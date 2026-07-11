@@ -1,0 +1,33 @@
+name: Collect Gotthard history
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gotthard-collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Collect sample
+        env:
+          OTD_API_KEY: ${{ secrets.OTD_API_KEY }}
+        run: python3 gotthard/collect.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "gottardo-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git pull --rebase --autostash || true
+          git add gotthard/data/history.json
+          git diff --cached --quiet || git commit -m "gotthard sample $(date -u +%FT%TZ)"
+          git push
