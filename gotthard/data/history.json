@@ -740,5 +740,12 @@
   "northDelay": 10,
   "southQueueKm": 3.0,
   "northQueueKm": 1.0
+ },
+ {
+  "time": "2026-07-12T15:59:30Z",
+  "southDelay": 30,
+  "northDelay": 10,
+  "southQueueKm": 3.0,
+  "northQueueKm": 1.0
  }
 ]
