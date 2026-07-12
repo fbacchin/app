@@ -79,6 +79,18 @@ FRESHNESS = timedelta(hours=6)
 # Stima del ritardo quando il messaggio riporta solo i km di coda
 MINUTES_PER_KM = 10
 
+# --- Notifiche push (Back4App) ---
+# Inviate quando una coda si forma (>= NOTIFY_START), diventa pesante
+# (>= NOTIFY_HEAVY, una volta) e quando si dissolve (< NOTIFY_CLEAR).
+# Lo stato per direzione vive in data/push-state.json (committato) e un
+# cooldown evita raffiche di notifiche.
+PUSH_APP_ID = os.environ.get("B4A_APP_ID", "")
+PUSH_MASTER_KEY = os.environ.get("B4A_MASTER_KEY", "")
+NOTIFY_START = 20   # minuti di attesa: coda formata
+NOTIFY_HEAVY = 60   # minuti: escalation "coda pesante"
+NOTIFY_CLEAR = 10   # sotto questa soglia la coda è considerata finita
+PUSH_COOLDOWN = timedelta(minutes=45)
+
 HISTORY_FILE = Path(__file__).parent / "data" / "history.json"
 WINDOW = timedelta(hours=48)
 
@@ -254,6 +266,78 @@ def delay_minutes(entry):
     return 0
 
 
+def send_push(alert):
+    """Invia una notifica al canale global via Back4App (Master Key)."""
+    if not PUSH_APP_ID or not PUSH_MASTER_KEY:
+        return False
+    request = urllib.request.Request(
+        "https://parseapi.back4app.com/push",
+        data=json.dumps({
+            "where": {"channels": "global", "deviceType": "ios"},
+            "data": {"alert": alert, "sound": "default", "badge": "Increment"},
+        }).encode("utf-8"),
+        headers={
+            "X-Parse-Application-Id": PUSH_APP_ID,
+            "X-Parse-Master-Key": PUSH_MASTER_KEY,
+            "Content-Type": "application/json",
+        },
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            ok = response.status < 300
+            print(f"push inviato ({response.status}): {alert}")
+            return ok
+    except Exception as exc:  # la notifica non deve mai rompere il campionamento
+        print(f"push fallito: {exc}")
+        return False
+
+
+def effective_wait(entry):
+    if entry["wait"] is not None:
+        return entry["wait"]
+    if entry["km"] is not None:
+        return round(entry["km"] * MINUTES_PER_KM)
+    return 0
+
+
+def update_notifications(state, now):
+    """Confronta lo stato attuale con l'ultimo notificato e invia se serve."""
+    state_file = HISTORY_FILE.parent / "push-state.json"
+    try:
+        push_state = json.loads(state_file.read_text())
+    except (FileNotFoundError, json.JSONDecodeError):
+        push_state = {}
+
+    labels = {"south": "Southbound", "north": "Northbound"}
+    for direction in ("south", "north"):
+        wait = effective_wait(state[direction])
+        km = state[direction]["km"]
+        entry = push_state.get(direction, {"phase": "clear", "lastSent": None})
+        phase = entry.get("phase", "clear")
+        last_sent = parse_time(entry.get("lastSent") or "")
+        cooling = last_sent is not None and now - last_sent < PUSH_COOLDOWN
+
+        km_part = f"{km:g} km queue · " if km else "queue · "
+        message = None
+        new_phase = phase
+        if phase == "clear" and wait >= NOTIFY_START:
+            message = f"🚦 {labels[direction]}: {km_part}~{wait} min wait"
+            new_phase = "queued"
+        elif phase == "queued" and wait >= NOTIFY_HEAVY:
+            message = f"⚠️ {labels[direction]}: heavy queue — {km_part}~{wait} min wait"
+            new_phase = "heavy"
+        elif phase in ("queued", "heavy") and wait < NOTIFY_CLEAR:
+            message = f"✅ {labels[direction]}: queue cleared"
+            new_phase = "clear"
+
+        if message and not cooling and send_push(message):
+            entry = {"phase": new_phase,
+                     "lastSent": now.isoformat().replace("+00:00", "Z")}
+        push_state[direction] = entry
+
+    state_file.write_text(json.dumps(push_state, indent=1))
+
+
 def main():
     api_key = os.environ.get("OTD_API_KEY", "").strip()
     if not api_key:
@@ -261,6 +345,8 @@ def main():
 
     state, events = extract(fetch_feed(api_key))
     now = datetime.now(timezone.utc).replace(microsecond=0)
+
+    update_notifications(state, now)
 
     sample = {
         "time": now.isoformat().replace("+00:00", "Z"),

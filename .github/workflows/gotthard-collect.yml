@@ -27,13 +27,15 @@ jobs:
       - name: Sample every 5 minutes for ~3 hours
         env:
           OTD_API_KEY: ${{ secrets.OTD_API_KEY }}
+          B4A_APP_ID: ${{ secrets.B4A_APP_ID }}
+          B4A_MASTER_KEY: ${{ secrets.B4A_MASTER_KEY }}
         run: |
           git config user.name "gottardo-bot"
           git config user.email "actions@users.noreply.github.com"
           for i in $(seq 1 34); do
             git fetch origin main && git reset --hard origin/main
             if python3 gotthard/collect.py; then
-              git add gotthard/data/history.json gotthard/data/latest.json
+              git add gotthard/data/history.json gotthard/data/latest.json gotthard/data/push-state.json
               git diff --cached --quiet || git commit -m "gotthard sample $(date -u +%FT%TZ)"
               git push origin main || echo "push fallito, campione perso: riprovo al prossimo giro"
             fi
