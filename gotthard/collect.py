@@ -153,18 +153,25 @@ def fetch_feed(api_key):
     return data
 
 
-def extract_state(xml_data):
-    """Ritorna lo stato attuale delle code: {south: {...}, north: {...}}."""
+def extract(xml_data):
+    """Ritorna (stato code, eventi corridoio).
+
+    - stato: {south: {km, wait}, north: {...}} dai messaggi di coda freschi (6h)
+    - eventi: tutti i messaggi del corridoio delle ultime 12 ore, con i testi
+      in tutte le lingue del feed, per il fallback dell'app quando l'API
+      diretta non è disponibile (limite 5 chiamate/minuto sulla chiave).
+    """
     root = ET.fromstring(xml_data)
     xsi_type = "{http://www.w3.org/2001/XMLSchema-instance}type"
     now = datetime.now(timezone.utc)
     state = {"south": {"km": None, "wait": None}, "north": {"km": None, "wait": None}}
+    events = []
 
     for record in (e for e in root.iter() if local(e.tag) == "situationRecord"):
-        if localtype(record.get(xsi_type, "")) != "AbnormalTraffic":
-            continue
+        typename = localtype(record.get(xsi_type, ""))
 
-        text = None
+        # commenti pubblici in tutte le lingue (esclude le note interne)
+        texts = {}
         for gpc in (c for c in record.iter() if local(c.tag) == "generalPublicComment"):
             ctype = next(
                 (ct.text for ct in gpc.iter() if local(ct.tag) == "commentType"), ""
@@ -172,8 +179,12 @@ def extract_state(xml_data):
             if ctype == "internalNote":
                 continue
             for value in (v for v in gpc.iter() if local(v.tag) == "value"):
-                if (value.get("lang") or "").lower().startswith("it"):
-                    text = (value.text or "").strip()
+                lang = (value.get("lang") or "")[:2].lower()
+                chunk = (value.text or "").strip()
+                if lang and chunk:
+                    texts[lang] = (texts[lang] + " — " + chunk) if texts.get(lang) else chunk
+
+        text = texts.get("it")
         if not text:
             continue
 
@@ -183,11 +194,6 @@ def extract_state(xml_data):
         if not any(k in lower for k in CORRIDOR):
             continue
 
-        km = queue_km(text)
-        wait = wait_minutes(text)
-        if km is None and wait is None:
-            continue
-
         version_time = parse_time(
             next(
                 (e.text for e in record.iter()
@@ -195,10 +201,32 @@ def extract_state(xml_data):
                 "",
             )
         )
-        if version_time is None or now - version_time > FRESHNESS:
+        if version_time is None:
             continue
+        age = now - version_time
 
+        km = queue_km(text)
+        wait = wait_minutes(text)
         direction = direction_of(lower)
+
+        # eventi: finestra 12 ore, come la lista avvisi dell'app
+        if age <= timedelta(hours=12):
+            events.append({
+                "id": record.get("id", ""),
+                "type": typename,
+                "direction": direction,
+                "versionTime": version_time.astimezone(timezone.utc)
+                    .replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+                "km": km,
+                "wait": wait,
+                "texts": texts,
+            })
+
+        # stato code: solo messaggi di coda freschi, riferiti ai portali
+        if typename != "AbnormalTraffic" or (km is None and wait is None):
+            continue
+        if age > FRESHNESS:
+            continue
         candidates = [direction] if direction else ["south", "north"]
         for d in candidates:
             portal = SOUTH_PORTAL if d == "south" else NORTH_PORTAL
@@ -209,7 +237,13 @@ def extract_state(xml_data):
             if wait is not None and wait > (state[d]["wait"] or 0):
                 state[d]["wait"] = wait
 
-    return state
+    events.sort(key=lambda e: (
+        not (e["km"] is not None or e["wait"] is not None),
+        e["versionTime"],
+    ), reverse=False)
+    events.sort(key=lambda e: e["versionTime"], reverse=True)
+    events.sort(key=lambda e: not (e["km"] is not None or e["wait"] is not None))
+    return state, events[:20]
 
 
 def delay_minutes(entry):
@@ -225,7 +259,7 @@ def main():
     if not api_key:
         sys.exit("OTD_API_KEY mancante")
 
-    state = extract_state(fetch_feed(api_key))
+    state, events = extract(fetch_feed(api_key))
     now = datetime.now(timezone.utc).replace(microsecond=0)
 
     sample = {
@@ -252,7 +286,18 @@ def main():
 
     HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
     HISTORY_FILE.write_text(json.dumps(history, indent=1))
-    print(f"campione salvato: {sample} (totale {len(history)})")
+
+    # Ultimo stato completo per il fallback dell'app (schede + avvisi)
+    latest = {
+        "time": sample["time"],
+        "south": state["south"],
+        "north": state["north"],
+        "events": events,
+    }
+    (HISTORY_FILE.parent / "latest.json").write_text(
+        json.dumps(latest, indent=1, ensure_ascii=False)
+    )
+    print(f"campione salvato: {sample} (totale {len(history)}, eventi {len(events)})")
 
 
 if __name__ == "__main__":
