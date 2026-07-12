@@ -70,7 +70,11 @@ NORTH_PORTAL = ["airolo", "quinto", "faido", "dosaggio"]
 
 # Un messaggio di coda è considerato attuale solo se aggiornato di recente
 # (il feed contiene record "attivi" mai chiusi, vecchi di mesi).
-FRESHNESS = timedelta(minutes=45)
+# NB: durante una coda stabile il versionTime può restare fermo a lungo
+# (es. plateau a 50 min per un'ora): la finestra deve essere ampia — 6 ore,
+# come nell'app. La fine reale di una coda arriva come revoca/rimozione
+# del messaggio dal feed, non per scadenza del timestamp.
+FRESHNESS = timedelta(hours=6)
 
 # Stima del ritardo quando il messaggio riporta solo i km di coda
 MINUTES_PER_KM = 10
