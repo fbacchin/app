@@ -1,5 +1,5 @@
 {
- "time": "2026-07-12T17:26:05Z",
+ "time": "2026-07-12T17:31:11Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,19 +8,5 @@
   "km": null,
   "wait": null
  },
- "events": [
-  {
-   "id": "situation.638804.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-07-12T16:57:39Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Wassen und Anschluss Amsteg Sachlage: Stau Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Wassen et Jonction autoroutière Amsteg Situation: bouchon Raison: surcharge de trafic",
-    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Wassen E Svincolo autostradale Amsteg Situazione: colonna Causa: traffico congestionato"
-   }
-  }
- ]
+ "events": []
 }
