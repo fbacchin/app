@@ -1,5 +1,5 @@
 {
- "time": "2026-07-12T15:39:11Z",
+ "time": "2026-07-12T15:44:16Z",
  "south": {
   "km": 3.0,
   "wait": 30
@@ -46,6 +46,19 @@
     "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Erstfeld und Anschluss Beckenried Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
     "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Erstfeld et Jonction autoroutière Beckenried Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
     "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Erstfeld E Svincolo autostradale Beckenried Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
+   }
+  },
+  {
+   "id": "situation.638804.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "north",
+   "versionTime": "2026-07-12T15:43:07Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Göschenen und Anschluss Amsteg Sachlage: Stau Ursache: Verkehrsüberlastung",
+    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Göschenen et Jonction autoroutière Amsteg Situation: bouchon Raison: surcharge de trafic",
+    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Göschenen E Svincolo autostradale Amsteg Situazione: colonna Causa: traffico congestionato"
    }
   },
   {
