@@ -1,5 +1,5 @@
 {
- "time": "2026-07-12T13:26:59Z",
+ "time": "2026-07-12T13:32:05Z",
  "south": {
   "km": 9.0,
   "wait": 90
@@ -39,13 +39,13 @@
    "id": "situation.638788.1.1.1",
    "type": "AbnormalTraffic",
    "direction": null,
-   "versionTime": "2026-07-12T13:26:41Z",
+   "versionTime": "2026-07-12T13:26:56Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Luzern -> Chiasso zwischen Anschluss Göschenen und Tunnel Gotthard-Tunnel Sachlage: Stau Ursache: Pannenfahrzeug",
-    "fr": "Libéré: A2 Lucerne -> Chiasso entre Jonction autoroutière Göschenen et Tunnel Tunnel du St-Gothard Situation: bouchon Raison: véhicule en panne",
-    "it": "Approvato: A2 Luzern -> Chiasso tra Svincolo autostradale Göschenen E Galleria Galleria San Gottardo Situazione: colonna Causa: veicolo in avaria"
+    "de": "Freigegeben: A2 Luzern -> Chiasso zwischen Anschluss Göschenen und Tunnel Gotthard-Tunnel Sachlage: Stau Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen blockiert",
+    "fr": "Libéré: A2 Lucerne -> Chiasso entre Jonction autoroutière Göschenen et Tunnel Tunnel du St-Gothard Situation: bouchon Raison: véhicule en panne Gestion du trafic: voie de droite bloquée",
+    "it": "Approvato: A2 Luzern -> Chiasso tra Svincolo autostradale Göschenen E Galleria Galleria San Gottardo Situazione: colonna Causa: veicolo in avaria Limitazione del traffico: corsia di destra bloccata"
    }
   },
   {
