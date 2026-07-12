@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 178
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Sample every 5 minutes for ~3 hours
         env:
@@ -37,5 +37,5 @@ jobs:
               git diff --cached --quiet || git commit -m "gotthard sample $(date -u +%FT%TZ)"
               git push origin main || echo "push fallito, campione perso: riprovo al prossimo giro"
             fi
-            [ "$i" -lt 34 ] && sleep 300
+            if [ "$i" -lt 34 ]; then sleep 300; fi
           done
