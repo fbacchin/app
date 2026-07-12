@@ -1,8 +1,12 @@
 name: Collect Gotthard history
 
+# GitHub esegue i cron "best effort" e ritarda anche di ore quelli frequenti.
+# Strategia: run lunghi che campionano in loop ogni 5 minuti per ~3 ore e
+# committano a ogni campione; il gruppo di concorrenza incatena i run in coda,
+# quindi basta che il cron parta ogni tanto per avere copertura continua.
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -15,19 +19,21 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
+    timeout-minutes: 178
     steps:
       - uses: actions/checkout@v4
 
-      - name: Collect sample
+      - name: Sample every 5 minutes for ~3 hours
         env:
           OTD_API_KEY: ${{ secrets.OTD_API_KEY }}
-        run: python3 gotthard/collect.py
-
-      - name: Commit and push
         run: |
           git config user.name "gottardo-bot"
           git config user.email "actions@users.noreply.github.com"
-          git pull --rebase --autostash || true
-          git add gotthard/data/history.json
-          git diff --cached --quiet || git commit -m "gotthard sample $(date -u +%FT%TZ)"
-          git push
+          for i in $(seq 1 34); do
+            python3 gotthard/collect.py || true
+            git pull --rebase --autostash || true
+            git add gotthard/data/history.json
+            git diff --cached --quiet || git commit -m "gotthard sample $(date -u +%FT%TZ)"
+            git push || true
+            [ "$i" -lt 34 ] && sleep 300
+          done
