@@ -1,5 +1,5 @@
 {
- "time": "2026-07-12T22:16:17Z",
+ "time": "2026-07-12T22:21:22Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,19 +8,5 @@
   "km": null,
   "wait": null
  },
- "events": [
-  {
-   "id": "situation.638847.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-07-12T22:05:07Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Anschluss Quinto und Tunnel Piottino-Tunnel Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen blockiert",
-    "fr": "Libéré: A2 St-Gothard -> Chiasso entre Jonction autoroutière Quinto et Tunnel Tunnel du Piottino Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de droite bloquée",
-    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Quinto E Galleria Galleria Piottino Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra bloccata"
-   }
-  }
- ]
+ "events": []
 }
