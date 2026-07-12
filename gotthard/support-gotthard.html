@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Support — Gottardo Live</title>
+<style>
+  :root {
+    --accent: #1D6A7A;
+    --accent-soft: #E3F0F2;
+    --ink: #1C2A2E;
+    --ink-soft: #51666C;
+    --paper: #F7FAFA;
+    --card: #FFFFFF;
+    --line: #DCE7E9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #5FB3C4;
+      --accent-soft: #14303A;
+      --ink: #E8F1F2;
+      --ink-soft: #9DB4BA;
+      --paper: #0E181C;
+      --card: #16242A;
+      --line: #24383F;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; }
+  .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  h1 { font-size: 1.9em; line-height: 1.2; }
+  .tag { color: var(--ink-soft); margin: 6px 0 32px; font-size: .95em; }
+  h2 { color: var(--accent); font-size: 1.25em; margin: 36px 0 10px; }
+  p, li { margin-bottom: 10px; }
+  ul { padding-left: 22px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 20px; margin: 14px 0;
+  }
+  .cta {
+    display: inline-block; background: var(--accent); color: #fff !important;
+    padding: 12px 22px; border-radius: 999px; text-decoration: none; font-weight: 600;
+    margin: 6px 0 10px;
+  }
+  details { border-bottom: 1px solid var(--line); padding: 12px 0; }
+  details:last-of-type { border-bottom: none; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin-top: 8px; color: var(--ink-soft); }
+  a { color: var(--accent); }
+  footer { color: var(--ink-soft); font-size: .85em; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="logo">
+    <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="10" fill="#1D6A7A"/><path d="M10 32 V22 a12 12 0 0 1 24 0 V32 h-5 V22 a7 7 0 0 0 -14 0 V32 Z" fill="#EFE6D2"/><rect x="20" y="26" width="4" height="2.6" rx="1.3" fill="#EFE6D2"/><rect x="20" y="30.4" width="4" height="2.6" rx="1.3" fill="#EFE6D2"/></svg>
+    <h1>Gottardo Live — Support</h1>
+  </div>
+  <p class="tag">Real-time traffic, queues, official alerts and webcams for the Gotthard road tunnel.</p>
+
+  <h2>Contact</h2>
+  <p>Questions, problems or suggestions? Write to us — we usually reply within a couple of days.</p>
+  <a class="cta" href="mailto:bacchin@mac.com?subject=Gottardo%20Live%20support">Email support</a>
+
+  <h2>Frequently asked questions</h2>
+  <div class="card">
+    <details>
+      <summary>The app shows "Clear" and 0 minutes — is it broken?</summary>
+      <p>No: it means there is currently no queue at the tunnel. Queues at the Gotthard typically build
+      on weekends, holidays and summer travel days. The 24-hour chart shows you how the day evolved.</p>
+    </details>
+    <details>
+      <summary>Why are the official alerts in Italian, German or French?</summary>
+      <p>The alerts are published by the Swiss traffic management centre (VMZ-CH) in the three national
+      languages only — an English version does not exist at the source. The app picks the language that
+      best matches your device settings; the app interface itself is fully localised in English,
+      Italian, German and French.</p>
+    </details>
+    <details>
+      <summary>A webcam shows "out of service"</summary>
+      <p>That placeholder image comes from the road authority (FEDRO/AFBN) when a camera is temporarily
+      down. It usually returns within a few days; nothing needs fixing on your side.</p>
+    </details>
+    <details>
+      <summary>How are waiting times calculated?</summary>
+      <p>When the authorities publish an official waiting time, we show that. When they publish only the
+      queue length, we estimate roughly 10 minutes per kilometre (the typical Gotthard metering rate).
+      Without any official queue message, we show the live travel-time delay from Apple Maps.</p>
+    </details>
+    <details>
+      <summary>I don't receive notifications</summary>
+      <p>Check iOS Settings → Notifications → Gottardo Live and make sure notifications are allowed.
+      Notifications are optional and used only for significant traffic updates.</p>
+    </details>
+    <details>
+      <summary>Can I see the intro tour again?</summary>
+      <p>Yes: in the app open Settings (gear icon) → About → "Replay the tour".</p>
+    </details>
+  </div>
+
+  <h2>Data sources</h2>
+  <ul>
+    <li>Traffic data and alerts: Swiss Federal Roads Office (FEDRO / VMZ-CH) via
+        <a href="https://opentransportdata.swiss/en/road-traffic/">opentransportdata.swiss</a></li>
+    <li>Travel times: Apple Maps · Weather: <a href="https://weatherkit.apple.com/legal-attribution.html">Apple Weather</a> / <a href="https://open-meteo.com">Open-Meteo</a></li>
+    <li>Webcams: <a href="https://www.afbn.ch/verkehr-und-baustellen/webcams">FEDRO / AFBN</a></li>
+  </ul>
+  <p>Queue information is provided by the authorities and may occasionally differ from actual
+  conditions. Please never use the app while driving.</p>
+
+  <footer>
+    © 2026 Fabrizio Bacchin · <a href="privacy-gotthard.html">Privacy Policy</a>
+  </footer>
+</main>
+</body>
+</html>
