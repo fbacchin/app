@@ -1,0 +1,10 @@
+{
+ "south": {
+  "phase": "clear",
+  "lastSent": null
+ },
+ "north": {
+  "phase": "clear",
+  "lastSent": null
+ }
+}
