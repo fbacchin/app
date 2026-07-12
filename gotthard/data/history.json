@@ -217,6 +217,7 @@
   "northQueueKm": 2.0
  },
  {
+<<<<<<< Updated upstream
   "time": "2026-07-12T09:48:15Z",
   "southDelay": 0,
   "northDelay": 20,
@@ -281,6 +282,9 @@
  },
  {
   "time": "2026-07-12T10:34:11Z",
+=======
+  "time": "2026-07-12T10:34:24Z",
+>>>>>>> Stashed changes
   "southDelay": 0,
   "northDelay": 40,
   "southQueueKm": null,
