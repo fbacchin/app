@@ -1,5 +1,5 @@
 {
- "time": "2026-07-12T16:29:57Z",
+ "time": "2026-07-12T16:35:02Z",
  "south": {
   "km": 2.0,
   "wait": 20
@@ -33,32 +33,6 @@
     "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Wassen und Anschluss Amsteg Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
     "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Wassen et Jonction autoroutière Amsteg Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
     "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Wassen E Svincolo autostradale Amsteg Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
-   }
-  },
-  {
-   "id": "situation.638754.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "south",
-   "versionTime": "2026-07-12T08:10:36Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Göschenen Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Göschenen Situation: entrée fermée",
-    "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata"
-   }
-  },
-  {
-   "id": "situation.638752.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-07-12T07:53:37Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Göschenen <-> Flüelen zwischen Ortschaft Erstfeld und Anschluss Göschenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
-    "fr": "Libéré: H2 Göschenen <-> Flüelen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
-    "it": "Approvato: H2 Göschenen <-> Flüelen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
    }
   }
  ]
