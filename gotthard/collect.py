@@ -90,6 +90,11 @@ NOTIFY_START = 20   # minuti di attesa: coda formata
 NOTIFY_HEAVY = 60   # minuti: escalation "coda pesante"
 NOTIFY_CLEAR = 10   # sotto questa soglia la coda è considerata finita
 PUSH_COOLDOWN = timedelta(minutes=45)
+# La coda deve restare sotto NOTIFY_CLEAR per almeno questo tempo prima di
+# annunciare "finita": sull'area di dosaggio di Airolo il messaggio ufficiale
+# viene revocato e riemesso a impulsi, quindi un singolo buco nel feed non
+# significa che il traffico è tornato scorrevole.
+CLEAR_CONFIRM = timedelta(minutes=20)
 
 HISTORY_FILE = Path(__file__).parent / "data" / "history.json"
 WINDOW = timedelta(hours=48)
@@ -312,10 +317,19 @@ def update_notifications(state, now):
     for direction in ("south", "north"):
         wait = effective_wait(state[direction])
         km = state[direction]["km"]
-        entry = push_state.get(direction, {"phase": "clear", "lastSent": None})
+        entry = push_state.get(direction, {})
         phase = entry.get("phase", "clear")
         last_sent = parse_time(entry.get("lastSent") or "")
+        clear_since = parse_time(entry.get("clearSince") or "")
         cooling = last_sent is not None and now - last_sent < PUSH_COOLDOWN
+
+        # Tiene traccia da quando la coda è sotto soglia, a prescindere da
+        # invii e cooldown: se torna sopra, la fine non era reale e il
+        # conteggio riparte da zero (vedi CLEAR_CONFIRM).
+        if phase in ("queued", "heavy"):
+            clear_since = None if wait >= NOTIFY_CLEAR else (clear_since or now)
+        else:
+            clear_since = None
 
         km_part = f"{km:g} km queue · " if km else "queue · "
         message = None
@@ -326,14 +340,24 @@ def update_notifications(state, now):
         elif phase == "queued" and wait >= NOTIFY_HEAVY:
             message = f"⚠️ {labels[direction]}: heavy queue — {km_part}~{wait} min wait"
             new_phase = "heavy"
-        elif phase in ("queued", "heavy") and wait < NOTIFY_CLEAR:
+        elif (phase in ("queued", "heavy") and clear_since is not None
+              and now - clear_since >= CLEAR_CONFIRM):
             message = f"✅ {labels[direction]}: queue cleared"
             new_phase = "clear"
 
         if message and not cooling and send_push(message):
-            entry = {"phase": new_phase,
-                     "lastSent": now.isoformat().replace("+00:00", "Z")}
-        push_state[direction] = entry
+            phase = new_phase
+            last_sent = now
+            if new_phase == "clear":
+                clear_since = None
+
+        new_entry = {
+            "phase": phase,
+            "lastSent": last_sent.isoformat().replace("+00:00", "Z") if last_sent else None,
+        }
+        if clear_since is not None:
+            new_entry["clearSince"] = clear_since.isoformat().replace("+00:00", "Z")
+        push_state[direction] = new_entry
 
     state_file.write_text(json.dumps(push_state, indent=1))
 
