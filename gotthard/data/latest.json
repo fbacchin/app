@@ -1,5 +1,5 @@
 {
- "time": "2026-07-14T07:18:10Z",
+ "time": "2026-07-14T07:23:15Z",
  "south": {
   "km": null,
   "wait": null
@@ -33,19 +33,6 @@
     "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.3 Dauer: tagsüber voraussichtlich 14.07.2026 07:00 bis 14.08.2026 17:00",
     "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3 Durée: durant la journée probable 14.07.2026 07:00 jusqu'à 14.08.2026 17:00",
     "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3 Durata: durante il giorno probabile 14.07.2026 07:00 fino 14.08.2026 17:00"
-   }
-  },
-  {
-   "id": "situation.639149.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-07-14T05:05:05Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen null Dosierstelle Coldrerio und null Chiasso-Warenzoll Sachlage: Stau für LKW Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: A2 St-Gothard -> Chiasso entre null Aire de dosage Coldrerio et null Chiasso-Douane commercial Situation: bouchon pour poids lourd Raison: surcharge de trafic",
-    "it": "Approvato: A2 S. Gottardo -> Chiasso tra null Area di dosaggio Coldrerio E null Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato"
    }
   }
  ]
