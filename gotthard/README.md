@@ -33,10 +33,14 @@ di una direzione attraversa le soglie:
 
 - **≥ 20 min** → 🚦 coda formata
 - **≥ 60 min** → ⚠️ escalation "coda pesante" (una sola volta per episodio)
-- **< 10 min** → ✅ coda finita
+- **< 10 min per almeno 20 min** → ✅ coda finita
 
 Cooldown di 45 minuti per direzione; l'isteresi tra le soglie (20/10) evita
-il ping-pong ai bordi. Quando il messaggio ufficiale riporta solo i km senza
+il ping-pong ai bordi. La fine coda è **confermata nel tempo**
+(`CLEAR_CONFIRM`, 20 min): all'area di dosaggio di Airolo il messaggio viene
+revocato e riemesso a impulsi, e un singolo buco nel feed non va scambiato
+per "traffico scorrevole" (altrimenti parte un falso "coda finita" mentre la
+coda è ancora presente). Quando il messaggio ufficiale riporta solo i km senza
 tempo d'attesa, l'attesa è stimata a ~10 min/km (dosaggio del Gottardo).
 
 ## Workflow GitHub Actions
