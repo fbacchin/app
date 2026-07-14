@@ -1,5 +1,5 @@
 {
- "time": "2026-07-14T19:02:11Z",
+ "time": "2026-07-14T19:07:16Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,32 +8,5 @@
   "km": null,
   "wait": null
  },
- "events": [
-  {
-   "id": "situation.626453.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-07-14T07:06:36Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.3 Dauer:  voraussichtlich 22.05.2026 07:00 bis 28.08.2026 17:00",
-    "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3 Durée:  probable 22.05.2026 07:00 jusqu'à 28.08.2026 17:00",
-    "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3 Durata:  probabile 22.05.2026 07:00 fino 28.08.2026 17:00"
-   }
-  },
-  {
-   "id": "situation.639174.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-07-14T07:04:36Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.3 Dauer: tagsüber voraussichtlich 14.07.2026 07:00 bis 14.08.2026 17:00",
-    "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3 Durée: durant la journée probable 14.07.2026 07:00 jusqu'à 14.08.2026 17:00",
-    "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3 Durata: durante il giorno probabile 14.07.2026 07:00 fino 14.08.2026 17:00"
-   }
-  }
- ]
+ "events": []
 }
