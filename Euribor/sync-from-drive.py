@@ -41,15 +41,28 @@ from datetime import datetime
 from pathlib import Path
 
 def find_drive_folder():
-    """La cartella Libor sul Drive montato. Ricavata a runtime: questa repo è
-    pubblica e il percorso completo conterrebbe indirizzi email."""
+    """La cartella Libor sul Drive montato.
+
+    Ricavata a runtime invece che cablata, per due motivi: questa repo è
+    pubblica e il percorso completo conterrebbe indirizzi email, e il nome del
+    mount cambia a ogni migrazione dell'account Google.
+
+    Cerca sia `Il mio Drive/Libor` sia `Il mio Drive/<vecchio account>/Libor`:
+    la seconda è l'annidatura ereditata da una migrazione precedente, che
+    potrebbe sparire. Funziona in entrambi i casi, e con Drive in qualsiasi
+    lingua ("Il mio Drive" / "My Drive").
+    """
     override = os.environ.get("LIBOR_DIR")
     if override:
         return Path(override)
-    matches = sorted(
-        Path.home().glob("Library/CloudStorage/GoogleDrive-*/*/*/Libor")
-    )
-    return matches[0] if matches else None
+    for pattern in (
+        "Library/CloudStorage/GoogleDrive-*/*/Libor",
+        "Library/CloudStorage/GoogleDrive-*/*/*/Libor",
+    ):
+        matches = sorted(p for p in Path.home().glob(pattern) if p.is_dir())
+        if matches:
+            return matches[0]
+    return None
 
 
 DRIVE = find_drive_folder()
