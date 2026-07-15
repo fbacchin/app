@@ -50,8 +50,10 @@ raggiungibile, **fermarsi e dirlo** invece di cercare alternative.
 | `SARON CHF.csv` | https://www.global-rates.com/en/interest-rates/saron/ | SARON ON |
 | `TONAR JPY.csv` | https://www.global-rates.com/en/interest-rates/tonar/ | TONAR ON |
 
-La cartella Libor è il workspace selezionato (la copia locale del Drive:
-`~/Library/CloudStorage/GoogleDrive-*/Il mio Drive/*/Libor`).
+La cartella Libor è il workspace selezionato in Cowork: la copia locale della
+cartella su Google Drive. Non cablare il percorso da nessuna parte — il nome del
+mount cambia a ogni migrazione dell'account Google, e la posizione della cartella
+dentro il Drive può cambiare.
 
 **Su Drive i nomi mantengono gli spazi e i formati restano quelli storici**: non
 rinominare né riformattare nulla qui. La conversione avviene solo al passo 2.
