@@ -34,15 +34,25 @@ LIBOR-USD e LIBOR-USD-SOFR). Controlla sempre il git diff prima di committare.
 
 import csv
 import io
+import os
 import re
 import sys
 from datetime import datetime
 from pathlib import Path
 
-DRIVE = Path(
-    "/Users/fabrizio/Library/CloudStorage/GoogleDrive-fabrizio.bacchin@cogipa.it"
-    "/Il mio Drive/fabrizio.bacchin@wwconsultant.net/Libor"
-)
+def find_drive_folder():
+    """La cartella Libor sul Drive montato. Ricavata a runtime: questa repo è
+    pubblica e il percorso completo conterrebbe indirizzi email."""
+    override = os.environ.get("LIBOR_DIR")
+    if override:
+        return Path(override)
+    matches = sorted(
+        Path.home().glob("Library/CloudStorage/GoogleDrive-*/*/*/Libor")
+    )
+    return matches[0] if matches else None
+
+
+DRIVE = find_drive_folder()
 REPO = Path(__file__).resolve().parent
 
 COLUMNS = ["Date", "Week day", "ON", "1W", "1M", "2M", "3M", "6M", "12M"]
@@ -160,8 +170,9 @@ def merge(published, new_rows):
 def main():
     check_only = "--check" in sys.argv
     rebuild = "--rebuild" in sys.argv
-    if not DRIVE.is_dir():
-        sys.exit(f"Cartella Drive non trovata: {DRIVE}")
+    if DRIVE is None or not DRIVE.is_dir():
+        sys.exit("Cartella Libor non trovata sul Drive montato. "
+                 "Indica il percorso con la variabile LIBOR_DIR.")
 
     changed = []
     for source_name, dest_name, mapping in FILES:
