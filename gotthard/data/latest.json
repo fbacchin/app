@@ -1,8 +1,8 @@
 {
- "time": "2026-07-15T16:15:48Z",
+ "time": "2026-07-15T16:20:53Z",
  "south": {
-  "km": 2.0,
-  "wait": 20
+  "km": 1.0,
+  "wait": 10
  },
  "north": {
   "km": null,
@@ -13,13 +13,26 @@
    "id": "situation.639455.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "south",
-   "versionTime": "2026-07-15T16:00:55Z",
-   "km": 2.0,
-   "wait": 20,
+   "versionTime": "2026-07-15T16:19:22Z",
+   "km": 1.0,
+   "wait": 10,
    "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 2.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
+    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
+    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
+    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
+   }
+  },
+  {
+   "id": "situation.639633.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "south",
+   "versionTime": "2026-07-15T16:18:25Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Anschluss Quinto und Anschluss Faido Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 6.3 Dauer:  voraussichtlich 13.07.2026 07:30 bis 17.07.2026 17:00",
+    "fr": "Libéré: A2 St-Gothard -> Chiasso entre Jonction autoroutière Quinto et Jonction autoroutière Faido Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 6.3 Durée:  probable 13.07.2026 07:30 jusqu'à 17.07.2026 17:00",
+    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Quinto E Svincolo autostradale Faido Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 6.3 Durata:  probabile 13.07.2026 07:30 fino 17.07.2026 17:00"
    }
   },
   {
