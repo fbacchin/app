@@ -1,5 +1,5 @@
 {
- "time": "2026-07-15T22:27:54Z",
+ "time": "2026-07-15T22:28:16Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,19 +8,5 @@
   "km": null,
   "wait": null
  },
- "events": [
-  {
-   "id": "situation.639633.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-07-15T16:18:25Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Anschluss Quinto und Anschluss Faido Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 6.3 Dauer:  voraussichtlich 13.07.2026 07:30 bis 17.07.2026 17:00",
-    "fr": "Libéré: A2 St-Gothard -> Chiasso entre Jonction autoroutière Quinto et Jonction autoroutière Faido Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 6.3 Durée:  probable 13.07.2026 07:30 jusqu'à 17.07.2026 17:00",
-    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Quinto E Svincolo autostradale Faido Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 6.3 Durata:  probabile 13.07.2026 07:30 fino 17.07.2026 17:00"
-   }
-  }
- ]
+ "events": []
 }
