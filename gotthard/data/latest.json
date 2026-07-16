@@ -1,5 +1,5 @@
 {
- "time": "2026-07-16T09:15:10Z",
+ "time": "2026-07-16T09:20:15Z",
  "south": {
   "km": 4.0,
   "wait": 40
@@ -33,19 +33,6 @@
     "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Göschenen Sachlage: Einfahrt gesperrt",
     "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Göschenen Situation: entrée fermée",
     "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata"
-   }
-  },
-  {
-   "id": "situation.639764.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-07-16T08:58:46Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Parkplatz Gurtnellen und Parkplatz Wassen, Dieden Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Parking Gurtnellen et Parking Wassen, Dieden Situation: danger Raison: objets sur la chaussée",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Parcheggio Gurtnellen E Parcheggio Wassen, Dieden Situazione: pericolo Causa: oggetto sulla strada"
    }
   },
   {
