@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Supporto — Tarocchi · Arcani Maggiori</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --notte: #120B26;
+    --notte2: #1C1238;
+    --velluto: #2A1D52;
+    --oro: #D9B35C;
+    --oro-chiaro: #F0D79A;
+    --pergamena: #EFE6D2;
+    --lavanda: #BCB0D8;
+    --rosso-arcano: #A8434F;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background:
+      radial-gradient(circle at 20% 10%, rgba(217,179,92,0.10), transparent 40%),
+      radial-gradient(circle at 80% 0%, rgba(188,176,216,0.08), transparent 45%),
+      linear-gradient(180deg, var(--notte) 0%, var(--notte2) 50%, var(--notte) 100%);
+    background-attachment: fixed;
+    color: var(--pergamena);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    line-height: 1.7;
+    min-height: 100vh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+
+  /* cielo stellato */
+  .stelle {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .stella {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--oro-chiaro);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: brilla 4s ease-in-out infinite;
+  }
+  @keyframes brilla {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 0.9; transform: scale(1.2); }
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 28px 96px;
+  }
+
+  /* intestazione */
+  header { text-align: center; margin-bottom: 56px; }
+
+  .luna {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--oro-chiaro), var(--oro) 70%);
+    box-shadow: 0 0 28px rgba(240,215,154,0.55), 0 0 60px rgba(217,179,92,0.30);
+    position: relative;
+  }
+  .luna::after {
+    content: "";
+    position: absolute;
+    top: -6px; left: 14px;
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    background: var(--notte);
+    box-shadow: 0 0 0 2px rgba(18,11,38,1);
+  }
+
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: var(--oro-chiaro);
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .sottotitolo {
+    color: var(--lavanda);
+    font-style: italic;
+    font-size: 19px;
+    margin-top: 10px;
+  }
+
+  /* sezioni */
+  section {
+    background: linear-gradient(160deg, rgba(42,29,82,0.55), rgba(28,18,56,0.55));
+    border: 1px solid rgba(217,179,92,0.18);
+    border-radius: 18px;
+    padding: 28px 30px;
+    margin-bottom: 22px;
+    backdrop-filter: blur(2px);
+  }
+
+  h2 {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 21px;
+    color: var(--oro);
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2::before {
+    content: "✦";
+    color: var(--oro-chiaro);
+    font-size: 16px;
+  }
+
+  p { margin-bottom: 12px; }
+  p:last-child { margin-bottom: 0; }
+
+  strong { color: var(--oro-chiaro); font-weight: 600; }
+
+  a { color: var(--oro); text-decoration: none; border-bottom: 1px dotted rgba(217,179,92,0.6); }
+  a:hover { color: var(--oro-chiaro); }
+
+  /* FAQ a fisarmonica */
+  details {
+    border-top: 1px solid rgba(217,179,92,0.15);
+    padding: 14px 0;
+  }
+  details:first-of-type { border-top: none; }
+  summary {
+    font-family: 'Cinzel', serif;
+    font-size: 17px;
+    color: var(--oro-chiaro);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    letter-spacing: 0.5px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: "☾";
+    color: var(--oro);
+    transition: transform 0.25s ease;
+  }
+  details[open] summary::before { transform: rotate(90deg); }
+  details .risposta {
+    padding: 12px 0 4px 26px;
+    color: var(--pergamena);
+  }
+
+  /* contatto in evidenza */
+  .contatto-box {
+    text-align: center;
+    background: linear-gradient(160deg, rgba(42,29,82,0.7), rgba(28,18,56,0.7));
+    border: 1px solid rgba(217,179,92,0.3);
+    border-radius: 18px;
+    padding: 36px 30px;
+    margin-top: 6px;
+  }
+  .contatto-box p { color: var(--lavanda); }
+  .mail-cta {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 12px 28px;
+    border: 1px solid var(--oro);
+    border-radius: 999px;
+    color: var(--oro-chiaro);
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--oro);
+    transition: background 0.2s ease;
+  }
+  .mail-cta:hover { background: rgba(217,179,92,0.12); }
+  .tempo {
+    margin-top: 16px;
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(188,176,216,0.8);
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 48px;
+    color: rgba(188,176,216,0.6);
+    font-size: 15px;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    body { font-size: 18px; }
+    .wrap { padding: 44px 18px 72px; }
+    h1 { font-size: 24px; }
+    section, .contatto-box { padding: 22px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="stelle" id="stelle" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header>
+    <div class="luna" aria-hidden="true"></div>
+    <h1>Supporto</h1>
+    <div class="sottotitolo">Tarocchi · Arcani Maggiori</div>
+  </header>
+
+  <section>
+    <h2>Acquisti e abbonamento</h2>
+    <p>All'inizio ricevi <strong>3 crediti gratuiti</strong> per provare le letture senza spese.</p>
+    <p>Puoi poi ottenere altre letture in due modi:</p>
+    <p>• <strong>Crediti</strong> (acquisti singoli o pacchetti): consumabili, ogni lettura usa un credito. Non scadono e restano legati al tuo account.</p>
+    <p>• <strong>Abbonamento mensile</strong>: letture illimitate finché l'abbonamento è attivo.</p>
+    <p>I prezzi esatti, nella tua valuta, sono mostrati nell'app al momento dell'acquisto.</p>
+    <p style="margin-top:16px;"><strong>Termini di rinnovo automatico.</strong> L'abbonamento si rinnova automaticamente alla stessa tariffa salvo disdetta almeno 24 ore prima della fine del periodo in corso. Il pagamento è addebitato sul tuo ID Apple alla conferma dell'acquisto e a ogni rinnovo. Puoi gestire o annullare l'abbonamento in qualsiasi momento da <strong>iPhone → Impostazioni → [il tuo nome] → Abbonamenti</strong>.</p>
+    <p>Consulta i <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Termini d'uso (EULA)</a> e la nostra <a href="https://fbacchin.github.io/privacy-and-support/privacy-tarocchi.html">Privacy Policy</a>.</p>
+  </section>
+
+  <section>
+    <h2>Domande frequenti</h2>
+
+    <details open>
+      <summary>Come funziona una lettura?</summary>
+      <div class="risposta">Scegli una stesa (Carta del Giorno, Tre Carte o Croce Semplice), formula la tua domanda, poi tocca le carte per rivelarle. Ogni carta mostra il suo significato in base alla posizione e all'eventuale verso rovesciato.</div>
+    </details>
+
+    <details>
+      <summary>I tarocchi predicono il futuro?</summary>
+      <div class="risposta">No. I tarocchi sono uno specchio simbolico pensato per favorire la riflessione personale, non uno strumento di predizione. L'app lo ricorda esplicitamente.</div>
+    </details>
+
+    <details>
+      <summary>Come funzionano i crediti e l'abbonamento?</summary>
+      <div class="risposta">Puoi acquistare letture singole o pacchetti di crediti, oppure attivare l'abbonamento mensile per letture illimitate. Crediti e abbonamento sono legati al tuo account e si sincronizzano dopo l'accesso con Apple.</div>
+    </details>
+
+    <details>
+      <summary>Ho cambiato iPhone: ritrovo le mie giocate e i crediti?</summary>
+      <div class="risposta">Sì. Accedi con lo stesso “Sign in with Apple” sul nuovo dispositivo: giocate salvate, crediti e abbonamento sono associati al tuo account e tornano disponibili.</div>
+    </details>
+
+    <details>
+      <summary>Come ripristino un acquisto?</summary>
+      <div class="risposta">Apri <strong>Profilo</strong> e tocca “Ripristina acquisti”. L'abbonamento attivo viene riconosciuto automaticamente tramite il tuo ID Apple.</div>
+    </details>
+
+    <details>
+      <summary>Come gestisco o annullo l'abbonamento?</summary>
+      <div class="risposta">L'abbonamento si gestisce da Apple: iPhone → Impostazioni → [il tuo nome] → Abbonamenti. Da lì puoi modificarlo o annullarlo in qualsiasi momento.</div>
+    </details>
+
+    <details>
+      <summary>Come elimino il mio account?</summary>
+      <div class="risposta">Dall'app: <strong>Profilo → Elimina account</strong>. L'operazione cancella in modo permanente le tue giocate e i dati associati.</div>
+    </details>
+
+    <details>
+      <summary>Non ricevo le notifiche</summary>
+      <div class="risposta">Verifica che le notifiche siano attive in iPhone → Impostazioni → Tarocchi → Notifiche. Se il problema persiste, scrivici.</div>
+    </details>
+  </section>
+
+  <div class="contatto-box">
+    <h2 style="justify-content:center;">Hai bisogno di aiuto?</h2>
+    <p>Scrivici: rispondiamo a ogni messaggio.</p>
+    <a class="mail-cta" href="mailto:bacchin@tiscali.it?subject=Supporto%20Tarocchi">bacchin@tiscali.it</a>
+    <p class="tempo">Tempo di risposta indicativo: entro 48 ore.</p>
+  </div>
+
+  <footer>
+    Per il trattamento dei dati consulta la nostra <a href="https://fbacchin.github.io/privacy-and-support/privacy-tarocchi.html">Privacy Policy</a>.
+  </footer>
+</div>
+
+<script>
+  // genera il cielo stellato
+  (function () {
+    const c = document.getElementById('stelle');
+    const n = 70;
+    for (let i = 0; i < n; i++) {
+      const s = document.createElement('div');
+      s.className = 'stella';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.animationDelay = (Math.random() * 4) + 's';
+      const size = Math.random() * 2 + 1;
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      c.appendChild(s);
+    }
+  })();
+</script>
+</body>
+</html>
