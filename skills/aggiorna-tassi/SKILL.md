@@ -31,8 +31,10 @@ Questa skill deve toccare **soltanto** due percorsi:
 - la cartella **Libor** su Google Drive (il workspace, fonte dei dati);
 - il clone della repo **`fbacchin/app`**, e al suo interno solo `Euribor/`.
 
-Nessun altro file o repo, né sul Mac né su GitHub. Se un percorso non è
-raggiungibile, **fermarsi e dirlo** invece di cercare alternative.
+Nessun altro file o repo, né sul Mac né su GitHub. Se il clone non è
+raggiungibile direttamente, l'unica alternativa ammessa è lo script
+`pubblica-github.command` descritto al Passo 2; per tutto il resto,
+**fermarsi e dirlo** invece di improvvisare.
 
 ---
 
@@ -128,27 +130,39 @@ righe già presenti su GitHub non vengono mai riscritte: lo storico lì è già
 bonificato e non va rigenerato dal Drive, che contiene ancora giorni della
 settimana incoerenti e valori con la virgola.
 
+**Prova prima l'accesso diretto** (la sessione interattiva ce l'ha; quella
+programmata forse no):
+
 ```bash
-cd /Users/fabrizio/Xcode/=NewApps/app
-git pull --quiet
-python3 Euribor/sync-from-drive.py
+cd /Users/fabrizio/Xcode/=NewApps/app && git pull --quiet && python3 Euribor/sync-from-drive.py
 ```
 
-Se non ci sono date nuove non tocca niente e lo dice. Con `--check` mostra cosa
-aggiungerebbe senza scrivere.
-
-> `--rebuild` rigenera l'intero storico da Drive: **non usarlo di routine**.
-> Serve solo se hai corretto un valore storico su Drive. Riscrive tutto e
-> nel farlo elimina le righe con date duplicate: controlla il git diff.
-
-Poi, **solo se ha segnalato dei file aggiornati**:
+Se lo script segnala file aggiornati, committa e pusha:
 
 ```bash
 cd /Users/fabrizio/Xcode/=NewApps/app
-git add Euribor
-git commit -m "Aggiorna i tassi al $(date +%d.%m.%Y)"
-git push origin main
+git add Euribor && git commit -m "Aggiorna i tassi al $(date +%d.%m.%Y)" && git push origin main
 ```
+
+**Se il percorso non è accessibile** (sandbox della sessione programmata):
+nella cartella Libor c'è `pubblica-github.command`, uno script fisso che fa
+tutto da solo — pull, sync, commit e push solo se serve — e scrive l'esito in
+`pubblica-github.log` accanto a sé. Va eseguito fuori dal sandbox:
+
+1. lancialo con `open pubblica-github.command` dalla cartella Libor; se
+   `open` non è permesso, aprilo con un doppio clic tramite Finder
+   (computer-use);
+2. attendi qualche secondo, poi leggi `pubblica-github.log`: l'ultima riga
+   è `ESITO: OK …` oppure `ESITO: FALLITO …`. Riporta quell'esito nel
+   riepilogo.
+
+Non riscrivere lo script né crearne di nuovi: usa quello esistente. Se manca,
+segnalalo — la copia di riferimento è versionata nella repo (`Euribor/`).
+
+Note su `--check` e `--rebuild` di `sync-from-drive.py`: `--check` mostra cosa
+aggiungerebbe senza scrivere; `--rebuild` rigenera l'intero storico da Drive e
+**non va usato di routine** (riscrive tutto ed elimina le righe con date
+duplicate — controllare il git diff).
 
 Corrispondenza dei nomi (la gestisce lo script, è qui solo come riferimento):
 
