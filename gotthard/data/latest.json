@@ -1,5 +1,5 @@
 {
- "time": "2026-07-16T22:25:17Z",
+ "time": "2026-07-16T22:30:23Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,45 +8,5 @@
   "km": null,
   "wait": null
  },
- "events": [
-  {
-   "id": "situation.639917.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-07-16T21:10:47Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Anschluss Airolo Sachlage: Stau Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: bouchon Raison: surcharge de trafic",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: colonna Causa: traffico congestionato"
-   }
-  },
-  {
-   "id": "situation.639736.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-07-16T20:36:22Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Parkplatz Dosierstelle Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Parking Aire de dosage Göschenen Situation: bouchon Raison: surcharge de trafic",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Parcheggio Area di dosaggio Göschenen Situazione: colonna Causa: traffico congestionato"
-   }
-  },
-  {
-   "id": "situation.639758.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-07-16T20:21:25Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Göschenen <-> Flüelen zwischen Ortschaft Erstfeld und Anschluss Göschenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
-    "fr": "Libéré: H2 Göschenen <-> Flüelen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
-    "it": "Approvato: H2 Göschenen <-> Flüelen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
-   }
-  }
- ]
+ "events": []
 }
