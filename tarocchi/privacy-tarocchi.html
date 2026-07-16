@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Privacy Policy — Tarocchi · Arcani Maggiori</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --notte: #120B26;
+    --notte2: #1C1238;
+    --velluto: #2A1D52;
+    --oro: #D9B35C;
+    --oro-chiaro: #F0D79A;
+    --pergamena: #EFE6D2;
+    --lavanda: #BCB0D8;
+    --rosso-arcano: #A8434F;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background:
+      radial-gradient(circle at 20% 10%, rgba(217,179,92,0.10), transparent 40%),
+      radial-gradient(circle at 80% 0%, rgba(188,176,216,0.08), transparent 45%),
+      linear-gradient(180deg, var(--notte) 0%, var(--notte2) 50%, var(--notte) 100%);
+    background-attachment: fixed;
+    color: var(--pergamena);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    line-height: 1.7;
+    min-height: 100vh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+
+  /* cielo stellato */
+  .stelle {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .stella {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--oro-chiaro);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: brilla 4s ease-in-out infinite;
+  }
+  @keyframes brilla {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 0.9; transform: scale(1.2); }
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 28px 96px;
+  }
+
+  /* intestazione */
+  header { text-align: center; margin-bottom: 56px; }
+
+  .luna {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--oro-chiaro), var(--oro) 70%);
+    box-shadow: 0 0 28px rgba(240,215,154,0.55), 0 0 60px rgba(217,179,92,0.30);
+    position: relative;
+  }
+  .luna::after {
+    content: "";
+    position: absolute;
+    top: -6px; left: 14px;
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    background: var(--notte);
+    box-shadow: 0 0 0 2px rgba(18,11,38,1);
+  }
+
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: var(--oro-chiaro);
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  .sottotitolo {
+    color: var(--lavanda);
+    font-style: italic;
+    font-size: 19px;
+    margin-top: 10px;
+  }
+  .aggiornato {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 5px 16px;
+    border: 1px solid rgba(217,179,92,0.4);
+    border-radius: 999px;
+    color: var(--oro);
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-family: 'Cinzel', serif;
+  }
+
+  /* sezioni */
+  section {
+    background: linear-gradient(160deg, rgba(42,29,82,0.55), rgba(28,18,56,0.55));
+    border: 1px solid rgba(217,179,92,0.18);
+    border-radius: 18px;
+    padding: 28px 30px;
+    margin-bottom: 22px;
+    backdrop-filter: blur(2px);
+  }
+
+  h2 {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 21px;
+    color: var(--oro);
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2::before {
+    content: "✦";
+    color: var(--oro-chiaro);
+    font-size: 16px;
+  }
+
+  p { margin-bottom: 12px; }
+  p:last-child { margin-bottom: 0; }
+
+  strong { color: var(--oro-chiaro); font-weight: 600; }
+
+  a { color: var(--oro); text-decoration: none; border-bottom: 1px dotted rgba(217,179,92,0.6); }
+  a:hover { color: var(--oro-chiaro); }
+
+  ul { list-style: none; margin: 8px 0 4px; }
+  li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 10px;
+  }
+  li::before {
+    content: "☾";
+    position: absolute;
+    left: 0;
+    color: var(--oro);
+    font-size: 16px;
+    top: 2px;
+  }
+
+  .contatto {
+    text-align: center;
+    margin-top: 36px;
+    color: var(--lavanda);
+  }
+  .contatto a { font-size: 21px; }
+
+  footer {
+    text-align: center;
+    margin-top: 48px;
+    color: rgba(188,176,216,0.6);
+    font-size: 15px;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    body { font-size: 18px; }
+    .wrap { padding: 44px 18px 72px; }
+    h1 { font-size: 24px; }
+    section { padding: 22px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="stelle" id="stelle" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header>
+    <div class="luna" aria-hidden="true"></div>
+    <h1>Privacy Policy</h1>
+    <div class="sottotitolo">Tarocchi · Arcani Maggiori</div>
+    <span class="aggiornato">Ultimo aggiornamento: giugno 2026</span>
+  </header>
+
+  <section>
+    <h2>Titolare del trattamento</h2>
+    <p>Fabrizio Bacchin — email: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a></p>
+  </section>
+
+  <section>
+    <h2>Dati che raccogliamo</h2>
+    <p>Quando accedi con <strong>“Sign in with Apple”</strong> e usi le funzioni online, trattiamo:</p>
+    <ul>
+      <li><strong>Identificativo utente Apple</strong>: per creare e identificare il tuo account.</li>
+      <li><strong>Email</strong> (se fornita da Apple e da te salvata): per la gestione dell'account.</li>
+      <li><strong>Giocate salvate</strong>: la stesa scelta, l'eventuale domanda e le carte estratte.</li>
+      <li><strong>Storico acquisti</strong>: i prodotti acquistati tramite In-App Purchase di Apple.</li>
+      <li><strong>Token di notifica</strong>: per inviarti notifiche push, se le attivi.</li>
+    </ul>
+    <p>Non utilizziamo i dati per pubblicità né li condividiamo con terze parti a scopi di marketing o tracciamento.</p>
+  </section>
+
+  <section>
+    <h2>Finalità e base giuridica</h2>
+    <p>I dati sono trattati per fornire il servizio (esecuzione del contratto, art. 6.1.b GDPR): salvataggio delle letture, gestione di crediti e abbonamento, invio delle notifiche.</p>
+  </section>
+
+  <section>
+    <h2>Dove sono conservati i dati</h2>
+    <p>I dati sono ospitati su <strong>Back4App</strong> (Parse Server), che agisce come responsabile del trattamento. I pagamenti sono gestiti da <strong>Apple</strong>: non abbiamo accesso ai dati della tua carta.</p>
+  </section>
+
+  <section>
+    <h2>Conservazione</h2>
+    <p>Conserviamo i dati finché mantieni l'account. Puoi eliminare l'account in qualsiasi momento dall'app (<strong>Profilo → Elimina account</strong>): ciò cancella in modo permanente le tue giocate e i dati associati.</p>
+  </section>
+
+  <section>
+    <h2>I tuoi diritti</h2>
+    <p>Hai diritto di accesso, rettifica, cancellazione, limitazione e portabilità dei dati (artt. 15–20 GDPR). Per esercitarli scrivi a <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+  </section>
+
+  <div class="contatto">
+    <p>Per qualsiasi domanda sulla privacy</p>
+    <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>
+  </div>
+
+  <footer>
+    I tarocchi sono uno specchio simbolico per la riflessione personale, non uno strumento di predizione.
+  </footer>
+</div>
+
+<script>
+  // genera il cielo stellato
+  (function () {
+    const c = document.getElementById('stelle');
+    const n = 70;
+    for (let i = 0; i < n; i++) {
+      const s = document.createElement('div');
+      s.className = 'stella';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.animationDelay = (Math.random() * 4) + 's';
+      const size = Math.random() * 2 + 1;
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      c.appendChild(s);
+    }
+  })();
+</script>
+</body>
+</html>
