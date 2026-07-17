@@ -5,6 +5,7 @@
  },
  "north": {
   "phase": "queued",
-  "lastSent": "2026-07-17T09:02:48Z"
+  "lastSent": "2026-07-17T09:02:48Z",
+  "clearSince": "2026-07-17T17:12:50Z"
  }
 }
