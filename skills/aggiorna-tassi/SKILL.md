@@ -32,9 +32,10 @@ Questa skill deve toccare **soltanto** due percorsi:
 - il clone della repo **`fbacchin/app`**, e al suo interno solo `Euribor/`.
 
 Nessun altro file o repo, né sul Mac né su GitHub. Se il clone non è
-raggiungibile direttamente, l'unica alternativa ammessa è lo script
-`pubblica-github.command` descritto al Passo 2; per tutto il resto,
-**fermarsi e dirlo** invece di improvvisare.
+raggiungibile direttamente, le uniche alternative ammesse sono gli script
+del Passo 2 (`pubblica-github-api.py`, e in sessione interattiva
+`pubblica-github.command`); per tutto il resto, **fermarsi e dirlo** invece
+di improvvisare.
 
 ---
 
@@ -144,20 +145,27 @@ cd /Users/fabrizio/Xcode/=NewApps/app
 git add Euribor && git commit -m "Aggiorna i tassi al $(date +%d.%m.%Y)" && git push origin main
 ```
 
-**Se il percorso non è accessibile** (sandbox della sessione programmata):
-nella cartella Libor c'è `pubblica-github.command`, uno script fisso che fa
-tutto da solo — pull, sync, commit e push solo se serve — e scrive l'esito in
-`pubblica-github.log` accanto a sé. Va eseguito fuori dal sandbox:
+**Se il percorso non è accessibile** (sandbox della sessione programmata),
+usa lo script API, che non ha bisogno del clone — solo di rete e del token:
 
-1. lancialo con `open pubblica-github.command` dalla cartella Libor; se
-   `open` non è permesso, aprilo con un doppio clic tramite Finder
-   (computer-use);
-2. attendi qualche secondo, poi leggi `pubblica-github.log`: l'ultima riga
-   è `ESITO: OK …` oppure `ESITO: FALLITO …`. Riporta quell'esito nel
-   riepilogo.
+```bash
+cd "<cartella Libor>" && python3 pubblica-github-api.py
+```
 
-Non riscrivere lo script né crearne di nuovi: usa quello esistente. Se manca,
-segnalalo — la copia di riferimento è versionata nella repo (`Euribor/`).
+Legge i CSV di questa cartella, scarica lo stato pubblicato dall'API di
+GitHub, carica solo le date mancanti e stampa l'esito: l'ultima riga è sempre
+`ESITO: OK …` o `ESITO: FALLITO …` — riportala nel riepilogo. Il token sta nel
+file `.github-token` della cartella; se manca, lo script lo dice.
+
+**Solo in sessione interattiva**, come ulteriore ripiego (token mancante o API
+irraggiungibile): `pubblica-github.command` nella stessa cartella fa pull,
+sync, commit e push via git fuori dal sandbox — lancialo con `open` o doppio
+clic via Finder e leggi `pubblica-github.log`. Nelle sessioni programmate non
+tentarlo: non possono approvare l'accesso a Finder/Terminale.
+
+Non riscrivere questi script né crearne di nuovi: usa quelli esistenti. Se
+mancano, segnalalo — le copie di riferimento sono versionate nella repo
+(`Euribor/`).
 
 Note su `--check` e `--rebuild` di `sync-from-drive.py`: `--check` mostra cosa
 aggiungerebbe senza scrivere; `--rebuild` rigenera l'intero storico da Drive e
