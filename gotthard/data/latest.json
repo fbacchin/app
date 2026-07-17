@@ -1,5 +1,5 @@
 {
- "time": "2026-07-17T13:38:24Z",
+ "time": "2026-07-17T13:43:30Z",
  "south": {
   "km": 11.0,
   "wait": null
@@ -33,6 +33,19 @@
     "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
     "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
     "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
+   }
+  },
+  {
+   "id": "situation.640085.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": null,
+   "versionTime": "2026-07-17T13:39:53Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Chiasso <-> Gotthard zwischen Anschluss Quinto und Anschluss Faido Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.4 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.0 Zusatz 2: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 7.0 Dauer: nachts voraussichtlich 26.07.2026 20:00 bis 31.07.2026 04:30",
+    "fr": "Libéré: A2 Chiasso <-> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Faido Situation: trafic perturbé travaux, longueur [km] 1.4 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.0 Complément 2: limitation temporaire de largeur largeur de la voie [m] 7.0 Durée: durant la nuit probable 26.07.2026 20:00 jusqu'à 31.07.2026 04:30",
+    "it": "Approvato: A2 Chiasso <-> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Faido Situazione: problemi di traffico cantiere, lunghezza [km] 1.4 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0 Aggiunta 2: limite temporaneo larghezza Larghezza carreggiata [m] 7.0 Durata: durante la notte probabile 26.07.2026 20:00 fino 31.07.2026 04:30"
    }
   },
   {
