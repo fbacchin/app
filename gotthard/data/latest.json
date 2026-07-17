@@ -1,5 +1,5 @@
 {
- "time": "2026-07-17T08:42:26Z",
+ "time": "2026-07-17T08:47:32Z",
  "south": {
   "km": 3.0,
   "wait": 30
@@ -9,6 +9,19 @@
   "wait": 10
  },
  "events": [
+  {
+   "id": "situation.639987.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "north",
+   "versionTime": "2026-07-17T08:43:40Z",
+   "km": null,
+   "wait": 15,
+   "texts": {
+    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Erstfeld und Autobahndreieck Verzweigung Altdorf Sachlage: Stau Zusatz 1: Zeitverlust Anz. [min] 15",
+    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Erstfeld et Echangeur Echangeur d'Altdorf Situation: bouchon Complément 1: retards Nbre. [min] 15",
+    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Erstfeld E Raccordo autostradale Diramazione Altdorf Situazione: colonna Aggiunta 1: ritardi No. [min] 15"
+   }
+  },
   {
    "id": "situation.639946.1.1.1",
    "type": "AbnormalTraffic",
