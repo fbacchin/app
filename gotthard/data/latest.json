@@ -1,5 +1,5 @@
 {
- "time": "2026-07-18T07:08:39Z",
+ "time": "2026-07-18T07:13:45Z",
  "south": {
   "km": 20.0,
   "wait": 180
@@ -33,6 +33,19 @@
     "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Anschluss Göschenen Sachlage: Stau Länge [km] 20.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 180 Zusatz 2: Staulänge zunehmend",
     "fr": "Libéré: A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 20.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 180 Complément 2: longueur du bouchon en augmentation",
     "it": "Approvato: A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 20.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 180 Aggiunta 2: lunghezza delle code in aumento"
+   }
+  },
+  {
+   "id": "situation.640195.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": null,
+   "versionTime": "2026-07-18T07:11:24Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: Ulrichen <-> Airolo Pass Nufenen-Pass Sachlage: Gefahr Ursache: Tiere auf der Fahrbahn Dauer: bis auf weiteres voraussichtlich 18.07.2026 09:11",
+    "fr": "Libéré: Ulrichen <-> Airolo Col Col du Nufenen Situation: danger Raison: animaux sur la route Durée: jusqu'à nouvel avis probable 18.07.2026 09:11",
+    "it": "Approvato: Ulrichen <-> Airolo Passo Passo della Novena Situazione: pericolo Causa: animali sulla strada Durata: fino a nuovo avviso probabile 18.07.2026 09:11"
    }
   },
   {
