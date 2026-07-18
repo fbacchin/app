@@ -1,8 +1,8 @@
 {
- "time": "2026-07-18T06:12:26Z",
+ "time": "2026-07-18T06:17:31Z",
  "south": {
-  "km": 17.0,
-  "wait": 170
+  "km": 20.0,
+  "wait": 180
  },
  "north": {
   "km": null,
@@ -13,13 +13,13 @@
    "id": "situation.639946.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "south",
-   "versionTime": "2026-07-18T05:56:40Z",
-   "km": 17.0,
-   "wait": 170,
+   "versionTime": "2026-07-18T06:17:20Z",
+   "km": 20.0,
+   "wait": 180,
    "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Anschluss Göschenen Sachlage: Stau Länge [km] 17.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 170 Zusatz 2: Staulänge zunehmend",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 17.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 170 Complément 2: longueur du bouchon en augmentation",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 17.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 170 Aggiunta 2: lunghezza delle code in aumento"
+    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Anschluss Göschenen Sachlage: Stau Länge [km] 20.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 180 Zusatz 2: Staulänge zunehmend",
+    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 20.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 180 Complément 2: longueur du bouchon en augmentation",
+    "it": "Approvato: A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 20.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 180 Aggiunta 2: lunghezza delle code in aumento"
    }
   }
  ]
