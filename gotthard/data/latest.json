@@ -1,5 +1,5 @@
 {
- "time": "2026-07-18T15:38:41Z",
+ "time": "2026-07-18T15:43:46Z",
  "south": {
   "km": 17.0,
   "wait": 150
@@ -39,13 +39,13 @@
    "id": "situation.640243.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-07-18T15:07:45Z",
+   "versionTime": "2026-07-18T15:43:05Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Amsteg und Anschluss Erstfeld Sachlage: stockender Verkehr Ursache: Unfall Verkehrsführung: rechter Fahrstreifen blockiert",
-    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Amsteg et Jonction autoroutière Erstfeld Situation: trafic en accordéon Raison: accident Gestion du trafic: voie de droite bloquée",
-    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Amsteg E Svincolo autostradale Erstfeld Situazione: traffico fortemente rallentato Causa: incidente Limitazione del traffico: corsia di destra bloccata"
+    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Wassen und Anschluss Erstfeld Sachlage: stockender Verkehr Ursache: Unfall Verkehrsführung: rechter Fahrstreifen blockiert",
+    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Wassen et Jonction autoroutière Erstfeld Situation: trafic en accordéon Raison: accident Gestion du trafic: voie de droite bloquée",
+    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Wassen E Svincolo autostradale Erstfeld Situazione: traffico fortemente rallentato Causa: incidente Limitazione del traffico: corsia di destra bloccata"
    }
   },
   {
