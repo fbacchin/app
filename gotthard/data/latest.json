@@ -1,5 +1,5 @@
 {
- "time": "2026-07-18T19:52:53Z",
+ "time": "2026-07-18T19:57:58Z",
  "south": {
   "km": 4.0,
   "wait": 40
@@ -20,6 +20,19 @@
     "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Anschluss Göschenen Sachlage: Stau Länge [km] 4 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
     "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 4 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
     "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 4 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
+   }
+  },
+  {
+   "id": "situation.640267.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": null,
+   "versionTime": "2026-07-18T19:54:45Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: H2 Bellinzona <-> Airolo Ortschaft Claro Sachlage: Verkehrsbehinderung Ursache: Unfall Verkehrsführung: wechselseitige Verkehrsführung",
+    "fr": "Libéré: H2 Bellinzone <-> Airolo Localité Claro Situation: trafic perturbé Raison: accident Gestion du trafic: circulation alternée à une voie",
+    "it": "Approvato: H2 Bellinzona <-> Airolo Luogo Claro Situazione: problemi di traffico Causa: incidente Limitazione del traffico: circolazione a corsie alternate"
    }
   }
  ]
