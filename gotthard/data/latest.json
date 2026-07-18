@@ -1,5 +1,5 @@
 {
- "time": "2026-07-18T14:47:42Z",
+ "time": "2026-07-18T14:57:53Z",
  "south": {
   "km": 17.0,
   "wait": 150
@@ -39,26 +39,13 @@
    "id": "situation.640243.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-07-18T14:47:21Z",
+   "versionTime": "2026-07-18T14:48:16Z",
    "km": null,
    "wait": null,
    "texts": {
     "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Amsteg und Anschluss Erstfeld Sachlage: Gefahr Ursache: Unfall",
     "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Amsteg et Jonction autoroutière Erstfeld Situation: danger Raison: accident",
     "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Amsteg E Svincolo autostradale Erstfeld Situazione: pericolo Causa: incidente"
-   }
-  },
-  {
-   "id": "situation.640242.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-07-18T14:32:26Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: Freggio, Faido in beide Richtungen  Sachlage: Strecke gesperrt Ursache: umgestürzte Bäume",
-    "fr": "Libéré: Freggio, Faido dans les deux sens  Situation: fermé Raison: arbres renversés",
-    "it": "Approvato: Freggio, Faido in tutte le direzioni  Situazione: chiusa Causa: alberi caduti"
    }
   },
   {
