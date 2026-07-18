@@ -1,8 +1,8 @@
 {
- "time": "2026-07-18T04:30:53Z",
+ "time": "2026-07-18T04:35:57Z",
  "south": {
-  "km": null,
-  "wait": null
+  "km": 15.0,
+  "wait": 150
  },
  "north": {
   "km": null,
@@ -13,13 +13,13 @@
    "id": "situation.639946.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "south",
-   "versionTime": "2026-07-18T04:28:56Z",
-   "km": null,
-   "wait": null,
+   "versionTime": "2026-07-18T04:32:07Z",
+   "km": 15.0,
+   "wait": 150,
    "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Raststätte Gotthard und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Staulänge zunehmend Anz. [min] 150 Zusatz 2: Zeitverlust Anz. [h] 2.5",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Aire de service St-Gothard et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic Complément 1: longueur du bouchon en augmentation Nbre. [min] 150 Complément 2: retards Nbre. [h] 2.5",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Area di servizio S. Gottardo E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato Aggiunta 1: lunghezza delle code in aumento No. [min] 150 Aggiunta 2: ritardi No. [h] 2.5"
+    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Raststätte Gotthard und Anschluss Göschenen Sachlage: Stau Länge [km] 15.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 150 Zusatz 2: Staulänge zunehmend",
+    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Aire de service St-Gothard et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 15.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 150 Complément 2: longueur du bouchon en augmentation",
+    "it": "Approvato: A2 Luzern -> S. Gottardo tra Area di servizio S. Gottardo E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 15.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 150 Aggiunta 2: lunghezza delle code in aumento"
    }
   }
  ]
