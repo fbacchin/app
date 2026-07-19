@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Euribor per Mac — Supporto · Support</title>
+<style>
+  :root {
+    --bg: #f5f7fc; --card: #ffffff; --fg: #0a1e5c; --muted: #5a6b94;
+    --accent: #1e6bff; --border: rgba(10,30,92,0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0b1226; --card: #141d3a; --fg: #eef2ff; --muted: #93a2c9; --accent: #5b93ff; --border: rgba(238,242,255,0.14); }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 64px; }
+  header { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+  .logo { width: 52px; height: 52px; border-radius: 12px; background: radial-gradient(circle at 35% 30%, #2b4bd7, #0a1e5c); display: flex; align-items: center; justify-content: center; color: #ffd617; font-size: 24px; }
+  h1 { font-size: 28px; margin: 0; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); margin: 0 0 20px 66px; }
+  .langbar { display: flex; gap: 8px; margin: 18px 0 26px; }
+  .langbar button {
+    font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--card); color: var(--fg);
+  }
+  .langbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  section.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 26px; margin: 14px 0; }
+  h2 { font-size: 19px; margin: 2px 0 10px; }
+  h2 .ic { color: var(--accent); margin-right: 6px; }
+  ul { margin: 8px 0; padding-left: 22px; }
+  li { margin: 5px 0; }
+  b { color: var(--fg); }
+  .kbd { display: inline-block; border: 1px solid var(--border); border-radius: 6px; padding: 0 7px; font-size: 14px; background: var(--bg); }
+  a { color: var(--accent); }
+  .foot { color: var(--muted); font-size: 14px; margin-top: 28px; text-align: center; }
+  [lang-block] { display: none; }
+  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"] { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">€</div>
+    <h1>Euribor per Mac</h1>
+  </header>
+  <p class="sub" lang-block="it">Supporto e guida all'uso</p>
+  <p class="sub" lang-block="en">Support and user guide</p>
+
+  <div class="langbar">
+    <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
+    <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+  </div>
+
+  <!-- ============================ ITALIANO ============================ -->
+  <div lang-block="it">
+    <section class="card">
+      <h2><span class="ic">◎</span>Cosa fa l'app</h2>
+      <p>Euribor mette i tassi del mercato monetario europeo a portata di clic: l'<b>€STR</b> (il tasso overnight della BCE) e i cinque tenor <b>Euribor</b> — 1 settimana, 1, 3, 6 e 12 mesi — in un'unica dashboard, con storici, variazioni e un calcolatore di rata integrato. I dati si aggiornano automaticamente all'avvio e a ogni ricarica.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>La dashboard</h2>
+      <p>Sei card, una per tasso. Ogni card mostra:</p>
+      <ul>
+        <li>il <b>fixing più recente</b> in grande;</li>
+        <li>la <b>variazione</b> rispetto al fixing precedente in <b>basis point</b> (verde se sale, rossa se scende) con la freccia di tendenza;</li>
+        <li>un <b>mini-grafico degli ultimi 30 giorni</b>;</li>
+        <li>il valore precedente e le <b>date dei due fixing</b>.</li>
+      </ul>
+      <p><b>Clic su una card</b> per aprire il grafico storico degli ultimi 3 mesi.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✦</span>La barra strumenti</h2>
+      <ul>
+        <li><span class="kbd">‹</span> <span class="kbd">›</span> — naviga ai <b>giorni di fixing precedenti e successivi</b>: tutte le card si aggiornano alla data scelta;</li>
+        <li><span class="kbd">⟳</span> — <b>ricarica</b> i tassi più recenti;</li>
+        <li><span class="kbd">⧉</span> — <b>copia negli appunti</b> i tassi del giorno, pronti da incollare;</li>
+        <li><span class="kbd">%</span> — apre il <b>calcolatore di rata</b>;</li>
+        <li><span class="kbd">ⓘ</span> — apre la finestra con la <b>legenda dei comandi</b>.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">∑</span>Il calcolatore di rata</h2>
+      <p>Stima la rata mensile di un mutuo o di un leasing. Inserisci:</p>
+      <ul>
+        <li><b>Importo</b>, <b>primo canone</b> (anticipo) e <b>riscatto</b> (valore residuo) in euro;</li>
+        <li>il <b>numero di rate</b> mensili;</li>
+        <li>il <b>tasso di riferimento</b>, scegliendolo dal menu (€STR o uno dei tenor Euribor, precompilato col valore del giorno) o digitandolo;</li>
+        <li>lo <b>spread</b> applicato dalla banca;</li>
+        <li>rate <b>in anticipo o posticipate</b>.</li>
+      </ul>
+      <p>La rata si <b>ricalcola da sola a ogni modifica</b>: non c'è nessun pulsante da premere.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Notifiche</h2>
+      <p>L'app può avvisarti con una notifica quando i tassi si aggiornano. L'autorizzazione viene chiesta al primo avvio; puoi cambiarla in ogni momento da <b>Impostazioni di Sistema → Notifiche → Euribor</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Problemi comuni</h2>
+      <ul>
+        <li><b>I tassi non si aggiornano</b> — verifica la connessione a Internet e premi <span class="kbd">⟳</span>. Senza rete l'app mostra gli ultimi dati scaricati.</li>
+        <li><b>Il grafico è vuoto</b> — serve almeno un aggiornamento riuscito: premi <span class="kbd">⟳</span> con la rete attiva.</li>
+        <li><b>Le notifiche non arrivano</b> — controlla che siano consentite in Impostazioni di Sistema → Notifiche.</li>
+        <li><b>Sono andato troppo indietro con le date</b> — l'app si ferma alla data più vecchia disponibile; premi <span class="kbd">⟳</span> per tornare a oggi.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">※</span>Dati e avvertenze</h2>
+      <p>I fixing Euribor sono pubblicati da <b>EMMI</b> (European Money Markets Institute), l'€STR dalla <b>Banca Centrale Europea</b>. I valori sono mostrati a solo scopo informativo e possono differire dai dati ufficiali: non costituiscono consulenza finanziaria né base contrattuale.</p>
+      <p>Requisiti: <b>macOS 11.5</b> o successivo.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">@</span>Contatti</h2>
+      <p>Per assistenza, segnalazioni o suggerimenti scrivi a <a href="mailto:bacchin@mac.com?subject=Euribor%20per%20Mac%20%E2%80%94%20Supporto">bacchin@mac.com</a>. Rispondo di solito entro pochi giorni lavorativi.</p>
+    </section>
+  </div>
+
+  <!-- ============================ ENGLISH ============================ -->
+  <div lang-block="en">
+    <section class="card">
+      <h2><span class="ic">◎</span>What the app does</h2>
+      <p>Euribor puts European money-market rates one click away: the <b>€STR</b> (the ECB's overnight rate) and the five <b>Euribor</b> tenors — 1 week, 1, 3, 6 and 12 months — in a single dashboard, with history charts, changes and a built-in payment calculator. Data refreshes automatically at launch and on every reload.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>The dashboard</h2>
+      <p>Six cards, one per rate. Each card shows:</p>
+      <ul>
+        <li>the <b>latest fixing</b>, large;</li>
+        <li>the <b>change</b> versus the previous fixing in <b>basis points</b> (green up, red down) with a trend arrow;</li>
+        <li>a <b>30-day mini chart</b>;</li>
+        <li>the previous value and the <b>dates of both fixings</b>.</li>
+      </ul>
+      <p><b>Click any card</b> to open its 3-month history chart.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✦</span>The toolbar</h2>
+      <ul>
+        <li><span class="kbd">‹</span> <span class="kbd">›</span> — step through <b>earlier and later fixing days</b>: every card updates to the chosen date;</li>
+        <li><span class="kbd">⟳</span> — <b>reload</b> the latest rates;</li>
+        <li><span class="kbd">⧉</span> — <b>copy today's rates</b> to the clipboard, ready to paste;</li>
+        <li><span class="kbd">%</span> — opens the <b>payment calculator</b>;</li>
+        <li><span class="kbd">ⓘ</span> — opens the window with the <b>controls legend</b>.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">∑</span>The payment calculator</h2>
+      <p>Estimates the monthly payment for a loan or lease. Enter:</p>
+      <ul>
+        <li>the <b>amount</b>, <b>first payment</b> (down payment) and <b>last payment</b> (residual value) in euros;</li>
+        <li>the <b>number of monthly payments</b>;</li>
+        <li>the <b>reference rate</b>, picked from the menu (€STR or any Euribor tenor, pre-filled with today's value) or typed manually;</li>
+        <li>the bank's <b>spread</b>;</li>
+        <li>payments <b>in advance or in arrears</b>.</li>
+      </ul>
+      <p>The payment <b>recalculates on every change</b> — there is no button to press.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Notifications</h2>
+      <p>The app can notify you when rates update. Permission is requested at first launch; you can change it any time in <b>System Settings → Notifications → Euribor</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Troubleshooting</h2>
+      <ul>
+        <li><b>Rates don't update</b> — check your Internet connection and press <span class="kbd">⟳</span>. Offline, the app shows the latest downloaded data.</li>
+        <li><b>The chart is empty</b> — at least one successful refresh is needed: press <span class="kbd">⟳</span> while online.</li>
+        <li><b>Notifications don't arrive</b> — make sure they are allowed in System Settings → Notifications.</li>
+        <li><b>Stepped too far back in time</b> — the app stops at the oldest available date; press <span class="kbd">⟳</span> to return to today.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">※</span>Data and disclaimer</h2>
+      <p>Euribor fixings are published by <b>EMMI</b> (European Money Markets Institute), €STR by the <b>European Central Bank</b>. Values are shown for information only and may differ from official data: they are not financial advice and not a contractual basis.</p>
+      <p>Requirements: <b>macOS 11.5</b> or later.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">@</span>Contact</h2>
+      <p>For assistance, bug reports or suggestions write to <a href="mailto:bacchin@mac.com?subject=Euribor%20for%20Mac%20%E2%80%94%20Support">bacchin@mac.com</a>. I usually reply within a few working days.</p>
+    </section>
+  </div>
+
+  <p class="foot">
+    <span lang-block="it">Euribor per Mac · <a href="privacy.html">Informativa sulla privacy</a></span>
+    <span lang-block="en">Euribor for Mac · <a href="privacy.html">Privacy policy</a></span>
+  </p>
+</div>
+
+<script>
+  function setLang(l) {
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    document.getElementById("btn-it").setAttribute("aria-pressed", l === "it");
+    document.getElementById("btn-en").setAttribute("aria-pressed", l === "en");
+    try { localStorage.setItem("euribor-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("euribor-lang"); } catch (e) {}
+  setLang(saved || ((navigator.language || "en").toLowerCase().indexOf("it") === 0 ? "it" : "en"));
+</script>
+<noscript><style>[lang-block]{display:block !important}</style></noscript>
+</body>
+</html>

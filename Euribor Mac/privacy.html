@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Euribor per Mac — Privacy</title>
+<style>
+  :root {
+    --bg: #f5f7fc; --card: #ffffff; --fg: #0a1e5c; --muted: #5a6b94;
+    --accent: #1e6bff; --border: rgba(10,30,92,0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0b1226; --card: #141d3a; --fg: #eef2ff; --muted: #93a2c9; --accent: #5b93ff; --border: rgba(238,242,255,0.14); }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 64px; }
+  header { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+  .logo { width: 52px; height: 52px; border-radius: 12px; background: radial-gradient(circle at 35% 30%, #2b4bd7, #0a1e5c); display: flex; align-items: center; justify-content: center; color: #ffd617; font-size: 24px; }
+  h1 { font-size: 28px; margin: 0; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); margin: 0 0 20px 66px; }
+  .langbar { display: flex; gap: 8px; margin: 18px 0 26px; }
+  .langbar button {
+    font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--card); color: var(--fg);
+  }
+  .langbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  section.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 26px; margin: 14px 0; }
+  h2 { font-size: 19px; margin: 2px 0 10px; }
+  ul { margin: 8px 0; padding-left: 22px; }
+  li { margin: 5px 0; }
+  a { color: var(--accent); }
+  .foot { color: var(--muted); font-size: 14px; margin-top: 28px; text-align: center; }
+  .date { color: var(--muted); font-size: 14px; }
+  [lang-block] { display: none; }
+  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"] { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">€</div>
+    <h1>Euribor per Mac</h1>
+  </header>
+  <p class="sub" lang-block="it">Informativa sulla privacy</p>
+  <p class="sub" lang-block="en">Privacy policy</p>
+
+  <div class="langbar">
+    <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
+    <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+  </div>
+
+  <!-- ============================ ITALIANO ============================ -->
+  <div lang-block="it">
+    <p class="date">In vigore dal 19 luglio 2026</p>
+
+    <section class="card">
+      <h2>In breve</h2>
+      <p>Euribor per Mac <b>non raccoglie dati personali</b>. Non richiede la creazione di account, non contiene pubblicità, non usa strumenti di profilazione e <b>non vende né condivide dati a fini commerciali</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Notifiche push</h2>
+      <p>Se scegli di attivare le notifiche, l'app registra presso il servizio <b>Back4App</b> (piattaforma Parse) due informazioni tecniche:</p>
+      <ul>
+        <li>il <b>token APNs</b> del dispositivo, generato da Apple, necessario per recapitare le notifiche;</li>
+        <li>un <b>identificatore anonimo di installazione</b>, usato per contare le consegne e le aperture delle notifiche.</li>
+      </ul>
+      <p>Questi dati non sono collegati alla tua identità, non contengono informazioni personali e vengono usati esclusivamente per il funzionamento delle notifiche. Se disattivi le notifiche da Impostazioni di Sistema, il token diventa inutilizzabile.</p>
+    </section>
+
+    <section class="card">
+      <h2>Download dei dati sui tassi</h2>
+      <p>I tassi vengono scaricati da pagine pubbliche ospitate su <b>GitHub Pages</b>. Come per qualunque sito web, GitHub può registrare dati tecnici di connessione (ad esempio l'indirizzo IP) secondo la propria <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">informativa sulla privacy</a>. L'app non invia alcun altro dato durante il download.</p>
+    </section>
+
+    <section class="card">
+      <h2>Dati salvati sul tuo Mac</h2>
+      <p>L'app conserva localmente, nel proprio contenitore sandbox, solo la <b>cache dei tassi</b> scaricati (per il funzionamento offline) e le preferenze di finestra. Nulla di tutto questo lascia il tuo Mac.</p>
+    </section>
+
+    <section class="card">
+      <h2>I tuoi diritti e contatti</h2>
+      <p>Per qualsiasi domanda su questa informativa, o per chiedere la cancellazione del token di notifica associato alla tua installazione, scrivi a <a href="mailto:bacchin@mac.com?subject=Euribor%20per%20Mac%20%E2%80%94%20Privacy">bacchin@mac.com</a>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Modifiche</h2>
+      <p>Eventuali modifiche a questa informativa saranno pubblicate su questa pagina, con aggiornamento della data di entrata in vigore.</p>
+    </section>
+  </div>
+
+  <!-- ============================ ENGLISH ============================ -->
+  <div lang-block="en">
+    <p class="date">Effective July 19, 2026</p>
+
+    <section class="card">
+      <h2>In short</h2>
+      <p>Euribor for Mac <b>does not collect personal data</b>. It requires no account, shows no advertising, uses no profiling tools and <b>never sells or shares data for commercial purposes</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Push notifications</h2>
+      <p>If you choose to enable notifications, the app registers two technical pieces of information with <b>Back4App</b> (a Parse platform):</p>
+      <ul>
+        <li>the device's <b>APNs token</b>, generated by Apple, required to deliver notifications;</li>
+        <li>an <b>anonymous installation identifier</b>, used to count notification deliveries and opens.</li>
+      </ul>
+      <p>This data is not linked to your identity, contains no personal information and is used solely to make notifications work. If you disable notifications in System Settings, the token becomes unusable.</p>
+    </section>
+
+    <section class="card">
+      <h2>Rate data downloads</h2>
+      <p>Rates are downloaded from public pages hosted on <b>GitHub Pages</b>. As with any website, GitHub may log technical connection data (such as your IP address) according to its own <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">privacy statement</a>. The app sends no other data during the download.</p>
+    </section>
+
+    <section class="card">
+      <h2>Data stored on your Mac</h2>
+      <p>The app keeps locally, inside its own sandbox container, only the <b>cache of downloaded rates</b> (for offline use) and window preferences. None of this ever leaves your Mac.</p>
+    </section>
+
+    <section class="card">
+      <h2>Your rights and contact</h2>
+      <p>For any question about this policy, or to request deletion of the notification token associated with your installation, write to <a href="mailto:bacchin@mac.com?subject=Euribor%20for%20Mac%20%E2%80%94%20Privacy">bacchin@mac.com</a>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Changes</h2>
+      <p>Any change to this policy will be published on this page, updating the effective date above.</p>
+    </section>
+  </div>
+
+  <p class="foot">
+    <span lang-block="it">Euribor per Mac · <a href="support.html">Supporto</a></span>
+    <span lang-block="en">Euribor for Mac · <a href="support.html">Support</a></span>
+  </p>
+</div>
+
+<script>
+  function setLang(l) {
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    document.getElementById("btn-it").setAttribute("aria-pressed", l === "it");
+    document.getElementById("btn-en").setAttribute("aria-pressed", l === "en");
+    try { localStorage.setItem("euribor-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("euribor-lang"); } catch (e) {}
+  setLang(saved || ((navigator.language || "en").toLowerCase().indexOf("it") === 0 ? "it" : "en"));
+</script>
+<noscript><style>[lang-block]{display:block !important}</style></noscript>
+</body>
+</html>
