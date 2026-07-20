@@ -87,5 +87,6 @@ Scrive in `data/` accanto allo script.
 
 ---
 
-La copia di riferimento del sorgente vive nel progetto Xcode
-(`Gotthard/Collector/`): le modifiche si fanno lì e si ricopiano qui.
+Questo repo è l'**unica copia** del collector: le modifiche a `collect.py`,
+al workflow e a questo README si fanno direttamente qui (via API GitHub o
+interfaccia web). Non esiste più una copia locale nel progetto Xcode.
