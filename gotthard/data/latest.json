@@ -1,8 +1,8 @@
 {
- "time": "2026-07-20T16:08:11Z",
+ "time": "2026-07-20T16:13:16Z",
  "south": {
-  "km": 16.0,
-  "wait": 160
+  "km": 14.0,
+  "wait": 140
  },
  "north": {
   "km": 3.0,
@@ -13,13 +13,13 @@
    "id": "situation.640391.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "south",
-   "versionTime": "2026-07-20T15:59:34Z",
-   "km": 16.0,
-   "wait": 160,
+   "versionTime": "2026-07-20T16:10:31Z",
+   "km": 14.0,
+   "wait": 140,
    "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Raststätte Gotthard und Anschluss Göschenen Sachlage: Stau Länge [km] 16.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 160",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Aire de service St-Gothard et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 16.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 160",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Area di servizio S. Gottardo E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 16.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 160"
+    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Erstfeld und Anschluss Göschenen Sachlage: Stau Länge [km] 14.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 140",
+    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 14.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 140",
+    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 14.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 140"
    }
   },
   {
