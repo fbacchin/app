@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Libor X — Supporto</title>
+<style>
+  :root {
+    --bg: #f5f7fc; --card: #ffffff; --fg: #0a1e5c; --muted: #5a6b94;
+    --accent: #1e6bff; --border: rgba(10,30,92,0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0b1226; --card: #141d3a; --fg: #eef2ff; --muted: #93a2c9; --accent: #5b93ff; --border: rgba(238,242,255,0.14); }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 64px; }
+  header { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+  .logo { width: 64px; height: 64px; border-radius: 14px; border: 1px solid var(--border); }
+  h1 { font-size: 28px; margin: 0; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); margin: 0 0 20px 78px; }
+  .langbar { display: flex; gap: 8px; margin: 18px 0 26px; }
+  .langbar button {
+    font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--card); color: var(--fg);
+  }
+  .langbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  section.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 26px; margin: 14px 0; }
+  h2 { font-size: 19px; margin: 2px 0 10px; }
+  h2 .ic { color: var(--accent); margin-right: 6px; }
+  .kbd { display: inline-block; border: 1px solid var(--border); border-radius: 6px; padding: 0 7px; font-size: 14px; background: var(--bg); }
+  ul { margin: 8px 0; padding-left: 22px; }
+  li { margin: 5px 0; }
+  b { color: var(--fg); }
+  a { color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  .foot { color: var(--muted); font-size: 14px; margin-top: 28px; text-align: center; }
+  [lang-block] { display: none; }
+  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"] { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="logo" src="data:image/png;base64,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" alt="">
+    <h1>Libor X</h1>
+  </header>
+  <p class="sub" lang-block="it">Supporto e guida all'uso · Libor X e LiborX Light</p>
+  <p class="sub" lang-block="en">Support and user guide · Libor X and LiborX Light</p>
+
+  <div class="langbar">
+    <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
+    <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+  </div>
+
+  <!-- ============================ ITALIANO ============================ -->
+  <div lang-block="it">
+    <section class="card">
+      <h2><span class="ic">◎</span>Cosa fanno le app</h2>
+      <p>Il LIBOR non esiste più: gli ultimi panel sono cessati nel 2023 e ogni valuta principale è passata a un nuovo tasso di riferimento. <b>Libor X raccoglie i successori in un'unica schermata</b>, per iPhone e iPad:</p>
+      <table>
+        <tr><th>Valuta</th><th>Tasso</th></tr>
+        <tr><td>🇺🇸 USD</td><td><b>SOFR</b> overnight + la curva <b>CME Term SOFR</b> a 1, 3, 6 e 12 mesi</td></tr>
+        <tr><td>🇬🇧 GBP</td><td><b>SONIA</b></td></tr>
+        <tr><td>🇨🇭 CHF</td><td><b>SARON</b></td></tr>
+        <tr><td>🇯🇵 JPY</td><td><b>TONAR</b></td></tr>
+      </table>
+      <p>I dati si aggiornano da soli all'avvio e l'app funziona anche <b>offline</b>, mostrando gli ultimi valori scaricati.</p>
+      <p>Esiste in due versioni, identiche nelle funzioni: <b>Libor X</b> (a pagamento, senza alcuna pubblicità) e <b>LiborX Light</b> (gratuita, sostenuta dagli annunci). Questa guida vale per entrambe.</p>
+      <p>Cerchi l'Euribor e l'€STR? Sono nell'app <b>Euribor X</b>, dedicata al mercato in euro.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>La schermata Markets</h2>
+      <p>In alto i quattro tassi <b>CME Term SOFR</b>, uno per scheda: valore, variazione rispetto al fixing precedente, mini-grafico degli ultimi tre mesi e <b>data del fixing</b>.</p>
+      <p>Sotto, i tassi <b>overnight</b> delle quattro valute in righe compatte. Sono molto stabili da un giorno all'altro, per questo non hanno un grafico in elenco: <b>tocca una riga</b> per aprire quello completo.</p>
+      <ul>
+        <li>Ogni tasso mostra <b>la propria data</b>: è normale che i Term SOFR siano avanti di un giorno rispetto agli overnight, perché gli amministratori non pubblicano tutti insieme.</li>
+        <li>Il <b>SARON</b> può essere <b>negativo</b>: non è un errore, la Svizzera convive da tempo con tassi sotto zero.</li>
+      </ul>
+      <p>Per aggiornare: <b>trascina verso il basso</b> oppure tocca il pulsante <span class="kbd">⟳</span> in alto.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📈</span>Il grafico storico</h2>
+      <p><b>Tocca una scheda o una riga</b> per aprire il grafico del tasso. Puoi scegliere l'intervallo — <b>1M</b>, <b>6M</b>, <b>1Y</b>, <b>2Y</b> o <b>Max</b> — e <b>scorrere il dito sul grafico</b> per leggere il valore esatto di ogni giornata. Sotto trovi minimo, massimo, media e variazione del periodo in <b>basis point</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🌍</span>La schermata Global</h2>
+      <p>È il confronto tra i mercati (su iPad si trova in fondo alla schermata principale):</p>
+      <ul>
+        <li><b>USD term curve</b> — la curva Term SOFR da 1 a 12 mesi, confrontata con com'era 3 mesi e 1 anno fa, con una lettura in parole semplici: se la curva sale il mercato si aspetta tassi più alti, se è invertita sconta tagli della Fed.</li>
+        <li><b>Rate ranking</b> — quale valuta paga di più oggi, in un colpo d'occhio.</li>
+        <li><b>One year, four currencies</b> — i quattro tassi overnight sovrapposti sugli ultimi 12 mesi.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>La pubblicità — solo LiborX Light</h2>
+      <p>LiborX Light è gratuita grazie agli annunci di <b>Google AdMob</b>: un <b>banner</b> nelle schermate principali e, ogni tanto, un <b>annuncio a schermo intero</b>. Libor X non contiene alcuna pubblicità.</p>
+      <p>Al primo avvio LiborX Light ti chiede le <b>preferenze sul consenso</b> (annunci personalizzati o generici); l'app <b>non richiede mai il tracciamento</b> di Apple. Puoi cambiare idea in ogni momento dal pulsante <b>Opzioni privacy</b> nella scheda Info. I dettagli sono nell'<a href="privacy.html">informativa sulla privacy</a>.</p>
+      <p>Se preferisci un'esperienza <b>senza pubblicità</b>, cerca <b>Libor X</b> sull'App Store.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Notifiche</h2>
+      <p>L'app può avvisarti con una notifica quando ci sono novità sui tassi. L'autorizzazione viene chiesta al primo avvio; puoi cambiarla in ogni momento da <b>Impostazioni → Notifiche</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🗣</span>Lingue</h2>
+      <p>Le app sono disponibili in <b>inglese, italiano, francese, spagnolo e tedesco</b> e seguono automaticamente la lingua del dispositivo. Per cambiarla: <b>Impostazioni → App → nome dell'app → Lingua</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Problemi comuni</h2>
+      <ul>
+        <li><b>I tassi non si aggiornano</b> — verifica la connessione e riprova con <span class="kbd">⟳</span>. Senza rete l'app mostra gli ultimi dati scaricati.</li>
+        <li><b>Manca il dato di oggi</b> — i fixing vengono pubblicati solo nei <b>giorni lavorativi</b>, mai nel weekend o nei festivi; il dato di un giorno arriva in genere il giorno successivo.</li>
+        <li><b>I tassi hanno date diverse tra loro</b> — è normale: ogni amministratore pubblica con tempi propri. Ogni tasso indica la sua data.</li>
+        <li><b>Il SARON è negativo</b> — è corretto, non è un errore di segno.</li>
+        <li><b>La variazione segna «= 0,000»</b> — il tasso non si è mosso in modo apprezzabile rispetto al fixing precedente.</li>
+        <li><b>Il grafico è vuoto</b> — serve almeno un aggiornamento riuscito: riprova con la rete attiva.</li>
+        <li><b>Lo spazio del banner è vuoto</b> (solo Light) — può capitare quando non ci sono annunci disponibili o manca la rete: non è un errore.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✱</span>Avvertenza</h2>
+      <p>I dati hanno finalità puramente informative e <b>non costituiscono consulenza finanziaria</b>. I valori possono differire dalle pubblicazioni ufficiali: prima di prendere decisioni fai sempre riferimento ai dati dell'amministratore del tasso.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✆</span>Contatti</h2>
+      <p>Per assistenza, segnalazioni o suggerimenti scrivi a <a href="mailto:bacchin@tiscali.it?subject=Libor%20X%20%E2%80%94%20Supporto">bacchin@tiscali.it</a>. Rispondo di solito entro pochi giorni lavorativi.</p>
+    </section>
+  </div>
+
+  <!-- ============================ ENGLISH ============================ -->
+  <div lang-block="en">
+    <section class="card">
+      <h2><span class="ic">◎</span>What the apps do</h2>
+      <p>LIBOR is gone: the final panels ended in 2023 and every major currency moved to a new benchmark. <b>Libor X gathers the successors on a single board</b>, for iPhone and iPad:</p>
+      <table>
+        <tr><th>Currency</th><th>Rate</th></tr>
+        <tr><td>🇺🇸 USD</td><td><b>SOFR</b> overnight + the <b>CME Term SOFR</b> curve at 1, 3, 6 and 12 months</td></tr>
+        <tr><td>🇬🇧 GBP</td><td><b>SONIA</b></td></tr>
+        <tr><td>🇨🇭 CHF</td><td><b>SARON</b></td></tr>
+        <tr><td>🇯🇵 JPY</td><td><b>TONAR</b></td></tr>
+      </table>
+      <p>Data refreshes by itself at launch and the app also works <b>offline</b>, showing the last values downloaded.</p>
+      <p>It comes in two versions, identical in features: <b>Libor X</b> (paid, with no advertising at all) and <b>LiborX Light</b> (free, supported by ads). This guide covers both.</p>
+      <p>Looking for Euribor and €STR? They are in the <b>Euribor X</b> app, dedicated to the euro market.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>The Markets screen</h2>
+      <p>At the top, the four <b>CME Term SOFR</b> rates, one card each: value, change from the previous fixing, a three-month mini chart and the <b>fixing date</b>.</p>
+      <p>Below them, the <b>overnight</b> rates of the four currencies in compact rows. They barely move from one day to the next, which is why they carry no chart in the list: <b>tap a row</b> to open the full one.</p>
+      <ul>
+        <li>Every rate shows <b>its own date</b>: Term SOFR being a day ahead of the overnight rates is normal — administrators don't all publish at the same time.</li>
+        <li><b>SARON</b> can be <b>negative</b>: that's not an error, Switzerland has long lived with sub-zero rates.</li>
+      </ul>
+      <p>To refresh: <b>pull down</b> or tap the <span class="kbd">⟳</span> button at the top.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📈</span>The historical chart</h2>
+      <p><b>Tap a card or a row</b> to open that rate's chart. Pick the range — <b>1M</b>, <b>6M</b>, <b>1Y</b>, <b>2Y</b> or <b>Max</b> — and <b>drag your finger across the chart</b> to read the exact value for any day. Below it you get the period's low, high, average and change in <b>basis points</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🌍</span>The Global screen</h2>
+      <p>This is where the markets are compared (on iPad it sits at the bottom of the main screen):</p>
+      <ul>
+        <li><b>USD term curve</b> — the Term SOFR curve from 1 to 12 months, against where it stood 3 months and 1 year ago, with a plain-language reading: an upward curve means markets expect higher rates, an inverted one means they are pricing in Fed cuts.</li>
+        <li><b>Rate ranking</b> — which currency pays the most today, at a glance.</li>
+        <li><b>One year, four currencies</b> — the four overnight rates overlaid across the last 12 months.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>Advertising — LiborX Light only</h2>
+      <p>LiborX Light is free thanks to <b>Google AdMob</b> ads: a <b>banner</b> on the main screens and, now and then, a <b>full-screen ad</b>. Libor X contains no advertising at all.</p>
+      <p>At first launch LiborX Light asks for your <b>consent preferences</b> (personalized or generic ads); the app <b>never requests Apple's tracking permission</b>. You can change your mind at any time from the <b>Privacy options</b> button in the Info tab. Details are in the <a href="privacy.html">privacy policy</a>.</p>
+      <p>If you prefer an <b>ad-free</b> experience, look for <b>Libor X</b> on the App Store.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Notifications</h2>
+      <p>The app can notify you when there is news about the rates. Permission is requested at first launch; you can change it at any time in <b>Settings → Notifications</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🗣</span>Languages</h2>
+      <p>The apps are available in <b>English, Italian, French, Spanish and German</b> and follow your device language automatically. To change it: <b>Settings → Apps → app name → Language</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Common issues</h2>
+      <ul>
+        <li><b>Rates don't refresh</b> — check your connection and try again with <span class="kbd">⟳</span>. With no network the app shows the last data downloaded.</li>
+        <li><b>Today's value is missing</b> — fixings are published on <b>business days</b> only, never at weekends or on holidays; a given day's value usually arrives the day after.</li>
+        <li><b>Rates show different dates</b> — that's normal: each administrator publishes on its own schedule. Every rate states its own date.</li>
+        <li><b>SARON is negative</b> — that's correct, not a sign error.</li>
+        <li><b>The change reads “= 0.000”</b> — the rate did not move appreciably from the previous fixing.</li>
+        <li><b>The chart is empty</b> — at least one successful refresh is needed: try again with the network on.</li>
+        <li><b>The banner space is blank</b> (Light only) — this can happen when no ad is available or the network is down: it is not an error.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✱</span>Disclaimer</h2>
+      <p>The data is for information only and <b>does not constitute financial advice</b>. Values may differ from official publications: before making decisions, always refer to the rate administrator's own data.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✆</span>Contact</h2>
+      <p>For assistance, bug reports or suggestions write to <a href="mailto:bacchin@tiscali.it?subject=Libor%20X%20%E2%80%94%20Support">bacchin@tiscali.it</a>. I usually reply within a few working days.</p>
+    </section>
+  </div>
+
+  <p class="foot">
+    <span lang-block="it">Libor X e LiborX Light · <a href="privacy.html">Privacy</a></span>
+    <span lang-block="en">Libor X and LiborX Light · <a href="privacy.html">Privacy</a></span>
+  </p>
+</div>
+
+<script>
+  function setLang(l) {
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    document.getElementById("btn-it").setAttribute("aria-pressed", l === "it");
+    document.getElementById("btn-en").setAttribute("aria-pressed", l === "en");
+    try { localStorage.setItem("liborx-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("liborx-lang"); } catch (e) {}
+  setLang(saved || ((navigator.language || "en").toLowerCase().indexOf("it") === 0 ? "it" : "en"));
+</script>
+<noscript><style>[lang-block]{display:block !important}</style></noscript>
+</body>
+</html>
