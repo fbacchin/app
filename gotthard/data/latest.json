@@ -1,8 +1,8 @@
 {
- "time": "2026-07-20T10:51:49Z",
+ "time": "2026-07-20T10:56:55Z",
  "south": {
-  "km": 16.0,
-  "wait": null
+  "km": 17.0,
+  "wait": 170
  },
  "north": {
   "km": 4.0,
@@ -13,13 +13,13 @@
    "id": "situation.640391.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "south",
-   "versionTime": "2026-07-20T10:46:30Z",
-   "km": 16.0,
-   "wait": null,
+   "versionTime": "2026-07-20T10:52:47Z",
+   "km": 17.0,
+   "wait": 170,
    "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Anschluss Göschenen Sachlage: Stau Länge [km] 16 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [h] 2.667",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 16 Raison: surcharge de trafic Complément 1: retards Nbre. [h] 2.667",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 16 Causa: traffico congestionato Aggiunta 1: ritardi No. [h] 2.667"
+    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Anschluss Göschenen Sachlage: Stau Länge [km] 17.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 170",
+    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 17.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 170",
+    "it": "Approvato: A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 17.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 170"
    }
   },
   {
