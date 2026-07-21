@@ -1,5 +1,5 @@
 {
- "time": "2026-07-21T09:17:10Z",
+ "time": "2026-07-21T09:22:15Z",
  "south": {
   "km": 2.0,
   "wait": 20
@@ -33,6 +33,19 @@
     "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 2.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
     "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
     "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
+   }
+  },
+  {
+   "id": "situation.640626.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "north",
+   "versionTime": "2026-07-21T09:19:28Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Erstfeld und Autobahndreieck Verzweigung Altdorf, bei Kilometer 145.4 Sachlage: Stau Ursache: Unfall Verkehrsführung: Fahrstreifen blockiert",
+    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Erstfeld et Echangeur Echangeur d'Altdorf, au kilomètre 145.4 Situation: bouchon Raison: accident Gestion du trafic: voie bloquée",
+    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Erstfeld E Raccordo autostradale Diramazione Altdorf, al chilometro 145.4 Situazione: colonna Causa: incidente Limitazione del traffico: corsia bloccata"
    }
   },
   {
