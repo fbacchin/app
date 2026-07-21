@@ -1,5 +1,5 @@
 {
- "time": "2026-07-21T09:22:15Z",
+ "time": "2026-07-21T09:27:20Z",
  "south": {
   "km": 2.0,
   "wait": 20
@@ -39,13 +39,13 @@
    "id": "situation.640626.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-07-21T09:19:28Z",
+   "versionTime": "2026-07-21T09:26:00Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Erstfeld und Autobahndreieck Verzweigung Altdorf, bei Kilometer 145.4 Sachlage: Stau Ursache: Unfall Verkehrsführung: Fahrstreifen blockiert",
-    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Erstfeld et Echangeur Echangeur d'Altdorf, au kilomètre 145.4 Situation: bouchon Raison: accident Gestion du trafic: voie bloquée",
-    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Erstfeld E Raccordo autostradale Diramazione Altdorf, al chilometro 145.4 Situazione: colonna Causa: incidente Limitazione del traffico: corsia bloccata"
+    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Erstfeld und Autobahndreieck Verzweigung Altdorf, bei Kilometer 145.4 Sachlage: Stau Ursache: Unfall Verkehrsführung: rechter Fahrstreifen blockiert",
+    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Erstfeld et Echangeur Echangeur d'Altdorf, au kilomètre 145.4 Situation: bouchon Raison: accident Gestion du trafic: voie de droite bloquée",
+    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Erstfeld E Raccordo autostradale Diramazione Altdorf, al chilometro 145.4 Situazione: colonna Causa: incidente Limitazione del traffico: corsia di destra bloccata"
    }
   },
   {
