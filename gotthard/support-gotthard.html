@@ -1,28 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Support — Gottardo Live</title>
 <style>
   :root {
-    --accent: #1D6A7A;
-    --accent-soft: #E3F0F2;
-    --ink: #1C2A2E;
-    --ink-soft: #51666C;
-    --paper: #F7FAFA;
-    --card: #FFFFFF;
-    --line: #DCE7E9;
+    --accent: #1D6A7A; --accent-soft: #E3F0F2; --ink: #1C2A2E; --ink-soft: #51666C;
+    --paper: #F7FAFA; --card: #FFFFFF; --line: #DCE7E9;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --accent: #5FB3C4;
-      --accent-soft: #14303A;
-      --ink: #E8F1F2;
-      --ink-soft: #9DB4BA;
-      --paper: #0E181C;
-      --card: #16242A;
-      --line: #24383F;
+      --accent: #5FB3C4; --accent-soft: #14303A; --ink: #E8F1F2; --ink-soft: #9DB4BA;
+      --paper: #0E181C; --card: #16242A; --line: #24383F;
     }
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,37 +22,58 @@
     padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
   }
   main { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; }
-  .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .logo svg { flex: none; }
   h1 { font-size: 1.9em; line-height: 1.2; }
-  .tag { color: var(--ink-soft); margin: 6px 0 32px; font-size: .95em; }
+  .sub { color: var(--ink-soft); margin: 0 0 14px 56px; }
+  .updated { color: var(--ink-soft); margin: 4px 0 6px; font-size: .9em; }
+  .langbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 28px; }
+  .langbar button {
+    font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  }
+  .langbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
   h2 { color: var(--accent); font-size: 1.25em; margin: 36px 0 10px; }
-  p, li { margin-bottom: 10px; }
+  p, li { color: var(--ink); margin-bottom: 10px; }
   ul { padding-left: 22px; }
   .card {
     background: var(--card); border: 1px solid var(--line); border-radius: 14px;
     padding: 18px 20px; margin: 14px 0;
   }
-  .cta {
-    display: inline-block; background: var(--accent); color: #fff !important;
-    padding: 12px 22px; border-radius: 999px; text-decoration: none; font-weight: 600;
-    margin: 6px 0 10px;
-  }
+  .tldr { background: var(--accent-soft); border-color: transparent; }
+  a { color: var(--accent); }
+  .cta { display: inline-block; background: var(--accent); color: #fff; padding: 10px 22px;
+    border-radius: 99px; text-decoration: none; margin: 6px 0 4px; }
   details { border-bottom: 1px solid var(--line); padding: 12px 0; }
-  details:last-of-type { border-bottom: none; }
+  details:last-child { border-bottom: none; }
   summary { cursor: pointer; font-weight: 600; }
   details p { margin-top: 8px; color: var(--ink-soft); }
-  a { color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: .95em; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--ink-soft); font-weight: 600; }
   footer { color: var(--ink-soft); font-size: .85em; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; }
+  [lang-block] { display: none; }
+  html[data-lang="en"] [lang-block="en"], html[data-lang="it"] [lang-block="it"],
+  html[data-lang="de"] [lang-block="de"], html[data-lang="fr"] [lang-block="fr"] { display: block; }
 </style>
 </head>
 <body>
 <main>
   <div class="logo">
     <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="10" fill="#1D6A7A"/><path d="M10 32 V22 a12 12 0 0 1 24 0 V32 h-5 V22 a7 7 0 0 0 -14 0 V32 Z" fill="#EFE6D2"/><rect x="20" y="26" width="4" height="2.6" rx="1.3" fill="#EFE6D2"/><rect x="20" y="30.4" width="4" height="2.6" rx="1.3" fill="#EFE6D2"/></svg>
-    <h1>Gottardo Live — Support</h1>
+    <h1>Gottardo Live</h1>
   </div>
-  <p class="tag">Real-time traffic, queues, official alerts and webcams for the Gotthard road tunnel.</p>
-
+  <p class="sub" lang-block="en">Support · Real-time traffic, queues, official alerts and webcams for the Gotthard road tunnel.</p>
+  <p class="sub" lang-block="it">Supporto · Traffico in tempo reale, code, avvisi ufficiali e webcam per il tunnel del San Gottardo.</p>
+  <p class="sub" lang-block="de">Support · Echtzeit-Verkehr, Staus, offizielle Meldungen und Webcams für den Gotthard-Strassentunnel.</p>
+  <p class="sub" lang-block="fr">Assistance · Trafic en temps réel, files, alertes officielles et webcams pour le tunnel routier du Gothard.</p>
+  <div class="langbar">
+    <button id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
+    <button id="btn-it" aria-pressed="false" onclick="setLang('it')">Italiano</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
+  </div>
+  <div lang-block="en">
   <h2>Contact</h2>
   <p>Questions, problems or suggestions? Write to us — we usually reply within a couple of days.</p>
   <a class="cta" href="mailto:bacchin@tiscali.it?subject=Gottardo%20Live%20support">Email support</a>
@@ -70,52 +81,208 @@
   <h2>Frequently asked questions</h2>
   <div class="card">
     <details>
-      <summary>The app shows "Clear" and 0 minutes — is it broken?</summary>
-      <p>No: it means there is currently no queue at the tunnel. Queues at the Gotthard typically build
-      on weekends, holidays and summer travel days. The 24-hour chart shows you how the day evolved.</p>
+      <summary>The app shows “Clear” and 0 minutes — is it broken?</summary>
+      <p>No: it means there is currently no queue at the tunnel. Queues at the Gotthard typically build on weekends, holidays and summer travel days. The 24-hour chart shows how the day evolved.</p>
     </details>
     <details>
       <summary>Why are the official alerts in Italian, German or French?</summary>
-      <p>The alerts are published by the Swiss traffic management centre (VMZ-CH) in the three national
-      languages only — an English version does not exist at the source. The app picks the language that
-      best matches your device settings; the app interface itself is fully localised in English,
-      Italian, German and French.</p>
+      <p>The alerts are published by the Swiss traffic management centre (VMZ-CH) in the three national languages only — an English version does not exist at the source. The app picks the language that best matches your device; the interface itself is fully localised in English, Italian, German and French.</p>
     </details>
     <details>
-      <summary>A webcam shows "out of service"</summary>
-      <p>That placeholder image comes from the road authority (FEDRO/AFBN) when a camera is temporarily
-      down. It usually returns within a few days; nothing needs fixing on your side.</p>
+      <summary>A webcam shows “out of service”</summary>
+      <p>That placeholder image comes from the road authority (FEDRO/AFBN) when a camera is temporarily down. It usually returns within a few days; nothing needs fixing on your side.</p>
     </details>
     <details>
       <summary>How are waiting times calculated?</summary>
-      <p>When the authorities publish an official waiting time, we show that. When they publish only the
-      queue length, we estimate roughly 10 minutes per kilometre (the typical Gotthard metering rate).
-      Without any official queue message, we show the live travel-time delay from Apple Maps.</p>
+      <p>When the authorities publish an official waiting time, we show that. When they publish only the queue length, we estimate roughly 10 minutes per kilometre (the typical Gotthard metering rate). When there is no official queue, Apple Maps may show a discreet “heavier traffic than usual” hint — this is only an indication, not a queue, and has no kilometres.</p>
+    </details>
+    <details>
+      <summary>How do I remove the ads?</summary>
+      <p>In the app open Settings (gear icon) → “Remove ads”. You can choose a one-month option (which does not renew automatically) or a one-time permanent purchase. On a new device, use “Restore purchases”.</p>
     </details>
     <details>
       <summary>I don't receive notifications</summary>
-      <p>Check iOS Settings → Notifications → Gottardo Live and make sure notifications are allowed.
-      Notifications are optional and used only for significant traffic updates.</p>
+      <p>Check iOS Settings → Notifications → Gottardo Live and make sure notifications are allowed. Notifications are optional and used only for significant traffic updates.</p>
     </details>
     <details>
       <summary>Can I see the intro tour again?</summary>
-      <p>Yes: in the app open Settings (gear icon) → About → "Replay the tour".</p>
+      <p>Yes: in the app open Settings (gear icon) → About → “Replay the tour”.</p>
     </details>
   </div>
 
   <h2>Data sources</h2>
   <ul>
-    <li>Traffic data and alerts: Swiss Federal Roads Office (FEDRO / VMZ-CH) via
-        <a href="https://opentransportdata.swiss/en/road-traffic/">opentransportdata.swiss</a></li>
-    <li>Travel times: Apple Maps · Weather: <a href="https://weatherkit.apple.com/legal-attribution.html">Apple Weather</a> / <a href="https://open-meteo.com">Open-Meteo</a></li>
-    <li>Webcams: <a href="https://www.afbn.ch/verkehr-und-baustellen/webcams">FEDRO / AFBN</a></li>
+      <li>Traffic data and alerts: Swiss Federal Roads Office (FEDRO / VMZ-CH) via <a href="https://opentransportdata.swiss/en/road-traffic/">opentransportdata.swiss</a></li>
+      <li>Travel times: Apple Maps · Weather: <a href="https://weatherkit.apple.com/legal-attribution.html">Apple Weather</a> / <a href="https://open-meteo.com">Open-Meteo</a></li>
+      <li>Webcams: <a href="https://www.afbn.ch/verkehr-und-baustellen/webcams">FEDRO / AFBN</a></li>
+      <li>Advertising: Google AdMob (free version)</li>
   </ul>
-  <p>Queue information is provided by the authorities and may occasionally differ from actual
-  conditions. Please never use the app while driving.</p>
+  <p>Queue information is provided by the authorities and may occasionally differ from actual conditions. Please never use the app while driving.</p>
+  </div>
+  <div lang-block="it">
+  <h2>Contatti</h2>
+  <p>Domande, problemi o suggerimenti? Scrivici — di solito rispondiamo entro un paio di giorni.</p>
+  <a class="cta" href="mailto:bacchin@tiscali.it?subject=Gottardo%20Live%20support">Scrivici via email</a>
 
+  <h2>Domande frequenti</h2>
+  <div class="card">
+    <details>
+      <summary>L'app mostra “Clear” e 0 minuti — è rotta?</summary>
+      <p>No: significa che al momento non c'è coda al tunnel. Le code al Gottardo si formano tipicamente nei weekend, nei giorni festivi e nei periodi di traffico estivo. Il grafico delle 24 ore mostra com'è andata la giornata.</p>
+    </details>
+    <details>
+      <summary>Perché gli avvisi ufficiali sono in italiano, tedesco o francese?</summary>
+      <p>Gli avvisi sono pubblicati dalla centrale svizzera del traffico (VMZ-CH) solo nelle tre lingue nazionali — una versione inglese non esiste alla fonte. L'app sceglie la lingua più vicina alle impostazioni del dispositivo; l'interfaccia è comunque completamente localizzata in inglese, italiano, tedesco e francese.</p>
+    </details>
+    <details>
+      <summary>Una webcam mostra “fuori servizio”</summary>
+      <p>Quell'immagine segnaposto arriva dall'ente stradale (USTRA/AFBN) quando una telecamera è temporaneamente fuori uso. Di solito torna nel giro di qualche giorno; non c'è nulla da sistemare da parte tua.</p>
+    </details>
+    <details>
+      <summary>Come vengono calcolati i tempi d'attesa?</summary>
+      <p>Quando le autorità pubblicano un tempo d'attesa ufficiale, mostriamo quello. Quando pubblicano solo la lunghezza della coda, stimiamo circa 10 minuti al chilometro (il ritmo tipico del dosaggio del Gottardo). Quando non c'è coda ufficiale, Apple Maps può mostrare un discreto indizio “traffico più lento del solito” — è solo un'indicazione, non una coda, e non ha chilometri.</p>
+    </details>
+    <details>
+      <summary>Come rimuovo la pubblicità?</summary>
+      <p>Nell'app apri Impostazioni (icona ingranaggio) → “Remove ads”. Puoi scegliere un'opzione di un mese (che non si rinnova automaticamente) oppure un acquisto unico permanente. Su un nuovo dispositivo usa “Restore purchases”.</p>
+    </details>
+    <details>
+      <summary>Non ricevo le notifiche</summary>
+      <p>Controlla in Impostazioni iOS → Notifiche → Gottardo Live che le notifiche siano consentite. Le notifiche sono facoltative e usate solo per aggiornamenti importanti sul traffico.</p>
+    </details>
+    <details>
+      <summary>Posso rivedere il tour iniziale?</summary>
+      <p>Sì: nell'app apri Impostazioni (icona ingranaggio) → Info → “Rivedi il tour”.</p>
+    </details>
+  </div>
+
+  <h2>Fonti dei dati</h2>
+  <ul>
+      <li>Dati e avvisi sul traffico: Ufficio federale delle strade (USTRA / VMZ-CH) tramite <a href="https://opentransportdata.swiss/en/road-traffic/">opentransportdata.swiss</a></li>
+      <li>Tempi di percorrenza: Apple Maps · Meteo: <a href="https://weatherkit.apple.com/legal-attribution.html">Apple Weather</a> / <a href="https://open-meteo.com">Open-Meteo</a></li>
+      <li>Webcam: <a href="https://www.afbn.ch/verkehr-und-baustellen/webcams">USTRA / AFBN</a></li>
+      <li>Pubblicità: Google AdMob (versione gratuita)</li>
+  </ul>
+  <p>Le informazioni sulle code sono fornite dalle autorità e possono a volte differire dalle condizioni reali. Non usare mai l'app mentre guidi.</p>
+  </div>
+  <div lang-block="de">
+  <h2>Kontakt</h2>
+  <p>Fragen, Probleme oder Vorschläge? Schreibe uns — wir antworten meist innerhalb weniger Tage.</p>
+  <a class="cta" href="mailto:bacchin@tiscali.it?subject=Gottardo%20Live%20support">Per E-Mail schreiben</a>
+
+  <h2>Häufige Fragen</h2>
+  <div class="card">
+    <details>
+      <summary>Die App zeigt „Clear“ und 0 Minuten — ist sie kaputt?</summary>
+      <p>Nein: Es bedeutet, dass gerade kein Stau am Tunnel ist. Staus am Gotthard bilden sich typischerweise an Wochenenden, Feiertagen und in der Sommerreisezeit. Das 24-Stunden-Diagramm zeigt den Tagesverlauf.</p>
+    </details>
+    <details>
+      <summary>Warum sind die offiziellen Meldungen auf Italienisch, Deutsch oder Französisch?</summary>
+      <p>Die Meldungen werden von der Schweizer Verkehrsmanagementzentrale (VMZ-CH) nur in den drei Landessprachen veröffentlicht — eine englische Version gibt es an der Quelle nicht. Die App wählt die Sprache, die am besten zu deinen Geräteeinstellungen passt; die Oberfläche selbst ist vollständig auf Englisch, Italienisch, Deutsch und Französisch lokalisiert.</p>
+    </details>
+    <details>
+      <summary>Eine Webcam zeigt „ausser Betrieb“</summary>
+      <p>Dieses Platzhalterbild stammt von der Strassenbehörde (ASTRA/AFBN), wenn eine Kamera vorübergehend ausfällt. Sie ist meist nach wenigen Tagen wieder da; auf deiner Seite ist nichts zu tun.</p>
+    </details>
+    <details>
+      <summary>Wie werden die Wartezeiten berechnet?</summary>
+      <p>Wenn die Behörden eine offizielle Wartezeit veröffentlichen, zeigen wir diese. Veröffentlichen sie nur die Staulänge, schätzen wir rund 10 Minuten pro Kilometer (die typische Dosierrate am Gotthard). Ohne offiziellen Stau kann Apple Karten einen dezenten Hinweis „mehr Verkehr als üblich“ anzeigen — das ist nur ein Hinweis, kein Stau, und hat keine Kilometerangabe.</p>
+    </details>
+    <details>
+      <summary>Wie entferne ich die Werbung?</summary>
+      <p>Öffne in der App die Einstellungen (Zahnrad) → „Remove ads“. Du kannst eine Monatsoption (die sich nicht automatisch verlängert) oder einen einmaligen dauerhaften Kauf wählen. Auf einem neuen Gerät nutze „Restore purchases“.</p>
+    </details>
+    <details>
+      <summary>Ich erhalte keine Benachrichtigungen</summary>
+      <p>Prüfe in den iOS-Einstellungen → Mitteilungen → Gottardo Live, ob Mitteilungen erlaubt sind. Benachrichtigungen sind optional und werden nur für wichtige Verkehrsupdates verwendet.</p>
+    </details>
+    <details>
+      <summary>Kann ich die Einführungstour erneut ansehen?</summary>
+      <p>Ja: Öffne in der App die Einstellungen (Zahnrad) → Info → „Tour erneut ansehen“.</p>
+    </details>
+  </div>
+
+  <h2>Datenquellen</h2>
+  <ul>
+      <li>Verkehrsdaten und Meldungen: Bundesamt für Strassen (ASTRA / VMZ-CH) über <a href="https://opentransportdata.swiss/en/road-traffic/">opentransportdata.swiss</a></li>
+      <li>Fahrzeiten: Apple Karten · Wetter: <a href="https://weatherkit.apple.com/legal-attribution.html">Apple Weather</a> / <a href="https://open-meteo.com">Open-Meteo</a></li>
+      <li>Webcams: <a href="https://www.afbn.ch/verkehr-und-baustellen/webcams">ASTRA / AFBN</a></li>
+      <li>Werbung: Google AdMob (kostenlose Version)</li>
+  </ul>
+  <p>Die Stauinformationen stammen von den Behörden und können gelegentlich von den tatsächlichen Bedingungen abweichen. Bitte nutze die App nie während der Fahrt.</p>
+  </div>
+  <div lang-block="fr">
+  <h2>Contact</h2>
+  <p>Questions, problèmes ou suggestions ? Écrivez-nous — nous répondons généralement en quelques jours.</p>
+  <a class="cta" href="mailto:bacchin@tiscali.it?subject=Gottardo%20Live%20support">Nous écrire par e-mail</a>
+
+  <h2>Questions fréquentes</h2>
+  <div class="card">
+    <details>
+      <summary>L'app affiche « Clear » et 0 minute — est-elle en panne ?</summary>
+      <p>Non : cela signifie qu'il n'y a pas de file au tunnel pour le moment. Les files au Gothard se forment généralement les week-ends, les jours fériés et pendant les départs estivaux. Le graphique sur 24 heures montre l'évolution de la journée.</p>
+    </details>
+    <details>
+      <summary>Pourquoi les alertes officielles sont-elles en italien, allemand ou français ?</summary>
+      <p>Les alertes sont publiées par la centrale suisse de gestion du trafic (VMZ-CH) uniquement dans les trois langues nationales — il n'existe pas de version anglaise à la source. L'app choisit la langue la plus proche des réglages de votre appareil ; l'interface est entièrement localisée en anglais, italien, allemand et français.</p>
+    </details>
+    <details>
+      <summary>Une webcam affiche « hors service »</summary>
+      <p>Cette image de remplacement provient de l'autorité routière (OFROU/AFBN) lorsqu'une caméra est temporairement indisponible. Elle revient généralement en quelques jours ; rien à corriger de votre côté.</p>
+    </details>
+    <details>
+      <summary>Comment les temps d'attente sont-ils calculés ?</summary>
+      <p>Lorsque les autorités publient un temps d'attente officiel, nous l'affichons. Lorsqu'elles ne publient que la longueur de la file, nous estimons environ 10 minutes par kilomètre (le débit de dosage typique du Gothard). En l'absence de file officielle, Plans (Apple) peut afficher une indication discrète « trafic plus dense que d'habitude » — ce n'est qu'une indication, pas une file, et sans kilomètres.</p>
+    </details>
+    <details>
+      <summary>Comment supprimer la publicité ?</summary>
+      <p>Dans l'app, ouvrez Réglages (icône engrenage) → « Remove ads ». Vous pouvez choisir une option d'un mois (qui ne se renouvelle pas automatiquement) ou un achat unique permanent. Sur un nouvel appareil, utilisez « Restore purchases ».</p>
+    </details>
+    <details>
+      <summary>Je ne reçois pas les notifications</summary>
+      <p>Vérifiez dans Réglages iOS → Notifications → Gottardo Live que les notifications sont autorisées. Les notifications sont facultatives et servent uniquement aux mises à jour importantes du trafic.</p>
+    </details>
+    <details>
+      <summary>Puis-je revoir le tour d'introduction ?</summary>
+      <p>Oui : dans l'app, ouvrez Réglages (icône engrenage) → À propos → « Revoir le tour ».</p>
+    </details>
+  </div>
+
+  <h2>Sources des données</h2>
+  <ul>
+      <li>Données et alertes de trafic : Office fédéral des routes (OFROU / VMZ-CH) via <a href="https://opentransportdata.swiss/en/road-traffic/">opentransportdata.swiss</a></li>
+      <li>Temps de trajet : Plans (Apple) · Météo : <a href="https://weatherkit.apple.com/legal-attribution.html">Apple Weather</a> / <a href="https://open-meteo.com">Open-Meteo</a></li>
+      <li>Webcams : <a href="https://www.afbn.ch/verkehr-und-baustellen/webcams">OFROU / AFBN</a></li>
+      <li>Publicité : Google AdMob (version gratuite)</li>
+  </ul>
+  <p>Les informations sur les files sont fournies par les autorités et peuvent parfois différer des conditions réelles. N'utilisez jamais l'app en conduisant.</p>
+  </div>
   <footer>
-    © 2026 Fabrizio Bacchin · <a href="privacy-gotthard.html">Privacy Policy</a>
+    © 2026 Fabrizio Bacchin ·
+    <span lang-block="en"><a href="privacy-gotthard.html">Privacy Policy</a></span>
+    <span lang-block="it"><a href="privacy-gotthard.html">Informativa sulla privacy</a></span>
+    <span lang-block="de"><a href="privacy-gotthard.html">Datenschutzrichtlinie</a></span>
+    <span lang-block="fr"><a href="privacy-gotthard.html">Politique de confidentialité</a></span>
   </footer>
 </main>
+
+<script>
+  var LANGS = ["en", "it", "de", "fr"];
+  function setLang(l) {
+    if (LANGS.indexOf(l) < 0) l = "en";
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    LANGS.forEach(function (x) {
+      document.getElementById("btn-" + x).setAttribute("aria-pressed", x === l);
+    });
+    try { localStorage.setItem("gotthard-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("gotthard-lang"); } catch (e) {}
+  var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+  setLang(saved || (LANGS.indexOf(nav) >= 0 ? nav : "en"));
+</script>
+<noscript><style>[lang-block]{display:block !important}</style></noscript>
+
 </body>
 </html>
