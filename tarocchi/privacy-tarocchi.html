@@ -67,7 +67,7 @@
   }
 
   /* intestazione */
-  header { text-align: center; margin-bottom: 56px; }
+  header { text-align: center; margin-bottom: 40px; }
 
   .luna {
     width: 64px;
@@ -115,6 +115,37 @@
     text-transform: uppercase;
     font-family: 'Cinzel', serif;
   }
+
+  /* selettore lingua */
+  .langbar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 24px 0 40px;
+  }
+  .langbar button {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding: 8px 24px;
+    border-radius: 999px;
+    cursor: pointer;
+    border: 1px solid rgba(217,179,92,0.5);
+    background: transparent;
+    color: var(--oro-chiaro);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .langbar button:hover { background: rgba(217,179,92,0.12); }
+  .langbar button[aria-pressed="true"] {
+    background: var(--oro);
+    border-color: var(--oro);
+    color: var(--notte);
+  }
+
+  /* blocchi lingua */
+  [lang-block] { display: none !important; }
+  html[data-lang="it"] [lang-block="it"],
+  html[data-lang="en"] [lang-block="en"] { display: revert !important; }
 
   /* sezioni */
   section {
@@ -196,131 +227,150 @@
   <header>
     <div class="luna" aria-hidden="true"></div>
     <h1>Privacy Policy</h1>
-    <div class="sottotitolo">Arcana · Rifletti e Decidi</div>
-    <span class="aggiornato">Ultimo aggiornamento: luglio 2026</span>
-    <p style="margin-top:14px;"><a href="#english">🇬🇧 English version below</a></p>
+    <div class="sottotitolo"><span lang-block="it">Arcana · Rifletti e Decidi</span><span lang-block="en">Arcana · Reflect &amp; Decide</span></div>
+    <span class="aggiornato"><span lang-block="it">Ultimo aggiornamento: luglio 2026</span><span lang-block="en">Last updated: July 2026</span></span>
   </header>
 
-  <section>
-    <h2>Titolare del trattamento</h2>
-    <p>Fabrizio Bacchin — email: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a></p>
-  </section>
+  <div class="langbar">
+    <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
+    <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+  </div>
 
-  <section>
-    <h2>Dati che raccogliamo</h2>
-    <p>Quando accedi con <strong>“Sign in with Apple”</strong> e usi le funzioni online, trattiamo:</p>
-    <ul>
-      <li><strong>Identificativo utente Apple</strong>: per creare e identificare il tuo account.</li>
-      <li><strong>Email</strong> (se fornita da Apple e da te salvata): per la gestione dell'account.</li>
-      <li><strong>Letture salvate</strong>: la stesa scelta, l'eventuale domanda, le carte estratte, lo stile di lettura, l'interpretazione con la sua spiegazione e il dialogo con l'AI.</li>
-      <li><strong>Dati di riflessione</strong> (facoltativi): il tuo stato d'animo prima e dopo la lettura, le decisioni che registri, gli esiti e le note che scegli di annotare.</li>
-      <li><strong>Storico acquisti</strong>: i prodotti acquistati tramite In-App Purchase di Apple.</li>
-      <li><strong>Token di notifica</strong>: per inviarti notifiche push, se le attivi.</li>
-    </ul>
-    <p>Non utilizziamo i dati per pubblicità né li condividiamo con terze parti a scopi di marketing o tracciamento.</p>
-  </section>
+  <!-- ============================ ITALIANO ============================ -->
+  <div lang-block="it">
+    <section>
+      <h2>Titolare del trattamento</h2>
+      <p>Fabrizio Bacchin — email: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a></p>
+    </section>
 
-  <section>
-    <h2>Interpretazioni con intelligenza artificiale</h2>
-    <p>Per generare l'interpretazione, la domanda e le carte della tua lettura vengono inviate — tramite il nostro server — ad <strong>Anthropic</strong> (modelli Claude), che agisce come fornitore del servizio AI. I dati inviati servono solo a generare la risposta e non vengono usati da Anthropic per addestrare i propri modelli, secondo i suoi termini commerciali.</p>
-    <p>In alternativa, sui dispositivi compatibili puoi scegliere il motore <strong>Apple Intelligence</strong> (Profilo → Motore della lettura): in questo caso l'interpretazione è generata <strong>interamente sul dispositivo</strong> e nessun dato della lettura viene inviato a servizi AI esterni.</p>
-  </section>
+    <section>
+      <h2>Dati che raccogliamo</h2>
+      <p>Quando accedi con <strong>“Sign in with Apple”</strong> e usi le funzioni online, trattiamo:</p>
+      <ul>
+        <li><strong>Identificativo utente Apple</strong>: per creare e identificare il tuo account.</li>
+        <li><strong>Email</strong> (se fornita da Apple e da te salvata): per la gestione dell'account.</li>
+        <li><strong>Letture salvate</strong>: la stesa scelta, l'eventuale domanda, le carte estratte, lo stile di lettura, l'interpretazione con la sua spiegazione e il dialogo con l'AI.</li>
+        <li><strong>Dati di riflessione</strong> (facoltativi): il tuo stato d'animo prima e dopo la lettura, le decisioni che registri, gli esiti e le note che scegli di annotare.</li>
+        <li><strong>Storico acquisti</strong>: i prodotti acquistati tramite In-App Purchase di Apple.</li>
+        <li><strong>Token di notifica</strong>: per inviarti notifiche push, se le attivi.</li>
+      </ul>
+      <p>Non utilizziamo i dati per pubblicità né li condividiamo con terze parti a scopi di marketing o tracciamento.</p>
+    </section>
 
-  <section>
-    <h2>Calendario</h2>
-    <p>Il collegamento al calendario è <strong>facoltativo</strong> e in sola lettura: serve a proporti una stesa di preparazione prima di un impegno. I tuoi eventi vengono letti <strong>solo sul dispositivo</strong> e non vengono mai inviati ai nostri server: al server arriva soltanto la domanda che vedi e confermi esplicitamente. Puoi revocare l'accesso in qualsiasi momento dalle Impostazioni di iOS.</p>
-  </section>
+    <section>
+      <h2>Interpretazioni con intelligenza artificiale</h2>
+      <p>Per generare l'interpretazione, la domanda e le carte della tua lettura vengono inviate — tramite il nostro server — ad <strong>Anthropic</strong> (modelli Claude), che agisce come fornitore del servizio AI. I dati inviati servono solo a generare la risposta e non vengono usati da Anthropic per addestrare i propri modelli, secondo i suoi termini commerciali.</p>
+      <p>In alternativa, sui dispositivi compatibili puoi scegliere il motore <strong>Apple Intelligence</strong> (Profilo → Motore della lettura): in questo caso l'interpretazione è generata <strong>interamente sul dispositivo</strong> e nessun dato della lettura viene inviato a servizi AI esterni.</p>
+    </section>
 
-  <section>
-    <h2>Finalità e base giuridica</h2>
-    <p>I dati sono trattati per fornire il servizio (esecuzione del contratto, art. 6.1.b GDPR): salvataggio delle letture e del percorso di riflessione, generazione delle interpretazioni AI, gestione di crediti e abbonamento, invio delle notifiche.</p>
-  </section>
+    <section>
+      <h2>Calendario</h2>
+      <p>Il collegamento al calendario è <strong>facoltativo</strong> e in sola lettura: serve a proporti una stesa di preparazione prima di un impegno. I tuoi eventi vengono letti <strong>solo sul dispositivo</strong> e non vengono mai inviati ai nostri server: al server arriva soltanto la domanda che vedi e confermi esplicitamente. Puoi revocare l'accesso in qualsiasi momento dalle Impostazioni di iOS.</p>
+    </section>
 
-  <section>
-    <h2>Dove sono conservati i dati</h2>
-    <p>I dati sono ospitati su <strong>Back4App</strong> (Parse Server), che agisce come responsabile del trattamento. I pagamenti sono gestiti da <strong>Apple</strong>: non abbiamo accesso ai dati della tua carta.</p>
-  </section>
+    <section>
+      <h2>Finalità e base giuridica</h2>
+      <p>I dati sono trattati per fornire il servizio (esecuzione del contratto, art. 6.1.b GDPR): salvataggio delle letture e del percorso di riflessione, generazione delle interpretazioni AI, gestione di crediti e abbonamento, invio delle notifiche.</p>
+    </section>
 
-  <section>
-    <h2>Conservazione</h2>
-    <p>Conserviamo i dati finché mantieni l'account. Puoi eliminare l'account in qualsiasi momento dall'app (<strong>Profilo → Elimina account</strong>): ciò cancella in modo permanente le tue letture e i dati associati.</p>
-  </section>
+    <section>
+      <h2>Dove sono conservati i dati</h2>
+      <p>I dati sono ospitati su <strong>Back4App</strong> (Parse Server), che agisce come responsabile del trattamento. I pagamenti sono gestiti da <strong>Apple</strong>: non abbiamo accesso ai dati della tua carta.</p>
+    </section>
 
-  <section>
-    <h2>I tuoi diritti</h2>
-    <p>Hai diritto di accesso, rettifica, cancellazione, limitazione e portabilità dei dati (artt. 15–20 GDPR). Per esercitarli scrivi a <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
-  </section>
+    <section>
+      <h2>Conservazione</h2>
+      <p>Conserviamo i dati finché mantieni l'account. Puoi eliminare l'account in qualsiasi momento dall'app (<strong>Profilo → Elimina account</strong>): ciò cancella in modo permanente le tue letture e i dati associati.</p>
+    </section>
 
-  <!-- ============ ENGLISH VERSION ============ -->
-  <header id="english" style="margin-top:72px;">
-    <div class="luna" aria-hidden="true"></div>
-    <h1>Privacy Policy</h1>
-    <div class="sottotitolo">Arcana · Reflect &amp; Decide</div>
-    <span class="aggiornato">Last updated: July 2026</span>
-    <p style="margin-top:14px;"><a href="#top" onclick="window.scrollTo(0,0);return false;">🇮🇹 Versione italiana sopra</a></p>
-  </header>
+    <section>
+      <h2>I tuoi diritti</h2>
+      <p>Hai diritto di accesso, rettifica, cancellazione, limitazione e portabilità dei dati (artt. 15–20 GDPR). Per esercitarli scrivi a <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+    </section>
 
-  <section>
-    <h2>Data controller</h2>
-    <p>Fabrizio Bacchin — email: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a></p>
-  </section>
+    <div class="contatto">
+      <p>Per qualsiasi domanda sulla privacy</p>
+      <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>
+    </div>
+  </div>
 
-  <section>
-    <h2>Data we collect</h2>
-    <p>When you sign in with <strong>“Sign in with Apple”</strong> and use the online features, we process:</p>
-    <ul>
-      <li><strong>Apple user identifier</strong>: to create and identify your account.</li>
-      <li><strong>Email</strong> (if provided by Apple and saved by you): for account management.</li>
-      <li><strong>Saved readings</strong>: the chosen spread, your question (if any), the drawn cards, the reading style, the interpretation with its explanation, and the AI dialogue.</li>
-      <li><strong>Reflection data</strong> (optional): your mood before and after a reading, the decisions you record, their outcomes and any notes you choose to add.</li>
-      <li><strong>Purchase history</strong>: products bought via Apple In-App Purchase.</li>
-      <li><strong>Notification token</strong>: to send you push notifications, if you enable them.</li>
-    </ul>
-    <p>We do not use your data for advertising, nor share it with third parties for marketing or tracking purposes.</p>
-  </section>
+  <!-- ============================ ENGLISH ============================ -->
+  <div lang-block="en">
+    <section>
+      <h2>Data controller</h2>
+      <p>Fabrizio Bacchin — email: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a></p>
+    </section>
 
-  <section>
-    <h2>AI-generated interpretations</h2>
-    <p>To generate the interpretation, your question and the drawn cards are sent — through our server — to <strong>Anthropic</strong> (Claude models), acting as our AI service provider. The data sent is used only to generate the response and is not used by Anthropic to train its models, under its commercial terms.</p>
-    <p>Alternatively, on compatible devices you can choose the <strong>Apple Intelligence</strong> engine (Profile → Reading engine): in that case the interpretation is generated <strong>entirely on your device</strong> and no reading data is sent to external AI services.</p>
-  </section>
+    <section>
+      <h2>Data we collect</h2>
+      <p>When you sign in with <strong>“Sign in with Apple”</strong> and use the online features, we process:</p>
+      <ul>
+        <li><strong>Apple user identifier</strong>: to create and identify your account.</li>
+        <li><strong>Email</strong> (if provided by Apple and saved by you): for account management.</li>
+        <li><strong>Saved readings</strong>: the chosen spread, your question (if any), the drawn cards, the reading style, the interpretation with its explanation, and the AI dialogue.</li>
+        <li><strong>Reflection data</strong> (optional): your mood before and after a reading, the decisions you record, their outcomes and any notes you choose to add.</li>
+        <li><strong>Purchase history</strong>: products bought via Apple In-App Purchase.</li>
+        <li><strong>Notification token</strong>: to send you push notifications, if you enable them.</li>
+      </ul>
+      <p>We do not use your data for advertising, nor share it with third parties for marketing or tracking purposes.</p>
+    </section>
 
-  <section>
-    <h2>Calendar</h2>
-    <p>The calendar connection is <strong>optional</strong> and read-only: it is used to suggest a preparation spread before a commitment. Your events are read <strong>on your device only</strong> and are never sent to our servers: only the question you see and explicitly confirm is transmitted. You can revoke access at any time in iOS Settings.</p>
-  </section>
+    <section>
+      <h2>AI-generated interpretations</h2>
+      <p>To generate the interpretation, your question and the drawn cards are sent — through our server — to <strong>Anthropic</strong> (Claude models), acting as our AI service provider. The data sent is used only to generate the response and is not used by Anthropic to train its models, under its commercial terms.</p>
+      <p>Alternatively, on compatible devices you can choose the <strong>Apple Intelligence</strong> engine (Profile → Reading engine): in that case the interpretation is generated <strong>entirely on your device</strong> and no reading data is sent to external AI services.</p>
+    </section>
 
-  <section>
-    <h2>Purpose and legal basis</h2>
-    <p>Data is processed to provide the service (performance of contract, Art. 6.1.b GDPR): saving your readings and reflection journey, generating AI interpretations, managing credits and subscription, sending notifications.</p>
-  </section>
+    <section>
+      <h2>Calendar</h2>
+      <p>The calendar connection is <strong>optional</strong> and read-only: it is used to suggest a preparation spread before a commitment. Your events are read <strong>on your device only</strong> and are never sent to our servers: only the question you see and explicitly confirm is transmitted. You can revoke access at any time in iOS Settings.</p>
+    </section>
 
-  <section>
-    <h2>Where data is stored</h2>
-    <p>Data is hosted on <strong>Back4App</strong> (Parse Server), acting as data processor. Payments are handled by <strong>Apple</strong>: we never have access to your card details.</p>
-  </section>
+    <section>
+      <h2>Purpose and legal basis</h2>
+      <p>Data is processed to provide the service (performance of contract, Art. 6.1.b GDPR): saving your readings and reflection journey, generating AI interpretations, managing credits and subscription, sending notifications.</p>
+    </section>
 
-  <section>
-    <h2>Retention</h2>
-    <p>We keep your data as long as you keep your account. You can delete your account at any time from the app (<strong>Profile → Delete account</strong>): this permanently deletes your readings and associated data.</p>
-  </section>
+    <section>
+      <h2>Where data is stored</h2>
+      <p>Data is hosted on <strong>Back4App</strong> (Parse Server), acting as data processor. Payments are handled by <strong>Apple</strong>: we never have access to your card details.</p>
+    </section>
 
-  <section>
-    <h2>Your rights</h2>
-    <p>You have the right of access, rectification, erasure, restriction and portability of your data (Arts. 15–20 GDPR). To exercise them, write to <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
-  </section>
+    <section>
+      <h2>Retention</h2>
+      <p>We keep your data as long as you keep your account. You can delete your account at any time from the app (<strong>Profile → Delete account</strong>): this permanently deletes your readings and associated data.</p>
+    </section>
 
-  <div class="contatto">
-    <p>Per qualsiasi domanda sulla privacy · For any privacy question</p>
-    <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>
+    <section>
+      <h2>Your rights</h2>
+      <p>You have the right of access, rectification, erasure, restriction and portability of your data (Arts. 15–20 GDPR). To exercise them, write to <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+    </section>
+
+    <div class="contatto">
+      <p>For any privacy question</p>
+      <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>
+    </div>
   </div>
 
   <footer>
-    Gli arcani sono uno specchio simbolico per la riflessione personale, non uno strumento di predizione. · The arcana are a symbolic mirror for personal reflection, not a prediction tool.
+    <span lang-block="it">Gli arcani sono uno specchio simbolico per la riflessione personale, non uno strumento di predizione. · <a href="https://fbacchin.github.io/app/tarocchi/support-tarocchi.html">Supporto</a></span>
+    <span lang-block="en">The arcana are a symbolic mirror for personal reflection, not a prediction tool. · <a href="https://fbacchin.github.io/app/tarocchi/support-tarocchi.html">Support</a></span>
   </footer>
 </div>
 
 <script>
+  function setLang(l) {
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    document.getElementById("btn-it").setAttribute("aria-pressed", l === "it" ? "true" : "false");
+    document.getElementById("btn-en").setAttribute("aria-pressed", l === "en" ? "true" : "false");
+    try { localStorage.setItem("arcana-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("arcana-lang"); } catch (e) {}
+  if (location.hash.toLowerCase().indexOf("english") !== -1) saved = "en";
+  setLang(saved || ((navigator.language || "en").toLowerCase().indexOf("it") === 0 ? "it" : "en"));
+
   // genera il cielo stellato
   (function () {
     const c = document.getElementById('stelle');
@@ -338,5 +388,6 @@
     }
   })();
 </script>
+<noscript><style>[lang-block]{display:revert !important}</style></noscript>
 </body>
 </html>
