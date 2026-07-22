@@ -23,9 +23,9 @@
   }
   main { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; }
   .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
-  .logo svg { flex: none; }
+  .app-icon { flex: none; border-radius: 12px; }
   h1 { font-size: 1.9em; line-height: 1.2; }
-  .sub { color: var(--ink-soft); margin: 0 0 14px 56px; }
+  .sub { color: var(--ink-soft); margin: 0 0 14px 64px; }
   .updated { color: var(--ink-soft); margin: 4px 0 6px; font-size: .9em; }
   .langbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 28px; }
   .langbar button {
@@ -51,7 +51,8 @@
   table { width: 100%; border-collapse: collapse; font-size: .95em; }
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
   th { color: var(--ink-soft); font-weight: 600; }
-  footer { color: var(--ink-soft); font-size: .85em; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; }
+  footer { color: var(--ink-soft); font-size: .85em; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; text-align: center; }
+  footer a { white-space: nowrap; }
   [lang-block] { display: none; }
   html[data-lang="en"] [lang-block="en"], html[data-lang="it"] [lang-block="it"],
   html[data-lang="de"] [lang-block="de"], html[data-lang="fr"] [lang-block="fr"] { display: block; }
@@ -60,7 +61,7 @@
 <body>
 <main>
   <div class="logo">
-    <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="10" fill="#1D6A7A"/><path d="M10 32 V22 a12 12 0 0 1 24 0 V32 h-5 V22 a7 7 0 0 0 -14 0 V32 Z" fill="#EFE6D2"/><rect x="20" y="26" width="4" height="2.6" rx="1.3" fill="#EFE6D2"/><rect x="20" y="30.4" width="4" height="2.6" rx="1.3" fill="#EFE6D2"/></svg>
+    <img class="app-icon" src="icon.png" width="52" height="52" alt="Gottardo Live">
     <h1>Gottardo Live</h1>
   </div>
   <p class="sub" lang-block="en">Support · Real-time traffic, queues, official alerts and webcams for the Gotthard road tunnel.</p>
@@ -278,11 +279,10 @@
   <p>Les informations sur les files sont fournies par les autorités et peuvent parfois différer des conditions réelles. N'utilisez jamais l'app en conduisant.</p>
   </div>
   <footer>
-    © 2026 Fabrizio Bacchin ·
-    <span lang-block="en"><a href="privacy-gotthard.html">Privacy Policy</a></span>
-    <span lang-block="it"><a href="privacy-gotthard.html">Informativa sulla privacy</a></span>
-    <span lang-block="de"><a href="privacy-gotthard.html">Datenschutzrichtlinie</a></span>
-    <span lang-block="fr"><a href="privacy-gotthard.html">Politique de confidentialité</a></span>
+    <span lang-block="en">© 2026 Fabrizio Bacchin · <a href="privacy-gotthard.html">Privacy Policy</a></span>
+    <span lang-block="it">© 2026 Fabrizio Bacchin · <a href="privacy-gotthard.html">Informativa sulla privacy</a></span>
+    <span lang-block="de">© 2026 Fabrizio Bacchin · <a href="privacy-gotthard.html">Datenschutzrichtlinie</a></span>
+    <span lang-block="fr">© 2026 Fabrizio Bacchin · <a href="privacy-gotthard.html">Politique de confidentialité</a></span>
   </footer>
 </main>
 
