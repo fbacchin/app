@@ -1,5 +1,5 @@
 {
- "time": "2026-07-23T10:31:02Z",
+ "time": "2026-07-23T10:36:09Z",
  "south": {
   "km": 5.0,
   "wait": 50
@@ -39,13 +39,13 @@
    "id": "situation.641055.1.1.1",
    "type": "AbnormalTraffic",
    "direction": null,
-   "versionTime": "2026-07-23T10:18:45Z",
+   "versionTime": "2026-07-23T10:33:51Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: H2 Göschenen -> Airolo zwischen Ortschaft Hospental und Anschluss Airolo-Nufenen Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: H2 Göschenen -> Airolo entre Localité Hospental et Jonction autoroutière Airolo-Nufenen Situation: trafic en accordéon Raison: surcharge de trafic",
-    "it": "Approvato: H2 Göschenen -> Airolo tra Luogo Hospental E Svincolo autostradale Airolo-Nufenen Situazione: traffico fortemente rallentato Causa: traffico congestionato"
+    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Ortschaft Hospental und Anschluss Airolo-Nufenen Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+    "fr": "Libéré: H2 Airolo <-> Göschenen entre Localité Hospental et Jonction autoroutière Airolo-Nufenen Situation: trafic en accordéon Raison: surcharge de trafic",
+    "it": "Approvato: H2 Airolo <-> Göschenen tra Luogo Hospental E Svincolo autostradale Airolo-Nufenen Situazione: traffico fortemente rallentato Causa: traffico congestionato"
    }
   },
   {
