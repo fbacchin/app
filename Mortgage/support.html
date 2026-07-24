@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mortgage Calculator — Support</title>
+<style>
+  :root {
+    --bg: #f5f7fc; --card: #ffffff; --fg: #0a1e5c; --muted: #5a6b94;
+    --accent: #1e6bff; --border: rgba(10,30,92,0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0b1226; --card: #141d3a; --fg: #eef2ff; --muted: #93a2c9; --accent: #5b93ff; --border: rgba(238,242,255,0.14); }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 64px; }
+  header { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+  .logo { width: 64px; height: 64px; border-radius: 14px; border: 1px solid var(--border); }
+  h1 { font-size: 28px; margin: 0; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); margin: 0 0 20px 78px; }
+  .langbar { display: flex; gap: 8px; margin: 18px 0 26px; }
+  .langbar button {
+    font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--card); color: var(--fg);
+  }
+  .langbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  section.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 26px; margin: 14px 0; }
+  h2 { font-size: 19px; margin: 2px 0 10px; }
+  ul { margin: 8px 0; padding-left: 22px; }
+  li { margin: 5px 0; }
+  b { color: var(--fg); }
+  a { color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  .foot { color: var(--muted); font-size: 14px; margin-top: 28px; text-align: center; }
+  .date { color: var(--muted); font-size: 14px; }
+  [lang-block] { display: none; }
+  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"] { display: block; }
+  .ic { display:inline-block; width:1.6em; }
+  .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--bg);
+         border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; font-size: .9em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="logo" src="data:image/png;base64,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" alt="">
+    <h1>Mortgage Calculator</h1>
+  </header>
+  <p class="sub" lang-block="it">Supporto e guida all'uso · Mortgage Calculator e Mortgage Calculator Light</p>
+  <p class="sub" lang-block="en">Support and user guide · Mortgage Calculator and Mortgage Calculator Light</p>
+
+  <div class="langbar">
+    <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
+    <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+  </div>
+
+  <!-- ============================ ITALIANO ============================ -->
+  <div lang-block="it">
+    <section class="card">
+      <h2><span class="ic">◎</span>Cosa fanno le app</h2>
+      <p>Mortgage Calculator calcola la <b>rata del tuo mutuo</b> e ti mostra che cosa c'è dietro quel numero: quanto paghi di capitale, quanto di interessi, come cambia rata dopo rata e che cosa succederebbe con un tasso o una durata diversi. Tutti i calcoli avvengono sul dispositivo, anche senza connessione.</p>
+      <p>Esiste in due versioni, identiche nelle funzioni: <b>Mortgage Calculator</b> (a pagamento, senza alcuna pubblicità) e <b>Mortgage Calculator Light</b> (gratuita, sostenuta dagli annunci). Questa guida vale per entrambe.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">∑</span>La scheda Calcolo</h2>
+      <p>È il punto di partenza. Imposti quattro dati:</p>
+      <ul>
+        <li>l'<b>importo</b> del mutuo;</li>
+        <li>la <b>data di inizio</b> — tocca la data per aprire il calendario;</li>
+        <li>il <b>tasso di interesse</b> annuo, con il cursore (passo dello 0,05%);</li>
+        <li>la <b>durata</b> in anni, con il cursore.</li>
+      </ul>
+      <p>La <b>rata mensile</b> si ricalcola all'istante a ogni modifica, insieme al <b>totale rimborsato</b> e al <b>totale interessi</b>. La barra in fondo mostra a colpo d'occhio la proporzione fra <b>capitale</b> (verde) e <b>interessi</b> (arancione) sull'intera durata del mutuo.</p>
+      <p>Il calcolo usa il <b>metodo francese</b> a rata costante, quello adottato dalla quasi totalità dei mutui: la rata resta uguale per tutta la durata e cambia la sua composizione interna.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>La scheda Piano ammort.</h2>
+      <p>È il dettaglio <b>rata per rata</b>. In cima restano sempre visibili il totale interessi, il totale rimborsato e la rata mensile; sotto scorre l'elenco completo delle rate, ciascuna con:</p>
+      <ul>
+        <li>il <b>numero</b> della rata e la sua <b>data di scadenza</b> (la prima coincide con la data di inizio);</li>
+        <li>la quota <b>capitale</b> e la quota <b>interessi</b>, con una barra che ne mostra il rapporto;</li>
+        <li>il <b>capitale residuo</b> dopo il pagamento.</li>
+      </ul>
+      <p>Scorrendo verso il basso vedrai la barra virare progressivamente verso il verde: è l'effetto tipico dell'ammortamento francese, dove all'inizio si pagano soprattutto interessi e verso la fine soprattutto capitale.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">⇪</span>Esportare il piano</h2>
+      <p>Con il pulsante di <b>condivisione</b> puoi esportare il piano completo in due formati:</p>
+      <ul>
+        <li><b>CSV</b> — per aprirlo in Numbers, Excel o Fogli Google e rielaborarlo. Le date sono in formato ISO (<span class="kbd">aaaa-mm-gg</span>) e i numeri con il punto decimale, così l'importazione funziona in qualsiasi lingua.</li>
+        <li><b>PDF</b> — un documento pronto da stampare o inviare, con il logo dell'app, il riepilogo del mutuo in testa e la tabella completa impaginata.</li>
+      </ul>
+      <p>Il file viene creato sul momento e passato al pannello di condivisione di iOS: decidi tu dove salvarlo o a chi mandarlo.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📊</span>La scheda Scenari</h2>
+      <p>Serve a rispondere alla domanda «e se…». Con i due cursori cambi <b>tasso</b> e <b>durata</b> e vedi subito la nuova rata.</p>
+      <p>Il grafico mostra otto durate a confronto — da 5 a 40 anni — e per ognuna una colonna divisa in due: la parte <b>verde</b> è il capitale, che non cambia mai perché è la somma che hai chiesto in prestito; la parte <b>arancione</b> sono gli interessi, che crescono all'allungarsi della durata. Sopra ogni colonna trovi la <b>rata</b> corrispondente.</p>
+      <p>È il modo più diretto per vedere il compromesso di fondo di ogni mutuo: allungare la durata abbassa la rata, ma alza il totale degli interessi. La colonna evidenziata è quella della durata che hai scelto.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">ℹ</span>La scheda App info</h2>
+      <p>Contiene la versione dell'app, una spiegazione sintetica di ogni scheda e le avvertenze. Nella versione Light contiene anche il pulsante <b>Impostazioni privacy</b> per rivedere le scelte sul consenso alla pubblicità.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>La pubblicità — solo la versione Light</h2>
+      <p>Mortgage Calculator Light è gratuita grazie agli annunci di <b>Google AdMob</b>: un <b>banner</b> nelle schede Calcolo, Piano ammort. e Scenari e, ogni tanto, un <b>annuncio a schermo intero</b>. Mortgage Calculator non contiene alcuna pubblicità.</p>
+      <p>Al primo avvio, in Europa, l'app ti chiede le <b>preferenze sul consenso</b> (annunci personalizzati o generici) e non richiede alcun annuncio prima della tua scelta; l'app <b>non chiede mai il tracciamento</b> di Apple. Puoi cambiare idea in ogni momento da <b>App info → Impostazioni privacy</b>. I dettagli sono nell'<a href="privacy.html">informativa sulla privacy</a>.</p>
+      <p>Se preferisci un'esperienza <b>senza pubblicità</b>, cerca <b>Mortgage Calculator</b> sull'App Store.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Notifiche</h2>
+      <p>L'app può inviarti qualche notifica occasionale sulle novità. L'autorizzazione viene chiesta al primo avvio; puoi cambiarla quando vuoi da <b>Impostazioni → Notifiche</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Domande frequenti</h2>
+      <ul>
+        <li><b>La rata non compare</b> — serve un importo maggiore di zero: tocca il campo «Importo mutuo» e digitalo.</li>
+        <li><b>Perché la mia banca mi dà una rata diversa?</b> — le app calcolano la rata pura di capitale e interessi. La rata che ti propone la banca può includere assicurazioni, spese di incasso o imposte, e può usare arrotondamenti diversi.</li>
+        <li><b>Che tasso devo inserire?</b> — il tasso <b>annuo nominale</b> (TAN) del mutuo, non il TAEG, che comprende anche i costi accessori.</li>
+        <li><b>L'ultima rata è di importo diverso</b> — è corretto: viene aggiustata di pochi centesimi per azzerare esattamente il capitale residuo.</li>
+        <li><b>Posso usarla per un mutuo a tasso variabile?</b> — puoi simulare qualsiasi tasso, ma il piano viene calcolato tenendo quel tasso fisso per tutta la durata. Per capire l'effetto di un rialzo, usa la scheda Scenari.</li>
+        <li><b>Lo spazio del banner è vuoto</b> (solo Light) — capita quando non ci sono annunci disponibili o manca la rete: non è un errore.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✱</span>Avvertenza</h2>
+      <p>Le app sono uno strumento di calcolo e simulazione, non una consulenza finanziaria. I risultati hanno valore indicativo: per un impegno reale fai sempre riferimento ai documenti forniti dal tuo istituto di credito.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✎</span>Contatti</h2>
+      <p>Hai trovato un problema, oppure ti manca una funzione? Scrivi a <a href="mailto:bacchin@tiscali.it?subject=Mortgage%20Calculator%20%E2%80%94%20Supporto">bacchin@tiscali.it</a>. Indica il modello di iPhone, la versione di iOS e la versione dell'app (la trovi nella scheda App info): aiuta a rispondere più in fretta.</p>
+    </section>
+  </div>
+
+  <!-- ============================ ENGLISH ============================ -->
+  <div lang-block="en">
+    <section class="card">
+      <h2><span class="ic">◎</span>What the apps do</h2>
+      <p>Mortgage Calculator works out your <b>monthly mortgage payment</b> and shows what sits behind that number: how much is principal, how much is interest, how it shifts payment after payment, and what would happen with a different rate or term. Everything is calculated on the device, offline included.</p>
+      <p>It comes in two versions, identical in features: <b>Mortgage Calculator</b> (paid, with no advertising at all) and <b>Mortgage Calculator Light</b> (free, ad-supported). This guide covers both.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">∑</span>The Calculation tab</h2>
+      <p>This is the starting point. You set four things:</p>
+      <ul>
+        <li>the mortgage <b>amount</b>;</li>
+        <li>the <b>start date</b> — tap the date to open the calendar;</li>
+        <li>the annual <b>interest rate</b>, with the slider (0.05% steps);</li>
+        <li>the <b>duration</b> in years, with the slider.</li>
+      </ul>
+      <p>The <b>monthly payment</b> recalculates instantly on every change, together with the <b>total repaid</b> and the <b>total interest</b>. The bar at the bottom shows at a glance the split between <b>principal</b> (green) and <b>interest</b> (orange) over the whole term.</p>
+      <p>The calculation uses the <b>French amortization method</b> with a constant instalment — the one used by almost every mortgage: the payment stays the same throughout, while its internal composition changes.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>The Amort. plan tab</h2>
+      <p>This is the <b>payment-by-payment</b> detail. The total interest, total repaid and monthly payment stay pinned at the top; below them the full list scrolls, each row showing:</p>
+      <ul>
+        <li>the payment <b>number</b> and its <b>due date</b> (the first one falls on the start date);</li>
+        <li>the <b>principal</b> and <b>interest</b> portions, with a bar showing their ratio;</li>
+        <li>the <b>remaining balance</b> after the payment.</li>
+      </ul>
+      <p>As you scroll down you will see the bar turn progressively greener: that is the hallmark of French amortization, where early payments are mostly interest and later ones mostly principal.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">⇪</span>Exporting the plan</h2>
+      <p>The <b>share</b> button exports the complete schedule in two formats:</p>
+      <ul>
+        <li><b>CSV</b> — to open in Numbers, Excel or Google Sheets. Dates are in ISO format (<span class="kbd">yyyy-mm-dd</span>) and numbers use a decimal point, so the import works in any language.</li>
+        <li><b>PDF</b> — a document ready to print or send, with the app logo, the mortgage summary at the top and the full paginated table.</li>
+      </ul>
+      <p>The file is created on the spot and handed to the iOS share sheet: you decide where to save it or who to send it to.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📊</span>The Scenarios tab</h2>
+      <p>This one answers the "what if" question. The two sliders change <b>rate</b> and <b>duration</b>, and the new payment appears immediately.</p>
+      <p>The chart compares eight terms — from 5 to 40 years — each as a column split in two: the <b>green</b> part is the principal, which never changes because it is the sum you borrowed; the <b>orange</b> part is the interest, which grows as the term lengthens. Above each column you find the corresponding <b>payment</b>.</p>
+      <p>It is the most direct way to see the fundamental trade-off of any mortgage: a longer term lowers the payment but raises the total interest. The highlighted column is the term you selected.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">ℹ</span>The App info tab</h2>
+      <p>It holds the app version, a short explanation of every tab, and the disclaimer. In the Light version it also holds the <b>Privacy settings</b> button, to review your advertising consent choices.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>Advertising — Light version only</h2>
+      <p>Mortgage Calculator Light is free thanks to <b>Google AdMob</b> ads: a <b>banner</b> in the Calculation, Amort. plan and Scenarios tabs and, occasionally, a <b>full-screen ad</b>. Mortgage Calculator contains no advertising.</p>
+      <p>On first launch, in Europe, the app asks for your <b>consent preferences</b> (personalised or generic ads) and requests no ad before you have chosen; the app <b>never asks for Apple's tracking</b> permission. You can change your mind at any time from <b>App info → Privacy settings</b>. Details are in the <a href="privacy.html">privacy policy</a>.</p>
+      <p>If you prefer an <b>ad-free</b> experience, look for <b>Mortgage Calculator</b> on the App Store.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Notifications</h2>
+      <p>The app may send you the occasional notification about what's new. Permission is requested on first launch; you can change it any time in <b>Settings → Notifications</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Frequently asked questions</h2>
+      <ul>
+        <li><b>No payment is shown</b> — an amount greater than zero is required: tap the "Mortgage amount" field and type it in.</li>
+        <li><b>Why does my bank quote a different payment?</b> — the apps compute the pure principal-and-interest payment. Your bank's instalment may include insurance, collection fees or taxes, and may use different rounding.</li>
+        <li><b>Which rate should I enter?</b> — the <b>nominal annual rate</b> of the mortgage, not the APR, which also includes ancillary costs.</li>
+        <li><b>The last payment differs from the others</b> — that is correct: it is adjusted by a few cents so the balance ends exactly at zero.</li>
+        <li><b>Can I use it for a variable-rate mortgage?</b> — you can simulate any rate, but the plan is computed holding that rate fixed for the whole term. To understand the effect of a rise, use the Scenarios tab.</li>
+        <li><b>The banner area is empty</b> (Light only) — this happens when no ad is available or the network is down: it is not an error.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✱</span>Disclaimer</h2>
+      <p>The apps are a calculation and simulation tool, not financial advice. Results are indicative: for any real commitment always refer to the documents provided by your lender.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✎</span>Contact</h2>
+      <p>Found a problem, or missing a feature? Write to <a href="mailto:bacchin@tiscali.it?subject=Mortgage%20Calculator%20%E2%80%94%20Support">bacchin@tiscali.it</a>. Please mention your iPhone model, iOS version and app version (you'll find it in the App info tab): it helps to answer faster.</p>
+    </section>
+  </div>
+
+  <p class="foot">
+    <span lang-block="it">Mortgage Calculator e Mortgage Calculator Light · <a href="privacy.html">Informativa sulla privacy</a></span>
+    <span lang-block="en">Mortgage Calculator and Mortgage Calculator Light · <a href="privacy.html">Privacy policy</a></span>
+  </p>
+</div>
+
+<script>
+  function setLang(l) {
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    document.getElementById("btn-it").setAttribute("aria-pressed", l === "it");
+    document.getElementById("btn-en").setAttribute("aria-pressed", l === "en");
+    try { localStorage.setItem("mortgage-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("mortgage-lang"); } catch (e) {}
+  setLang(saved || ((navigator.language || "en").toLowerCase().indexOf("it") === 0 ? "it" : "en"));
+</script>
+<noscript><style>[lang-block]{display:block !important}</style></noscript>
+</body>
+</html>
