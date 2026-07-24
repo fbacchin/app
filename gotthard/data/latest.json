@@ -1,5 +1,5 @@
 {
- "time": "2026-07-24T04:11:26Z",
+ "time": "2026-07-24T04:16:30Z",
  "south": {
   "km": 1.0,
   "wait": 10
@@ -13,7 +13,7 @@
    "id": "situation.641197.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "south",
-   "versionTime": "2026-07-24T04:10:36Z",
+   "versionTime": "2026-07-24T04:11:26Z",
    "km": 1.0,
    "wait": 10,
    "texts": {
