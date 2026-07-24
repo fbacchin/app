@@ -1,5 +1,5 @@
 {
- "time": "2026-07-24T19:28:29Z",
+ "time": "2026-07-24T19:33:34Z",
  "south": {
   "km": 5.0,
   "wait": 50
@@ -13,7 +13,7 @@
    "id": "situation.641228.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-07-24T19:23:30Z",
+   "versionTime": "2026-07-24T19:28:28Z",
    "km": 1.0,
    "wait": 10,
    "texts": {
@@ -33,19 +33,6 @@
     "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Anschluss Göschenen Sachlage: Stau Länge [km] 5.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 50",
     "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 5.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 50",
     "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 5.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 50"
-   }
-  },
-  {
-   "id": "situation.641242.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-07-24T08:15:52Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Bellinzona <-> Göschenen zwischen Ortschaft Faido und Anschluss Airolo-Nufenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
-    "fr": "Libéré: H2 Bellinzone <-> Göschenen entre Localité Faido et Jonction autoroutière Airolo-Nufenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
-    "it": "Approvato: H2 Bellinzona <-> Göschenen tra Luogo Faido E Svincolo autostradale Airolo-Nufenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
    }
   }
  ]
