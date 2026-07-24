@@ -1,8 +1,8 @@
 {
- "time": "2026-07-24T21:46:04Z",
+ "time": "2026-07-24T21:51:09Z",
  "south": {
   "km": 5.0,
-  "wait": 50
+  "wait": null
  },
  "north": {
   "km": null,
@@ -13,13 +13,13 @@
    "id": "situation.641197.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "south",
-   "versionTime": "2026-07-24T20:51:48Z",
+   "versionTime": "2026-07-24T21:50:41Z",
    "km": 5.0,
-   "wait": 50,
+   "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Anschluss Göschenen Sachlage: Stau Länge [km] 5 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 50",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 5 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 50",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 5 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 50"
+    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Anschluss Göschenen Sachlage: Stau Länge [km] 5.0 Ursache: Verkehrsüberlastung",
+    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 5.0 Raison: surcharge de trafic",
+    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 5.0 Causa: traffico congestionato"
    }
   }
  ]
