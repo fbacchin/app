@@ -81,6 +81,12 @@
         <p>Open Profile → "Connect the Health app" and grant the requested permissions. Rings reflect the data recorded by Apple Health.</p>
       </details>
       <details>
+        <summary>The App won't connect to Apple Health</summary>
+        <p>If the permission sheet never appears, or it opens and closes instantly, or the spinner keeps turning, the problem is the iOS Health service, not the App: it can get stuck and stop answering any app's authorisation request. We have seen it on beta releases of iOS.</p>
+        <p><strong>The fix:</strong> Settings → General → Transfer or Reset iPhone → Reset → <strong>Reset Location &amp; Privacy</strong>. Then reopen the App and grant access again. This clears the location and privacy permissions of <em>every</em> app on the device — each one will ask again the next time you open it — but it deletes no personal data.</p>
+        <p>A lighter thing to try first: open another app that reads Health (any fitness or running app) and let it complete its own request. That sometimes wakes the stuck service up.</p>
+      </details>
+      <details>
         <summary>The GPS route is missing</summary>
         <p>Make sure the App has location permission (Settings → Privacy &amp; Security → Location Services) and start the activity outdoors with a clear view of the sky.</p>
       </details>
@@ -114,6 +120,12 @@
       <details>
         <summary>Gli anelli attività sono vuoti</summary>
         <p>Apri Profilo → "Connetti l'app Salute" e concedi i permessi richiesti. Gli anelli riflettono i dati registrati da Apple Salute.</p>
+      </details>
+      <details>
+        <summary>L'App non riesce a collegarsi ad Apple Salute</summary>
+        <p>Se il foglio dei permessi non compare mai, o si apre e si chiude all'istante, o la rotellina continua a girare, il problema è il servizio Salute di iOS, non l'App: può bloccarsi e smettere di rispondere alle richieste di autorizzazione di qualsiasi app. L'abbiamo riscontrato sulle versioni beta di iOS.</p>
+        <p><strong>La soluzione:</strong> Impostazioni → Generali → Trasferisci o inizializza iPhone → Ripristina → <strong>Ripristina posizione e privacy</strong>. Poi riapri l'App e concedi di nuovo l'accesso. L'operazione azzera i permessi di posizione e privacy di <em>tutte</em> le app del dispositivo — ciascuna li richiederà di nuovo alla prossima apertura — ma non cancella alcun dato personale.</p>
+        <p>Prima puoi provare una cosa più leggera: apri un'altra app che legge Salute (una qualsiasi app di fitness o corsa) e lasciale completare la sua richiesta. A volte basta a risvegliare il servizio bloccato.</p>
       </details>
       <details>
         <summary>Manca il percorso GPS</summary>
