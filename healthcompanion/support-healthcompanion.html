@@ -1,81 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Support — Your Health Companion AI</title>
 <style>
   :root {
-    --teal: #26c79e;
-    --blue: #156bd9;
-    --ink: #10243a;
-    --muted: #5a6b7d;
+    --paper: #f2f7f9;
     --card: #ffffff;
-    --bg: #f2f7f9;
+    --ink: #10243a;
+    --ink-soft: #5a6b7d;
+    --line: #dde6ec;
+    --accent: #156bd9;
+    --accent-2: #26c79e;
+    --accent-soft: #e3f2ee;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 17px;
-    line-height: 1.65;
-    min-height: 100vh;
+    background: var(--paper); color: var(--ink);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
   }
-  header {
-    background: linear-gradient(135deg, var(--teal) 0%, var(--blue) 100%);
-    color: #fff;
-    padding: 56px 24px 48px;
-    text-align: center;
+  main { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; }
+  .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .app-icon { flex: none; border-radius: 12px; }
+  h1 { font-size: 1.9em; line-height: 1.2; }
+  .sub { color: var(--ink-soft); margin: 0 0 14px 64px; }
+  .langbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 28px; }
+  .langbar button {
+    font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
   }
-  header h1 { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.02em; }
-  header p { opacity: 0.9; margin-top: 8px; }
-  main { max-width: 760px; margin: -24px auto 48px; padding: 0 16px; }
+  .langbar button[aria-pressed="true"] {
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    border-color: var(--accent); color: #fff;
+  }
+  h2 { color: var(--accent); font-size: 1.25em; margin: 36px 0 10px; }
+  p, li { color: var(--ink); margin-bottom: 10px; }
   .card {
-    background: var(--card);
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(16, 36, 58, 0.08);
-    padding: 32px 28px;
-    margin-bottom: 16px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 20px; margin: 14px 0;
   }
-  h2 { font-size: 1.15rem; margin: 24px 0 8px; color: var(--blue); }
-  h2:first-child { margin-top: 0; }
-  p { margin-bottom: 10px; }
-  a { color: var(--blue); }
-  .btn {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--teal), var(--blue));
-    color: #fff;
-    font-weight: 700;
-    text-decoration: none;
-    padding: 12px 22px;
-    border-radius: 12px;
-    margin-top: 6px;
-  }
-  footer { text-align: center; padding: 24px; color: var(--muted); font-size: 0.85rem; }
+  a { color: var(--accent); }
+  .cta { display: inline-block; background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    color: #fff; padding: 10px 22px; border-radius: 99px; text-decoration: none; margin: 6px 0 4px; font-weight: 600; }
+  details { border-bottom: 1px solid var(--line); padding: 12px 0; }
+  details:last-child { border-bottom: none; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin-top: 8px; color: var(--ink-soft); }
+  footer { color: var(--ink-soft); font-size: .85em; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; text-align: center; }
+  [lang-block] { display: none; }
+  html[data-lang="en"] [lang-block="en"], html[data-lang="it"] [lang-block="it"] { display: block; }
 </style>
 </head>
 <body>
-<header>
-  <h1>Support</h1>
-  <p>Your Health Companion AI — for iPhone and Apple Watch</p>
-</header>
 <main>
-  <div class="card">
+  <div class="logo">
+    <img class="app-icon" src="icon.png" width="52" height="52" alt="Your Health Companion AI">
+    <h1>Your Health Companion AI</h1>
+  </div>
+  <p class="sub" lang-block="en">Support</p>
+  <p class="sub" lang-block="it">Supporto</p>
+
+  <div class="langbar">
+    <button id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
+    <button id="btn-it" aria-pressed="false" onclick="setLang('it')">Italiano</button>
+  </div>
+
+  <div lang-block="en">
     <h2>Contact us</h2>
-    <p>Questions, feedback or a problem with the App? Write to us — we usually reply within a couple of days.</p>
-    <a class="btn" href="mailto:bacchin@mac.com?subject=Your%20Health%20Companion%20AI%20—%20Support">Email support</a>
+    <div class="card">
+      <p>Questions, feedback or a problem with the App? Write to us — we usually reply within a couple of days.</p>
+      <a class="cta" href="mailto:bacchin@mac.com?subject=Your%20Health%20Companion%20AI%20—%20Support">Email support</a>
+    </div>
 
     <h2>Frequently asked questions</h2>
-    <p><strong>My activity rings are empty.</strong> Open Profile → "Connect the Health app" and grant the requested permissions. On the iPhone, rings reflect the data recorded by Apple Health.</p>
-    <p><strong>GPS route is missing.</strong> Make sure the App has location permission (Settings → Privacy &amp; Security → Location Services) and start the activity outdoors.</p>
-    <p><strong>A food is missing from the database.</strong> Food search and barcodes are powered by Open Food Facts. You can always add a food manually with its calories and macros.</p>
-    <p><strong>How do I delete my data?</strong> Profile → "Delete all data" removes everything stored by the App on your device.</p>
+    <div class="card">
+      <details>
+        <summary>My activity rings are empty</summary>
+        <p>Open Profile → "Connect the Health app" and grant the requested permissions. Rings reflect the data recorded by Apple Health.</p>
+      </details>
+      <details>
+        <summary>The GPS route is missing</summary>
+        <p>Make sure the App has location permission (Settings → Privacy &amp; Security → Location Services) and start the activity outdoors with a clear view of the sky.</p>
+      </details>
+      <details>
+        <summary>A food is missing from the database</summary>
+        <p>Food search and barcodes are powered by Open Food Facts. You can always add a food manually with its calories and macros.</p>
+      </details>
+      <details>
+        <summary>The Apple Watch app doesn't show my plan</summary>
+        <p>Open the iPhone app at least once after creating your training plan: today's workout is sent automatically to the Watch.</p>
+      </details>
+      <details>
+        <summary>How do I delete my data?</summary>
+        <p>Profile → "Delete all data" removes everything stored by the App on your device.</p>
+      </details>
+    </div>
 
     <h2>Privacy</h2>
     <p>Read our <a href="privacy-healthcompanion.html">Privacy Policy</a>.</p>
   </div>
+
+  <div lang-block="it">
+    <h2>Contattaci</h2>
+    <div class="card">
+      <p>Domande, suggerimenti o un problema con l'App? Scrivici — di solito rispondiamo entro un paio di giorni.</p>
+      <a class="cta" href="mailto:bacchin@mac.com?subject=Your%20Health%20Companion%20AI%20—%20Supporto">Scrivi al supporto</a>
+    </div>
+
+    <h2>Domande frequenti</h2>
+    <div class="card">
+      <details>
+        <summary>Gli anelli attività sono vuoti</summary>
+        <p>Apri Profilo → "Connetti l'app Salute" e concedi i permessi richiesti. Gli anelli riflettono i dati registrati da Apple Salute.</p>
+      </details>
+      <details>
+        <summary>Manca il percorso GPS</summary>
+        <p>Verifica che l'App abbia il permesso posizione (Impostazioni → Privacy e sicurezza → Localizzazione) e avvia l'attività all'aperto con vista libera del cielo.</p>
+      </details>
+      <details>
+        <summary>Un alimento non è nel database</summary>
+        <p>Ricerca e barcode usano Open Food Facts. Puoi sempre aggiungere un alimento manualmente con le sue calorie e i suoi macro.</p>
+      </details>
+      <details>
+        <summary>L'app Apple Watch non mostra il mio piano</summary>
+        <p>Apri l'app su iPhone almeno una volta dopo aver creato il piano: l'allenamento del giorno viene inviato automaticamente al Watch.</p>
+      </details>
+      <details>
+        <summary>Come cancello i miei dati?</summary>
+        <p>Profilo → "Cancella tutti i dati" rimuove tutto ciò che l'App ha salvato sul dispositivo.</p>
+      </details>
+    </div>
+
+    <h2>Privacy</h2>
+    <p>Leggi la nostra <a href="privacy-healthcompanion.html">Informativa sulla privacy</a>.</p>
+  </div>
+
+  <footer>
+    <span lang-block="en">© 2026 Fabrizio Bacchin · <a href="privacy-healthcompanion.html">Privacy Policy</a></span>
+    <span lang-block="it">© 2026 Fabrizio Bacchin · <a href="privacy-healthcompanion.html">Informativa privacy</a></span>
+  </footer>
 </main>
-<footer>© 2026 Fabrizio Bacchin — Your Health Companion AI</footer>
+
+<script>
+  var LANGS = ["en", "it"];
+  function setLang(l) {
+    if (LANGS.indexOf(l) < 0) l = "en";
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    LANGS.forEach(function (x) {
+      document.getElementById("btn-" + x).setAttribute("aria-pressed", x === l);
+    });
+    try { localStorage.setItem("healthcompanion-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("healthcompanion-lang"); } catch (e) {}
+  var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+  setLang(saved || (LANGS.indexOf(nav) >= 0 ? nav : "en"));
+</script>
+<noscript><style>[lang-block]{display:block !important}</style></noscript>
+
 </body>
 </html>
