@@ -1,5 +1,5 @@
 {
- "time": "2026-07-26T15:44:17Z",
+ "time": "2026-07-26T15:49:22Z",
  "south": {
   "km": 2.0,
   "wait": 20
@@ -46,19 +46,6 @@
     "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Ortschaft Hospental und Pass Gotthard-Pass Sachlage: Verkehrsbehinderung Ursache: Unfall",
     "fr": "Libéré: H2 Airolo <-> Göschenen entre Localité Hospental et Col Col du St-Gothard Situation: trafic perturbé Raison: accident",
     "it": "Approvato: H2 Airolo <-> Göschenen tra Luogo Hospental E Passo Passo del S. Gottardo Situazione: problemi di traffico Causa: incidente"
-   }
-  },
-  {
-   "id": "situation.641518.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "south",
-   "versionTime": "2026-07-26T07:42:02Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Göschenen Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Göschenen Situation: entrée fermée",
-    "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata"
    }
   },
   {
