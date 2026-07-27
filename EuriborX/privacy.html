@@ -41,7 +41,7 @@
   .foot { color: var(--muted); font-size: 14px; margin-top: 28px; text-align: center; }
   .date { color: var(--muted); font-size: 14px; }
   [lang-block] { display: none; }
-  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"] { display: block; }
+  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"], html[data-lang="fr"] [lang-block="fr"], html[data-lang="de"] [lang-block="de"], html[data-lang="es"] [lang-block="es"] { display: block; }
 </style>
 </head>
 <body>
@@ -52,10 +52,16 @@
   </header>
   <p class="sub" lang-block="it">Informativa sulla privacy · Euribor X e Euribor X Light</p>
   <p class="sub" lang-block="en">Privacy policy · Euribor X and Euribor X Light</p>
+  <p class="sub" lang-block="fr">Politique de confidentialité · Euribor X et Euribor X Light</p>
+  <p class="sub" lang-block="de">Datenschutzerklärung · Euribor X und Euribor X Light</p>
+  <p class="sub" lang-block="es">Política de privacidad · Euribor X y Euribor X Light</p>
 
   <div class="langbar">
     <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
     <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
   </div>
 
   <!-- ============================ ITALIANO ============================ -->
@@ -192,23 +198,232 @@
     </section>
   </div>
 
+  <!-- ============================ FRANÇAIS ============================ -->
+  <div lang-block="fr">
+    <p class="date">En vigueur depuis le 27 juillet 2026</p>
+
+    <section class="card">
+      <h2>En bref</h2>
+      <p>Euribor X et Euribor X Light sont des applications de Fabrizio Bacchin, et cette politique s'applique aux deux. Les applications <b>ne collectent aucune donnée personnelle</b> : pas de compte, pas d'outil d'analyse propre, aucune vente de données (si vous activez les notifications push, seules des données techniques anonymes sont enregistrées — voir ci-dessous). <b>Euribor X ne contient aucune publicité.</b> <b>Euribor X Light</b>, la version gratuite, affiche des annonces Google AdMob et, en Europe, <b>vous demande votre consentement</b> avant de demander la moindre annonce.</p>
+    </section>
+
+    <section class="card">
+      <h2>Les deux applications</h2>
+      <table>
+        <tr><th>App</th><th>Publicité</th></tr>
+        <tr><td>Euribor X (payant)</td><td>Aucune. L'app ne contient aucun code publicitaire.</td></tr>
+        <tr><td>Euribor X Light (gratuit)</td><td>Bannières et annonces plein écran Google AdMob — voir les sections dédiées.</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Téléchargement des données de taux</h2>
+      <p>Les taux sont téléchargés depuis des pages publiques hébergées sur <b>GitHub Pages</b>. Comme pour tout site web, GitHub peut enregistrer des données techniques de connexion (par exemple l'adresse IP) selon sa propre <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">politique de confidentialité</a>. Les applications n'envoient aucune autre donnée pendant le téléchargement.</p>
+    </section>
+
+    <section class="card">
+      <h2>Notifications push</h2>
+      <p>Si vous choisissez d'activer les notifications, l'app enregistre auprès du service <b>Back4App</b> (plateforme Parse) deux informations techniques :</p>
+      <ul>
+        <li>le <b>jeton APNs</b> de l'appareil, généré par Apple, nécessaire pour délivrer les notifications ;</li>
+        <li>un <b>identifiant d'installation anonyme</b>, utilisé pour gérer les envois.</li>
+      </ul>
+      <p>Ces données ne sont pas liées à votre identité et servent uniquement au fonctionnement des notifications. Si vous refusez ou désactivez ensuite les notifications dans les Réglages, le jeton devient inutilisable ; vous pouvez en demander la suppression en écrivant au contact ci-dessous.</p>
+    </section>
+
+    <section class="card">
+      <h2>Données stockées sur votre appareil</h2>
+      <p>Les applications conservent localement, dans leur propre conteneur sandbox, uniquement le <b>cache des taux</b> téléchargés (pour le mode hors ligne) et vos <b>préférences</b> (par exemple l'échéance sélectionnée et les paramètres du simulateur de prêt) ; Euribor X Light y enregistre aussi vos <b>choix de consentement</b>. Rien de tout cela n'est transmis à des tiers par les applications.</p>
+    </section>
+
+    <section class="card">
+      <h2>Publicité — Euribor X Light uniquement</h2>
+      <p>Euribor X Light est gratuit grâce aux annonces — une bannière sur les trois écrans et de rares annonces plein écran — diffusées par <b>Google AdMob</b>. Pour sélectionner et mesurer les annonces, Google peut traiter :</p>
+      <ul>
+        <li>l'<b>identifiant publicitaire (IDFA)</b> de l'appareil — uniquement si vous autorisez le suivi — et d'autres identifiants techniques ;</li>
+        <li>l'<b>adresse IP</b> (qui indique une localisation approximative) et des informations techniques sur l'appareil ;</li>
+        <li>des données d'<b>interaction avec les annonces</b> (impressions, clics).</li>
+      </ul>
+      <p>La façon dont Google traite ces données est décrite dans la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">politique de confidentialité de Google</a> et sur la page <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">« Comment Google utilise les informations »</a>. L'app utilise en outre <b>SKAdNetwork</b> d'Apple, le système qui mesure l'efficacité des campagnes sous forme agrégée et anonyme. Euribor X ne contient rien de tout cela.</p>
+    </section>
+
+    <section class="card">
+      <h2>Votre consentement — Euribor X Light uniquement</h2>
+      <p>Au premier lancement, si vous êtes dans l'Espace économique européen ou au Royaume-Uni, l'app affiche le <b>formulaire de consentement</b> de Google : vous pouvez choisir entre des <b>annonces personnalisées</b> et des <b>annonces génériques</b>, non fondées sur vos centres d'intérêt. Vous pouvez <b>modifier ou retirer ce choix à tout moment</b> via le bouton <b>Options de confidentialité</b> de l'onglet Infos.</p>
+      <p>Juste après, iOS affiche la demande d'<b>autorisation de suivi</b> d'Apple (App Tracking Transparency) : si vous acceptez, les annonces peuvent utiliser l'identifiant publicitaire (IDFA) de l'appareil ; si vous refusez, l'IDFA n'est ni rendu disponible ni partagé et les annonces restent non personnalisées. Vous pouvez modifier ce choix dans <b>Réglages → Confidentialité et sécurité → Suivi</b>.</p>
+      <p>L'app fonctionne de la même manière quel que soit votre choix : seules les annonces changent, pas les fonctionnalités.</p>
+    </section>
+
+    <section class="card">
+      <h2>Vos droits et contact</h2>
+      <p>Vous avez le droit de retirer votre consentement à tout moment (voir ci-dessus) et de saisir votre autorité de protection des données. Pour toute question sur cette politique, écrivez à <a href="mailto:bacchin@tiscali.it?subject=Euribor%20X%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Pour exercer vos droits sur les données traitées par Google, utilisez les canaux indiqués dans la politique de Google.</p>
+    </section>
+
+    <section class="card">
+      <h2>Modifications</h2>
+      <p>Toute modification de cette politique sera publiée sur cette page, avec mise à jour de la date d'entrée en vigueur.</p>
+    </section>
+  </div>
+
+  <!-- ============================ DEUTSCH ============================ -->
+  <div lang-block="de">
+    <p class="date">Gültig ab 27. Juli 2026</p>
+
+    <section class="card">
+      <h2>Kurz gesagt</h2>
+      <p>Euribor X und Euribor X Light sind Apps von Fabrizio Bacchin, und diese Erklärung gilt für beide. Die Apps <b>erfassen keine personenbezogenen Daten</b>: kein Konto, keine eigenen Analysewerkzeuge, kein Verkauf von Daten (wenn Sie Push-Mitteilungen aktivieren, werden nur anonyme technische Daten gespeichert — siehe unten). <b>Euribor X enthält keinerlei Werbung.</b> <b>Euribor X Light</b>, die kostenlose Version, zeigt Google-AdMob-Anzeigen und fragt in Europa <b>vor der ersten Anzeigenanfrage Ihre Einwilligung ab</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Die beiden Apps</h2>
+      <table>
+        <tr><th>App</th><th>Werbung</th></tr>
+        <tr><td>Euribor X (kostenpflichtig)</td><td>Keine. Die App enthält keinen Werbecode.</td></tr>
+        <tr><td>Euribor X Light (kostenlos)</td><td>Google-AdMob-Banner und Vollbildanzeigen — siehe die entsprechenden Abschnitte.</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Herunterladen der Zinsdaten</h2>
+      <p>Die Zinssätze werden von öffentlichen Seiten geladen, die auf <b>GitHub Pages</b> gehostet werden. Wie bei jeder Website kann GitHub technische Verbindungsdaten (z. B. die IP-Adresse) gemäß seiner eigenen <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Datenschutzerklärung</a> protokollieren. Die Apps senden beim Download keine weiteren Daten.</p>
+    </section>
+
+    <section class="card">
+      <h2>Push-Mitteilungen</h2>
+      <p>Wenn Sie Mitteilungen aktivieren, registriert die App beim Dienst <b>Back4App</b> (Parse-Plattform) zwei technische Angaben:</p>
+      <ul>
+        <li>das von Apple erzeugte <b>APNs-Token</b> des Geräts, das zum Zustellen der Mitteilungen nötig ist;</li>
+        <li>eine <b>anonyme Installationskennung</b> zur Verwaltung der Zustellungen.</li>
+      </ul>
+      <p>Diese Daten sind nicht mit Ihrer Identität verknüpft und dienen ausschließlich dem Betrieb der Mitteilungen. Wenn Sie die Mitteilungen ablehnen oder später in den Einstellungen deaktivieren, wird das Token unbrauchbar; Sie können seine Löschung über den Kontakt unten anfordern.</p>
+    </section>
+
+    <section class="card">
+      <h2>Auf Ihrem Gerät gespeicherte Daten</h2>
+      <p>Die Apps speichern lokal in ihrem eigenen Sandbox-Container nur den <b>Cache der geladenen Zinssätze</b> (für den Offline-Betrieb) und Ihre <b>Einstellungen</b> (z. B. die gewählte Laufzeit und die Parameter des Kreditrechners); Euribor X Light speichert dort zusätzlich Ihre <b>Einwilligungsentscheidungen</b>. Nichts davon wird von den Apps an Dritte übermittelt.</p>
+    </section>
+
+    <section class="card">
+      <h2>Werbung — nur Euribor X Light</h2>
+      <p>Euribor X Light ist dank Anzeigen kostenlos — ein Banner auf den drei Bildschirmen und gelegentliche Vollbildanzeigen — ausgeliefert von <b>Google AdMob</b>. Zum Auswählen und Messen der Anzeigen kann Google verarbeiten:</p>
+      <ul>
+        <li>die <b>Werbekennung (IDFA)</b> des Geräts — nur wenn Sie das Tracking erlauben — und weitere technische Kennungen;</li>
+        <li>die <b>IP-Adresse</b> (die einen ungefähren Standort angibt) und technische Geräteinformationen;</li>
+        <li>Daten zur <b>Interaktion mit Anzeigen</b> (Impressionen, Klicks).</li>
+      </ul>
+      <p>Wie Google diese Daten verarbeitet, ist in der <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a> und auf der Seite <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">„Wie Google Daten verwendet“</a> beschrieben. Die App nutzt außerdem Apples <b>SKAdNetwork</b>, das die Wirksamkeit von Kampagnen aggregiert und anonym misst. Euribor X enthält nichts davon.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ihre Einwilligung — nur Euribor X Light</h2>
+      <p>Beim ersten Start zeigt die App, wenn Sie sich im Europäischen Wirtschaftsraum oder im Vereinigten Königreich befinden, das <b>Einwilligungsformular</b> von Google: Sie können zwischen <b>personalisierten Anzeigen</b> und <b>allgemeinen Anzeigen</b> wählen, die nicht auf Ihren Interessen beruhen. Sie können <b>diese Wahl jederzeit ändern oder widerrufen</b> über die Schaltfläche <b>Datenschutzoptionen</b> im Info-Tab.</p>
+      <p>Direkt danach zeigt iOS die Apple-Abfrage zur <b>Tracking-Erlaubnis</b> (App Tracking Transparency): Wenn Sie zustimmen, dürfen Anzeigen die Werbekennung (IDFA) des Geräts nutzen; wenn Sie ablehnen, wird die IDFA weder bereitgestellt noch geteilt und die Anzeigen bleiben nicht personalisiert. Sie können diese Wahl unter <b>Einstellungen → Datenschutz &amp; Sicherheit → Tracking</b> ändern.</p>
+      <p>Die App funktioniert bei jeder Wahl gleich: Nur die Anzeigen ändern sich, nicht die Funktionen.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ihre Rechte und Kontakt</h2>
+      <p>Sie haben das Recht, Ihre Einwilligung jederzeit zu widerrufen (siehe oben) und sich an Ihre Datenschutzbehörde zu wenden. Bei Fragen zu dieser Erklärung schreiben Sie an <a href="mailto:bacchin@tiscali.it?subject=Euribor%20X%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Zur Ausübung Ihrer Rechte hinsichtlich der von Google verarbeiteten Daten nutzen Sie die in Googles Erklärung genannten Wege.</p>
+    </section>
+
+    <section class="card">
+      <h2>Änderungen</h2>
+      <p>Änderungen dieser Erklärung werden auf dieser Seite veröffentlicht und das Datum des Inkrafttretens wird aktualisiert.</p>
+    </section>
+  </div>
+
+  <!-- ============================ ESPAÑOL ============================ -->
+  <div lang-block="es">
+    <p class="date">En vigor desde el 27 de julio de 2026</p>
+
+    <section class="card">
+      <h2>En resumen</h2>
+      <p>Euribor X y Euribor X Light son apps de Fabrizio Bacchin, y esta política se aplica a ambas. Las apps <b>no recopilan datos personales</b>: sin cuenta, sin herramientas de análisis propias, sin venta de datos (si activas las notificaciones push, solo se registran datos técnicos anónimos — ver más abajo). <b>Euribor X no contiene ninguna publicidad.</b> <b>Euribor X Light</b>, la versión gratuita, muestra anuncios de Google AdMob y, en Europa, <b>te pide el consentimiento</b> antes de solicitar siquiera un anuncio.</p>
+    </section>
+
+    <section class="card">
+      <h2>Las dos apps</h2>
+      <table>
+        <tr><th>App</th><th>Publicidad</th></tr>
+        <tr><td>Euribor X (de pago)</td><td>Ninguna. La app no contiene código publicitario.</td></tr>
+        <tr><td>Euribor X Light (gratuita)</td><td>Banners y anuncios a pantalla completa de Google AdMob — ver las secciones específicas.</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Descarga de los datos de tipos</h2>
+      <p>Los tipos se descargan de páginas públicas alojadas en <b>GitHub Pages</b>. Como en cualquier sitio web, GitHub puede registrar datos técnicos de conexión (por ejemplo la dirección IP) según su propia <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">política de privacidad</a>. Las apps no envían ningún otro dato durante la descarga.</p>
+    </section>
+
+    <section class="card">
+      <h2>Notificaciones push</h2>
+      <p>Si eliges activar las notificaciones, la app registra en el servicio <b>Back4App</b> (plataforma Parse) dos datos técnicos:</p>
+      <ul>
+        <li>el <b>token APNs</b> del dispositivo, generado por Apple, necesario para entregar las notificaciones;</li>
+        <li>un <b>identificador de instalación anónimo</b>, usado para gestionar los envíos.</li>
+      </ul>
+      <p>Estos datos no están vinculados a tu identidad y se usan únicamente para el funcionamiento de las notificaciones. Si rechazas o después desactivas las notificaciones en Ajustes, el token queda inservible; puedes solicitar su eliminación escribiendo al contacto de abajo.</p>
+    </section>
+
+    <section class="card">
+      <h2>Datos guardados en tu dispositivo</h2>
+      <p>Las apps guardan localmente, en su propio contenedor aislado, solo la <b>caché de los tipos</b> descargados (para el uso sin conexión) y tus <b>preferencias</b> (por ejemplo el plazo seleccionado y los parámetros del simulador de hipoteca); Euribor X Light guarda ahí también tus <b>opciones de consentimiento</b>. Nada de esto lo transmiten las apps a terceros.</p>
+    </section>
+
+    <section class="card">
+      <h2>Publicidad — solo Euribor X Light</h2>
+      <p>Euribor X Light es gratuita gracias a los anuncios — un banner en las tres pantallas y ocasionales anuncios a pantalla completa — servidos por <b>Google AdMob</b>. Para seleccionar y medir los anuncios, Google puede tratar:</p>
+      <ul>
+        <li>el <b>identificador publicitario (IDFA)</b> del dispositivo — solo si permites el seguimiento — y otros identificadores técnicos;</li>
+        <li>la <b>dirección IP</b> (que indica una ubicación aproximada) e información técnica del dispositivo;</li>
+        <li>datos de <b>interacción con los anuncios</b> (impresiones, toques).</li>
+      </ul>
+      <p>Cómo trata Google estos datos se describe en la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidad de Google</a> y en la página <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">«Cómo usa Google la información»</a>. La app usa además <b>SKAdNetwork</b> de Apple, el sistema que mide la eficacia de las campañas de forma agregada y anónima. Euribor X no contiene nada de esto.</p>
+    </section>
+
+    <section class="card">
+      <h2>Tu consentimiento — solo Euribor X Light</h2>
+      <p>En el primer inicio, si te encuentras en el Espacio Económico Europeo o en el Reino Unido, la app muestra el <b>formulario de consentimiento</b> de Google: puedes elegir entre <b>anuncios personalizados</b> y <b>anuncios genéricos</b>, no basados en tus intereses. Puedes <b>cambiar o retirar esta elección en cualquier momento</b> con el botón <b>Opciones de privacidad</b> de la pestaña Información.</p>
+      <p>Justo después, iOS muestra la solicitud de <b>autorización de seguimiento</b> de Apple (App Tracking Transparency): si aceptas, los anuncios pueden usar el identificador publicitario (IDFA) del dispositivo; si rechazas, el IDFA no se pone a disposición ni se comparte y los anuncios siguen siendo no personalizados. Puedes cambiar esta elección en <b>Ajustes → Privacidad y seguridad → Seguimiento</b>.</p>
+      <p>La app funciona igual sea cual sea tu elección: solo cambian los anuncios, no las funciones.</p>
+    </section>
+
+    <section class="card">
+      <h2>Tus derechos y contacto</h2>
+      <p>Tienes derecho a retirar el consentimiento en cualquier momento (ver arriba) y a dirigirte a tu autoridad de protección de datos. Para cualquier duda sobre esta política escribe a <a href="mailto:bacchin@tiscali.it?subject=Euribor%20X%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Para ejercer tus derechos sobre los datos tratados por Google, usa los canales indicados en la política de Google.</p>
+    </section>
+
+    <section class="card">
+      <h2>Cambios</h2>
+      <p>Cualquier cambio en esta política se publicará en esta página, actualizando la fecha de entrada en vigor.</p>
+    </section>
+  </div>
+
   <p class="foot">
     <span lang-block="it">Euribor X e Euribor X Light · <a href="support.html">Supporto</a></span>
     <span lang-block="en">Euribor X and Euribor X Light · <a href="support.html">Support</a></span>
+    <span lang-block="fr">Euribor X et Euribor X Light · <a href="support.html">Assistance</a></span>
+    <span lang-block="de">Euribor X und Euribor X Light · <a href="support.html">Hilfe</a></span>
+    <span lang-block="es">Euribor X y Euribor X Light · <a href="support.html">Ayuda</a></span>
   </p>
 </div>
 
 <script>
+  var LANGS = ["it", "en", "fr", "de", "es"];
   function setLang(l) {
+    if (LANGS.indexOf(l) < 0) l = "en";
     document.documentElement.setAttribute("data-lang", l);
     document.documentElement.lang = l;
-    document.getElementById("btn-it").setAttribute("aria-pressed", l === "it");
-    document.getElementById("btn-en").setAttribute("aria-pressed", l === "en");
+    LANGS.forEach(function (code) {
+      var btn = document.getElementById("btn-" + code);
+      if (btn) btn.setAttribute("aria-pressed", code === l);
+    });
     try { localStorage.setItem("euribor-lang", l); } catch (e) {}
   }
   var saved = null;
   try { saved = localStorage.getItem("euribor-lang"); } catch (e) {}
-  setLang(saved || ((navigator.language || "en").toLowerCase().indexOf("it") === 0 ? "it" : "en"));
+  var device = (navigator.language || "en").toLowerCase().slice(0, 2);
+  setLang(saved || (LANGS.indexOf(device) >= 0 ? device : "en"));
 </script>
 <noscript><style>[lang-block]{display:block !important}</style></noscript>
 </body>
