@@ -38,7 +38,7 @@
   a { color: var(--accent); }
   .foot { color: var(--muted); font-size: 14px; margin-top: 28px; text-align: center; }
   [lang-block] { display: none; }
-  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"] { display: block; }
+  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"], html[data-lang="fr"] [lang-block="fr"], html[data-lang="de"] [lang-block="de"], html[data-lang="es"] [lang-block="es"] { display: block; }
 </style>
 </head>
 <body>
@@ -49,10 +49,16 @@
   </header>
   <p class="sub" lang-block="it">Supporto e guida all'uso · Euribor X e Euribor X Light</p>
   <p class="sub" lang-block="en">Support and user guide · Euribor X and Euribor X Light</p>
+  <p class="sub" lang-block="fr">Assistance et guide · Euribor X et Euribor X Light</p>
+  <p class="sub" lang-block="de">Hilfe und Anleitung · Euribor X und Euribor X Light</p>
+  <p class="sub" lang-block="es">Ayuda y guía de uso · Euribor X y Euribor X Light</p>
 
   <div class="langbar">
     <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
     <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
   </div>
 
   <!-- ============================ ITALIANO ============================ -->
@@ -211,23 +217,265 @@
     </section>
   </div>
 
+  <!-- ============================ FRANÇAIS ============================ -->
+  <div lang-block="fr">
+    <section class="card">
+      <h2><span class="ic">◎</span>Ce que font les applications</h2>
+      <p>Euribor X met les taux du marché monétaire européen sur votre iPhone et votre iPad : l'<b>€STR</b> (le taux au jour le jour de la BCE) et les cinq échéances <b>Euribor</b> — 1 semaine, 1, 3, 6 et 12 mois — avec des graphiques historiques, une lecture claire de la courbe et un simulateur de prêt intégré. Les données se mettent à jour automatiquement au lancement et l'app fonctionne aussi hors ligne.</p>
+      <p>Elle existe en deux versions aux fonctions identiques : <b>Euribor X</b> (payant, sans aucune publicité) et <b>Euribor X Light</b> (gratuit, financé par la publicité). Ce guide s'applique aux deux.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>L'écran Taux</h2>
+      <p>Une carte par taux. Chaque carte affiche :</p>
+      <ul>
+        <li>le <b>dernier fixing</b>, en grand ;</li>
+        <li>la <b>variation</b> par rapport au fixing précédent en <b>points de base</b> (vert si hausse, rouge si baisse) ;</li>
+        <li>un <b>mini-graphique des 30 derniers jours</b> ;</li>
+        <li>si besoin, le badge <b>« Fixing du … »</b> : il indique que ce taux est resté à une date antérieure aux autres. C'est normal — la BCE publie l'€STR un jour ouvré après l'Euribor.</li>
+      </ul>
+      <p>Sous les taux, la carte <b>Lecture de la courbe</b> compare le taux court aux échéances longues et vous dit, en mots simples, si le marché attend des hausses, des baisses ou de la stabilité.</p>
+      <p>Pour actualiser : <b>tirez la liste vers le bas</b> ou touchez le bouton <span class="kbd">⟳</span> en haut.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📈</span>Le graphique historique</h2>
+      <p><b>Touchez une carte</b> pour ouvrir le graphique du taux. Choisissez la période — <b>1M</b>, <b>6M</b>, <b>1A</b> ou <b>Max</b> — et <b>faites glisser votre doigt sur le graphique</b> pour lire la valeur exacte de chaque jour.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">∑</span>Le simulateur de prêt</h2>
+      <p>Dans l'onglet <b>Mon prêt</b> (intégré à l'écran principal sur iPad), vous réglez avec les curseurs :</p>
+      <ul>
+        <li>le <b>montant</b> du prêt ;</li>
+        <li>la <b>durée</b> en années ;</li>
+        <li>l'<b>indice de référence</b> (€STR ou une échéance Euribor, prérempli avec le dernier fixing) ;</li>
+        <li>la <b>marge</b> appliquée par la banque.</li>
+      </ul>
+      <p>La mensualité se <b>recalcule instantanément</b> à chaque changement. Le curseur <b>« Et si les taux… »</b> montre comment la mensualité évoluerait si l'indice montait ou baissait jusqu'à 2 points de pourcentage : utile pour mesurer votre exposition aux décisions de la BCE.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>La publicité — Euribor X Light uniquement</h2>
+      <p>Euribor X Light est gratuit grâce aux annonces de <b>Google AdMob</b> : une <b>bannière</b> sur chacun des trois écrans et, de temps à autre, une <b>annonce plein écran</b> après une actualisation manuelle des données. Euribor X ne contient aucune publicité.</p>
+      <p>Au premier lancement, Euribor X Light vous demande vos <b>préférences de consentement</b> (annonces personnalisées ou génériques) ; juste après, l'app demande l'<b>autorisation de suivi</b> d'Apple. Vous pouvez changer d'avis à tout moment via le bouton <b>Options de confidentialité</b> de l'onglet Infos (consentement Google) et dans <b>Réglages → Confidentialité et sécurité → Suivi</b> (Apple). Les détails figurent dans la <a href="privacy.html">politique de confidentialité</a>.</p>
+      <p>Si vous préférez une expérience <b>sans publicité</b>, cherchez <b>Euribor X</b> sur l'App Store.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Notifications</h2>
+      <p>L'app peut vous prévenir par une notification en cas d'actualité sur les taux. L'autorisation est demandée au premier lancement ; vous pouvez la modifier à tout moment dans <b>Réglages → Notifications</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🌍</span>Langues</h2>
+      <p>Les applications sont disponibles en <b>français, anglais, italien, espagnol et allemand</b> et suivent automatiquement la langue de l'appareil. Pour la changer : <b>Réglages → Apps → nom de l'app → Langue</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Problèmes courants</h2>
+      <ul>
+        <li><b>Les taux ne se mettent pas à jour</b> — vérifiez la connexion et réessayez avec <span class="kbd">⟳</span>. Hors ligne, l'app affiche les dernières données téléchargées.</li>
+        <li><b>La valeur du jour manque</b> — les fixings ne sont publiés que les <b>jours ouvrés</b>, jamais le week-end ni les jours fériés ; la valeur d'un jour arrive en général le lendemain.</li>
+        <li><b>L'€STR et l'Euribor ont des dates différentes</b> — c'est normal : l'€STR paraît avec un jour ouvré de retard. Le badge sur la carte vous le signale.</li>
+        <li><b>Le graphique est vide</b> — il faut au moins une actualisation réussie : réessayez en étant connecté.</li>
+        <li><b>L'emplacement de la bannière est vide</b> (Light uniquement) — cela peut arriver quand aucune annonce n'est disponible ou hors connexion : ce n'est pas une erreur.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">※</span>Données et avertissements</h2>
+      <p>Les fixings Euribor sont publiés par <b>EMMI</b> (European Money Markets Institute), l'€STR par la <b>Banque centrale européenne</b>. Les valeurs sont affichées à titre purement informatif et peuvent différer des données officielles : elles ne constituent ni un conseil financier ni une base contractuelle. Les simulations de prêt sont indicatives : référez-vous toujours au tableau d'amortissement de votre banque.</p>
+      <p>Configuration requise : <b>iOS 17</b> ou version ultérieure, iPhone et iPad.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">@</span>Contact</h2>
+      <p>Pour toute assistance, tout signalement ou toute suggestion, écrivez à <a href="mailto:bacchin@tiscali.it?subject=Euribor%20X%20%E2%80%94%20Support">bacchin@tiscali.it</a>. Je réponds généralement sous quelques jours ouvrés.</p>
+    </section>
+  </div>
+
+  <!-- ============================ DEUTSCH ============================ -->
+  <div lang-block="de">
+    <section class="card">
+      <h2><span class="ic">◎</span>Was die Apps tun</h2>
+      <p>Euribor X bringt die Sätze des europäischen Geldmarkts auf Ihr iPhone und iPad: den <b>€STR</b> (den Tagesgeldsatz der EZB) und die fünf <b>Euribor</b>-Laufzeiten — 1 Woche, 1, 3, 6 und 12 Monate — mit Verlaufsdiagrammen, einer verständlichen Deutung der Kurve und einem integrierten Kreditrechner. Die Daten aktualisieren sich beim Start automatisch, und die App funktioniert auch offline.</p>
+      <p>Es gibt zwei Versionen mit identischen Funktionen: <b>Euribor X</b> (kostenpflichtig, ohne jede Werbung) und <b>Euribor X Light</b> (kostenlos, werbefinanziert). Diese Anleitung gilt für beide.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>Der Zinsen-Bildschirm</h2>
+      <p>Eine Karte pro Satz. Jede Karte zeigt:</p>
+      <ul>
+        <li>das <b>aktuelle Fixing</b>, groß;</li>
+        <li>die <b>Veränderung</b> gegenüber dem vorherigen Fixing in <b>Basispunkten</b> (grün bei Anstieg, rot bei Rückgang);</li>
+        <li>ein <b>Minidiagramm der letzten 30 Tage</b>;</li>
+        <li>bei Bedarf das Abzeichen <b>„Fixing vom …“</b>: Es zeigt, dass dieser Satz auf einem früheren Datum als die anderen steht. Das ist normal — die EZB veröffentlicht den €STR einen Werktag nach dem Euribor.</li>
+      </ul>
+      <p>Unter den Sätzen vergleicht die Karte <b>Kurvendeutung</b> den kurzfristigen Satz mit den längeren Laufzeiten und sagt Ihnen in einfachen Worten, ob der Markt Anstiege, Rückgänge oder Stabilität erwartet.</p>
+      <p>Zum Aktualisieren: <b>Liste nach unten ziehen</b> oder oben auf die Schaltfläche <span class="kbd">⟳</span> tippen.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📈</span>Das Verlaufsdiagramm</h2>
+      <p><b>Tippen Sie auf eine Karte</b>, um das Diagramm des Satzes zu öffnen. Wählen Sie den Zeitraum — <b>1M</b>, <b>6M</b>, <b>1J</b> oder <b>Max</b> — und <b>fahren Sie mit dem Finger über das Diagramm</b>, um den genauen Wert jedes Tages abzulesen.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">∑</span>Der Kreditrechner</h2>
+      <p>Im Tab <b>Mein Kredit</b> (auf dem iPad in den Hauptbildschirm integriert) stellen Sie mit Reglern ein:</p>
+      <ul>
+        <li>den <b>Betrag</b> des Kredits;</li>
+        <li>die <b>Laufzeit</b> in Jahren;</li>
+        <li>den <b>Referenzindex</b> (€STR oder eine Euribor-Laufzeit, mit dem letzten Fixing vorbelegt);</li>
+        <li>den von der Bank verlangten <b>Aufschlag</b>.</li>
+      </ul>
+      <p>Die monatliche Rate wird bei jeder Änderung <b>sofort neu berechnet</b>. Der Regler <b>„Was wäre, wenn die Zinsen…“</b> zeigt, wie sich die Rate ändern würde, wenn der Index um bis zu 2 Prozentpunkte steigt oder fällt: nützlich, um Ihre Abhängigkeit von EZB-Entscheidungen einzuschätzen.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>Werbung — nur Euribor X Light</h2>
+      <p>Euribor X Light ist dank Anzeigen von <b>Google AdMob</b> kostenlos: ein <b>Banner</b> auf jedem der drei Bildschirme und gelegentlich eine <b>Vollbildanzeige</b> nach einer manuellen Datenaktualisierung. Euribor X enthält keinerlei Werbung.</p>
+      <p>Beim ersten Start fragt Euribor X Light Ihre <b>Einwilligungseinstellungen</b> ab (personalisierte oder allgemeine Anzeigen); direkt danach fragt die App Apples <b>Tracking-Erlaubnis</b> ab. Sie können Ihre Wahl jederzeit über die Schaltfläche <b>Datenschutzoptionen</b> im Info-Tab (Google-Einwilligung) und unter <b>Einstellungen → Datenschutz &amp; Sicherheit → Tracking</b> (Apple) ändern. Details finden Sie in der <a href="privacy.html">Datenschutzerklärung</a>.</p>
+      <p>Wenn Sie eine <b>werbefreie</b> Nutzung bevorzugen, suchen Sie im App Store nach <b>Euribor X</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Mitteilungen</h2>
+      <p>Die App kann Sie per Mitteilung benachrichtigen, wenn es Neuigkeiten zu den Zinsen gibt. Die Erlaubnis wird beim ersten Start abgefragt; Sie können sie jederzeit unter <b>Einstellungen → Mitteilungen</b> ändern.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🌍</span>Sprachen</h2>
+      <p>Die Apps sind auf <b>Deutsch, Englisch, Italienisch, Französisch und Spanisch</b> verfügbar und folgen automatisch der Gerätesprache. Zum Ändern: <b>Einstellungen → Apps → Name der App → Sprache</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Häufige Probleme</h2>
+      <ul>
+        <li><b>Die Zinsen aktualisieren sich nicht</b> — prüfen Sie die Verbindung und versuchen Sie es erneut mit <span class="kbd">⟳</span>. Ohne Netz zeigt die App die zuletzt geladenen Daten.</li>
+        <li><b>Der heutige Wert fehlt</b> — Fixings werden nur an <b>Werktagen</b> veröffentlicht, nie am Wochenende oder an Feiertagen; der Wert eines Tages kommt in der Regel am Folgetag.</li>
+        <li><b>€STR und Euribor haben unterschiedliche Daten</b> — das ist normal: Der €STR erscheint mit einem Werktag Verzögerung. Das Abzeichen auf der Karte weist darauf hin.</li>
+        <li><b>Das Diagramm ist leer</b> — es ist mindestens eine erfolgreiche Aktualisierung nötig: versuchen Sie es online erneut.</li>
+        <li><b>Der Bannerbereich ist leer</b> (nur Light) — das kann vorkommen, wenn keine Anzeige verfügbar ist oder Sie offline sind: Das ist kein Fehler.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">※</span>Daten und Hinweise</h2>
+      <p>Euribor-Fixings werden von <b>EMMI</b> (European Money Markets Institute) veröffentlicht, der €STR von der <b>Europäischen Zentralbank</b>. Die Werte dienen ausschließlich zur Information und können von offiziellen Daten abweichen: Sie stellen weder eine Finanzberatung noch eine Vertragsgrundlage dar. Kreditsimulationen sind Richtwerte: Beziehen Sie sich stets auf den Tilgungsplan Ihrer Bank.</p>
+      <p>Voraussetzungen: <b>iOS 17</b> oder neuer, iPhone und iPad.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">@</span>Kontakt</h2>
+      <p>Für Hilfe, Fehlermeldungen oder Vorschläge schreiben Sie an <a href="mailto:bacchin@tiscali.it?subject=Euribor%20X%20%E2%80%94%20Support">bacchin@tiscali.it</a>. Ich antworte meist innerhalb weniger Werktage.</p>
+    </section>
+  </div>
+
+  <!-- ============================ ESPAÑOL ============================ -->
+  <div lang-block="es">
+    <section class="card">
+      <h2><span class="ic">◎</span>Qué hacen las apps</h2>
+      <p>Euribor X pone los tipos del mercado monetario europeo en tu iPhone y iPad: el <b>€STR</b> (el tipo a un día del BCE) y los cinco plazos <b>Euribor</b> — 1 semana, 1, 3, 6 y 12 meses — con gráficos históricos, una lectura clara de la curva y un simulador de hipoteca integrado. Los datos se actualizan solos al abrir y la app funciona también sin conexión.</p>
+      <p>Existe en dos versiones, idénticas en funciones: <b>Euribor X</b> (de pago, sin ninguna publicidad) y <b>Euribor X Light</b> (gratuita, financiada con anuncios). Esta guía vale para ambas.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>La pantalla Tipos</h2>
+      <p>Una tarjeta por tipo. Cada tarjeta muestra:</p>
+      <ul>
+        <li>el <b>último fixing</b>, en grande;</li>
+        <li>la <b>variación</b> respecto al fixing anterior en <b>puntos básicos</b> (verde si sube, rojo si baja);</li>
+        <li>un <b>minigráfico de los últimos 30 días</b>;</li>
+        <li>cuando hace falta, la etiqueta <b>«Fixing del …»</b>: indica que ese tipo se ha quedado en una fecha anterior a los demás. Es normal — el BCE publica el €STR un día hábil después del Euríbor.</li>
+      </ul>
+      <p>Debajo de los tipos, la tarjeta <b>Lectura de la curva</b> compara el tipo a corto con los plazos largos y te dice, en palabras sencillas, si el mercado espera subidas, bajadas o estabilidad.</p>
+      <p>Para actualizar: <b>tira de la lista hacia abajo</b> o toca el botón <span class="kbd">⟳</span> de arriba.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📈</span>El gráfico histórico</h2>
+      <p><b>Toca una tarjeta</b> para abrir el gráfico del tipo. Elige el intervalo — <b>1M</b>, <b>6M</b>, <b>1A</b> o <b>Máx</b> — y <b>desliza el dedo por el gráfico</b> para leer el valor exacto de cada día.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">∑</span>El simulador de hipoteca</h2>
+      <p>En la pestaña <b>Mi hipoteca</b> (en iPad está integrada en la pantalla principal) ajustas con los controles:</p>
+      <ul>
+        <li>el <b>importe</b> de la hipoteca;</li>
+        <li>el <b>plazo</b> en años;</li>
+        <li>el <b>índice de referencia</b> (€STR o un plazo Euríbor, precargado con el último fixing);</li>
+        <li>el <b>diferencial</b> que aplica el banco.</li>
+      </ul>
+      <p>La cuota mensual se <b>recalcula al instante</b> con cada cambio. El control <b>«Y si los tipos…»</b> te muestra cómo cambiaría la cuota si el índice subiera o bajara hasta 2 puntos porcentuales: útil para ver tu exposición a las decisiones del BCE.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>La publicidad — solo Euribor X Light</h2>
+      <p>Euribor X Light es gratuita gracias a los anuncios de <b>Google AdMob</b>: un <b>banner</b> en cada una de las tres pantallas y, de vez en cuando, un <b>anuncio a pantalla completa</b> tras una actualización manual de los datos. Euribor X no contiene ninguna publicidad.</p>
+      <p>En el primer inicio, Euribor X Light te pide las <b>preferencias de consentimiento</b> (anuncios personalizados o genéricos); justo después, la app solicita la <b>autorización de seguimiento</b> de Apple. Puedes cambiar de opinión en cualquier momento con el botón <b>Opciones de privacidad</b> de la pestaña Información (consentimiento de Google) y en <b>Ajustes → Privacidad y seguridad → Seguimiento</b> (Apple). Los detalles están en la <a href="privacy.html">política de privacidad</a>.</p>
+      <p>Si prefieres una experiencia <b>sin publicidad</b>, busca <b>Euribor X</b> en la App Store.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Notificaciones</h2>
+      <p>La app puede avisarte con una notificación cuando hay novedades sobre los tipos. El permiso se pide en el primer inicio; puedes cambiarlo en cualquier momento en <b>Ajustes → Notificaciones</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🌍</span>Idiomas</h2>
+      <p>Las apps están disponibles en <b>español, inglés, italiano, francés y alemán</b> y siguen automáticamente el idioma del dispositivo. Para cambiarlo: <b>Ajustes → Apps → nombre de la app → Idioma</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Problemas frecuentes</h2>
+      <ul>
+        <li><b>Los tipos no se actualizan</b> — comprueba la conexión y reinténtalo con <span class="kbd">⟳</span>. Sin red, la app muestra los últimos datos descargados.</li>
+        <li><b>Falta el dato de hoy</b> — los fixings se publican solo en <b>días hábiles</b>, nunca en fin de semana ni festivos; el dato de un día suele llegar al día siguiente.</li>
+        <li><b>El €STR y el Euríbor tienen fechas distintas</b> — es normal: el €STR sale con un día hábil de retraso. La etiqueta de la tarjeta te lo indica.</li>
+        <li><b>El gráfico está vacío</b> — hace falta al menos una actualización correcta: reinténtalo con conexión.</li>
+        <li><b>El espacio del banner está vacío</b> (solo Light) — puede pasar cuando no hay anuncios disponibles o no hay red: no es un error.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">※</span>Datos y advertencias</h2>
+      <p>Los fixings del Euríbor los publica <b>EMMI</b> (European Money Markets Institute) y el €STR el <b>Banco Central Europeo</b>. Los valores se muestran solo con fines informativos y pueden diferir de los datos oficiales: no constituyen asesoramiento financiero ni base contractual. Las simulaciones de hipoteca son orientativas: consulta siempre el cuadro de amortización de tu banco.</p>
+      <p>Requisitos: <b>iOS 17</b> o posterior, iPhone y iPad.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">@</span>Contacto</h2>
+      <p>Para asistencia, informes de errores o sugerencias escribe a <a href="mailto:bacchin@tiscali.it?subject=Euribor%20X%20%E2%80%94%20Support">bacchin@tiscali.it</a>. Suelo responder en unos pocos días hábiles.</p>
+    </section>
+  </div>
+
   <p class="foot">
     <span lang-block="it">Euribor X e Euribor X Light · <a href="privacy.html">Informativa sulla privacy</a></span>
     <span lang-block="en">Euribor X and Euribor X Light · <a href="privacy.html">Privacy policy</a></span>
+    <span lang-block="fr">Euribor X et Euribor X Light · <a href="privacy.html">Politique de confidentialité</a></span>
+    <span lang-block="de">Euribor X und Euribor X Light · <a href="privacy.html">Datenschutzerklärung</a></span>
+    <span lang-block="es">Euribor X y Euribor X Light · <a href="privacy.html">Política de privacidad</a></span>
   </p>
 </div>
 
 <script>
+  var LANGS = ["it", "en", "fr", "de", "es"];
   function setLang(l) {
+    if (LANGS.indexOf(l) < 0) l = "en";
     document.documentElement.setAttribute("data-lang", l);
     document.documentElement.lang = l;
-    document.getElementById("btn-it").setAttribute("aria-pressed", l === "it");
-    document.getElementById("btn-en").setAttribute("aria-pressed", l === "en");
+    LANGS.forEach(function (code) {
+      var btn = document.getElementById("btn-" + code);
+      if (btn) btn.setAttribute("aria-pressed", code === l);
+    });
     try { localStorage.setItem("euribor-lang", l); } catch (e) {}
   }
   var saved = null;
   try { saved = localStorage.getItem("euribor-lang"); } catch (e) {}
-  setLang(saved || ((navigator.language || "en").toLowerCase().indexOf("it") === 0 ? "it" : "en"));
+  var device = (navigator.language || "en").toLowerCase().slice(0, 2);
+  setLang(saved || (LANGS.indexOf(device) >= 0 ? device : "en"));
 </script>
 <noscript><style>[lang-block]{display:block !important}</style></noscript>
 </body>
