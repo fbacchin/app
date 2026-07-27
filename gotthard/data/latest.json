@@ -1,5 +1,5 @@
 {
- "time": "2026-07-27T07:27:29Z",
+ "time": "2026-07-27T07:32:34Z",
  "south": {
   "km": 5.0,
   "wait": 50
@@ -20,19 +20,6 @@
     "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Anschluss Göschenen Sachlage: Stau Länge [km] 5.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 50",
     "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 5.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 50",
     "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 5.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 50"
-   }
-  },
-  {
-   "id": "situation.641657.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-07-27T07:15:55Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Tunnel Biaschina-Tunnel und Anschluss Faido Sachlage: Verkehrsbehinderung Ursache: Gegenstände auf der Fahrbahn",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Tunnel Tunnel de la Biaschina et Jonction autoroutière Faido Situation: trafic perturbé Raison: objets sur la chaussée",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Galleria Galleria Biaschina E Svincolo autostradale Faido Situazione: problemi di traffico Causa: oggetto sulla strada"
    }
   },
   {
