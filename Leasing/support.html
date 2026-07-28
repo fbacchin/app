@@ -33,6 +33,11 @@
   h2 { font-size: 19px; margin: 2px 0 10px; }
   ul { margin: 8px 0; padding-left: 22px; }
   li { margin: 5px 0; }
+  /* Testo giustificato con sillabazione: senza `hyphens` una colonna stretta
+     apre spazi vuoti enormi fra le parole, e in tedesco è impietoso. La lingua
+     la prende dall'attributo lang su <html>, che il selettore aggiorna. */
+  section.card p, section.card li { text-align: justify; text-justify: inter-word;
+    hyphens: auto; -webkit-hyphens: auto; }
   b { color: var(--fg); }
   a { color: var(--accent); }
   table { width: 100%; border-collapse: collapse; font-size: 15px; }
