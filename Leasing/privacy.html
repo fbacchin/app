@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leasing Calculator — Privacy</title>
+<style>
+  :root {
+    --bg: #eef0fa; --card: #ffffff; --fg: #141a33; --muted: #5a6285;
+    --accent: #3a4b9e; --amber: #c9761b; --border: rgba(20,26,51,0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0c0e19; --card: #171b2c; --fg: #eef0fa; --muted: #98a0be;
+            --accent: #8b96e2; --amber: #f0a542; --border: rgba(238,240,250,0.14); }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 64px; }
+  header { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+  .logo { width: 64px; height: 64px; border-radius: 14px; border: 1px solid var(--border); }
+  h1 { font-size: 28px; margin: 0; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); margin: 0 0 20px 78px; }
+  .langbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 26px; }
+  .langbar button {
+    font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--card); color: var(--fg);
+  }
+  .langbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  section.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 26px; margin: 14px 0; }
+  h2 { font-size: 19px; margin: 2px 0 10px; }
+  ul { margin: 8px 0; padding-left: 22px; }
+  li { margin: 5px 0; }
+  b { color: var(--fg); }
+  a { color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  .foot { color: var(--muted); font-size: 14px; margin-top: 28px; text-align: center; }
+  .date { color: var(--muted); font-size: 14px; }
+  [lang-block] { display: none; }
+  .ic { display:inline-block; width:1.6em; color: var(--accent); }
+  .ic-a { color: var(--amber); }
+html[data-lang="it"] [lang-block="it"] { display: block; }
+html[data-lang="en"] [lang-block="en"] { display: block; }
+html[data-lang="fr"] [lang-block="fr"] { display: block; }
+html[data-lang="de"] [lang-block="de"] { display: block; }
+html[data-lang="es"] [lang-block="es"] { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="logo" src="data:image/png;base64,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" alt="">
+    <h1>Leasing Calculator</h1>
+  </header>
+  <p class="sub" lang-block="it">Informativa sulla privacy · Leasing Calculators e Leasing Calculator Light</p>
+  <p class="sub" lang-block="en">Privacy policy · Leasing Calculators and Leasing Calculator Light</p>
+  <p class="sub" lang-block="fr">Politique de confidentialité · Leasing Calculators et Leasing Calculator Light</p>
+  <p class="sub" lang-block="de">Datenschutzerklärung · Leasing Calculators und Leasing Calculator Light</p>
+  <p class="sub" lang-block="es">Política de privacidad · Leasing Calculators y Leasing Calculator Light</p>
+
+  <div class="langbar">
+    <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
+    <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+  </div>
+
+  <div lang-block="it">
+    <p class="date">In vigore dal 28 luglio 2026</p>
+    <section class="card">
+      <h2>In breve</h2>
+      <p>Leasing Calculators e Leasing Calculator Light sono app di Fabrizio Bacchin (Svizzera) e questa informativa vale per entrambe. Le app <b>non raccolgono dati personali</b>: nessun account, nessuno strumento di analisi, nessuna vendita di dati. I dati del leasing che inserisci <b>restano sul tuo dispositivo</b> (per le notifiche push, se le attivi, vengono registrati solo dati tecnici anonimi — vedi sotto). <b>Leasing Calculators non contiene alcuna pubblicità.</b> <b>Leasing Calculator Light</b>, la versione gratuita, mostra annunci di Google AdMob e <b>ti chiede due volte il permesso</b> — il consenso di Google e l'autorizzazione al tracciamento di Apple — prima di richiedere anche un solo annuncio.</p>
+    </section>
+    <section class="card">
+      <h2>Le due app</h2>
+      <table><tr><th>App</th><th>Pubblicità</th></tr><tr><td>Leasing Calculators (a pagamento)</td><td>Nessuna. L'app non contiene codice pubblicitario.</td></tr><tr><td>Leasing Calculator Light (gratuita)</td><td>Banner e annunci a schermo intero di Google AdMob — vedi le sezioni dedicate.</td></tr></table>
+    </section>
+    <section class="card">
+      <h2>Dati salvati sul tuo dispositivo</h2>
+      <p>Le app conservano localmente, nel proprio contenitore sandbox, soltanto i <b>parametri del leasing</b> che inserisci — valore del bene, maxicanone, riscatto finale, durata, tasso, modalità anticipata o posticipata e data della prima rata — così da ritrovarli al riavvio e da poterli condividere fra le schede Calcolo, Rate e Confronto. Leasing Calculator Light vi salva anche le <b>scelte di consenso</b> alla pubblicità.</p><p>Tutti i calcoli — rata, piano rate, confronti — avvengono <b>interamente sul dispositivo</b>: nessun dato viene inviato ad alcun server, e non esiste alcuna sincronizzazione sul cloud.</p>
+    </section>
+    <section class="card">
+      <h2>Esportazione del piano rate</h2>
+      <p>Dalla scheda Rate puoi esportare il piano in formato <b>CSV</b> o <b>PDF</b>. Il file viene generato sul dispositivo e passato al <b>pannello di condivisione di iOS</b>: sei tu a scegliere se salvarlo, stamparlo o inviarlo, e a chi. Le app non caricano né trasmettono questi file da nessuna parte.</p>
+    </section>
+    <section class="card">
+      <h2>Notifiche push</h2>
+      <p>Se scegli di attivare le notifiche, l'app registra presso il servizio <b>Back4App</b> (piattaforma Parse) alcune informazioni tecniche:</p><ul><li>il <b>token APNs</b> del dispositivo, generato da Apple, necessario per recapitare le notifiche;</li><li>un <b>identificatore anonimo di installazione</b>, usato per gestire le consegne;</li><li>dati tecnici di base come il tipo di dispositivo, la versione dell'app e il fuso orario.</li></ul><p>Questi dati non sono collegati alla tua identità e vengono usati esclusivamente per il funzionamento delle notifiche. Se rifiuti o disattivi le notifiche da Impostazioni, il token diventa inutilizzabile; puoi chiederne la cancellazione scrivendo al contatto qui sotto.</p>
+    </section>
+    <section class="card">
+      <h2>Pubblicità — solo Leasing Calculator Light</h2>
+      <p>Leasing Calculator Light è gratuita grazie agli annunci — un banner nelle schede Calcolo, Rate e Confronto, e occasionali annunci a schermo intero — serviti da <b>Google AdMob</b>. Per selezionare e misurare gli annunci, Google può trattare:</p><ul><li>gli <b>identificatori del dispositivo</b>, incluso l'<b>identificatore pubblicitario (IDFA)</b> se hai concesso l'autorizzazione al tracciamento (vedi la sezione seguente);</li><li>l'<b>indirizzo IP</b> (che indica una posizione approssimativa) e informazioni tecniche sul dispositivo;</li><li>dati di <b>interazione con gli annunci</b> (impressioni, tocchi).</li></ul><p>Come Google tratta questi dati è descritto nell'<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">informativa privacy di Google</a> e nella pagina <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">«Come Google utilizza i dati»</a>. Leasing Calculators non contiene nulla di tutto questo.</p>
+    </section>
+    <section class="card">
+      <h2>Consenso e tracciamento — solo Leasing Calculator Light</h2>
+      <p>Al primo avvio l'app ti chiede il permesso <b>due volte</b>, in quest'ordine.</p><p><b>1. Il modulo di consenso di Google.</b> Se ti trovi nello Spazio Economico Europeo o nel Regno Unito puoi scegliere fra <b>annunci personalizzati</b> e <b>annunci generici</b>, non basati sui tuoi interessi. Puoi <b>cambiare o revocare la scelta in ogni momento</b> dalla scheda <b>App info</b>, alla voce <b>Impostazioni privacy → Gestisci il consenso</b>.</p><p><b>2. L'autorizzazione al tracciamento di Apple</b> (App Tracking Transparency). Se la concedi, l'app può usare l'<b>identificatore pubblicitario (IDFA)</b> del tuo dispositivo per mostrare annunci più pertinenti e misurarne il rendimento. Se la neghi, iOS non rende disponibile l'IDFA: gli annunci continuano a esserci, ma non sono personalizzati. Puoi cambiare idea in ogni momento da <b>Impostazioni di iOS → Privacy e sicurezza → Tracciamento</b>.</p><p>Nessun annuncio viene richiesto prima che tu abbia risposto a entrambe le richieste. L'app funziona allo stesso modo qualunque scelta tu faccia: cambiano solo gli annunci, non le funzioni.</p>
+    </section>
+    <section class="card">
+      <h2>Cosa non facciamo</h2>
+      <ul><li>Nessun account e nessun profilo utente</li><li>Nessuna statistica né misurazione dell'utilizzo da parte nostra</li><li>Nessun accesso alla posizione: le app non la richiedono mai</li><li>Nessuna pubblicità e nessun tracciamento nella versione a pagamento</li><li>Nessuna vendita o condivisione dei tuoi dati a fini commerciali</li></ul>
+    </section>
+    <section class="card">
+      <h2>I tuoi diritti e contatti</h2>
+      <p>In base al GDPR e alla legge svizzera sulla protezione dei dati (nLPD) hai il diritto di revocare il consenso in ogni momento (vedi sopra), di chiedere l'accesso o la cancellazione dei dati tecnici descritti nella sezione sulle notifiche, e di rivolgerti all'autorità di controllo competente. Per qualsiasi domanda su questa informativa scrivi a <a href="mailto:bacchin@tiscali.it?subject=Leasing%20Calculator%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Per l'esercizio dei diritti sui dati trattati da Google, fai riferimento ai canali indicati nell'informativa di Google.</p>
+    </section>
+    <section class="card">
+      <h2>Modifiche</h2>
+      <p>Eventuali modifiche a questa informativa saranno pubblicate su questa pagina, con aggiornamento della data di entrata in vigore.</p>
+    </section>
+  </div>
+  <div lang-block="en">
+    <p class="date">Effective from 28 July 2026</p>
+    <section class="card">
+      <h2>In short</h2>
+      <p>Leasing Calculators and Leasing Calculator Light are apps by Fabrizio Bacchin (Switzerland) and this policy covers both. The apps <b>collect no personal data</b>: no account, no analytics, no data selling. The lease figures you enter <b>stay on your device</b> (for push notifications, if you enable them, only anonymous technical data is registered — see below). <b>Leasing Calculators contains no advertising at all.</b> <b>Leasing Calculator Light</b>, the free version, shows Google AdMob ads and <b>asks your permission twice</b> — Google's consent form and Apple's tracking authorisation — before requesting a single ad.</p>
+    </section>
+    <section class="card">
+      <h2>The two apps</h2>
+      <table><tr><th>App</th><th>Advertising</th></tr><tr><td>Leasing Calculators (paid)</td><td>None. The app contains no advertising code.</td></tr><tr><td>Leasing Calculator Light (free)</td><td>Google AdMob banners and full-screen ads — see the sections below.</td></tr></table>
+    </section>
+    <section class="card">
+      <h2>Data stored on your device</h2>
+      <p>The apps store locally, inside their own sandbox container, only the <b>lease parameters</b> you enter — asset value, down payment, final buyout, term, interest rate, payments in advance or in arrears, and the first instalment date — so they can be restored on relaunch and shared between the Calculation, Instalments and Comparison tabs. Leasing Calculator Light also stores your <b>advertising consent choices</b> there.</p><p>All calculations — instalment, plan, comparisons — happen <b>entirely on the device</b>: no data is sent to any server, and there is no cloud synchronisation.</p>
+    </section>
+    <section class="card">
+      <h2>Exporting the instalment plan</h2>
+      <p>From the Instalments tab you can export the plan as <b>CSV</b> or <b>PDF</b>. The file is generated on the device and handed to the <b>iOS share sheet</b>: you decide whether to save, print or send it, and to whom. The apps never upload or transmit these files anywhere.</p>
+    </section>
+    <section class="card">
+      <h2>Push notifications</h2>
+      <p>If you choose to enable notifications, the app registers a few technical items with <b>Back4App</b> (a Parse platform):</p><ul><li>the device <b>APNs token</b>, generated by Apple, required to deliver notifications;</li><li>an <b>anonymous installation identifier</b>, used to manage deliveries;</li><li>basic technical data such as device type, app version and time zone.</li></ul><p>This data is not linked to your identity and is used solely to make notifications work. If you decline or later turn notifications off in Settings, the token becomes unusable; you may request its deletion by writing to the contact below.</p>
+    </section>
+    <section class="card">
+      <h2>Advertising — Leasing Calculator Light only</h2>
+      <p>Leasing Calculator Light is free thanks to advertising — a banner in the Calculation, Instalments and Comparison tabs, plus occasional full-screen ads — served by <b>Google AdMob</b>. To select and measure ads, Google may process:</p><ul><li>device <b>identifiers</b>, including the <b>advertising identifier (IDFA)</b> if you granted the tracking authorisation (see the next section);</li><li>your <b>IP address</b> (which indicates an approximate location) and technical device information;</li><li><b>ad interaction</b> data (impressions, taps).</li></ul><p>How Google processes this data is described in the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google privacy policy</a> and in <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">&quot;How Google uses information from sites or apps that use our services&quot;</a>. Leasing Calculators contains none of this.</p>
+    </section>
+    <section class="card">
+      <h2>Consent and tracking — Leasing Calculator Light only</h2>
+      <p>On first launch the app asks your permission <b>twice</b>, in this order.</p><p><b>1. Google's consent form.</b> If you are in the European Economic Area or the United Kingdom you can choose between <b>personalised ads</b> and <b>generic ads</b> not based on your interests. You can <b>change or withdraw your choice at any time</b> from the <b>App info</b> tab, under <b>Privacy settings → Manage consent</b>.</p><p><b>2. Apple's tracking authorisation</b> (App Tracking Transparency). If you allow it, the app may use your device's <b>advertising identifier (IDFA)</b> to show more relevant ads and measure their performance. If you decline, iOS does not make the IDFA available: you still see ads, but they are not personalised. You can change your mind at any time in <b>iOS Settings → Privacy &amp; Security → Tracking</b>.</p><p>No ad is requested before you have answered both prompts. The app works exactly the same whichever choice you make: only the ads change, never the features.</p>
+    </section>
+    <section class="card">
+      <h2>What we don't do</h2>
+      <ul><li>No account and no user profile</li><li>No analytics or usage measurement on our side</li><li>No location access: the apps never request it</li><li>No advertising and no tracking in the paid version</li><li>No selling or sharing of your data for commercial purposes</li></ul>
+    </section>
+    <section class="card">
+      <h2>Your rights and contact</h2>
+      <p>Under the GDPR and the Swiss data protection act (nFADP) you have the right to withdraw consent at any time (see above), to request access to or deletion of the technical data described in the notifications section, and to lodge a complaint with your supervisory authority. For any question about this policy write to <a href="mailto:bacchin@tiscali.it?subject=Leasing%20Calculator%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. To exercise your rights over data processed by Google, refer to the channels indicated in Google's policy.</p>
+    </section>
+    <section class="card">
+      <h2>Changes</h2>
+      <p>Any change to this policy will be published on this page, with an updated effective date.</p>
+    </section>
+  </div>
+  <div lang-block="fr">
+    <p class="date">En vigueur depuis le 28 juillet 2026</p>
+    <section class="card">
+      <h2>En bref</h2>
+      <p>Leasing Calculators et Leasing Calculator Light sont des applications de Fabrizio Bacchin (Suisse) et cette politique couvre les deux. Les applications <b>ne collectent aucune donnée personnelle</b> : pas de compte, pas d'outil d'analyse, aucune vente de données. Les données de leasing que vous saisissez <b>restent sur votre appareil</b> (pour les notifications push, si vous les activez, seules des données techniques anonymes sont enregistrées — voir plus bas). <b>Leasing Calculators ne contient aucune publicité.</b> <b>Leasing Calculator Light</b>, la version gratuite, affiche des annonces Google AdMob et <b>vous demande deux fois votre autorisation</b> — le formulaire de consentement de Google et l'autorisation de suivi d'Apple — avant de demander la moindre annonce.</p>
+    </section>
+    <section class="card">
+      <h2>Les deux applications</h2>
+      <table><tr><th>Application</th><th>Publicité</th></tr><tr><td>Leasing Calculators (payante)</td><td>Aucune. L'application ne contient aucun code publicitaire.</td></tr><tr><td>Leasing Calculator Light (gratuite)</td><td>Bannières et annonces plein écran de Google AdMob — voir les sections dédiées.</td></tr></table>
+    </section>
+    <section class="card">
+      <h2>Données enregistrées sur votre appareil</h2>
+      <p>Les applications conservent localement, dans leur propre conteneur, uniquement les <b>paramètres du leasing</b> que vous saisissez — valeur du bien, premier loyer majoré, valeur de rachat, durée, taux, paiement d'avance ou à terme échu, et date de la première mensualité — afin de les retrouver au redémarrage et de les partager entre les onglets Calcul, Mensualités et Comparaison. Leasing Calculator Light y enregistre également vos <b>choix de consentement</b> publicitaire.</p><p>Tous les calculs — mensualité, plan, comparaisons — se font <b>entièrement sur l'appareil</b> : aucune donnée n'est envoyée à un serveur, et il n'existe aucune synchronisation dans le cloud.</p>
+    </section>
+    <section class="card">
+      <h2>Exportation du plan de mensualités</h2>
+      <p>Depuis l'onglet Mensualités, vous pouvez exporter le plan au format <b>CSV</b> ou <b>PDF</b>. Le fichier est généré sur l'appareil et transmis à la <b>feuille de partage d'iOS</b> : c'est vous qui décidez de l'enregistrer, de l'imprimer ou de l'envoyer, et à qui. Les applications ne téléversent ni ne transmettent ces fichiers nulle part.</p>
+    </section>
+    <section class="card">
+      <h2>Notifications push</h2>
+      <p>Si vous choisissez d'activer les notifications, l'application enregistre auprès du service <b>Back4App</b> (plateforme Parse) quelques informations techniques :</p><ul><li>le <b>jeton APNs</b> de l'appareil, généré par Apple, nécessaire à la remise des notifications ;</li><li>un <b>identifiant d'installation anonyme</b>, utilisé pour gérer les envois ;</li><li>des données techniques de base comme le type d'appareil, la version de l'application et le fuseau horaire.</li></ul><p>Ces données ne sont pas liées à votre identité et servent exclusivement au fonctionnement des notifications. Si vous refusez ou désactivez les notifications dans Réglages, le jeton devient inutilisable ; vous pouvez en demander la suppression en écrivant au contact ci-dessous.</p>
+    </section>
+    <section class="card">
+      <h2>Publicité — Leasing Calculator Light uniquement</h2>
+      <p>Leasing Calculator Light est gratuite grâce à la publicité — une bannière dans les onglets Calcul, Mensualités et Comparaison, ainsi que des annonces plein écran occasionnelles — diffusées par <b>Google AdMob</b>. Pour sélectionner et mesurer les annonces, Google peut traiter :</p><ul><li>les <b>identifiants de l'appareil</b>, y compris l'<b>identifiant publicitaire (IDFA)</b> si vous avez accordé l'autorisation de suivi (voir la section suivante) ;</li><li>votre <b>adresse IP</b> (qui indique une localisation approximative) et des informations techniques sur l'appareil ;</li><li>les données d'<b>interaction avec les annonces</b> (impressions, clics).</li></ul><p>La manière dont Google traite ces données est décrite dans la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">politique de confidentialité de Google</a> et sur la page <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">« Comment Google utilise les données »</a>. Leasing Calculators ne contient rien de tout cela.</p>
+    </section>
+    <section class="card">
+      <h2>Consentement et suivi — Leasing Calculator Light uniquement</h2>
+      <p>Au premier lancement, l'application vous demande votre autorisation <b>deux fois</b>, dans cet ordre.</p><p><b>1. Le formulaire de consentement de Google.</b> Si vous vous trouvez dans l'Espace économique européen ou au Royaume-Uni, vous pouvez choisir entre des <b>annonces personnalisées</b> et des <b>annonces génériques</b>, non fondées sur vos centres d'intérêt. Vous pouvez <b>modifier ou retirer votre choix à tout moment</b> depuis l'onglet <b>App info</b>, sous <b>Réglages de confidentialité → Gérer le consentement</b>.</p><p><b>2. L'autorisation de suivi d'Apple</b> (App Tracking Transparency). Si vous l'accordez, l'application peut utiliser l'<b>identifiant publicitaire (IDFA)</b> de votre appareil pour afficher des annonces plus pertinentes et en mesurer les performances. Si vous la refusez, iOS ne met pas l'IDFA à disposition : les annonces restent présentes, mais ne sont pas personnalisées. Vous pouvez changer d'avis à tout moment dans <b>Réglages iOS → Confidentialité et sécurité → Suivi</b>.</p><p>Aucune annonce n'est demandée avant que vous ayez répondu aux deux demandes. L'application fonctionne de la même manière quel que soit votre choix : seules les annonces changent, jamais les fonctions.</p>
+    </section>
+    <section class="card">
+      <h2>Ce que nous ne faisons pas</h2>
+      <ul><li>Aucun compte ni profil d'utilisateur</li><li>Aucune statistique ni mesure d'utilisation de notre part</li><li>Aucun accès à la localisation : les applications ne la demandent jamais</li><li>Aucune publicité ni suivi dans la version payante</li><li>Aucune vente ni partage de vos données à des fins commerciales</li></ul>
+    </section>
+    <section class="card">
+      <h2>Vos droits et contact</h2>
+      <p>En vertu du RGPD et de la loi suisse sur la protection des données (nLPD), vous avez le droit de retirer votre consentement à tout moment (voir ci-dessus), de demander l'accès aux données techniques décrites dans la section sur les notifications ou leur suppression, et de saisir l'autorité de contrôle compétente. Pour toute question sur cette politique, écrivez à <a href="mailto:bacchin@tiscali.it?subject=Leasing%20Calculator%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Pour exercer vos droits sur les données traitées par Google, référez-vous aux canaux indiqués dans la politique de Google.</p>
+    </section>
+    <section class="card">
+      <h2>Modifications</h2>
+      <p>Toute modification de cette politique sera publiée sur cette page, avec mise à jour de la date d'entrée en vigueur.</p>
+    </section>
+  </div>
+  <div lang-block="de">
+    <p class="date">Gültig ab 28. Juli 2026</p>
+    <section class="card">
+      <h2>Kurz gefasst</h2>
+      <p>Leasing Calculators und Leasing Calculator Light sind Apps von Fabrizio Bacchin (Schweiz); diese Erklärung gilt für beide. Die Apps <b>erheben keine personenbezogenen Daten</b>: kein Konto, keine Analysewerkzeuge, kein Datenverkauf. Die von Ihnen eingegebenen Leasingdaten <b>bleiben auf Ihrem Gerät</b> (für Push-Mitteilungen werden, falls Sie sie aktivieren, nur anonyme technische Daten erfasst — siehe unten). <b>Leasing Calculators enthält keinerlei Werbung.</b> <b>Leasing Calculator Light</b>, die kostenlose Version, zeigt Google-AdMob-Anzeigen und <b>fragt Sie zweimal um Erlaubnis</b> — Googles Einwilligungsformular und Apples Tracking-Berechtigung — bevor auch nur eine einzige Anzeige angefordert wird.</p>
+    </section>
+    <section class="card">
+      <h2>Die beiden Apps</h2>
+      <table><tr><th>App</th><th>Werbung</th></tr><tr><td>Leasing Calculators (kostenpflichtig)</td><td>Keine. Die App enthält keinen Werbecode.</td></tr><tr><td>Leasing Calculator Light (kostenlos)</td><td>Banner und Vollbildanzeigen von Google AdMob — siehe die entsprechenden Abschnitte.</td></tr></table>
+    </section>
+    <section class="card">
+      <h2>Auf Ihrem Gerät gespeicherte Daten</h2>
+      <p>Die Apps speichern lokal, im eigenen Sandbox-Container, ausschliesslich die von Ihnen eingegebenen <b>Leasingparameter</b> — Objektwert, Sonderzahlung, Restwert, Laufzeit, Zinssatz, Zahlung vorschüssig oder nachschüssig sowie das Datum der ersten Rate — damit sie beim Neustart wieder verfügbar sind und zwischen den Tabs Berechnung, Raten und Vergleich geteilt werden können. Leasing Calculator Light speichert dort auch Ihre <b>Einwilligungsentscheidungen</b> zur Werbung.</p><p>Sämtliche Berechnungen — Rate, Ratenplan, Vergleiche — erfolgen <b>vollständig auf dem Gerät</b>: Es werden keine Daten an einen Server gesendet, und es gibt keine Cloud-Synchronisierung.</p>
+    </section>
+    <section class="card">
+      <h2>Export des Ratenplans</h2>
+      <p>Im Tab Raten können Sie den Plan als <b>CSV</b> oder <b>PDF</b> exportieren. Die Datei wird auf dem Gerät erzeugt und an das <b>Teilen-Menü von iOS</b> übergeben: Sie entscheiden, ob Sie sie sichern, drucken oder senden — und an wen. Die Apps laden diese Dateien nirgendwohin hoch und übertragen sie nicht.</p>
+    </section>
+    <section class="card">
+      <h2>Push-Mitteilungen</h2>
+      <p>Wenn Sie Mitteilungen aktivieren, registriert die App beim Dienst <b>Back4App</b> (Parse-Plattform) einige technische Angaben:</p><ul><li>das von Apple erzeugte <b>APNs-Token</b> des Geräts, das für die Zustellung erforderlich ist;</li><li>eine <b>anonyme Installationskennung</b> zur Verwaltung der Zustellungen;</li><li>technische Basisdaten wie Gerätetyp, App-Version und Zeitzone.</li></ul><p>Diese Daten sind nicht mit Ihrer Identität verknüpft und dienen ausschliesslich dem Betrieb der Mitteilungen. Wenn Sie ablehnen oder die Mitteilungen später in den Einstellungen deaktivieren, wird das Token unbrauchbar; Sie können seine Löschung über den unten genannten Kontakt verlangen.</p>
+    </section>
+    <section class="card">
+      <h2>Werbung — nur Leasing Calculator Light</h2>
+      <p>Leasing Calculator Light ist dank Werbung kostenlos — ein Banner in den Tabs Berechnung, Raten und Vergleich sowie gelegentliche Vollbildanzeigen — ausgeliefert von <b>Google AdMob</b>. Zur Auswahl und Messung der Anzeigen kann Google verarbeiten:</p><ul><li><b>Gerätekennungen</b>, einschliesslich der <b>Werbekennung (IDFA)</b>, sofern Sie die Tracking-Berechtigung erteilt haben (siehe nächster Abschnitt);</li><li>Ihre <b>IP-Adresse</b> (die einen ungefähren Standort angibt) sowie technische Geräteinformationen;</li><li>Daten zur <b>Anzeigeninteraktion</b> (Impressionen, Klicks).</li></ul><p>Wie Google diese Daten verarbeitet, ist in der <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a> und auf der Seite <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">«Wie Google Daten verwendet»</a> beschrieben. Leasing Calculators enthält nichts davon.</p>
+    </section>
+    <section class="card">
+      <h2>Einwilligung und Tracking — nur Leasing Calculator Light</h2>
+      <p>Beim ersten Start fragt die App <b>zweimal</b> um Erlaubnis, in dieser Reihenfolge.</p><p><b>1. Googles Einwilligungsformular.</b> Wenn Sie sich im Europäischen Wirtschaftsraum oder im Vereinigten Königreich befinden, können Sie zwischen <b>personalisierten Anzeigen</b> und <b>allgemeinen Anzeigen</b> wählen, die nicht auf Ihren Interessen beruhen. Sie können Ihre Wahl <b>jederzeit ändern oder widerrufen</b> — im Tab <b>App info</b> unter <b>Datenschutzeinstellungen → Einwilligung verwalten</b>.</p><p><b>2. Apples Tracking-Berechtigung</b> (App Tracking Transparency). Wenn Sie sie erteilen, darf die App die <b>Werbekennung (IDFA)</b> Ihres Geräts verwenden, um relevantere Anzeigen auszuspielen und deren Leistung zu messen. Wenn Sie ablehnen, stellt iOS die IDFA nicht bereit: Anzeigen erscheinen weiterhin, sind aber nicht personalisiert. Sie können Ihre Entscheidung jederzeit in <b>iOS-Einstellungen → Datenschutz &amp; Sicherheit → Tracking</b> ändern.</p><p>Vor Ihrer Antwort auf beide Abfragen wird keine Anzeige angefordert. Die App funktioniert unabhängig von Ihrer Wahl identisch: Es ändern sich nur die Anzeigen, nie die Funktionen.</p>
+    </section>
+    <section class="card">
+      <h2>Was wir nicht tun</h2>
+      <ul><li>Kein Konto und kein Nutzerprofil</li><li>Keine Statistiken oder Nutzungsmessung unsererseits</li><li>Kein Zugriff auf den Standort: Die Apps fragen ihn nie ab</li><li>Keine Werbung und kein Tracking in der kostenpflichtigen Version</li><li>Kein Verkauf und keine Weitergabe Ihrer Daten zu kommerziellen Zwecken</li></ul>
+    </section>
+    <section class="card">
+      <h2>Ihre Rechte und Kontakt</h2>
+      <p>Nach der DSGVO und dem Schweizer Datenschutzgesetz (revDSG) haben Sie das Recht, Ihre Einwilligung jederzeit zu widerrufen (siehe oben), Auskunft über die im Abschnitt zu den Mitteilungen beschriebenen technischen Daten oder deren Löschung zu verlangen und sich an die zuständige Aufsichtsbehörde zu wenden. Bei Fragen zu dieser Erklärung schreiben Sie an <a href="mailto:bacchin@tiscali.it?subject=Leasing%20Calculator%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Zur Ausübung Ihrer Rechte hinsichtlich der von Google verarbeiteten Daten wenden Sie sich an die in Googles Erklärung genannten Kanäle.</p>
+    </section>
+    <section class="card">
+      <h2>Änderungen</h2>
+      <p>Änderungen dieser Erklärung werden auf dieser Seite veröffentlicht, mit aktualisiertem Datum des Inkrafttretens.</p>
+    </section>
+  </div>
+  <div lang-block="es">
+    <p class="date">En vigor desde el 28 de julio de 2026</p>
+    <section class="card">
+      <h2>En resumen</h2>
+      <p>Leasing Calculators y Leasing Calculator Light son aplicaciones de Fabrizio Bacchin (Suiza) y esta política se aplica a ambas. Las aplicaciones <b>no recogen datos personales</b>: sin cuenta, sin herramientas de análisis, sin venta de datos. Los datos del leasing que introduces <b>permanecen en tu dispositivo</b> (para las notificaciones push, si las activas, solo se registran datos técnicos anónimos — véase más abajo). <b>Leasing Calculators no contiene publicidad alguna.</b> <b>Leasing Calculator Light</b>, la versión gratuita, muestra anuncios de Google AdMob y <b>te pide permiso dos veces</b> — el formulario de consentimiento de Google y la autorización de seguimiento de Apple — antes de solicitar un solo anuncio.</p>
+    </section>
+    <section class="card">
+      <h2>Las dos aplicaciones</h2>
+      <table><tr><th>Aplicación</th><th>Publicidad</th></tr><tr><td>Leasing Calculators (de pago)</td><td>Ninguna. La aplicación no contiene código publicitario.</td></tr><tr><td>Leasing Calculator Light (gratuita)</td><td>Banners y anuncios a pantalla completa de Google AdMob — véanse las secciones correspondientes.</td></tr></table>
+    </section>
+    <section class="card">
+      <h2>Datos guardados en tu dispositivo</h2>
+      <p>Las aplicaciones conservan localmente, en su propio contenedor aislado, únicamente los <b>parámetros del leasing</b> que introduces — valor del bien, entrada inicial, valor residual, duración, tipo de interés, pago anticipado o vencido y fecha de la primera cuota — para recuperarlos al reiniciar y compartirlos entre las pestañas Cálculo, Cuotas y Comparación. Leasing Calculator Light guarda ahí también tus <b>decisiones de consentimiento</b> publicitario.</p><p>Todos los cálculos — cuota, plan de cuotas, comparaciones — se realizan <b>íntegramente en el dispositivo</b>: no se envía ningún dato a ningún servidor y no existe sincronización en la nube.</p>
+    </section>
+    <section class="card">
+      <h2>Exportación del plan de cuotas</h2>
+      <p>Desde la pestaña Cuotas puedes exportar el plan en formato <b>CSV</b> o <b>PDF</b>. El archivo se genera en el dispositivo y se entrega al <b>panel de compartir de iOS</b>: tú decides si guardarlo, imprimirlo o enviarlo, y a quién. Las aplicaciones nunca suben ni transmiten estos archivos a ningún sitio.</p>
+    </section>
+    <section class="card">
+      <h2>Notificaciones push</h2>
+      <p>Si decides activar las notificaciones, la aplicación registra en el servicio <b>Back4App</b> (plataforma Parse) algunos datos técnicos:</p><ul><li>el <b>token APNs</b> del dispositivo, generado por Apple, necesario para entregar las notificaciones;</li><li>un <b>identificador anónimo de instalación</b>, usado para gestionar los envíos;</li><li>datos técnicos básicos como el tipo de dispositivo, la versión de la aplicación y la zona horaria.</li></ul><p>Estos datos no están vinculados a tu identidad y se usan exclusivamente para el funcionamiento de las notificaciones. Si las rechazas o las desactivas más tarde en Ajustes, el token queda inservible; puedes solicitar su eliminación escribiendo al contacto indicado abajo.</p>
+    </section>
+    <section class="card">
+      <h2>Publicidad — solo Leasing Calculator Light</h2>
+      <p>Leasing Calculator Light es gratuita gracias a la publicidad — un banner en las pestañas Cálculo, Cuotas y Comparación, además de anuncios ocasionales a pantalla completa — servidos por <b>Google AdMob</b>. Para seleccionar y medir los anuncios, Google puede tratar:</p><ul><li>los <b>identificadores del dispositivo</b>, incluido el <b>identificador publicitario (IDFA)</b> si has concedido la autorización de seguimiento (véase la sección siguiente);</li><li>tu <b>dirección IP</b> (que indica una ubicación aproximada) e información técnica del dispositivo;</li><li>datos de <b>interacción con los anuncios</b> (impresiones, toques).</li></ul><p>Cómo trata Google estos datos se describe en la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidad de Google</a> y en la página <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">«Cómo usa Google los datos»</a>. Leasing Calculators no contiene nada de esto.</p>
+    </section>
+    <section class="card">
+      <h2>Consentimiento y seguimiento — solo Leasing Calculator Light</h2>
+      <p>En el primer inicio la aplicación te pide permiso <b>dos veces</b>, en este orden.</p><p><b>1. El formulario de consentimiento de Google.</b> Si te encuentras en el Espacio Económico Europeo o en el Reino Unido puedes elegir entre <b>anuncios personalizados</b> y <b>anuncios genéricos</b>, no basados en tus intereses. Puedes <b>cambiar o retirar tu decisión en cualquier momento</b> desde la pestaña <b>App info</b>, en <b>Ajustes de privacidad → Gestionar el consentimiento</b>.</p><p><b>2. La autorización de seguimiento de Apple</b> (App Tracking Transparency). Si la concedes, la aplicación puede usar el <b>identificador publicitario (IDFA)</b> de tu dispositivo para mostrar anuncios más pertinentes y medir su rendimiento. Si la deniegas, iOS no pone el IDFA a disposición: los anuncios siguen apareciendo, pero no son personalizados. Puedes cambiar de opinión en cualquier momento en <b>Ajustes de iOS → Privacidad y seguridad → Rastreo</b>.</p><p>No se solicita ningún anuncio antes de que hayas respondido a ambas peticiones. La aplicación funciona igual sea cual sea tu elección: solo cambian los anuncios, nunca las funciones.</p>
+    </section>
+    <section class="card">
+      <h2>Lo que no hacemos</h2>
+      <ul><li>Ninguna cuenta ni perfil de usuario</li><li>Ninguna estadística ni medición de uso por nuestra parte</li><li>Ningún acceso a la ubicación: las aplicaciones nunca la solicitan</li><li>Ninguna publicidad ni seguimiento en la versión de pago</li><li>Ninguna venta ni cesión de tus datos con fines comerciales</li></ul>
+    </section>
+    <section class="card">
+      <h2>Tus derechos y contacto</h2>
+      <p>Conforme al RGPD y a la ley suiza de protección de datos (nLPD) tienes derecho a retirar el consentimiento en cualquier momento (véase arriba), a solicitar el acceso o la supresión de los datos técnicos descritos en la sección de notificaciones y a dirigirte a la autoridad de control competente. Para cualquier pregunta sobre esta política escribe a <a href="mailto:bacchin@tiscali.it?subject=Leasing%20Calculator%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Para ejercer tus derechos sobre los datos tratados por Google, consulta los canales indicados en la política de Google.</p>
+    </section>
+    <section class="card">
+      <h2>Cambios</h2>
+      <p>Cualquier cambio en esta política se publicará en esta página, con la fecha de entrada en vigor actualizada.</p>
+    </section>
+  </div>
+
+  <p class="foot">
+    <span lang-block="it">Leasing Calculators &amp; Leasing Calculator Light · <a href="support.html">Supporto</a></span>
+    <span lang-block="en">Leasing Calculators &amp; Leasing Calculator Light · <a href="support.html">Support</a></span>
+    <span lang-block="fr">Leasing Calculators &amp; Leasing Calculator Light · <a href="support.html">Assistance</a></span>
+    <span lang-block="de">Leasing Calculators &amp; Leasing Calculator Light · <a href="support.html">Support</a></span>
+    <span lang-block="es">Leasing Calculators &amp; Leasing Calculator Light · <a href="support.html">Soporte</a></span>
+  </p>
+</div>
+
+<script>
+  var LANGS = ["it", "en", "fr", "de", "es"];
+  function setLang(l) {
+    if (LANGS.indexOf(l) < 0) l = "en";
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    for (var i = 0; i < LANGS.length; i++) {
+      var b = document.getElementById("btn-" + LANGS[i]);
+      if (b) b.setAttribute("aria-pressed", LANGS[i] === l);
+    }
+    try { localStorage.setItem("leasing-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("leasing-lang"); } catch (e) {}
+  var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+  setLang(saved || (LANGS.indexOf(nav) >= 0 ? nav : "en"));
+</script>
+<noscript><style>[lang-block]{display:block !important}</style></noscript>
+</body>
+</html>
