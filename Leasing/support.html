@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leasing Calculator — Support</title>
+<style>
+  :root {
+    --bg: #eef0fa; --card: #ffffff; --fg: #141a33; --muted: #5a6285;
+    --accent: #3a4b9e; --amber: #c9761b; --border: rgba(20,26,51,0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0c0e19; --card: #171b2c; --fg: #eef0fa; --muted: #98a0be;
+            --accent: #8b96e2; --amber: #f0a542; --border: rgba(238,240,250,0.14); }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 64px; }
+  header { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+  .logo { width: 64px; height: 64px; border-radius: 14px; border: 1px solid var(--border); }
+  h1 { font-size: 28px; margin: 0; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); margin: 0 0 20px 78px; }
+  .langbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 26px; }
+  .langbar button {
+    font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--border); background: var(--card); color: var(--fg);
+  }
+  .langbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  section.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 26px; margin: 14px 0; }
+  h2 { font-size: 19px; margin: 2px 0 10px; }
+  ul { margin: 8px 0; padding-left: 22px; }
+  li { margin: 5px 0; }
+  b { color: var(--fg); }
+  a { color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  .foot { color: var(--muted); font-size: 14px; margin-top: 28px; text-align: center; }
+  .date { color: var(--muted); font-size: 14px; }
+  [lang-block] { display: none; }
+  .ic { display:inline-block; width:1.6em; color: var(--accent); }
+  .ic-a { color: var(--amber); }
+html[data-lang="it"] [lang-block="it"] { display: block; }
+html[data-lang="en"] [lang-block="en"] { display: block; }
+html[data-lang="fr"] [lang-block="fr"] { display: block; }
+html[data-lang="de"] [lang-block="de"] { display: block; }
+html[data-lang="es"] [lang-block="es"] { display: block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="logo" src="data:image/png;base64,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" alt="">
+    <h1>Leasing Calculator</h1>
+  </header>
+  <p class="sub" lang-block="it">Supporto · Leasing Calculators e Leasing Calculator Light</p>
+  <p class="sub" lang-block="en">Support · Leasing Calculators and Leasing Calculator Light</p>
+  <p class="sub" lang-block="fr">Assistance · Leasing Calculators et Leasing Calculator Light</p>
+  <p class="sub" lang-block="de">Support · Leasing Calculators und Leasing Calculator Light</p>
+  <p class="sub" lang-block="es">Soporte · Leasing Calculators y Leasing Calculator Light</p>
+
+  <div class="langbar">
+    <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
+    <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+  </div>
+
+  <div lang-block="it">
+    <p class="date">Aggiornato al 28 luglio 2026</p>
+    <section class="card">
+      <h2><span class="ic">◎</span>Cosa fanno le app</h2>
+      <p>Leasing Calculators e Leasing Calculator Light calcolano la <b>rata di un leasing</b> a partire dal valore del bene, dall'eventuale maxicanone, dal riscatto finale, dalla durata e dal tasso. Le due app hanno le stesse funzioni: la versione Light è gratuita e mostra pubblicità, quella a pagamento no.</p><p>L'app ha quattro schede: <b>Calcolo</b>, <b>Rate</b>, <b>Confronto</b> e <b>App info</b>.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">∑</span>La scheda Calcolo</h2>
+      <p>Inserisci il <b>valore del bene</b>. Aggiungi <b>maxicanone</b> e <b>riscatto finale</b> se il contratto li prevede — sono facoltativi — poi imposta <b>durata</b> e <b>tasso</b> con gli slider.</p><p>Con il selettore scegli se le rate sono <b>anticipate</b> o <b>posticipate</b>: con le anticipate la prima scade subito e la rata risulta un po' più bassa, perché il capitale comincia a ridursi prima.</p><p>Sotto compaiono la <b>rata mensile</b>, il <b>costo totale</b> e gli <b>interessi</b>, più una barra che mostra come il costo totale si divide fra maxicanone, rate e riscatto. Il risultato si aggiorna mentre digiti.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">▦</span>La scheda Rate</h2>
+      <p>È il piano completo, riga per riga: il <b>maxicanone</b> in testa, tutte le <b>rate</b> con la loro scadenza, e il <b>riscatto</b> in coda. Per ciascuna riga vedi la <b>quota capitale</b>, la <b>quota interessi</b> e il <b>capitale residuo</b>.</p><p>Le scadenze partono dalla data che hai impostato alla voce «Prima rata» nella scheda Calcolo.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">⇪</span>Esportare il piano</h2>
+      <p>In cima alla scheda Rate ci sono due pulsanti, <b>CSV</b> e <b>PDF</b>. Il file viene generato sul telefono e passato al pannello di condivisione di iOS: da lì puoi salvarlo in File, stamparlo, inviarlo per email o aprirlo in un'altra app.</p><p>Il <b>CSV</b> è pensato per essere riaperto in un foglio di calcolo: le date sono in formato ISO e i numeri usano il punto decimale. Il <b>PDF</b> è già impaginato per la stampa.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">📊</span>La scheda Confronto</h2>
+      <p>Risponde a due domande che il solo calcolo della rata non risolve: <b>quanto conviene versare un maxicanone più alto?</b> e <b>quanto costa davvero un riscatto più alto?</b></p><p>Per ciascuna delle due leve vedi cinque scenari — 0, 10, 20, 30 e 40% del valore del bene — con la rata corrispondente e, sotto in piccolo, il <b>costo totale</b>. Il pallino colorato indica lo scenario più vicino a quello che hai impostato.</p><p>È qui che si vede il compromesso: alzare il riscatto <b>abbassa la rata ma alza il costo complessivo</b>, perché su quella somma continui a pagare interessi fino alla fine. La card «In sintesi» lo quantifica con i numeri del tuo contratto.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">ℹ</span>La scheda App info</h2>
+      <p>Contiene la versione dell'app, una guida sintetica, il pulsante per <b>valutare l'app</b> sull'App Store e, nella versione Light, la voce <b>Impostazioni privacy</b> per rivedere o revocare il consenso alla pubblicità.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">▣</span>La pubblicità — solo la versione Light</h2>
+      <p>Leasing Calculator Light mostra un banner nelle schede Calcolo, Rate e Confronto, e ogni tanto un annuncio a schermo intero. Al primo avvio l'app chiede il permesso due volte: prima il <b>modulo di consenso di Google</b> (in Europa e nel Regno Unito), poi l'<b>autorizzazione al tracciamento</b> di Apple.</p><p>Puoi rifiutare entrambe: gli annunci restano, ma non sono personalizzati, e l'app funziona esattamente allo stesso modo. Per cambiare idea: il consenso Google da <b>App info → Impostazioni privacy</b>, il tracciamento da <b>Impostazioni di iOS → Privacy e sicurezza → Tracciamento</b>.</p><p>La versione a pagamento non contiene alcun codice pubblicitario.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">✉</span>Notifiche</h2>
+      <p>Le app possono inviare notifiche occasionali sugli aggiornamenti. Puoi rifiutarle al primo avvio o disattivarle in qualsiasi momento da <b>Impostazioni di iOS → Leasing Calculator → Notifiche</b>. L'app funziona identica senza.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">?</span>Domande frequenti</h2>
+      <p><b>Perché la rata cambia se scelgo anticipata o posticipata?</b><br>Perché cambia il momento in cui paghi. Con le rate anticipate versi all'inizio di ogni periodo: il capitale si riduce prima, maturano meno interessi e la rata scende leggermente.</p><p><b>Devo per forza inserire maxicanone e riscatto?</b><br>No, sono facoltativi. Lasciandoli vuoti ottieni il calcolo di un finanziamento semplice, senza anticipo né valore finale.</p><p><b>Il totale degli interessi comprende il riscatto?</b><br>Sì. Gli interessi sono la differenza fra quanto paghi in tutto (maxicanone + rate + riscatto) e il valore del bene.</p><p><b>La rata calcolata è quella che mi farà la società di leasing?</b><br>È una stima corretta della sola componente finanziaria. Un contratto reale può includere spese di istruttoria, assicurazioni, imposte e servizi che l'app non calcola.</p><p><b>I miei dati vengono inviati da qualche parte?</b><br>No. Tutti i calcoli avvengono sul dispositivo. Vedi l'<a href="privacy.html">informativa sulla privacy</a>.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic ic-a">✱</span>Avvertenza</h2>
+      <p>I valori forniti dalle app sono a scopo informativo. Lo sviluppatore declina ogni responsabilità sui calcoli effettuati; l'app si usa esclusivamente sotto la responsabilità dell'utente. Per un'offerta vincolante rivolgiti alla società di leasing.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">✎</span>Contatti</h2>
+      <p>Hai trovato un problema, oppure ti manca una funzione? Scrivi a <a href="mailto:bacchin@tiscali.it?subject=Leasing%20Calculator%20%E2%80%94%20Supporto">bacchin@tiscali.it</a>. Indica il modello di iPhone, la versione di iOS e la versione dell'app (la trovi nella scheda App info): aiuta a rispondere più in fretta.</p>
+    </section>
+  </div>
+  <div lang-block="en">
+    <p class="date">Updated 28 July 2026</p>
+    <section class="card">
+      <h2><span class="ic">◎</span>What the apps do</h2>
+      <p>Leasing Calculators and Leasing Calculator Light work out the <b>instalment of a lease</b> from the asset value, an optional down payment, the final buyout, the term and the interest rate. Both apps have the same features: the Light version is free and shows ads, the paid one does not.</p><p>The app has four tabs: <b>Calculation</b>, <b>Plan</b>, <b>Compare</b> and <b>App info</b>.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">∑</span>The Calculation tab</h2>
+      <p>Enter the <b>asset value</b>. Add the <b>down payment</b> and the <b>final buyout</b> if your contract has them — both are optional — then set the <b>term</b> and the <b>rate</b> with the sliders.</p><p>Use the selector to choose whether instalments are paid <b>in advance</b> or <b>in arrears</b>: in advance the first one falls due straight away and the instalment comes out slightly lower, because the principal starts shrinking sooner.</p><p>Below you get the <b>monthly instalment</b>, the <b>total cost</b> and the <b>interest</b>, plus a bar showing how the total cost splits between down payment, instalments and buyout. The result updates as you type.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">▦</span>The Plan tab</h2>
+      <p>The complete schedule, row by row: the <b>down payment</b> first, every <b>instalment</b> with its due date, and the <b>buyout</b> last. Each row shows the <b>principal</b>, the <b>interest</b> and the <b>outstanding balance</b>.</p><p>Due dates start from the date you set under &quot;First instalment&quot; in the Calculation tab.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">⇪</span>Exporting the plan</h2>
+      <p>At the top of the Plan tab there are two buttons, <b>CSV</b> and <b>PDF</b>. The file is generated on the phone and handed to the iOS share sheet: from there you can save it to Files, print it, email it or open it in another app.</p><p>The <b>CSV</b> is meant to be reopened in a spreadsheet: dates are in ISO format and numbers use the decimal point. The <b>PDF</b> is already laid out for printing.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">📊</span>The Compare tab</h2>
+      <p>It answers two questions the instalment alone does not: <b>how much is a bigger down payment worth?</b> and <b>what does a bigger buyout really cost?</b></p><p>For each of the two levers you see five scenarios — 0, 10, 20, 30 and 40% of the asset value — with the resulting instalment and, in small type underneath, the <b>total cost</b>. The coloured dot marks the scenario closest to your own settings.</p><p>This is where the trade-off shows: raising the buyout <b>lowers the instalment but raises the overall cost</b>, because you keep paying interest on that amount until the end. The &quot;In short&quot; card puts a number on it using your own figures.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">ℹ</span>The App info tab</h2>
+      <p>Holds the app version, a short guide, the button to <b>rate the app</b> on the App Store and, in the Light version, the <b>Privacy settings</b> entry to review or withdraw your advertising consent.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">▣</span>Advertising — Light version only</h2>
+      <p>Leasing Calculator Light shows a banner in the Calculation, Plan and Compare tabs, and an occasional full-screen ad. On first launch the app asks permission twice: first <b>Google's consent form</b> (in Europe and the UK), then Apple's <b>tracking authorisation</b>.</p><p>You can decline both: ads remain but are not personalised, and the app works exactly the same. To change your mind: Google consent from <b>App info → Privacy settings</b>, tracking from <b>iOS Settings → Privacy &amp; Security → Tracking</b>.</p><p>The paid version contains no advertising code at all.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">✉</span>Notifications</h2>
+      <p>The apps may send occasional notifications about updates. You can decline on first launch or turn them off at any time in <b>iOS Settings → Leasing Calculator → Notifications</b>. The app works identically without them.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">?</span>Frequently asked questions</h2>
+      <p><b>Why does the instalment change between in advance and in arrears?</b><br>Because the timing of the payment changes. Paying in advance means paying at the start of each period: the principal shrinks sooner, less interest accrues and the instalment drops slightly.</p><p><b>Do I have to enter a down payment and a buyout?</b><br>No, both are optional. Leaving them empty gives you a plain loan calculation, with no upfront and no final value.</p><p><b>Does the total interest include the buyout?</b><br>Yes. Interest is the difference between everything you pay (down payment + instalments + buyout) and the asset value.</p><p><b>Is this the instalment the leasing company will quote me?</b><br>It is an accurate estimate of the financial component alone. A real contract may include arrangement fees, insurance, taxes and services that the app does not calculate.</p><p><b>Is my data sent anywhere?</b><br>No. All calculations happen on the device. See the <a href="privacy.html">privacy policy</a>.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic ic-a">✱</span>Disclaimer</h2>
+      <p>The figures the apps provide are for information only. The developer declines any liability for the calculations performed; the app is used entirely at the user's own responsibility. For a binding offer, contact your leasing company.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">✎</span>Contact</h2>
+      <p>Found a problem, or missing a feature? Write to <a href="mailto:bacchin@tiscali.it?subject=Leasing%20Calculator%20%E2%80%94%20Support">bacchin@tiscali.it</a>. Please mention your iPhone model, iOS version and app version (you'll find it in the App info tab): it helps to answer faster.</p>
+    </section>
+  </div>
+  <div lang-block="fr">
+    <p class="date">Mis à jour le 28 juillet 2026</p>
+    <section class="card">
+      <h2><span class="ic">◎</span>Ce que font les applications</h2>
+      <p>Leasing Calculators et Leasing Calculator Light calculent la <b>mensualité d'un leasing</b> à partir de la valeur du bien, d'un éventuel premier loyer majoré, de la valeur de rachat, de la durée et du taux. Les deux applications offrent les mêmes fonctions : la version Light est gratuite et affiche de la publicité, la version payante non.</p><p>L'application comporte quatre onglets : <b>Calcul</b>, <b>Mensualités</b>, <b>Comparaison</b> et <b>App info</b>.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">∑</span>L'onglet Calcul</h2>
+      <p>Saisissez la <b>valeur du bien</b>. Ajoutez le <b>premier loyer majoré</b> et la <b>valeur de rachat</b> si votre contrat les prévoit — ils sont facultatifs — puis réglez la <b>durée</b> et le <b>taux</b> avec les curseurs.</p><p>Le sélecteur permet de choisir des mensualités payées <b>d'avance</b> ou <b>à terme échu</b> : d'avance, la première échoit immédiatement et la mensualité est légèrement plus basse, car le capital commence à diminuer plus tôt.</p><p>En dessous s'affichent la <b>mensualité</b>, le <b>coût total</b> et les <b>intérêts</b>, ainsi qu'une barre montrant la répartition du coût total entre premier loyer, mensualités et rachat. Le résultat se met à jour pendant la saisie.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">▦</span>L'onglet Mensualités</h2>
+      <p>Le plan complet, ligne par ligne : le <b>premier loyer majoré</b> en tête, toutes les <b>mensualités</b> avec leur échéance, et le <b>rachat</b> en fin. Chaque ligne indique la <b>part de capital</b>, la <b>part d'intérêts</b> et le <b>capital restant dû</b>.</p><p>Les échéances partent de la date définie sous « Première mensualité » dans l'onglet Calcul.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">⇪</span>Exporter le plan</h2>
+      <p>En haut de l'onglet Mensualités se trouvent deux boutons, <b>CSV</b> et <b>PDF</b>. Le fichier est généré sur le téléphone et transmis à la feuille de partage d'iOS : de là, vous pouvez l'enregistrer dans Fichiers, l'imprimer, l'envoyer par e-mail ou l'ouvrir dans une autre application.</p><p>Le <b>CSV</b> est conçu pour être rouvert dans un tableur : les dates sont au format ISO et les nombres utilisent le point décimal. Le <b>PDF</b> est déjà mis en page pour l'impression.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">📊</span>L'onglet Comparaison</h2>
+      <p>Il répond à deux questions que le seul calcul de la mensualité ne résout pas : <b>quel est l'intérêt d'un premier loyer plus élevé ?</b> et <b>combien coûte réellement une valeur de rachat plus élevée ?</b></p><p>Pour chacun des deux leviers, cinq scénarios s'affichent — 0, 10, 20, 30 et 40 % de la valeur du bien — avec la mensualité correspondante et, en petit dessous, le <b>coût total</b>. Le point coloré indique le scénario le plus proche de vos réglages.</p><p>C'est là que le compromis apparaît : augmenter le rachat <b>abaisse la mensualité mais élève le coût global</b>, car vous continuez à payer des intérêts sur ce montant jusqu'à la fin. La carte « En bref » le chiffre avec vos propres données.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">ℹ</span>L'onglet App info</h2>
+      <p>Contient la version de l'application, un guide succinct, le bouton pour <b>évaluer l'application</b> sur l'App Store et, dans la version Light, l'entrée <b>Réglages de confidentialité</b> pour revoir ou retirer votre consentement publicitaire.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">▣</span>La publicité — version Light uniquement</h2>
+      <p>Leasing Calculator Light affiche une bannière dans les onglets Calcul, Mensualités et Comparaison, et occasionnellement une annonce plein écran. Au premier lancement, l'application demande deux fois l'autorisation : d'abord le <b>formulaire de consentement de Google</b> (en Europe et au Royaume-Uni), puis l'<b>autorisation de suivi</b> d'Apple.</p><p>Vous pouvez refuser les deux : les annonces restent, mais ne sont pas personnalisées, et l'application fonctionne exactement de la même manière. Pour changer d'avis : le consentement Google depuis <b>App info → Réglages de confidentialité</b>, le suivi depuis <b>Réglages iOS → Confidentialité et sécurité → Suivi</b>.</p><p>La version payante ne contient aucun code publicitaire.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">✉</span>Notifications</h2>
+      <p>Les applications peuvent envoyer des notifications occasionnelles sur les mises à jour. Vous pouvez les refuser au premier lancement ou les désactiver à tout moment dans <b>Réglages iOS → Leasing Calculator → Notifications</b>. L'application fonctionne à l'identique sans elles.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">?</span>Questions fréquentes</h2>
+      <p><b>Pourquoi la mensualité change-t-elle entre paiement d'avance et à terme échu ?</b><br>Parce que le moment du paiement change. En payant d'avance, vous versez au début de chaque période : le capital diminue plus tôt, moins d'intérêts courent et la mensualité baisse légèrement.</p><p><b>Dois-je obligatoirement saisir un premier loyer et une valeur de rachat ?</b><br>Non, les deux sont facultatifs. En les laissant vides, vous obtenez le calcul d'un financement simple, sans apport ni valeur finale.</p><p><b>Le total des intérêts comprend-il le rachat ?</b><br>Oui. Les intérêts correspondent à la différence entre tout ce que vous payez (premier loyer + mensualités + rachat) et la valeur du bien.</p><p><b>Est-ce la mensualité que me proposera la société de leasing ?</b><br>C'est une estimation exacte de la seule composante financière. Un contrat réel peut inclure des frais de dossier, des assurances, des taxes et des services que l'application ne calcule pas.</p><p><b>Mes données sont-elles envoyées quelque part ?</b><br>Non. Tous les calculs se font sur l'appareil. Voir la <a href="privacy.html">politique de confidentialité</a>.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic ic-a">✱</span>Avertissement</h2>
+      <p>Les valeurs fournies par les applications sont indicatives. Le développeur décline toute responsabilité quant aux calculs effectués ; l'application s'utilise sous la seule responsabilité de l'utilisateur. Pour une offre contraignante, adressez-vous à votre société de leasing.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">✎</span>Contact</h2>
+      <p>Vous avez rencontré un problème ou une fonction vous manque ? Écrivez à <a href="mailto:bacchin@tiscali.it?subject=Leasing%20Calculator%20%E2%80%94%20Support">bacchin@tiscali.it</a>. Indiquez le modèle d'iPhone, la version d'iOS et la version de l'application (elle figure dans l'onglet App info) : cela permet de répondre plus vite.</p>
+    </section>
+  </div>
+  <div lang-block="de">
+    <p class="date">Stand 28. Juli 2026</p>
+    <section class="card">
+      <h2><span class="ic">◎</span>Was die Apps tun</h2>
+      <p>Leasing Calculators und Leasing Calculator Light berechnen die <b>Leasingrate</b> aus Objektwert, einer optionalen Sonderzahlung, dem Restwert, der Laufzeit und dem Zinssatz. Beide Apps bieten denselben Funktionsumfang: Die Light-Version ist kostenlos und zeigt Werbung, die kostenpflichtige nicht.</p><p>Die App hat vier Tabs: <b>Berechnung</b>, <b>Raten</b>, <b>Vergleich</b> und <b>App info</b>.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">∑</span>Der Tab Berechnung</h2>
+      <p>Geben Sie den <b>Objektwert</b> ein. Ergänzen Sie <b>Sonderzahlung</b> und <b>Restwert</b>, falls Ihr Vertrag sie vorsieht — beide sind optional — und stellen Sie dann <b>Laufzeit</b> und <b>Zinssatz</b> mit den Reglern ein.</p><p>Mit dem Schalter wählen Sie, ob die Raten <b>vorschüssig</b> oder <b>nachschüssig</b> gezahlt werden: vorschüssig wird die erste sofort fällig und die Rate fällt etwas niedriger aus, weil sich das Kapital früher verringert.</p><p>Darunter erscheinen die <b>Monatsrate</b>, die <b>Gesamtkosten</b> und die <b>Zinsen</b> sowie ein Balken, der zeigt, wie sich die Gesamtkosten auf Sonderzahlung, Raten und Restwert verteilen. Das Ergebnis aktualisiert sich während der Eingabe.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">▦</span>Der Tab Raten</h2>
+      <p>Der vollständige Plan, Zeile für Zeile: die <b>Sonderzahlung</b> zuerst, alle <b>Raten</b> mit ihrem Fälligkeitsdatum und der <b>Restwert</b> am Ende. Jede Zeile zeigt <b>Tilgungsanteil</b>, <b>Zinsanteil</b> und <b>Restkapital</b>.</p><p>Die Fälligkeiten beginnen mit dem Datum, das Sie im Tab Berechnung unter «Erste Rate» festgelegt haben.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">⇪</span>Den Plan exportieren</h2>
+      <p>Oben im Tab Raten finden Sie zwei Schaltflächen, <b>CSV</b> und <b>PDF</b>. Die Datei wird auf dem Telefon erzeugt und an das Teilen-Menü von iOS übergeben: Von dort können Sie sie in Dateien sichern, drucken, per E-Mail senden oder in einer anderen App öffnen.</p><p>Die <b>CSV</b>-Datei ist dafür gedacht, in einer Tabellenkalkulation geöffnet zu werden: Datumsangaben im ISO-Format, Zahlen mit Dezimalpunkt. Das <b>PDF</b> ist bereits druckfertig gesetzt.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">📊</span>Der Tab Vergleich</h2>
+      <p>Er beantwortet zwei Fragen, die die Rate allein offenlässt: <b>Was bringt eine höhere Sonderzahlung?</b> und <b>was kostet ein höherer Restwert wirklich?</b></p><p>Für jeden der beiden Hebel sehen Sie fünf Szenarien — 0, 10, 20, 30 und 40 % des Objektwerts — mit der jeweiligen Rate und darunter, klein gesetzt, den <b>Gesamtkosten</b>. Der farbige Punkt markiert das Szenario, das Ihren Einstellungen am nächsten kommt.</p><p>Hier wird der Zielkonflikt sichtbar: Ein höherer Restwert <b>senkt die Rate, erhöht aber die Gesamtkosten</b>, weil Sie auf diesen Betrag bis zum Schluss Zinsen zahlen. Die Karte «Kurz gefasst» beziffert das mit Ihren eigenen Zahlen.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">ℹ</span>Der Tab App info</h2>
+      <p>Enthält die App-Version, eine kurze Anleitung, die Schaltfläche zum <b>Bewerten der App</b> im App Store und, in der Light-Version, den Eintrag <b>Datenschutzeinstellungen</b> zum Prüfen oder Widerrufen Ihrer Werbeeinwilligung.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">▣</span>Werbung — nur Light-Version</h2>
+      <p>Leasing Calculator Light zeigt ein Banner in den Tabs Berechnung, Raten und Vergleich sowie gelegentlich eine Vollbildanzeige. Beim ersten Start fragt die App zweimal um Erlaubnis: zuerst <b>Googles Einwilligungsformular</b> (in Europa und im Vereinigten Königreich), dann Apples <b>Tracking-Berechtigung</b>.</p><p>Sie können beides ablehnen: Anzeigen bleiben, sind aber nicht personalisiert, und die App funktioniert genau gleich. Zum Ändern: Google-Einwilligung über <b>App info → Datenschutzeinstellungen</b>, Tracking über <b>iOS-Einstellungen → Datenschutz &amp; Sicherheit → Tracking</b>.</p><p>Die kostenpflichtige Version enthält überhaupt keinen Werbecode.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">✉</span>Mitteilungen</h2>
+      <p>Die Apps können gelegentlich Mitteilungen zu Aktualisierungen senden. Sie können sie beim ersten Start ablehnen oder jederzeit unter <b>iOS-Einstellungen → Leasing Calculator → Mitteilungen</b> deaktivieren. Die App funktioniert auch ohne sie unverändert.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">?</span>Häufige Fragen</h2>
+      <p><b>Warum ändert sich die Rate zwischen vorschüssig und nachschüssig?</b><br>Weil sich der Zahlungszeitpunkt ändert. Vorschüssig zahlen Sie zu Beginn jeder Periode: Das Kapital sinkt früher, es fallen weniger Zinsen an und die Rate wird etwas niedriger.</p><p><b>Muss ich Sonderzahlung und Restwert angeben?</b><br>Nein, beide sind optional. Lässt man sie leer, erhält man die Berechnung einer einfachen Finanzierung ohne Anzahlung und ohne Schlusswert.</p><p><b>Sind im Zinstotal die Restwertzinsen enthalten?</b><br>Ja. Die Zinsen sind die Differenz zwischen allem, was Sie zahlen (Sonderzahlung + Raten + Restwert), und dem Objektwert.</p><p><b>Ist das die Rate, die mir die Leasinggesellschaft anbieten wird?</b><br>Es ist eine korrekte Schätzung allein der Finanzierungskomponente. Ein realer Vertrag kann Bearbeitungsgebühren, Versicherungen, Steuern und Dienstleistungen enthalten, die die App nicht berechnet.</p><p><b>Werden meine Daten irgendwohin gesendet?</b><br>Nein. Alle Berechnungen laufen auf dem Gerät. Siehe die <a href="privacy.html">Datenschutzerklärung</a>.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic ic-a">✱</span>Hinweis</h2>
+      <p>Die von den Apps gelieferten Werte dienen nur der Information. Der Entwickler übernimmt keine Haftung für die durchgeführten Berechnungen; die Nutzung der App erfolgt ausschliesslich auf eigene Verantwortung. Für ein verbindliches Angebot wenden Sie sich an Ihre Leasinggesellschaft.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">✎</span>Kontakt</h2>
+      <p>Ein Problem entdeckt oder eine Funktion vermisst? Schreiben Sie an <a href="mailto:bacchin@tiscali.it?subject=Leasing%20Calculator%20%E2%80%94%20Support">bacchin@tiscali.it</a>. Nennen Sie bitte iPhone-Modell, iOS-Version und App-Version (im Tab App info zu finden): Das beschleunigt die Antwort.</p>
+    </section>
+  </div>
+  <div lang-block="es">
+    <p class="date">Actualizado el 28 de julio de 2026</p>
+    <section class="card">
+      <h2><span class="ic">◎</span>Qué hacen las aplicaciones</h2>
+      <p>Leasing Calculators y Leasing Calculator Light calculan la <b>cuota de un leasing</b> a partir del valor del bien, una entrada inicial opcional, el valor residual, la duración y el tipo de interés. Ambas tienen las mismas funciones: la versión Light es gratuita y muestra publicidad, la de pago no.</p><p>La aplicación tiene cuatro pestañas: <b>Cálculo</b>, <b>Cuotas</b>, <b>Comparación</b> y <b>App info</b>.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">∑</span>La pestaña Cálculo</h2>
+      <p>Introduce el <b>valor del bien</b>. Añade la <b>entrada inicial</b> y el <b>valor residual</b> si tu contrato los prevé — son opcionales — y luego ajusta la <b>duración</b> y el <b>tipo</b> con los deslizadores.</p><p>Con el selector eliges si las cuotas se pagan <b>por anticipado</b> o <b>a vencimiento</b>: por anticipado la primera vence de inmediato y la cuota resulta algo más baja, porque el capital empieza a reducirse antes.</p><p>Debajo aparecen la <b>cuota mensual</b>, el <b>coste total</b> y los <b>intereses</b>, además de una barra que muestra cómo se reparte el coste total entre entrada, cuotas y valor residual. El resultado se actualiza mientras escribes.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">▦</span>La pestaña Cuotas</h2>
+      <p>El plan completo, línea a línea: la <b>entrada inicial</b> al principio, todas las <b>cuotas</b> con su vencimiento y el <b>valor residual</b> al final. Cada línea muestra la <b>parte de capital</b>, la <b>parte de intereses</b> y el <b>capital pendiente</b>.</p><p>Los vencimientos parten de la fecha que hayas fijado en «Primera cuota», en la pestaña Cálculo.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">⇪</span>Exportar el plan</h2>
+      <p>En la parte superior de la pestaña Cuotas hay dos botones, <b>CSV</b> y <b>PDF</b>. El archivo se genera en el teléfono y se entrega al panel de compartir de iOS: desde ahí puedes guardarlo en Archivos, imprimirlo, enviarlo por correo o abrirlo en otra aplicación.</p><p>El <b>CSV</b> está pensado para abrirse en una hoja de cálculo: las fechas van en formato ISO y los números usan el punto decimal. El <b>PDF</b> ya viene maquetado para imprimir.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">📊</span>La pestaña Comparación</h2>
+      <p>Responde a dos preguntas que el cálculo de la cuota por sí solo no resuelve: <b>¿cuánto compensa una entrada mayor?</b> y <b>¿cuánto cuesta realmente un valor residual más alto?</b></p><p>Para cada una de las dos palancas verás cinco escenarios — 0, 10, 20, 30 y 40 % del valor del bien — con la cuota correspondiente y, en pequeño debajo, el <b>coste total</b>. El punto de color señala el escenario más cercano al que tienes configurado.</p><p>Aquí se ve el compromiso: subir el valor residual <b>baja la cuota pero eleva el coste global</b>, porque sigues pagando intereses sobre esa cantidad hasta el final. La tarjeta «En resumen» lo cuantifica con tus propias cifras.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">ℹ</span>La pestaña App info</h2>
+      <p>Contiene la versión de la aplicación, una guía breve, el botón para <b>valorar la aplicación</b> en el App Store y, en la versión Light, la entrada <b>Ajustes de privacidad</b> para revisar o retirar tu consentimiento publicitario.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">▣</span>La publicidad — solo la versión Light</h2>
+      <p>Leasing Calculator Light muestra un banner en las pestañas Cálculo, Cuotas y Comparación, y de vez en cuando un anuncio a pantalla completa. En el primer inicio la aplicación pide permiso dos veces: primero el <b>formulario de consentimiento de Google</b> (en Europa y el Reino Unido) y después la <b>autorización de seguimiento</b> de Apple.</p><p>Puedes rechazar ambas: los anuncios siguen apareciendo, pero no son personalizados, y la aplicación funciona exactamente igual. Para cambiar de opinión: el consentimiento de Google desde <b>App info → Ajustes de privacidad</b>, el seguimiento desde <b>Ajustes de iOS → Privacidad y seguridad → Rastreo</b>.</p><p>La versión de pago no contiene ningún código publicitario.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">✉</span>Notificaciones</h2>
+      <p>Las aplicaciones pueden enviar notificaciones ocasionales sobre actualizaciones. Puedes rechazarlas en el primer inicio o desactivarlas cuando quieras en <b>Ajustes de iOS → Leasing Calculator → Notificaciones</b>. La aplicación funciona igual sin ellas.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">?</span>Preguntas frecuentes</h2>
+      <p><b>¿Por qué cambia la cuota entre pago anticipado y a vencimiento?</b><br>Porque cambia el momento del pago. Pagando por anticipado abonas al inicio de cada periodo: el capital se reduce antes, se devengan menos intereses y la cuota baja ligeramente.</p><p><b>¿Tengo que introducir entrada y valor residual?</b><br>No, ambos son opcionales. Si los dejas vacíos obtienes el cálculo de una financiación simple, sin entrada ni valor final.</p><p><b>¿El total de intereses incluye el valor residual?</b><br>Sí. Los intereses son la diferencia entre todo lo que pagas (entrada + cuotas + valor residual) y el valor del bien.</p><p><b>¿Es la cuota que me ofrecerá la entidad de leasing?</b><br>Es una estimación correcta solo del componente financiero. Un contrato real puede incluir gastos de estudio, seguros, impuestos y servicios que la aplicación no calcula.</p><p><b>¿Se envían mis datos a algún sitio?</b><br>No. Todos los cálculos se hacen en el dispositivo. Consulta la <a href="privacy.html">política de privacidad</a>.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic ic-a">✱</span>Advertencia</h2>
+      <p>Los valores que ofrecen las aplicaciones son orientativos. El desarrollador declina toda responsabilidad sobre los cálculos realizados; la aplicación se usa exclusivamente bajo la responsabilidad del usuario. Para una oferta vinculante, dirígete a tu entidad de leasing.</p>
+    </section>
+    <section class="card">
+      <h2><span class="ic">✎</span>Contacto</h2>
+      <p>¿Has encontrado un problema o echas en falta una función? Escribe a <a href="mailto:bacchin@tiscali.it?subject=Leasing%20Calculator%20%E2%80%94%20Support">bacchin@tiscali.it</a>. Indica el modelo de iPhone, la versión de iOS y la versión de la aplicación (la encuentras en la pestaña App info): así se responde más rápido.</p>
+    </section>
+  </div>
+
+  <p class="foot">
+    <span lang-block="it">Leasing Calculators &amp; Leasing Calculator Light · <a href="privacy.html">Privacy</a></span>
+    <span lang-block="en">Leasing Calculators &amp; Leasing Calculator Light · <a href="privacy.html">Privacy</a></span>
+    <span lang-block="fr">Leasing Calculators &amp; Leasing Calculator Light · <a href="privacy.html">Confidentialité</a></span>
+    <span lang-block="de">Leasing Calculators &amp; Leasing Calculator Light · <a href="privacy.html">Datenschutz</a></span>
+    <span lang-block="es">Leasing Calculators &amp; Leasing Calculator Light · <a href="privacy.html">Privacidad</a></span>
+  </p>
+</div>
+
+<script>
+  var LANGS = ["it", "en", "fr", "de", "es"];
+  function setLang(l) {
+    if (LANGS.indexOf(l) < 0) l = "en";
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    for (var i = 0; i < LANGS.length; i++) {
+      var b = document.getElementById("btn-" + LANGS[i]);
+      if (b) b.setAttribute("aria-pressed", LANGS[i] === l);
+    }
+    try { localStorage.setItem("leasing-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("leasing-lang"); } catch (e) {}
+  var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+  setLang(saved || (LANGS.indexOf(nav) >= 0 ? nav : "en"));
+</script>
+<noscript><style>[lang-block]{display:block !important}</style></noscript>
+</body>
+</html>
