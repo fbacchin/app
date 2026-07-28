@@ -1,5 +1,5 @@
 {
- "time": "2026-07-28T05:16:40Z",
+ "time": "2026-07-28T05:21:45Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,5 +8,19 @@
   "km": null,
   "wait": null
  },
- "events": []
+ "events": [
+  {
+   "id": "situation.641816.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "south",
+   "versionTime": "2026-07-28T05:21:30Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Parkplatz Dosierstelle Coldrerio und Anschluss Chiasso-Warenzoll Sachlage: Stau für LKW Ursache: Verkehrsüberlastung",
+    "fr": "Libéré: A2 St-Gothard -> Chiasso entre Parking Aire de dosage Coldrerio et Jonction autoroutière Chiasso-Douane commercial Situation: bouchon pour poids lourd Raison: surcharge de trafic",
+    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Coldrerio E Svincolo autostradale Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato"
+   }
+  }
+ ]
 }
