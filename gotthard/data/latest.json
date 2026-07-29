@@ -1,5 +1,5 @@
 {
- "time": "2026-07-29T16:12:52Z",
+ "time": "2026-07-29T16:17:58Z",
  "south": {
   "km": null,
   "wait": null
@@ -20,6 +20,19 @@
     "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Anschluss Airolo Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
     "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
     "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
+   }
+  },
+  {
+   "id": "situation.642130.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": null,
+   "versionTime": "2026-07-29T16:16:49Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: Faido <-> Osco Ortschaft Mairengo Sachlage: Verkehrsbehinderung Ursache: Gegenstände auf der Fahrbahn",
+    "fr": "Libéré: Faido <-> Osco Localité Mairengo Situation: trafic perturbé Raison: objets sur la chaussée",
+    "it": "Approvato: Faido <-> Osco Luogo Mairengo Situazione: problemi di traffico Causa: oggetto sulla strada"
    }
   },
   {
