@@ -1,5 +1,5 @@
 {
- "time": "2026-07-29T14:20:29Z",
+ "time": "2026-07-29T14:25:39Z",
  "south": {
   "km": 3.0,
   "wait": 30
@@ -9,6 +9,19 @@
   "wait": 40
  },
  "events": [
+  {
+   "id": "situation.642058.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "north",
+   "versionTime": "2026-07-29T14:23:59Z",
+   "km": null,
+   "wait": 30,
+   "texts": {
+    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Erstfeld und Anschluss Beckenried Sachlage: Stau Ursache: Bauarbeiten Verkehrsführung: Fahrstreifen blockiert auf einen Fahrstreifen verengt Zusatz 1: Zeitverlust Anz. [min] 30",
+    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Erstfeld et Jonction autoroutière Beckenried Situation: bouchon Raison: travaux de construction Gestion du trafic: voie bloquée sur une voie de circulation Complément 1: retards Nbre. [min] 30",
+    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Erstfeld E Svincolo autostradale Beckenried Situazione: colonna Causa: lavori di costruzione Limitazione del traffico: corsia bloccata ridotta su una corsia Aggiunta 1: ritardi No. [min] 30"
+   }
+  },
   {
    "id": "situation.642012.1.1.1",
    "type": "AbnormalTraffic",
