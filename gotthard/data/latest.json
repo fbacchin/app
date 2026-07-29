@@ -1,5 +1,5 @@
 {
- "time": "2026-07-29T04:48:35Z",
+ "time": "2026-07-29T04:53:41Z",
  "south": {
   "km": null,
   "wait": null
@@ -13,7 +13,7 @@
    "id": "situation.641977.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
    "direction": null,
-   "versionTime": "2026-07-29T04:32:40Z",
+   "versionTime": "2026-07-29T04:50:02Z",
    "km": null,
    "wait": null,
    "texts": {
