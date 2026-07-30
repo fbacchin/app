@@ -1,5 +1,5 @@
 {
- "time": "2026-07-30T15:56:52Z",
+ "time": "2026-07-30T16:01:58Z",
  "south": {
   "km": 3.0,
   "wait": 30
@@ -33,6 +33,19 @@
     "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 6.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 60",
     "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 6.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 60",
     "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 6.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 60"
+   }
+  },
+  {
+   "id": "situation.642252.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "north",
+   "versionTime": "2026-07-30T16:00:21Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Erstfeld und Tunnel Seelisberg-Tunnel Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: mehrfach kurzfristige Sperrungen Zusatz 2: es ist mit grossem Zeitverlust zu rechnen",
+    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Erstfeld et Tunnel Tunnel du Seelisberg Situation: bouchon Raison: surcharge de trafic Complément 1: fermetures intermittentes de courte durée Complément 2: retards importants prévus",
+    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Erstfeld E Galleria Galleria Seelisberg Situazione: colonna Causa: traffico congestionato Aggiunta 1: chiusure intermittenti di breve durata Aggiunta 2: si prevedono lunghi ritardi"
    }
   },
   {
