@@ -1,5 +1,5 @@
 {
- "time": "2026-07-30T09:59:05Z",
+ "time": "2026-07-30T10:04:11Z",
  "south": {
   "km": 3.0,
   "wait": 30
@@ -39,13 +39,13 @@
    "id": "situation.642234.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
    "direction": null,
-   "versionTime": "2026-07-30T09:56:51Z",
+   "versionTime": "2026-07-30T10:01:44Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Gotthard <-> Luzern Anschluss Göschenen Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 St-Gothard <-> Lucerne Jonction autoroutière Göschenen Situation: entrée fermée",
-    "it": "Approvato: A2 S. Gottardo <-> Luzern Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata"
+    "de": "Freigegeben: A2 Gotthard <-> Luzern zwischen Parkplatz Dosierstelle Göschenen und Anschluss Göschenen Sachlage: Einfahrt gesperrt",
+    "fr": "Libéré: A2 St-Gothard <-> Lucerne entre Parking Aire de dosage Göschenen et Jonction autoroutière Göschenen Situation: entrée fermée",
+    "it": "Approvato: A2 S. Gottardo <-> Luzern tra Parcheggio Area di dosaggio Göschenen E Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata"
    }
   },
   {
