@@ -15,8 +15,8 @@
       },
       "indice": {
         "url": "https://fbacchin.github.io/app/Burraco/codici/fibur/2026-01/indice.json",
-        "sha256": "d070b423bd3a4cb5e2d6ff60aa7230d529cb1227b61182e77b676f66d1fda35d",
-        "voci": 46
+        "sha256": "72f612f7d409e7aefb989b0f3cdfaa6787566ebdfa1b9b7f2788febd4351a730",
+        "voci": 45
       }
     },
     {
@@ -32,8 +32,8 @@
       },
       "indice": {
         "url": "https://fbacchin.github.io/app/Burraco/codici/fitab/2026-04/indice.json",
-        "sha256": "d68ede240c10c8a6c2a851e88909bb6f84b38b30770733a245232fb0821090dc",
-        "voci": 56
+        "sha256": "79ceab12af35b6777b5fdfafabdccd3f961923a377c1e80e48562f356934da0b",
+        "voci": 55
       }
     }
   ]
