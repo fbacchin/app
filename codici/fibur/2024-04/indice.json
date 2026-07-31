@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "codiceId": "fibur",
+  "edizione": "Aprile 2024",
+  "edizioneId": "2024-04",
+  "voci": [
+    {
+      "id": "definizioni",
+      "titolo": "Definizioni",
+      "pagina": 5,
+      "ancora": "Definizioni"
+    },
+    {
+      "id": "art-1",
+      "titolo": "Art. 1 Mazzo di carte",
+      "pagina": 11,
+      "ancora": "Art. 1"
+    },
+    {
+      "id": "art-2",
+      "titolo": "Art. 2 Composizione dei tavoli",
+      "pagina": 11,
+      "ancora": "Art. 2"
+    },
+    {
+      "id": "art-3",
+      "titolo": "Art. 3 Preparazione e svolgimento del gioco",
+      "pagina": 12,
+      "ancora": "Art. 3"
+    },
+    {
+      "id": "art-4",
+      "titolo": "Art. 4 Mescolatura, distribuzione delle carte e composizione dei pozzi",
+      "pagina": 13,
+      "ancora": "Art. 4"
+    },
+    {
+      "id": "art-5",
+      "titolo": "Art. 5 Irregolarità del mazzo di carte",
+      "pagina": 15,
+      "ancora": "Art. 5"
+    },
+    {
+      "id": "art-6",
+      "titolo": "Art. 6 Turni di gioco: tempi",
+      "pagina": 15,
+      "ancora": "Art. 6"
+    },
+    {
+      "id": "art-7",
+      "titolo": "Art. 7 Procedure e tempi di gioco",
+      "pagina": 16,
+      "ancora": "Art. 7"
+    },
+    {
+      "id": "art-8",
+      "titolo": "Art. 8 Pesca dal tallone",
+      "pagina": 17,
+      "ancora": "Art. 8"
+    },
+    {
+      "id": "art-9",
+      "titolo": "Art. 9 Raccolta dal monte degli scarti",
+      "pagina": 17,
+      "ancora": "Art. 9"
+    },
+    {
+      "id": "art-10",
+      "titolo": "Art. 10 Jolly e pinelle",
+      "pagina": 19,
+      "ancora": "Art. 10"
+    },
+    {
+      "id": "art-11",
+      "titolo": "Art. 11 Sequenze",
+      "pagina": 20,
+      "ancora": "Art. 11"
+    },
+    {
+      "id": "art-12",
+      "titolo": "Art. 12 Combinazioni",
+      "pagina": 20,
+      "ancora": "Art. 12"
+    },
+    {
+      "id": "art-13",
+      "titolo": "Art. 13 Burraco",
+      "pagina": 20,
+      "ancora": "Art. 13"
+    },
+    {
+      "id": "art-14",
+      "titolo": "Art. 14 Scarto delle matte",
+      "pagina": 21,
+      "ancora": "Art. 14"
+    },
+    {
+      "id": "art-15",
+      "titolo": "Art. 15 Time out",
+      "pagina": 21,
+      "ancora": "Art. 15"
+    },
+    {
+      "id": "art-16",
+      "titolo": "Art. 16 Stallo",
+      "pagina": 21,
+      "ancora": "Art. 16"
+    },
+    {
+      "id": "art-17",
+      "titolo": "Art. 17 Chiusure (tipologie e bonus)",
+      "pagina": 22,
+      "ancora": "Art. 17"
+    },
+    {
+      "id": "art-18",
+      "titolo": "Art. 18 Conteggio dei punti",
+      "pagina": 22,
+      "ancora": "Art. 18"
+    },
+    {
+      "id": "art-19",
+      "titolo": "Art. 19 Score - compilazione e consegna",
+      "pagina": 23,
+      "ancora": "Art. 19"
+    },
+    {
+      "id": "art-20",
+      "titolo": "Art. 20 Errori e correzioni",
+      "pagina": 24,
+      "ancora": "Art. 20"
+    },
+    {
+      "id": "art-21",
+      "titolo": "Art. 21 Irregolarità",
+      "pagina": 25,
+      "ancora": "Art. 21"
+    },
+    {
+      "id": "art-22",
+      "titolo": "Art. 22 Suggerimento",
+      "pagina": 26,
+      "ancora": "Art. 22"
+    },
+    {
+      "id": "art-23",
+      "titolo": "Art. 23 Pozzi",
+      "pagina": 27,
+      "ancora": "Art. 23"
+    },
+    {
+      "id": "art-24",
+      "titolo": "Art. 24 Carta esposta",
+      "pagina": 28,
+      "ancora": "Art. 24"
+    },
+    {
+      "id": "art-25",
+      "titolo": "Art. 25 Carte penalizzate",
+      "pagina": 29,
+      "ancora": "Art. 25"
+    },
+    {
+      "id": "art-26",
+      "titolo": "Art. 26 Carta fantasma",
+      "pagina": 29,
+      "ancora": "Art. 26"
+    },
+    {
+      "id": "art-27",
+      "titolo": "Art. 27 Carte giocate irregolarmente",
+      "pagina": 30,
+      "ancora": "Art. 27"
+    },
+    {
+      "id": "art-28",
+      "titolo": "Art. 28 Lancio e passaggio di carte",
+      "pagina": 31,
+      "ancora": "Art. 28"
+    },
+    {
+      "id": "art-29",
+      "titolo": "Art. 29 Giochi errati (aperture e carte legate)",
+      "pagina": 33,
+      "ancora": "Art. 29"
+    },
+    {
+      "id": "art-30",
+      "titolo": "Art. 30 Mancata pesca o raccolta",
+      "pagina": 33,
+      "ancora": "Art. 30"
+    },
+    {
+      "id": "art-31",
+      "titolo": "Art. 31 Pesca o raccolta fuori turno",
+      "pagina": 34,
+      "ancora": "Art. 31"
+    },
+    {
+      "id": "art-32",
+      "titolo": "Art. 32 Gioco fuori turno",
+      "pagina": 36,
+      "ancora": "Art. 32"
+    },
+    {
+      "id": "art-33",
+      "titolo": "Art. 33 Chiusura con mancanza di burraco",
+      "pagina": 36,
+      "ancora": "Art. 33"
+    },
+    {
+      "id": "art-34",
+      "titolo": "Art. 34 Chiusura con scarto della matta",
+      "pagina": 36,
+      "ancora": "Art. 34"
+    },
+    {
+      "id": "art-35",
+      "titolo": "Art. 35 Chiusura senza scarto",
+      "pagina": 36,
+      "ancora": "Art. 35"
+    },
+    {
+      "id": "art-36",
+      "titolo": "Art. 36 Mancato conteggio dei punti",
+      "pagina": 37,
+      "ancora": "Art. 36"
+    },
+    {
+      "id": "art-37",
+      "titolo": "Art. 37 Tempi di gioco",
+      "pagina": 37,
+      "ancora": "Art. 37"
+    },
+    {
+      "id": "art-38",
+      "titolo": "Art. 38 Sostituzioni - Assenze - Abbandono",
+      "pagina": 38,
+      "ancora": "Art. 38"
+    },
+    {
+      "id": "art-40",
+      "titolo": "Art. 40 Ritardi",
+      "pagina": 40,
+      "ancora": "Art. 40"
+    },
+    {
+      "id": "art-41",
+      "titolo": "Art. 41 Interruzione di un torneo",
+      "pagina": 40,
+      "ancora": "Art. 41"
+    },
+    {
+      "id": "i-poteri-dellarbitro",
+      "titolo": "I poteri dell’Arbitro",
+      "pagina": 41,
+      "ancora": "I poteri dell’Arbitro"
+    },
+    {
+      "id": "norme-comportamentali",
+      "titolo": "Norme comportamentali",
+      "pagina": 42,
+      "ancora": "Norme comportamentali"
+    },
+    {
+      "id": "tavoli-provvisti-di-separe-e-paramani",
+      "titolo": "Tavoli provvisti di separè e paramani",
+      "pagina": 43,
+      "ancora": "Tavoli provvisti di separè"
+    }
+  ]
+}
