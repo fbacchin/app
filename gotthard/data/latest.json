@@ -1,12 +1,39 @@
 {
- "time": "2026-07-31T23:00:32Z",
+ "time": "2026-07-31T23:05:37Z",
  "south": {
-  "km": null,
+  "km": 1.0,
   "wait": null
  },
  "north": {
-  "km": null,
+  "km": 2.0,
   "wait": null
  },
- "events": []
+ "events": [
+  {
+   "id": "situation.642572.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "south",
+   "versionTime": "2026-07-31T23:03:18Z",
+   "km": 1.0,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung",
+    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic",
+    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato"
+   }
+  },
+  {
+   "id": "situation.642402.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "north",
+   "versionTime": "2026-07-31T23:02:16Z",
+   "km": 2.0,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 2 Ursache: Verkehrsüberlastung",
+    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 2 Raison: surcharge de trafic",
+    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 2 Causa: traffico congestionato"
+   }
+  }
+ ]
 }
