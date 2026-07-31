@@ -1,14 +1,27 @@
 {
- "time": "2026-07-31T13:03:35Z",
+ "time": "2026-07-31T13:08:40Z",
  "south": {
   "km": 4.0,
   "wait": 40
  },
  "north": {
   "km": 6.0,
-  "wait": null
+  "wait": 20
  },
  "events": [
+  {
+   "id": "situation.642489.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": null,
+   "versionTime": "2026-07-31T13:07:40Z",
+   "km": null,
+   "wait": 20,
+   "texts": {
+    "de": "Freigegeben: H2 Bellinzona -> Airolo zwischen Ortschaft Piotta und Ortschaft Madrano Sachlage: Stau Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1: Zeitverlust Anz. [min] 20",
+    "fr": "Libéré: H2 Bellinzone -> Airolo entre Localité Piotta et Localité Madrano Situation: bouchon Raison: travaux de construction Gestion du trafic: circulation alternée à une voie Complément 1: retards Nbre. [min] 20",
+    "it": "Approvato: H2 Bellinzona -> Airolo tra Luogo Piotta E Luogo Madrano Situazione: colonna Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: ritardi No. [min] 20"
+   }
+  },
   {
    "id": "situation.642402.1.1.1",
    "type": "AbnormalTraffic",
