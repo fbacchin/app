@@ -51,14 +51,18 @@
   details { border-bottom: 1px solid var(--line); padding: 12px 0; }
   details:last-of-type { border-bottom: none; }
   summary { cursor: pointer; font-weight: 600; }
-  details p { margin-top: 8px; color: var(--ink-soft); }
+  details p { margin-top: 8px; color: var(--ink-soft); text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
   a { color: var(--accent); }
   table { width: 100%; border-collapse: collapse; font-size: .95em; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th, td { text-align: left; padding: 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
   th { color: var(--ink-soft); font-weight: 600; }
+  td:first-child { width: 45%; }
+  td:last-child { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+  .appname { display: block; font-weight: 600; }
   .plat {
-    display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px;
+    display: inline-block; margin-top: 6px; padding: 1px 8px; border-radius: 999px;
     background: var(--accent-soft); color: var(--accent); font-size: .78em; font-weight: 600;
+    white-space: nowrap;
   }
   footer { color: var(--ink-soft); font-size: .85em; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; }
 </style>
@@ -81,10 +85,10 @@
   <div class="card">
     <table>
       <tr><th>App</th><th>Che cos'è</th></tr>
-      <tr><td>Burraco Score <span class="plat">iPhone</span></td><td>La versione a pagamento. Funzioni identiche, nessuna pubblicità.</td></tr>
-      <tr><td>Burraco Light <span class="plat">iPhone</span></td><td>La versione gratuita, sostenuta dalla pubblicità.</td></tr>
-      <tr><td>Burraco Score HD <span class="plat">iPad</span></td><td>La versione a pagamento per iPad. Funzioni identiche, nessuna pubblicità.</td></tr>
-      <tr><td>Burraco Score HD Light <span class="plat">iPad</span></td><td>La versione gratuita per iPad, sostenuta dalla pubblicità.</td></tr>
+      <tr><td><span class="appname">Burraco Score</span><span class="plat">iPhone</span></td><td>La versione a pagamento. Funzioni identiche, nessuna pubblicità.</td></tr>
+      <tr><td><span class="appname">Burraco Light</span><span class="plat">iPhone</span></td><td>La versione gratuita, sostenuta dalla pubblicità.</td></tr>
+      <tr><td><span class="appname">Burraco Score HD</span><span class="plat">iPad</span></td><td>La versione a pagamento per iPad. Funzioni identiche, nessuna pubblicità.</td></tr>
+      <tr><td><span class="appname">Burraco Score HD Light</span><span class="plat">iPad</span></td><td>La versione gratuita per iPad, sostenuta dalla pubblicità.</td></tr>
     </table>
   </div>
 
