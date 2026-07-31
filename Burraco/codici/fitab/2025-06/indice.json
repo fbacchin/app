@@ -1,0 +1,344 @@
+{
+  "schemaVersion": 1,
+  "codiceId": "fitab",
+  "edizione": "Giugno 2025",
+  "edizioneId": "2025-06",
+  "voci": [
+    {
+      "id": "definizioni",
+      "titolo": "Definizioni",
+      "pagina": 3,
+      "ancora": "Definizioni"
+    },
+    {
+      "id": "art-1",
+      "titolo": "Art. 1 Mazzo di carte",
+      "pagina": 6,
+      "ancora": "Art. 1"
+    },
+    {
+      "id": "art-2",
+      "titolo": "Art. 2 Composizione dei tavoli",
+      "pagina": 6,
+      "ancora": "Art. 2"
+    },
+    {
+      "id": "art-3",
+      "titolo": "Art. 3 Preparazione e svolgimento del gioco",
+      "pagina": 7,
+      "ancora": "Art. 3"
+    },
+    {
+      "id": "art-4",
+      "titolo": "Art. 4 Mazziere, mescolatura, distribuzione delle carte e composizione dei pozzetti",
+      "pagina": 7,
+      "ancora": "Art. 4"
+    },
+    {
+      "id": "art-5",
+      "titolo": "Art. 5 Turni di gioco (tempi)",
+      "pagina": 8,
+      "ancora": "Art. 5"
+    },
+    {
+      "id": "art-5-bis",
+      "titolo": "Art. 5/bis – Turno di gioco con tendine e paramani",
+      "pagina": 8,
+      "ancora": "Art. 5/bis"
+    },
+    {
+      "id": "art-6",
+      "titolo": "Art. 6 Procedure e inizio del gioco",
+      "pagina": 9,
+      "ancora": "Art. 6"
+    },
+    {
+      "id": "art-7",
+      "titolo": "Art. 7 Pesca dal tallone",
+      "pagina": 9,
+      "ancora": "Art. 7"
+    },
+    {
+      "id": "art-8",
+      "titolo": "Art. 8 Raccolta dal monte degli scarti",
+      "pagina": 9,
+      "ancora": "Art. 8"
+    },
+    {
+      "id": "art-9",
+      "titolo": "Art. 9 Combinazioni e sequenze",
+      "pagina": 10,
+      "ancora": "Art. 9"
+    },
+    {
+      "id": "art-10",
+      "titolo": "Art. 10 Jolly e pinelle",
+      "pagina": 10,
+      "ancora": "Art. 10"
+    },
+    {
+      "id": "art-11",
+      "titolo": "Art. 11 Sequenze",
+      "pagina": 10,
+      "ancora": "Art. 11"
+    },
+    {
+      "id": "art-12",
+      "titolo": "Art. 12 Combinazioni",
+      "pagina": 11,
+      "ancora": "Art. 12"
+    },
+    {
+      "id": "art-13",
+      "titolo": "Art. 13 Burraco",
+      "pagina": 11,
+      "ancora": "Art. 13"
+    },
+    {
+      "id": "art-14",
+      "titolo": "Art. 14 Scarto delle matte",
+      "pagina": 11,
+      "ancora": "Art. 14"
+    },
+    {
+      "id": "art-15",
+      "titolo": "Art. 15 Time out",
+      "pagina": 11,
+      "ancora": "Art. 15"
+    },
+    {
+      "id": "art-16",
+      "titolo": "Art. 16 Stallo",
+      "pagina": 12,
+      "ancora": "Art. 16"
+    },
+    {
+      "id": "art-17",
+      "titolo": "Art. 17 Chiusure (tipologie e bonus)",
+      "pagina": 12,
+      "ancora": "Art. 17"
+    },
+    {
+      "id": "art-18",
+      "titolo": "Art. 18 Conteggio dei punti",
+      "pagina": 12,
+      "ancora": "Art. 18"
+    },
+    {
+      "id": "art-19",
+      "titolo": "Art. 19 Score (compilazione e consegna)",
+      "pagina": 13,
+      "ancora": "Art. 19"
+    },
+    {
+      "id": "art-20",
+      "titolo": "Art. 20 Score (errori e correzioni)",
+      "pagina": 14,
+      "ancora": "Art. 20"
+    },
+    {
+      "id": "art-21",
+      "titolo": "Art. 21 Irregolarità ",
+      "pagina": 15,
+      "ancora": "Art. 21"
+    },
+    {
+      "id": "art-22",
+      "titolo": "Art. 22 Pozzetti irregolari / Erronea presa di pozzetto",
+      "pagina": 15,
+      "ancora": "Art. 22"
+    },
+    {
+      "id": "art-23",
+      "titolo": "Art. 23 Carta esposta",
+      "pagina": 17,
+      "ancora": "Art. 23"
+    },
+    {
+      "id": "art-24",
+      "titolo": "Art. 24 Carta penalizzata / Carta fantasma",
+      "pagina": 17,
+      "ancora": "Art. 24"
+    },
+    {
+      "id": "art-25",
+      "titolo": "Art. 25 Carta penalizzante",
+      "pagina": 18,
+      "ancora": "Art. 25"
+    },
+    {
+      "id": "art-26",
+      "titolo": "Art. 26 Carte mancanti o eccedenti",
+      "pagina": 18,
+      "ancora": "Art. 26"
+    },
+    {
+      "id": "art-27",
+      "titolo": "Art. 27 Aperture errate / Aperture incomplete",
+      "pagina": 19,
+      "ancora": "Art. 27"
+    },
+    {
+      "id": "art-28",
+      "titolo": "Art. 28 Giochi con carte eccedenti",
+      "pagina": 19,
+      "ancora": "Art. 28"
+    },
+    {
+      "id": "art-29",
+      "titolo": "Art. 29 Mancata pesca o raccolta",
+      "pagina": 20,
+      "ancora": "Art. 29"
+    },
+    {
+      "id": "art-30",
+      "titolo": "Art. 30 Pesca / Raccolta fuori turno",
+      "pagina": 20,
+      "ancora": "Art. 30"
+    },
+    {
+      "id": "art-30-bis",
+      "titolo": "Art. 30/bis – Gioco fuori turno senza pescare o raccogliere",
+      "pagina": 23,
+      "ancora": "Art. 30/bis"
+    },
+    {
+      "id": "art-31",
+      "titolo": "Art. 31 Apertura di combinazioni uguali",
+      "pagina": 23,
+      "ancora": "Art. 31"
+    },
+    {
+      "id": "art-32",
+      "titolo": "Art. 32 Chiusura",
+      "pagina": 23,
+      "ancora": "Art. 32"
+    },
+    {
+      "id": "art-33",
+      "titolo": "Art. 33 Mancato conteggio dei punti",
+      "pagina": 25,
+      "ancora": "Art. 33"
+    },
+    {
+      "id": "art-34",
+      "titolo": "Art. 34 Tempi di gioco",
+      "pagina": 25,
+      "ancora": "Art. 34"
+    },
+    {
+      "id": "art-35",
+      "titolo": "Art. 35 Lancio",
+      "pagina": 25,
+      "ancora": "Art. 35"
+    },
+    {
+      "id": "art-36",
+      "titolo": "Art. 36 Interruzione della smazzata",
+      "pagina": 26,
+      "ancora": "Art. 36"
+    },
+    {
+      "id": "art-37",
+      "titolo": "Art. 37 Abbandono",
+      "pagina": 27,
+      "ancora": "Art. 37"
+    },
+    {
+      "id": "art-37-bis",
+      "titolo": "Art. 37/bis Abbandono forzato",
+      "pagina": 28,
+      "ancora": "Art. 37/bis"
+    },
+    {
+      "id": "art-38",
+      "titolo": "Art. 38 Ritardo",
+      "pagina": 28,
+      "ancora": "Art. 38"
+    },
+    {
+      "id": "art-38-bis",
+      "titolo": "Art. 38/bis Ritardo ad inizio torneo",
+      "pagina": 29,
+      "ancora": "Art. 38/bis"
+    },
+    {
+      "id": "art-39",
+      "titolo": "Art. 39 Interruzione forzata di un torneo",
+      "pagina": 29,
+      "ancora": "Art. 39"
+    },
+    {
+      "id": "art-40",
+      "titolo": "Art. 40 Diritti acquisiti",
+      "pagina": 29,
+      "ancora": "Art. 40"
+    },
+    {
+      "id": "art-41",
+      "titolo": "Art. 41 Giuria (composizione)",
+      "pagina": 29,
+      "ancora": "Art. 41"
+    },
+    {
+      "id": "i-poteri-dellarbitro",
+      "titolo": "I POTERI DELL’ARBITRO",
+      "pagina": 30,
+      "ancora": "I POTERI DELL’ARBITRO"
+    },
+    {
+      "id": "norme-comportamentali",
+      "titolo": "NORME COMPORTAMENTALI",
+      "pagina": 30,
+      "ancora": "NORME COMPORTAMENTALI"
+    },
+    {
+      "id": "il-codice-del-burraco-internazionale",
+      "titolo": "IL CODICE DEL BURRACO INTERNAZIONALE",
+      "pagina": 32,
+      "ancora": "IL CODICE DEL BURRACO"
+    },
+    {
+      "id": "regola-1",
+      "titolo": "REGOLA 1 - BURRACO PULITO OBBLIGATORIO",
+      "pagina": 32,
+      "ancora": "REGOLA 1"
+    },
+    {
+      "id": "regola-2",
+      "titolo": "REGOLA 2 - COMBINAZIONI AMMESSE: SOLTANTO DI ASSI E TRE",
+      "pagina": 32,
+      "ancora": "REGOLA 2"
+    },
+    {
+      "id": "regola-3",
+      "titolo": "REGOLA 3 – RACCOLTA DAL MONTE DEGLI SCARTI",
+      "pagina": 32,
+      "ancora": "REGOLA 3"
+    },
+    {
+      "id": "regola-4",
+      "titolo": "REGOLA 4 - TALLONE",
+      "pagina": 32,
+      "ancora": "REGOLA 4"
+    },
+    {
+      "id": "regole-di-gioco",
+      "titolo": "Regole di gioco",
+      "pagina": 32,
+      "ancora": "Regole di gioco"
+    },
+    {
+      "id": "tempi-di-gioco-del-burraco-internazionale",
+      "titolo": "Tempi di gioco del burraco internazionale",
+      "pagina": 34,
+      "ancora": "Tempi di gioco del"
+    },
+    {
+      "id": "edizione",
+      "titolo": "Edizione 01 Giugno 2025",
+      "pagina": 1,
+      "ancora": "Edizione 01 Giugno 2025"
+    }
+  ]
+}

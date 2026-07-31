@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "aggiornato": "2026-07-31",
+  "codici": [
+    {
+      "id": "fibur",
+      "nome": "Fibur",
+      "titolo": "Codice di Gara Fibur",
+      "edizione": "Aprile 2024",
+      "edizioneId": "2024-04",
+      "pdf": {
+        "url": "https://fbacchin.github.io/app/Burraco/codici/fibur/2024-04/codice.pdf",
+        "sha256": "dc84e6dc1e25d2f2700aa6ac13ed7b0d984b728a6ad4a92b0f775cf19864f565",
+        "bytes": 2071304
+      },
+      "indice": {
+        "url": "https://fbacchin.github.io/app/Burraco/codici/fibur/2024-04/indice.json",
+        "sha256": "4c64b86671f685e5fece15866319d52731ce8cf3923df10c1c01d59da67db28f",
+        "voci": 45
+      }
+    },
+    {
+      "id": "fitab",
+      "nome": "Fitab",
+      "titolo": "Codice di Gara Fitab",
+      "edizione": "Giugno 2025",
+      "edizioneId": "2025-06",
+      "pdf": {
+        "url": "https://fbacchin.github.io/app/Burraco/codici/fitab/2025-06/codice.pdf",
+        "sha256": "d239a1ff357cb54be1fc15ca4798d5798aa78a371f671905b7b17c12ad648fd7",
+        "bytes": 861592
+      },
+      "indice": {
+        "url": "https://fbacchin.github.io/app/Burraco/codici/fitab/2025-06/indice.json",
+        "sha256": "6bb87b1c10496c139453a14d054463e4b32218bac119591643ec411a3c353cd4",
+        "voci": 56
+      }
+    }
+  ]
+}
