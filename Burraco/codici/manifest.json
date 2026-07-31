@@ -6,33 +6,33 @@
       "id": "fibur",
       "nome": "Fibur",
       "titolo": "Codice di Gara Fibur",
-      "edizione": "Aprile 2024",
-      "edizioneId": "2024-04",
+      "edizione": "Gennaio 2026",
+      "edizioneId": "2026-01",
       "pdf": {
-        "url": "https://fbacchin.github.io/app/Burraco/codici/fibur/2024-04/codice.pdf",
-        "sha256": "dc84e6dc1e25d2f2700aa6ac13ed7b0d984b728a6ad4a92b0f775cf19864f565",
-        "bytes": 2071304
+        "url": "https://fbacchin.github.io/app/Burraco/codici/fibur/2026-01/codice.pdf",
+        "sha256": "7327d08815e2e6c1c464446bc6c03b46b798ecf276d23f2178c7bcf25f45c91a",
+        "bytes": 1854553
       },
       "indice": {
-        "url": "https://fbacchin.github.io/app/Burraco/codici/fibur/2024-04/indice.json",
-        "sha256": "4c64b86671f685e5fece15866319d52731ce8cf3923df10c1c01d59da67db28f",
-        "voci": 45
+        "url": "https://fbacchin.github.io/app/Burraco/codici/fibur/2026-01/indice.json",
+        "sha256": "d070b423bd3a4cb5e2d6ff60aa7230d529cb1227b61182e77b676f66d1fda35d",
+        "voci": 46
       }
     },
     {
       "id": "fitab",
       "nome": "Fitab",
       "titolo": "Codice di Gara Fitab",
-      "edizione": "Giugno 2025",
-      "edizioneId": "2025-06",
+      "edizione": "Aprile 2026",
+      "edizioneId": "2026-04",
       "pdf": {
-        "url": "https://fbacchin.github.io/app/Burraco/codici/fitab/2025-06/codice.pdf",
-        "sha256": "d239a1ff357cb54be1fc15ca4798d5798aa78a371f671905b7b17c12ad648fd7",
-        "bytes": 861592
+        "url": "https://fbacchin.github.io/app/Burraco/codici/fitab/2026-04/codice.pdf",
+        "sha256": "f5b9fac4ccc2230db9d14070cb0047ad707fe96e0984b482b7491b381e639a32",
+        "bytes": 913416
       },
       "indice": {
-        "url": "https://fbacchin.github.io/app/Burraco/codici/fitab/2025-06/indice.json",
-        "sha256": "6bb87b1c10496c139453a14d054463e4b32218bac119591643ec411a3c353cd4",
+        "url": "https://fbacchin.github.io/app/Burraco/codici/fitab/2026-04/indice.json",
+        "sha256": "d68ede240c10c8a6c2a851e88909bb6f84b38b30770733a245232fb0821090dc",
         "voci": 56
       }
     }
