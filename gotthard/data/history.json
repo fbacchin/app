@@ -3969,25 +3969,25 @@
  {
   "time": "2026-08-01T08:58:45Z",
   "southDelay": 80,
-  "northDelay": 70,
+  "northDelay": 30,
   "southQueueKm": 8.0,
-  "northQueueKm": 7.0
+  "northQueueKm": 3.0
  },
  {
   "time": "2026-08-01T09:08:51Z",
   "southDelay": 80,
-  "northDelay": 70,
+  "northDelay": 30,
   "southQueueKm": 8.0,
-  "northQueueKm": 7.0,
+  "northQueueKm": 3.0,
   "southHeld": true,
   "northHeld": true
  },
  {
   "time": "2026-08-01T09:13:56Z",
   "southDelay": 80,
-  "northDelay": 70,
+  "northDelay": 30,
   "southQueueKm": 8.0,
-  "northQueueKm": 7.0,
+  "northQueueKm": 3.0,
   "southHeld": true,
   "northHeld": true
  },
