@@ -1,6 +1,66 @@
 [
  {
   "firstSeen": "2026-08-01T14:02:08Z",
+  "id": "situation.642572.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "south",
+  "versionTime": "2026-08-01T14:47:35Z",
+  "km": 2.0,
+  "wait": 20,
+  "texts": {
+   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 2.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
+   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
+   "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
+  },
+  "lastSeen": "2026-08-01T15:09:00Z"
+ },
+ {
+  "firstSeen": "2026-08-01T14:02:08Z",
+  "id": "situation.642611.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": null,
+  "versionTime": "2026-08-01T08:04:52Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: H2 Bellinzona <-> Göschenen zwischen Ortschaft Faido und Anschluss Airolo-Nufenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
+   "fr": "Libéré: H2 Bellinzone <-> Göschenen entre Localité Faido et Jonction autoroutière Airolo-Nufenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
+   "it": "Approvato: H2 Bellinzona <-> Göschenen tra Luogo Faido E Svincolo autostradale Airolo-Nufenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
+  },
+  "lastSeen": "2026-08-01T15:09:00Z"
+ },
+ {
+  "firstSeen": "2026-08-01T14:02:08Z",
+  "id": "situation.642644.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": null,
+  "versionTime": "2026-08-01T13:07:02Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Pass Gotthard-Pass und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung",
+   "fr": "Libéré: H2 Airolo -> Flüelen entre Col Col du St-Gothard et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic",
+   "it": "Approvato: H2 Airolo -> Flüelen tra Passo Passo del S. Gottardo E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato"
+  },
+  "lastSeen": "2026-08-01T15:09:00Z"
+ },
+ {
+  "firstSeen": "2026-08-01T14:02:08Z",
+  "id": "situation.642575.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "north",
+  "versionTime": "2026-08-01T14:33:57Z",
+  "km": 5.0,
+  "wait": 50,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Anschluss Airolo Sachlage: Stau Länge [km] 5.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 50",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: bouchon longueur [km] 5.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 50",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: colonna lunghezza [km] 5.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 50"
+  },
+  "lastSeen": "2026-08-01T15:09:00Z"
+ },
+ {
+  "firstSeen": "2026-08-01T14:02:08Z",
   "id": "situation.642580.1.1.1",
   "type": "RoadOrCarriagewayOrLaneManagement",
   "direction": "north",
@@ -27,52 +87,8 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Göschenen Situation: entrée fermée",
    "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-08-01T14:37:47Z"
- },
- {
-  "firstSeen": "2026-08-01T14:02:08Z",
-  "id": "situation.642572.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "south",
-  "versionTime": "2026-08-01T14:14:10Z",
-  "km": 4.0,
-  "wait": 40,
-  "texts": {
-   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Anschluss Göschenen Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
-   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
-   "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
-  },
-  "lastSeen": "2026-08-01T14:37:47Z"
- },
- {
-  "firstSeen": "2026-08-01T14:02:08Z",
-  "id": "situation.642611.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-08-01T08:04:52Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Bellinzona <-> Göschenen zwischen Ortschaft Faido und Anschluss Airolo-Nufenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
-   "fr": "Libéré: H2 Bellinzone <-> Göschenen entre Localité Faido et Jonction autoroutière Airolo-Nufenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
-   "it": "Approvato: H2 Bellinzona <-> Göschenen tra Luogo Faido E Svincolo autostradale Airolo-Nufenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
-  },
-  "lastSeen": "2026-08-01T14:37:47Z"
- },
- {
-  "firstSeen": "2026-08-01T14:02:08Z",
-  "id": "situation.642644.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-08-01T13:07:02Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Pass Gotthard-Pass und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung",
-   "fr": "Libéré: H2 Airolo -> Flüelen entre Col Col du St-Gothard et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic",
-   "it": "Approvato: H2 Airolo -> Flüelen tra Passo Passo del S. Gottardo E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato"
-  },
-  "lastSeen": "2026-08-01T14:37:47Z"
+  "lastSeen": "2026-08-01T14:37:47Z",
+  "revokedAt": "2026-08-01T15:09:00Z"
  },
  {
   "firstSeen": "2026-08-01T14:02:08Z",
@@ -87,21 +103,7 @@
    "fr": "Libéré: H2 Flüelen -> Göschenen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
    "it": "Approvato: H2 Flüelen -> Göschenen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
   },
-  "lastSeen": "2026-08-01T14:37:47Z"
- },
- {
-  "firstSeen": "2026-08-01T14:02:08Z",
-  "id": "situation.642575.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-08-01T12:19:56Z",
-  "km": 6.0,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Anschluss Airolo Sachlage: Stau Länge [km] 6 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [h] 1",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: bouchon longueur [km] 6 Raison: surcharge de trafic Complément 1: retards Nbre. [h] 1",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: colonna lunghezza [km] 6 Causa: traffico congestionato Aggiunta 1: ritardi No. [h] 1"
-  },
-  "lastSeen": "2026-08-01T14:27:37Z"
+  "lastSeen": "2026-08-01T14:37:47Z",
+  "revokedAt": "2026-08-01T15:09:00Z"
  }
 ]
