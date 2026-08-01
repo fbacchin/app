@@ -183,7 +183,6 @@ def extract(xml_data):
     now = datetime.now(timezone.utc)
     state = {"south": {"km": None, "wait": None}, "north": {"km": None, "wait": None}}
     events = []
-    revocations = set()
 
     for record in (e for e in root.iter() if local(e.tag) == "situationRecord"):
         typename = localtype(record.get(xsi_type, ""))
@@ -207,7 +206,8 @@ def extract(xml_data):
             continue
 
         lower = text.lower()
-        revoked = lower.startswith(("revocato", "aufgehoben", "révoqué"))
+        if lower.startswith(("revocato", "aufgehoben", "révoqué")):
+            continue
         if not any(k in lower for k in CORRIDOR):
             continue
 
@@ -225,17 +225,6 @@ def extract(xml_data):
         km = queue_km(text)
         wait = wait_minutes(text)
         direction = direction_of(lower)
-
-        # La revoca è l'unico modo in cui la fonte annuncia che una coda è
-        # finita: la si annota per direzione, poi il messaggio esce di scena
-        # (non va né fra gli avvisi mostrati né nello stato).
-        if revoked:
-            if typename == "AbnormalTraffic" and age <= FRESHNESS:
-                for d in ([direction] if direction else ["south", "north"]):
-                    portal = SOUTH_PORTAL if d == "south" else NORTH_PORTAL
-                    if any(k in lower for k in portal):
-                        revocations.add(d)
-            continue
 
         # eventi: finestra 12 ore, come la lista avvisi dell'app
         if age <= timedelta(hours=12):
@@ -271,7 +260,7 @@ def extract(xml_data):
     ), reverse=False)
     events.sort(key=lambda e: e["versionTime"], reverse=True)
     events.sort(key=lambda e: not (e["km"] is not None or e["wait"] is not None))
-    return state, events[:20], revocations
+    return state, events[:20]
 
 
 def delay_minutes(entry):
@@ -373,128 +362,23 @@ def update_notifications(state, now):
     state_file.write_text(json.dumps(push_state, indent=1))
 
 
-def hold_through_gaps(state, revocations, history, now):
-    """Un messaggio assente non significa «coda finita».
-
-    La fonte annuncia la fine con una **revoca esplicita** (prefisso
-    «Revocato:»). Se il messaggio sparisce senza revoca è quasi sempre un buco
-    del feed, e scrivere 0 inventa uno sgonfiamento che non è avvenuto: in quel
-    caso si tiene l'ultimo valore osservato.
-
-    Tre limiti, perché non resti appesa una coda che è davvero finita:
-
-    - se la revoca c'è, si scrive 0 senza discutere;
-    - non si tiene oltre CLEAR_CONFIRM dall'ultima osservazione diretta, così
-      una revoca sfuggita costa venti minuti, non l'eternità;
-    - non si tiene a partire da una coda vista **una volta sola**: il feed
-      riemette a volte un ultimo messaggio di una coda già chiusa, e senza
-      questo controllo quell'eco diventerebbe un plateau di venti minuti
-      (stessa logica di drop_feed_echoes).
-    """
-    for side in ("south", "north"):
-        if state[side]["km"] is not None or state[side]["wait"] is not None:
-            continue
-        if side in revocations:
-            continue
-
-        km_key, delay_key = f"{side}QueueKm", f"{side}Delay"
-        recent = history[-2:]
-        if len(recent) < 2 or not all(s.get(km_key) for s in recent):
-            continue
-
-        observed = None
-        for past in reversed(history):
-            if not past.get(km_key):
-                break
-            if not past.get(f"{side}Held"):
-                observed = past
-                break
-        if observed is None:
-            continue
-        seen_at = parse_time(observed.get("time", ""))
-        if seen_at is None or now - seen_at > CLEAR_CONFIRM:
-            continue
-
-        state[side]["km"] = observed[km_key]
-        state[side]["wait"] = observed[delay_key]
-        state[side]["held"] = True
-    return state
-
-
-def drop_feed_echoes(history):
-    """Toglie le code isolate, l'altra faccia del lampeggio del feed.
-
-    Quando una coda finisce davvero, il messaggio ufficiale viene talvolta
-    riemesso un'ultima volta a distanza di minuti: nello storico compare un
-    picco largo **un solo campione**, con lo stesso identico chilometraggio
-    dell'episodio appena concluso. Otto chilometri di auto non si formano e
-    si dissolvono in cinque minuti.
-
-    La soglia non è arbitraria: su 48h reali gli episodi veri vanno da 4 a
-    215 campioni (10-1082 minuti), gli echi da 1 campione (0 minuti). Si
-    scarta quindi solo l'episodio lungo un campione, isolato fra due assenze.
-
-    L'**ultimo** campione dello storico è esente: una coda appena nata è
-    indistinguibile da un eco finché non arriva il campione successivo, e
-    fra i due è meno grave mostrare una coda in più per cinque minuti che
-    nasconderne una vera a chi sta per partire.
-
-    Va eseguita PRIMA di fill_feed_gaps: un eco lasciato al suo posto
-    farebbe da àncora e la ricucitura estenderebbe all'indietro una coda
-    che era già finita.
-    """
-    for side in ("south", "north"):
-        delay_key, km_key = f"{side}Delay", f"{side}QueueKm"
-        for i in range(1, len(history) - 1):
-            if (history[i][km_key]
-                    and not history[i - 1][km_key]
-                    and not history[i + 1][km_key]):
-                history[i][delay_key], history[i][km_key] = 0, None
-    return history
-
-
-def fill_feed_gaps(history):
-    """Ricuce i buchi del feed nello storico.
-
-    All'area di dosaggio di Airolo il messaggio ufficiale non resta pubblicato
-    per tutta la durata della coda: viene revocato e riemesso a impulsi. Il
-    campione grezzo registra allora 8 km, poi 0, poi di nuovo 8 km, e il
-    grafico dell'app diventa un'onda quadra impossibile.
-
-    Si riempiono SOLO i buchi **racchiusi fra due campioni con coda** distanti
-    non più di CLEAR_CONFIRM: la ricomparsa della coda è la prova che non era
-    mai finita. Una fine vera non ha nulla dopo di sé, quindi resta 0 — stessa
-    soglia e stessa logica delle notifiche (vedi update_notifications).
-    Si usa il minore dei due estremi: mai inventare una coda più lunga di
-    quanto le autorità abbiano effettivamente pubblicato.
-
-    L'operazione è idempotente: rigirarla sullo storico già ricucito non trova
-    altri buchi, quindi ogni run ripara anche i campioni vecchi ancora in
-    finestra senza accumulare effetti.
-    """
-    for side in ("south", "north"):
-        delay_key, km_key = f"{side}Delay", f"{side}QueueKm"
-        queued = [i for i, s in enumerate(history) if s.get(km_key)]
-        for start, end in zip(queued, queued[1:]):
-            if end - start < 2:
-                continue
-            t_start, t_end = parse_time(history[start]["time"]), parse_time(history[end]["time"])
-            if not t_start or not t_end or t_end - t_start > CLEAR_CONFIRM:
-                continue
-            delay = min(history[start][delay_key] or 0, history[end][delay_key] or 0)
-            km = min(history[start][km_key], history[end][km_key])
-            for gap in history[start + 1:end]:
-                gap[delay_key], gap[km_key] = delay, km
-    return history
-
-
 def main():
     api_key = os.environ.get("OTD_API_KEY", "").strip()
     if not api_key:
         sys.exit("OTD_API_KEY mancante")
 
-    state, events, revocations = extract(fetch_feed(api_key))
+    state, events = extract(fetch_feed(api_key))
     now = datetime.now(timezone.utc).replace(microsecond=0)
+
+    update_notifications(state, now)
+
+    sample = {
+        "time": now.isoformat().replace("+00:00", "Z"),
+        "southDelay": delay_minutes(state["south"]),
+        "northDelay": delay_minutes(state["north"]),
+        "southQueueKm": state["south"]["km"],
+        "northQueueKm": state["north"]["km"],
+    }
 
     history = []
     if HISTORY_FILE.exists():
@@ -508,28 +392,7 @@ def main():
         s for s in history
         if (parse_time(s.get("time", "")) or cutoff) > cutoff
     ]
-
-    # Prima di ogni altra cosa: se il messaggio manca ma nessuno ne ha
-    # annunciato la revoca, la coda c'è ancora. Vale anche per le notifiche e
-    # per le schede dell'app, che leggono lo stesso stato.
-    hold_through_gaps(state, revocations, history, now)
-
-    update_notifications(state, now)
-
-    sample = {
-        "time": now.isoformat().replace("+00:00", "Z"),
-        "southDelay": delay_minutes(state["south"]),
-        "northDelay": delay_minutes(state["north"]),
-        "southQueueKm": state["south"]["km"],
-        "northQueueKm": state["north"]["km"],
-    }
-    for side in ("south", "north"):
-        if state[side].get("held"):
-            sample[f"{side}Held"] = True
-
     history.append(sample)
-    drop_feed_echoes(history)
-    fill_feed_gaps(history)
 
     HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
     HISTORY_FILE.write_text(json.dumps(history, indent=1))
