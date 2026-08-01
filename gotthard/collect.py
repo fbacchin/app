@@ -14,6 +14,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
@@ -95,6 +96,13 @@ PUSH_COOLDOWN = timedelta(minutes=45)
 # viene revocato e riemesso a impulsi, quindi un singolo buco nel feed non
 # significa che il traffico è tornato scorrevole.
 CLEAR_CONFIRM = timedelta(minutes=20)
+# Tetto della TENUTA anti-lampeggio (hold_through_gaps): quanto a lungo un
+# messaggio assente senza revoca viene considerato "buco del feed" e non
+# "coda finita". È separato da CLEAR_CONFIRM (che governa solo la notifica
+# di fine coda): il 01.08.2026 il feed è rimasto muto per 59 minuti con la
+# coda ferma a 8 km, quindi 20 minuti non bastavano. Con le revoche a fare
+# da interruttore, una fine annunciata azzera comunque subito.
+HOLD_WINDOW = timedelta(minutes=60)
 
 HISTORY_FILE = Path(__file__).parent / "data" / "history.json"
 WINDOW = timedelta(hours=48)
@@ -153,6 +161,13 @@ def direction_of(lower):
 
 
 def fetch_feed(api_key):
+    """Scarica il feed, con retry sugli errori transitori del server.
+
+    Nei giorni di punta (1. agosto…) opentransportdata.swiss risponde a
+    tratti 503: perdere l'intero giro per un errore momentaneo crea buchi
+    di 10-20 minuti nello storico. Si riprova due volte a distanza di 25
+    secondi; se il server resta giù, l'eccezione emerge come prima (il
+    giro salta, la tenuta copre il buco)."""
     request = urllib.request.Request(
         ENDPOINT,
         data=SOAP_BODY.encode("utf-8"),
@@ -162,8 +177,16 @@ def fetch_feed(api_key):
             "Content-Type": "text/xml; charset=utf-8",
         },
     )
-    with urllib.request.urlopen(request, timeout=120) as response:
-        data = response.read()
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request, timeout=120) as response:
+                data = response.read()
+            break
+        except urllib.error.HTTPError as exc:
+            if exc.code < 500 or attempt == 2:
+                raise
+            print(f"feed {exc.code}, riprovo fra 25 s (tentativo {attempt + 1}/3)")
+            time.sleep(25)
     # Il server comprime in gzip a prescindere dall'Accept-Encoding
     if data[:2] == b"\x1f\x8b":
         data = gzip.decompress(data)
@@ -384,7 +407,7 @@ def hold_through_gaps(state, revocations, history, now):
 
     Tre limiti, perché non resti appesa una coda davvero finita:
     - se la revoca c'è, si scrive 0 senza discutere;
-    - non si tiene oltre CLEAR_CONFIRM dall'ultima osservazione diretta;
+    - non si tiene oltre HOLD_WINDOW dall'ultima osservazione diretta;
     - non si tiene a partire da una coda vista una volta sola (un eco
       riemesso a coda già chiusa diventerebbe un plateau di 20 minuti).
 
@@ -412,7 +435,7 @@ def hold_through_gaps(state, revocations, history, now):
         if observed is None:
             continue
         seen_at = parse_time(observed.get("time", ""))
-        if seen_at is None or now - seen_at > CLEAR_CONFIRM:
+        if seen_at is None or now - seen_at > HOLD_WINDOW:
             continue
 
         state[side]["km"] = observed[km_key]
