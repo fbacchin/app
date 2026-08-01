@@ -48,7 +48,19 @@
   .updated { color: var(--ink-soft); margin: 6px 0 32px; font-size: .9em; }
   .tldr { background: var(--accent-soft); border-color: transparent; }
   h2 { color: var(--accent); font-size: 1.25em; margin: 36px 0 10px; }
-  p, li { margin-bottom: 10px; }
+  /* Testo giustificato. La sillabazione non è un vezzo: senza, in una colonna
+     stretta l'italiano — che ha parole lunghe — lascia buchi bianchi larghi fra
+     le parole. La lingua per sillabare la prende da <html lang="it">. */
+  /* `.tldr` sta nell'elenco perché il suo testo è dentro il div, senza <p>:
+     senza nominarlo resterebbe l'unico paragrafo non giustificato della pagina. */
+  p, li, .tldr {
+    margin-bottom: 10px;
+    text-align: justify;
+    -webkit-hyphens: auto; hyphens: auto;
+  }
+  /* Le righe di intestazione sono una o due: giustificarle allargherebbe gli
+     spazi dell'ultima riga senza guadagnarci niente. */
+  .tag, .updated { text-align: left; -webkit-hyphens: manual; hyphens: manual; }
   ul { padding-left: 22px; }
   .card {
     background: var(--card); border: 1px solid var(--line); border-radius: 14px;
