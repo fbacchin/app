@@ -1,33 +1,5 @@
 [
  {
-  "time": "2026-07-30T07:20:42Z",
-  "southDelay": 10,
-  "northDelay": 0,
-  "southQueueKm": 1.0,
-  "northQueueKm": null
- },
- {
-  "time": "2026-07-30T07:25:48Z",
-  "southDelay": 10,
-  "northDelay": 0,
-  "southQueueKm": 1.0,
-  "northQueueKm": null
- },
- {
-  "time": "2026-07-30T07:30:54Z",
-  "southDelay": 10,
-  "northDelay": 0,
-  "southQueueKm": 1.0,
-  "northQueueKm": null
- },
- {
-  "time": "2026-07-30T07:36:00Z",
-  "southDelay": 10,
-  "northDelay": 0,
-  "southQueueKm": 1.0,
-  "northQueueKm": null
- },
- {
   "time": "2026-07-30T07:41:06Z",
   "southDelay": 10,
   "northDelay": 0,
@@ -4022,6 +3994,13 @@
   "southDelay": 80,
   "northDelay": 30,
   "southQueueKm": 8.0,
+  "northQueueKm": 3.0
+ },
+ {
+  "time": "2026-08-01T07:37:01Z",
+  "southDelay": 90,
+  "northDelay": 30,
+  "southQueueKm": 9.0,
   "northQueueKm": 3.0
  }
 ]
