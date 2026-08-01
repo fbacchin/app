@@ -362,6 +362,38 @@ def update_notifications(state, now):
     state_file.write_text(json.dumps(push_state, indent=1))
 
 
+def drop_feed_echoes(history):
+    """Toglie le code isolate, l'altra faccia del lampeggio del feed.
+
+    Quando una coda finisce davvero, il messaggio ufficiale viene talvolta
+    riemesso un'ultima volta a distanza di minuti: nello storico compare un
+    picco largo **un solo campione**, con lo stesso identico chilometraggio
+    dell'episodio appena concluso. Otto chilometri di auto non si formano e
+    si dissolvono in cinque minuti.
+
+    La soglia non è arbitraria: su 48h reali gli episodi veri vanno da 4 a
+    215 campioni (10-1082 minuti), gli echi da 1 campione (0 minuti). Si
+    scarta quindi solo l'episodio lungo un campione, isolato fra due assenze.
+
+    L'**ultimo** campione dello storico è esente: una coda appena nata è
+    indistinguibile da un eco finché non arriva il campione successivo, e
+    fra i due è meno grave mostrare una coda in più per cinque minuti che
+    nasconderne una vera a chi sta per partire.
+
+    Va eseguita PRIMA di fill_feed_gaps: un eco lasciato al suo posto
+    farebbe da àncora e la ricucitura estenderebbe all'indietro una coda
+    che era già finita.
+    """
+    for side in ("south", "north"):
+        delay_key, km_key = f"{side}Delay", f"{side}QueueKm"
+        for i in range(1, len(history) - 1):
+            if (history[i][km_key]
+                    and not history[i - 1][km_key]
+                    and not history[i + 1][km_key]):
+                history[i][delay_key], history[i][km_key] = 0, None
+    return history
+
+
 def fill_feed_gaps(history):
     """Ricuce i buchi del feed nello storico.
 
@@ -428,6 +460,7 @@ def main():
         if (parse_time(s.get("time", "")) or cutoff) > cutoff
     ]
     history.append(sample)
+    drop_feed_echoes(history)
     fill_feed_gaps(history)
 
     HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
