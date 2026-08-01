@@ -147,6 +147,12 @@ def wait_minutes(text):
     match = re.search(r"ritardi\s*no\.\s*\[min\]\s*(\d+)", lower)
     if match:
         return int(match.group(1))
+    # Il VMZ pubblica l'attesa anche in ORE, coi decimali: "[h] 1.333" = 80 min.
+    # Senza questo caso il campo restava vuoto e si ripiegava sulla stima dai
+    # km (~10 min/km): con "[h] 2" su 6 km si mostravano 60 minuti invece di 120.
+    match = re.search(r"ritardi\s*no\.\s*\[h\]\s*(\d+(?:[.,]\d+)?)", lower)
+    if match:
+        return round(float(match.group(1).replace(",", ".")) * 60)
     match = re.search(
         r"(\d+)\s*(?:ora|ore|stunde|stunden|heure|heures)(?:\D{1,8}(\d+)\s*min)?", lower
     )
