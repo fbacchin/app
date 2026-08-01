@@ -107,6 +107,14 @@ HOLD_WINDOW = timedelta(minutes=60)
 HISTORY_FILE = Path(__file__).parent / "data" / "history.json"
 WINDOW = timedelta(hours=48)
 
+# Archivio degli avvisi ufficiali. Il feed ritira i messaggi a impulsi (lo
+# stesso lampeggio che colpiva le code): un avviso che sparisce per un giro
+# non è un avviso finito. Qui si accumulano per id, con firstSeen/lastSeen e
+# l'eventuale revoca esplicita, così l'app ha una lista stabile e si ottiene
+# uno storico degli avvisi che il feed da solo non conserva.
+ALERTS_FILE = Path(__file__).parent / "data" / "alerts.json"
+ALERTS_WINDOW = timedelta(hours=48)
+
 
 def local(tag):
     return tag.split("}")[-1]
@@ -207,6 +215,7 @@ def extract(xml_data):
     state = {"south": {"km": None, "wait": None}, "north": {"km": None, "wait": None}}
     events = []
     revocations = set()
+    revoked_ids = {}
 
     for record in (e for e in root.iter() if local(e.tag) == "situationRecord"):
         typename = localtype(record.get(xsi_type, ""))
@@ -258,6 +267,10 @@ def extract(xml_data):
                     portal = SOUTH_PORTAL if d == "south" else NORTH_PORTAL
                     if any(k in lower for k in portal):
                         revocations.add(d)
+            record_id = record.get("id", "")
+            if record_id:
+                revoked_ids[record_id] = now.replace(microsecond=0) \
+                    .isoformat().replace("+00:00", "Z")
             continue
 
         # eventi: finestra 12 ore, come la lista avvisi dell'app
@@ -294,7 +307,7 @@ def extract(xml_data):
     ), reverse=False)
     events.sort(key=lambda e: e["versionTime"], reverse=True)
     events.sort(key=lambda e: not (e["km"] is not None or e["wait"] is not None))
-    return state, events[:20], revocations
+    return state, events[:20], revocations, revoked_ids
 
 
 def delay_minutes(entry):
@@ -444,12 +457,64 @@ def hold_through_gaps(state, revocations, history, now):
     return state
 
 
+def update_alerts(events, revoked_ids, now):
+    """Accumula gli avvisi ufficiali in data/alerts.json.
+
+    Il feed non è un archivio: ritira i messaggi quando vuole — a volte per
+    un solo giro di campionamento, a volte definitivamente. Qui ogni avviso
+    viene tenuto per id: si aggiorna il contenuto a ogni riapparizione e si
+    annotano `firstSeen` (quando l'abbiamo visto la prima volta) e `lastSeen`
+    (l'ultimo giro in cui era pubblicato). Un avviso che sparisce per un giro
+    non viene perso, e l'app può distinguere «non più pubblicato» da «mai
+    esistito».
+
+    `revokedAt` registra la revoca esplicita, l'unico modo in cui la fonte
+    dichiara che un messaggio è chiuso.
+
+    Si conservano 48 ore dall'ultima volta che l'avviso è stato visto.
+    """
+    stamp = now.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+    alerts = []
+    if ALERTS_FILE.exists():
+        try:
+            alerts = json.loads(ALERTS_FILE.read_text())
+        except json.JSONDecodeError:
+            alerts = []
+    by_id = {a.get("id"): a for a in alerts if a.get("id")}
+
+    for event in events:
+        entry = by_id.get(event["id"])
+        if entry is None:
+            entry = {"firstSeen": stamp}
+            by_id[event["id"]] = entry
+        entry.update(event)
+        entry["lastSeen"] = stamp
+        entry.pop("revokedAt", None)   # ripubblicato: la revoca non vale più
+
+    for record_id, revoked_at in revoked_ids.items():
+        entry = by_id.get(record_id)
+        if entry is not None and "revokedAt" not in entry:
+            entry["revokedAt"] = revoked_at
+
+    cutoff = now - ALERTS_WINDOW
+    kept = [
+        a for a in by_id.values()
+        if (parse_time(a.get("lastSeen", "")) or cutoff) > cutoff
+    ]
+    kept.sort(key=lambda a: a.get("lastSeen", ""), reverse=True)
+
+    ALERTS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    ALERTS_FILE.write_text(json.dumps(kept, indent=1, ensure_ascii=False))
+    return kept
+
+
 def main():
     api_key = os.environ.get("OTD_API_KEY", "").strip()
     if not api_key:
         sys.exit("OTD_API_KEY mancante")
 
-    state, events, revocations = extract(fetch_feed(api_key))
+    state, events, revocations, revoked_ids = extract(fetch_feed(api_key))
     now = datetime.now(timezone.utc).replace(microsecond=0)
 
     history = []
@@ -494,10 +559,12 @@ def main():
         "north": state["north"],
         "events": events,
     }
+    alerts = update_alerts(events, revoked_ids, now)
+
     (HISTORY_FILE.parent / "latest.json").write_text(
         json.dumps(latest, indent=1, ensure_ascii=False)
     )
-    print(f"campione salvato: {sample} (totale {len(history)}, eventi {len(events)}, revoche {sorted(revocations) or '-'})")
+    print(f"campione salvato: {sample} (totale {len(history)}, eventi {len(events)}, archivio avvisi {len(alerts)}, revoche {sorted(revocations) or '-'})")
 
 
 if __name__ == "__main__":
