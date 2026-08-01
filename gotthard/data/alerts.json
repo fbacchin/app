@@ -1,6 +1,21 @@
 [
  {
   "firstSeen": "2026-08-01T14:02:08Z",
+  "id": "situation.642580.1.1.1",
+  "type": "RoadOrCarriagewayOrLaneManagement",
+  "direction": "north",
+  "versionTime": "2026-08-01T02:52:09Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
+  },
+  "lastSeen": "2026-08-01T14:48:44Z"
+ },
+ {
+  "firstSeen": "2026-08-01T14:02:08Z",
   "id": "situation.642578.1.1.1",
   "type": "RoadOrCarriagewayOrLaneManagement",
   "direction": "south",
@@ -41,21 +56,6 @@
    "de": "Freigegeben: H2 Bellinzona <-> Göschenen zwischen Ortschaft Faido und Anschluss Airolo-Nufenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
    "fr": "Libéré: H2 Bellinzone <-> Göschenen entre Localité Faido et Jonction autoroutière Airolo-Nufenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
    "it": "Approvato: H2 Bellinzona <-> Göschenen tra Luogo Faido E Svincolo autostradale Airolo-Nufenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
-  },
-  "lastSeen": "2026-08-01T14:37:47Z"
- },
- {
-  "firstSeen": "2026-08-01T14:02:08Z",
-  "id": "situation.642580.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": "north",
-  "versionTime": "2026-08-01T02:52:09Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
   "lastSeen": "2026-08-01T14:37:47Z"
  },
