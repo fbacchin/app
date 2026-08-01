@@ -1,5 +1,5 @@
 {
- "time": "2026-08-01T11:21:53Z",
+ "time": "2026-08-01T11:26:58Z",
  "south": {
   "km": 6.0,
   "wait": 60,
@@ -11,6 +11,19 @@
   "held": true
  },
  "events": [
+  {
+   "id": "situation.642636.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": null,
+   "versionTime": "2026-08-01T11:02:14Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: H2 Airolo -> Göschenen zwischen Ortschaft Hospental und Ortschaft Andermatt Sachlage: Stau Ursache: Verkehrsüberlastung",
+    "fr": "Libéré: H2 Airolo -> Göschenen entre Localité Hospental et Localité Andermatt Situation: bouchon Raison: surcharge de trafic",
+    "it": "Approvato: H2 Airolo -> Göschenen tra Luogo Hospental E Luogo Andermatt Situazione: colonna Causa: traffico congestionato"
+   }
+  },
   {
    "id": "situation.642578.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
