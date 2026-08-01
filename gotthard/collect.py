@@ -362,6 +362,41 @@ def update_notifications(state, now):
     state_file.write_text(json.dumps(push_state, indent=1))
 
 
+def fill_feed_gaps(history):
+    """Ricuce i buchi del feed nello storico.
+
+    All'area di dosaggio di Airolo il messaggio ufficiale non resta pubblicato
+    per tutta la durata della coda: viene revocato e riemesso a impulsi. Il
+    campione grezzo registra allora 8 km, poi 0, poi di nuovo 8 km, e il
+    grafico dell'app diventa un'onda quadra impossibile.
+
+    Si riempiono SOLO i buchi **racchiusi fra due campioni con coda** distanti
+    non più di CLEAR_CONFIRM: la ricomparsa della coda è la prova che non era
+    mai finita. Una fine vera non ha nulla dopo di sé, quindi resta 0 — stessa
+    soglia e stessa logica delle notifiche (vedi update_notifications).
+    Si usa il minore dei due estremi: mai inventare una coda più lunga di
+    quanto le autorità abbiano effettivamente pubblicato.
+
+    L'operazione è idempotente: rigirarla sullo storico già ricucito non trova
+    altri buchi, quindi ogni run ripara anche i campioni vecchi ancora in
+    finestra senza accumulare effetti.
+    """
+    for side in ("south", "north"):
+        delay_key, km_key = f"{side}Delay", f"{side}QueueKm"
+        queued = [i for i, s in enumerate(history) if s.get(km_key)]
+        for start, end in zip(queued, queued[1:]):
+            if end - start < 2:
+                continue
+            t_start, t_end = parse_time(history[start]["time"]), parse_time(history[end]["time"])
+            if not t_start or not t_end or t_end - t_start > CLEAR_CONFIRM:
+                continue
+            delay = min(history[start][delay_key] or 0, history[end][delay_key] or 0)
+            km = min(history[start][km_key], history[end][km_key])
+            for gap in history[start + 1:end]:
+                gap[delay_key], gap[km_key] = delay, km
+    return history
+
+
 def main():
     api_key = os.environ.get("OTD_API_KEY", "").strip()
     if not api_key:
@@ -393,6 +428,7 @@ def main():
         if (parse_time(s.get("time", "")) or cutoff) > cutoff
     ]
     history.append(sample)
+    fill_feed_gaps(history)
 
     HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
     HISTORY_FILE.write_text(json.dumps(history, indent=1))
