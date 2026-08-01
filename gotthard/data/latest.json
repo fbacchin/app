@@ -1,5 +1,5 @@
 {
- "time": "2026-08-01T12:28:23Z",
+ "time": "2026-08-01T12:33:28Z",
  "south": {
   "km": 8.0,
   "wait": null
@@ -39,13 +39,13 @@
    "id": "situation.642644.1.1.1",
    "type": "AbnormalTraffic",
    "direction": null,
-   "versionTime": "2026-08-01T12:15:29Z",
+   "versionTime": "2026-08-01T12:32:21Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: H2 Airolo -> Göschenen zwischen Anschluss Airolo-Nufenen und Pass Gotthard-Pass Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: H2 Airolo -> Göschenen entre Jonction autoroutière Airolo-Nufenen et Col Col du St-Gothard Situation: trafic en accordéon Raison: surcharge de trafic",
-    "it": "Approvato: H2 Airolo -> Göschenen tra Svincolo autostradale Airolo-Nufenen E Passo Passo del S. Gottardo Situazione: traffico fortemente rallentato Causa: traffico congestionato"
+    "de": "Freigegeben: H2 Airolo -> Göschenen zwischen Anschluss Airolo-Nufenen und Ortschaft Andermatt Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+    "fr": "Libéré: H2 Airolo -> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Andermatt Situation: trafic en accordéon Raison: surcharge de trafic",
+    "it": "Approvato: H2 Airolo -> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Andermatt Situazione: traffico fortemente rallentato Causa: traffico congestionato"
    }
   },
   {
