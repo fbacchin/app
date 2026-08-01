@@ -33,7 +33,16 @@
   }
   main { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; }
   .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-  .logo svg { flex: none; }
+  /* L'icona è la versione con la cornice dorata, quella scartata per l'app
+     perché iOS ne taglia i bordi: qui non c'è nessuna maschera di sistema e la
+     cornice si vede intera. Gli angoli del file sono bianchi opachi, non
+     trasparenti, e sul fondo della pagina si noterebbero: il 10% è il raggio
+     della cornice stessa, misurato sull'immagine. */
+  .logo img {
+    flex: none; width: 44px; height: 44px;
+    border-radius: 10%;
+    box-shadow: 0 1px 3px rgb(0 0 0 / .18);
+  }
   h1 { font-size: 1.9em; line-height: 1.2; }
   .tag { color: var(--ink-soft); margin: 6px 0 32px; font-size: .95em; }
   .updated { color: var(--ink-soft); margin: 6px 0 32px; font-size: .9em; }
@@ -68,7 +77,7 @@
 <body>
 <main>
   <div class="logo">
-    <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="10" fill="#0F6E56"/><text x="22" y="32" font-size="24" text-anchor="middle" fill="#EAF7F1" font-family="-apple-system, BlinkMacSystemFont, sans-serif">&#9878;</text></svg>
+    <img src="icona-codicedigara.png" width="44" height="44" alt="" aria-hidden="true">
     <h1>Codice di Gara Burraco &mdash; Assistenza</h1>
   </div>
   <p class="tag">I regolamenti ufficiali di gara del Burraco, FIBur e FITaB, con l&rsquo;elenco degli articoli
