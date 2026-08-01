@@ -1,12 +1,5 @@
 [
  {
-  "time": "2026-07-30T07:10:30Z",
-  "southDelay": 10,
-  "northDelay": 0,
-  "southQueueKm": 1.0,
-  "northQueueKm": null
- },
- {
   "time": "2026-07-30T07:15:36Z",
   "southDelay": 10,
   "northDelay": 0,
@@ -3320,16 +3313,16 @@
  {
   "time": "2026-07-31T22:24:49Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 30,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 3.0
  },
  {
   "time": "2026-07-31T22:29:54Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 30,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 3.0
  },
  {
   "time": "2026-07-31T22:34:59Z",
@@ -3369,9 +3362,9 @@
  {
   "time": "2026-07-31T23:00:32Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-07-31T23:05:37Z",
@@ -3564,9 +3557,9 @@
  },
  {
   "time": "2026-08-01T01:28:11Z",
-  "southDelay": 0,
+  "southDelay": 20,
   "northDelay": 0,
-  "southQueueKm": null,
+  "southQueueKm": 2.0,
   "northQueueKm": null
  },
  {
@@ -3585,9 +3578,9 @@
  },
  {
   "time": "2026-08-01T01:48:25Z",
-  "southDelay": 0,
+  "southDelay": 10,
   "northDelay": 0,
-  "southQueueKm": null,
+  "southQueueKm": 1.0,
   "northQueueKm": null
  },
  {
@@ -3599,9 +3592,9 @@
  },
  {
   "time": "2026-08-01T01:58:33Z",
-  "southDelay": 0,
+  "southDelay": 10,
   "northDelay": 0,
-  "southQueueKm": null,
+  "southQueueKm": 1.0,
   "northQueueKm": null
  },
  {
@@ -3648,9 +3641,9 @@
  },
  {
   "time": "2026-08-01T02:34:00Z",
-  "southDelay": 0,
+  "southDelay": 20,
   "northDelay": 0,
-  "southQueueKm": null,
+  "southQueueKm": 2.0,
   "northQueueKm": null
  },
  {
@@ -3718,17 +3711,17 @@
  },
  {
   "time": "2026-08-01T03:19:58Z",
-  "southDelay": 0,
-  "northDelay": 0,
-  "southQueueKm": null,
-  "northQueueKm": null
+  "southDelay": 50,
+  "northDelay": 20,
+  "southQueueKm": 5.0,
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-01T03:25:01Z",
-  "southDelay": 0,
-  "northDelay": 0,
-  "southQueueKm": null,
-  "northQueueKm": null
+  "southDelay": 50,
+  "northDelay": 20,
+  "southQueueKm": 5.0,
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-01T03:30:18Z",
@@ -3767,10 +3760,10 @@
  },
  {
   "time": "2026-08-01T03:55:42Z",
-  "southDelay": 0,
-  "northDelay": 0,
-  "southQueueKm": null,
-  "northQueueKm": null
+  "southDelay": 80,
+  "northDelay": 20,
+  "southQueueKm": 8.0,
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-01T04:00:47Z",
@@ -3781,10 +3774,10 @@
  },
  {
   "time": "2026-08-01T04:05:53Z",
-  "southDelay": 0,
-  "northDelay": 0,
-  "southQueueKm": null,
-  "northQueueKm": null
+  "southDelay": 80,
+  "northDelay": 20,
+  "southQueueKm": 8.0,
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-01T04:10:58Z",
@@ -3795,17 +3788,17 @@
  },
  {
   "time": "2026-08-01T04:16:02Z",
-  "southDelay": 0,
-  "northDelay": 0,
-  "southQueueKm": null,
-  "northQueueKm": null
+  "southDelay": 80,
+  "northDelay": 10,
+  "southQueueKm": 8.0,
+  "northQueueKm": 1.0
  },
  {
   "time": "2026-08-01T04:21:07Z",
-  "southDelay": 0,
-  "northDelay": 0,
-  "southQueueKm": null,
-  "northQueueKm": null
+  "southDelay": 80,
+  "northDelay": 10,
+  "southQueueKm": 8.0,
+  "northQueueKm": 1.0
  },
  {
   "time": "2026-08-01T04:26:13Z",
@@ -3830,10 +3823,10 @@
  },
  {
   "time": "2026-08-01T04:41:30Z",
-  "southDelay": 0,
-  "northDelay": 0,
-  "southQueueKm": null,
-  "northQueueKm": null
+  "southDelay": 80,
+  "northDelay": 10,
+  "southQueueKm": 8.0,
+  "northQueueKm": 1.0
  },
  {
   "time": "2026-08-01T04:46:36Z",
@@ -3949,17 +3942,17 @@
  },
  {
   "time": "2026-08-01T06:15:43Z",
-  "southDelay": 0,
-  "northDelay": 0,
-  "southQueueKm": null,
-  "northQueueKm": null
+  "southDelay": 80,
+  "northDelay": 20,
+  "southQueueKm": 8.0,
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-01T06:20:49Z",
-  "southDelay": 0,
-  "northDelay": 0,
-  "southQueueKm": null,
-  "northQueueKm": null
+  "southDelay": 80,
+  "northDelay": 20,
+  "southQueueKm": 8.0,
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-01T06:25:55Z",
@@ -3977,10 +3970,10 @@
  },
  {
   "time": "2026-08-01T06:36:09Z",
-  "southDelay": 0,
-  "northDelay": 0,
-  "southQueueKm": null,
-  "northQueueKm": null
+  "southDelay": 80,
+  "northDelay": 20,
+  "southQueueKm": 8.0,
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-01T06:41:14Z",
@@ -3991,10 +3984,10 @@
  },
  {
   "time": "2026-08-01T06:46:18Z",
-  "southDelay": 0,
-  "northDelay": 0,
-  "southQueueKm": null,
-  "northQueueKm": null
+  "southDelay": 80,
+  "northDelay": 20,
+  "southQueueKm": 8.0,
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-01T06:51:24Z",
@@ -4023,5 +4016,12 @@
   "northDelay": 0,
   "southQueueKm": null,
   "northQueueKm": null
+ },
+ {
+  "time": "2026-08-01T07:11:46Z",
+  "southDelay": 80,
+  "northDelay": 30,
+  "southQueueKm": 8.0,
+  "northQueueKm": 3.0
  }
 ]
