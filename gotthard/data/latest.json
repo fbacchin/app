@@ -1,13 +1,12 @@
 {
- "time": "2026-08-02T16:47:45Z",
+ "time": "2026-08-02T16:52:50Z",
  "south": {
   "km": null,
   "wait": null
  },
  "north": {
-  "km": 8.0,
-  "wait": 80,
-  "held": true
+  "km": null,
+  "wait": null
  },
  "events": [
   {
@@ -24,19 +23,6 @@
    }
   },
   {
-   "id": "situation.642675.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-08-02T15:20:03Z",
-   "km": 8.0,
-   "wait": 80,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Faido und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 8.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 80",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 8.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 80",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 8.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 80"
-   }
-  },
-  {
    "id": "situation.642682.1.1.1",
    "type": "AbnormalTraffic",
    "direction": null,
@@ -47,19 +33,6 @@
     "de": "Freigegeben: H2 Göschenen <-> Flüelen zwischen Ortschaft Erstfeld und Anschluss Göschenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
     "fr": "Libéré: H2 Göschenen <-> Flüelen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
     "it": "Approvato: H2 Göschenen <-> Flüelen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
-   }
-  },
-  {
-   "id": "situation.642676.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "north",
-   "versionTime": "2026-08-02T06:13:58Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
    }
   }
  ]
