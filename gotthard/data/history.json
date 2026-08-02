@@ -4124,22 +4124,22 @@
  {
   "time": "2026-08-02T16:52:50Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 50,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 5.0
  },
  {
   "time": "2026-08-02T16:57:56Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 50,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 5.0
  },
  {
   "time": "2026-08-02T17:03:00Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 50,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 5.0
  }
 ]
