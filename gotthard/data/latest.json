@@ -1,14 +1,12 @@
 {
- "time": "2026-08-02T10:35:12Z",
+ "time": "2026-08-02T10:40:17Z",
  "south": {
   "km": 4.0,
-  "wait": 40,
-  "held": true
+  "wait": 40
  },
  "north": {
   "km": 5.0,
-  "wait": 50,
-  "held": true
+  "wait": 50
  },
  "events": [
   {
