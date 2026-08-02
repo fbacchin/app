@@ -4087,7 +4087,7 @@
  {
   "time": "2026-08-02T11:36:15Z",
   "southDelay": 40,
-  "northDelay": 4200,
+  "northDelay": 70,
   "southQueueKm": 4.0,
   "northQueueKm": 7.0
  }
