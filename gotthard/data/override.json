@@ -1,10 +1,14 @@
 {
-  "_comment": "ATTIVA. Per disarmare: rimettere 'code' a 'disarmato' oppure portare 'until' nel passato. Vale solo per le build che contengono il codice atteso (dalla 1.2.7). Il collector NON tocca questo file.",
-  "code": "gottardo-manuale-2026",
-  "until": "2026-08-02T19:00:00Z",
-  "north": {
-    "km": 5,
-    "wait": 50
+  "_comment": "DISARMATA. Per attivarla: mettere 'code' a gottardo-manuale-2026, dare a 'until' un istante futuro (ISO 8601, max 12 ore da adesso) e i valori veri. Per disarmarla: rimettere 'code' a 'disarmato'. Vale solo per le build che contengono il codice atteso (dalla 1.2.7). Il collector NON tocca questo file.",
+  "code": "disarmato",
+  "until": "2026-01-01T00:00:00Z",
+  "south": {
+    "km": null,
+    "wait": null
   },
-  "note": "02.08.2026 17:00 UTC — il feed DATEX ha smesso di consegnare il messaggio della coda verso nord mentre TCS la riporta a 5 km / 50 min. Valore preso da TCS. Il sud e' lasciato al calcolo dell'app: li' non c'e' divergenza."
+  "north": {
+    "km": null,
+    "wait": null
+  },
+  "note": "Esempio. Un lato omesso o coi valori nulli lascia intatto il dato calcolato dall'app: si puo correggere una sola direzione."
 }
