@@ -515,6 +515,40 @@ def update_alerts(events, revoked_ids, now):
     return kept
 
 
+def hold_events(fresh, alerts, now):
+    """Eventi da pubblicare in latest.json, tenuti attraverso i buchi.
+
+    Il collector teneva gia lo STATO delle code (hold_through_gaps) ma
+    scriveva gli eventi cosi come arrivavano: quando il feed ritirava i
+    messaggi, latest.json usciva con le code valorizzate e `events` vuoto.
+    Le app che ripiegano su questo file mostravano quindi schede piene e
+    lista avvisi vuota — la stessa contraddizione corretta lato app in
+    ADEV-565, mai applicata qui. Osservato il 02.08.2026 sulla 1.1.1.
+
+    Si FONDE invece di sostituire: il feed a volte consegna una parte dei
+    messaggi del corridoio e non le code, quindi "tieni solo se la lista e
+    vuota" non basterebbe. Dall'archivio si riprendono gli avvisi non
+    revocati e visti da meno di HOLD_WINDOW, saltando quelli gia presenti.
+    """
+    out = list(fresh)
+    visti = {e.get("id") for e in out}
+    cutoff = now - HOLD_WINDOW
+    campi = ("id", "type", "direction", "versionTime", "km", "wait", "texts")
+
+    for a in alerts:
+        if a.get("id") in visti or a.get("revokedAt"):
+            continue
+        ultimo = parse_time(a.get("lastSeen", ""))
+        if ultimo is None or ultimo <= cutoff:
+            continue
+        out.append({k: a[k] for k in campi if k in a})
+
+    # stesso ordinamento di extract(): prima i messaggi con numeri
+    out.sort(key=lambda e: e.get("versionTime") or "", reverse=True)
+    out.sort(key=lambda e: not (e.get("km") is not None or e.get("wait") is not None))
+    return out[:20]
+
+
 def main():
     api_key = os.environ.get("OTD_API_KEY", "").strip()
     if not api_key:
@@ -559,18 +593,21 @@ def main():
     HISTORY_FILE.write_text(json.dumps(history, indent=1))
 
     # Ultimo stato completo per il fallback dell'app (schede + avvisi)
+    # L'archivio si aggiorna PRIMA: serve a ricostruire gli avvisi tenuti.
+    alerts = update_alerts(events, revoked_ids, now)
+    latest_events = hold_events(events, alerts, now)
+
     latest = {
         "time": sample["time"],
         "south": state["south"],
         "north": state["north"],
-        "events": events,
+        "events": latest_events,
     }
-    alerts = update_alerts(events, revoked_ids, now)
 
     (HISTORY_FILE.parent / "latest.json").write_text(
         json.dumps(latest, indent=1, ensure_ascii=False)
     )
-    print(f"campione salvato: {sample} (totale {len(history)}, eventi {len(events)}, archivio avvisi {len(alerts)}, revoche {sorted(revocations) or '-'})")
+    print(f"campione salvato: {sample} (totale {len(history)}, eventi {len(events)}->{len(latest_events)}, archivio avvisi {len(alerts)}, revoche {sorted(revocations) or '-'})")
 
 
 if __name__ == "__main__":
