@@ -189,6 +189,13 @@ def fetch_feed(api_key):
             "Authorization": f"Bearer {api_key}",
             "SOAPAction": SOAP_ACTION,
             "Content-Type": "text/xml; charset=utf-8",
+            # La documentazione di opentransportdata.swiss chiede uno
+            # User-Agent esplicito e la dichiarazione della compressione.
+            # Prima si mandava "Python-urllib/3.x": ipotesi (02.08.2026, NON
+            # dimostrata) sul perche' certe risposte omettano messaggi che
+            # esistono. La sonda TCS misura se cambia qualcosa.
+            "User-Agent": "GottardoLive-collector/1.0 (+https://github.com/fbacchin/app)",
+            "Accept-Encoding": "gzip, br, deflate",
         },
     )
     for attempt in range(3):
