@@ -115,6 +115,15 @@ WINDOW = timedelta(hours=48)
 ALERTS_FILE = Path(__file__).parent / "data" / "alerts.json"
 ALERTS_WINDOW = timedelta(hours=48)
 
+# Registro di cio' che l'API comunica sul corridoio: una riga per ogni
+# comparsa, cambiamento o revoca. NON si salva il documento grezzo — 7-22 MB a
+# chiamata, quattro gigabyte al giorno, e il 99,8% non riguarda il Gottardo.
+# Serve a rispondere a posteriori alla domanda "e' davvero arrivata una
+# revoca?": il 02.08.2026 non e' stato possibile, perche' un'ora dopo il
+# messaggio non era piu' nel feed e restavano solo indizi indiretti.
+FEED_LOG_FILE = Path(__file__).parent / "data" / "feed-log.jsonl"
+FEED_LOG_WINDOW = timedelta(days=14)
+
 
 def local(tag):
     return tag.split("}")[-1]
@@ -313,8 +322,14 @@ def extract(xml_data):
                         revocations.add(d)
             record_id = record.get("id", "")
             if record_id:
-                revoked_ids[record_id] = now.replace(microsecond=0) \
-                    .isoformat().replace("+00:00", "Z")
+                # Si conserva anche il TESTO della revoca: e' il documento che
+                # prova la fine della coda. Il 02.08.2026 non e' stato
+                # possibile verificarne una a un'ora di distanza, perche' del
+                # messaggio restava solo l'orario in cui l'avevamo visto.
+                revoked_ids[record_id] = {
+                    "at": now.replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+                    "testo": text,
+                }
             continue
 
         # eventi: finestra 12 ore, come la lista avvisi dell'app
@@ -529,19 +544,36 @@ def update_alerts(events, revoked_ids, now):
             alerts = []
     by_id = {a.get("id"): a for a in alerts if a.get("id")}
 
+    diario = []
+
     for event in events:
         entry = by_id.get(event["id"])
         if entry is None:
             entry = {"firstSeen": stamp}
             by_id[event["id"]] = entry
+            diario.append(("comparso", event, None))
+        else:
+            # Si registra solo se cambia qualcosa di sostanziale: senza questo
+            # filtro il registro avrebbe una riga ogni 5 minuti per ogni
+            # messaggio fermo, e il segnale sparirebbe nel rumore.
+            prima = (entry.get("km"), entry.get("wait"), entry.get("versionTime"))
+            dopo = (event.get("km"), event.get("wait"), event.get("versionTime"))
+            if prima != dopo:
+                diario.append(("aggiornato", event, prima))
         entry.update(event)
         entry["lastSeen"] = stamp
         entry.pop("revokedAt", None)   # ripubblicato: la revoca non vale più
 
-    for record_id, revoked_at in revoked_ids.items():
+    for record_id, revoca in revoked_ids.items():
         entry = by_id.get(record_id)
-        if entry is not None and "revokedAt" not in entry:
-            entry["revokedAt"] = revoked_at
+        if entry is None or "revokedAt" in entry:
+            continue
+        entry["revokedAt"] = revoca["at"]
+        # Nel registro va il testo della REVOCA, non quello della coda: e'
+        # quello che permette di verificare a posteriori che sia arrivata.
+        diario.append(("revocato",
+                       dict(entry, id=record_id, texts={"it": revoca["testo"]}),
+                       None))
 
     cutoff = now - ALERTS_WINDOW
     kept = [
@@ -552,7 +584,46 @@ def update_alerts(events, revoked_ids, now):
 
     ALERTS_FILE.parent.mkdir(parents=True, exist_ok=True)
     ALERTS_FILE.write_text(json.dumps(kept, indent=1, ensure_ascii=False))
+    scrivi_registro(diario, now)
     return kept
+
+
+def scrivi_registro(diario, now):
+    """Aggiunge gli eventi al registro e pota le righe piu vecchie di 14 giorni."""
+    if not diario and not FEED_LOG_FILE.exists():
+        return
+    stamp = now.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+    righe = []
+    if FEED_LOG_FILE.exists():
+        cutoff = (now - FEED_LOG_WINDOW).isoformat().replace("+00:00", "Z")
+        for riga in FEED_LOG_FILE.read_text().splitlines():
+            if not riga.strip():
+                continue
+            try:
+                if json.loads(riga).get("seenAt", "") > cutoff:
+                    righe.append(riga)
+            except json.JSONDecodeError:
+                continue   # una riga corrotta non deve far perdere il resto
+
+    for tipo, evento, prima in diario:
+        voce = {
+            "seenAt": stamp,
+            "evento": tipo,
+            "id": evento.get("id"),
+            "direction": evento.get("direction"),
+            "km": evento.get("km"),
+            "wait": evento.get("wait"),
+            "versionTime": evento.get("versionTime"),
+            # Testo italiano alla lettera: e' la prova, non va riassunto.
+            "testo": (evento.get("texts") or {}).get("it"),
+        }
+        if prima is not None:
+            voce["prima"] = {"km": prima[0], "wait": prima[1], "versionTime": prima[2]}
+        righe.append(json.dumps(voce, ensure_ascii=False))
+
+    FEED_LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+    FEED_LOG_FILE.write_text("\n".join(righe) + "\n")
 
 
 def hold_events(fresh, alerts, now):
