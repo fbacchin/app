@@ -5,6 +5,7 @@
  },
  "north": {
   "phase": "heavy",
-  "lastSent": "2026-08-02T11:10:46Z"
+  "lastSent": "2026-08-02T11:10:46Z",
+  "clearSince": "2026-08-02T19:54:01Z"
  }
 }
