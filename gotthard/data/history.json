@@ -3843,16 +3843,16 @@
  {
   "time": "2026-08-02T21:00:16Z",
   "southDelay": 0,
-  "northDelay": 20,
+  "northDelay": 10,
   "southQueueKm": null,
-  "northQueueKm": 2.0
+  "northQueueKm": 1.0
  },
  {
   "time": "2026-08-02T21:05:20Z",
   "southDelay": 0,
-  "northDelay": 20,
+  "northDelay": 10,
   "southQueueKm": null,
-  "northQueueKm": 2.0,
+  "northQueueKm": 1.0,
   "northHeld": true
  },
  {
