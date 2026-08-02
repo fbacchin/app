@@ -590,7 +590,13 @@ def update_alerts(events, revoked_ids, now):
 
 def scrivi_registro(diario, now):
     """Aggiunge gli eventi al registro e pota le righe piu vecchie di 14 giorni."""
-    if not diario and not FEED_LOG_FILE.exists():
+    # Il file si crea SEMPRE, anche vuoto. Il 02.08.2026 l'uscita anticipata
+    # ha fatto fallire "git add gotthard/data/feed-log.jsonl" con codice 128 su
+    # un percorso inesistente, e con le impostazioni di GitHub Actions quello
+    # abbatte l'intero run da tre ore: il collector e' rimasto fermo un'ora.
+    # Un file vuoto costa nulla; un file assente costa il servizio.
+    FEED_LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+    if not diario and FEED_LOG_FILE.exists():
         return
     stamp = now.replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
