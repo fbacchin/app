@@ -3909,9 +3909,9 @@
  },
  {
   "time": "2026-08-02T05:57:31Z",
-  "southDelay": 0,
+  "southDelay": 10,
   "northDelay": 0,
-  "southQueueKm": null,
+  "southQueueKm": 1.0,
   "northQueueKm": null
  },
  {
@@ -3931,81 +3931,81 @@
  {
   "time": "2026-08-02T06:12:46Z",
   "southDelay": 10,
-  "northDelay": 0,
+  "northDelay": 10,
   "southQueueKm": 1.0,
-  "northQueueKm": null,
+  "northQueueKm": 1.0,
   "southHeld": true
  },
  {
   "time": "2026-08-02T06:17:51Z",
   "southDelay": 10,
-  "northDelay": 0,
+  "northDelay": 10,
   "southQueueKm": 1.0,
-  "northQueueKm": null,
+  "northQueueKm": 1.0,
   "southHeld": true
  },
  {
   "time": "2026-08-02T06:28:47Z",
   "southDelay": 10,
-  "northDelay": 0,
+  "northDelay": 10,
   "southQueueKm": 1.0,
-  "northQueueKm": null,
+  "northQueueKm": 1.0,
   "southHeld": true
  },
  {
   "time": "2026-08-02T06:33:52Z",
   "southDelay": 10,
-  "northDelay": 0,
+  "northDelay": 10,
   "southQueueKm": 1.0,
-  "northQueueKm": null,
+  "northQueueKm": 1.0,
   "southHeld": true
  },
  {
   "time": "2026-08-02T06:38:58Z",
   "southDelay": 10,
-  "northDelay": 0,
+  "northDelay": 10,
   "southQueueKm": 1.0,
-  "northQueueKm": null,
+  "northQueueKm": 1.0,
   "southHeld": true
  },
  {
   "time": "2026-08-02T06:44:02Z",
   "southDelay": 10,
-  "northDelay": 0,
+  "northDelay": 10,
   "southQueueKm": 1.0,
-  "northQueueKm": null,
+  "northQueueKm": 1.0,
   "southHeld": true
  },
  {
   "time": "2026-08-02T06:49:06Z",
   "southDelay": 10,
-  "northDelay": 0,
+  "northDelay": 10,
   "southQueueKm": 1.0,
-  "northQueueKm": null,
+  "northQueueKm": 1.0,
   "southHeld": true
  },
  {
   "time": "2026-08-02T06:54:11Z",
   "southDelay": 10,
-  "northDelay": 0,
+  "northDelay": 10,
   "southQueueKm": 1.0,
-  "northQueueKm": null,
+  "northQueueKm": 1.0,
   "southHeld": true
  },
  {
   "time": "2026-08-02T06:59:18Z",
   "southDelay": 10,
-  "northDelay": 0,
+  "northDelay": 10,
   "southQueueKm": 1.0,
-  "northQueueKm": null,
+  "northQueueKm": 1.0,
   "southHeld": true
  },
  {
   "time": "2026-08-02T07:04:22Z",
   "southDelay": 10,
-  "northDelay": 0,
+  "northDelay": 10,
   "southQueueKm": 1.0,
-  "northQueueKm": null,
+  "northQueueKm": 1.0,
   "southHeld": true
  },
  {
