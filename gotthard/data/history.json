@@ -4028,16 +4028,16 @@
  {
   "time": "2026-08-02T19:54:01Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 30,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 3.0
  },
  {
   "time": "2026-08-02T19:59:06Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 30,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 3.0
  },
  {
   "time": "2026-08-02T20:04:15Z",
