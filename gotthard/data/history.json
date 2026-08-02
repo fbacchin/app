@@ -1,12 +1,5 @@
 [
  {
-  "time": "2026-07-31T21:02:57Z",
-  "southDelay": 20,
-  "northDelay": 60,
-  "southQueueKm": 2.0,
-  "northQueueKm": 6.0
- },
- {
   "time": "2026-07-31T21:08:02Z",
   "southDelay": 20,
   "northDelay": 60,
@@ -4077,5 +4070,13 @@
   "northDelay": 20,
   "southQueueKm": null,
   "northQueueKm": 2.0
+ },
+ {
+  "time": "2026-08-02T21:05:20Z",
+  "southDelay": 0,
+  "northDelay": 20,
+  "southQueueKm": null,
+  "northQueueKm": 2.0,
+  "northHeld": true
  }
 ]
