@@ -1,0 +1,8 @@
+{
+  "_comment": "Scavalcatura manuale dei dati mostrati dall'app. DISARMATA: il codice non combacia con quello atteso, quindi non ha alcun effetto. Per attivarla: mettere 'code' a gottardo-manuale-2026, dare a 'until' un istante futuro (ISO 8601, max 12 ore da adesso) e i valori veri. Per disarmarla: rimettere 'code' a 'disarmato' oppure portare 'until' nel passato. Il collector NON tocca questo file.",
+  "code": "disarmato",
+  "until": "2026-01-01T00:00:00Z",
+  "south": { "km": null, "wait": null },
+  "north": { "km": null, "wait": null },
+  "note": "Esempio. Un lato omesso o coi valori nulli lascia intatto il dato calcolato dall'app: si puo correggere una sola direzione."
+}
