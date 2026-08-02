@@ -214,6 +214,28 @@ def fetch_feed(api_key):
     return data
 
 
+def sulla_autostrada(lower):
+    """Vero se il messaggio riguarda l'A2 (autostrada e galleria), non l'H2.
+
+    L'H2 e' la strada del PASSO: il percorso che si prende per EVITARE la
+    galleria. I suoi messaggi citano Airolo e Goeschenen esattamente come
+    quelli del tunnel, quindi superano il filtro dei portali, e quando non
+    hanno una direzione riconoscibile finiscono su ENTRAMBE le schede.
+
+    Osservato il 02.08.2026: "H2 Airolo -> Flüelen tra Passo del S. Gottardo E
+    Svincolo Goeschenen ... ritardi No. [min] 60" ha portato a 60 minuti sia il
+    sud (reale: 40) sia il nord (reale: 50), vincendo per la regola del massimo.
+
+    Si ESCLUDE l'H2 invece di RICHIEDERE l'A2: se un domani un messaggio del
+    tunnel non riportasse la sigla, richiederla lo farebbe sparire — e uno zero
+    falso e' il difetto peggiore che questo progetto possa produrre.
+
+    Vale solo per lo stato delle code e per le revoche. Negli AVVISI il
+    messaggio resta: una coda al passo e' informazione utile a chi guida.
+    """
+    return not re.search(r"\bh2\b", lower)
+
+
 def extract(xml_data):
     """Ritorna (stato code, eventi corridoio).
 
@@ -275,7 +297,7 @@ def extract(xml_data):
         # finita: la si annota per direzione, poi il messaggio esce di scena
         # (non va né fra gli avvisi mostrati né nello stato).
         if revoked:
-            if typename == "AbnormalTraffic" and age <= FRESHNESS:
+            if typename == "AbnormalTraffic" and age <= FRESHNESS and sulla_autostrada(lower):
                 for d in ([direction] if direction else ["south", "north"]):
                     portal = SOUTH_PORTAL if d == "south" else NORTH_PORTAL
                     if any(k in lower for k in portal):
@@ -303,6 +325,8 @@ def extract(xml_data):
         if typename != "AbnormalTraffic" or (km is None and wait is None):
             continue
         if age > FRESHNESS:
+            continue
+        if not sulla_autostrada(lower):
             continue
         candidates = [direction] if direction else ["south", "north"]
         for d in candidates:
