@@ -152,7 +152,16 @@ def wait_minutes(text):
     # km (~10 min/km): con "[h] 2" su 6 km si mostravano 60 minuti invece di 120.
     match = re.search(r"ritardi\s*no\.\s*\[h\]\s*(\d+(?:[.,]\d+)?)", lower)
     if match:
-        return round(float(match.group(1).replace(",", ".")) * 60)
+        valore = float(match.group(1).replace(",", "."))
+        # L'etichetta [h] NON e' affidabile: il 02.08.2026 il feed ha pubblicato
+        # "colonna lunghezza [km] 7.0 ... ritardi No. [h] 70", cioe' 70 MINUTI
+        # (coerenti con 7 km) marcati come ore. Interpretandolo alla lettera
+        # uscivano 4200 minuti, settanta ore.
+        # Regola: si crede all'etichetta solo se il risultato resta plausibile.
+        # Oltre le 6 ore nessuna attesa al Gottardo e' credibile — le giornate
+        # peggiori arrivano a 3-4 ore — quindi il numero era in minuti.
+        minuti = round(valore * 60)
+        return minuti if minuti <= 360 else round(valore)
     match = re.search(
         r"(\d+)\s*(?:ora|ore|stunde|stunden|heure|heures)(?:\D{1,8}(\d+)\s*min)?", lower
     )
