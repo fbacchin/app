@@ -4068,15 +4068,15 @@
  },
  {
   "time": "2026-08-02T11:10:46Z",
-  "southDelay": 60,
-  "northDelay": 60,
+  "southDelay": 40,
+  "northDelay": 50,
   "southQueueKm": 4.0,
   "northQueueKm": 5.0
  },
  {
   "time": "2026-08-02T11:15:51Z",
-  "southDelay": 60,
-  "northDelay": 60,
+  "southDelay": 40,
+  "northDelay": 50,
   "southQueueKm": 4.0,
   "northQueueKm": 5.0,
   "southHeld": true,
