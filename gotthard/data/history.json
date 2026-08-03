@@ -3747,31 +3747,31 @@
  {
   "time": "2026-08-03T12:20:57Z",
   "southDelay": 80,
-  "northDelay": 0,
+  "northDelay": 60,
   "southQueueKm": 8.0,
-  "northQueueKm": null
+  "northQueueKm": 6.0
  },
  {
   "time": "2026-08-03T12:26:04Z",
   "southDelay": 80,
-  "northDelay": 0,
+  "northDelay": 60,
   "southQueueKm": 8.0,
-  "northQueueKm": null
+  "northQueueKm": 6.0
  },
  {
   "time": "2026-08-03T12:31:08Z",
   "southDelay": 80,
-  "northDelay": 0,
+  "northDelay": 60,
   "southQueueKm": 8.0,
-  "northQueueKm": null,
+  "northQueueKm": 6.0,
   "southHeld": true
  },
  {
   "time": "2026-08-03T12:36:14Z",
   "southDelay": 80,
-  "northDelay": 0,
+  "northDelay": 60,
   "southQueueKm": 8.0,
-  "northQueueKm": null,
+  "northQueueKm": 6.0,
   "southHeld": true
  },
  {
