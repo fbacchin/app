@@ -1,72 +1,5 @@
 [
  {
-  "time": "2026-08-01T07:57:21Z",
-  "southDelay": 90,
-  "northDelay": 30,
-  "southQueueKm": 9.0,
-  "northQueueKm": 3.0,
-  "southHeld": true,
-  "northHeld": true
- },
- {
-  "time": "2026-08-01T08:02:26Z",
-  "southDelay": 90,
-  "northDelay": 30,
-  "southQueueKm": 9.0,
-  "northQueueKm": 3.0
- },
- {
-  "time": "2026-08-01T08:07:30Z",
-  "southDelay": 90,
-  "northDelay": 30,
-  "southQueueKm": 9.0,
-  "northQueueKm": 3.0
- },
- {
-  "time": "2026-08-01T08:12:35Z",
-  "southDelay": 90,
-  "northDelay": 30,
-  "southQueueKm": 9.0,
-  "northQueueKm": 3.0
- },
- {
-  "time": "2026-08-01T08:17:40Z",
-  "southDelay": 90,
-  "northDelay": 30,
-  "southQueueKm": 9.0,
-  "northQueueKm": 3.0
- },
- {
-  "time": "2026-08-01T08:22:45Z",
-  "southDelay": 80,
-  "northDelay": 30,
-  "southQueueKm": 8.0,
-  "northQueueKm": 3.0
- },
- {
-  "time": "2026-08-01T08:27:51Z",
-  "southDelay": 80,
-  "northDelay": 30,
-  "southQueueKm": 8.0,
-  "northQueueKm": 3.0
- },
- {
-  "time": "2026-08-01T08:28:13Z",
-  "southDelay": 80,
-  "northDelay": 30,
-  "southQueueKm": 8.0,
-  "northQueueKm": 3.0
- },
- {
-  "time": "2026-08-01T08:33:18Z",
-  "southDelay": 80,
-  "northDelay": 30,
-  "southQueueKm": 8.0,
-  "northQueueKm": 3.0,
-  "southHeld": true,
-  "northHeld": true
- },
- {
   "time": "2026-08-01T08:38:23Z",
   "southDelay": 80,
   "northDelay": 30,
@@ -4074,5 +4007,12 @@
   "northQueueKm": 3.0,
   "southHeld": true,
   "northHeld": true
+ },
+ {
+  "time": "2026-08-03T08:33:18Z",
+  "southDelay": 50,
+  "northDelay": 40,
+  "southQueueKm": 5.0,
+  "northQueueKm": 4.0
  }
 ]
