@@ -3933,5 +3933,14 @@
   "southQueueKm": 10.0,
   "northQueueKm": 5.0,
   "northHeld": true
+ },
+ {
+  "time": "2026-08-03T14:43:49Z",
+  "southDelay": 100,
+  "northDelay": 50,
+  "southQueueKm": 10.0,
+  "northQueueKm": 5.0,
+  "southHeld": true,
+  "northHeld": true
  }
 ]
