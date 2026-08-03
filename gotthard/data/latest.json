@@ -1,8 +1,9 @@
 {
- "time": "2026-08-03T12:26:04Z",
+ "time": "2026-08-03T12:31:08Z",
  "south": {
   "km": 8.0,
-  "wait": 80
+  "wait": 80,
+  "held": true
  },
  "north": {
   "km": null,
