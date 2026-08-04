@@ -3682,44 +3682,44 @@
  {
   "time": "2026-08-04T08:19:23Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-04T08:24:28Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-04T08:29:33Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-04T08:34:36Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-04T08:39:40Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-04T08:44:44Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-04T08:49:50Z",
