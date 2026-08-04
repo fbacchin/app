@@ -1,14 +1,12 @@
 {
- "time": "2026-08-04T10:43:33Z",
+ "time": "2026-08-04T10:48:40Z",
  "south": {
   "km": 3.0,
-  "wait": 30,
-  "held": true
+  "wait": 30
  },
  "north": {
   "km": 4.0,
-  "wait": 40,
-  "held": true
+  "wait": 40
  },
  "events": [
   {
@@ -41,7 +39,7 @@
    "id": "situation.643036.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
    "direction": "south",
-   "versionTime": "2026-08-04T10:27:06Z",
+   "versionTime": "2026-08-04T10:28:59Z",
    "km": null,
    "wait": null,
    "texts": {
