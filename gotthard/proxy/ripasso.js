@@ -22,41 +22,74 @@
  *
  * =========================================================== perche' e' qui
  *
- * Sta in un file suo, e non dentro il giro dei 4 minuti, perche' e' una cosa
- * diversa: il giro pianificato insegue il presente, il ripasso rimedia al
- * passato. Tenerli separati vuol dire poter cambiare il ritmo del secondo —
- * o spegnerlo — senza toccare il primo, che e' quello da cui dipendono le
- * schede.
+ * Le sue regole stanno in un file suo, anche se il ripasso gira dentro il
+ * giro dei 4 minuti, perche' e' una cosa diversa: il giro insegue il
+ * presente, il ripasso rimedia al passato. Tenerle separate vuol dire poter
+ * cambiare il ritmo o la profondita' del secondo — o spegnerlo, mettendo
+ * PERIODO a Infinity — senza mettere le mani nel primo, che e' quello da cui
+ * dipendono le schede.
  *
  * ============================================================= come si usa
  *
- * E' un lavoro pianificato a se': `ripassa`, da schedulare nel cruscotto di
- * Back4App con il ritmo che si decide. Accetta un parametro:
+ * Il ripasso NON ha una sua schedulazione: gira **dentro il lavoro
+ * `aggiorna`**, che parte ogni 4 minuti. A ogni giro `sincronizza` chiede a
+ * questo file se e' ora (`tocca`), e in caso allarga la finestra: uno su
+ * cinque, quindi, e' un ripasso.
  *
- *     ore    quanto indietro chiedere (default 6, tetto 24 come il resto)
+ * Cosi' perche' su Back4App si puo' schedulare un lavoro solo. Le regole
+ * restano pero' qui, in un file loro: cambiare il ritmo o la profondita' non
+ * vuol dire mettere le mani nel giro da cui dipendono le schede.
  *
- * I due numeri fanno due mestieri diversi:
- *   - ogni quanto gira  = per quanto tempo un messaggio perso resta perso;
- *   - quante ore chiede = da quanto lungo un fermo si riesce a rientrare.
+ * Resta anche il lavoro `ripassa`, per i lanci a mano: accetta il parametro
+ * `ore` (default 6, tetto 24) e serve quando si vuole una rilettura profonda
+ * subito, senza aspettare il turno.
  *
- * Costo: una finestra di sei ore pesa ~300 KB contro i ~10 KB di un giro
- * normale, ed e' una chiamata sola in piu' ogni volta che gira.
+ * ============================================== i due numeri, e cosa fanno
  *
- * Fa esattamente quello che fa il giro pianificato — magazzino, tabelle,
+ *   PERIODO   ogni quanto tocca. Governa il ripescaggio delle REVOCHE, che
+ *             la piattaforma tiene disponibili 60 minuti e poi butta (R4).
+ *             Venti minuti danno a ogni revoca tre occasioni dentro la sua
+ *             ora di vita. Un ripasso raro, per quanto profondo, non ne
+ *             salverebbe nessuna: provato il 04.08.2026 su
+ *             situation.643096, la cui revoca aveva cinque ore e non
+ *             esisteva piu' in nessuna finestra.
+ *
+ *   FINESTRA  quanto indietro chiede. Governa il ripescaggio delle
+ *             SITUAZIONI perse, che invece restano pubblicate finche' sono
+ *             vive, quindi si possono ripescare anche ore dopo.
+ *
+ * Costo misurato: una finestra di sei ore pesa fra i 20 e i 300 KB, contro i
+ * ~10 KB di un giro normale. A un ripasso ogni venti minuti e' irrilevante, e
+ * il numero di chiamate alla fonte non cambia di una — e' lo stesso giro.
+ *
+ * Fa esattamente quello che fa il giro normale — magazzino, tabelle,
  * schermata pronta — solo con la finestra allargata. Se la fonte non
  * risponde, esce senza salvare e senza spostare il cursore, come sempre.
  */
-module.exports = function (giroCompleto) {
-  const ORE_PREDEFINITE = 6;
-  const ORE_MASSIME = 24;   // oltre, si chiede l'archivio invece del recente
+const PERIODO_MS = 20 * 60 * 1000;
+const FINESTRA_MS = 6 * 3600 * 1000;
+const ORE_PREDEFINITE = 6;
+const ORE_MASSIME = 24;   // oltre, si chiede l'archivio invece del recente
 
+/**
+ * E' ora di ripassare? `ultimoRipasso` e' quello che risulta nello stato
+ * salvato; una data illeggibile o assente vale come "mai", quindi si ripassa
+ * subito — al primo avvio, e dopo qualunque pasticcio sullo stato.
+ */
+function tocca(ultimoRipasso, adesso) {
+  const t = Date.parse(ultimoRipasso || "");
+  return isNaN(t) || adesso - t >= PERIODO_MS;
+}
+
+/** Registra il lavoro per i lanci a mano. Chiamato in fondo a main.js. */
+function registraLavoro(giroCompleto) {
   Parse.Cloud.job("ripassa", async (request) => {
     const chieste = Number((request.params && request.params.ore) || ORE_PREDEFINITE);
     const ore = Math.min(
       Math.max(Number.isFinite(chieste) && chieste > 0 ? chieste : ORE_PREDEFINITE, 1),
       ORE_MASSIME);
 
-    request.message("ripasso: chiedo le ultime " + ore + " ore");
+    request.message("ripasso a mano: chiedo le ultime " + ore + " ore");
     const payload = await giroCompleto(null, {
       finestraMinima: ore * 3600 * 1000,
       etichettaModo: "ripasso",
@@ -65,4 +98,6 @@ module.exports = function (giroCompleto) {
       ", eventi " + payload.events.length +
       ", storico " + (payload.history || []).length);
   });
-};
+}
+
+module.exports = { PERIODO_MS, FINESTRA_MS, tocca, registraLavoro };

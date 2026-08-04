@@ -124,6 +124,10 @@ const FINESTRA_CODE_MS = 6 * 3600 * 1000;    // schede: messaggi di coda freschi
 const FINESTRA_EVENTI_MS = 12 * 3600 * 1000; // lista avvisi
 const POTATURA_MS = 13 * 3600 * 1000;        // il magazzino tiene solo il mostrabile
 
+// Le regole del ripasso — ogni quanto, e quanto indietro — stanno in un file
+// loro. Qui serve `tocca()`, che sincronizza consulta a ogni giro.
+const ripasso = require("./ripasso.js");
+
 // ------------------------------------------------- filtri del corridoio
 // Identici a gotthard/collect.py: e' il filtro collaudato sul campo.
 // I nomi con cui la fonte chiama LA GALLERIA. Ne usa piu' d'uno, e alterna
@@ -1196,10 +1200,12 @@ async function sincronizza(opzioni) {
   // cambiamenti che contiene, non quanto l'intervallo richiesto.
   const ultima = stato && stato.ultimaSync ? Date.parse(stato.ultimaSync) : NaN;
   const partenza = isNaN(ultima) ? adesso - INCREMENTALE_MAX_MS : ultima - 60 * 1000;
-  // `finestraMinima` la passa solo il ripasso (ripasso.js). Il giro
-  // pianificato non la passa e la finestra resta quella del cursore.
-  const cursore = new Date(inizioFinestra(partenza, adesso,
-    opzioni && opzioni.finestraMinima));
+  // LA FINESTRA LARGA. Due strade portano qui: il lavoro `ripassa` lanciato
+  // a mano, che passa `finestraMinima`; e il turno periodico, che tocca una
+  // volta ogni PERIODO. Fuori da questi due casi comanda il cursore.
+  const largo = (opzioni && opzioni.finestraMinima)
+    || (ripasso.tocca(stato && stato.ultimoRipasso, adesso) ? ripasso.FINESTRA_MS : 0);
+  const cursore = new Date(inizioFinestra(partenza, adesso, largo || undefined));
 
   let diario, situazioni, recordTotali, frontiera;
   try {
@@ -1213,7 +1219,7 @@ async function sincronizza(opzioni) {
     await registraChiamata(e.diario);
     throw e;
   }
-  diario.modo = (opzioni && opzioni.etichettaModo) || modo;
+  diario.modo = (opzioni && opzioni.etichettaModo) || (largo ? "ripasso" : modo);
   diario.recordTotali = recordTotali;
   diario.situazioni = Object.keys(situazioni).length;
 
@@ -1323,6 +1329,9 @@ async function sincronizza(opzioni) {
   row.unset("syncAlle");   // il lucchetto si apre insieme all'avanzamento
   row.set("stato", {
     ultimaSync: iso(nuovoCursore),
+    // Il turno del ripasso si segna solo se il giro e' arrivato in fondo,
+    // esattamente come il cursore: un giro fallito non consuma il turno.
+    ultimoRipasso: largo ? iso(adesso) : ((stato && stato.ultimoRipasso) || null),
     // Elenco, NON mappa: gli id contengono punti e Parse li rifiuta come
     // chiavi annidate (vedi daMagazzinoSalvato).
     magazzino: Object.values(magazzino),
@@ -1805,9 +1814,9 @@ Parse.Cloud.define("revoca", async (request) => {
   };
 });
 
-// ------------------------------------------------- il ripasso, a parte
+// ------------------------------------------------- il ripasso
 //
-// Registra il lavoro `ripassa`, che ha la sua schedulazione e il suo ritmo.
-// Il file lo si legge per capire perche' esiste: la risposta della fonte e'
-// parziale, e l'unica difesa e' richiedere la stessa finestra piu' volte.
-require("./ripasso.js")(giroCompleto);
+// Registra il lavoro `ripassa` per i lanci a mano. Il ripasso periodico
+// invece NON e' un lavoro suo: gira dentro `aggiorna`, e la decisione la
+// prende `ripasso.tocca()` dentro sincronizza — vedi il file per il perche'.
+ripasso.registraLavoro(giroCompleto);

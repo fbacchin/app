@@ -15,7 +15,7 @@ condivisa fra tutti i client.
 | file | cosa fa |
 |---|---|
 | `main.js` | tutto: trasporto, magazzino, schermo pronto, tabelle, la funzione `gotthard` e il lavoro `aggiorna` (ogni 4 minuti) |
-| `ripasso.js` | il lavoro `ripassa`, rilettura a finestra larga, con la sua schedulazione |
+| `ripasso.js` | le regole della rilettura a finestra larga: ogni quanto tocca e quanto indietro chiedere. Gira **dentro** `aggiorna` — su Back4App si schedula un lavoro solo — e resta il lavoro `ripassa` per i lanci a mano |
 | `prove/` | 211 prove, da lanciare prima di ogni distribuzione |
 
 ## La chiave

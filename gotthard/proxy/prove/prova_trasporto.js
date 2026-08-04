@@ -401,6 +401,22 @@ async function giro(script) {
       /OTD_KEY/.test(esito.messaggio || ""));
   }
 
+  // --- il turno del ripasso -----------------------------------------------
+  //
+  // Le regole stanno in ripasso.js perche' il ripasso gira DENTRO il giro dei
+  // 4 minuti (su Back4App si schedula un lavoro solo), ma il ritmo e la
+  // profondita' si devono poter cambiare senza toccare il giro.
+  const rip = richiedi("./ripasso.js");
+  const T20 = 20 * 60 * 1000;
+  ok("mai ripassato: si ripassa subito", rip.tocca(undefined, ADESSO) === true);
+  ok("  e una data illeggibile vale come mai", rip.tocca("non una data", ADESSO) === true);
+  ok("ripassato un minuto fa: no",
+    rip.tocca(new Date(ADESSO - MIN).toISOString(), ADESSO) === false);
+  ok("ripassato venti minuti fa: si'",
+    rip.tocca(new Date(ADESSO - T20).toISOString(), ADESSO) === true);
+  ok("il periodo e' venti minuti: un giro su cinque", rip.PERIODO_MS === T20);
+  ok("la finestra del ripasso e' di sei ore", rip.FINESTRA_MS === 6 * ORA);
+
   let n = 0;
   console.log("=== gestione errori e ritentativi ===");
   for (const [nome, esito] of prove) { console.log(esito ? "  OK  " : "  NO  ", nome); if (esito) n++; }
