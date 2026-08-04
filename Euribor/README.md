@@ -50,10 +50,42 @@ Tutti i file condividono lo stesso schema:
 
 ## Aggiornamento
 
-Oggi manuale: la skill `aggiorna-tassi` scarica i dati da global-rates.com,
-aggiunge solo le date mancanti senza toccare lo storico, poi si committa.
-L'automazione via GitHub Action è tracciata in ADEV-197 (il collector di
-`gotthard/` in questa stessa repo è il modello di riferimento).
+La skill `aggiorna-tassi` scarica i dati da global-rates.com, aggiorna i CSV
+nella cartella Libor su Drive, e pubblica qui le sole date mancanti con
+`pubblica-github-api.py` (che sta nella cartella Libor e scrive via API, senza
+bisogno di un clone). L'automazione via GitHub Action è tracciata in ADEV-197
+(il collector di `gotthard/` in questa stessa repo è il modello di riferimento).
+
+### Correggere un valore storico già pubblicato
+
+**Il flusso normale non lo fa, e non lo dice.** Sia `pubblica-github-api.py`
+sia `sync-from-drive.py` aggiungono soltanto le date *mancanti* e non
+riscrivono mai una riga già presente. È voluto: lo storico qui è stato
+bonificato (vedi sotto), mentre su Drive restano giorni della settimana
+incoerenti e valori con la virgola, quindi rigenerare da Drive rovinerebbe il
+lavoro fatto.
+
+Conseguenza da conoscere: se correggi un valore su Drive e lanci
+l'aggiornamento, **non succede niente** — quella data c'è già, quindi viene
+saltata. Nessun errore, nessun avviso, e il valore sbagliato resta pubblicato.
+
+L'unico strumento che riscrive è `sync-from-drive.py --rebuild`, che rigenera
+l'intero storico da Drive. Vuole il clone locale di questa repo:
+
+```bash
+cd <clone di fbacchin/app>
+git sparse-checkout list                     # se Euribor/ è escluso, rimettilo
+python3 Euribor/sync-from-drive.py --check   # cosa farebbe, senza scrivere
+python3 Euribor/sync-from-drive.py --rebuild
+git diff -- Euribor                          # GUARDALO PRIMA DI COMMITTARE
+```
+
+`--rebuild` riscrive tutto ed elimina le righe con date duplicate: il `git
+diff` è l'unica rete. Serve per riparare, mai per l'uso quotidiano.
+
+Questa nota esiste perché fino al 04.08.2026 la cosa era scritta nella skill,
+e togliendo da lì la via del clone è rimasta senza casa: lo strumento c'era
+ancora, la conoscenza di quando serve no.
 
 ## Note sulla qualità dei dati
 
