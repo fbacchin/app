@@ -49,12 +49,68 @@ SOAP_BODY = """<?xml version="1.0" encoding="utf-8"?>
 """
 
 # Località del corridoio del tunnel (stesso filtro dell'app iOS)
-CORRIDOR = [
+# I nomi con cui la fonte chiama LA GALLERIA. Ne usa piu' d'uno e alterna
+# senza regola: "Galleria Galleria del S. Gottardo" e "Galleria Galleria San
+# Gottardo", senza "del". La lista aveva solo le forme col "del", e il
+# 03.08.2026 alle 22:16 la chiusura del tunnel — scritta nell'altro modo — e'
+# stata scartata all'ingresso: ne' l'app ne' questo collector se ne sono
+# accorti per tutta la notte. Il tedesco scrive "Gotthard-Tunnel" col trattino.
+NOMI_TUNNEL = [
     "galleria del s. gottardo", "galleria del san gottardo",
-    "gotthardtunnel", "gotthard tunnel",
+    "galleria s. gottardo", "galleria san gottardo",
+    "gotthardtunnel", "gotthard tunnel", "gotthard-tunnel",
+]
+CORRIDOR = NOMI_TUNNEL + [
     "göschenen", "goeschenen", "airolo", "wassen", "amsteg", "erstfeld",
     "quinto", "faido", "area di dosaggio",
 ]
+
+# --- il corridoio per CODICE, non per nome ---
+# I punti AlertC (tabella svizzera n. 9) che la fonte dichiara nei messaggi.
+# Il codice viene prima del nome perche' e' un dato, mentre il nome e' prosa e
+# cambia forma: la chiusura del 03.08 portava 11187 come tutti gli altri
+# messaggi sulla galleria, ma si chiamava in un modo che non avevamo in lista.
+PUNTO_TUNNEL = "11187"                     # la galleria del San Gottardo
+PUNTI_LATO_URI = {                         # a nord del tunnel
+    "10455",   # Svincolo autostradale Erstfeld
+    "11588",   # Erstfeld (abitato)
+    "10456",   # Svincolo autostradale Amsteg
+    "10458",   # Svincolo autostradale Wassen
+    "10460",   # Svincolo autostradale Göschenen (A2)
+    "10459",   # Svincolo autostradale Göschenen (H2)
+    "27447",   # Galleria Naxberg
+}
+PUNTI_LATO_TICINO = {                      # a sud del tunnel
+    "10275",   # Svincolo autostradale Airolo
+    "11320",   # Airolo (abitato)
+    "14913",   # Parcheggio Area di dosaggio Airolo
+    "27706",   # Svincolo autostradale Airolo-Nufenen
+    "10461",   # Svincolo autostradale Quinto
+    "10462",   # Svincolo autostradale Faido
+    "11598",   # Faido (abitato)
+}
+PUNTI_CORRIDOIO = {PUNTO_TUNNEL} | PUNTI_LATO_URI | PUNTI_LATO_TICINO
+
+# --- chiusura del tunnel ---
+# La fonte annuncia la chiusura con "Situazione: tunnel chiuso" e NON annuncia
+# la riapertura: revoca il messaggio di chiusura. Controllato su 18 record di
+# chiusura in dodici catture del feed: "tunnel aperto" non compare mai.
+FRASI_CHIUSURA = [
+    "tunnel chiuso",                    # it
+    "tunnel gesperrt",                  # de
+    "tunnel fermé", "tunnel ferme",     # fr
+    "tunnel closed",                    # en
+]
+# I qualificatori che dicono "solo in certe ore" senza dire quali: con uno di
+# questi non possiamo affermare che la chiusura sia in corso adesso. Quattro
+# valori in 34548 blocchi d'archivio; `untilFurtherNotice` non e' fra questi
+# perche' non e' una restrizione — dice "da adesso e fino a nuovo avviso", ed
+# e' come era scritta la chiusura del 03.08.2026.
+QUALIFICATORI_A_ORARIO = {"duringTheNight", "duringTheDayTime", "severalTimes"}
+
+# La direzione come la dichiara la fonte, non come la si indovina dal testo.
+# Verificato il 03.08.2026 su 50 concordanze e zero contraddizioni.
+DIREZIONE_CODIFICATA = {"positive": "north", "negative": "south"}
 SOUTH_MARKERS = [
     "luzern -> s. gottardo", "lucerna -> s. gottardo",
     "basilea -> s. gottardo", "basel -> s. gottardo",
@@ -254,6 +310,90 @@ def sulla_autostrada(lower):
     return not re.search(r"\bh2\b", lower)
 
 
+def punti_di(record):
+    """I punti AlertC toccati dal record, primari e secondari insieme."""
+    return {
+        (e.text or "").strip()
+        for e in record.iter()
+        if local(e.tag) == "specificLocation" and (e.text or "").strip().isdigit()
+    }
+
+
+def direzione_codificata(record):
+    """Il senso di marcia come lo dichiara la fonte, o None.
+
+    Un record puo' portarne piu' d'uno: se uno dice "both" e un altro un senso
+    preciso vince il preciso. Se due si contraddicono si lascia in bianco.
+    """
+    valori = {
+        (e.text or "").strip()
+        for e in record.iter()
+        if local(e.tag) == "alertCDirectionCoded" and (e.text or "").strip()
+    }
+    nette = valori - {"both"}
+    if len(nette) == 1:
+        return DIREZIONE_CODIFICATA.get(nette.pop())
+    return None
+
+
+def in_vigore(record, now):
+    """Il messaggio vale ADESSO, o parla di qualcosa di programmato?
+
+    Tre domande, tutte su dati dichiarati dalla fonte:
+      - vale solo in certe ore che non conosciamo? allora no;
+      - comincia dopo adesso? allora no;
+      - ha dei periodi di validita'? allora adesso deve cadere dentro uno.
+
+    Senza niente di tutto questo vale adesso: e' il caso normale di una coda.
+    """
+    for ext in (e for e in record.iter() if local(e.tag) == "validityExtension"):
+        for enum in (x for x in ext.iter()
+                     if local(x.tag) == "elementEnumerationExtension"):
+            nome = next((c.text for c in enum if local(c.tag) == "element"), "")
+            valore = next((c.text for c in enum if local(c.tag) == "value"), "")
+            if ((nome or "").strip() == "validityStatus"
+                    and (valore or "").strip() in QUALIFICATORI_A_ORARIO):
+                return False
+
+    inizi = [t for t in (parse_time((e.text or "").strip())
+                         for e in record.iter()
+                         if local(e.tag) == "overallStartTime") if t]
+    if inizi and min(inizi) > now:
+        return False
+
+    periodi = [p for p in record.iter() if local(p.tag) == "validPeriod"]
+    if not periodi:
+        return True
+    for p in periodi:
+        da = next((parse_time((c.text or "").strip()) for c in p
+                   if local(c.tag) == "startOfPeriod"), None)
+        a = next((parse_time((c.text or "").strip()) for c in p
+                  if local(c.tag) == "endOfPeriod"), None)
+        if (da is None or da <= now) and (a is None or a >= now):
+            return True
+    return False
+
+
+def chiusura_del_tunnel(texts, punti):
+    """Il messaggio parla di una chiusura DELLA GALLERIA DEL GOTTARDO?
+
+    Non basta trovare "tunnel chiuso": nel corridoio ci sono altre gallerie
+    (la Naxberg, la Piumogna) e chiuderne una non e' chiudere il Gottardo.
+    Serve una di queste tre prove, in ordine di solidita': il punto AlertC del
+    tunnel, il nome nel testo, oppure il fatto che il messaggio tocchi un
+    punto dal lato di Uri E uno dal lato del Ticino — in mezzo c'e' solo la
+    galleria (e' il caso di situation.639408, "tra Göschenen E Airolo").
+    """
+    testi = " ".join(v for v in texts.values() if v).lower()
+    if not any(f in testi for f in FRASI_CHIUSURA):
+        return False
+    if PUNTO_TUNNEL in punti:
+        return True
+    if any(n in testi for n in NOMI_TUNNEL):
+        return True
+    return bool(punti & PUNTI_LATO_URI) and bool(punti & PUNTI_LATO_TICINO)
+
+
 def extract(xml_data):
     """Ritorna (stato code, eventi corridoio).
 
@@ -269,6 +409,7 @@ def extract(xml_data):
     events = []
     revocations = set()
     revoked_ids = {}
+    tunnel = {"chiuso": False, "revocato": False, "direzione": None, "testo": None}
 
     for record in (e for e in root.iter() if local(e.tag) == "situationRecord"):
         typename = localtype(record.get(xsi_type, ""))
@@ -293,8 +434,21 @@ def extract(xml_data):
 
         lower = text.lower()
         revoked = lower.startswith(("revocato", "aufgehoben", "révoqué"))
-        if not any(k in lower for k in CORRIDOR):
+
+        # Dentro il corridoio per CODICE, o in mancanza per nome.
+        punti = punti_di(record)
+        if not (punti & PUNTI_CORRIDOIO) and not any(k in lower for k in CORRIDOR):
             continue
+
+        # La chiusura del tunnel: si registra qui, prima che la revoca faccia
+        # uscire di scena il messaggio, perche' la revoca E' la riapertura.
+        if chiusura_del_tunnel(texts, punti):
+            if revoked:
+                tunnel["revocato"] = True
+            elif in_vigore(record, now):
+                tunnel["chiuso"] = True
+                tunnel["direzione"] = direzione_codificata(record)
+                tunnel["testo"] = text
 
         version_time = parse_time(
             next(
@@ -368,7 +522,7 @@ def extract(xml_data):
     ), reverse=False)
     events.sort(key=lambda e: e["versionTime"], reverse=True)
     events.sort(key=lambda e: not (e["km"] is not None or e["wait"] is not None))
-    return state, events[:20], revocations, revoked_ids
+    return state, events[:20], revocations, revoked_ids, tunnel
 
 
 def delay_minutes(entry):
@@ -467,6 +621,67 @@ def update_notifications(state, now):
             new_entry["clearSince"] = clear_since.isoformat().replace("+00:00", "Z")
         push_state[direction] = new_entry
 
+    state_file.write_text(json.dumps(push_state, indent=1))
+
+
+# I testi delle due notifiche, nello stile delle altre (inglese, con emoji).
+TUNNEL_CHIUSO = {
+    None: "🚧 Gotthard tunnel closed",
+    "south": "🚧 Gotthard tunnel closed southbound",
+    "north": "🚧 Gotthard tunnel closed northbound",
+}
+TUNNEL_RIAPERTO = "✅ Gotthard tunnel reopened"
+
+
+def update_tunnel_notifications(tunnel, now):
+    """Una push quando il tunnel chiude, una quando riapre.
+
+    Due inneschi per la riapertura, perche' uno solo non basta:
+
+      - la REVOCA vista nel feed, che e' il modo in cui la fonte annuncia la
+        riapertura (non esiste un messaggio "tunnel aperto": verificato, in
+        dodici catture non compare mai). Ma la revoca resta disponibile 60
+        minuti, e un giro saltato la fa perdere per sempre;
+      - in mancanza, la chiusura che non risulta piu' in vigore e resta cosi'
+        per CLEAR_CONFIRM. La conferma evita di annunciare una riapertura per
+        un buco del feed, esattamente come per la fine di una coda.
+
+    Niente cooldown: se il tunnel chiude mentre e' appena partita la notifica
+    di una coda, quella notizia non puo' aspettare 45 minuti.
+    """
+    state_file = HISTORY_FILE.parent / "push-state.json"
+    try:
+        push_state = json.loads(state_file.read_text())
+    except (FileNotFoundError, json.JSONDecodeError):
+        push_state = {}
+
+    entry = push_state.get("tunnel", {})
+    phase = entry.get("phase", "open")
+    open_since = parse_time(entry.get("openSince") or "")
+
+    if tunnel["chiuso"]:
+        open_since = None
+        if phase != "closed":
+            testo = TUNNEL_CHIUSO.get(tunnel["direzione"], TUNNEL_CHIUSO[None])
+            if send_push(testo):
+                phase = "closed"
+    elif phase == "closed":
+        if tunnel["revocato"]:
+            if send_push(TUNNEL_RIAPERTO):
+                phase = "open"
+                open_since = None
+        else:
+            open_since = open_since or now
+            if now - open_since >= CLEAR_CONFIRM and send_push(TUNNEL_RIAPERTO):
+                phase = "open"
+                open_since = None
+    else:
+        open_since = None
+
+    nuovo = {"phase": phase}
+    if open_since is not None:
+        nuovo["openSince"] = open_since.isoformat().replace("+00:00", "Z")
+    push_state["tunnel"] = nuovo
     state_file.write_text(json.dumps(push_state, indent=1))
 
 
@@ -671,7 +886,7 @@ def main():
     if not api_key:
         sys.exit("OTD_API_KEY mancante")
 
-    state, events, revocations, revoked_ids = extract(fetch_feed(api_key))
+    state, events, revocations, revoked_ids, tunnel = extract(fetch_feed(api_key))
     now = datetime.now(timezone.utc).replace(microsecond=0)
 
     history = []
@@ -692,6 +907,9 @@ def main():
     hold_through_gaps(state, revocations, history, now)
 
     update_notifications(state, now)
+    # Dopo le code, e da una rilettura fresca del file: la chiusura del tunnel
+    # ha uno stato suo e non deve calpestare quello delle due direzioni.
+    update_tunnel_notifications(tunnel, now)
 
     sample = {
         "time": now.isoformat().replace("+00:00", "Z"),
@@ -724,7 +942,9 @@ def main():
     (HISTORY_FILE.parent / "latest.json").write_text(
         json.dumps(latest, indent=1, ensure_ascii=False)
     )
-    print(f"campione salvato: {sample} (totale {len(history)}, eventi {len(events)}->{len(latest_events)}, archivio avvisi {len(alerts)}, revoche {sorted(revocations) or '-'})")
+    stato_tunnel = ("CHIUSO" + (f" verso {tunnel['direzione']}" if tunnel["direzione"] else "")
+                    if tunnel["chiuso"] else ("revocato" if tunnel["revocato"] else "aperto"))
+    print(f"campione salvato: {sample} (totale {len(history)}, eventi {len(events)}->{len(latest_events)}, archivio avvisi {len(alerts)}, revoche {sorted(revocations) or '-'}, tunnel {stato_tunnel})")
 
 
 if __name__ == "__main__":
