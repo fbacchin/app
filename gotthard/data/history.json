@@ -3545,44 +3545,44 @@
  {
   "time": "2026-08-04T16:47:33Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-04T16:47:44Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-04T16:52:49Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-04T16:57:52Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-04T17:02:58Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-04T17:08:02Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 20,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 2.0
  },
  {
   "time": "2026-08-04T17:13:07Z",
