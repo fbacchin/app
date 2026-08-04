@@ -85,6 +85,25 @@ scelte che altrimenti sembrano eccessive.
    una da capo a fondo, ricevuta 17 minuti dopo — e costruire sull'assenza
    significa far sparire code vive al primo buco nel feed.
 
+4. **Una revoca vive 60 minuti, poi non esiste più.** È R4: la piattaforma
+   tiene disponibile un messaggio revocato per un'ora (è la stessa costante
+   `MEMORIA_REVOCHE_MS`). Passata quella, nessuna finestra per quanto larga la
+   riporta indietro — provato il 04.08 alle 20:49 su `situation.643096`, la
+   cui revoca era di quasi cinque ore prima: un ripasso di sei ore ha risposto
+   con cinque record e nessuno era quello.
+
+   Da qui una distinzione che vale per il ripasso, e che è facile sbagliare:
+
+   | | serve a ripescare | quel che conta |
+   |---|---|---|
+   | profondità della finestra | **situazioni** perse, che restano pubblicate finché sono vive | ore |
+   | frequenza del ripasso | **revoche** perse, che scadono dopo un'ora | meno di un'ora |
+
+   Perdere una revoca costa caro: l'unica rete rimasta è la potatura a 13 ore,
+   e nel frattempo l'app mostra una coda che non c'è. Il 03.08 ne sono state
+   perse tre di fila e una ha lasciato in vita una coda fantasma di 2 km per
+   quasi undici ore.
+
 ## Dove sta il resto
 
 - il collector che campiona lo storico: `gotthard/collect.py`, accanto;
