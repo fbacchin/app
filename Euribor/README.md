@@ -70,15 +70,24 @@ l'aggiornamento, **non succede niente** — quella data c'è già, quindi viene
 saltata. Nessun errore, nessun avviso, e il valore sbagliato resta pubblicato.
 
 L'unico strumento che riscrive è `sync-from-drive.py --rebuild`, che rigenera
-l'intero storico da Drive. Vuole il clone locale di questa repo:
+l'intero storico da Drive. Gira su un clone di questa repo — e **sul Mac non
+ce n'è più uno**: quello in `Xcode/=NewApps/app` è stato tolto il 04.08.2026,
+quando la pubblicazione è passata interamente all'API e il clone non serviva
+più a niente. Quindi si parte clonando:
 
 ```bash
-cd <clone di fbacchin/app>
-git sparse-checkout list                     # se Euribor/ è escluso, rimettilo
+git clone https://github.com/fbacchin/app.git
+cd app
 python3 Euribor/sync-from-drive.py --check   # cosa farebbe, senza scrivere
 python3 Euribor/sync-from-drive.py --rebuild
 git diff -- Euribor                          # GUARDALO PRIMA DI COMMITTARE
+git add Euribor && git commit -m "Correggi lo storico dei tassi" -- Euribor
+git push origin main
 ```
+
+Lo script legge i CSV sorgente dalla cartella Libor su Google Drive: il
+percorso lo trova da sé, ma la cartella dev'essere sincronizzata sul Mac da
+cui lo lanci.
 
 `--rebuild` riscrive tutto ed elimina le righe con date duplicate: il `git
 diff` è l'unica rete. Serve per riparare, mai per l'uso quotidiano.
