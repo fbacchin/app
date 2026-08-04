@@ -12,7 +12,8 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Göschenen Situation: entrée fermée Raison: en raison de problèmes techniques",
    "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata Causa: per problemi tecnici"
   },
-  "lastSeen": "2026-08-04T02:32:31Z"
+  "lastSeen": "2026-08-04T02:32:31Z",
+  "revokedAt": "2026-08-04T02:42:39Z"
  },
  {
   "firstSeen": "2026-08-03T05:50:36Z",
@@ -43,7 +44,8 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-08-03T18:53:38Z"
+  "lastSeen": "2026-08-03T18:53:38Z",
+  "revokedAt": "2026-08-04T02:42:39Z"
  },
  {
   "firstSeen": "2026-08-03T05:35:15Z",
