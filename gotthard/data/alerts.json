@@ -1,21 +1,5 @@
 [
  {
-  "firstSeen": "2026-08-04T14:34:43Z",
-  "id": "situation.643093.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-08-04T15:52:11Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Faido und Tunnel Piumogna-Tunnel Sachlage: Stau Ursache: Unfall Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Tunnel Tunnel de Piumogna Situation: bouchon Raison: accident Gestion du trafic: rétrécissement des voies sur une voie de circulation",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Galleria Galleria Piumogna Situazione: colonna Causa: incidente Limitazione del traffico: corsie strette ridotta su una corsia"
-  },
-  "lastSeen": "2026-08-04T16:01:47Z",
-  "revokedAt": "2026-08-04T16:37:23Z"
- },
- {
   "firstSeen": "2026-08-04T08:19:10Z",
   "id": "situation.643023.1.1.1",
   "type": "RoadOrCarriagewayOrLaneManagement",
@@ -28,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-08-04T16:01:47Z"
+  "lastSeen": "2026-08-04T16:42:29Z"
  },
  {
   "firstSeen": "2026-08-04T08:19:10Z",
@@ -43,7 +27,23 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
   },
-  "lastSeen": "2026-08-04T16:01:47Z"
+  "lastSeen": "2026-08-04T16:42:29Z"
+ },
+ {
+  "firstSeen": "2026-08-04T14:34:43Z",
+  "id": "situation.643093.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "north",
+  "versionTime": "2026-08-04T15:52:11Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Faido und Tunnel Piumogna-Tunnel Sachlage: Stau Ursache: Unfall Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Tunnel Tunnel de Piumogna Situation: bouchon Raison: accident Gestion du trafic: rétrécissement des voies sur une voie de circulation",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Galleria Galleria Piumogna Situazione: colonna Causa: incidente Limitazione del traffico: corsie strette ridotta su una corsia"
+  },
+  "lastSeen": "2026-08-04T16:01:47Z",
+  "revokedAt": "2026-08-04T16:37:23Z"
  },
  {
   "firstSeen": "2026-08-04T14:55:00Z",
