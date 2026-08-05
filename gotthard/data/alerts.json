@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Göschenen et Jonction autoroutière Airolo Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable 05.08.2026 23:00 jusqu'à 06.08.2026 01:00",
    "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Göschenen E Svincolo autostradale Airolo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile 05.08.2026 23:00 fino 06.08.2026 01:00"
   },
-  "lastSeen": "2026-08-05T11:15:44Z"
+  "lastSeen": "2026-08-05T11:46:13Z"
  },
  {
   "firstSeen": "2026-08-05T08:12:01Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
   },
-  "lastSeen": "2026-08-05T11:15:44Z"
+  "lastSeen": "2026-08-05T11:46:13Z"
  },
  {
   "firstSeen": "2026-08-05T07:56:41Z",
@@ -42,7 +42,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 5.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 50",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 5.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 50"
   },
-  "lastSeen": "2026-08-05T11:15:44Z"
+  "lastSeen": "2026-08-05T11:46:13Z"
  },
  {
   "firstSeen": "2026-08-05T08:01:47Z",
@@ -57,7 +57,7 @@
    "fr": "Libéré: A2 Chiasso <-> St-Gothard entre Jonction autoroutière Biasca et Jonction autoroutière Quinto Situation: trafic perturbé travaux, longueur [km] 25.5 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.8 Complément 2: limitation temporaire de largeur largeur de la voie [m] 3.8 Durée: durant la journée probable 12.10.2026 07:00 jusqu'à 30.10.2026 16:00",
    "it": "Approvato: A2 Chiasso <-> S. Gottardo tra Svincolo autostradale Biasca E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 25.5 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.8 Aggiunta 2: limite temporaneo larghezza Larghezza carreggiata [m] 3.8 Durata: durante il giorno probabile 12.10.2026 07:00 fino 30.10.2026 16:00"
   },
-  "lastSeen": "2026-08-05T11:15:44Z"
+  "lastSeen": "2026-08-05T11:46:13Z"
  },
  {
   "firstSeen": "2026-08-05T08:06:52Z",
@@ -72,7 +72,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-08-05T11:15:44Z"
+  "lastSeen": "2026-08-05T11:46:13Z"
  },
  {
   "firstSeen": "2026-08-05T07:31:23Z",
@@ -87,7 +87,22 @@
    "fr": "Libéré: A2 Chiasso <-> St-Gothard entre Jonction autoroutière Faido et Jonction autoroutière Quinto Situation: trafic perturbé travaux, longueur [km] 6.8 Gestion du trafic: rétrécissement des voies sur deux voies de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 7.25 Complément 2: limitation temporaire de largeur largeur de la voie [m] 3.85 Durée: durant la journée probable 17.08.2026 07:00 jusqu'à 21.08.2026 16:30",
    "it": "Approvato: A2 Chiasso <-> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 6.8 Limitazione del traffico: corsie strette ridotta su due corsie Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 7.25 Aggiunta 2: limite temporaneo larghezza Larghezza carreggiata [m] 3.85 Durata: durante il giorno probabile 17.08.2026 07:00 fino 21.08.2026 16:30"
   },
-  "lastSeen": "2026-08-05T11:15:44Z"
+  "lastSeen": "2026-08-05T11:46:13Z"
+ },
+ {
+  "firstSeen": "2026-08-05T11:46:13Z",
+  "id": "situation.643241.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "north",
+  "versionTime": "2026-08-05T11:27:57Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Raststätte San Gottardo Sud Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Aire de service San Gottardo Sud Situation: trafic perturbé Raison: véhicule en panne",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Area di servizio San Gottardo Sud Situazione: problemi di traffico Causa: veicolo in avaria"
+  },
+  "lastSeen": "2026-08-05T11:46:13Z"
  },
  {
   "firstSeen": "2026-08-05T11:15:44Z",
