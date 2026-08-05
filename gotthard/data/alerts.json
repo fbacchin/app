@@ -12,7 +12,22 @@
    "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Göschenen et Jonction autoroutière Airolo Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable 05.08.2026 23:00 jusqu'à 06.08.2026 01:00",
    "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Göschenen E Svincolo autostradale Airolo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile 05.08.2026 23:00 fino 06.08.2026 01:00"
   },
-  "lastSeen": "2026-08-05T07:21:16Z"
+  "lastSeen": "2026-08-05T07:31:23Z"
+ },
+ {
+  "firstSeen": "2026-08-05T07:31:23Z",
+  "id": "situation.643199.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": null,
+  "versionTime": "2026-08-05T06:43:46Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso <-> Gotthard zwischen Anschluss Faido und Anschluss Quinto Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 6.8 Verkehrsführung: Fahrbahnverengung auf zwei Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 7.25 Zusatz 2: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.85 Dauer: tagsüber voraussichtlich 17.08.2026 07:00 bis 21.08.2026 16:30",
+   "fr": "Libéré: A2 Chiasso <-> St-Gothard entre Jonction autoroutière Faido et Jonction autoroutière Quinto Situation: trafic perturbé travaux, longueur [km] 6.8 Gestion du trafic: rétrécissement des voies sur deux voies de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 7.25 Complément 2: limitation temporaire de largeur largeur de la voie [m] 3.85 Durée: durant la journée probable 17.08.2026 07:00 jusqu'à 21.08.2026 16:30",
+   "it": "Approvato: A2 Chiasso <-> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 6.8 Limitazione del traffico: corsie strette ridotta su due corsie Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 7.25 Aggiunta 2: limite temporaneo larghezza Larghezza carreggiata [m] 3.85 Durata: durante il giorno probabile 17.08.2026 07:00 fino 21.08.2026 16:30"
+  },
+  "lastSeen": "2026-08-05T07:31:23Z"
  },
  {
   "firstSeen": "2026-08-04T17:13:07Z",
