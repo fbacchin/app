@@ -4033,9 +4033,9 @@
  },
  {
   "time": "2026-08-05T08:47:35Z",
-  "southDelay": 0,
+  "southDelay": 10,
   "northDelay": 30,
-  "southQueueKm": null,
+  "southQueueKm": 1.0,
   "northQueueKm": 3.0,
   "northHeld": true
  },
