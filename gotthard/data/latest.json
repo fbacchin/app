@@ -1,11 +1,11 @@
 {
- "time": "2026-08-05T22:29:32Z",
+ "time": "2026-08-05T22:34:38Z",
  "south": {
   "km": null,
   "wait": null
  },
  "north": {
-  "km": null,
+  "km": 2.0,
   "wait": null
  },
  "events": [
@@ -13,7 +13,7 @@
    "id": "situation.643372.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-08-05T22:24:00Z",
+   "versionTime": "2026-08-05T22:25:42Z",
    "km": 2.0,
    "wait": null,
    "texts": {
@@ -23,23 +23,10 @@
    }
   },
   {
-   "id": "situation.643371.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-05T21:46:31Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo -> Göschenen zwischen Ortschaft Andermatt und Ortschaft Göschenen Sachlage: Strecke blockiert Ursache: Ausnahmetransport",
-    "fr": "Libéré: H2 Airolo -> Göschenen entre Localité Andermatt et Localité Göschenen Situation: bloqué Raison: convoi exceptionnel",
-    "it": "Approvato: H2 Airolo -> Göschenen tra Luogo Andermatt E Luogo Göschenen Situazione: strada bloccata Causa: trasporto eccezionale"
-   }
-  },
-  {
    "id": "situation.643370.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
    "direction": null,
-   "versionTime": "2026-08-05T21:42:49Z",
+   "versionTime": "2026-08-05T22:25:09Z",
    "km": null,
    "wait": null,
    "texts": {
