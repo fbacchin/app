@@ -4,11 +4,10 @@
   "lastSent": "2026-08-05T15:04:56Z"
  },
  "north": {
-  "phase": "clear",
-  "lastSent": "2026-08-05T19:36:04Z"
+  "phase": "queued",
+  "lastSent": "2026-08-05T22:24:26Z"
  },
  "tunnel": {
-  "phase": "closed",
-  "openSince": "2026-08-05T22:09:08Z"
+  "phase": "closed"
  }
 }
