@@ -1747,12 +1747,15 @@ Parse.Cloud.job("aggiorna", async (request) => {
  * leggibile da chiunque la scompatti — ma impedisce che una chiamata a caso
  * o dimenticata cambi lo stato senza che qualcuno l'abbia voluto. Stessa
  * logica del vecchio `overrideCode` delle scavalcature manuali.
+ *
+ * Lo stesso codice vale per tutte le correzioni a mano — la revoca di un
+ * avviso, un campione dello Storico, un campione di history.json su GitHub.
  */
-const CODICE_REVOCA = "gottardo-manuale-2026";
+const CODICE_MANUALE = "gottardo-manuale-2026";
 
 Parse.Cloud.define("revoca", async (request) => {
   const { situationId, revocato, codice } = request.params || {};
-  if (codice !== CODICE_REVOCA) throw new Error("codice non valido");
+  if (codice !== CODICE_MANUALE) throw new Error("codice non valido");
   if (!situationId) throw new Error("manca situationId");
 
   const riga = await rigaAvviso(situationId);
@@ -1812,6 +1815,247 @@ Parse.Cloud.define("revoca", async (request) => {
     revocatoAlle: attiva ? riga.get("revocatoAlle").toISOString() : null,
     toltoDalMagazzino,
   };
+});
+
+// ------------------------------------------------- lo Storico corretto a mano
+
+/**
+ * I campi dello Storico che si possono correggere dall'app, col modo in cui
+ * va letto ognuno. Fuori da questo elenco non si scrive niente, e `campione`
+ * ne sta fuori apposta: e' l'identita' della riga, cambiarlo non correggerebbe
+ * un campione, ne inventerebbe un altro in un'ora in cui non e' stato letto.
+ */
+const CAMPI_STORICO = {
+  sudKm: "numero", nordKm: "numero",
+  sudMin: "intero", nordMin: "intero",
+  sudTenuto: "booleano", nordTenuto: "booleano",
+};
+
+/**
+ * Legge un valore arrivato dall'app. Vuoto, assente e null valgono "niente" —
+ * e' cosi' che si cancella un numero. Un numero negativo non e' un dato
+ * plausibile ne' per una coda ne' per un'attesa: meglio l'errore che una
+ * curva che scende sotto lo zero.
+ */
+function leggiValore(nome, tipo, v) {
+  if (v === null || v === undefined || v === "") return null;
+  if (tipo === "booleano") return v === true || v === "true";
+  const n = Number(v);
+  if (!isFinite(n) || n < 0) {
+    throw new Error(nome + ": serve un numero non negativo, non " + JSON.stringify(v));
+  }
+  return tipo === "intero" ? Math.round(n) : n;
+}
+
+/**
+ * Butta la risposta gia' pronta. Resta in cache un minuto, e in quel minuto
+ * l'app continuerebbe a servire lo schermo vecchio — col numero appena
+ * corretto ancora dentro. Stessa ragione per cui lo fa anche `revoca`.
+ */
+async function scadeLaCache() {
+  const q = new Parse.Query(STATO_CLASS);
+  q.descending("updatedAt");
+  const riga = await q.first({ useMasterKey: true });
+  if (!riga) return;
+  riga.unset("builtAt");
+  await riga.save(null, { useMasterKey: true });
+}
+
+/**
+ * Corregge o cancella un campione dello Storico, dall'app Gottardo Dati.
+ *
+ * La tabella non e' solo una tabella: `leggiStorico` la rilegge a ogni giro ed
+ * e' da li' che nasce la serie del grafico. Una correzione fatta qui si vede
+ * sui telefoni al primo aggiornamento — che e' il motivo per cui esiste questa
+ * funzione, e il motivo per cui la riga resta marcata `corretto`.
+ */
+Parse.Cloud.define("correggiStorico", async (request) => {
+  const { objectId, codice, azione, valori } = request.params || {};
+  if (codice !== CODICE_MANUALE) throw new Error("codice non valido");
+  if (!objectId) throw new Error("manca objectId");
+
+  const riga = await new Parse.Query("Storico").get(objectId, { useMasterKey: true });
+
+  if (azione === "cancella") {
+    const quando = riga.get("campione");
+    await riga.destroy({ useMasterKey: true });
+    await scadeLaCache();
+    return { objectId, cancellato: true, campione: quando ? quando.toISOString() : null };
+  }
+
+  const scritti = {};
+  for (const nome of Object.keys(CAMPI_STORICO)) {
+    if (!valori || !(nome in valori)) continue;
+    const v = leggiValore(nome, CAMPI_STORICO[nome], valori[nome]);
+    if (v === null) riga.unset(nome); else riga.set(nome, v);
+    scritti[nome] = v;
+  }
+  if (!Object.keys(scritti).length) throw new Error("nessun campo da correggere");
+
+  // Segnata, non nascosta: come per la revoca a mano, chi legge la tabella
+  // deve poter distinguere un numero letto dalla fonte da uno scritto da noi.
+  riga.set("corretto", true);
+  riga.set("correttoAlle", new Date());
+  await riga.save(null, { useMasterKey: true });
+  await scadeLaCache();
+  return { objectId, corretto: scritti };
+});
+
+// ------------------------------------------------- lo Storico su GitHub
+//
+// Il secondo storico. `gotthard/data/history.json` sul repo `fbacchin/app` lo
+// scrive il collector che gira su GitHub Actions: un campione ogni 5 minuti,
+// finestra di 48 ore. E' un lettore della fonte indipendente da questo, e la
+// sua utilita' vera e' proprio quella: quando i due storici non coincidono, la
+// differenza dice quale dei due ha perso un messaggio. E' cosi' che il
+// 03.08.2026 sono venute fuori le tre revoche che noi non avevamo ricevuto.
+//
+// Anche qui la scrittura passa dal server, per la stessa ragione della revoca:
+// il token di GitHub sta nell'ambiente (`GH_TOKEN`), non dentro l'app.
+
+const GH_REPO = "fbacchin/app";
+const GH_PERCORSO = "gotthard/data/history.json";
+const GH_RAMO = "main";
+const GH_TOKEN = (typeof process !== "undefined" && process.env && process.env.GH_TOKEN) || "";
+const URL_CONTENUTO = "https://api.github.com/repos/" + GH_REPO + "/contents/" + GH_PERCORSO;
+
+async function chiamaGitHub(metodo, url, corpo) {
+  if (!GH_TOKEN) {
+    // Come per OTD_KEY: senza token GitHub risponde 404 sul repo privato o 401
+    // sulla scrittura, e si andrebbe a cercare un permesso sbagliato invece di
+    // una variabile che non c'e'.
+    throw new Error("variabile d'ambiente GH_TOKEN assente: impostarla nelle " +
+      "Server Settings di Back4App (serve il permesso Contents: read and write su " + GH_REPO + ")");
+  }
+  const res = await fetch(url, {
+    method: metodo,
+    headers: {
+      Authorization: "Bearer " + GH_TOKEN,
+      Accept: "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2022-11-28",
+      "User-Agent": "gottardo-proxy",
+      "Content-Type": "application/json",
+    },
+    body: corpo ? JSON.stringify(corpo) : undefined,
+  });
+  const testo = await res.text();
+  if (res.status < 200 || res.status >= 300) {
+    let motivo = testo.slice(0, 300);
+    try { motivo = JSON.parse(testo).message || motivo; } catch (e) { /* non era JSON */ }
+    const errore = new Error("GitHub HTTP " + res.status + ": " + motivo);
+    errore.stato = res.status;
+    throw errore;
+  }
+  return testo ? JSON.parse(testo) : null;
+}
+
+async function leggiFileGitHub() {
+  const r = await chiamaGitHub("GET", URL_CONTENUTO + "?ref=" + GH_RAMO);
+  return { testo: Buffer.from(r.content || "", "base64").toString("utf8"), sha: r.sha };
+}
+
+/**
+ * Riscrive history.json ESATTAMENTE come lo scrive il collector.
+ *
+ * Non e' pignoleria. Il collector usa `json.dumps(..., indent=1)`, e Python
+ * scrive i float con la virgola anche quando sono tondi: `2.0`, dove
+ * JSON.stringify scriverebbe `2`. Riserializzare col JSON di JavaScript
+ * cambierebbe ogni riga di km del file — 532 righe di diff per correggere un
+ * campione, e i chilometri diventati interi per sempre. Con questa forma il
+ * commit tocca solo le righe che abbiamo davvero cambiato.
+ */
+const CHIAVI_DECIMALI = new Set(["southQueueKm", "northQueueKm"]);
+
+function comeIlCollector(campioni) {
+  const valore = (chiave, v) => {
+    if (v === null || v === undefined) return "null";
+    if (typeof v === "boolean") return v ? "true" : "false";
+    if (typeof v === "number") {
+      if (!CHIAVI_DECIMALI.has(chiave)) return String(v);
+      return Number.isInteger(v) ? v.toFixed(1) : String(v);
+    }
+    return JSON.stringify(v);
+  };
+  const oggetto = (o) => " {\n" + Object.keys(o)
+    .map((k) => "  " + JSON.stringify(k) + ": " + valore(k, o[k])).join(",\n") + "\n }";
+  return "[\n" + campioni.map(oggetto).join(",\n") + "\n]";
+}
+
+const CAMPI_GITHUB = {
+  southQueueKm: "numero", northQueueKm: "numero",
+  southDelay: "intero", northDelay: "intero",
+  southHeld: "booleano", northHeld: "booleano",
+};
+
+/**
+ * Applica la correzione al testo del file e restituisce il testo nuovo.
+ *
+ * Sta separata dalla chiamata a GitHub perche' e' la parte che puo' sbagliare
+ * in silenzio, ed e' l'unica che si puo' provare senza rete.
+ */
+function correggiFileStorico(testo, time, azione, valori) {
+  const campioni = JSON.parse(testo);
+  if (comeIlCollector(campioni) !== testo) {
+    // Guardia: se il collector ha cambiato forma al file, riscriverlo da qui
+    // lo riformatterebbe tutto. Meglio fermarsi che consegnare un commit di
+    // cinquecento righe spacciato per una correzione.
+    throw new Error("history.json non ha piu' la forma che scrive il collector: " +
+      "correggerlo da qui riscriverebbe l'intero file. Allineare comeIlCollector() a collect.py.");
+  }
+  const i = campioni.findIndex((c) => c.time === time);
+  if (i < 0) throw new Error("campione sconosciuto: " + time);
+
+  if (azione === "cancella") {
+    campioni.splice(i, 1);
+    return { testo: comeIlCollector(campioni), cancellato: true, corretto: null };
+  }
+
+  const scritti = {};
+  for (const nome of Object.keys(CAMPI_GITHUB)) {
+    if (!valori || !(nome in valori)) continue;
+    scritti[nome] = leggiValore(nome, CAMPI_GITHUB[nome], valori[nome]);
+    campioni[i][nome] = scritti[nome];
+  }
+  if (!Object.keys(scritti).length) throw new Error("nessun campo da correggere");
+  return { testo: comeIlCollector(campioni), cancellato: false, corretto: scritti };
+}
+
+Parse.Cloud.define("storicoGitHub", async (request) => {
+  const { codice, azione, time, valori } = request.params || {};
+  if (codice !== CODICE_MANUALE) throw new Error("codice non valido");
+
+  if (!azione || azione === "leggi") {
+    // Si legge dal server anche se il repo e' pubblico: raw.githubusercontent
+    // sta dietro una cache di qualche minuto, e dopo una correzione mostrare
+    // ancora il numero vecchio farebbe pensare che la scrittura sia fallita.
+    const { testo } = await leggiFileGitHub();
+    return { repo: GH_REPO, percorso: GH_PERCORSO, campioni: JSON.parse(testo) };
+  }
+  if (!time) throw new Error("manca time");
+
+  // Il collector committa un campione ogni 5 minuti: fra la lettura e la
+  // scrittura il file puo' cambiare sotto i piedi, e GitHub rifiuta il PUT con
+  // lo sha vecchio. Si rilegge e si riprova: la correzione riguarda un
+  // campione preciso, quindi rifarla sul file nuovo resta giusta.
+  let ultimo;
+  for (let tentativo = 0; tentativo < 3; tentativo++) {
+    const { testo, sha } = await leggiFileGitHub();
+    const esito = correggiFileStorico(testo, time, azione, valori);
+    try {
+      await chiamaGitHub("PUT", URL_CONTENUTO, {
+        message: (esito.cancellato ? "storico: campione tolto a mano " : "storico: campione corretto a mano ")
+          + time,
+        content: Buffer.from(esito.testo, "utf8").toString("base64"),
+        sha,
+        branch: GH_RAMO,
+      });
+      return { time, cancellato: esito.cancellato, corretto: esito.corretto, tentativi: tentativo + 1 };
+    } catch (e) {
+      if (e.stato !== 409 && e.stato !== 422) throw e;
+      ultimo = e;
+    }
+  }
+  throw ultimo;
 });
 
 // ------------------------------------------------- il ripasso

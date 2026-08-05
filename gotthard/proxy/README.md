@@ -14,21 +14,51 @@ condivisa fra tutti i client.
 
 | file | cosa fa |
 |---|---|
-| `main.js` | tutto: trasporto, magazzino, schermo pronto, tabelle, la funzione `gotthard` e il lavoro `aggiorna` (ogni 4 minuti) |
+| `main.js` | tutto: trasporto, magazzino, schermo pronto, tabelle, la funzione `gotthard`, le correzioni a mano e il lavoro `aggiorna` (ogni 4 minuti) |
 | `ripasso.js` | le regole della rilettura a finestra larga: ogni quanto tocca e quanto indietro chiedere. Gira **dentro** `aggiorna` — su Back4App si schedula un lavoro solo — e resta il lavoro `ripassa` per i lanci a mano |
-| `prove/` | 211 prove, da lanciare prima di ogni distribuzione |
+| `prove/` | 268 prove, da lanciare prima di ogni distribuzione |
 
-## La chiave
+## Le chiavi
 
-`main.js` legge la chiave della fonte dalla **variabile d'ambiente `OTD_KEY`**,
-impostata nelle Server Settings dell'app su Back4App. Nel sorgente non c'è, e
-non deve tornarci: fino al 04.08.2026 c'era un segnaposto sostituito da un
-passo di build, che produceva un secondo file — quello vero, con la chiave
-dentro — impossibile da versionare.
+Nessuna delle due sta nel sorgente, e non devono tornarci. Si impostano nelle
+**Server Settings** dell'app su Back4App, in Environment Variables.
 
-Se la variabile manca, il giro fallisce subito con un messaggio esplicito e
-senza chiamare la fonte: senza quella guardia si prenderebbe un 401 e si
-andrebbe a cercare una chiave scaduta invece di una variabile assente.
+| variabile | a cosa serve | senza |
+|---|---|---|
+| `OTD_KEY` | leggere la fonte DATEX | il giro fallisce subito, senza chiamare la fonte |
+| `GH_TOKEN` | leggere e correggere `history.json` sul repo (`Contents: read and write` su `fbacchin/app`) | il quadro GitHub di Gottardo Dati dice che la variabile manca |
+
+In tutti e due i casi la guardia c'è apposta: senza, si prenderebbe un 401 o un
+404 e si andrebbe a cercare una chiave scaduta o un permesso sbagliato invece
+di una variabile assente. Fino al 04.08.2026 la chiave della fonte era un
+segnaposto sostituito da un passo di build, che produceva un secondo file —
+quello vero, con la chiave dentro — impossibile da versionare.
+
+## Le correzioni a mano (app Gottardo Dati)
+
+Tre funzioni, tutte con lo stesso codice di conferma (`CODICE_MANUALE`), tutte
+per la stessa ragione: le tabelle hanno le scritture chiuse alla master key e i
+segreti stanno sul server, quindi il client può fare solo queste cose, su
+questi campi.
+
+| funzione | cosa cambia |
+|---|---|
+| `revoca` | mette o toglie la revoca su un avviso, e lo toglie dal magazzino |
+| `correggiStorico` | corregge o cancella un campione della tabella `Storico` |
+| `storicoGitHub` | legge `history.json` dal repo, e ne corregge o cancella un campione con un commit |
+
+Due dettagli che sembrano eccessivi e non lo sono:
+
+- dopo ogni correzione si butta la risposta già pronta (`builtAt`), altrimenti
+  per un minuto l'app continua a servire il numero vecchio e sembra che la
+  scrittura non sia andata;
+- `history.json` si riscrive con `comeIlCollector()` e non con
+  `JSON.stringify`. Il collector usa `json.dumps(indent=1)`, e Python scrive i
+  float tondi come `2.0` dove JavaScript scriverebbe `2`: riserializzare col
+  JSON di serie cambierebbe ogni riga di chilometri del file — cinquecento
+  righe di diff per correggere un campione, e i chilometri diventati interi per
+  sempre. Se un giorno il collector cambiasse forma al file, la scrittura si
+  ferma con un messaggio esplicito invece di riformattare tutto.
 
 ## Distribuire
 
@@ -42,8 +72,8 @@ cd gotthard/proxy
 for f in prove/*.js; do node "$f" | tail -1; done
 ```
 
-Attese: `102/102`, `45/45`, `37/37`, `27/27`. Il collector ha le sue, accanto
-a lui: `python3 ../prova_collector.py` → `21/21`.
+Attese: `108/108`, `51/51`, `45/45`, `37/37`, `27/27`. Il collector ha le sue,
+accanto a lui: `python3 ../prova_collector.py` → `21/21`.
 
 ## Cosa sorvegliano le prove
 
@@ -62,6 +92,10 @@ commento in testa dice quale.
   marcia.
 - **`prova_tabelle.js`** — le tabelle leggibili (`Attuale`, `Avvisi`,
   `Storico`) e lo schermo pronto.
+- **`prova_correzioni.js`** — le correzioni a mano dei due storici. La prova
+  che conta è l'ultima: `history.json` vero, riscritto senza toccarlo, deve
+  tornare identico byte per byte — se non lo è, un giorno un commit di
+  correzione riformatterebbe l'intero file.
 
 ## Tre cose sulla fonte che è costato caro imparare
 
