@@ -1,20 +1,19 @@
 {
- "time": "2026-08-05T08:17:07Z",
+ "time": "2026-08-05T08:22:11Z",
  "south": {
-  "km": null,
-  "wait": null
+  "km": 1.0,
+  "wait": 10
  },
  "north": {
   "km": 2.0,
-  "wait": 20,
-  "held": true
+  "wait": 20
  },
  "events": [
   {
    "id": "situation.643212.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "south",
-   "versionTime": "2026-08-05T08:11:50Z",
+   "versionTime": "2026-08-05T08:12:31Z",
    "km": 1.0,
    "wait": 10,
    "texts": {
