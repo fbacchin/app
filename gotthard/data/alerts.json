@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Poste de douane Chiasso-Brogeda et Tunnel Tunnel du St-Gothard Situation: ralentissements prévus Raison: convoi exceptionnel",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Dogana Chiasso Brogeda E Galleria Galleria San Gottardo Situazione: si prevedono problemi di traffico Causa: trasporto eccezionale"
   },
-  "lastSeen": "2026-08-05T20:26:58Z"
+  "lastSeen": "2026-08-05T20:52:29Z"
  },
  {
   "firstSeen": "2026-08-05T08:01:47Z",
@@ -296,21 +296,5 @@
   },
   "lastSeen": "2026-08-04T02:32:31Z",
   "revokedAt": "2026-08-04T02:42:39Z"
- },
- {
-  "firstSeen": "2026-08-03T05:50:36Z",
-  "id": "situation.642792.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-08-03T19:41:10Z",
-  "km": 3.0,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 3.0 Ursache: Verkehrsüberlastung",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 3.0 Raison: surcharge de trafic",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato"
-  },
-  "lastSeen": "2026-08-03T20:51:23Z",
-  "revokedAt": "2026-08-03T21:27:11Z"
  }
 ]
