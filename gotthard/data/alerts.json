@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Poste de douane Chiasso-Brogeda et Tunnel Tunnel du St-Gothard Situation: ralentissements prévus Raison: convoi exceptionnel",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Dogana Chiasso Brogeda E Galleria Galleria San Gottardo Situazione: si prevedono problemi di traffico Causa: trasporto eccezionale"
   },
-  "lastSeen": "2026-08-06T02:29:36Z"
+  "lastSeen": "2026-08-06T02:34:41Z"
  },
  {
   "firstSeen": "2026-08-05T22:24:26Z",
@@ -329,21 +329,5 @@
   },
   "lastSeen": "2026-08-04T13:11:50Z",
   "revokedAt": "2026-08-04T13:37:44Z"
- },
- {
-  "firstSeen": "2026-08-03T19:13:58Z",
-  "id": "situation.642966.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": "south",
-  "versionTime": "2026-08-03T19:05:50Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Göschenen Sachlage: Einfahrt gesperrt Ursache: Technische Probleme",
-   "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Göschenen Situation: entrée fermée Raison: en raison de problèmes techniques",
-   "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata Causa: per problemi tecnici"
-  },
-  "lastSeen": "2026-08-04T02:32:31Z",
-  "revokedAt": "2026-08-04T02:42:39Z"
  }
 ]
