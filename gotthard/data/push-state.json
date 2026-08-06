@@ -4,9 +4,8 @@
   "lastSent": "2026-08-06T09:24:18Z"
  },
  "north": {
-  "phase": "queued",
-  "lastSent": "2026-08-06T06:55:33Z",
-  "clearSince": "2026-08-06T15:36:40Z"
+  "phase": "clear",
+  "lastSent": "2026-08-06T15:57:01Z"
  },
  "tunnel": {
   "phase": "open"
