@@ -4,7 +4,7 @@
   "id": "situation.643607.1.1.1",
   "type": "AbnormalTraffic",
   "direction": "north",
-  "versionTime": "2026-08-07T16:37:51Z",
+  "versionTime": "2026-08-07T17:25:50Z",
   "km": 9.0,
   "wait": 90,
   "texts": {
@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 9 Raison: surcharge de trafic Complément 1: retards Nbre. [h] 1.5",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 9 Causa: traffico congestionato Aggiunta 1: ritardi No. [h] 1.5"
   },
-  "lastSeen": "2026-08-07T17:23:01Z"
+  "lastSeen": "2026-08-07T17:28:08Z"
  },
  {
   "firstSeen": "2026-08-07T05:26:58Z",
