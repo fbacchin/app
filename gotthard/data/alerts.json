@@ -12,7 +12,22 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 6.0 Raison: surcharge de trafic Complément 1: retards Nbre. [h] 1",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 6.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [h] 1"
   },
-  "lastSeen": "2026-08-07T18:04:14Z"
+  "lastSeen": "2026-08-07T18:09:20Z"
+ },
+ {
+  "firstSeen": "2026-08-07T18:09:20Z",
+  "id": "situation.643776.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "north",
+  "versionTime": "2026-08-07T18:07:52Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Tunnel Stalvedro-Tunnel Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Tunnel Tunnel de Stalvedro Situation: trafic perturbé Raison: véhicule en panne",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Galleria Galleria Stalvedro Situazione: problemi di traffico Causa: veicolo in avaria"
+  },
+  "lastSeen": "2026-08-07T18:09:20Z"
  },
  {
   "firstSeen": "2026-08-07T05:26:58Z",
