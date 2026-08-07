@@ -1,5 +1,5 @@
 {
- "time": "2026-08-07T13:48:13Z",
+ "time": "2026-08-07T13:53:21Z",
  "south": {
   "km": 3.0,
   "wait": 30
@@ -13,13 +13,13 @@
    "id": "situation.643683.1.1.1",
    "type": "AbnormalTraffic",
    "direction": null,
-   "versionTime": "2026-08-07T13:39:52Z",
+   "versionTime": "2026-08-07T13:51:39Z",
    "km": null,
-   "wait": 25,
+   "wait": 20,
    "texts": {
-    "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Pass Gotthard-Pass und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 25",
-    "fr": "Libéré: H2 Airolo -> Flüelen entre Col Col du St-Gothard et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 25",
-    "it": "Approvato: H2 Airolo -> Flüelen tra Passo Passo del S. Gottardo E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 25"
+    "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Pass Gotthard-Pass und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
+    "fr": "Libéré: H2 Airolo -> Flüelen entre Col Col du St-Gothard et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
+    "it": "Approvato: H2 Airolo -> Flüelen tra Passo Passo del S. Gottardo E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
    }
   },
   {
