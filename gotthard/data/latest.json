@@ -1,5 +1,5 @@
 {
- "time": "2026-08-07T14:08:41Z",
+ "time": "2026-08-07T14:13:47Z",
  "south": {
   "km": 2.0,
   "wait": 20
@@ -46,19 +46,6 @@
     "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Pass Gotthard-Pass und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
     "fr": "Libéré: H2 Airolo -> Flüelen entre Col Col du St-Gothard et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
     "it": "Approvato: H2 Airolo -> Flüelen tra Passo Passo del S. Gottardo E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
-   }
-  },
-  {
-   "id": "situation.643658.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "south",
-   "versionTime": "2026-08-07T10:41:15Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Göschenen Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Göschenen Situation: entrée fermée",
-    "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata"
    }
   },
   {
