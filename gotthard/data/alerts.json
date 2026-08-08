@@ -187,21 +187,5 @@
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
   },
   "lastSeen": "2026-08-06T16:07:13Z"
- },
- {
-  "firstSeen": "2026-08-05T17:43:04Z",
-  "id": "situation.643343.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-08-05T17:35:11Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Zollstation Chiasso-Brogeda und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung zu erwarten Ursache: Ausnahmetransport",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Poste de douane Chiasso-Brogeda et Tunnel Tunnel du St-Gothard Situation: ralentissements prévus Raison: convoi exceptionnel",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Dogana Chiasso Brogeda E Galleria Galleria San Gottardo Situazione: si prevedono problemi di traffico Causa: trasporto eccezionale"
-  },
-  "lastSeen": "2026-08-06T02:55:22Z",
-  "revokedAt": "2026-08-06T03:20:46Z"
  }
 ]
