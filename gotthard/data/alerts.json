@@ -12,22 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 7.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 70",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 7.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 70"
   },
-  "lastSeen": "2026-08-08T16:31:09Z"
- },
- {
-  "firstSeen": "2026-08-08T04:36:43Z",
-  "id": "situation.643798.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": "north",
-  "versionTime": "2026-08-08T04:33:31Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
-  },
-  "lastSeen": "2026-08-08T16:31:09Z"
+  "lastSeen": "2026-08-08T16:36:14Z"
  },
  {
   "firstSeen": "2026-08-08T10:18:47Z",
@@ -42,7 +27,7 @@
    "fr": "Libéré: H2 Bellinzone <-> Göschenen entre Localité Faido et Jonction autoroutière Airolo-Nufenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
    "it": "Approvato: H2 Bellinzona <-> Göschenen tra Luogo Faido E Svincolo autostradale Airolo-Nufenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
   },
-  "lastSeen": "2026-08-08T16:31:09Z"
+  "lastSeen": "2026-08-08T16:36:14Z"
  },
  {
   "firstSeen": "2026-08-08T12:41:42Z",
@@ -56,6 +41,21 @@
    "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Ortschaft Motto Bartola und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 30",
    "fr": "Libéré: H2 Airolo -> Flüelen entre Localité Motto Bartola et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
    "it": "Approvato: H2 Airolo -> Flüelen tra Luogo Motto Bartola E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30"
+  },
+  "lastSeen": "2026-08-08T16:36:14Z"
+ },
+ {
+  "firstSeen": "2026-08-08T04:36:43Z",
+  "id": "situation.643798.1.1.1",
+  "type": "RoadOrCarriagewayOrLaneManagement",
+  "direction": "north",
+  "versionTime": "2026-08-08T04:33:31Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
   "lastSeen": "2026-08-08T16:31:09Z"
  },
