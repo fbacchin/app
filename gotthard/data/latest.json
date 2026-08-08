@@ -1,5 +1,5 @@
 {
- "time": "2026-08-08T08:11:17Z",
+ "time": "2026-08-08T08:16:23Z",
  "south": {
   "km": 4.0,
   "wait": 40
@@ -39,13 +39,13 @@
    "id": "situation.643811.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-08-08T07:15:06Z",
+   "versionTime": "2026-08-08T08:11:58Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Quinto Sachlage: Stau in der Ausfahrt Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Quinto Situation: bouchon dans la sortie Raison: surcharge de trafic",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Quinto Situazione: colonna in uscita Causa: traffico congestionato"
+    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Tunnel Piottino-Tunnel und Anschluss Quinto Sachlage: Stau Ursache: Verkehrsüberlastung",
+    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Tunnel Tunnel du Piottino et Jonction autoroutière Quinto Situation: bouchon Raison: surcharge de trafic",
+    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Galleria Galleria Piottino E Svincolo autostradale Quinto Situazione: colonna Causa: traffico congestionato"
    }
   },
   {
