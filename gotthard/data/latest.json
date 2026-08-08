@@ -1,5 +1,5 @@
 {
- "time": "2026-08-08T14:38:55Z",
+ "time": "2026-08-08T14:44:00Z",
  "south": {
   "km": 1.0,
   "wait": 10
@@ -9,6 +9,19 @@
   "wait": 10
  },
  "events": [
+  {
+   "id": "situation.643877.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": null,
+   "versionTime": "2026-08-08T14:43:52Z",
+   "km": null,
+   "wait": 35,
+   "texts": {
+    "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Ortschaft Motto Bartola und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 35",
+    "fr": "Libéré: H2 Airolo -> Flüelen entre Localité Motto Bartola et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 35",
+    "it": "Approvato: H2 Airolo -> Flüelen tra Luogo Motto Bartola E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 35"
+   }
+  },
   {
    "id": "situation.643796.1.1.1",
    "type": "AbnormalTraffic",
@@ -33,19 +46,6 @@
     "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
     "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
     "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
-   }
-  },
-  {
-   "id": "situation.643877.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-08T14:03:54Z",
-   "km": null,
-   "wait": 40,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Ortschaft Motto Bartola und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
-    "fr": "Libéré: H2 Airolo -> Flüelen entre Localité Motto Bartola et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
-    "it": "Approvato: H2 Airolo -> Flüelen tra Luogo Motto Bartola E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
    }
   },
   {
