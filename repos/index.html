@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>I miei repository — fbacchin</title>
+<meta name="description" content="Archivio di tutti i repository GitHub: pubblici e, con un token personale, anche privati.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#E9EDF2">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0C141B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%97%82%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --paper: #E9EDF2;
+    --card: #FFFFFF;
+    --ink: #0F1720;
+    --ink-soft: #5B6B7C;
+    --line: #D4DCE5;
+    --accent: #0E5F6A;
+    --accent-soft: #DCEDEF;
+    --amber: #9A6700;
+    --amber-soft: #FBF0DB;
+    --danger: #A13232;
+    --danger-soft: #F8E4E4;
+    --shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 4px 14px rgba(16, 24, 40, .05);
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, "Cascadia Code", Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0C141B;
+      --card: #131F29;
+      --ink: #E7EEF5;
+      --ink-soft: #8DA2B5;
+      --line: #22303D;
+      --accent: #4CC8D4;
+      --accent-soft: #0F2A30;
+      --amber: #D4A72C;
+      --amber-soft: #2A2413;
+      --danger: #E5807C;
+      --danger-soft: #331B1B;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 4px 14px rgba(0, 0, 0, .25);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font: 16px/1.55 var(--sans);
+    padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 1080px; margin: 0 auto; padding: 44px 0 24px; }
+  a { color: var(--accent); }
+  button, input, select { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  /* ---------- Intestazione ---------- */
+  header { margin-bottom: 28px; }
+  .eyebrow {
+    font: 600 12px/1 var(--mono);
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 22px; height: 1px;
+    background: var(--ink-soft);
+    display: inline-block;
+  }
+  .masthead {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  h1 {
+    font: 600 clamp(1.9rem, 6vw, 3rem)/1.05 var(--mono);
+    letter-spacing: -.02em;
+    overflow-wrap: anywhere;
+  }
+  h1 .slash { color: var(--accent); }
+  .whoami { display: flex; align-items: center; gap: 14px; }
+  .avatar {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    object-fit: cover;
+    display: none;
+  }
+  .avatar.on { display: block; }
+  .statline {
+    margin-top: 10px;
+    color: var(--ink-soft);
+    font-size: .95em;
+    min-height: 1.5em;
+  }
+  .statline b { color: var(--ink); font-family: var(--mono); font-weight: 600; }
+
+  /* ---------- Spettro dei linguaggi ---------- */
+  .spectrum-wrap { margin: 22px 0 6px; }
+  .spectrum {
+    display: flex;
+    gap: 2px;
+    height: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .spectrum .seg {
+    border: 0;
+    padding: 0;
+    min-width: 6px;
+    background: var(--seg, var(--line));
+    cursor: pointer;
+    transition: flex-grow .6s cubic-bezier(.2, .8, .2, 1), opacity .2s, transform .15s;
+    flex: 0 0 auto;
+  }
+  .spectrum .seg:hover { transform: scaleY(1.25); }
+  .spectrum.dimmed .seg { opacity: .3; }
+  .spectrum.dimmed .seg[aria-pressed="true"] { opacity: 1; }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 4px;
+    margin-top: 10px;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 999px;
+    padding: 4px 11px;
+    font: 500 12.5px/1.3 var(--mono);
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .chip:hover { border-color: var(--ink-soft); color: var(--ink); }
+  .chip[aria-pressed="true"] {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+  .chip .pct { color: var(--ink-soft); font-weight: 400; }
+  .dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--seg, var(--line));
+    flex: none;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12);
+  }
+
+  /* ---------- Controlli ---------- */
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin: 26px 0 18px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .search {
+    flex: 1 1 240px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 9px 13px;
+  }
+  .search:focus-within { border-color: var(--accent); }
+  .search svg { flex: none; color: var(--ink-soft); }
+  .search input {
+    border: 0;
+    background: none;
+    width: 100%;
+    outline: none;
+  }
+  .search input::placeholder { color: var(--ink-soft); }
+  .select-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+  .select-wrap::after {
+    content: "";
+    position: absolute;
+    right: 12px;
+    width: 7px; height: 7px;
+    border-right: 1.5px solid var(--ink-soft);
+    border-bottom: 1.5px solid var(--ink-soft);
+    transform: rotate(45deg) translateY(-2px);
+    pointer-events: none;
+  }
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 9px 32px 9px 13px;
+    cursor: pointer;
+  }
+  .btn {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 10px;
+    padding: 9px 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: border-color .15s;
+  }
+  .btn:hover { border-color: var(--ink-soft); }
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--paper);
+    font-weight: 600;
+  }
+  .btn svg { flex: none; }
+  .btn.spin svg { animation: spin 1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- Avvisi ---------- */
+  .notice {
+    border-radius: 10px;
+    padding: 12px 15px;
+    margin-bottom: 18px;
+    font-size: .95em;
+    border: 1px solid var(--line);
+    background: var(--card);
+    display: none;
+  }
+  .notice.on { display: block; }
+  .notice.error { border-color: var(--danger); background: var(--danger-soft); }
+  .notice a { font-weight: 600; }
+
+  /* ---------- Griglia ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 14px;
+    list-style: none;
+  }
+  .repo {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--edge, var(--line));
+    border-radius: 12px;
+    padding: 16px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: var(--shadow);
+    transition: transform .15s, border-color .15s;
+  }
+  .repo:hover, .repo:focus-within { transform: translateY(-2px); border-color: var(--ink-soft); border-left-color: var(--edge, var(--line)); }
+  .repo-head {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .repo-name {
+    font: 600 15px/1.35 var(--mono);
+    color: var(--ink);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .repo-name::after { content: ""; position: absolute; inset: 0; border-radius: 12px; }
+  .repo-name:focus-visible { outline: none; }
+  .repo:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .badge {
+    font: 600 10.5px/1 var(--mono);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 3.5px 6px;
+    white-space: nowrap;
+  }
+  .badge.private { color: var(--amber); background: var(--amber-soft); }
+  .badge.fork, .badge.archived { color: var(--ink-soft); background: var(--paper); border: 1px solid var(--line); }
+  .repo-desc {
+    color: var(--ink-soft);
+    font-size: .92em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.8em;
+  }
+  .repo-desc.placeholder { font-style: italic; opacity: .7; }
+  .topics { display: flex; flex-wrap: wrap; gap: 5px; }
+  .topic {
+    font: 500 11px/1.2 var(--mono);
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 999px;
+    padding: 3px 9px;
+  }
+  .repo-meta {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: var(--ink-soft);
+    font: 400 12.5px/1.4 var(--mono);
+    flex-wrap: wrap;
+  }
+  .repo-meta .m { display: inline-flex; align-items: center; gap: 5px; }
+  .repo-meta svg { opacity: .75; }
+  .repo-meta .when { margin-left: auto; }
+
+  /* ---------- Scheletri e stati vuoti ---------- */
+  .skeleton {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    height: 148px;
+    overflow: hidden;
+    position: relative;
+  }
+  .skeleton::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(100deg, transparent 30%, var(--paper) 50%, transparent 70%);
+    animation: shimmer 1.4s infinite;
+  }
+  @keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+  .empty {
+    text-align: center;
+    padding: 64px 20px;
+    color: var(--ink-soft);
+    display: none;
+  }
+  .empty.on { display: block; }
+  .empty .big { font: 600 1.15em/1.4 var(--sans); color: var(--ink); margin-bottom: 6px; }
+  .empty .btn { margin-top: 16px; }
+
+  /* ---------- Impostazioni ---------- */
+  .settings {
+    margin-top: 34px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--card);
+  }
+  .settings summary {
+    cursor: pointer;
+    padding: 13px 16px;
+    font-weight: 600;
+    font-size: .95em;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .settings summary::-webkit-details-marker { display: none; }
+  .settings summary::after {
+    content: "";
+    width: 7px; height: 7px;
+    border-right: 1.5px solid var(--ink-soft);
+    border-bottom: 1.5px solid var(--ink-soft);
+    transform: rotate(45deg);
+    margin-left: auto;
+    transition: transform .2s;
+  }
+  .settings[open] summary::after { transform: rotate(-135deg); }
+  .settings-body {
+    padding: 4px 16px 18px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    gap: 14px;
+  }
+  .settings-body p { color: var(--ink-soft); font-size: .92em; margin-top: 12px; }
+  .field { display: grid; gap: 6px; }
+  .field label { font: 600 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  .field-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .field input {
+    flex: 1 1 220px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 9px 13px;
+    outline: none;
+    font-family: var(--mono);
+    font-size: .92em;
+  }
+  .field input:focus { border-color: var(--accent); }
+  .hint { font-size: .85em; color: var(--ink-soft); }
+  .token-state { font: 500 12.5px/1.4 var(--mono); color: var(--accent); display: none; }
+  .token-state.on { display: block; }
+
+  footer {
+    margin: 40px 0 24px;
+    color: var(--ink-soft);
+    font-size: .85em;
+    text-align: center;
+  }
+
+  /* ---------- Animazioni d'ingresso ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .repo { animation: rise .35s cubic-bezier(.2, .8, .2, 1) backwards; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .spectrum .seg { transition: none; }
+    .skeleton::after { animation: none; }
+  }
+
+  @media (max-width: 560px) {
+    main { padding-top: 28px; }
+    .avatar { width: 44px; height: 44px; }
+    .repo-desc { min-height: 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Archivio · GitHub</p>
+    <div class="masthead">
+      <h1 id="title">fbacchin<span class="slash">/</span></h1>
+      <div class="whoami">
+        <img id="avatar" class="avatar" alt="" width="52" height="52">
+      </div>
+    </div>
+    <p class="statline" id="statline">Carico i repository…</p>
+    <div class="spectrum-wrap">
+      <div class="spectrum" id="spectrum" role="group" aria-label="Distribuzione dei linguaggi: tocca un segmento per filtrare"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <label class="search">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.2" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.6 3.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <input type="search" id="q" placeholder="Cerca per nome o descrizione…" autocomplete="off" aria-label="Cerca nei repository">
+    </label>
+    <span class="select-wrap">
+      <select id="sort" aria-label="Ordina per">
+        <option value="pushed">Aggiornati di recente</option>
+        <option value="created">Creati di recente</option>
+        <option value="stars">Più stelle</option>
+        <option value="name">Nome A–Z</option>
+      </select>
+    </span>
+    <span class="select-wrap">
+      <select id="vis" aria-label="Filtra per visibilità">
+        <option value="all">Pubblici e privati</option>
+        <option value="public">Solo pubblici</option>
+        <option value="private">Solo privati</option>
+      </select>
+    </span>
+    <button class="btn" id="refresh" title="Ricarica i dati da GitHub">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 1.5v3h-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Aggiorna
+    </button>
+  </div>
+
+  <div class="notice" id="notice" role="status"></div>
+
+  <ul class="grid" id="grid"></ul>
+
+  <div class="empty" id="empty">
+    <p class="big" id="empty-title"></p>
+    <p id="empty-text"></p>
+    <button class="btn" id="empty-action"></button>
+  </div>
+
+  <details class="settings" id="settings">
+    <summary>
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.6" y="7" width="10.8" height="7" rx="1.8" stroke="currentColor" stroke-width="1.5"/><path d="M5.2 7V4.8a2.8 2.8 0 1 1 5.6 0V7" stroke="currentColor" stroke-width="1.5"/></svg>
+      Repository privati e impostazioni
+    </summary>
+    <div class="settings-body">
+      <p>Senza token vedi i repository pubblici. Per vedere anche i privati serve un
+        <a href="https://github.com/settings/tokens/new?scopes=repo&description=Archivio%20repository" target="_blank" rel="noopener">token personale GitHub</a>
+        con permesso <code>repo</code>: resta salvato solo su questo dispositivo, nel browser.</p>
+      <div class="field">
+        <label for="token">Token personale</label>
+        <div class="field-row">
+          <input type="password" id="token" placeholder="ghp_…" autocomplete="off">
+          <button class="btn primary" id="save-token">Salva token</button>
+          <button class="btn" id="clear-token">Rimuovi</button>
+        </div>
+        <span class="token-state" id="token-state">● Token attivo: vedi anche i repository privati.</span>
+      </div>
+      <div class="field">
+        <label for="user">Utente da mostrare (senza token)</label>
+        <div class="field-row">
+          <input type="text" id="user" placeholder="fbacchin" autocomplete="off" spellcheck="false">
+          <button class="btn" id="save-user">Cambia utente</button>
+        </div>
+        <span class="hint">Con un token attivo l'utente è quello del token e questa impostazione viene ignorata.</span>
+      </div>
+    </div>
+  </details>
+
+  <footer>Pagina statica: i dati arrivano direttamente dall'API di GitHub e non passano da altri server.</footer>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const DEFAULT_USER = "fbacchin";
+  const LS = { token: "archivio.token", user: "archivio.user", cache: "archivio.cache" };
+  const API = "https://api.github.com";
+  const CACHE_TTL = 10 * 60 * 1000; // dopo 10 minuti la cache viene riaggiornata da GitHub
+
+  // Colori ufficiali dei linguaggi (github/linguist); per quelli mancanti si genera una tinta stabile.
+  const LANG_COLORS = {
+    "Swift": "#F05138", "Objective-C": "#438EFF", "Python": "#3572A5", "JavaScript": "#F1E05A",
+    "TypeScript": "#3178C6", "HTML": "#E34C26", "CSS": "#663399", "SCSS": "#C6538C",
+    "Ruby": "#701516", "Go": "#00ADD8", "Java": "#B07219", "Kotlin": "#A97BFF",
+    "C": "#555555", "C++": "#F34B7D", "C#": "#178600", "Shell": "#89E051",
+    "PHP": "#4F5D95", "Rust": "#DEA584", "Dart": "#00B4AB", "Lua": "#000080",
+    "Perl": "#0298C3", "R": "#198CE7", "Haskell": "#5E5086", "Elixir": "#6E4A7E",
+    "Vue": "#41B883", "Svelte": "#FF3E00", "Jupyter Notebook": "#DA5B0B",
+    "Dockerfile": "#384D54", "Makefile": "#427819", "AppleScript": "#101F1F",
+    "Vim Script": "#199F4B", "TeX": "#3D6117", "MATLAB": "#E16737", "Groovy": "#4298B8",
+    "PowerShell": "#012456", "Assembly": "#6E4C13", "Scala": "#C22D40", "Julia": "#A270BA"
+  };
+  const NO_LANG = "Senza linguaggio";
+
+  const $ = (id) => document.getElementById(id);
+  const grid = $("grid"), statline = $("statline"), spectrum = $("spectrum"), legend = $("legend");
+  const notice = $("notice"), empty = $("empty");
+
+  const state = {
+    repos: [],
+    profile: null,
+    fetchedAt: null,
+    fromCache: false,
+    loading: false,
+    q: "",
+    lang: null,
+    sort: "pushed",
+    vis: "all"
+  };
+
+  /* ---------- Utilità ---------- */
+
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  const nf = new Intl.NumberFormat("it-IT");
+  const rtf = new Intl.RelativeTimeFormat("it", { numeric: "auto" });
+  const hf = new Intl.DateTimeFormat("it-IT", { hour: "2-digit", minute: "2-digit" });
+
+  function relTime(iso) {
+    if (!iso) return "";
+    const s = (new Date(iso) - Date.now()) / 1000;
+    const steps = [[60, "second"], [3600, "minute"], [86400, "hour"], [2592000, "day"], [31536000, "month"], [Infinity, "year"]];
+    let prev = 1;
+    for (const [limit, unit] of steps) {
+      if (Math.abs(s) < limit) return rtf.format(Math.round(s / prev), unit);
+      prev = limit;
+    }
+  }
+
+  function langColor(lang) {
+    if (!lang || lang === NO_LANG) return getComputedStyle(document.documentElement).getPropertyValue("--line").trim() || "#9AA7B4";
+    if (LANG_COLORS[lang]) return LANG_COLORS[lang];
+    let h = 0;
+    for (const c of lang) h = (h * 31 + c.codePointAt(0)) % 360;
+    return `hsl(${h} 55% 55%)`;
+  }
+
+  const token = () => localStorage.getItem(LS.token) || "";
+  const userLogin = () => (localStorage.getItem(LS.user) || DEFAULT_USER).trim();
+
+  /* ---------- Chiamate all'API di GitHub ---------- */
+
+  function headers() {
+    const h = { "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" };
+    if (token()) h["Authorization"] = "Bearer " + token();
+    return h;
+  }
+
+  async function gh(path) {
+    const res = await fetch(API + path, { headers: headers() });
+    if (!res.ok) {
+      const err = new Error("HTTP " + res.status);
+      err.status = res.status;
+      err.rateLimited = res.status === 403 && res.headers.get("x-ratelimit-remaining") === "0";
+      throw err;
+    }
+    return res.json();
+  }
+
+  async function fetchAll() {
+    if (state.loading) return;
+    state.loading = true;
+    setRefreshing(true);
+    if (!state.repos.length) renderSkeletons();
+    hideNotice();
+
+    try {
+      const authed = !!token();
+      const profile = await gh(authed ? "/user" : "/users/" + encodeURIComponent(userLogin()));
+      const base = authed
+        ? "/user/repos?per_page=100&affiliation=owner,collaborator,organization_member&sort=pushed&page="
+        : "/users/" + encodeURIComponent(userLogin()) + "/repos?per_page=100&sort=pushed&page=";
+
+      const repos = [];
+      for (let page = 1; page <= 10; page++) {
+        const batch = await gh(base + page);
+        repos.push(...batch.map(pick));
+        if (batch.length < 100) break;
+      }
+
+      state.repos = repos;
+      state.profile = { login: profile.login, name: profile.name, avatar: profile.avatar_url };
+      state.fetchedAt = Date.now();
+      state.fromCache = false;
+      saveCache();
+      renderAll();
+    } catch (e) {
+      if (!state.repos.length) loadCache();
+      renderAll();
+      showError(e);
+    } finally {
+      state.loading = false;
+      setRefreshing(false);
+    }
+  }
+
+  // Si tiene solo l'essenziale: la cache in localStorage resta piccola.
+  function pick(r) {
+    return {
+      name: r.name,
+      full_name: r.full_name,
+      owner: r.owner && r.owner.login,
+      url: r.html_url,
+      desc: r.description,
+      lang: r.language,
+      stars: r.stargazers_count,
+      forks: r.forks_count,
+      issues: r.open_issues_count,
+      pushed: r.pushed_at || r.updated_at,
+      created: r.created_at,
+      private: !!r.private,
+      fork: !!r.fork,
+      archived: !!r.archived,
+      topics: (r.topics || []).slice(0, 3)
+    };
+  }
+
+  function showError(e) {
+    let msg;
+    if (e.rateLimited) {
+      msg = "Hai raggiunto il limite di richieste dell'API di GitHub. Riprova tra qualche minuto, oppure salva un token nelle impostazioni per alzare il limite.";
+    } else if (e.status === 401) {
+      msg = "Il token salvato non è più valido. Aprilo nelle impostazioni e sostituiscilo o rimuovilo.";
+    } else if (e.status === 404) {
+      msg = `L'utente “${esc(userLogin())}” non esiste su GitHub. Controlla il nome nelle impostazioni.`;
+    } else {
+      msg = "Non riesco a raggiungere GitHub in questo momento. Controlla la connessione e riprova con “Aggiorna”.";
+    }
+    if (state.fromCache && state.repos.length) {
+      msg += " Intanto vedi i dati dell'ultima visita.";
+    }
+    notice.className = "notice error on";
+    notice.innerHTML = msg;
+  }
+
+  const hideNotice = () => { notice.className = "notice"; notice.textContent = ""; };
+
+  /* ---------- Cache locale ---------- */
+
+  function saveCache() {
+    try {
+      localStorage.setItem(LS.cache, JSON.stringify({
+        when: state.fetchedAt, profile: state.profile, repos: state.repos, login: userLogin(), authed: !!token()
+      }));
+    } catch { /* storage pieno o negato: pazienza, si vive senza cache */ }
+  }
+
+  function loadCache() {
+    try {
+      const c = JSON.parse(localStorage.getItem(LS.cache) || "null");
+      if (!c || !Array.isArray(c.repos)) return false;
+      if (!token() && c.login !== userLogin()) return false;
+      if (!!token() !== !!c.authed) return false;
+      state.repos = c.repos;
+      state.profile = c.profile;
+      state.fetchedAt = c.when;
+      state.fromCache = true;
+      return true;
+    } catch { return false; }
+  }
+
+  /* ---------- Filtri e ordinamento ---------- */
+
+  function visible() {
+    const q = state.q.trim().toLowerCase();
+    let list = state.repos.filter((r) => {
+      if (state.vis === "public" && r.private) return false;
+      if (state.vis === "private" && !r.private) return false;
+      if (state.lang && (r.lang || NO_LANG) !== state.lang) return false;
+      if (q && !((r.name || "").toLowerCase().includes(q) || (r.desc || "").toLowerCase().includes(q))) return false;
+      return true;
+    });
+    const by = {
+      pushed: (a, b) => new Date(b.pushed) - new Date(a.pushed),
+      created: (a, b) => new Date(b.created) - new Date(a.created),
+      stars: (a, b) => b.stars - a.stars || new Date(b.pushed) - new Date(a.pushed),
+      name: (a, b) => a.name.localeCompare(b.name, "it")
+    };
+    return list.sort(by[state.sort] || by.pushed);
+  }
+
+  /* ---------- Rendering ---------- */
+
+  function renderAll() {
+    renderHeader();
+    renderSpectrum();
+    renderGrid();
+  }
+
+  function renderHeader() {
+    const p = state.profile;
+    const login = (p && p.login) || userLogin();
+    $("title").innerHTML = esc(login) + '<span class="slash">/</span>';
+    document.title = "I miei repository — " + login;
+    const av = $("avatar");
+    if (p && p.avatar) { av.src = p.avatar; av.alt = "Avatar di " + login; av.classList.add("on"); }
+
+    const n = state.repos.length;
+    if (!n && state.loading) { statline.textContent = "Carico i repository…"; return; }
+    const stars = state.repos.reduce((s, r) => s + (r.stars || 0), 0);
+    const langs = new Set(state.repos.map((r) => r.lang).filter(Boolean)).size;
+    const priv = state.repos.filter((r) => r.private).length;
+    let parts = [`<b>${nf.format(n)}</b> repository`];
+    if (priv) parts.push(`<b>${nf.format(priv)}</b> privati`);
+    if (stars) parts.push(`<b>${nf.format(stars)}</b> stelle`);
+    if (langs) parts.push(`<b>${nf.format(langs)}</b> linguaggi`);
+    if (state.fetchedAt) {
+      parts.push(state.fromCache
+        ? `dati dell'ultima visita (${relTime(new Date(state.fetchedAt).toISOString())})`
+        : `aggiornato alle ${hf.format(state.fetchedAt)}`);
+    }
+    statline.innerHTML = parts.join(" · ");
+  }
+
+  function renderSpectrum() {
+    const counts = new Map();
+    for (const r of state.repos) {
+      const k = r.lang || NO_LANG;
+      counts.set(k, (counts.get(k) || 0) + 1);
+    }
+    const total = state.repos.length || 1;
+    const entries = [...counts.entries()].sort((a, b) => b[1] - a[1]);
+
+    spectrum.classList.toggle("dimmed", !!state.lang);
+    spectrum.innerHTML = entries.map(([lang, n]) => {
+      const pct = (n / total) * 100;
+      const sel = state.lang === lang;
+      return `<button class="seg" style="--seg:${langColor(lang)};flex-grow:${pct.toFixed(2)}"
+        data-lang="${esc(lang)}" aria-pressed="${sel}"
+        title="${esc(lang)}: ${n} repository (${pct.toFixed(0)}%)"
+        aria-label="${esc(lang)}: ${n} repository. Filtra per questo linguaggio."></button>`;
+    }).join("");
+
+    legend.innerHTML = entries.map(([lang, n]) => {
+      const pct = Math.round((n / total) * 100);
+      return `<button class="chip" data-lang="${esc(lang)}" aria-pressed="${state.lang === lang}">
+        <span class="dot" style="--seg:${langColor(lang)}"></span>${esc(lang)}&nbsp;<span class="pct">${pct}%</span></button>`;
+    }).join("");
+
+    for (const el of document.querySelectorAll("[data-lang]")) {
+      el.addEventListener("click", () => {
+        state.lang = state.lang === el.dataset.lang ? null : el.dataset.lang;
+        renderSpectrum();
+        renderGrid();
+      });
+    }
+  }
+
+  const ICONS = {
+    star: '<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .8l2.2 4.4 4.9.7-3.5 3.5.8 4.9L8 12l-4.4 2.3.8-4.9L.9 5.9l4.9-.7z"/></svg>',
+    fork: '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="4" cy="3.2" r="1.7"/><circle cx="12" cy="3.2" r="1.7"/><circle cx="8" cy="12.8" r="1.7"/><path d="M4 5v1a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3V5M8 9v2"/></svg>'
+  };
+
+  function renderGrid() {
+    const list = visible();
+    grid.innerHTML = list.map((r, i) => `
+      <li class="repo" style="--edge:${langColor(r.lang || NO_LANG)};animation-delay:${Math.min(i * 25, 400)}ms">
+        <div class="repo-head">
+          <a class="repo-name" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a>
+          ${r.private ? '<span class="badge private">Privato</span>' : ""}
+          ${r.fork ? '<span class="badge fork">Fork</span>' : ""}
+          ${r.archived ? '<span class="badge archived">Archiviato</span>' : ""}
+        </div>
+        <p class="repo-desc${r.desc ? "" : " placeholder"}">${r.desc ? esc(r.desc) : "Nessuna descrizione."}</p>
+        ${r.topics.length ? `<div class="topics">${r.topics.map((t) => `<span class="topic">${esc(t)}</span>`).join("")}</div>` : ""}
+        <div class="repo-meta">
+          ${r.lang ? `<span class="m"><span class="dot" style="--seg:${langColor(r.lang)}"></span>${esc(r.lang)}</span>` : ""}
+          ${r.stars ? `<span class="m" title="${r.stars} stelle">${ICONS.star}${nf.format(r.stars)}</span>` : ""}
+          ${r.forks ? `<span class="m" title="${r.forks} fork">${ICONS.fork}${nf.format(r.forks)}</span>` : ""}
+          <span class="m when" title="Ultimo push">${esc(relTime(r.pushed))}</span>
+        </div>
+      </li>`).join("");
+
+    renderEmpty(list);
+  }
+
+  function renderEmpty(list) {
+    const hasFilters = state.q.trim() || state.lang || state.vis !== "all";
+    const wantsPrivateNoToken = state.vis === "private" && !token();
+    empty.classList.toggle("on", !list.length && !state.loading);
+    if (list.length || state.loading) return;
+
+    if (wantsPrivateNoToken) {
+      $("empty-title").textContent = "I repository privati richiedono un token";
+      $("empty-text").textContent = "Salva un token personale GitHub nelle impostazioni qui sotto: resta solo su questo dispositivo.";
+      $("empty-action").textContent = "Apri le impostazioni";
+      $("empty-action").onclick = () => { $("settings").open = true; $("token").focus(); };
+    } else if (hasFilters) {
+      $("empty-title").textContent = "Nessun repository con questi filtri";
+      $("empty-text").textContent = "Prova ad allargare la ricerca o a togliere qualche filtro.";
+      $("empty-action").textContent = "Azzera i filtri";
+      $("empty-action").onclick = resetFilters;
+    } else if (state.repos.length === 0 && state.fetchedAt) {
+      $("empty-title").textContent = "Nessun repository da mostrare";
+      $("empty-text").textContent = "Questo profilo non ha ancora repository visibili.";
+      $("empty-action").textContent = "Aggiorna";
+      $("empty-action").onclick = fetchAll;
+    } else {
+      empty.classList.remove("on");
+    }
+  }
+
+  function renderSkeletons() {
+    grid.innerHTML = Array.from({ length: 6 }, () => '<li class="skeleton" aria-hidden="true"></li>').join("");
+  }
+
+  function resetFilters() {
+    state.q = ""; state.lang = null; state.vis = "all";
+    $("q").value = ""; $("vis").value = "all";
+    renderSpectrum(); renderGrid();
+  }
+
+  function setRefreshing(on) {
+    $("refresh").classList.toggle("spin", on);
+    $("refresh").disabled = on;
+  }
+
+  /* ---------- Impostazioni ---------- */
+
+  function refreshTokenUI() {
+    $("token-state").classList.toggle("on", !!token());
+    $("token").value = "";
+    $("token").placeholder = token() ? "•••••••• (token salvato)" : "ghp_…";
+  }
+
+  function wireSettings() {
+    $("user").value = localStorage.getItem(LS.user) || "";
+    refreshTokenUI();
+
+    $("save-token").addEventListener("click", () => {
+      const t = $("token").value.trim();
+      if (!t) return $("token").focus();
+      localStorage.setItem(LS.token, t);
+      refreshTokenUI();
+      state.repos = []; state.fetchedAt = null;
+      fetchAll();
+    });
+    $("clear-token").addEventListener("click", () => {
+      localStorage.removeItem(LS.token);
+      localStorage.removeItem(LS.cache);
+      refreshTokenUI();
+      state.repos = []; state.fetchedAt = null;
+      fetchAll();
+    });
+    $("save-user").addEventListener("click", () => {
+      const u = $("user").value.trim();
+      if (u) localStorage.setItem(LS.user, u);
+      else localStorage.removeItem(LS.user);
+      if (!token()) { state.repos = []; state.fetchedAt = null; fetchAll(); }
+    });
+    $("user").addEventListener("keydown", (e) => { if (e.key === "Enter") $("save-user").click(); });
+    $("token").addEventListener("keydown", (e) => { if (e.key === "Enter") $("save-token").click(); });
+  }
+
+  /* ---------- Avvio ---------- */
+
+  $("q").addEventListener("input", (e) => { state.q = e.target.value; renderGrid(); });
+  $("sort").addEventListener("change", (e) => { state.sort = e.target.value; renderGrid(); });
+  $("vis").addEventListener("change", (e) => { state.vis = e.target.value; renderGrid(); });
+  $("refresh").addEventListener("click", fetchAll);
+
+  wireSettings();
+
+  if (loadCache()) {
+    renderAll();
+    if (Date.now() - (state.fetchedAt || 0) > CACHE_TTL) fetchAll();
+  } else {
+    fetchAll();
+  }
+})();
+</script>
+</body>
+</html>
