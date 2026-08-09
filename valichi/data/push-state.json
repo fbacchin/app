@@ -25,5 +25,14 @@
  },
  "hu-ua.zahony.exit": {
   "phase": "clear"
+ },
+ "pl-ua.hrebenne.exit": {
+  "phase": "clear"
+ },
+ "pl-ua.korczowa.exit": {
+  "phase": "clear"
+ },
+ "pl-ua.medyka.exit": {
+  "phase": "clear"
  }
 }
