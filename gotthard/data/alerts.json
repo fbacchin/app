@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
   },
-  "lastSeen": "2026-08-09T06:07:51Z"
+  "lastSeen": "2026-08-09T06:12:58Z"
  },
  {
   "firstSeen": "2026-08-09T05:32:10Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-08-09T06:07:51Z"
+  "lastSeen": "2026-08-09T06:12:58Z"
  },
  {
   "firstSeen": "2026-08-08T22:22:58Z",
@@ -331,21 +331,5 @@
   },
   "lastSeen": "2026-08-07T07:34:43Z",
   "revokedAt": "2026-08-07T07:39:49Z"
- },
- {
-  "firstSeen": "2026-08-07T05:52:28Z",
-  "id": "situation.643610.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": "south",
-  "versionTime": "2026-08-07T06:11:33Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Gotthard -> Chiasso Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Brand",
-   "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: incendie",
-   "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: incendio"
-  },
-  "lastSeen": "2026-08-07T06:12:53Z",
-  "revokedAt": "2026-08-07T06:17:59Z"
  }
 ]
