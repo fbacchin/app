@@ -1,15 +1,15 @@
 {
- "time": "2026-08-09T13:41:56Z",
+ "time": "2026-08-09T13:52:02Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
-   "updated": "2026-08-09T13:41:56Z",
+   "updated": "2026-08-09T13:52:02Z",
    "directions": {
     "south": {
      "wait": 30
     },
     "north": {
-     "wait": 60
+     "wait": 70
     }
    }
   },
@@ -185,7 +185,7 @@
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-08-09T13:41:34Z"
+   "sampled": "2026-08-09T13:51:46Z"
   },
   "hak": {
    "ok": true,
