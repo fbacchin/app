@@ -94,13 +94,15 @@ USER_AGENT = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
               "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15 "
               "ValichiLive-collector/0.1 (+https://github.com/fbacchin/app)")
 
-# Gli URL per fonte, in ordine di preferenza: il primo che risponde con una
-# pagina sostanziosa vince. La versione mobile di HAK viene prima perché è
-# la più asciutta da spianare.
+# Gli URL per fonte. Si provano TUTTI e vince quello da cui si estraggono
+# più attese (collaudo del 09.08.2026: m.hak.hr/stanje.asp rispondeva per
+# primo con una pagina sostanziosa — ma era la pagina AVVISI, prosa su
+# lavori e telecamere senza un solo tempo d'attesa, e "il primo URL che
+# risponde" l'aveva fatta vincere).
 SOURCE_URLS = {
     "hak": [
-        "https://m.hak.hr/stanje.asp?id=2",
         "https://www.hak.hr/info/granicni-prijelazi/",
+        "https://m.hak.hr/stanje.asp?id=2",
     ],
     "police_hu": [
         "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo",
@@ -294,8 +296,9 @@ def parse_directions(window):
 
 
 def estrai_valichi(page_text, crossings):
-    """Per ogni valico attivo della fonte: la finestra di testo dal primo
-    matchName trovato e le direzioni lette. Ritorna (campioni, finestre).
+    """Per ogni valico attivo della fonte: la finestra di testo della
+    migliore occorrenza dei matchNames e le direzioni lette.
+    Ritorna (campioni, finestre).
 
     La finestra si chiude alla prima comparsa del nome di un ALTRO valico:
     su una pagina-elenco le schede sono contigue, e senza questo taglio i
@@ -304,30 +307,42 @@ def estrai_valichi(page_text, crossings):
     scheda di Nova Sela) non chiudono niente.
     """
     piatto = spiana(page_text)
-    posizioni = {}
+    occorrenze = {}
     tutte = []
     for crossing in crossings:
-        prima = -1
+        pos_list = []
         for name in crossing.get("matchNames", []):
             for m in re.finditer(re.escape(name), piatto):
                 tutte.append((m.start(), crossing["id"]))
-                if prima < 0 or m.start() < prima:
-                    prima = m.start()
-        if prima >= 0:
-            posizioni[crossing["id"]] = prima
+                pos_list.append(m.start())
+        if pos_list:
+            # Un tetto alle occorrenze: su una pagina patologica un nome
+            # citato cento volte non deve far esplodere il giro.
+            occorrenze[crossing["id"]] = sorted(pos_list)[:20]
     tutte.sort()
 
     campioni = {}
     finestre = {}
-    for cid, pos in posizioni.items():
-        fine = pos + WINDOW_CHARS
-        for p, altro in tutte:
-            if p > pos and altro != cid:
-                fine = min(fine, p)
-                break
-        window = piatto[pos:fine]
-        finestre[cid] = window
-        campioni[cid] = parse_directions(window)
+    for cid, posizioni in occorrenze.items():
+        # Si prova OGNI occorrenza del nome e vince quella da cui si leggono
+        # più valori; a parità la prima. Il collaudo del 09.08.2026 ha
+        # mostrato perché la prima da sola non basta: su police.hu il primo
+        # "roszke" era un titolo di cronaca in tedesco a inizio pagina, e la
+        # riga con i dati veniva molto dopo.
+        migliore = None
+        for pos in posizioni:
+            fine = pos + WINDOW_CHARS
+            for p, altro in tutte:
+                if p > pos and altro != cid:
+                    fine = min(fine, p)
+                    break
+            window = piatto[pos:fine]
+            letto = parse_directions(window)
+            punteggio = sum(1 for v in letto.values() if v is not None)
+            if migliore is None or (punteggio, -pos) > migliore[0]:
+                migliore = ((punteggio, -pos), window, letto)
+        finestre[cid] = migliore[1]
+        campioni[cid] = migliore[2]
     return campioni, finestre
 
 
@@ -381,19 +396,45 @@ def scarica(urls, lang):
 # (campioni {id: {exit/entry/…: minuti|None}}, salute {…}, finestre {id: testo}).
 
 def fonte_pagina(source, crossings):
-    """Adapter comune alle fonti "pagina di stato": HAK, police.hu, granica."""
-    html, url, errore = scarica(SOURCE_URLS[source], SOURCE_LANG[source])
-    if html is None:
-        return {}, {"ok": False, "error": errore}, {}
-    campioni, finestre = estrai_valichi(html_in_testo(html), crossings)
-    salute = {"ok": True, "url": url, "found": len(campioni), "of": len(crossings)}
+    """Adapter comune alle fonti "pagina di stato": HAK, police.hu, granica.
+
+    Si provano tutti gli URL della fonte e vince quello da cui si LEGGONO
+    più attese — non il primo che risponde: una pagina può essere
+    raggiungibile, sostanziosa e comunque sbagliata (la pagina avvisi di
+    HAK, 09.08.2026). Se nessun URL produce numeri si tiene comunque il
+    migliore per nomi trovati, così le finestre nel registro mostrano su
+    cosa stiamo inciampando.
+    """
+    migliore = None   # ((attese, trovati), campioni, url, finestre, testo)
+    errori = []
+    for url in SOURCE_URLS[source]:
+        html, _, errore = scarica([url], SOURCE_LANG[source])
+        if html is None:
+            errori.append(errore)
+            continue
+        testo = html_in_testo(html)
+        campioni, finestre = estrai_valichi(testo, crossings)
+        attese = sum(1 for c in campioni.values()
+                     for v in c.values() if v is not None)
+        chiave = (attese, len(campioni))
+        if migliore is None or chiave > migliore[0]:
+            migliore = (chiave, campioni, url, finestre, testo)
+        if attese >= 2 * len(crossings):
+            break   # entrambe le direzioni di tutti: non si può fare meglio
+
+    if migliore is None:
+        return {}, {"ok": False, "error": " | ".join(errori) or "nessun URL"}, {}
+
+    (attese, _), campioni, url, finestre, testo = migliore
+    salute = {"ok": True, "url": url, "found": len(campioni),
+              "of": len(crossings), "waits": attese}
     if not campioni:
         # Pagina raggiunta ma nessun valico riconosciuto: quasi certamente è
         # cambiato il formato. Si conserva l'inizio del testo spianato come
         # reperto, senza committare l'HTML intero (peserebbe a ogni giro).
         salute["ok"] = False
         salute["error"] = "nessun valico riconosciuto nella pagina"
-        salute["excerpt"] = spiana(html_in_testo(html))[:400]
+        salute["excerpt"] = spiana(testo)[:400]
     return campioni, salute, finestre
 
 
@@ -549,8 +590,10 @@ def scrivi_registro(salute_fonti, finestre, now):
                 for k, v in (voce.get("windows") or {}).items():
                     ultime_finestre[k] = v
 
-    nuove = {k: v[:220] for k, v in finestre.items()
-             if ultime_finestre.get(k) != v[:220]}
+    # 400 caratteri, non di meno: al collaudo del 09.08.2026 le finestre da
+    # 220 mozzavano proprio il pezzo che serviva a capire il formato vero.
+    nuove = {k: v[:400] for k, v in finestre.items()
+             if ultime_finestre.get(k) != v[:400]}
     voce = {"at": stampa_ora(now), "sources": salute_fonti}
     if nuove:
         voce["windows"] = nuove

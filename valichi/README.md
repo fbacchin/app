@@ -50,26 +50,29 @@ che questo progetto possa produrre (lezione del Gottardo).
 | Fonte | Copre | Stato | Note |
 |---|---|---|---|
 | `gotthard` (file interno) | Gottardo | ✅ attiva | riusa `gotthard/data/latest.json` già raccolto dal collector gemello: zero rete, zero quota doppia |
-| `hak` (hak.hr) | HR ↔ ME / BA / RS | ✅ attiva | include Karasovići–Debeli Brijeg e il nuovo Vitaljina–Kobila |
-| `police_hu` (police.hu Határinfó) | HU ↔ RS / UA | ✅ attiva | HU–RO esclusa: Romania in Schengen dal 1.1.2025, niente più controlli |
-| `granica_pl` (granica.gov.pl) | PL ↔ UA | ✅ attiva | la fonte dichiara ~8 aggiornamenti al giorno; esiste anche un servizio SOAP ufficiale (`granica.wsdl`) se la pagina non bastasse |
+| `hak` (hak.hr) | HR ↔ ME / BA / RS | ✅ attiva | include Karasovići–Debeli Brijeg e il nuovo Vitaljina–Kobila. ⚠️ `m.hak.hr/stanje.asp` è la pagina AVVISI (prosa, zero numeri): l'adapter prova tutti gli URL e tiene quello con più attese lette |
+| `police_hu` (police.hu Határinfó) | HU ↔ RS / UA | ✅ attiva | HU–RO esclusa: Romania in Schengen dal 1.1.2025. ⚠️ la pagina apre con un notiziario che cita i valichi senza dati: si sceglie l'occorrenza migliore, non la prima. Al collaudo Tompa non compariva sulla pagina base |
+| `granica_pl` (granica.gov.pl) | PL ↔ UA | ⚠️ parziale | i valichi si trovano ma la tabella è a colonne (`H:MM`, classi `≤7,5t`/`>7,5t`, più valichi affiancati): dal testo appiattito i numeri non sono attribuibili con certezza, quindi restano IGNOTI — mai inventati. Prossimo passo: il servizio SOAP ufficiale (`www.granica.gov.pl/Services/czasyService/granica.wsdl`, ~8 aggiornamenti/giorno) |
 | `otd_ch` | San Bernardino | 🔜 | stesso feed DATEX II del Gottardo, stessa chiave `OTD_API_KEY`: si estende il filtro del corridoio (attenzione alla quota condivisa) |
 | `asfinag` | Brennero, Tauri | 🔜 | open data Asfinag da integrare |
 | `promet_si` | Caravanche | 🔜 | B2B promet.si (DARS), registrazione gratuita |
 | `tmb` / `sftrf` | Monte Bianco, Fréjus | 🔜 | le società dei trafori pubblicano attese e chiusure |
 | `mvr_bg` | Kapitan Andreevo–Kapıkule | 🔜 | polizia di frontiera bulgara |
 
-⚠️ **La prima esecuzione del workflow è il collaudo delle fonti.** Le
-pagine di HAK/police.hu/granica non sono raggiungibili dalla sandbox in
-cui questo progetto è stato scritto (proxy con allowlist): il parser è
-collaudato sulle fixture, che imitano i formati documentati, **non su
-catture reali**. Al primo run su GitHub Actions guardare
-`data/sources-log.jsonl`: se una fonte risulta `ok: false` con "nessun
-valico riconosciuto", lì c'è l'estratto della pagina vera su cui adeguare
-`matchNames` o il vocabolario; le finestre registrate permettono di
-verificare che i minuti letti siano quelli giusti. Poi allineare le
-fixture in `prove/` alle pagine reali, così `--prova` protegge da
-regressioni future.
+**Il collaudo sulle pagine vere** (il parser nasce su fixture: la sandbox
+di sviluppo non raggiunge le fonti). Primo giro il 09.08.2026, esiti in
+`data/sources-log.jsonl`:
+
+- tutte e quattro le fonti raggiungibili e nomi riconosciuti (HAK 3/6,
+  police.hu 3/4, granica 4/4), ma **zero attese lette** al primo colpo:
+  m.hak.hr era la pagina avvisi, su police.hu vinceva il titolo di
+  cronaca, la tabella di granica è a colonne. Da qui le due regole "miglior
+  URL" e "miglior occorrenza" e la finestra di log a 400 caratteri;
+- il registro resta lo strumento: a ogni modifica di formato le finestre
+  mostrano il testo vero su cui adeguare `matchNames` o vocabolario. Poi
+  allineare le fixture in `prove/` (che oggi includono anche i
+  "depistaggi" osservati: notiziario prima dei dati, avvisi in prosa),
+  così `--prova` protegge da regressioni.
 
 ## Come legge le pagine (e perché così)
 
