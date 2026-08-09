@@ -5,5 +5,12 @@
    "ch.gottardo.south": 20,
    "ch.gottardo.north": 50
   }
+ },
+ {
+  "time": "2026-08-09T12:01:00Z",
+  "w": {
+   "ch.gottardo.south": 40,
+   "ch.gottardo.north": 50
+  }
  }
 ]

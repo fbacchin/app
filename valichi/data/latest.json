@@ -1,12 +1,12 @@
 {
- "time": "2026-08-09T09:44:48Z",
+ "time": "2026-08-09T12:01:00Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "south": {
-     "wait": 20
+     "wait": 40
     },
     "north": {
      "wait": 50
@@ -14,7 +14,7 @@
    }
   },
   "hr-me.karasovici": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -25,7 +25,7 @@
    }
   },
   "hr-me.vitaljina": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -36,7 +36,7 @@
    }
   },
   "hr-ba.nova-sela": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -47,7 +47,7 @@
    }
   },
   "hr-ba.stara-gradiska": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -58,7 +58,7 @@
    }
   },
   "hr-rs.bajakovo": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -69,7 +69,7 @@
    }
   },
   "hr-rs.tovarnik": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -80,7 +80,7 @@
    }
   },
   "hu-rs.roszke": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -91,7 +91,7 @@
    }
   },
   "hu-rs.tompa": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -102,7 +102,7 @@
    }
   },
   "hu-ua.zahony": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -113,7 +113,7 @@
    }
   },
   "hu-ua.beregsurany": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -124,7 +124,7 @@
    }
   },
   "pl-ua.medyka": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -135,7 +135,7 @@
    }
   },
   "pl-ua.korczowa": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -146,7 +146,7 @@
    }
   },
   "pl-ua.dorohusk": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -157,7 +157,7 @@
    }
   },
   "pl-ua.hrebenne": {
-   "updated": "2026-08-09T09:44:48Z",
+   "updated": "2026-08-09T12:01:00Z",
    "directions": {
     "exit": {
      "wait": null
@@ -171,19 +171,25 @@
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-08-09T09:26:42Z"
+   "sampled": "2026-08-09T11:59:50Z"
   },
   "hak": {
-   "ok": false,
-   "error": "https://www.hak.hr/info/granicni-prijelazi/: <urlopen error Tunnel connection failed: 403 Forbidden>"
+   "ok": true,
+   "url": "https://m.hak.hr/stanje.asp?id=2",
+   "found": 3,
+   "of": 6
   },
   "police_hu": {
-   "ok": false,
-   "error": "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo: <urlopen error Tunnel connection failed: 403 Forbidden>"
+   "ok": true,
+   "url": "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo",
+   "found": 3,
+   "of": 4
   },
   "granica_pl": {
-   "ok": false,
-   "error": "https://granica.gov.pl/wczasy.php?v=pl: <urlopen error Tunnel connection failed: 403 Forbidden>"
+   "ok": true,
+   "url": "https://granica.gov.pl/index_wait.php?p=u&v=pl&k=w",
+   "found": 4,
+   "of": 4
   }
  }
 }
