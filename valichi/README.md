@@ -175,11 +175,14 @@ riletto da remoto: l'app usa la copia remota se più recente, così un
 valico nuovo o un matchName corretto arrivano senza release. I product ID
 lì dentro sono la mappa zona→prodotto che il paywall legge.
 
-## L'app iOS (`app/`)
+## L'app iOS (progetto locale, fuori repo)
 
-Progetto Xcode pronto: `app/ValichiLive.xcodeproj` (formato Xcode 16,
-cartelle sincronizzate — i file nuovi in `app/ValichiLive/` entrano nel
-target da soli). **iPhone + iPad**, iOS 17+, SwiftUI.
+Come per Gottardo Live, il progetto Xcode **non vive in questo repo**:
+sta sul Mac, in `Xcode/=NewApps/ValichiLive` (consegnato come zip il
+09.08.2026). **iPhone + iPad**, iOS 17+, SwiftUI, formato progetto
+Xcode 16 (cartelle sincronizzate — i file nuovi entrano nel target da
+soli). Il repo resta la casa di collector, dati e pagine; l'app è solo un
+client dei file pubblicati qui.
 
 Già implementato nello scaffold:
 
@@ -191,14 +194,16 @@ Già implementato nello scaffold:
 - `StoreManager` (StoreKit 2): prodotti letti dal catalogo, paywall per
   zona con pacchetto "Tutta Europa", ripristino, Family Sharing, listener
   `Transaction.updates`;
-- `app/Products.storekit` per provare gli acquisti senza App Store
-  Connect: in Xcode, Scheme → Run → Options → StoreKit Configuration.
+- `Products.storekit` (nel progetto) per provare gli acquisti senza App
+  Store Connect: in Xcode, Scheme → Run → Options → StoreKit
+  Configuration.
 
 Per farlo girare: aprire il progetto, impostare il **Development Team**
-e (se serve) il bundle ID — ora `com.bacchin.valichi`, segnaposto. La
-copia `app/ValichiLive/catalog.json` è il fallback offline: quando si
-tocca `valichi/catalog.json` va ricopiata (`cp catalog.json
-app/ValichiLive/`).
+e (se serve) il bundle ID — ora `com.bacchin.valichi`, segnaposto. Dentro
+il progetto c'è una copia di `catalog.json` come fallback offline del
+primo avvio: quando si tocca `valichi/catalog.json` qui nel repo va
+ricopiata nel progetto (la versione remota comunque vince quando c'è
+rete).
 
 Restano da fare:
 
