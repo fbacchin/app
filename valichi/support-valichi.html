@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Support — Valichi Live</title>
+<style>
+  :root {
+    --accent: #1D4E7A; --accent-soft: #E3EAF2; --ink: #1C222E; --ink-soft: #515D6C;
+    --paper: #F7F9FA; --card: #FFFFFF; --line: #DCE2E9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #5F93C4; --accent-soft: #14233A; --ink: #E8ECF2; --ink-soft: #9DA9BA;
+      --paper: #0E1218; --card: #161C24; --line: #242C3F;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; }
+  .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  h1 { font-size: 1.9em; line-height: 1.2; }
+  .sub { color: var(--ink-soft); margin: 0 0 14px; }
+  .langbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 28px; }
+  .langbar button {
+    font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  }
+  .langbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  h2 { color: var(--accent); font-size: 1.25em; margin: 36px 0 10px; }
+  p, li {
+    color: var(--ink); margin-bottom: 10px;
+    text-align: justify; text-wrap: pretty;
+    -webkit-hyphens: auto; hyphens: auto;
+  }
+  .sub { text-align: initial; hyphens: manual; }
+  ul { padding-left: 22px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 20px; margin: 14px 0;
+  }
+  a { color: var(--accent); }
+  .cta { display: inline-block; background: var(--accent); color: #fff; padding: 10px 22px;
+    border-radius: 99px; text-decoration: none; margin: 6px 0 4px; }
+  details { border-bottom: 1px solid var(--line); padding: 12px 0; }
+  details:last-child { border-bottom: none; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin-top: 8px; color: var(--ink-soft); }
+  footer { color: var(--ink-soft); font-size: .85em; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; text-align: center; }
+  footer a { white-space: nowrap; }
+  [lang-block] { display: none; }
+  html[data-lang="en"] [lang-block="en"], html[data-lang="it"] [lang-block="it"],
+  html[data-lang="de"] [lang-block="de"], html[data-lang="fr"] [lang-block="fr"] { display: block; }
+</style>
+</head>
+<body>
+<main>
+  <div class="logo">
+    <!-- icona: aggiungere icon.png quando l'app ha la sua -->
+    <h1>Valichi Live</h1>
+  </div>
+  <p class="sub" lang-block="en">Support · Live waiting times at Europe's busiest border crossings and Alpine corridors.</p>
+  <p class="sub" lang-block="it">Supporto · Tempi d'attesa in tempo reale ai valichi di frontiera e ai grandi assi alpini d'Europa.</p>
+  <p class="sub" lang-block="de">Support · Wartezeiten in Echtzeit an Europas meistbefahrenen Grenzübergängen und Alpenachsen.</p>
+  <p class="sub" lang-block="fr">Assistance · Temps d'attente en direct aux postes-frontières et grands axes alpins d'Europe.</p>
+  <div class="langbar">
+    <button id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
+    <button id="btn-it" aria-pressed="false" onclick="setLang('it')">Italiano</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
+  </div>
+
+  <div lang-block="en">
+  <h2>Contact</h2>
+  <p>Questions, problems or suggestions? Write to us — we usually reply within a couple of days.</p>
+  <a class="cta" href="mailto:bacchin@tiscali.it?subject=Valichi%20Live%20support">Email support</a>
+
+  <h2>Frequently asked questions</h2>
+  <div class="card">
+    <details>
+      <summary>What do I get for free, and what do the packs unlock?</summary>
+      <p>The app is free and always includes the Gotthard tunnel with live queues and history. Regional packs — Alps, Balkans &amp; Adriatic, Eastern Europe — unlock every crossing of that region as one-time purchases (no subscription). The "All of Europe" pack unlocks everything, including regions added later.</p>
+    </details>
+    <details>
+      <summary>How do I restore my purchases on a new device?</summary>
+      <p>Open Settings → "Restore purchases". Purchases are tied to your Apple Account, work across your devices and support Family Sharing.</p>
+    </details>
+    <details>
+      <summary>A crossing shows "coming soon" — why?</summary>
+      <p>We only show a crossing once an official data source for it is connected and verified. Crossings appear in the list as soon as their authority's data is live; packs are priced for what they contain today, and new crossings join the pack at no extra cost.</p>
+    </details>
+    <details>
+      <summary>Where do the waiting times come from?</summary>
+      <p>From the authorities of each country: the Swiss federal roads office for the Gotthard, the Croatian auto club (HAK) for Croatia's borders with Montenegro, Bosnia and Serbia, the Hungarian police for the Serbian and Ukrainian borders, and granica.gov.pl for Poland–Ukraine. The app shows when each value was last updated and marks values carried over a temporary source outage.</p>
+    </details>
+    <details>
+      <summary>The app shows "no data" for a crossing</summary>
+      <p>It means the official source is currently not publishing a value for that crossing — we prefer telling you "unknown" over inventing a zero. The value returns as soon as the authority publishes again.</p>
+    </details>
+    <details>
+      <summary>I don't receive notifications</summary>
+      <p>Check iOS Settings → Notifications → Valichi Live, and in the app make sure the bell is on for the crossings you care about. Notifications are optional and sent only when a significant queue forms, gets heavy or clears at a crossing you follow.</p>
+    </details>
+  </div>
+
+  <h2>Purchases &amp; advertising</h2>
+  <p>The free version is supported by a single banner ad. Any purchase — a regional pack or All of Europe — also removes ads for good. Purchases are one-time (not subscriptions), processed entirely by Apple.</p>
+  <p>See our <a href="privacy-valichi.html">Privacy Policy</a>.</p>
+
+  <h2>Data sources</h2>
+  <ul>
+      <li>Switzerland (Gotthard): Swiss Federal Roads Office (FEDRO / VMZ-CH) via <a href="https://opentransportdata.swiss/en/road-traffic/">opentransportdata.swiss</a></li>
+      <li>Croatia — borders with Montenegro, Bosnia and Serbia: <a href="https://www.hak.hr/">HAK — Croatian Auto Club</a></li>
+      <li>Hungary — borders with Serbia and Ukraine: <a href="https://www.police.hu/hu/hirek-es-informaciok/hatarinfo">police.hu Határinfó</a></li>
+      <li>Poland — border with Ukraine: <a href="https://granica.gov.pl/">granica.gov.pl</a></li>
+  </ul>
+  <p>Waiting times are provided by the authorities and may occasionally differ from actual conditions. Please never use the app while driving.</p>
+  </div>
+
+  <div lang-block="it">
+  <h2>Contatti</h2>
+  <p>Domande, problemi o suggerimenti? Scrivici — di solito rispondiamo entro un paio di giorni.</p>
+  <a class="cta" href="mailto:bacchin@tiscali.it?subject=Valichi%20Live%20support">Scrivici via email</a>
+
+  <h2>Domande frequenti</h2>
+  <div class="card">
+    <details>
+      <summary>Cosa è gratis e cosa sbloccano i pacchetti?</summary>
+      <p>L'app è gratuita e include sempre il tunnel del San Gottardo con code e storico in tempo reale. I pacchetti regionali — Alpi, Balcani e Adriatico, Europa dell'Est — sbloccano tutti i valichi della regione con un acquisto una tantum (nessun abbonamento). Il pacchetto "Tutta Europa" sblocca tutto, incluse le regioni aggiunte in futuro.</p>
+    </details>
+    <details>
+      <summary>Come ripristino gli acquisti su un nuovo dispositivo?</summary>
+      <p>Apri Impostazioni → "Ripristina acquisti". Gli acquisti sono legati al tuo Account Apple, valgono su tutti i tuoi dispositivi e supportano "In famiglia".</p>
+    </details>
+    <details>
+      <summary>Un valico è segnato "in arrivo" — perché?</summary>
+      <p>Mostriamo un valico solo quando la sua fonte dati ufficiale è collegata e verificata. I valichi compaiono in lista appena i dati dell'autorità sono attivi; i pacchetti sono prezzati per ciò che contengono oggi, e i nuovi valichi entrano nel pacchetto senza costi aggiuntivi.</p>
+    </details>
+    <details>
+      <summary>Da dove arrivano i tempi d'attesa?</summary>
+      <p>Dalle autorità di ciascun paese: l'Ufficio federale delle strade svizzero per il Gottardo, l'automobile club croato (HAK) per le frontiere della Croazia con Montenegro, Bosnia e Serbia, la polizia ungherese per le frontiere con Serbia e Ucraina, e granica.gov.pl per Polonia–Ucraina. L'app mostra quando ogni valore è stato aggiornato e marca i valori mantenuti durante un'interruzione temporanea della fonte.</p>
+    </details>
+    <details>
+      <summary>L'app mostra "nessun dato" per un valico</summary>
+      <p>Significa che la fonte ufficiale in questo momento non pubblica un valore per quel valico — preferiamo dirti "ignoto" piuttosto che inventare uno zero. Il valore torna appena l'autorità ripubblica.</p>
+    </details>
+    <details>
+      <summary>Non ricevo le notifiche</summary>
+      <p>Controlla in Impostazioni iOS → Notifiche → Valichi Live, e nell'app verifica che la campanella sia attiva sui valichi che ti interessano. Le notifiche sono facoltative e arrivano solo quando a un valico che segui si forma una coda significativa, diventa pesante o si dissolve.</p>
+    </details>
+  </div>
+
+  <h2>Acquisti e pubblicità</h2>
+  <p>La versione gratuita è sostenuta da un solo banner pubblicitario. Qualsiasi acquisto — un pacchetto regionale o Tutta Europa — rimuove anche la pubblicità per sempre. Gli acquisti sono una tantum (niente abbonamenti), gestiti interamente da Apple.</p>
+  <p>Consulta la nostra <a href="privacy-valichi.html">Informativa sulla privacy</a>.</p>
+
+  <h2>Fonti dei dati</h2>
+  <ul>
+      <li>Svizzera (Gottardo): Ufficio federale delle strade (USTRA / VMZ-CH) tramite <a href="https://opentransportdata.swiss/en/road-traffic/">opentransportdata.swiss</a></li>
+      <li>Croazia — frontiere con Montenegro, Bosnia e Serbia: <a href="https://www.hak.hr/">HAK — Automobile club croato</a></li>
+      <li>Ungheria — frontiere con Serbia e Ucraina: <a href="https://www.police.hu/hu/hirek-es-informaciok/hatarinfo">police.hu Határinfó</a></li>
+      <li>Polonia — frontiera con l'Ucraina: <a href="https://granica.gov.pl/">granica.gov.pl</a></li>
+  </ul>
+  <p>Le attese sono fornite dalle autorità e possono a volte differire dalle condizioni reali. Non usare mai l'app mentre guidi.</p>
+  </div>
+
+  <div lang-block="de">
+  <h2>Kontakt</h2>
+  <p>Fragen, Probleme oder Vorschläge? Schreibe uns — wir antworten meist innerhalb weniger Tage.</p>
+  <a class="cta" href="mailto:bacchin@tiscali.it?subject=Valichi%20Live%20support">Per E-Mail schreiben</a>
+
+  <h2>Häufige Fragen</h2>
+  <div class="card">
+    <details>
+      <summary>Was ist gratis, und was schalten die Pakete frei?</summary>
+      <p>Die App ist kostenlos und enthält immer den Gotthard-Tunnel mit Staus und Verlauf in Echtzeit. Die Regionspakete — Alpen, Balkan &amp; Adria, Osteuropa — schalten alle Übergänge der Region per Einmalkauf frei (kein Abo). Das Paket „Ganz Europa" schaltet alles frei, auch später hinzugefügte Regionen.</p>
+    </details>
+    <details>
+      <summary>Wie stelle ich Käufe auf einem neuen Gerät wieder her?</summary>
+      <p>Öffne Einstellungen → „Käufe wiederherstellen". Käufe sind mit deinem Apple Account verknüpft, gelten auf allen deinen Geräten und unterstützen die Familienfreigabe.</p>
+    </details>
+    <details>
+      <summary>Ein Übergang ist als „bald verfügbar" markiert — warum?</summary>
+      <p>Wir zeigen einen Übergang erst, wenn seine offizielle Datenquelle angebunden und geprüft ist. Übergänge erscheinen in der Liste, sobald die Behördendaten live sind; neue Übergänge kommen ohne Aufpreis ins Paket.</p>
+    </details>
+    <details>
+      <summary>Woher stammen die Wartezeiten?</summary>
+      <p>Von den Behörden der Länder: dem Schweizer Bundesamt für Strassen für den Gotthard, dem kroatischen Autoklub (HAK) für Kroatiens Grenzen zu Montenegro, Bosnien und Serbien, der ungarischen Polizei für die Grenzen zu Serbien und der Ukraine sowie granica.gov.pl für Polen–Ukraine. Die App zeigt, wann jeder Wert zuletzt aktualisiert wurde, und markiert Werte, die während eines Quellenausfalls gehalten werden.</p>
+    </details>
+    <details>
+      <summary>Die App zeigt „keine Daten" für einen Übergang</summary>
+      <p>Die offizielle Quelle veröffentlicht gerade keinen Wert für diesen Übergang — wir sagen lieber „unbekannt", als eine Null zu erfinden. Der Wert kehrt zurück, sobald die Behörde wieder veröffentlicht.</p>
+    </details>
+    <details>
+      <summary>Ich erhalte keine Benachrichtigungen</summary>
+      <p>Prüfe die iOS-Einstellungen → Mitteilungen → Valichi Live und in der App, ob die Glocke für deine Übergänge aktiv ist. Benachrichtigungen sind optional und kommen nur, wenn sich an einem gefolgten Übergang ein erheblicher Stau bildet, schwer wird oder auflöst.</p>
+    </details>
+  </div>
+
+  <h2>Käufe &amp; Werbung</h2>
+  <p>Die Gratisversion wird durch ein einzelnes Werbebanner finanziert. Jeder Kauf — ein Regionspaket oder Ganz Europa — entfernt zugleich dauerhaft die Werbung. Käufe sind einmalig (keine Abos) und werden vollständig von Apple abgewickelt.</p>
+  <p>Siehe unsere <a href="privacy-valichi.html">Datenschutzrichtlinie</a>.</p>
+
+  <h2>Datenquellen</h2>
+  <ul>
+      <li>Schweiz (Gotthard): Bundesamt für Strassen (ASTRA / VMZ-CH) über <a href="https://opentransportdata.swiss/en/road-traffic/">opentransportdata.swiss</a></li>
+      <li>Kroatien — Grenzen zu Montenegro, Bosnien und Serbien: <a href="https://www.hak.hr/">HAK — Kroatischer Autoklub</a></li>
+      <li>Ungarn — Grenzen zu Serbien und der Ukraine: <a href="https://www.police.hu/hu/hirek-es-informaciok/hatarinfo">police.hu Határinfó</a></li>
+      <li>Polen — Grenze zur Ukraine: <a href="https://granica.gov.pl/">granica.gov.pl</a></li>
+  </ul>
+  <p>Die Wartezeiten stammen von den Behörden und können gelegentlich von den tatsächlichen Bedingungen abweichen. Bitte nutze die App nie während der Fahrt.</p>
+  </div>
+
+  <div lang-block="fr">
+  <h2>Contact</h2>
+  <p>Questions, problèmes ou suggestions ? Écrivez-nous — nous répondons généralement en quelques jours.</p>
+  <a class="cta" href="mailto:bacchin@tiscali.it?subject=Valichi%20Live%20support">Nous écrire par e-mail</a>
+
+  <h2>Questions fréquentes</h2>
+  <div class="card">
+    <details>
+      <summary>Qu'est-ce qui est gratuit, et que débloquent les packs ?</summary>
+      <p>L'app est gratuite et inclut toujours le tunnel du Gothard avec files et historique en direct. Les packs régionaux — Alpes, Balkans &amp; Adriatique, Europe de l'Est — débloquent tous les postes de la région en achat unique (pas d'abonnement). Le pack « Toute l'Europe » débloque tout, y compris les régions ajoutées plus tard.</p>
+    </details>
+    <details>
+      <summary>Comment restaurer mes achats sur un nouvel appareil ?</summary>
+      <p>Ouvrez Réglages → « Restaurer les achats ». Les achats sont liés à votre compte Apple, valent sur tous vos appareils et prennent en charge le partage familial.</p>
+    </details>
+    <details>
+      <summary>Un poste est marqué « bientôt disponible » — pourquoi ?</summary>
+      <p>Nous n'affichons un poste que lorsque sa source officielle est connectée et vérifiée. Les postes apparaissent dès que les données de l'autorité sont actives ; les nouveaux postes rejoignent le pack sans surcoût.</p>
+    </details>
+    <details>
+      <summary>D'où viennent les temps d'attente ?</summary>
+      <p>Des autorités de chaque pays : l'office fédéral des routes suisse pour le Gothard, l'automobile club croate (HAK) pour les frontières de la Croatie avec le Monténégro, la Bosnie et la Serbie, la police hongroise pour les frontières serbe et ukrainienne, et granica.gov.pl pour Pologne–Ukraine. L'app indique quand chaque valeur a été mise à jour et marque les valeurs maintenues pendant une panne temporaire de la source.</p>
+    </details>
+    <details>
+      <summary>L'app affiche « aucune donnée » pour un poste</summary>
+      <p>La source officielle ne publie pas de valeur pour ce poste en ce moment — nous préférons dire « inconnu » plutôt qu'inventer un zéro. La valeur revient dès que l'autorité publie à nouveau.</p>
+    </details>
+    <details>
+      <summary>Je ne reçois pas les notifications</summary>
+      <p>Vérifiez Réglages iOS → Notifications → Valichi Live, et dans l'app que la cloche est active pour vos postes. Les notifications sont facultatives et n'arrivent que lorsqu'une file significative se forme, s'alourdit ou se dissout à un poste suivi.</p>
+    </details>
+  </div>
+
+  <h2>Achats &amp; publicité</h2>
+  <p>La version gratuite est financée par une seule bannière publicitaire. Tout achat — un pack régional ou Toute l'Europe — supprime aussi définitivement la publicité. Les achats sont uniques (pas d'abonnement), traités entièrement par Apple.</p>
+  <p>Consultez notre <a href="privacy-valichi.html">Politique de confidentialité</a>.</p>
+
+  <h2>Sources des données</h2>
+  <ul>
+      <li>Suisse (Gothard) : Office fédéral des routes (OFROU / VMZ-CH) via <a href="https://opentransportdata.swiss/en/road-traffic/">opentransportdata.swiss</a></li>
+      <li>Croatie — frontières avec le Monténégro, la Bosnie et la Serbie : <a href="https://www.hak.hr/">HAK — Automobile club croate</a></li>
+      <li>Hongrie — frontières avec la Serbie et l'Ukraine : <a href="https://www.police.hu/hu/hirek-es-informaciok/hatarinfo">police.hu Határinfó</a></li>
+      <li>Pologne — frontière avec l'Ukraine : <a href="https://granica.gov.pl/">granica.gov.pl</a></li>
+  </ul>
+  <p>Les temps d'attente sont fournis par les autorités et peuvent parfois différer des conditions réelles. N'utilisez jamais l'app en conduisant.</p>
+  </div>
+
+  <footer>
+    <span lang-block="en">© 2026 Fabrizio Bacchin · <a href="privacy-valichi.html">Privacy Policy</a></span>
+    <span lang-block="it">© 2026 Fabrizio Bacchin · <a href="privacy-valichi.html">Informativa sulla privacy</a></span>
+    <span lang-block="de">© 2026 Fabrizio Bacchin · <a href="privacy-valichi.html">Datenschutzrichtlinie</a></span>
+    <span lang-block="fr">© 2026 Fabrizio Bacchin · <a href="privacy-valichi.html">Politique de confidentialité</a></span>
+  </footer>
+</main>
+
+<script>
+  var LANGS = ["en", "it", "de", "fr"];
+  function setLang(l) {
+    if (LANGS.indexOf(l) < 0) l = "en";
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    LANGS.forEach(function (x) {
+      document.getElementById("btn-" + x).setAttribute("aria-pressed", x === l);
+    });
+    try { localStorage.setItem("valichi-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("valichi-lang"); } catch (e) {}
+  var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+  setLang(saved || (LANGS.indexOf(nav) >= 0 ? nav : "en"));
+</script>
+<noscript><style>[lang-block]{display:block !important}</style></noscript>
+
+</body>
+</html>
