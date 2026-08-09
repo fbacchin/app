@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Privacy Policy — Valichi Live</title>
+<style>
+  :root {
+    --accent: #1D4E7A; --accent-soft: #E3EAF2; --ink: #1C222E; --ink-soft: #515D6C;
+    --paper: #F7F9FA; --card: #FFFFFF; --line: #DCE2E9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #5F93C4; --accent-soft: #14233A; --ink: #E8ECF2; --ink-soft: #9DA9BA;
+      --paper: #0E1218; --card: #161C24; --line: #242C3F;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; }
+  .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  h1 { font-size: 1.9em; line-height: 1.2; }
+  .sub { color: var(--ink-soft); margin: 0 0 14px; }
+  .updated { color: var(--ink-soft); margin: 4px 0 6px; font-size: .9em; }
+  .langbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 28px; }
+  .langbar button {
+    font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  }
+  .langbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  h2 { color: var(--accent); font-size: 1.25em; margin: 36px 0 10px; }
+  p, li {
+    color: var(--ink); margin-bottom: 10px;
+    text-align: justify; text-wrap: pretty;
+    -webkit-hyphens: auto; hyphens: auto;
+  }
+  .sub, .updated { text-align: initial; hyphens: manual; }
+  ul { padding-left: 22px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 20px; margin: 14px 0;
+  }
+  a { color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; font-size: .95em; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--ink-soft); font-weight: 600; }
+  footer { color: var(--ink-soft); font-size: .85em; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; text-align: center; }
+  footer a { white-space: nowrap; }
+  [lang-block] { display: none; }
+  html[data-lang="en"] [lang-block="en"], html[data-lang="it"] [lang-block="it"],
+  html[data-lang="de"] [lang-block="de"], html[data-lang="fr"] [lang-block="fr"] { display: block; }
+</style>
+</head>
+<body>
+<main>
+  <div class="logo">
+    <h1>Valichi Live</h1>
+  </div>
+  <p class="sub" lang-block="en">Privacy Policy</p>
+  <p class="sub" lang-block="it">Informativa sulla privacy</p>
+  <p class="sub" lang-block="de">Datenschutzrichtlinie</p>
+  <p class="sub" lang-block="fr">Politique de confidentialité</p>
+  <div class="langbar">
+    <button id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
+    <button id="btn-it" aria-pressed="false" onclick="setLang('it')">Italiano</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
+  </div>
+
+  <div lang-block="en">
+    <p class="updated">Valichi Live — last updated 9 August 2026</p>
+  <h2>1. Who we are</h2>
+  <p>Valichi Live is an iOS app by Fabrizio Bacchin (Switzerland) that shows official waiting times at European border crossings and Alpine corridors. For anything related to this policy, contact <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+  <h2>2. In-app purchases</h2>
+  <p>Regional packs and the "All of Europe" pack are one-time in-app purchases processed entirely by <strong>Apple</strong>. We never see your name, payment details or billing address. The app only receives an anonymous confirmation from Apple's StoreKit that a pack is unlocked, and stores that entitlement on your device and in your Apple Account (so it can be restored on your other devices). See <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>.</p>
+  <h2>3. Advertising (free version)</h2>
+  <p>The free version shows one banner advert supplied by <strong>Google AdMob</strong>. To select, deliver, measure and protect those ads, Google's advertising SDK may process technical data from your device — such as a device/advertising identifier, IP address, coarse (non-precise) location and ad-interaction data. For this processing <a href="https://policies.google.com/technologies/partner-sites">Google</a> acts as an independent data controller under its own policies.</p>
+  <p>In the European Economic Area, the United Kingdom and Switzerland we ask for your consent through Google's consent form <em>before</em> any ad is requested, and iOS asks separately — through Apple's <strong>App Tracking Transparency</strong> prompt — whether the app may track you. If you decline either, the app works exactly the same and ads are simply not personalised. Any purchase removes ads entirely, and with them all advertising data processing.</p>
+  <h2>4. Data the app sends (push notifications)</h2>
+  <p>If — and only if — you allow notifications, the app registers your device with our notification service (Back4App, a Parse hosting provider). The registration contains:</p>
+  <div class="card">
+    <ul><li>the anonymous Apple push token of your device (APNs)</li><li>a random installation identifier generated by the app</li><li>the list of crossing channels you follow (e.g. "valico-hr-me-karasovici"), device type ("ios"), app version, time zone and language setting</li></ul>
+  </div>
+  <p>The followed channels reveal only which crossings you want alerts for — nothing identifies you personally, nothing is linked to any account, and nothing is used for advertising. If you deny or later disable notifications, no registration is created or used. You may request deletion of your registration at any time by email.</p>
+  <h2>5. Services the app talks to</h2>
+  <p>The waiting times of all crossings are collected by <em>our</em> server-side collector from the national authorities and republished as open data on GitHub: your device never contacts the authorities' websites, it only reads our aggregated files. As with any internet request, the services below technically process your IP address for the duration of the request.</p>
+  <div class="card">
+    <table><tr><th>Service</th><th>Purpose</th></tr><tr><td>GitHub Pages / raw.githubusercontent.com</td><td>aggregated waiting times, 48-hour history, crossing catalogue</td></tr><tr><td>Apple StoreKit</td><td>in-app purchases and restore (see section 2)</td></tr><tr><td>Back4App</td><td>push-notification delivery (see section 4)</td></tr><tr><td>Google AdMob</td><td>advertising in the free version only — see <a href="https://policies.google.com/privacy">Google's privacy policy</a></td></tr></table>
+  </div>
+  <h2>6. Data stored on your device only</h2>
+  <p>Your settings, followed crossings, ad-consent choice and cached traffic data are stored on your device and are not uploaded to us. Deleting the app deletes them.</p>
+  <h2>7. What we don't do</h2>
+  <div class="card">
+    <ul><li>No user accounts, no profiles</li><li>No analytics or usage measurement of our own</li><li>No location tracking — the app never asks for your position</li><li>No tracking without your permission, no sale of your data</li><li>No data knowingly collected from children — the app is a traffic utility rated 4+</li></ul>
+  </div>
+  <h2>8. Your rights</h2>
+  <p>Under Swiss data-protection law (nFADP) and the GDPR you may request access to, correction or deletion of the data described in section 4. Since we hold no identifying information, please include the approximate date you enabled notifications so we can locate the registration. Write to <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>. For advertising data processed by Google, please refer to <a href="https://policies.google.com/technologies/partner-sites">Google</a>; for purchase data, to Apple.</p>
+  <h2>9. Changes</h2>
+  <p>This policy will be updated whenever the app's data practices change, and the "last updated" date above will change accordingly.</p>
+  </div>
+
+  <div lang-block="it">
+    <p class="updated">Valichi Live — ultimo aggiornamento 9 agosto 2026</p>
+  <h2>1. Chi siamo</h2>
+  <p>Valichi Live è un'app iOS di Fabrizio Bacchin (Svizzera) che mostra i tempi d'attesa ufficiali ai valichi di frontiera e agli assi alpini europei. Per qualsiasi cosa relativa a questa informativa, scrivi a <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+  <h2>2. Acquisti in-app</h2>
+  <p>I pacchetti regionali e il pacchetto "Tutta Europa" sono acquisti una tantum gestiti interamente da <strong>Apple</strong>. Non vediamo mai il tuo nome, i dati di pagamento o l'indirizzo di fatturazione. L'app riceve da StoreKit solo la conferma anonima che un pacchetto è sbloccato, e conserva questo diritto sul tuo dispositivo e nel tuo Account Apple (per il ripristino sugli altri dispositivi). Vedi l'<a href="https://www.apple.com/legal/privacy/">informativa privacy di Apple</a>.</p>
+  <h2>3. Pubblicità (versione gratuita)</h2>
+  <p>La versione gratuita mostra un banner fornito da <strong>Google AdMob</strong>. Per selezionare, mostrare, misurare e proteggere gli annunci, l'SDK pubblicitario di Google può trattare dati tecnici del dispositivo — come un identificativo del dispositivo/pubblicitario, l'indirizzo IP, la posizione approssimativa (non precisa) e i dati di interazione con gli annunci. Per questo trattamento <a href="https://policies.google.com/technologies/partner-sites">Google</a> agisce come titolare autonomo secondo le proprie policy.</p>
+  <p>Nello Spazio economico europeo, nel Regno Unito e in Svizzera chiediamo il tuo consenso tramite il modulo di Google <em>prima</em> di qualsiasi richiesta di annuncio, e iOS chiede a parte — con il dialogo <strong>App Tracking Transparency</strong> di Apple — se l'app può tracciarti. Se rifiuti, l'app funziona esattamente allo stesso modo e gli annunci semplicemente non sono personalizzati. Qualsiasi acquisto rimuove del tutto la pubblicità, e con essa ogni trattamento di dati pubblicitari.</p>
+  <h2>4. Dati che l'app invia (notifiche push)</h2>
+  <p>Se — e solo se — consenti le notifiche, l'app registra il tuo dispositivo presso il nostro servizio di notifica (Back4App, un provider Parse). La registrazione contiene:</p>
+  <div class="card">
+    <ul><li>il token push anonimo Apple del dispositivo (APNs)</li><li>un identificativo casuale di installazione generato dall'app</li><li>l'elenco dei canali dei valichi che segui (es. "valico-hr-me-karasovici"), il tipo di dispositivo ("ios"), la versione dell'app, il fuso orario e la lingua</li></ul>
+  </div>
+  <p>I canali seguiti rivelano solo per quali valichi vuoi gli avvisi — nulla ti identifica personalmente, nulla è collegato a un account e nulla è usato per la pubblicità. Se neghi o disattivi le notifiche, nessuna registrazione viene creata o usata. Puoi chiederne la cancellazione in qualsiasi momento via email.</p>
+  <h2>5. Servizi con cui l'app comunica</h2>
+  <p>Le attese di tutti i valichi sono raccolte dal <em>nostro</em> collector lato server presso le autorità nazionali e ripubblicate come open data su GitHub: il tuo dispositivo non contatta mai i siti delle autorità, legge solo i nostri file aggregati. Come per ogni richiesta internet, i servizi qui sotto trattano tecnicamente il tuo indirizzo IP per la durata della richiesta.</p>
+  <div class="card">
+    <table><tr><th>Servizio</th><th>Scopo</th></tr><tr><td>GitHub Pages / raw.githubusercontent.com</td><td>attese aggregate, storico 48 ore, catalogo valichi</td></tr><tr><td>Apple StoreKit</td><td>acquisti in-app e ripristino (sezione 2)</td></tr><tr><td>Back4App</td><td>consegna delle notifiche push (sezione 4)</td></tr><tr><td>Google AdMob</td><td>pubblicità solo nella versione gratuita — vedi l'<a href="https://policies.google.com/privacy">informativa di Google</a></td></tr></table>
+  </div>
+  <h2>6. Dati che restano solo sul tuo dispositivo</h2>
+  <p>Le impostazioni, i valichi seguiti, la scelta sul consenso pubblicitario e i dati di traffico in cache restano sul dispositivo e non ci vengono inviati. Cancellando l'app si cancellano.</p>
+  <h2>7. Cosa non facciamo</h2>
+  <div class="card">
+    <ul><li>Nessun account utente, nessun profilo</li><li>Nessuna analisi o misurazione d'uso nostra</li><li>Nessuna localizzazione — l'app non chiede mai la tua posizione</li><li>Nessun tracciamento senza permesso, nessuna vendita dei tuoi dati</li><li>Nessun dato raccolto consapevolmente da minori — l'app è un'utility sul traffico classificata 4+</li></ul>
+  </div>
+  <h2>8. I tuoi diritti</h2>
+  <p>In base alla legge svizzera sulla protezione dei dati (nLPD) e al GDPR puoi chiedere accesso, correzione o cancellazione dei dati descritti nella sezione 4. Poiché non conserviamo informazioni identificative, indica la data approssimativa in cui hai attivato le notifiche, così possiamo trovare la registrazione. Scrivi a <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>. Per i dati pubblicitari trattati da Google rivolgiti a <a href="https://policies.google.com/technologies/partner-sites">Google</a>; per i dati d'acquisto ad Apple.</p>
+  <h2>9. Modifiche</h2>
+  <p>Questa informativa sarà aggiornata ogni volta che cambiano le pratiche sui dati dell'app, e con essa la data di "ultimo aggiornamento".</p>
+  </div>
+
+  <div lang-block="de">
+    <p class="updated">Valichi Live — zuletzt aktualisiert am 9. August 2026</p>
+  <h2>1. Wer wir sind</h2>
+  <p>Valichi Live ist eine iOS-App von Fabrizio Bacchin (Schweiz), die offizielle Wartezeiten an europäischen Grenzübergängen und Alpenachsen zeigt. Für alles rund um diese Richtlinie: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+  <h2>2. In-App-Käufe</h2>
+  <p>Regionspakete und das Paket „Ganz Europa" sind Einmalkäufe, die vollständig von <strong>Apple</strong> abgewickelt werden. Wir sehen weder Namen noch Zahlungsdaten oder Rechnungsadresse. Die App erhält von StoreKit nur die anonyme Bestätigung, dass ein Paket freigeschaltet ist, und speichert dieses Recht auf deinem Gerät und in deinem Apple Account (für die Wiederherstellung auf anderen Geräten). Siehe <a href="https://www.apple.com/legal/privacy/">Apples Datenschutzrichtlinie</a>.</p>
+  <h2>3. Werbung (Gratisversion)</h2>
+  <p>Die Gratisversion zeigt ein Banner von <strong>Google AdMob</strong>. Dafür kann Googles Werbe-SDK technische Gerätedaten verarbeiten — etwa Geräte-/Werbekennung, IP-Adresse, grobe (nicht präzise) Standortdaten und Anzeigeninteraktionen. <a href="https://policies.google.com/technologies/partner-sites">Google</a> handelt dabei als eigenständiger Verantwortlicher nach eigenen Richtlinien.</p>
+  <p>Im EWR, im Vereinigten Königreich und in der Schweiz fragen wir <em>vor</em> jeder Anzeigenanforderung über Googles Einwilligungsformular nach deiner Zustimmung, und iOS fragt separat — über Apples <strong>App-Tracking-Transparency</strong>-Dialog — ob die App dich tracken darf. Lehnst du ab, funktioniert die App genau gleich, die Anzeigen sind nur nicht personalisiert. Jeder Kauf entfernt die Werbung vollständig — und damit jede werbliche Datenverarbeitung.</p>
+  <h2>4. Daten, die die App sendet (Push-Mitteilungen)</h2>
+  <p>Nur wenn du Mitteilungen erlaubst, registriert die App dein Gerät bei unserem Benachrichtigungsdienst (Back4App, ein Parse-Anbieter). Die Registrierung enthält:</p>
+  <div class="card">
+    <ul><li>das anonyme Apple-Push-Token deines Geräts (APNs)</li><li>eine zufällige, von der App erzeugte Installationskennung</li><li>die Liste der gefolgten Übergangs-Kanäle (z. B. „valico-hr-me-karasovici"), Gerätetyp („ios"), App-Version, Zeitzone und Sprache</li></ul>
+  </div>
+  <p>Die gefolgten Kanäle verraten nur, für welche Übergänge du Meldungen willst — nichts identifiziert dich persönlich, nichts ist mit einem Konto verknüpft, nichts dient der Werbung. Ohne Erlaubnis wird keine Registrierung angelegt. Löschung jederzeit per E-Mail möglich.</p>
+  <h2>5. Dienste, mit denen die App spricht</h2>
+  <p>Die Wartezeiten aller Übergänge sammelt <em>unser</em> serverseitiger Collector bei den nationalen Behörden und veröffentlicht sie als Open Data auf GitHub: dein Gerät kontaktiert die Behördenseiten nie, es liest nur unsere aggregierten Dateien. Wie bei jeder Internetanfrage verarbeiten die folgenden Dienste deine IP-Adresse für die Dauer der Anfrage.</p>
+  <div class="card">
+    <table><tr><th>Dienst</th><th>Zweck</th></tr><tr><td>GitHub Pages / raw.githubusercontent.com</td><td>aggregierte Wartezeiten, 48-Stunden-Verlauf, Katalog</td></tr><tr><td>Apple StoreKit</td><td>In-App-Käufe und Wiederherstellung (Abschnitt 2)</td></tr><tr><td>Back4App</td><td>Zustellung der Push-Mitteilungen (Abschnitt 4)</td></tr><tr><td>Google AdMob</td><td>Werbung nur in der Gratisversion — siehe <a href="https://policies.google.com/privacy">Googles Datenschutzerklärung</a></td></tr></table>
+  </div>
+  <h2>6. Daten nur auf deinem Gerät</h2>
+  <p>Einstellungen, gefolgte Übergänge, Werbe-Einwilligung und zwischengespeicherte Verkehrsdaten bleiben auf dem Gerät und werden nicht an uns übertragen. Mit der App werden sie gelöscht.</p>
+  <h2>7. Was wir nicht tun</h2>
+  <div class="card">
+    <ul><li>Keine Benutzerkonten, keine Profile</li><li>Keine eigene Analyse oder Nutzungsmessung</li><li>Keine Ortung — die App fragt nie nach deinem Standort</li><li>Kein Tracking ohne Erlaubnis, kein Verkauf deiner Daten</li><li>Keine wissentliche Datenerhebung von Kindern — Verkehrs-Utility, Altersfreigabe 4+</li></ul>
+  </div>
+  <h2>8. Deine Rechte</h2>
+  <p>Nach Schweizer Datenschutzrecht (revDSG) und DSGVO kannst du Auskunft, Berichtigung oder Löschung der in Abschnitt 4 beschriebenen Daten verlangen. Da wir keine identifizierenden Daten halten, nenne bitte das ungefähre Datum der Aktivierung der Mitteilungen. Schreibe an <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>. Für Werbedaten wende dich an <a href="https://policies.google.com/technologies/partner-sites">Google</a>, für Kaufdaten an Apple.</p>
+  <h2>9. Änderungen</h2>
+  <p>Diese Richtlinie wird aktualisiert, wann immer sich die Datenpraktiken der App ändern; das Datum oben ändert sich entsprechend.</p>
+  </div>
+
+  <div lang-block="fr">
+    <p class="updated">Valichi Live — dernière mise à jour le 9 août 2026</p>
+  <h2>1. Qui nous sommes</h2>
+  <p>Valichi Live est une app iOS de Fabrizio Bacchin (Suisse) qui affiche les temps d'attente officiels aux postes-frontières et axes alpins européens. Pour tout ce qui concerne cette politique : <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+  <h2>2. Achats intégrés</h2>
+  <p>Les packs régionaux et le pack « Toute l'Europe » sont des achats uniques traités entièrement par <strong>Apple</strong>. Nous ne voyons jamais votre nom, vos données de paiement ni votre adresse de facturation. L'app ne reçoit de StoreKit que la confirmation anonyme qu'un pack est débloqué, et conserve ce droit sur votre appareil et dans votre compte Apple (pour la restauration sur vos autres appareils). Voir la <a href="https://www.apple.com/legal/privacy/">politique de confidentialité d'Apple</a>.</p>
+  <h2>3. Publicité (version gratuite)</h2>
+  <p>La version gratuite affiche une bannière fournie par <strong>Google AdMob</strong>. Pour sélectionner, diffuser, mesurer et protéger les annonces, le SDK publicitaire de Google peut traiter des données techniques de l'appareil — identifiant appareil/publicitaire, adresse IP, localisation approximative (non précise) et interactions avec les annonces. <a href="https://policies.google.com/technologies/partner-sites">Google</a> agit en responsable de traitement autonome selon ses propres politiques.</p>
+  <p>Dans l'EEE, au Royaume-Uni et en Suisse, nous demandons votre consentement via le formulaire de Google <em>avant</em> toute demande d'annonce, et iOS demande séparément — via l'invite <strong>App Tracking Transparency</strong> d'Apple — si l'app peut vous suivre. En cas de refus, l'app fonctionne exactement pareil et les annonces ne sont simplement pas personnalisées. Tout achat supprime entièrement la publicité, et avec elle tout traitement de données publicitaires.</p>
+  <h2>4. Données envoyées par l'app (notifications push)</h2>
+  <p>Si — et seulement si — vous autorisez les notifications, l'app enregistre votre appareil auprès de notre service de notification (Back4App, un hébergeur Parse). L'enregistrement contient :</p>
+  <div class="card">
+    <ul><li>le jeton push Apple anonyme de votre appareil (APNs)</li><li>un identifiant d'installation aléatoire généré par l'app</li><li>la liste des canaux de postes suivis (p. ex. « valico-hr-me-karasovici »), le type d'appareil (« ios »), la version de l'app, le fuseau horaire et la langue</li></ul>
+  </div>
+  <p>Les canaux suivis ne révèlent que les postes pour lesquels vous voulez des alertes — rien ne vous identifie personnellement, rien n'est lié à un compte, rien ne sert à la publicité. Sans autorisation, aucun enregistrement n'est créé. Suppression possible à tout moment par e-mail.</p>
+  <h2>5. Services contactés par l'app</h2>
+  <p>Les temps d'attente de tous les postes sont collectés par <em>notre</em> collecteur côté serveur auprès des autorités nationales et republiés en open data sur GitHub : votre appareil ne contacte jamais les sites des autorités, il ne lit que nos fichiers agrégés. Comme pour toute requête internet, les services ci-dessous traitent techniquement votre adresse IP le temps de la requête.</p>
+  <div class="card">
+    <table><tr><th>Service</th><th>Finalité</th></tr><tr><td>GitHub Pages / raw.githubusercontent.com</td><td>attentes agrégées, historique 48 h, catalogue des postes</td></tr><tr><td>Apple StoreKit</td><td>achats intégrés et restauration (section 2)</td></tr><tr><td>Back4App</td><td>distribution des notifications push (section 4)</td></tr><tr><td>Google AdMob</td><td>publicité dans la version gratuite uniquement — voir la <a href="https://policies.google.com/privacy">politique de Google</a></td></tr></table>
+  </div>
+  <h2>6. Données stockées uniquement sur votre appareil</h2>
+  <p>Vos réglages, postes suivis, choix de consentement publicitaire et données de trafic en cache restent sur l'appareil et ne nous sont pas transmis. Supprimer l'app les supprime.</p>
+  <h2>7. Ce que nous ne faisons pas</h2>
+  <div class="card">
+    <ul><li>Pas de comptes utilisateurs, pas de profils</li><li>Pas d'analyse ni de mesure d'usage de notre part</li><li>Pas de géolocalisation — l'app ne demande jamais votre position</li><li>Pas de suivi sans permission, pas de vente de vos données</li><li>Aucune donnée sciemment collectée auprès d'enfants — utilitaire trafic classé 4+</li></ul>
+  </div>
+  <h2>8. Vos droits</h2>
+  <p>En vertu du droit suisse de la protection des données (nLPD) et du RGPD, vous pouvez demander l'accès, la rectification ou la suppression des données décrites à la section 4. Comme nous ne détenons aucune information identifiante, indiquez la date approximative d'activation des notifications. Écrivez à <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>. Pour les données publicitaires, adressez-vous à <a href="https://policies.google.com/technologies/partner-sites">Google</a> ; pour les données d'achat, à Apple.</p>
+  <h2>9. Modifications</h2>
+  <p>Cette politique sera mise à jour à chaque changement des pratiques de données de l'app, avec la date de « dernière mise à jour » ci-dessus.</p>
+  </div>
+
+  <footer>
+    <span lang-block="en">© 2026 Fabrizio Bacchin · <a href="support-valichi.html">Support</a></span>
+    <span lang-block="it">© 2026 Fabrizio Bacchin · <a href="support-valichi.html">Supporto</a></span>
+    <span lang-block="de">© 2026 Fabrizio Bacchin · <a href="support-valichi.html">Support</a></span>
+    <span lang-block="fr">© 2026 Fabrizio Bacchin · <a href="support-valichi.html">Assistance</a></span>
+  </footer>
+</main>
+
+<script>
+  var LANGS = ["en", "it", "de", "fr"];
+  function setLang(l) {
+    if (LANGS.indexOf(l) < 0) l = "en";
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    LANGS.forEach(function (x) {
+      document.getElementById("btn-" + x).setAttribute("aria-pressed", x === l);
+    });
+    try { localStorage.setItem("valichi-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("valichi-lang"); } catch (e) {}
+  var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+  setLang(saved || (LANGS.indexOf(nav) >= 0 ? nav : "en"));
+</script>
+<noscript><style>[lang-block]{display:block !important}</style></noscript>
+
+</body>
+</html>

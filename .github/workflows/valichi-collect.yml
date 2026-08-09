@@ -1,0 +1,56 @@
+name: Collect valichi history
+
+# Stessa strategia del collector del Gottardo (vedi gotthard-collect.yml):
+# i cron di GitHub sono "best effort", quindi run lunghi ~3 ore che
+# campionano in loop e committano a ogni giro, incatenati dal gruppo di
+# concorrenza. Sync col remoto via fetch+reset (mai pull/rebase: un merge
+# conflittuale aveva committato marcatori <<<<<<< dentro un JSON del
+# Gottardo corrompendolo).
+#
+# Cadenza 10 minuti, non 5: le fonti di frontiera si aggiornano più
+# lentamente del feed svizzero (granica dichiara 8 aggiornamenti al giorno)
+# e sono siti pubblici da non martellare.
+#
+# NB: gli scheduled workflow girano solo dal branch di default — questo
+# file si attiva quando arriva su main.
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: valichi-collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 178
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Sample every 10 minutes for ~3 hours
+        env:
+          # Push opzionali: senza questi secrets il collector raccoglie e
+          # basta. App Back4App SEPARATA da quella di Gottardo Live: canali
+          # per valico, pubblico diverso.
+          B4A_VALICHI_APP_ID: ${{ secrets.B4A_VALICHI_APP_ID }}
+          B4A_VALICHI_MASTER_KEY: ${{ secrets.B4A_VALICHI_MASTER_KEY }}
+        run: |
+          git config user.name "valichi-bot"
+          git config user.email "actions@users.noreply.github.com"
+          for i in $(seq 1 17); do
+            git fetch origin main && git reset --hard origin/main
+            if python3 valichi/collect.py; then
+              # File elencati ESPLICITAMENTE: un file dati nuovo va aggiunto
+              # qui, altrimenti nasce a ogni giro e muore al reset successivo
+              # senza mai arrivare su GitHub (successo due volte al Gottardo).
+              git add valichi/data/latest.json valichi/data/history.json valichi/data/push-state.json valichi/data/sources-log.jsonl
+              git diff --cached --quiet || git commit -m "valichi sample $(date -u +%FT%TZ)"
+              git push origin main || echo "push fallito, campione perso: riprovo al prossimo giro"
+            fi
+            if [ "$i" -lt 17 ]; then sleep 600; fi
+          done
