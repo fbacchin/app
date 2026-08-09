@@ -1,12 +1,12 @@
 {
- "time": "2026-08-09T14:42:44Z",
+ "time": "2026-08-09T14:52:51Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
-   "updated": "2026-08-09T14:42:44Z",
+   "updated": "2026-08-09T14:52:51Z",
    "directions": {
     "south": {
-     "wait": 10
+     "wait": null
     },
     "north": {
      "wait": 60
@@ -185,25 +185,28 @@
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-08-09T14:42:36Z"
+   "sampled": "2026-08-09T14:47:57Z"
   },
   "hak": {
    "ok": true,
    "url": "https://m.hak.hr/stanje.asp?id=2",
    "found": 3,
-   "of": 6
+   "of": 6,
+   "waits": 0
   },
   "police_hu": {
    "ok": true,
    "url": "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo",
    "found": 3,
-   "of": 4
+   "of": 4,
+   "waits": 0
   },
   "granica_pl": {
    "ok": true,
    "url": "https://granica.gov.pl/index_wait.php?p=u&v=pl&k=w",
    "found": 4,
-   "of": 4
+   "of": 4,
+   "waits": 0
   }
  }
 }
