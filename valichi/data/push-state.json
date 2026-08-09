@@ -4,5 +4,26 @@
  },
  "ch.gottardo.south": {
   "phase": "clear"
+ },
+ "hr-me.karasovici.exit": {
+  "phase": "clear"
+ },
+ "hr-rs.bajakovo.entry": {
+  "phase": "clear"
+ },
+ "hr-rs.bajakovo.exit": {
+  "phase": "clear"
+ },
+ "hu-ua.beregsurany.entry": {
+  "phase": "clear"
+ },
+ "hu-ua.beregsurany.exit": {
+  "phase": "clear"
+ },
+ "hu-ua.zahony.entry": {
+  "phase": "clear"
+ },
+ "hu-ua.zahony.exit": {
+  "phase": "clear"
  }
 }
