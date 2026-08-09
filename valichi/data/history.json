@@ -1247,5 +1247,17 @@
    "hr-rs.bajakovo",
    "hr-rs.tovarnik"
   ]
+ },
+ {
+  "time": "2026-08-09T23:21:39Z",
+  "w": {
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 0,
+   "pl-ua.korczowa.exit": 60,
+   "pl-ua.hrebenne.exit": 0
+  }
  }
 ]
