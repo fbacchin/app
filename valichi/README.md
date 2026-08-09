@@ -50,8 +50,8 @@ che questo progetto possa produrre (lezione del Gottardo).
 | Fonte | Copre | Stato | Note |
 |---|---|---|---|
 | `gotthard` (file interno) | Gottardo | ✅ attiva | riusa `gotthard/data/latest.json` già raccolto dal collector gemello: zero rete, zero quota doppia |
-| `hak` (hak.hr) | HR ↔ ME / BA / RS | ✅ attiva | include Karasovići–Debeli Brijeg e il nuovo Vitaljina–Kobila. ⚠️ `m.hak.hr/stanje.asp` è la pagina AVVISI (prosa, zero numeri): l'adapter prova tutti gli URL e tiene quello con più attese lette |
-| `police_hu` (police.hu Határinfó) | HU ↔ RS / UA | ✅ attiva | HU–RO esclusa: Romania in Schengen dal 1.1.2025. ⚠️ la pagina apre con un notiziario che cita i valichi senza dati: si sceglie l'occorrenza migliore, non la prima. Al collaudo Tompa non compariva sulla pagina base |
+| `hak` (hak.hr) | HR ↔ ME / BA / RS | ✅ attiva | tabella del MUP in fondo a `/info/stanje-na-cestama`, letta a celle. ⚠️ elenca **solo i valichi con una coda da dichiarare**: chi non è in tabella è ignoto, non libero. Vicoli ciechi da non riprovare: `/info/granicni-prijelazi/` è 404 e `m.hak.hr/stanje.asp?id=2` — che pure si intitola "Granični prijelazi" — è la pagina AVVISI, prosa senza un solo numero |
+| `police_hu` (police.hu Határinfó) | HU ↔ RS / UA | ⚠️ parziale | HU–UA (Záhony, Beregsurány) ha i blocchi di attesa; **HU–RS no**: Röszke compare solo nei paragrafi di spiegazione e Tompa non compare affatto, quindi restano ignoti. HU–RO esclusa: Romania in Schengen dal 1.1.2025. Serve una seconda fonte per il confine serbo |
 | `granica_pl` (granica.gov.pl) | PL ↔ UA | ⚠️ parziale | i valichi si trovano ma la tabella è a colonne (`H:MM`, classi `≤7,5t`/`>7,5t`, più valichi affiancati): dal testo appiattito i numeri non sono attribuibili con certezza, quindi restano IGNOTI — mai inventati. Prossimo passo: il servizio SOAP ufficiale (`www.granica.gov.pl/Services/czasyService/granica.wsdl`, ~8 aggiornamenti/giorno) |
 | `otd_ch` | San Bernardino | 🔜 | stesso feed DATEX II del Gottardo, stessa chiave `OTD_API_KEY`: si estende il filtro del corridoio (attenzione alla quota condivisa) |
 | `asfinag` | Brennero, Tauri | 🔜 | open data Asfinag da integrare |
@@ -68,17 +68,39 @@ di sviluppo non raggiunge le fonti). Primo giro il 09.08.2026, esiti in
   m.hak.hr era la pagina avvisi, su police.hu vinceva il titolo di
   cronaca, la tabella di granica è a colonne. Da qui le due regole "miglior
   URL" e "miglior occorrenza" e la finestra di log a 400 caratteri;
+- **secondo giro, stesso giorno**: le finestre a 400 caratteri hanno
+  mostrato che il problema non era la taratura ma la fonte. Le regole
+  "miglior URL" e "miglior occorrenza" non potevano salvare HAK, perché
+  dei due URL uno era 404 e l'altro non conteneva numeri. Da qui i due
+  parser strutturali (tabella per HAK, blocchi per police.hu) e il
+  passaggio da 0 a 8 attese note su 15 valichi;
 - il registro resta lo strumento: a ogni modifica di formato le finestre
-  mostrano il testo vero su cui adeguare `matchNames` o vocabolario. Poi
-  allineare le fixture in `prove/` (che oggi includono anche i
-  "depistaggi" osservati: notiziario prima dei dati, avvisi in prosa),
-  così `--prova` protegge da regressioni.
+  mostrano il testo vero su cui adeguare i parser. Poi si rifà la cattura
+  in `prove/` — che ora sono **pagine reali**, non imitazioni — e si
+  riallineano i valori attesi di `--prova`, che protegge da regressioni.
 
 ## Come legge le pagine (e perché così)
 
 Le fonti di frontiera sono pagine HTML **senza contratto**: nessun feed
-garantito, markup libero di cambiare. Il collector quindi non interpreta
-la struttura ma il **testo**:
+garantito, markup libero di cambiare. Da qui la scelta iniziale di non
+interpretare la struttura ma il **testo**. Il collaudo del 09.08.2026 ha
+mostrato il limite della regola: quando la pagina è una vera tabella a
+colonne, dal testo appiattito le direzioni **non sono ricostruibili**, e
+la lettura fuzzy le attribuisce tutte all'uscita. Oggi quindi convivono
+due strategie, e si sceglie la struttura quando c'è:
+
+- **HAK** — parser di tabella (`estrai_hak`): si leggono le celle di
+  `table.gptable`, l'intestazione dice quali colonne sono Ulaz/Izlaz e
+  quali auto/camion. Il tooltip (`L: 0 km`, timestamp) si butta prima di
+  cercare i minuti: uno `0 km` letto come attesa sarebbe uno zero falso.
+- **police.hu** — parser di blocchi (`estrai_police_hu`): per ogni valico
+  si legge solo lo spezzone che segue il marcatore di direzione, chiuso
+  alla voce successiva del blocco.
+- **granica.gov.pl** — ancora a finestre di testo, in attesa del SOAP.
+  Da quella pagina non caverà comunque niente di attribuibile.
+
+Il funzionamento a finestre, che regge granica e resta la rete di
+sicurezza per le fonti future:
 
 1. la pagina viene spianata (tag via, minuscole, senza accenti, spazi
    compressi) — "Karasovići", "KARASOVIĆI" e "karasovici" diventano la

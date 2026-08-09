@@ -1,39 +1,1542 @@
 <!DOCTYPE html>
-<!-- Fixture per collect.py --prova: imita la pagina Határinfó della polizia
-     ungherese (police.hu, impaginazione per categoria di veicolo).
-     NON è una cattura reale: al primo run del workflow le finestre vere
-     finiscono in data/sources-log.jsonl e questa fixture va allineata. -->
-<html lang="hu">
-<head><meta charset="utf-8"><title>Határinfó | A Rendőrség hivatalos honlapja</title></head>
-<body>
-<nav><a href="/">Kezdőlap</a> · <a href="/hirek">Hírek és információk</a> · Határinfó</nav>
-<h1>Határinfó — várakozási idők a határátkelőhelyeken</h1>
-<!-- Il notiziario PRIMA dei dati: sul sito vero (collaudo 09.08.2026) il
-     primo "Röszke" della pagina era questo titolo in tedesco, non la riga
-     con i tempi. La scelta della migliore occorrenza deve scavalcarlo. -->
-<div class="news">
- <h3>Röszke–Horgos (Ungarn-Serbien): mit stundenlangen Wartezeiten ist zu rechnen</h3>
- <p>Szerb határszakasz: a feltüntetett várakozási idő kizárólag a magyar oldalon
-    történő határátlépés előtti várakozást mutatja.</p>
+<html  lang="hu" dir="ltr">
+  <head> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">    
+    <meta charset="utf-8" />
+<meta name="Generator" content="Drupal 8 (https://www.drupal.org)" />
+<meta name="MobileOptimized" content="width" />
+<meta name="HandheldFriendly" content="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="/sites/default/files/logo_favicon.png" type="image/png" />
+
+    <title>Határinfó adatok | A Rendőrség hivatalos honlapja</title>
+    <link rel="stylesheet" href="/themes/custom/police/includes/bootstrap/css/bootstrap.min.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/includes/datetimepicker/bootstrap-datetimepicker.min.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/includes/font-awesome/css/font-awesome.min.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/includes/mCustomScrollbar/jquery.mCustomScrollbar.min.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/reset.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/police_clean.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/header.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/forms.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/footer.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/jsor-slides.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/navigation.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/frontpage.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/page.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/search.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/maintenance.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/postlist-page.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/post-page.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/page-borderinfo-rutin.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/includes/juicebox/classic/theme.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/juicebox-theme.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/koral.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/includes/slick/slick/slick.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/includes/slick/slick/slick-theme.css?tjhhs1" media="all" />
+<link rel="stylesheet" href="/themes/custom/police/css/mournful-mode.css?tjhhs1" media="all" />
+
+    
+<!--[if lte IE 8]>
+<script src="/core/assets/vendor/html5shiv/html5shiv.min.js?v=3.7.3"></script>
+<![endif]-->
+ 
+       
+  </head>
+   <body >
+    <input id="web-accessible-uri" type="hidden" value="https://akadalymentes.police.hu/hu/hirek-es-informaciok/hatarinfo">
+        <a id="skip-link" href="#main-content" tabindex="1">Ugrás a fő tartalomra</a>
+    
+    
+  <header>    
+     	<div id="primary-header" class="navbar navbar-default navbar-fixed-top" data-40="height:88px;" data-300="height:75px;">
+	      	    		 <div id="slave-navigation" class="pull-right" data-40="padding-top:28px;" data-300="padding-top:22px" tabindex="4" aria-label="Nyelv választó menü">
+		                       		  
+<ul class="links"><li hreflang="en" class="en"><a href="/en" class="language-link" hreflang="en">EN</a></li><li hreflang="hu" class="hu"><a href="/hu" class="language-link is-active" hreflang="hu">HU</a></li></ul>
 </div>
-<div class="atkelo">
- <h2>Röszke (autópálya) — Szerbia</h2>
- <p>Személygépkocsi: kilépő forgalomban a várakozási idő 2 óra, belépő forgalomban 30 perc.
-    Tehergépkocsi: kilépő forgalomban 6 óra.</p>
+   
+    
+  <div class="navbar-header toleft">
+	<a class="navbar-brand" href="/hu" title="Címlap" rel="home" data-40="height:88px;" data-300="height:75px;" tabindex="1">
+		<img alt="Police.hu" src="/themes/custom/police/images/szolgalunk_vedunk_logo_vegleges.png" alt="Címlap"/> 
+	</a>
+	<div class="social-dropdown pull-right">
+		<button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#social-holder" aria-expanded="false">
+			<i class="fa fa-plus fa-inverse"></i>
+		</button>
+	</div>	
 </div>
-<div class="atkelo">
- <h2>Tompa — Szerbia</h2>
- <p>Személygépkocsi: kilépő forgalomban nincs várakozás, belépő forgalomban nincs várakozás.</p>
+<div class="infobar" id="koral-box-xs"></div>
+<div id="social-holder" class="collapse navbar-collapse pull-right" data-40="padding-top:28px;" data-300="padding-top:22px">
+	<div class="visible-xs" id="phone-number-box-xs"></div>	
+	<hr class="visible-xs"></hr>		
+	<ul class="nav navbar-nav navbar-right">
+		<li>
+			<a href="https://www.facebook.com/PoliceHungaryOfficial/" data-toogle="tooltip" data-placement="left" title="Facebook" target="_blank" tabindex="3" aria-label="A Rendőrség Facebook oldala">
+				<i class="fa fa-facebook"></i>
+				<span class="visible-xs">
+					&nbsp;Tovább a rendőrség Facebook oldalára &raquo;
+				</span>
+			</a>
+		</li>
+		<li>
+			<a href="https://twitter.com/police_HU"  data-toogle="tooltip" data-placement="left" title="@police_HU követése" target="_blank" tabindex="3" aria-label="A Rendőrség Twitter oldala">
+				<i class="fa fa-twitter"></i>
+			<span class="visible-xs">
+				&nbsp;Tovább a rendőrség Twitter oldalára &raquo;
+			</span>
+			</a>	
+		</li>
+		<li>
+			<a href="https://www.youtube.com/user/PoliceHungary" data-toogle="tooltip" target="_blank" data-placement="left" title="Youtube" target="_blank" tabindex="3" aria-label="A Rendőrség Youtube oldala">
+				<i class="fa fa-youtube"></i>
+				<span class="visible-xs">
+					&nbsp;Tovább a rendőrség Youtube oldalára &raquo;
+				</span>
+			</a>
+		</li>
+		<li>
+			<a href="https://www.instagram.com/police_HU" data-toogle="tooltip" data-placement="left" title="@police_hu követése" target="_blank" tabindex="3" aria-label="A Rendőrség Instagram oldala">
+				<i class="fa fa-instagram"></i>
+				<span class="visible-xs">
+				&nbsp;Tovább a rendőrség Instagram oldalára &raquo;
+			    </span>
+			</a>    
+		</li>
+		<li>
+			<a href="/hu/rss"  alt="RSS feliratkozás" title="RSS feliratkozás" tabindex="3" aria-label="A Rendőrség RSS oldala">
+				<i class="fa fa-rss-square" aria-hidden="true"></i>
+				<span class="visible-xs">
+					&nbsp;Tovább a rendőrség RSS oldalára &raquo;
+				</span>
+			</a>
+		</li>
+		<li>
+			<a id="theme-switcher-link" href="https://akadalymentes.police.hu/hu/hirek-es-informaciok/legfrissebb-hireink/bunugyek/taroltak-az-elfogok" rel="nofollow" title="Akadálymentes verzió" tabindex="3" aria-label="A Rendőrség akadálymentes oldala">
+				<i class="fa fa-eye-slash" aria-hidden="true"></i>
+				<span class="visible-xs">
+					&nbsp;Tovább a rendőrség akadálymentes oldalára &raquo;
+				</span>
+			</a>
+		</li>	
+	</ul>
 </div>
-<div class="atkelo">
- <h2>Záhony — Ukrajna</h2>
- <p>Személygépkocsi: kilépő forgalomban 1 óra, belépő forgalomban 1 óra 30 perc.
-    Autóbusz: belépő forgalomban 2 óra.</p>
+
+<div class="help-info pull-right" data-40="padding-top:26px;" data-300="padding-top:26px" tabindex="2">
+		<a id="help-text" href="/hu/ugyintezes/mit-tegyek">Bajban van?</a>
 </div>
-<div class="atkelo">
- <h2>Beregsurány — Ukrajna</h2>
- <p>Személygépkocsi: kilépő forgalomban 30 perc, belépő forgalomban nincs várakozás.</p>
+
+
+		                                         
 </div>
-<footer>© Rendőrség</footer>
-</body>
+   
+	    <div id="secondary-header" data-40="top:94px;" data-300="top:81px">
+  <div class="infobar hidden-xs">
+            
+    
+       
+
+            <div id="european-aid-box">
+<a class="koral-full hidden-xs" href="/hu/a-rendorsegrol/europai-tamogatasok" data-placement="bottom" data-toogle="tooltip" target="_blank" tabindex="5">
+<img src="/themes/custom/police/images/europai_tamogatasok.png" height="30" aria-hidden="true">
+&nbsp;&nbsp;Európai támogatások
+</a>
+</div>
+      
+  
+  
+    
+       
+
+            <div id="public-info-box">
+<a class="koral-full hidden-xs " href="https://adatvedelem.police.hu" data-placement="bottom"  data-toogle="tooltip" target="_blank" tabindex="5">
+<img src="/themes/custom/police/images/kozerdeku_adatok.png" height="30" aria-hidden="true">
+&nbsp;&nbsp;Közérdekű adatok
+</a>
+</div>
+      
+  
+  
+    
+       
+
+            <div id="anonymized-verdicts-box">
+<a class="koral-full hidden-xs " href="https://adatvedelem.police.hu/anonimizalt-hatarozatok" data-placement="bottom"  data-toogle="tooltip" target="_blank" tabindex="5">
+<img src="/themes/custom/police/images/anonymized_verdicts.png" height="30" aria-hidden="true">
+&nbsp;&nbsp;Anonimizált határozatok
+</a>
+</div>
+      
+  
+  
+    
+       
+
+            <div id="e-administration-box">
+<a class="koral-full hidden-xs " href="https://ugyintezes.police.hu/home" data-placement="bottom"  data-toogle="tooltip" target="_blank" tabindex="5">
+<img src="/themes/custom/police/images/e-ugyintezes_fejlec.png" height="30" aria-hidden="true">
+&nbsp;&nbsp;E-ügyintézés
+</a>
+</div>
+      
+  
+  
+    
+       
+
+            <div id="koral-box">
+<a class="koral-full hidden-xs " href="/hu/koral/toplistas-korozesek" data-placement="bottom"  data-toogle="tooltip" tabindex="5"><img src="/themes/custom/police/images/infobar_koral_full_top.png" height="30" aria-hidden="true">&nbsp;&nbsp;Körözési toplista</a>
+<a class="koral-full hidden-xs" href="/hu/koral" data-placement="bottom"  data-toogle="tooltip" title="Közérdekből nyilvános körözések" tabindex="5"><img src="/themes/custom/police/images/infobar_koral_full.png" height="30" aria-hidden="true">&nbsp;&nbsp;Körözések</a></div>
+      
+  
+  
+    
+       
+
+            <ul id="important-box" role="complementary">
+<li><button onclick="showAnimatedDiv(this)" tabindex="5" aria-haspopup="true" aria-expanded="false">TELEFONTANÚ</button><div class="phone-number" tabindex="-1" aria-label="Telefonszám: +36-80/555-111">+36-80/555-111</div></li>
+</ul>
+      
+  
+
+    
+  </div>
+</div>
+	    <nav id="menu2" aria-label="Főmenü">
+	<h2 id="menubutton" class="hamburger"  data-40="height:87px; padding-top:41px;" data-300="height:73px; padding-top:35px;" tabindex="1" role="button" aria-controls="menu-content" aria-haspopup="true" aria-expanded="false" aria-label="Fő navigációs menü">
+		<a aria-hidden="true" focusable="false"></a>
+	</h2> 
+	<div id="menu-content" role="navigation" aria-label="Navigációs menü">
+            <ul class="nav sidebar-nav" role="menu" aria-labelledby="new_and_informaton_label">
+	<li class="dropdown" role="none">
+		<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" tabindex="-1">
+			<span class="icon news" aria-hidden="true" focusable="false"></span>
+			<span id="new_and_informaton_label">Hírek és információk</span>
+		</a>                 		
+                                            		<ul class="dropdown-menu multilevel" role="menu">
+                            			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Legfrissebb híreink</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink" role="menuitem" tabindex="-1">Legfrissebb híreink</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/hatarvadasz-hirek" role="menuitem" tabindex="-1">Határvadász hírek</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/formula-1-hungaroring" role="menuitem" tabindex="-1">FORMULA 1</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/augusztus-20" title="" role="menuitem" tabindex="-1">Augusztus 20.</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/centenarium" role="menuitem" tabindex="-1">Centenárium</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/toborzas/toborzasi-hirek" role="menuitem" tabindex="-1">Toborzási hírek</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/szervezeti-hirek" role="menuitem" tabindex="-1">Szervezeti hírek</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/helyi-hirek" role="menuitem" tabindex="-1">Helyi hírek</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/bunugyek" role="menuitem" tabindex="-1">Bűnügyek</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/felhivasok" role="menuitem" tabindex="-1">Felhívások</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/dijkituzesek" role="menuitem" tabindex="-1">Díjkitűzések</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/kozrendvedelem" role="menuitem" tabindex="-1">Közrendvédelem</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/kozlekedesrendeszet" role="menuitem" tabindex="-1">Közlekedésrendészet</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/hatarrendeszet" role="menuitem" tabindex="-1">Határrendészet</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/igazgatasrendeszet" role="menuitem" tabindex="-1">Igazgatásrendészet</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li  role="none"><a href="/hu/koral/toplistas-korozesek" role="menuitem" tabindex="-1">Körözési toplista</a></li>
+                                			<li  role="none"><a href="/hu/koral" role="menuitem" tabindex="-1">Összes körözés</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/matrix-projekt" role="menuitem" tabindex="-1">Mátrix Projekt</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/zsaru-magazin" role="menuitem" tabindex="-1">Zsaru Magazin</a></li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>EMPACT</span>
+				</a>
+
+										                
+					
+  	            						
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/hirek-es-informaciok/empact/altalanos" role="menuitem" tabindex="-1">Általános információk</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/legfrissebb-hireink/empact" role="menuitem" tabindex="-1">Hírek</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Határinfo</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo" role="menuitem" tabindex="-1">Határinfo</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/hataratlepessel-kapcsolatos-informaciok" role="menuitem" tabindex="-1">Határátlépés</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/atkelohelyek-mukodesi-rendje" role="menuitem" tabindex="-1">Átkelőhelyek működési rendje</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/illegalis-migracio-alakulasa" role="menuitem" tabindex="-1">Illegális migráció alakulása</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/tartozkodasi-ido" role="menuitem" tabindex="-1">Tartózkodási idő</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/vizuminformacios-rendszer" role="menuitem" tabindex="-1">Vízuminformációs rendszer</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/vizumkiadas-az-atkelohelyeken" role="menuitem" tabindex="-1">Vízumkiadás az átkelőhelyeken</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/ideiglenes-hatarakelohely-nyitas" role="menuitem" tabindex="-1">Ideiglenes határákelőhely nyitás</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/schengeni-informacios-rendszer" role="menuitem" tabindex="-1">Schengeni Információs Rendszer</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/europai-hatarregisztracios-rendszer-ees" role="menuitem" tabindex="-1">Európai Határregisztrációs Rendszer (EES)</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Útinfo</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/hirek-es-informaciok/utinfo/forgalmirend-valtozasok" role="menuitem" tabindex="-1">Útinfo</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/a-veda-felvetelek-informaciotartalma" role="menuitem" tabindex="-1">A VÉDA felvételek információtartalma</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/utinfo/baleseti-hirek" role="menuitem" tabindex="-1">Baleseti hírek</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/utinfo/forgalmirend-valtozasok" role="menuitem" tabindex="-1">Forgalmirend-változások</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/utinfo/teruletlezarasok" role="menuitem" tabindex="-1">Területlezárások</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/utinfo/sebesseghatarok-franciaorszagban" role="menuitem" tabindex="-1">Sebességhatárok Franciaországban</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Baleset-megelőzés</span>
+				</a>
+
+										                
+					
+  	            						
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/hirek-es-informaciok/baleset-megelozes/aktualis" role="menuitem" tabindex="-1">Aktuális</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/baleset-megelozes/hatter" role="menuitem" tabindex="-1">Háttér</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/baleset-megelozes/kampanyok" role="menuitem" tabindex="-1">Kampányok</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Bűnmegelőzés</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/hirek-es-informaciok/bunmegelozes/aktualis" role="menuitem" tabindex="-1">Bűnmegelőzés</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bunmegelozes/a-rendorsegi-bunmegelozes" role="menuitem" tabindex="-1">A rendőrségi bűnmegelőzés</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bunmegelozes/aktualis" role="menuitem" tabindex="-1">Aktuális</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bunmegelozes/csaladvedelem" role="menuitem" tabindex="-1">Családvédelem</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bunmegelozes/drogprevencio" role="menuitem" tabindex="-1">Drogprevenció</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bunmegelozes/drogprevencios-osszekotok" role="menuitem" tabindex="-1">Drogprevenciós összekötők</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bunmegelozes/ifjusagvedelem" role="menuitem" tabindex="-1">Ifjúságvédelem</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bunmegelozes/idosek-biztonsaga" role="menuitem" tabindex="-1">Idősek biztonsága</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bunmegelozes/vagyonvedelem" role="menuitem" tabindex="-1">Vagyonvédelem</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bunmegelozes/internet-biztonsag" role="menuitem" tabindex="-1">Internet-biztonság</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bunmegelozes/aldozatsegites" role="menuitem" tabindex="-1">Áldozatsegítés</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bunmegelozes/bunmegelozesi-kisfilmek" role="menuitem" tabindex="-1">Bűnmegelőzési kisfilmek</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li  role="none"><a href="https://terkep.police.hu/portal/baleseti" role="menuitem" tabindex="-1">Baleseti térkép</a></li>
+                                			<li  role="none"><a href="https://terkep.police.hu/portal/bunugyi" role="menuitem" tabindex="-1">Bűnügyi térkép</a></li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Turisztika - Balaton</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/hirek-es-informaciok/turisztika-balaton" role="menuitem" tabindex="-1">Turisztika - Balaton</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bkkb/aktualis" role="menuitem" tabindex="-1">Aktuális</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bkkb/bun-es-balesetmegelozes" role="menuitem" tabindex="-1">Bűn- és balesetmegelőzés</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bkkb/igazsagugyi-szolgalatok-elerhetosegei" role="menuitem" tabindex="-1">Igazságügyi Szolgálatok</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bkkb/rendezvenynaptar" role="menuitem" tabindex="-1">Rendezvénynaptár</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/bkkb/archiv" role="menuitem" tabindex="-1">Archív</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Turisztika - Tisza-tó</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/hirek-es-informaciok/turisztika-tisza-to" role="menuitem" tabindex="-1">Turisztika - Tisza-tó</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/tkkb/aktualis" role="menuitem" tabindex="-1">Aktuális</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/tkkb/archiv" role="menuitem" tabindex="-1">Archív</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/tkkb/bun-es-balesetmegelozes" role="menuitem" tabindex="-1">Bűn- és balesetmegelőzés</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/tkkb/rendezvenynaptar" role="menuitem" tabindex="-1">Rendezvénynaptár</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Gyülekezési határozatok</span>
+				</a>
+
+										                
+					
+  	            						
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/hirek-es-informaciok/gyulekezesi-hatarozatok/altalanos" role="menuitem" tabindex="-1">Általános információk</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/gyulekezesi-hatarozatok/aktualis" role="menuitem" tabindex="-1">Aktuális</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/gyulekezesi-hatarozatok/archiv" role="menuitem" tabindex="-1">Archív</a></li>
+                    		</ul>
+    
+			</li>
+                    		</ul>
+    
+
+
+        	</li>
+</ul><ul class="nav sidebar-nav" role="menu" aria-labelledby="police_administration_label">
+	<li class="dropdown" role="none">
+		<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" tabindex="-1">
+			<span class="icon police-assist" aria-hidden="true" focusable="false"></span>
+			<span id="police_administration_label">Ügyintézés</span>
+		</a>
+                                            		<ul class="dropdown-menu multilevel" role="menu">
+                            			<li  role="none"><a href="/hu/ugyintezes" role="menuitem" tabindex="-1">Szervezeti egységek</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/kozigazgatasi-birsag" role="menuitem" tabindex="-1">Közigazgatási bírság</a></li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Elektronikus ügyintézés</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/ugyintezes/elektronikus-ugyintezes" role="menuitem" tabindex="-1">Elektronikus ügyintézés</a></li>
+                                			<li  role="none"><a href="https://ugyintezes.police.hu" role="menuitem" tabindex="-1">Ügyintézési portál</a></li>
+                                			<li  role="none"><a href="https://ugyintezes.police.hu/hu/egyuttmukodo-szervek" role="menuitem" tabindex="-1">Együttműködő szervek</a></li>
+                                			<li  role="none"><a href="https://ugyintezes.police.hu/hu/novapack" role="menuitem" tabindex="-1">NOVA.PACK szolgáltatás</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/elektronikus-ugyintezes/karbantartassal-kapcsolatos-informaciok" role="menuitem" tabindex="-1">Karbantartással kapcsolatos információk</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li  role="none"><a href="/hu/ugyintezes/nyomtatvanyok/tajekoztatok" role="menuitem" tabindex="-1">Tájékoztatók</a></li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Nyomtatványok</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/ugyintezes/nyomtatvanyok" role="menuitem" tabindex="-1">Nyomtatványok</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/nyomtatvanyok/fegyverengedelyek" role="menuitem" tabindex="-1">Fegyverengedélyek</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/nyomtatvanyok/igazolvanyok" role="menuitem" tabindex="-1">Igazolványok</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/nyomtatvanyok/korozesi-nyomtatvanyok" role="menuitem" tabindex="-1">Körözési nyomtatványok</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/nyomtatvanyok/kozigazgatasi-birsag" role="menuitem" tabindex="-1">Közigazgatási bírság</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/nyomtatvanyok/mukodesi-jogosultsagok" role="menuitem" tabindex="-1">Működési jogosultságok</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/nyomtatvanyok/pirotechnika" role="menuitem" tabindex="-1">Pirotechnika</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/nyomtatvanyok/rendeszeti-feladatokat-ellato-szemelyek" role="menuitem" tabindex="-1">Rendészeti feladatokat ellátó személyek</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/nyomtatvanyok/rendezvenyek" role="menuitem" tabindex="-1">Rendezvények</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/nyomtatvanyok/robbanoanyagok" role="menuitem" tabindex="-1">Robbanóanyagok</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/nyomtatvanyok/utdij-mentesseg" role="menuitem" tabindex="-1">Útdíj mentesség</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Távoltartás</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/ugyintezes/tavoltartas" role="menuitem" tabindex="-1">Távoltartás</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/baranya-varmegye" role="menuitem" tabindex="-1">Baranya Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/bacs-kiskun-varmegye" role="menuitem" tabindex="-1">Bács-Kiskun Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/bekes-varmegye" role="menuitem" tabindex="-1">Békés Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/borsod-abauj-zemplen-varmegye" role="menuitem" tabindex="-1">Borsod-Abaúj-Zemplén Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/budapest" role="menuitem" tabindex="-1">Budapest</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/csongrad-csanad-varmegye" role="menuitem" tabindex="-1">Csongrád Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/fejer-varmegye" role="menuitem" tabindex="-1">Fejér Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/gyor-moson-sopron-varmegye" role="menuitem" tabindex="-1">Győr-Moson-Sopron Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/hajdu-bihar-varmegye" role="menuitem" tabindex="-1">Hajdú-Bihar Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/heves-varmegye" role="menuitem" tabindex="-1">Heves Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/jasz-nagykun-szolnok-varmegye" role="menuitem" tabindex="-1">Jász-Nagykun-Szolnok Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/komarom-esztergom-varmegye" role="menuitem" tabindex="-1">Komárom-Esztergom Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/nograd-varmegye" role="menuitem" tabindex="-1">Nógrád Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/pest-varmegye" role="menuitem" tabindex="-1">Pest Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/somogy-varmegye" role="menuitem" tabindex="-1">Somogy Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/szabolcs-szatmar-bereg-varmegye" role="menuitem" tabindex="-1">Szabolcs-Szatmár-Bereg Megye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/tolna-varmegye" role="menuitem" tabindex="-1">Tolna Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/vas-varmegye" role="menuitem" tabindex="-1">Vas Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/veszprem-varmegye" role="menuitem" tabindex="-1">Veszprém Vármegye</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/tavoltartas/zala-varmegye" role="menuitem" tabindex="-1">Zala Vármegye</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li  role="none"><a href="/hu/ugyintezes/telefontanu" role="menuitem" tabindex="-1">Telefontanú</a></li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Hirdetmények</span>
+				</a>
+
+										                
+					
+  	            						
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/ugyintezes/hirdetmenyek/bunugy" role="menuitem" tabindex="-1">Bűnügy</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/hirdetmenyek/idegenrendeszet" role="menuitem" tabindex="-1">Idegenrendészet</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/hirdetmenyek/igazgatasrendeszet" role="menuitem" tabindex="-1">Igazgatásrendészet</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/hirdetmenyek/kozlekedesrendeszet" role="menuitem" tabindex="-1">Közlekedésrendészet</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/hirdetmenyek/kozigazgatasi-hatosagi-szolgalat" role="menuitem" tabindex="-1">Közigazgatási Hatósági Szolgálat</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/hirdetmenyek/szabalysertes" role="menuitem" tabindex="-1">Szabálysértés</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/hirdetmenyek/panasz" role="menuitem" tabindex="-1">Panasz</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Hozzáférhetetlenné tételi határozatok</span>
+				</a>
+
+										                
+					
+  	            						
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/ugyintezes/hozzaferhetetlenne-teteli-hatarozatok/altalanos" role="menuitem" tabindex="-1">Általános információk</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/hozzaferhetetlenne-teteli-hatarozatok/aktualis" role="menuitem" tabindex="-1">Aktuális</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/hozzaferhetetlenne-teteli-hatarozatok/archiv" role="menuitem" tabindex="-1">Archív</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li  role="none"><a href="/hu/ugyintezes/mutargyvedelem" role="menuitem" tabindex="-1">Műtárgyvédelem</a></li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Sportrendészet</span>
+				</a>
+
+										                
+					
+  	            						
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/ugyintezes/sportrendeszet/szabalyzatok" role="menuitem" tabindex="-1">Szabályzatok</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/sportrendeszet/hatarozatok-labdarugas" role="menuitem" tabindex="-1">Határozatok - labdarúgás</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/sportrendeszet/hatarozatok-kezilabda" role="menuitem" tabindex="-1">Határozatok - kézilabda</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/sportrendeszet/hatarozatok-kosarlabda" role="menuitem" tabindex="-1">Határozatok - kosárlabda</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/sportrendeszet/hatarozatok-vizilabda" role="menuitem" tabindex="-1">Határozatok - vízilabda</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/sportrendeszet/hatarozatok-jegkorong" role="menuitem" tabindex="-1">Határozatok - jégkorong</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Beadványtétel</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel" role="menuitem" tabindex="-1">Beadványtétel</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/kozponti-panasziroda" role="menuitem" tabindex="-1">Központi Panasziroda</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2020" role="menuitem" tabindex="-1">Határozatok, 2020.</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2019" role="menuitem" tabindex="-1">Határozatok, 2019.</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2018" role="menuitem" tabindex="-1">Határozatok, 2018.</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2017" role="menuitem" tabindex="-1">Határozatok, 2017.</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2016" role="menuitem" tabindex="-1">Határozatok, 2016.</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2015" role="menuitem" tabindex="-1">Határozatok, 2015.</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2014" role="menuitem" tabindex="-1">Határozatok, 2014.</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2013" role="menuitem" tabindex="-1">Határozatok, 2013.</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2012" role="menuitem" tabindex="-1">Határozatok, 2012.</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2011" role="menuitem" tabindex="-1">Határozatok, 2011.</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2010" role="menuitem" tabindex="-1">Határozatok, 2010.</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2009" role="menuitem" tabindex="-1">Határozatok, 2009.</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/beadvanytetel/hatarozatok-2008" role="menuitem" tabindex="-1">Határozatok, 2008.</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Szupergyors Internet Projekt</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt" role="menuitem" tabindex="-1">Szupergyors Internet Projekt</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/baranya-mrfk" title="" role="menuitem" tabindex="-1">Baranya MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/bacs-kiskun-mrfk" role="menuitem" tabindex="-1">Bács-Kiskun MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/bekes-mrfk" role="menuitem" tabindex="-1">Békés MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/borsod-abauj-zemplen-mrfk" role="menuitem" tabindex="-1">Borsod-Abaúj-Zemplén MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/brfk" title="" role="menuitem" tabindex="-1">BRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/csongrad-mrfk" role="menuitem" tabindex="-1">Csongrád MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/fejer-mrfk" role="menuitem" tabindex="-1">Fejér MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/gyor-moson-sopron-mrfk" role="menuitem" tabindex="-1">Győr-Moson-Sopron MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/hajdu-bihar-mrfk" role="menuitem" tabindex="-1">Hajdú-Bihar MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/heves-mrfk" role="menuitem" tabindex="-1">Heves MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/jasz-nagykun-szolnok-megye" title="" role="menuitem" tabindex="-1">Jász-Nagykun-Szolnok MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/komarom-esztergom-mrfk" role="menuitem" tabindex="-1">Komárom-Esztergom MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/nograd-megye" title="" role="menuitem" tabindex="-1">Nógrád MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/pest-megye" title="" role="menuitem" tabindex="-1">Pest MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/somogy-megye" role="menuitem" tabindex="-1">Somogy MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/szabolcs-szatmar-bereg-megye" title="" role="menuitem" tabindex="-1">Szabolcs-Szatmár-Bereg MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/tolna-mrfk" role="menuitem" tabindex="-1">Tolna MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/vas-megye" role="menuitem" tabindex="-1">Vas MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/veszprem-megye" title="" role="menuitem" tabindex="-1">Veszprém MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/zala-mrfk" role="menuitem" tabindex="-1">Zala MRFK</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/adyligeti-rendeszeti-szakkozepiskola" role="menuitem" tabindex="-1">Adyligeti Rendészeti Szakközépiskola</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/bunugyi-szakertoi-es-kutatointezet" role="menuitem" tabindex="-1">Bűnügyi Szakértői és Kutatóintézet</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/keszenleti-rendorseg" role="menuitem" tabindex="-1">Készenléti Rendőrség</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/kormendi-rendeszeti-szakkozepiskola" role="menuitem" tabindex="-1">Körmendi Rendészeti Szakközépiskola</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/miskolci-rendeszeti-szakkozepiskola" role="menuitem" tabindex="-1">Miskolci Rendészeti Szakközépiskola</a></li>
+                                			<li  role="none"><a href="/hu/ugyintezes/szupergyors-internet-projekt/repuloteri-rendor-igazgatosag" role="menuitem" tabindex="-1">Repülőtéri Rendőr Igazgatóság</a></li>
+                    		</ul>
+    
+			</li>
+                    		</ul>
+    
+
+
+        	</li>
+</ul><ul class="nav sidebar-nav" role="menu" aria-labelledby="about_police_label">
+	<li class="dropdown" role="none">
+		<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" tabindex="-1">
+			<span class="icon police" aria-hidden="true" focusable="false"></span>
+			<span id="about_police_label">A Rendőrségről</span>
+		</a>
+                                            		<ul class="dropdown-menu multilevel" role="menu">
+                            			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>A testület</span>
+				</a>
+
+										                
+					
+  	            						
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/a-rendorsegrol/testulet/altalanosan" role="menuitem" tabindex="-1">Általánosan</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/testulet/bunugyi-szakterulet" role="menuitem" tabindex="-1">Bűnügyi szakterület</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/testulet/rendeszeti-szakterulet" role="menuitem" tabindex="-1">Rendészeti szakterület</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/testulet/funkcionalis-szervek" role="menuitem" tabindex="-1">Funkcionális szervek</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/testulet/teruleti-szervek" role="menuitem" tabindex="-1">Területi szervek</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/a-testulet/igy-dolgozunk-mi-0" role="menuitem" tabindex="-1">Így dolgozunk mi</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/evkonyv" role="menuitem" tabindex="-1">Évkönyv</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Megfelelőségértékelés</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/a-rendorsegrol/megfelelosegertekeles" role="menuitem" tabindex="-1">Megfelelőségértékelés</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/megfelelosegertekeles/jogszabalyok" role="menuitem" tabindex="-1">Jogszabályok</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/megfelelosegertekeles/kijelolt-szervezet" role="menuitem" tabindex="-1">Kijelölt szervezet</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/megfelelosegertekeles/kozzetetel" role="menuitem" tabindex="-1">Közzététel</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/megfelelosegertekeles/europai-unioba-bejelentett-szervezet" role="menuitem" tabindex="-1">Európai Unióba bejelentett szervezet</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Statisztikák</span>
+				</a>
+
+										                
+					
+  	            						
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/a-rendorsegrol/statisztikak/bunugyi-statisztikak" role="menuitem" tabindex="-1">Bűnügyi statisztikák</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/statisztikak/kozrendvedelem" role="menuitem" tabindex="-1">Közrendvédelem</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/statisztikak/kozlekedesrendeszet" role="menuitem" tabindex="-1">Közlekedésrendészet</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/statisztikak/igazgatasrendeszet" role="menuitem" tabindex="-1">Igazgatásrendészet</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/statisztikak/hatarrendeszet" role="menuitem" tabindex="-1">Határrendészet</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/statisztikak/keszenleti-rendorseg" role="menuitem" tabindex="-1">Készenléti Rendőrség</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/statisztikak/repuloteri-rendor-igazgatosag" role="menuitem" tabindex="-1">Repülőtéri Rendőr Igazgatóság</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/statisztikak/szabalysertesi-elokeszito-eljarasok" role="menuitem" tabindex="-1">Szabálysértési előkészítő eljárások</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/statisztikak/hivasfogado-kozpontok" role="menuitem" tabindex="-1">Hívásfogadó központok</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/statisztikak/osap-kerdoivek" role="menuitem" tabindex="-1">OSAP kérdőívek</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/statisztikak/kimutatas-a-terfigyelo-kamerakrol-0" role="menuitem" tabindex="-1">Kimutatás a térfigyelő kamerákról</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li  role="none"><a href="https://karrier.police.hu/" role="menuitem" tabindex="-1">Képzések, állásajánlatok</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/tajekoztatas-a-sis-adatairol" role="menuitem" tabindex="-1">Tájékoztatás a SIS adatairól</a></li>
+                                			<li  role="none"><a href="https://adatvedelem.police.hu/web/guest/kozadat/" role="menuitem" tabindex="-1">Gazdálkodási adatok</a></li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Beszerzések</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/a-rendorsegrol/beszerzesek" role="menuitem" tabindex="-1">Beszerzések</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/beszerzesek/tervek" role="menuitem" tabindex="-1">Tervek</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/beszerzesek/eljarasok" role="menuitem" tabindex="-1">Eljárások</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/beszerzesek/szerzodesek" role="menuitem" tabindex="-1">Szerződések</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/beszerzesek/kifizetesek" role="menuitem" tabindex="-1">Kifizetések</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/beszerzesek/palyazatok" role="menuitem" tabindex="-1">Pályázatok</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/beszerzesek/ajanlatteteli-felhivasok" role="menuitem" tabindex="-1">Ajánlattételi felhívások</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li class="dropdown" role="none">
+				<a href="javascript:;" rel="nofollow" class="dropdown-toggle" data-toggle="dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+					<span>Európai támogatások</span>
+				</a>
+
+										                
+					
+  	            							                		   		            		       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			           		            			               		    			                    			       		            			                    			       		            			           		            			               		    			                    			                    			       	        		
+                		                		<ul class="dropdown-menu" role="menu">
+                            			<li  role="none"><a href="/hu/a-rendorsegrol/europai-tamogatasok" role="menuitem" tabindex="-1">Európai támogatások</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/europai-tamogatasok/belugyi-alapok" role="menuitem" tabindex="-1">Belügyi alapok</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/europai-tamogatasok/solid-alapok" role="menuitem" tabindex="-1">Solid alapok</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/europai-tamogatasok/operativ-programok" role="menuitem" tabindex="-1">Operatív programok</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/europai-tamogatasok/egyeb-forrasok" role="menuitem" tabindex="-1">Egyéb források</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/europai-tamogatasok/altalanosan" role="menuitem" tabindex="-1">Általánosan</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/europai-unios-tamogatasok/eu-s-kifizetesek-kozzetetele" role="menuitem" tabindex="-1">EU-s kifizetések közzététele</a></li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/europai-unios-tamogatasok/eu-s-fejlesztesek-kozzetetele" role="menuitem" tabindex="-1">EU-s fejlesztések közzététele</a></li>
+                    		</ul>
+    
+			</li>
+                                			<li  role="none"><a href="/hu/a-rendorsegrol/egyeb/egyeb-felhivasok" role="menuitem" tabindex="-1">Egyéb felhívások</a></li>
+                    		</ul>
+    
+
+
+        	</li>
+</ul>
+        </div>
+</nav>
+
+        <div id="secondary-menu">
+    <div class="quick-search-container" aria-label="Keresés a police.hu tartalmai között" tabindex="6">
+        <form method="GET" action="/hu/kereses" role="search">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <input id="search-input" name="q" type="text" aria-labelledby="quick-search-button" tabindex="6" />
+            <input id="quick-search-button" type="submit" value="Keresés" tabindex="6"/>
+        </form>
+    </div>
+            
+<nav id="alternative-menu" role="navigation" aria-label="Gyors menü"  id="block-tabmenu" tabindex="6">
+              	     	 <ul role="menubar">
+        		           	 <li role="none"  class="item-1"><a href="https://ugyintezes.police.hu" tabindex="6" role="menuitem">Elektronikus ügyintézés</a></li>
+              		           	 <li role="none"  class="item-2"><a href="https://adatvedelem.police.hu/anonimizalt-hatarozatok" tabindex="6" role="menuitem">Anonimizált határozatok</a></li>
+              		           	 <li role="none"  class="item-3"><a href="/hu/info/elerhetosegek" tabindex="6" role="menuitem">Elérhetőségek</a></li>
+              		  		    <li role="none"  class="item-multitab" ><a rel="nofollow" href="javascript:;" onclick="return false;" tabindex="6" role="menuitem" aria-haspopup="true" aria-expanded="false">Útinfó</a>
+            	      	     	 <ul role="menu" class="submenu-layer" aria-label="Útinfó">
+         		           	 <li role="none"  class="item-1"><a href="/hu/hirek-es-informaciok/utinfo/baleseti-hirek" tabindex="-1" role="menuitem">Baleseti hírek</a></li>
+              		           	 <li role="none"  class="item-2"><a href="/hu/hirek-es-informaciok/utinfo/forgalmirend-valtozasok" tabindex="-1" role="menuitem">Forgalmirend-változások</a></li>
+              		           	 <li role="none"  class="item-3"><a href="/hu/hirek-es-informaciok/utinfo/teruletlezarasok" tabindex="-1" role="menuitem">Területlezárások</a></li>
+              		           	 <li role="none"  class="item-4"><a href="/hu/hirek-es-informaciok/hatarinfo" tabindex="-1" role="menuitem">Határinfó</a></li>
+                   </ul>
+  
+			</li>
+             		           	 <li role="none"  class="item-5"><a href="https://adatvedelem.police.hu" tabindex="6" role="menuitem">Közérdekű adatok</a></li>
+              		           	 <li role="none"  class="item-6"><a href="/hu/112" tabindex="6" role="menuitem">112 segélyhívó</a></li>
+                   </ul>
+  
+
+
+  </nav>
+
+            	<div class="maintenance-link">
+    		<i class="fa fa-wrench" aria-hidden="true"></i>
+    		<a href="/hu/ugyintezes/elektronikus-ugyintezes/karbantartassal-kapcsolatos-informaciok" tabindex="6" aria-label="Információ a tervezett karbantartás időpontjáról">POLICE.hu karbantartás</a>
+    	</div>
+    </div>
+
+      </header>    
+    <main id="main-content" role="main" class="page postlist">
+    	<div class="region main-region">  	                  
+                    <div class="container-wrapper bg-white">
+			     		 <div class="container" id="news-page">       
+							<div class="row">
+						        <div class="col-lg-8 col-xs-12 aside-left">	
+						                 
+                                                                		              <div>
+      
+    
+      <nav class="breadcrumb" role="navigation" aria-labelledby="system-breadcrumb">  
+    <ul>
+          <li>
+       
+          Címlap
+       
+      </li>
+        </ul>
+  </nav>
+
+
+  	
+	          				  
+  
+
+  </div>
+
+                                                                                   
+                                     
+                                                    			                  <div>
+    <div data-drupal-messages>
+  <div class="messages__wrapper">
+    </div>
+</div>  
+    
+      
+<div class="js-view-dom-id-5daf000e69aa220b5c02a7750e4d0251fc276d433954575fb91e0ca60d7525c7">
+  
+    
+
+        <header><h1>Határinfó adatok</h1></header>
+  
+  <form class="views-exposed-form" data-drupal-selector="views-exposed-form-border-info-page-1" action="/hu/hirek-es-informaciok/hatarinfo" method="get" id="views-exposed-form-border-info-page-1" accept-charset="UTF-8">
+  <div class="js-form-item form-item js-form-type-select form-item-field-hat-rszakasz-value js-form-item-field-hat-rszakasz-value">
+      <label for="edit-field-hat-rszakasz-value">Határszakasz:</label>
+        <select data-drupal-selector="edit-field-hat-rszakasz-value" id="edit-field-hat-rszakasz-value" name="field_hat_rszakasz_value" class="form-select"><option value="All">- Bármely -</option><option value="ukrán határszakasz" selected="selected">Ukrán határszakasz</option><option value="román határszakasz">Román határszakasz</option><option value="szerb határszakasz">Szerb határszakasz</option><option value="horvát határszakasz">Horvát határszakasz</option><option value="osztrák határszakasz">Osztrák határszakasz</option><option value="szlovén határszakasz">Szlovén határszakasz</option><option value="szlovák határszakasz">Szlovák határszakasz</option></select>
+        </div>
+
+<input data-drupal-selector="edit-submit-border-info" type="submit" id="edit-submit-border-info" value="Mehet" class="button js-form-submit form-submit" />
+
+
+
+</form>
+
+  
+
+  
+<div class="crossing-point accordions-header">Határszakasz: Ukrán határszakasz</div>
+<div id="borderinfo-accordions" class="accordions">
+		
+     <div class="panel panel-primary">
+	<div class="panel-heading">
+		<h5 class="panel-title">                     
+   				<a data-toggle="collapse" data-parent="#accordion" href="#collapse_0">   				
+   					   						<span>Barabás - Koson’-</span>
+   						<span>07.00-19.00 </span>
+   						
+   				</a>
+		</h5>
+	</div>
+	<div id="collapse_0" class="panel-collapse collapse">
+   		<div class="panel-body">
+   			<div class="row"> 
+      			       				<div class="col-xs-12">
+      					<div class="label">Várakozási idő Magyarország felől (ki):</div>				
+      					<div>Nincs 15 percet meghaladó várakozás</div>
+      					<hr>
+      				</div>  
+      				
+      			      				<div class="col-xs-12">
+      					<div class="label">Várakozási idő Magyarország felé (be):</div>  				
+      					<div>Nincs 15 percet meghaladó várakozás</div>
+      					<hr>
+      				</div>  
+      				
+      			<div class="col-xs-12">
+      				<div class="label">Forgalom típusa:</div>
+      				<div>Nemzetközi személyforgalom (autóbusz forgalom kivételével)<br />
+<br />
+<br />
+  </div>
+      				      				<hr>
+      				      			</div>
+      			      			<div class="col-xs-12">
+      				<div class="label">Alternatív határátkelőhely:</div>
+      				<div>Beregsurány 00-24, Záhony 00-24, Tiszabecs 00-24</div>
+      			</div>
+      			      		</div>
+  		</div>
+	</div>
+</div>
+		
+     <div class="panel panel-primary">
+	<div class="panel-heading">
+		<h5 class="panel-title">                     
+   				<a data-toggle="collapse" data-parent="#accordion" href="#collapse_1">   				
+   					   						<span>Beregsurány - Астей-</span>
+   						<span>00 - 24</span>
+   						
+   				</a>
+		</h5>
+	</div>
+	<div id="collapse_1" class="panel-collapse collapse">
+   		<div class="panel-body">
+   			<div class="row"> 
+      			       				<div class="col-xs-12">
+      					<div class="label">Várakozási idő Magyarország felől (ki):</div>				
+      					<div>Nincs 15 percet meghaladó várakozás</div>
+      					<hr>
+      				</div>  
+      				
+      			      				<div class="col-xs-12">
+      					<div class="label">Várakozási idő Magyarország felé (be):</div>  				
+      					<div>Nincs 15 percet meghaladó várakozás</div>
+      					<hr>
+      				</div>  
+      				
+      			<div class="col-xs-12">
+      				<div class="label">Forgalom típusa:</div>
+      				<div>Nemzetközi személy- és teherforgalom (tranzit) 2020. szeptember 1-től. A határátkelőhelyet az Ukrajnából kilépő üres tehergépjárművek súlykorlátozás nélkül is használhatják.   </div>
+      				      				<hr>
+      				      			</div>
+      			      			<div class="col-xs-12">
+      				<div class="label">Alternatív határátkelőhely:</div>
+      				<div>Barabás 07-19,Lónya 08-16,Tiszabecs 00-24</div>
+      			</div>
+      			      		</div>
+  		</div>
+	</div>
+</div>
+		
+     <div class="panel panel-primary">
+	<div class="panel-heading">
+		<h5 class="panel-title">                     
+   				<a data-toggle="collapse" data-parent="#accordion" href="#collapse_2">   				
+   					   						<span>Lónya - Dzvinkove-</span>
+   						<span>07.00-18.00</span>
+   						
+   				</a>
+		</h5>
+	</div>
+	<div id="collapse_2" class="panel-collapse collapse">
+   		<div class="panel-body">
+   			<div class="row"> 
+      			       				<div class="col-xs-12">
+      					<div class="label">Várakozási idő Magyarország felől (ki):</div>				
+      					<div>Nincs 15 percet meghaladó várakozás</div>
+      					<hr>
+      				</div>  
+      				
+      			      				<div class="col-xs-12">
+      					<div class="label">Várakozási idő Magyarország felé (be):</div>  				
+      					<div>Nincs 15 percet meghaladó várakozás</div>
+      					<hr>
+      				</div>  
+      				
+      			<div class="col-xs-12">
+      				<div class="label">Forgalom típusa:</div>
+      				<div>Nemzetközi személyforgalom (autóbusz forgalom kivételével)<br />
+  </div>
+      				      				<hr>
+      				      			</div>
+      			      			<div class="col-xs-12">
+      				<div class="label">Alternatív határátkelőhely:</div>
+      				<div>Tiszabecs, Beregsurány, Barabás, Záhony</div>
+      			</div>
+      			      		</div>
+  		</div>
+	</div>
+</div>
+		
+     <div class="panel panel-primary">
+	<div class="panel-heading">
+		<h5 class="panel-title">                     
+   				<a data-toggle="collapse" data-parent="#accordion" href="#collapse_3">   				
+   					   						<span>Nagyhódos–Nagypalád -</span>
+   						<span>07:00–18:00 </span>
+   						
+   				</a>
+		</h5>
+	</div>
+	<div id="collapse_3" class="panel-collapse collapse">
+   		<div class="panel-body">
+   			<div class="row"> 
+      			       				<div class="col-xs-12">
+      					<div class="label">Várakozási idő Magyarország felől (ki):</div>				
+      					<div>Nincs 15 percet meghaladó várakozás</div>
+      					<hr>
+      				</div>  
+      				
+      			      				<div class="col-xs-12">
+      					<div class="label">Várakozási idő Magyarország felé (be):</div>  				
+      					<div>Nincs 15 percet meghaladó várakozás</div>
+      					<hr>
+      				</div>  
+      				
+      			<div class="col-xs-12">
+      				<div class="label">Forgalom típusa:</div>
+      				<div>Nemzetközi személyforgalom (autóbusz forgalom kivételével)  </div>
+      				      				<hr>
+      				      			</div>
+      			      			<div class="col-xs-12">
+      				<div class="label">Alternatív határátkelőhely:</div>
+      				<div>Beregsurány 00-24, Tiszabecs 00-24</div>
+      			</div>
+      			      		</div>
+  		</div>
+	</div>
+</div>
+		
+     <div class="panel panel-primary">
+	<div class="panel-heading">
+		<h5 class="panel-title">                     
+   				<a data-toggle="collapse" data-parent="#accordion" href="#collapse_4">   				
+   					   						<span>Tiszabecs - Vilok -</span>
+   						<span>00:00-24:00</span>
+   						
+   				</a>
+		</h5>
+	</div>
+	<div id="collapse_4" class="panel-collapse collapse">
+   		<div class="panel-body">
+   			<div class="row"> 
+      			       				<div class="col-xs-12">
+      					<div class="label">Várakozási idő Magyarország felől (ki):</div>				
+      					<div>Nincs 15 percet meghaladó várakozás</div>
+      					<hr>
+      				</div>  
+      				
+      			      				<div class="col-xs-12">
+      					<div class="label">Várakozási idő Magyarország felé (be):</div>  				
+      					<div>Nincs 15 percet meghaladó várakozás</div>
+      					<hr>
+      				</div>  
+      				
+      			<div class="col-xs-12">
+      				<div class="label">Forgalom típusa:</div>
+      				<div>nemzetközi személyforgalom   </div>
+      				      				<hr>
+      				      			</div>
+      			      			<div class="col-xs-12">
+      				<div class="label">Alternatív határátkelőhely:</div>
+      				<div>Beregsurány, Lónya, Barabás,Záhony</div>
+      			</div>
+      			      		</div>
+  		</div>
+	</div>
+</div>
+		
+     <div class="panel panel-primary">
+	<div class="panel-heading">
+		<h5 class="panel-title">                     
+   				<a data-toggle="collapse" data-parent="#accordion" href="#collapse_5">   				
+   					   						<span>Záhony - Čop-</span>
+   						<span>00:00-24:00</span>
+   						
+   				</a>
+		</h5>
+	</div>
+	<div id="collapse_5" class="panel-collapse collapse">
+   		<div class="panel-body">
+   			<div class="row"> 
+      			       				<div class="col-xs-12">
+      					<div class="label">Várakozási idő Magyarország felől (ki):</div>				
+      					<div>Nincs 15 percet meghaladó várakozás</div>
+      					<hr>
+      				</div>  
+      				
+      			      				<div class="col-xs-12">
+      					<div class="label">Várakozási idő Magyarország felé (be):</div>  				
+      					<div>Nincs 15 percet meghaladó várakozás</div>
+      					<hr>
+      				</div>  
+      				
+      			<div class="col-xs-12">
+      				<div class="label">Forgalom típusa:</div>
+      				<div>nemzetközi személy- és teherforgalom (tranzit) 2020. szeptember 1-től.  </div>
+      				      				<hr>
+      				      			</div>
+      			      			<div class="col-xs-12">
+      				<div class="label">Alternatív határátkelőhely:</div>
+      				<div>Beregsurány, Tiszabecs, Lónya, Barabás, Visny Nemecke(SK)</div>
+      			</div>
+      			      		</div>
+  		</div>
+	</div>
+</div>
+</div>
+  
+  
+
+  
+  
+
+      <footer>
+      <p>
+Az adatok tapasztalati úton megállapítottak és tájékoztató jellegűek.
+A tényleges várakozási idő az ellenőrzött személyek állampolgársági
+összetételétől, az átléptetett személyek, járművek és a
+foganatosított rendőri és egyéb hatósági intézkedések számától
+függően változhat.
+</p>
+<p>
+The data were collected based on police experience and they are for
+information purposes. The real waiting time can be changed depending on
+citizenship of travellers, number of travellers, vehicles, police and
+other authority measures.
+</p>
+<p>
+Die Daten wurden nach Polizeierfahrungen erhoben und haben einen
+Informationswert. Die tatsächliche Wartezeit kann sich nach
+Staatsangehörigkeit der Reisenden, nach Anzahl der Reisenden, nach
+Anzahl der Fahrzeugen und nach polizeilichen und anderen behördlichen
+Maßnahmen ändern.
+</p>
+<p>
+<b>ACHTUNG!</b> Bitte informieren Sie sich über Wartezeiten an den Grenzübergängen unter folgender Webseite: <a href="http://www.police.hu/deutsch/grenze-information/alternative-fahrrouten">https://www.police.hu/deutsch/grenze-information/alternative-fahrrouten</a> Reisende können am Grenzübergang Röszke–Horgoš (Ungarn-Serbien) mit stundenlangen Wartezeiten rechnen.
+</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Szerb határszakasz:</strong></p>
+<p>&nbsp;</p>
+<p>A feltüntetett várakozási idő kizárólag a magyar oldalon történő határátlépés előtti várakozást mutatja. Ez az időtartam a Szerbiából történő kilépést követően, a magyarországi határellenőrzési ponthoz való eljutáshoz szükséges várakozást jelöli, így a szerb oldalon tapasztalható esetleges várakozási időt nem tartalmazza.</p>
+<p>&nbsp;</p>
+<p>Az Ásotthalom–Bački Vinogradi, Bácsszentgyörgy–Rasina, Röszke–Horgos és Kübekháza–Rabe közúti átkelőhelyeken azonban a magyar és a szerb hatóságok közösen, a magyar oldalon végzik az ellenőrzést. Ezeken a határátkelőhelyeken tehát a feltüntetett várakozási idő a teljes ellenőrzési folyamatra vonatkozik, külön szerb várakozási idővel nem kell számolni.</p>
+<p>&nbsp;</p>
+<p>2026. május 1-től a korlátozott működésű közúti határátkelőhelyeken – Magyarország Kormánya és a Szerb Köztársaság Kormánya által 2025. október 22-én aláírt határforgalmi Megállapodás 7. cikke alapján – lehetőség nyílik a diplomata- és hivatali útlevéllel rendelkező személyek határátlépésére.</p>
+<p>&nbsp;</p>
+<p><strong>Serbian border section:</strong></p>
+<p>&nbsp;</p>
+<p>The waiting time indicated refers only to the waiting time before crossing the border on the Hungarian side. This time period refers to the waiting time required to reach the Hungarian border control point after leaving Serbia, and therefore does not include any waiting time that may occur on the Serbian side.</p>
+<p>&nbsp;</p>
+<p>However, at the <strong>Ásotthalom–Bački Vinogradi, Bácsszentgyörgy–Rasina, Röszke–Horgos, and Kübekháza–Rabe road border crossing points</strong>, Hungarian and Serbian authorities jointly carry out checks on the Hungarian side. Therefore, at these border crossing points, the indicated waiting time refers to the entire checking process; there is no separate Serbian waiting time to take into account.</p>
+<p>&nbsp;</p>
+<p>As of May 1, 2026, at road border crossing points with limited operating hours, it will be possible for persons holding diplomatic and official passports to cross the border, pursuant to Article 7 of the Border Traffic Agreement signed on October 22, 2025, by the Government of Hungary and the Government of the Republic of Serbia.</p>
+<p>&nbsp;</p>
+<p><strong>Serbischer Grenzabschnitt:</strong></p>
+<p>&nbsp;</p>
+<p>Die angegebene Wartezeit bezieht sich ausschließlich auf die Wartezeit vor dem Grenzübertritt auf der ungarischen Seite. Diese Zeitangabe bezieht sich auf die Wartezeit nach der Ausreise aus Serbien bis zur Erreichung des ungarischen Grenzkontrollpunkts und beinhaltet daher keine eventuelle Wartezeit auf der serbischen Seite.</p>
+<p>&nbsp;</p>
+<p><strong>An den Grenzübergängen Ásotthalom–Bački Vinogradi, Bácsszentgyörgy–Rasina Röszke–Horgos und Kübekháza–Rabe</strong> führen die ungarischen und serbischen Behörden die Kontrollen gemeinsam auf der ungarischen Seite durch. An diesen Grenzübergängen <strong>bezieht sich die angegebene Wartezeit deshalb auf den gesamten Kontrollvorgang</strong>, eine separate Wartezeit auf der serbischen Seite ist nicht zu berücksichtigen.</p>
+<p>&nbsp;</p>
+<p>Ab dem 1. Mai 2026 wird an Grenzübergangsstellen zu Lande mit eingeschränktem Betrieb – gemäß Artikel 7 des am 22. Oktober 2025 von der Regierung Ungarns und der Regierung der Republik Serbien unterzeichneten Grenzverkehrsabkommens – der Grenzübertritt Inhabern von Diplomaten- und Dienstpässen ermöglicht.</p>
+<p>&nbsp;</p>
+<p><strong>Ukrán határszakasz:</strong></p>
+<p>&nbsp;</p>
+<p>A feltüntetett várakozási idő kizárólag a magyar oldalon történő határátlépés előtti várakozást mutatja. Ez az időtartam az Ukrajnából történő kilépést követően, a magyarországi határellenőrzési ponthoz való eljutáshoz szükséges várakozást jelöli, így az ukrán oldalon tapasztalható esetleges várakozási időt nem tartalmazza.</p>
+<p>&nbsp;</p>
+<p><strong>Ukrainian border section:</strong></p>
+<p>&nbsp;</p>
+<p>The waiting time indicated refers only to the waiting time before crossing the border on the Hungarian side. This time period refers to the waiting time required to reach the Hungarian border control point after leaving Ukraine, and therefore does not include any waiting time that may occur on the Ukrainian side.</p>
+<p>&nbsp;</p>
+<p><strong>Ukrainischer Grenzabschnitt:</strong></p>
+<p>&nbsp;</p>
+<p>Die angegebene Wartezeit bezieht sich ausschließlich auf die Wartezeit vor dem Grenzübertritt auf der ungarischen Seite. Diese Zeitangabe bezieht sich auf die Wartezeit, die nach der Ausreise aus der Ukraine bis zum Erreichen der ungarischen Grenzkontrollstelle erforderlich ist, und beinhaltet daher keine eventuelle Wartezeit auf der ukrainischen Seite.</p>
+<p>&nbsp;</p>
+
+    </footer>
+  
+</div>
+
+
+  
+
+  </div>
+
+                                    		
+            	                 </div>   
+     							     
+    								<div class="col-lg-4 col-xs-12 aside-right">									  								       																	
+            									                            			                <div>
+     <section  id="block-localmenublock" aria-label="Kapcsolódó oldalak" tabindex="0">
+ 	<header class="big-section-head2"><h1>Kapcsolódó oldalak</h1></header>   	
+                              		<ul class="dropdown-menu multilevel" role="menu">
+                            			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/hataratlepessel-kapcsolatos-informaciok" role="menuitem" tabindex="-1">Határátlépés</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/atkelohelyek-mukodesi-rendje" role="menuitem" tabindex="-1">Átkelőhelyek működési rendje</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/illegalis-migracio-alakulasa" role="menuitem" tabindex="-1">Illegális migráció alakulása</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/tartozkodasi-ido" role="menuitem" tabindex="-1">Tartózkodási idő</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/vizuminformacios-rendszer" role="menuitem" tabindex="-1">Vízuminformációs rendszer</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/vizumkiadas-az-atkelohelyeken" role="menuitem" tabindex="-1">Vízumkiadás az átkelőhelyeken</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/ideiglenes-hatarakelohely-nyitas" role="menuitem" tabindex="-1">Ideiglenes határákelőhely nyitás</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/schengeni-informacios-rendszer" role="menuitem" tabindex="-1">Schengeni Információs Rendszer</a></li>
+                                			<li  role="none"><a href="/hu/hirek-es-informaciok/hatarinfo/europai-hatarregisztracios-rendszer-ees" role="menuitem" tabindex="-1">Európai Határregisztrációs Rendszer (EES)</a></li>
+                    		</ul>
+    
+
+
+      </section>
+    
+  </div>
+
+                                                   
+                                    	   </div>    
+                                         
+                            	   
+                     		</div>
+						  </div>
+					</div>
+		</div>		
+ 	 </main>  
+   <footer role="contentinfo" id="page-footer">
+     <section aria-label="Lábléc" role="region" tabindex="0">
+		  <div class="container-wrapper bg-dark">
+		    <div class="container">
+    		         
+        			<div class="row organizations" aria-label="Önálló oldalak" role="region" tabindex="0">      
+    		                        			      <div>
+      
+    
+      
+<div class="js-view-dom-id-9c6d3377aa9e48d47b07d818896a14c3ddc7df7a0af16171374701950429d67f">
+  
+    
+
+  
+  
+  
+
+  
+  		    
+	<div class="col-md-12">
+        <h2>Önálló oldalak</h2>                                   
+		<ul>                           
+                	
+                     
+
+ <li><a href="https://www.palyazat.gov.hu/programok/szechenyi-terv-plusz" target="_blank" data-placement="left" data-toogle="tooltip" title="KEHOP Plusz">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/N%C3%A9vtelen_721.png?itok=6vo_bubE" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="https://bm-tt.hu/" target="_blank" data-placement="left" data-toogle="tooltip" title="Belügyi Tudományos Tanács">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/BTT_logo-01%20copy_75x75.jpg?itok=JOGb_KnO" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="https://belugyiszemlejournal.org/index.php/belugyiszemle" target="_blank" data-placement="left" data-toogle="tooltip" title="Belügyi Szemle">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/bsz_logo.jpg?itok=d2DsGmH7" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="https://oif.gov.hu/" target="_blank" data-placement="left" data-toogle="tooltip" title="Országos Idegenrendészeti Főigazgatóság">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/OMSZ%20police.jpg?itok=qNO-Fo7M" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://rendormuzeum.com/fooldal" target="_blank" data-placement="left" data-toogle="tooltip" title="Rendőrmúzeum">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/Rendormuzeum.jpg?itok=15aPDcUT" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="https://epapir.gov.hu/" target="_blank" data-placement="left" data-toogle="tooltip" title="e-Papír">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/Epapir_Logo_1.jpg?itok=UnVjcOeQ" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://nszkk.gov.hu/" target="_blank" data-placement="left" data-toogle="tooltip" title="Nemzeti Szakértői és Kutató Központ">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/nszkk_logo_negyzetes.jpg?itok=jq0zMpQD" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://tek.gov.hu/" target="_blank" data-placement="left" data-toogle="tooltip" title="Terrorelhárítási Központ">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/logo-hatter_nelkuli.png?itok=6iF4Tw_M" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://belugyialapok.hu/alapok/" target="_blank" data-placement="left" data-toogle="tooltip" title="Belügyialapok">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/BABBA.jpg?itok=tNG3JUVs" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="https://r-tt.hu/" target="_blank" data-placement="left" data-toogle="tooltip" title="RTT">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/logo_1.png?itok=y4YujRlX" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://www.bpaldozatsegites.hu" target="_blank" data-placement="left" data-toogle="tooltip" title="Budapesti áldozatsegítés">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/bpaldozatsegites.jpg?itok=y3CwhPmI" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://www.cepol.europa.eu" target="_blank" data-placement="left" data-toogle="tooltip" title="CEPOL">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/4_transp_for_light_background_kis_j2.jpg?itok=uuhRtXYf" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://www.rendvedelmikar.hu" target="_blank" data-placement="left" data-toogle="tooltip" title="Magyar Rendvédelmi Kar">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/mrk.jpg?itok=Y_3iZc-R" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://www.rendorpenztar.hu" target="_blank" data-placement="left" data-toogle="tooltip" title="Rendőri Nyugdíjpénztár">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/rendoripenztar.jpg?itok=wLK6EIOZ" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://www.opsz.hu" target="_blank" data-placement="left" data-toogle="tooltip" title="OPSZ">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/opsz.jpg?itok=AanB_846" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://palyazat.gov.hu/" target="_blank" data-placement="left" data-toogle="tooltip" title="Széchenyi 2020">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/szechenyi_2020_logo_allo_color_nogradient_cmyk.jpg?itok=2V-pQaAI" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://www.biaproject.ro/?lang=en" target="_blank" data-placement="left" data-toogle="tooltip" title="Lifelong Learning Programme">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/llp.png?itok=DZEXdtZD" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://www.swiss-contribution.admin.ch/hungary/hu/Home/Swiss_contribution_to_Hungary" target="_blank" data-placement="left" data-toogle="tooltip" title="Swiss Contribution">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/swisscontribution.png?itok=JqI41gZV" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://solidalapok.hu/solid/" target="_blank" data-placement="left" data-toogle="tooltip" title="Külső Határok Alap">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/kha.png?itok=FhqXNPk0" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://www.baleset-megelozes.eu/charta_csatlakozas.php" target="_blank" data-placement="left" data-toogle="tooltip" title="A józan közlekedésért Charta">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/ajozankozlekedesert.png?itok=_dDeR9qc" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://kreszvaltozas.hu/" target="_blank" data-placement="left" data-toogle="tooltip" title="Balesetmegelőzés">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/lastverobb_ver55_.png?itok=ZFglS5_3" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                	
+                     
+
+ <li><a href="http://www.nvsz.hu" target="_blank" data-placement="left" data-toogle="tooltip" title="Nemzeti Védelmi Szolgálat">  
+<div>
+	<img src="/sites/default/files/styles/75x75/public/nvsz.png?itok=m7rOnKWl" width="75" height="75" alt="" class="img-responsive"/>
+</div>
+
+</a> </li>
+                                             	                                
+		</ul>
+        <hr></hr>
+	</div>
+  
+  
+
+  
+  
+
+    
+</div>
+
+
+  
+
+  </div>
+
+         	 		               	 		</div>     	
+         	 		<div class="row sitemap" aria-label="Webhelytérkép" role="region" tabindex="0"> 	 		   
+        		                  			  <div>
+    <nav role="navigation" aria-labelledby="block-police-footer-menu" id="block-police-footer">
+            
+  <h2 class="visually-hidden" id="block-police-footer-menu">Lábléc menü</h2>
+  
+
+            
+       
+  	<ul>
+                          <li class="col-md-4 col-sm-12" aria-label="Hírek és információk" role="region" tabindex="0">
+              <h2>Hírek és információk</h2>
+                  
+       
+  	<ul>
+                     	 <li><a href="/hu/hirek-es-informaciok/legfrissebb-hireink">Legfrissebb híreink</a></li>
+                              	 <li><a href="/hu/koral">Nyilvános körözések</a></li>
+                              	 <li><a href="/hu/hirek-es-informaciok/hatarinfo">Határinfó</a></li>
+                              	 <li><a href="/hu/hirek-es-informaciok/utinfo">Útinfó</a></li>
+                              	 <li><a href="/hu/hirek-es-informaciok/baleset-megelozes/aktualis">Baleset-megelőzés</a></li>
+                              	 <li><a href="/hu/hirek-es-informaciok/bunmegelozes/aktualis">Bűnmegelőzés</a></li>
+                              	 <li><a href="https://terkep.police.hu/portal/baleseti">Baleseti térkép</a></li>
+                              	 <li><a href="https://terkep.police.hu/portal/bunugyi">Bűnügyi térkép</a></li>
+                              	 <li><a href="/hu/hirek-es-informaciok/turisztika-balaton">BKKB</a></li>
+                              	 <li><a href="/hu/hirek-es-informaciok/turisztika-tisza-to">TKKB</a></li>
+                  </ul>
+  
+              </li>
+                                   <li class="col-md-4 col-sm-12" aria-label="Ügyintézés" role="region" tabindex="0">
+              <h2>Ügyintézés</h2>
+                  
+       
+  	<ul>
+                     	 <li><a href="/hu/ugyintezes/kozigazgatasi-birsag">Közigazgatási bírság</a></li>
+                              	 <li><a href="/hu/ugyintezes/elektronikus-ugyintezes">Elektronikus ügyintézés</a></li>
+                              	 <li><a href="/hu/ugyintezes/nyomtatvanyok">Nyomtatványok</a></li>
+                              	 <li><a href="/hu/ugyintezes/tavoltartas">Távoltartás</a></li>
+                              	 <li><a href="/hu/ugyintezes/telefontanu">Telefontanú</a></li>
+                              	 <li><a href="/ugyintezes/hirdetmenyek">Hirdetmények</a></li>
+                              	 <li><a href="/hu/ugyintezes/mutargyvedelem">Műtárgyvédelem</a></li>
+                              	 <li><a href="/ugyintezes/sportrendeszet/sportrendeszet">Sportrendészet</a></li>
+                              	 <li><a href="/hu/ugyintezes/beadvanytetel">Beadványtétel</a></li>
+                              	 <li><a href="/hu/ugyintezes/szupergyors-internet-projekt">Szupergyors internet projekt</a></li>
+                  </ul>
+  
+              </li>
+                                   <li class="col-md-4 col-sm-12" aria-label="A rendőrségről" role="region" tabindex="0">
+              <h2>A rendőrségről</h2>
+                  
+       
+  	<ul>
+                     	 <li><a href="/hu/a-rendorsegrol/testulet/altalanosan">A testület</a></li>
+                              	 <li><a href="/hu/a-rendorsegrol/megfelelosegertekeles">Megfelelőség értékelés</a></li>
+                              	 <li><a href="/hu/a-rendorsegrol/kepzes">Képzés</a></li>
+                              	 <li><a href="https://karrier.police.hu/allasajanlatok">Állásajánlatok</a></li>
+                              	 <li><a href="/hu/a-rendorsegrol/tajekoztatas-a-sis-adatairol">Tájékoztatás a SIS adatairól</a></li>
+                              	 <li><a href="/hu/a-rendorsegrol/gazdalkodasi-adatok">Gazdálkodási adatok</a></li>
+                              	 <li><a href="/hu/a-rendorsegrol/beszerzesek">Beszerzések</a></li>
+                              	 <li><a href="/hu/a-rendorsegrol/europai-tamogatasok">Európai támogatások</a></li>
+                              	 <li><a href="/hu/a-rendorsegrol/egyeb/egyeb-felhivasok">Egyéb felhívások</a></li>
+                              	 <li><a href="/hu/a-rendorsegrol/erdekvedelmi-szervezetek">Érdekvédelmi szervezetek</a></li>
+                  </ul>
+  
+              </li>
+                  </ul>
+  
+
+
+  </nav>
+
+  </div>
+
+         	 		           	 		</div>
+         	 			 
+     	 		 <div class="row footernav">
+     	 		 	<hr></hr>
+        		                  			  <div>
+    <nav role="navigation" aria-labelledby="block-footer-bottom-menu-menu" id="block-footer-bottom-menu">
+            
+  <h2 class="visually-hidden" id="block-footer-bottom-menu-menu">Lábléc alsó</h2>
+  
+
+            
+      
+      <ul>    
+             	 <li><a href="/hu/info/szerzoi-jogok">Szerzői jogok</a></li>
+             	 <li><a href="/hu/info/jogi-nyilatkozat">Jogi nyilatkozat</a></li>
+             	 <li><a href="/hu/info/impresszum">Impresszum</a></li>
+             	 <li><a href="/hu/info/elerhetosegek">Elérhetőségek</a></li>
+             	 <li><a href="/hu/info/akadalymentes">Akadálymentesítési nyilatkozat</a></li>
+         </ul>
+  
+
+
+  </nav>
+
+  </div>
+
+         	 		     
+     	 		   <hr></hr>
+     	 		  </div>
+     	 	</div>
+		  </div>
+  	</section>	
+    </footer>
+  
+
+
+    
+    <script src="/themes/custom/police/includes/jquery/jquery.min.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/jquery/jquery-ui.min.js?tjhhs1"></script>
+<script src="/themes/custom/police/js/police.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/moment/moment.min.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/locales/locales.min.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/moment/moment-with-locales.min.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/bootstrap/js/bootstrap.min.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/datetimepicker/bootstrap-datetimepicker.min.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/jssor.slider-23.1.5.min.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/slick/slick/slick.min.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/skrollr.min.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/mCustomScrollbar/jquery.mCustomScrollbar.min.js?tjhhs1"></script>
+<script src="/themes/custom/police/js/jssor_init.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/juicebox/juicebox.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/Chart.js?tjhhs1"></script>
+<script src="/themes/custom/police/js/menu2_.js?tjhhs1"></script>
+<script src="/themes/custom/police/js/google-analytics.js?tjhhs1"></script>
+<script src="/themes/custom/police/includes/js-cookie/js.cookie.js?tjhhs1"></script>
+<script src="/themes/custom/police/js/scripts.js?tjhhs1"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+   
+  </body>
 </html>

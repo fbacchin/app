@@ -100,9 +100,14 @@ USER_AGENT = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
 # lavori e telecamere senza un solo tempo d'attesa, e "il primo URL che
 # risponde" l'aveva fatta vincere).
 SOURCE_URLS = {
+    # I tempi veri stanno nella tabella MUP in fondo alla pagina "stanje na
+    # cestama". Gli altri due URL provati al collaudo del 09.08.2026 sono
+    # vicoli ciechi e non tornano nella lista: /info/granicni-prijelazi/
+    # risponde 404, e m.hak.hr/stanje.asp?id=2 — che pure si intitola
+    # "Granični prijelazi" — è la pagina AVVISI, quattromila caratteri su
+    # EES, ponti e divieti ai camion senza un solo tempo d'attesa.
     "hak": [
-        "https://www.hak.hr/info/granicni-prijelazi/",
-        "https://m.hak.hr/stanje.asp?id=2",
+        "https://www.hak.hr/info/stanje-na-cestama",
     ],
     "police_hu": [
         "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo",
@@ -147,7 +152,12 @@ OTHER_VEHICLE_WORDS = ["teretna", "teretni", "kamion", "autobus",
 # coincide con l'italiano "ora" e va benissimo così. Il croato usa
 # sat/sata/sati, il polacco godz(iny).
 HOURS_RE = r"(\d+(?:[.,]\d+)?)\s*(?:h\b|hr\b|sat[ai]?\b|ora\b|ore\b|godz\w*|hour\w*)"
-MINUTES_RE = r"(\d+)\s*(?:min\w*|perc\b|')"
+# "perc" va preso con le sue desinenze: l'ungherese declina, e la frase che
+# conta davvero sulla pagina della polizia è "nincs 15 percet meghaladó
+# várakozás". Con `perc\b` il confine di parola cadeva dentro "percet" e i
+# 15 minuti si perdevano. Il negative lookahead tiene fuori l'inglese
+# "percent", che non è una durata.
+MINUTES_RE = r"(\d+)\s*(?:min\w*|perc(?!ent)\w*|')"
 
 
 def spiana(text):
@@ -346,6 +356,243 @@ def estrai_valichi(page_text, crossings):
     return campioni, finestre
 
 
+# --- HAK: la tabella del MUP, letta a celle -----------------------------
+
+class _TabelleGP(HTMLParser):
+    """Le tabelle class="gptable" della pagina HAK, cella per cella.
+
+    Il tooltip (`<span class="gpDatmToolTip">L: 0 km T: 9.8.2026...`) si
+    butta via mentre si legge: contiene la lunghezza della coda in km e
+    l'ora del rilevamento, e uno "0 km" dato in pasto a parse_wait
+    diventerebbe uno zero falso — il difetto peggiore che questo progetto
+    possa produrre.
+    """
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.tabelle = []
+        self._tab = None
+        self._riga = None
+        self._cella = None
+        self._salta = 0
+        self._intestazione = False
+
+    def handle_starttag(self, tag, attrs):
+        attributi = dict(attrs)
+        classe = attributi.get("class") or ""
+        if tag == "span":
+            if self._salta or "gpDatmToolTip" in classe:
+                self._salta += 1
+            return
+        if tag == "table":
+            self._tab = {"gp": "gptable" in classe, "head": [], "righe": []}
+            self._intestazione = False
+        elif self._tab is None:
+            return
+        elif tag == "thead":
+            self._intestazione = True
+        elif tag == "tbody":
+            self._intestazione = False
+        elif tag == "tr":
+            self._riga = []
+        elif tag in ("td", "th"):
+            try:
+                colspan = max(1, int(attributi.get("colspan", "1")))
+            except ValueError:
+                colspan = 1
+            self._cella = {"cls": classe, "colspan": colspan, "pezzi": []}
+
+    def handle_endtag(self, tag):
+        if tag == "span":
+            if self._salta:
+                self._salta -= 1
+            return
+        if self._tab is None:
+            return
+        if tag in ("td", "th"):
+            if self._cella is not None and self._riga is not None:
+                testo = re.sub(r"\s+", " ", "".join(self._cella["pezzi"])).strip()
+                self._riga.append((testo, self._cella["cls"], self._cella["colspan"]))
+            self._cella = None
+        elif tag == "tr":
+            if self._riga:
+                destinazione = "head" if self._intestazione else "righe"
+                self._tab[destinazione].append(self._riga)
+            self._riga = None
+        elif tag == "thead":
+            self._intestazione = False
+        elif tag == "table":
+            if self._tab["gp"] and self._tab["righe"]:
+                self.tabelle.append(self._tab)
+            self._tab = None
+
+    def handle_data(self, data):
+        if self._cella is not None and not self._salta:
+            self._cella["pezzi"].append(data)
+
+
+def colonne_gp(head):
+    """Dall'intestazione della tabella HAK alla mappa colonna → (direzione,
+    categoria).
+
+    Sono due righe di `th`: la prima porta le direzioni, ciascuna larga due
+    colonne (`<th colspan=2>Ulaz</th><th colspan=2>Izlaz</th>`), la seconda
+    le classi `gpvehcar`/`gpvehtruck` che dicono quale delle due colonne è
+    delle auto. Si legge l'intestazione invece di contare le colonne a mano
+    perché l'ordine Ulaz/Izlaz non è garantito e un giorno può cambiare.
+    """
+    direzioni = {}
+    if head:
+        colonna = 0
+        for testo, _classe, colspan in head[0]:
+            piatto = spiana(testo)
+            direzione = None
+            if any(w in piatto for w in EXIT_WORDS):
+                direzione = "exit"
+            elif any(w in piatto for w in ENTRY_WORDS):
+                direzione = "entry"
+            for _ in range(colspan):
+                if direzione:
+                    direzioni[colonna] = direzione
+                colonna += 1
+    categorie = {}
+    if len(head) > 1:
+        colonna = 0
+        for _testo, classe, colspan in head[1]:
+            for _ in range(colspan):
+                if "gpvehcar" in classe:
+                    categorie[colonna] = "car"
+                elif "gpvehtruck" in classe:
+                    categorie[colonna] = "other"
+                colonna += 1
+    return {c: (d, categorie.get(c)) for c, d in direzioni.items()}
+
+
+def attesa_cella(testo):
+    """Il valore di una cella HAK: `-` è "Nema podataka", cioè ignoto — e
+    ignoto è None, mai zero."""
+    piatto = spiana(testo).strip(" .")
+    if not piatto or piatto in ("-", "–", "—"):
+        return None
+    return parse_wait(piatto)
+
+
+def estrai_hak(html, crossings):
+    """Campioni HAK dalla tabella del MUP, a celle e non a finestre.
+
+    Le due direzioni stanno in colonne diverse della stessa riga: nel testo
+    appiattito diventano una sequenza di numeri senza etichetta, e la
+    finestra fuzzy li attribuirebbe tutti all'uscita. Delle quattro colonne
+    si leggono solo quelle delle auto: l'app parla ai viaggiatori, non agli
+    spedizionieri.
+    """
+    parser = _TabelleGP()
+    try:
+        parser.feed(html)
+    except Exception:
+        return {}, {}
+    campioni = {}
+    finestre = {}
+    tabelle_valide = 0
+    for tabella in parser.tabelle:
+        colonne = colonne_gp(tabella["head"])
+        if not colonne:
+            continue
+        tabelle_valide += 1
+        for riga in tabella["righe"]:
+            nome = spiana(riga[0][0])
+            crossing = next(
+                (c for c in crossings
+                 if any(n in nome for n in c.get("matchNames", []))), None)
+            if crossing is None:
+                continue
+            letto = {"exit": None, "entry": None}
+            for indice, (testo, _classe, _colspan) in enumerate(riga):
+                direzione, categoria = colonne.get(indice, (None, None))
+                if direzione is None or categoria != "car":
+                    continue
+                letto[direzione] = attesa_cella(testo)
+            campioni[crossing["id"]] = letto
+            finestre[crossing["id"]] = " | ".join(t for t, _c, _s in riga)[:400]
+
+    # La tabella del MUP elenca solo i valichi per cui c'è qualcosa da
+    # segnalare: un valico assente non è un errore di lettura, è un valico
+    # senza coda dichiarata — e quindi ignoto, non zero. Se però almeno una
+    # tabella si è letta, lo si dice esplicitamente con un campione vuoto:
+    # così un giro senza NESSUN campione resta il segnale pulito che la
+    # pagina ha cambiato faccia, invece di confondersi con le quattro del
+    # mattino.
+    if tabelle_valide:
+        for crossing in crossings:
+            campioni.setdefault(crossing["id"], {"exit": None, "entry": None})
+    return campioni, finestre
+
+
+# --- police.hu: i blocchi per valico ------------------------------------
+
+# I marcatori di direzione della pagina ungherese. Non sono "kilépő" e
+# "belépő" come il vocabolario comune dava per scontato: la fonte scrive
+# "várakozási idő Magyarország felől (ki)" per chi ESCE e "...felé (be)"
+# per chi ENTRA. Al collaudo del 09.08.2026 nessun marcatore agganciava e
+# tutto finiva sull'uscita. Peggio: "kilép" compare davvero nella pagina,
+# ma dentro "az Ukrajnából kilépő üres tehergépjárművek", una frase sui
+# camion vuoti che non è affatto una direzione.
+HU_DIREZIONI = (("exit", "felol (ki)"), ("entry", "fele (be)"))
+
+# Dove finisce il valore di una direzione: l'inizio della voce successiva
+# del blocco. Serve perché "forgalom típusa: nemzetközi személy- és
+# teherforgalom" nomina le auto (személy) e i camion (teher) descrivendo il
+# tipo di traffico, non un'attesa: la regola delle categorie, applicata a
+# tutto il blocco, cominciava a leggere da lì e perdeva i minuti scritti
+# prima.
+HU_FINE_VOCE = re.compile(
+    r"varakozasi ido|forgalom tipusa|alternativ hataratkelohely|nyitva tart")
+
+
+def estrai_police_hu(html, crossings):
+    """Campioni police.hu leggendo il blocco di ciascun valico.
+
+    La pagina non ha tabelle: ogni valico è un blocchetto "nome – nome
+    estero – orario" seguito dalle due voci di attesa. Si legge solo lo
+    spezzone che segue il marcatore di direzione e si chiude alla voce
+    dopo, invece di dare una finestra a lunghezza fissa in pasto alla
+    regola delle categorie.
+
+    Si prova ogni occorrenza del nome e vince quella da cui si leggono più
+    valori: i primi "Röszke" della pagina sono dentro tre paragrafi di
+    spiegazioni in ungherese, inglese e tedesco, e il blocco coi dati — se
+    c'è — viene molto dopo.
+    """
+    piatto = spiana(html_in_testo(html))
+    campioni = {}
+    finestre = {}
+    for crossing in crossings:
+        migliore = None
+        for nome in crossing.get("matchNames", []):
+            for trovato in re.finditer(re.escape(nome), piatto):
+                blocco = piatto[trovato.start():trovato.start() + WINDOW_CHARS]
+                letto = {"exit": None, "entry": None}
+                for direzione, marcatore in HU_DIREZIONI:
+                    inizio = blocco.find(marcatore)
+                    if inizio < 0:
+                        continue
+                    resto = blocco[inizio + len(marcatore):]
+                    fine = HU_FINE_VOCE.search(resto)
+                    # parse_wait diretto, non attesa_nel_segmento: qui lo
+                    # spezzone è già di una sola direzione e di un solo
+                    # tipo di traffico.
+                    letto[direzione] = parse_wait(
+                        resto[:fine.start()] if fine else resto)
+                punteggio = sum(1 for v in letto.values() if v is not None)
+                if migliore is None or punteggio > migliore[0]:
+                    migliore = (punteggio, blocco, letto)
+        if migliore is None:
+            continue
+        finestre[crossing["id"]] = migliore[1][:400]
+        campioni[crossing["id"]] = migliore[2]
+    return campioni, finestre
+
+
 def scarica(urls, lang):
     """La prima pagina sostanziosa fra gli URL della fonte.
 
@@ -413,7 +660,7 @@ def fonte_pagina(source, crossings):
             errori.append(errore)
             continue
         testo = html_in_testo(html)
-        campioni, finestre = estrai_valichi(testo, crossings)
+        campioni, finestre = ESTRATTORI[source](html, crossings)
         attese = sum(1 for c in campioni.values()
                      for v in c.values() if v is not None)
         chiave = (attese, len(campioni))
@@ -455,6 +702,19 @@ def fonte_gotthard(crossings):
     quando = dati.get("time", "")
     return campioni, {"ok": True, "sampled": quando}, {}
 
+
+# Come si passa dall'HTML ai campioni, fonte per fonte. HAK e police.hu
+# hanno un parser proprio perché la loro pagina ha una struttura che regge
+# il peso (una tabella a colonne, dei blocchi per valico); granica.gov.pl
+# resta sulle finestre di testo finché non passa al servizio SOAP, ma da
+# quella pagina — tre valichi affiancati sotto la stessa intestazione, in
+# colonne H:MM — le finestre non possono cavare niente di attribuibile.
+ESTRATTORI = {
+    "hak": estrai_hak,
+    "police_hu": estrai_police_hu,
+    "granica_pl": lambda html, crossings: estrai_valichi(
+        html_in_testo(html), crossings),
+}
 
 FONTI = {
     "hak": lambda c: fonte_pagina("hak", c),
@@ -613,20 +873,30 @@ def prova():
     for c in attivi:
         per_fonte.setdefault(c["source"], []).append(c)
 
+    # I valori attesi sono quelli delle catture reali del 09.08.2026, non
+    # più quelli di una fixture inventata: le due pagine sono in prove/ così
+    # come le serve la fonte, e questi numeri si leggono a occhio dentro
+    # l'HTML. Rifacendo la cattura vanno riallineati.
     attese = {
+        # Ulaz "1 h" → entry 60, Izlaz "do 30 min." → exit 30. Gli altri
+        # quattro valichi non sono in tabella: la tabella del MUP elenca
+        # solo chi ha una coda da dichiarare, e chi non c'è è ignoto.
         "hak": {
-            "hr-me.karasovici": {"exit": 90, "entry": 0},
+            "hr-me.karasovici": {"exit": 30, "entry": 60},
             "hr-me.vitaljina": {"exit": None, "entry": None},
-            "hr-ba.nova-sela": {"exit": 20, "entry": 20},
-            "hr-ba.stara-gradiska": {"exit": 0, "entry": 30},
-            "hr-rs.bajakovo": {"exit": 180, "entry": 45},
-            "hr-rs.tovarnik": {"exit": 150, "entry": 0},
+            "hr-ba.nova-sela": {"exit": None, "entry": None},
+            "hr-ba.stara-gradiska": {"exit": None, "entry": None},
+            "hr-rs.bajakovo": {"exit": 30, "entry": 60},
+            "hr-rs.tovarnik": {"exit": None, "entry": None},
         },
+        # "nincs 15 percet meghaladó várakozás" → 15 come limite superiore,
+        # in entrambe le direzioni. Röszke compare solo nei paragrafi di
+        # spiegazione e Tompa non compare affatto: il confine con la Serbia
+        # su questa pagina non ha blocchi di attesa.
         "police_hu": {
-            "hu-rs.roszke": {"exit": 120, "entry": 30},
-            "hu-rs.tompa": {"exit": 0, "entry": 0},
-            "hu-ua.zahony": {"exit": 60, "entry": 90},
-            "hu-ua.beregsurany": {"exit": 30, "entry": 0},
+            "hu-rs.roszke": {"exit": None, "entry": None},
+            "hu-ua.zahony": {"exit": 15, "entry": 15},
+            "hu-ua.beregsurany": {"exit": 15, "entry": 15},
         },
         "granica_pl": {
             "pl-ua.medyka": {"exit": 75, "entry": 0},
@@ -639,8 +909,8 @@ def prova():
     errori = 0
     for source, expected in attese.items():
         fixture = PROVE_DIR / f"{source}.html"
-        campioni, _ = estrai_valichi(html_in_testo(fixture.read_text()),
-                                     per_fonte[source])
+        campioni, _ = ESTRATTORI[source](fixture.read_text(),
+                                         per_fonte[source])
         for crossing_id, atteso in expected.items():
             avuto = campioni.get(crossing_id, {"exit": None, "entry": None})
             esito = "ok" if avuto == atteso else "SBAGLIATO"
@@ -711,7 +981,14 @@ def main():
             # le attese diventano null: ignote, non zero.
             vecchio = precedente.get(cid)
             visto = parse_time((vecchio or {}).get("updated") or "")
-            if vecchio and visto is not None and now - visto <= HOLD_WINDOW:
+            # Si tiene l'ultimo valore OSSERVATO: uno stato di soli null non
+            # è un'osservazione e non va tenuto. Senza questo controllo i
+            # valichi mai letti uscivano marcati held con dentro dei null —
+            # una tenuta che non teneva niente.
+            osservato = any(
+                (d or {}).get("wait") is not None
+                for d in (vecchio or {}).get("directions", {}).values())
+            if vecchio and osservato and visto is not None and now - visto <= HOLD_WINDOW:
                 nuovo = dict(vecchio)
                 nuovo["held"] = True
             else:
