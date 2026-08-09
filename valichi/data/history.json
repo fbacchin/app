@@ -203,5 +203,28 @@
    "ch.gottardo.south": 30,
    "ch.gottardo.north": 60
   }
+ },
+ {
+  "time": "2026-08-09T13:41:56Z",
+  "w": {
+   "ch.gottardo.south": 30,
+   "ch.gottardo.north": 60
+  },
+  "held": [
+   "hr-ba.nova-sela",
+   "hr-ba.stara-gradiska",
+   "hr-me.karasovici",
+   "hr-me.vitaljina",
+   "hr-rs.bajakovo",
+   "hr-rs.tovarnik",
+   "hu-rs.roszke",
+   "hu-rs.tompa",
+   "hu-ua.beregsurany",
+   "hu-ua.zahony",
+   "pl-ua.dorohusk",
+   "pl-ua.hrebenne",
+   "pl-ua.korczowa",
+   "pl-ua.medyka"
+  ]
  }
 ]
