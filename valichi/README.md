@@ -175,19 +175,43 @@ riletto da remoto: l'app usa la copia remota se più recente, così un
 valico nuovo o un matchName corretto arrivano senza release. I product ID
 lì dentro sono la mappa zona→prodotto che il paywall legge.
 
-## Cosa resta da fare lato app (Xcode)
+## L'app iOS (`app/`)
 
-1. progetto SwiftUI sul modello di Gottardo Live: lista zone → lista
-   valichi → scheda valico (due direzioni, grafico 48h da `history.json`,
-   stato fonte/`held`);
-2. StoreKit 2: `Product.products(for:)` sui 4 ID, entitlement per zona,
-   "Ripristina acquisti", paywall per zona bloccata;
-3. push: registrazione ai canali `valico-…` dei valichi seguiti
+Progetto Xcode pronto: `app/ValichiLive.xcodeproj` (formato Xcode 16,
+cartelle sincronizzate — i file nuovi in `app/ValichiLive/` entrano nel
+target da soli). **iPhone + iPad**, iOS 17+, SwiftUI.
+
+Già implementato nello scaffold:
+
+- lista zone → scheda valico (direzioni con attesa colorata, marcatore
+  `held` "fonte muta", grafico 12/24/48h con Swift Charts da
+  `history.json`, salute della fonte);
+- `DataStore`: catalogo dal bundle all'avvio, poi catalogo+dati remoti
+  (il remoto vince: valichi nuovi senza release);
+- `StoreManager` (StoreKit 2): prodotti letti dal catalogo, paywall per
+  zona con pacchetto "Tutta Europa", ripristino, Family Sharing, listener
+  `Transaction.updates`;
+- `app/Products.storekit` per provare gli acquisti senza App Store
+  Connect: in Xcode, Scheme → Run → Options → StoreKit Configuration.
+
+Per farlo girare: aprire il progetto, impostare il **Development Team**
+e (se serve) il bundle ID — ora `com.bacchin.valichi`, segnaposto. La
+copia `app/ValichiLive/catalog.json` è il fallback offline: quando si
+tocca `valichi/catalog.json` va ricopiata (`cp catalog.json
+app/ValichiLive/`).
+
+Restano da fare:
+
+1. push: registrazione ai canali `valico-…` dei valichi seguiti
    (Back4App SDK o REST, come già fatto per `global` sul Gottardo);
-4. mappa d'Europa con i valichi colorati per attesa (le coordinate del
+2. AdMob nella versione gratuita con flusso di consenso UMP/ATT (riusare
+   quello di Gottardo Live) — lo scaffold non ha pubblicità;
+3. mappa d'Europa con i valichi colorati per attesa (le coordinate del
    catalogo sono indicative: rifinirle);
-5. icona + nome definitivo, e `icon.png` da aggiungere alle due pagine
-   HTML (il riquadro è già predisposto).
+4. localizzazione en/it/de/fr (le stringhe dello scaffold sono in
+   italiano) e icona; `icon.png` va aggiunta anche alle due pagine HTML;
+5. i 4 prodotti non-consumable in App Store Connect con gli stessi ID del
+   catalogo.
 
 ## Test locale
 
