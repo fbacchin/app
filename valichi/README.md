@@ -52,7 +52,7 @@ che questo progetto possa produrre (lezione del Gottardo).
 | `gotthard` (file interno) | Gottardo | ✅ attiva | riusa `gotthard/data/latest.json` già raccolto dal collector gemello: zero rete, zero quota doppia |
 | `hak` (hak.hr) | HR ↔ ME / BA / RS | ✅ attiva | tabella del MUP in fondo a `/info/stanje-na-cestama`, letta a celle. ⚠️ elenca **solo i valichi con una coda da dichiarare**: chi non è in tabella è ignoto, non libero. Vicoli ciechi da non riprovare: `/info/granicni-prijelazi/` è 404 e `m.hak.hr/stanje.asp?id=2` — che pure si intitola "Granični prijelazi" — è la pagina AVVISI, prosa senza un solo numero |
 | `police_hu` (police.hu Határinfó) | HU ↔ RS / UA | ⚠️ parziale | HU–UA (Záhony, Beregsurány) ha i blocchi di attesa; **HU–RS no**: Röszke compare solo nei paragrafi di spiegazione e Tompa non compare affatto, quindi restano ignoti. HU–RO esclusa: Romania in Schengen dal 1.1.2025. Serve una seconda fonte per il confine serbo |
-| `granica_pl` (granica.gov.pl) | PL ↔ UA | ⚠️ parziale | i valichi si trovano ma la tabella è a colonne (`H:MM`, classi `≤7,5t`/`>7,5t`, più valichi affiancati): dal testo appiattito i numeri non sono attribuibili con certezza, quindi restano IGNOTI — mai inventati. Prossimo passo: il servizio SOAP ufficiale (`www.granica.gov.pl/Services/czasyService/granica.wsdl`, ~8 aggiornamenti/giorno) |
+| `granica_pl` (granica.gov.pl) | PL ↔ UA | ✅ attiva | servizio **SOAP** ufficiale, operazione `getCzasyWszystko`. ⚠️ tre cose da sapere: l'endpoint e il WSDL rispondono solo **senza `www.`** (con `www.` è 500); le durate sono **ore**, anche decimali (`0.5`); il servizio pubblica solo le uscite dalla Polonia (`czas_osobowe_wjazd` è `-` a ogni ora e a ogni valico), quindi UA → PL resta ignoto |
 | `otd_ch` | San Bernardino | 🔜 | stesso feed DATEX II del Gottardo, stessa chiave `OTD_API_KEY`: si estende il filtro del corridoio (attenzione alla quota condivisa) |
 | `asfinag` | Brennero, Tauri | 🔜 | open data Asfinag da integrare |
 | `promet_si` | Caravanche | 🔜 | B2B promet.si (DARS), registrazione gratuita |
@@ -96,11 +96,24 @@ due strategie, e si sceglie la struttura quando c'è:
 - **police.hu** — parser di blocchi (`estrai_police_hu`): per ogni valico
   si legge solo lo spezzone che segue il marcatore di direzione, chiuso
   alla voce successiva del blocco.
-- **granica.gov.pl** — ancora a finestre di testo, in attesa del SOAP.
-  Da quella pagina non caverà comunque niente di attribuibile.
+- **granica.gov.pl** — non è più una pagina: si interroga il servizio SOAP
+  (`fonte_granica_pl`), una chiamata per valico, e i valori arrivano già
+  separati per direzione e categoria.
 
-Il funzionamento a finestre, che regge granica e resta la rete di
-sicurezza per le fonti future:
+**Sul SOAP polacco, una cautela che vale la pena scrivere.** Il servizio
+indicizza per ora locale polacca e risponde **anche per ore che non sono
+ancora accadute**: interrogato il 09.08 dava un valore per il 10.08 alle
+12, e la risposta non contiene alcun marcatore di freschezza — rimanda
+indietro la data e l'ora che gli hai chiesto, non quelle del rilevamento.
+Per questo si chiede sempre e solo l'ora in corso (`ora_polacca`), e la
+coppia data/ora che il servizio rimanda finisce nel registro delle
+finestre: se un giorno i valori si rivelassero trascinati, la verifica è
+già lì. Lo zero, invece, qui è affidabile come in nessun'altra fonte: il
+servizio scrive `0` quando non si aspetta e `-` (o il campo vuoto) quando
+non sa, e le due cose non si confondono.
+
+Il funzionamento a finestre, che oggi non serve a nessuna fonte attiva ma
+resta la rete di sicurezza per quelle future:
 
 1. la pagina viene spianata (tag via, minuscole, senza accenti, spazi
    compressi) — "Karasovići", "KARASOVIĆI" e "karasovici" diventano la
@@ -113,12 +126,13 @@ sicurezza per le fonti future:
    `izlaz`/`ulaz`, `kilépő`/`belépő`, `wyjazd`/`wjazd`, "1 h 30 min",
    "2 sata", "1 godz. 15 min", e le frasi di zero esplicito ("nema
    zadržavanja", "nincs várakozás", "brak kolejki");
-4. due impaginazioni reali, entrambe gestite: **per categoria** (HAK,
-   police.hu: "auto: uscita X, entrata Y. camion: uscita Z" — il
-   marcatore di direzione che segue una voce camion appartiene ai camion
-   e si salta) e **per direzione** (granica: "uscita — auto X, camion Z;
-   entrata — auto Y" — nel segmento di direzione si legge dal marcatore
-   auto alla prima altra categoria). Si mostrano le attese delle **auto**:
+4. due impaginazioni, entrambe gestite: **per categoria** ("auto: uscita
+   X, entrata Y. camion: uscita Z" — il marcatore di direzione che segue
+   una voce camion appartiene ai camion e si salta) e **per direzione**
+   ("uscita — auto X, camion Z; entrata — auto Y" — nel segmento di
+   direzione si legge dal marcatore auto alla prima altra categoria).
+   Sono le forme osservate su HAK, police.hu e granica prima che le tre
+   fonti passassero a parser propri. Si mostrano le attese delle **auto**:
    l'app parla ai viaggiatori, e i camion — spesso ore in più — non devono
    vincere per la regola del massimo;
 5. una finestra con un'attesa ma senza marcatori di direzione va

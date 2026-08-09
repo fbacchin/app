@@ -46,6 +46,7 @@ import time
 import unicodedata
 import urllib.error
 import urllib.request
+import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from html.parser import HTMLParser
 from pathlib import Path
@@ -112,12 +113,10 @@ SOURCE_URLS = {
     "police_hu": [
         "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo",
     ],
-    "granica_pl": [
-        "https://granica.gov.pl/index_wait.php?p=u&v=pl&k=w",
-        "https://granica.gov.pl/wczasy.php?v=pl",
-    ],
+    # granica.gov.pl non è qui: non è più una pagina da spianare ma il
+    # servizio SOAP ufficiale, e ha un adapter tutto suo (fonte_granica_pl).
 }
-SOURCE_LANG = {"hak": "hr", "police_hu": "hu", "granica_pl": "pl"}
+SOURCE_LANG = {"hak": "hr", "police_hu": "hu"}
 
 # --- vocabolario multilingue, tutto in forma GIÀ SPIANATA (minuscole,
 # senza accenti: "óra"→"ora", "zadržavanja"→"zadrzavanja") ---
@@ -685,6 +684,202 @@ def fonte_pagina(source, crossings):
     return campioni, salute, finestre
 
 
+# --- granica.gov.pl: il servizio SOAP ufficiale -------------------------
+
+# L'endpoint e il suo WSDL rispondono solo sull'host SENZA www:
+# www.granica.gov.pl/Services/… dà 500. È lo stesso servizio che alimenta
+# la pagina HTML, ma qui i valori arrivano già separati per direzione e
+# categoria: dalla pagina non erano attribuibili, perché tre valichi
+# stanno sotto la stessa intestazione e le colonne sono in H:MM.
+GRANICA_SOAP = "https://granica.gov.pl/Services/czasyService/soap_granica.php"
+
+GRANICA_BUSTA = """<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:ns1="granicaServiceOriginal">
+ <SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+  <ns1:getCzasyWszystko>
+   <dane_in_wszystko xsi:type="ns1:getCzasyReq">
+    <jednostka xsi:type="xsd:string">{jednostka}</jednostka>
+    <rok xsi:type="xsd:string">{rok}</rok>
+    <miesiac xsi:type="xsd:string">{miesiac:02d}</miesiac>
+    <dzien xsi:type="xsd:string">{dzien:02d}</dzien>
+    <godzina xsi:type="xsd:string">{godzina:02d}</godzina>
+   </dane_in_wszystko>
+  </ns1:getCzasyWszystko>
+ </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+"""
+
+# Il servizio pubblica solo le USCITE dalla Polonia: czas_osobowe_wjazd è
+# "-" a ogni ora e a ogni valico (verificato sulle 24 ore del 09.08.2026 e
+# su tutti e quattro i valichi). UA → PL resta quindi ignoto, invece di
+# essere riempito col valore dell'uscita.
+GRANICA_CAMPI = {"exit": "czas_osobowe_wyjazd"}
+
+
+def ora_polacca(adesso):
+    """L'ora locale polacca.
+
+    Il servizio indicizza per ora locale, e chiedere l'ora sbagliata vuol
+    dire leggere lo slot sbagliato senza che la risposta lo segnali.
+    """
+    try:
+        from zoneinfo import ZoneInfo
+        return adesso.astimezone(ZoneInfo("Europe/Warsaw"))
+    except Exception:
+        # Senza database dei fusi vale la regola UE: ora legale dall'ultima
+        # domenica di marzo all'ultima domenica di ottobre.
+        def ultima_domenica(mese):
+            giorno = 31
+            while True:
+                quando = datetime(adesso.year, mese, giorno, 1,
+                                  tzinfo=timezone.utc)
+                if quando.weekday() == 6:
+                    return quando
+                giorno -= 1
+        legale = ultima_domenica(3) <= adesso < ultima_domenica(10)
+        return adesso.astimezone(timezone(timedelta(hours=2 if legale else 1)))
+
+
+def attesa_soap(valore):
+    """Da una stringa del servizio ai minuti.
+
+    Le durate sono ORE, anche decimali ("0.5" è mezz'ora). Il servizio
+    distingue tre cose che la pagina HTML impastava: un numero, lo zero
+    dichiarato e il non-dato — che scrive "-" oppure lascia il campo
+    vuoto. Solo il numero diventa un valore, e "0" diventa 0 perché lì è
+    la fonte a dire che non si aspetta: è l'unico zero che questo progetto
+    accetta.
+    """
+    testo = (valore or "").strip().replace(",", ".")
+    if not testo or testo in ("-", "–", "—"):
+        return None
+    try:
+        minuti = round(float(testo) * 60)
+    except ValueError:
+        return None
+    if minuti < 0 or minuti > 1440:
+        return None
+    return minuti
+
+
+def unita_granica(crossing):
+    """Il nome con cui il servizio conosce il valico: quello del lato
+    polacco, che nel catalogo è già scritto per esteso."""
+    for lato in ("sideA", "sideB"):
+        dati = crossing.get(lato) or {}
+        if dati.get("country") == "PL" and dati.get("name"):
+            return dati["name"]
+    return (crossing.get("sideA") or {}).get("name", "")
+
+
+def busta_granica(jednostka, quando):
+    nome = (jednostka.replace("&", "&amp;")
+                     .replace("<", "&lt;").replace(">", "&gt;"))
+    return GRANICA_BUSTA.format(jednostka=nome, rok=quando.year,
+                                miesiac=quando.month, dzien=quando.day,
+                                godzina=quando.hour)
+
+
+def leggi_risposta_soap(xml_testo):
+    """I campi di una risposta getCzasyWszystko, per nome locale.
+
+    Un SOAP-Fault, un XML malformato o una risposta senza campi tornano un
+    dizionario vuoto: per il chiamante è "nessun dato", mai zero.
+    """
+    try:
+        radice = ET.fromstring(xml_testo)
+    except ET.ParseError:
+        return {}
+    campi = {}
+    for elemento in radice.iter():
+        if len(elemento) or elemento.text is None:
+            continue
+        campi[elemento.tag.rsplit("}", 1)[-1]] = elemento.text.strip()
+    return campi
+
+
+def posta_soap(url, corpo, azione):
+    """POST SOAP con un solo retry sui 5xx, come per le pagine."""
+    request = urllib.request.Request(url, data=corpo.encode("utf-8"), headers={
+        "User-Agent": USER_AGENT,
+        "Content-Type": "text/xml; charset=utf-8",
+        "SOAPAction": f'"{azione}"',
+    })
+    ultimo_errore = None
+    for tentativo in range(2):
+        try:
+            with urllib.request.urlopen(request, timeout=60) as risposta:
+                return risposta.read().decode("utf-8", "replace"), None
+        except urllib.error.HTTPError as exc:
+            ultimo_errore = f"HTTP {exc.code}"
+            if exc.code < 500 or tentativo == 1:
+                break
+            time.sleep(15)
+        except Exception as exc:
+            ultimo_errore = str(exc)
+            break
+    return None, ultimo_errore
+
+
+def fonte_granica_pl(crossings):
+    """PL ↔ UA dal servizio SOAP della Straż Graniczna.
+
+    Si chiede sempre e solo l'ORA CORRENTE polacca. Il servizio risponde
+    anche per ore che non sono ancora accadute — il 10.08 alle 12 dava un
+    valore mentre era ancora il 09.08 — e non marca in alcun modo la
+    freschezza del dato: chiedere qualcosa di diverso dall'ora in corso
+    vorrebbe dire pubblicare un numero che non descrive niente. La data e
+    l'ora che il servizio rimanda indietro finiscono nel registro, così la
+    staleness resta verificabile a posteriori.
+    """
+    adesso = ora_polacca(datetime.now(timezone.utc))
+    campioni = {}
+    finestre = {}
+    errori = []
+    for crossing in crossings:
+        unita = unita_granica(crossing)
+        if not unita:
+            errori.append(f"{crossing['id']}: nessun lato polacco nel catalogo")
+            continue
+        xml_testo, errore = posta_soap(
+            GRANICA_SOAP, busta_granica(unita, adesso), "getCzasyWszystko")
+        if xml_testo is None:
+            errori.append(f"{unita}: {errore}")
+            continue
+        campi = leggi_risposta_soap(xml_testo)
+        if not campi.get("jednostka"):
+            # A un nome che non conosce il servizio risponde senza campi.
+            # Va detto: è un errore di catalogo, non un valico senza coda.
+            errori.append(f"{unita}: risposta senza dati")
+            continue
+        campioni[crossing["id"]] = {
+            "exit": attesa_soap(campi.get(GRANICA_CAMPI["exit"])),
+            "entry": None,
+        }
+        finestre[crossing["id"]] = (
+            f"{campi.get('jednostka', '?')} {campi.get('data', '?')} "
+            f"ora {campi.get('godzina', '?')} · osobowe wyjazd="
+            f"{campi.get('czas_osobowe_wyjazd', '')!r} wjazd="
+            f"{campi.get('czas_osobowe_wjazd', '')!r} · ciezarowe wyjazd="
+            f"{campi.get('czas_ciezarowe_wyjazd', '')!r}")[:400]
+
+    salute = {
+        "ok": bool(campioni),
+        "url": GRANICA_SOAP,
+        "found": len(campioni),
+        "of": len(crossings),
+        "waits": sum(1 for c in campioni.values()
+                     for v in c.values() if v is not None),
+        "ora_pl": f"{adesso:%Y-%m-%d %H}",
+    }
+    if errori:
+        salute["error"] = " | ".join(errori)[:400]
+    return campioni, salute, finestre
+
+
 def fonte_gotthard(crossings):
     """Il Gottardo dalla copia già raccolta dal collector gemello: un file
     nel repo, niente rete, niente quota API consumata due volte."""
@@ -703,23 +898,18 @@ def fonte_gotthard(crossings):
     return campioni, {"ok": True, "sampled": quando}, {}
 
 
-# Come si passa dall'HTML ai campioni, fonte per fonte. HAK e police.hu
-# hanno un parser proprio perché la loro pagina ha una struttura che regge
-# il peso (una tabella a colonne, dei blocchi per valico); granica.gov.pl
-# resta sulle finestre di testo finché non passa al servizio SOAP, ma da
-# quella pagina — tre valichi affiancati sotto la stessa intestazione, in
-# colonne H:MM — le finestre non possono cavare niente di attribuibile.
+# Come si passa dall'HTML ai campioni, per le fonti che sono pagine. HAK e
+# police.hu hanno un parser proprio perché la loro pagina ha una struttura
+# che regge il peso: una tabella a colonne, dei blocchi per valico.
 ESTRATTORI = {
     "hak": estrai_hak,
     "police_hu": estrai_police_hu,
-    "granica_pl": lambda html, crossings: estrai_valichi(
-        html_in_testo(html), crossings),
 }
 
 FONTI = {
     "hak": lambda c: fonte_pagina("hak", c),
     "police_hu": lambda c: fonte_pagina("police_hu", c),
-    "granica_pl": lambda c: fonte_pagina("granica_pl", c),
+    "granica_pl": fonte_granica_pl,
     "gotthard": fonte_gotthard,
 }
 
@@ -898,12 +1088,6 @@ def prova():
             "hu-ua.zahony": {"exit": 15, "entry": 15},
             "hu-ua.beregsurany": {"exit": 15, "entry": 15},
         },
-        "granica_pl": {
-            "pl-ua.medyka": {"exit": 75, "entry": 0},
-            "pl-ua.korczowa": {"exit": 0, "entry": 120},
-            "pl-ua.dorohusk": {"exit": 45, "entry": None},
-            "pl-ua.hrebenne": {"exit": 0, "entry": 0},
-        },
     }
 
     errori = 0
@@ -917,6 +1101,35 @@ def prova():
             if esito != "ok":
                 errori += 1
             print(f"  {source:>10}  {crossing_id:<22} atteso {atteso}  letto {avuto}  {esito}")
+
+    # granica non è più una pagina ma un servizio: si collauda la
+    # conversione dei valori e la lettura di due risposte vere, catturate
+    # il 09.08.2026 alle 15 (ora polacca). Medyka aveva un'attesa, Dorohusk
+    # il campo delle auto vuoto — i due casi che contano.
+    valori = [("2", 120), ("0", 0), ("0.5", 30), ("0,5", 30), ("-", None),
+              ("", None), (None, None), ("bo", None), ("30", None)]
+    for grezzo, atteso in valori:
+        avuto = attesa_soap(grezzo)
+        esito = "ok" if avuto == atteso else "SBAGLIATO"
+        if esito != "ok":
+            errori += 1
+        print(f"  {'granica_pl':>10}  attesa_soap({grezzo!r:>6})     "
+              f"atteso {atteso}  letto {avuto}  {esito}")
+
+    soap = {
+        "medyka": ("pl-ua.medyka", {"exit": 120, "entry": None}),
+        "dorohusk": ("pl-ua.dorohusk", {"exit": None, "entry": None}),
+    }
+    for nome, (crossing_id, atteso) in soap.items():
+        campi = leggi_risposta_soap(
+            (PROVE_DIR / f"granica_pl.{nome}.xml").read_text())
+        avuto = {"exit": attesa_soap(campi.get(GRANICA_CAMPI["exit"])),
+                 "entry": None}
+        esito = "ok" if avuto == atteso and campi.get("jednostka") else "SBAGLIATO"
+        if esito != "ok":
+            errori += 1
+        print(f"  {'granica_pl':>10}  {crossing_id:<22} "
+              f"atteso {atteso}  letto {avuto}  {esito}")
 
     fixture = PROVE_DIR / "gotthard.latest.json"
     dati = json.loads(fixture.read_text())
