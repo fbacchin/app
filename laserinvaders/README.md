@@ -1,23 +1,35 @@
-# Laser Invaders 👾
+# Laser Invaders 🚀
 
-Sparatutto arcade stile anni '80 (ondate di alieni, laser, bunker, UFO misterioso),
-scritto come **webapp in un singolo file** — niente dipendenze, niente build, funziona anche offline.
+Sparatutto arcade stile anni '80: squadriglie di astronavi nemiche arrivano in picchiata
+**1, 2 o 3 alla volta** — abbattile col laser e raccogli le capsule **[P]** per potenziarlo:
+singolo → **doppio** → **triplo**. Scritto come **webapp in un singolo file** — niente
+dipendenze, niente build, funziona anche offline.
 
 ## Come si gioca
 
-- **Desktop**: frecce ← → (o A/D) per muovere, **SPAZIO** per sparare, **P** pausa, **M** audio.
+- **Desktop**: frecce ← → (o A/D) per muovere, **SPAZIO** per sparare
+  (tieni premuto: fuoco automatico), **P** pausa, **M** audio.
 - **iPhone / iPad**: trascina il dito sullo schermo per muovere la navicella, oppure usa i
-  pulsanti ◀ ▶ e **FUOCO** (tieni premuto per il fuoco automatico).
-- Vita extra a 1.500 punti. L'UFO rosso vale da 50 a 300 punti… mistero!
-- Il record resta salvato sul dispositivo.
+  pulsanti ◀ ▶; tieni premuto **FUOCO** per sparare a raffica.
+- Ogni 7 astronavi abbattute cade una capsula **[P]**: prendila per passare al laser
+  doppio e poi triplo (a laser già triplo vale 500 punti bonus).
+- Se vieni colpito perdi una vita e il laser scende di un livello.
+- Vita extra ogni 2.500 punti. Il record resta salvato sul dispositivo.
+
+## Le astronavi
+
+| Nave | Comportamento | Colpi | Punti |
+| --- | --- | --- | --- |
+| Caccia (ciano) | Picchiata a serpentina, veloce | 1 | 50 |
+| Incrociatore (magenta) | Attraversa lo schermo planando | 2 | 100 |
+| Nave pesante (ambra) | Scende lenta a zig-zag | 3 | 150 |
 
 ## Caratteristiche
 
 - Estetica CRT autentica: scanline, maschera RGB, vignettatura, accensione del tubo catodico.
-- Colori "a bande" come i cabinet del 1978-82: il monitor era monocromatico con strisce di
-  gelatina colorata, quindi gli alieni **cambiano colore mentre scendono**.
 - Audio 100% sintetizzato con Web Audio API: il "pew" laser (doppio oscillatore in caduta
-  esponenziale, stile disco anni '80), esplosioni, la marcia a 4 note che accelera, sirena UFO.
+  esponenziale, stile disco anni '80— il timbro sale col laser potenziato), esplosioni,
+  battito di fondo che accelera col livello.
 - Font pixel (Press Start 2P) incorporato in base64: nessuna richiesta esterna.
 - PWA completa: manifest, service worker, icone — installabile e giocabile offline.
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Laser Invaders</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<meta name="description" content="Laser Invaders — sparatutto arcade anni '80. Difendi la galassia a colpi di laser.">
+<meta name="description" content="Laser Invaders — sparatutto arcade anni '80. Abbatti le astronavi e potenzia il laser.">
 <meta name="theme-color" content="#05060f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -171,18 +171,20 @@ body{
   </div>
   <div id="controls">
     <div class="padgroup">
-      <div class="padbtn" id="btnLeft" aria-label="Sinistra">&#9664;</div>
-      <div class="padbtn" id="btnRight" aria-label="Destra">&#9654;</div>
+      <div class="padbtn" id="btnLeft" role="button" aria-label="Sinistra">&#9664;</div>
+      <div class="padbtn" id="btnRight" role="button" aria-label="Destra">&#9654;</div>
     </div>
-    <div class="padbtn fire" id="btnFire" aria-label="Fuoco">FUOCO</div>
+    <div class="padbtn fire" id="btnFire" role="button" aria-label="Fuoco">FUOCO</div>
   </div>
-  <div id="hint">&#9664; &#9654; MUOVI &nbsp;·&nbsp; SPAZIO SPARA &nbsp;·&nbsp; P PAUSA &nbsp;·&nbsp; M AUDIO</div>
+  <div id="hint">&#9664; &#9654; MUOVI &nbsp;·&nbsp; SPAZIO SPARA (TIENI PREMUTO) &nbsp;·&nbsp; P PAUSA &nbsp;·&nbsp; M AUDIO</div>
 </div>
 
 <script>
 'use strict';
 /* =====================================================================
    LASER INVADERS — sparatutto arcade stile 1982
+   Squadriglie di astronavi in picchiata (1/2/3 alla volta), fuoco
+   automatico e laser potenziabile: singolo -> doppio -> triplo.
    Risoluzione logica 256x320, upscaling pixelated, audio Web Audio API.
    ===================================================================== */
 
@@ -195,76 +197,70 @@ const COLORS = {
   amber:'#ffb300', red:'#ff2b4a', white:'#e8f6ff', dim:'#43507a'
 };
 
-/* Bande di colore "cellophane": come nei cabinet del 1978-82 il monitor era
-   monocromatico con strisce di gelatina colorata — il colore dipende dalla
-   riga dello schermo, quindi gli alieni cambiano colore mentre scendono. */
-function bandColor(y){
-  if (y < 34)  return COLORS.amber;
-  if (y < 100) return COLORS.magenta;
-  if (y < 170) return COLORS.cyan;
-  return COLORS.green;
-}
-
 /* ============ Sprite (bitmap in stringhe) ============ */
 const SPR = {
-  squid: [[
-    '...XX...',
-    '..XXXX..',
-    '.XXXXXX.',
-    'XX.XX.XX',
-    'XXXXXXXX',
-    '..X..X..',
-    '.X.XX.X.',
-    'X.X..X.X'
+  /* caccia veloce — picchiata con serpentina */
+  dart: [[
+    '...X.X...',
+    'X...X...X',
+    'XX..X..XX',
+    '.XX.X.XX.',
+    '..XXXXX..',
+    '...XXX...',
+    '...XXX...',
+    '....X....'
   ],[
-    '...XX...',
-    '..XXXX..',
-    '.XXXXXX.',
-    'XX.XX.XX',
-    'XXXXXXXX',
-    '.X.XX.X.',
-    'X......X',
-    '.X....X.'
+    '...X.X...',
+    'X...X...X',
+    'XX..X..XX',
+    '.XX.X.XX.',
+    '..XXXXX..',
+    '...XXX...',
+    '..X.X.X..',
+    '....X....'
   ]],
-  crab: [[
-    '..X.....X..',
-    '...X...X...',
-    '..XXXXXXX..',
-    '.XX.XXX.XX.',
-    'XXXXXXXXXXX',
-    'X.XXXXXXX.X',
-    'X.X.....X.X',
-    '...XX.XX...'
+  /* incrociatore ad ali larghe — attraversa lo schermo */
+  wing: [[
+    'X.....X.....X',
+    'XX....X....XX',
+    'XXX..XXX..XXX',
+    'XXXXXXXXXXXXX',
+    '.XXXXXXXXXXX.',
+    '..XX.XXX.XX..',
+    '...X..X..X...',
+    '......X......'
   ],[
-    '..X.....X..',
-    'X..X...X..X',
-    'X.XXXXXXX.X',
-    'XXX.XXX.XXX',
-    'XXXXXXXXXXX',
-    '.XXXXXXXXX.',
-    '..X.....X..',
-    '.X.......X.'
+    'X.....X.....X',
+    'XX....X....XX',
+    'XXX..XXX..XXX',
+    'XXXXXXXXXXXXX',
+    '.XXXXXXXXXXX.',
+    '..XX.XXX.XX..',
+    '..X...X...X..',
+    '......X......'
   ]],
-  octo: [[
-    '....XXXX....',
-    '.XXXXXXXXXX.',
-    'XXXXXXXXXXXX',
-    'XXX..XX..XXX',
-    'XXXXXXXXXXXX',
-    '...XX..XX...',
-    '..XX.XX.XX..',
-    'XX........XX'
+  /* nave pesante — lenta, a zig-zag, incassa piu colpi */
+  heavy: [[
+    '.....XXXX.....',
+    '...XXXXXXXX...',
+    '..XXXXXXXXXX..',
+    '.XXX.XXXX.XXX.',
+    'XXXXXXXXXXXXXX',
+    '.X.XXXXXXXX.X.',
+    '.X..XX..XX..X.',
+    '....X....X....'
   ],[
-    '....XXXX....',
-    '.XXXXXXXXXX.',
-    'XXXXXXXXXXXX',
-    'XXX..XX..XXX',
-    'XXXXXXXXXXXX',
-    '..XXX..XXX..',
-    '.XX..XX..XX.',
-    '..XX....XX..'
+    '.....XXXX.....',
+    '...XXXXXXXX...',
+    '..XXXXXXXXXX..',
+    '.XXX.XXXX.XXX.',
+    'XXXXXXXXXXXXXX',
+    '.X.XXXXXXXX.X.',
+    '.X.XX....XX.X.',
+    '....X....X....'
   ]],
-  ship: [[
+  /* navicella del giocatore: 3 livelli di armamento */
+  ship1: [[
     '......X......',
     '.....XXX.....',
     '.....XXX.....',
@@ -274,15 +270,32 @@ const SPR = {
     'XXXXXXXXXXXXX',
     'XXXXXXXXXXXXX'
   ]],
-  ufo: [[
-    '.....XXXXXX.....',
-    '...XXXXXXXXXX...',
-    '..XXXXXXXXXXXX..',
-    '.XX.XX.XX.XX.XX.',
-    'XXXXXXXXXXXXXXXX',
-    '..XXX..XX..XXX..',
-    '...X........X...'
+  ship2: [[
+    'X.....X.....X',
+    'X....XXX....X',
+    'X....XXX....X',
+    'XXXXXXXXXXXXX',
+    'XXXXXXXXXXXXX',
+    'XXXXXXXXXXXXX',
+    'XXXXXXXXXXXXX',
+    'XXXXXXXXXXXXX'
+  ]],
+  ship3: [[
+    'X..X..X..X..X',
+    'X..X.XXX.X..X',
+    'X..X.XXX.X..X',
+    'XXXXXXXXXXXXX',
+    'XXXXXXXXXXXXX',
+    'XXXXXXXXXXXXX',
+    'XXXXXXXXXXXXX',
+    'XXXXXXXXXXXXX'
   ]]
+};
+
+const ENEMY_DEF = {
+  dart:  { color: '#2ee6ff', hp: 1, pts: 50  },
+  wing:  { color: '#ff3df0', hp: 2, pts: 100 },
+  heavy: { color: '#ffb300', hp: 3, pts: 150 }
 };
 
 /* Cache degli sprite renderizzati (tipo+frame+colore -> canvas) */
@@ -304,9 +317,13 @@ function sprite(name, frame, color){
   return c;
 }
 
+/* ============ Storage sicuro (Safari in navigazione privata) ============ */
+function storeGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function storeSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+
 /* ============ Audio (tutto sintetizzato) ============ */
 let ac = null, master = null, noiseBuf = null;
-let muted = localStorage.getItem('li_muted') === '1';
+let muted = storeGet('li_muted') === '1';
 
 function audioInit(){
   if (ac) return;
@@ -325,11 +342,11 @@ function audioInit(){
 }
 function audioResume(){
   audioInit();
-  if (ac && ac.state === 'suspended') ac.resume();
+  if (ac && ac.state !== 'running') ac.resume();
 }
 function setMuted(m){
   muted = m;
-  localStorage.setItem('li_muted', m ? '1' : '0');
+  storeSet('li_muted', m ? '1' : '0');
   if (master) master.gain.value = m ? 0 : 0.5;
   btnSound.textContent = m ? 'AUDIO OFF' : 'AUDIO ON';
 }
@@ -361,102 +378,77 @@ function tone(type, f0, f1, dur, vol, when){
   o.start(t); o.stop(t+dur+0.03);
 }
 
-/* Il "pew": due oscillatori in caduta esponenziale, il classico laser disco */
-function sfxLaser(){
-  tone('square',   1900, 150, 0.17, 0.35);
-  tone('sawtooth', 2900, 220, 0.15, 0.18);
-  noise(0.05, 5000, 0.10, 'highpass');
+/* Il "pew": due oscillatori in caduta esponenziale, il classico laser disco.
+   Con il laser potenziato il timbro sale leggermente. */
+function sfxLaser(level){
+  const base = 1700 + level*220;
+  tone('square',   base,      150, 0.14, 0.26);
+  tone('sawtooth', base*1.55, 220, 0.12, 0.13);
+  noise(0.04, 5200, 0.08, 'highpass');
 }
-function sfxAlienHit(){
-  noise(0.12, 1400, 0.4);
-  tone('square', 420, 60, 0.12, 0.3);
+function sfxHitTick(){
+  noise(0.05, 2600, 0.18);
 }
-function sfxBombPop(){
-  noise(0.06, 2400, 0.25);
+function sfxEnemyBoom(big){
+  noise(big ? 0.28 : 0.14, 1300, 0.42);
+  tone('square', 380, 55, big ? 0.26 : 0.13, 0.3);
+  if (big) tone('sawtooth', 140, 40, 0.3, 0.25);
 }
 function sfxPlayerBoom(){
   noise(0.7, 900, 0.55, 'lowpass');
   tone('sawtooth', 220, 28, 0.7, 0.4);
 }
-function sfxMarch(step){
-  const notes = [110, 104, 98, 92];
-  tone('square', notes[step % 4], notes[step % 4], 0.09, 0.22);
-  tone('triangle', notes[step % 4] / 2, notes[step % 4] / 2, 0.09, 0.25);
+function sfxPowerup(){
+  [392, 523, 659, 880].forEach((f,i) => tone('square', f, f, 0.08, 0.25, i*0.07));
 }
-function sfxUfoHit(){
-  tone('square', 1200, 200, 0.35, 0.3);
-  noise(0.3, 2000, 0.3);
-}
-function sfxWaveClear(){
-  [523, 659, 784, 1047].forEach((f,i) => tone('square', f, f, 0.09, 0.25, i*0.09));
-}
-function sfxGameOver(){
-  [392, 330, 262, 196, 131].forEach((f,i) => tone('sawtooth', f, f*0.97, 0.18, 0.3, i*0.16));
+function sfxLevelUp(){
+  [660, 880, 1100].forEach((f,i) => tone('square', f, f, 0.09, 0.22, i*0.08));
 }
 function sfxExtraLife(){
   [880, 1320].forEach((f,i) => tone('square', f, f, 0.09, 0.3, i*0.1));
 }
-
-/* UFO: sirena continua finché è in volo */
-let ufoOsc = null, ufoLfo = null, ufoGain = null;
-function ufoSoundStart(){
-  if (!ac || muted || ufoOsc) return;
-  ufoOsc = ac.createOscillator(); ufoOsc.type = 'triangle';
-  ufoOsc.frequency.value = 880;
-  ufoLfo = ac.createOscillator(); ufoLfo.frequency.value = 5;
-  const lg = ac.createGain(); lg.gain.value = 120;
-  ufoLfo.connect(lg); lg.connect(ufoOsc.frequency);
-  ufoGain = ac.createGain(); ufoGain.gain.value = 0.07;
-  ufoOsc.connect(ufoGain); ufoGain.connect(master);
-  ufoOsc.start(); ufoLfo.start();
+function sfxGameOver(){
+  [392, 330, 262, 196, 131].forEach((f,i) => tone('sawtooth', f, f*0.97, 0.18, 0.3, i*0.16));
 }
-function ufoSoundStop(){
-  if (ufoOsc){ try{ ufoOsc.stop(); ufoLfo.stop(); }catch(e){} }
-  ufoOsc = ufoLfo = ufoGain = null;
+/* battito di fondo che accompagna il gioco */
+function sfxPulse(alt){
+  tone('triangle', alt ? 82 : 74, 0, 0.07, 0.13);
 }
 
 /* ============ Stato di gioco ============ */
-const ST = { BOOT:0, ATTRACT:1, WAVEINTRO:2, PLAY:3, DYING:4, GAMEOVER:5 };
+const ST = { BOOT:0, ATTRACT:1, INTRO:2, PLAY:3, DYING:4, GAMEOVER:5 };
 let state = ST.BOOT;
 let stateT = 0;            // tempo trascorso nello stato corrente
 let paused = false;
 
 let score = 0;
-let hiscore = parseInt(localStorage.getItem('li_hiscore') || '0', 10) || 0;
+let hiscore = parseInt(storeGet('li_hiscore') || '0', 10) || 0;
+let hiscoreAtStart = 0;
 let lives = 3;
-let wave = 1;
-let extraLifeGiven = false;
+let level = 1;
+let kills = 0;
+let killsSincePow = 0;
+let nextLifeAt = 2500;
 
 const GROUND_Y = 306;
 const PLAYER_Y = 286;
 
 /* Player */
-const player = { x: W/2, w: 13, h: 8, targetX: null, invuln: 0, cool: 0 };
+const player = { x: W/2, targetX: null, invuln: 0, cool: 0 };
+let laserLevel = 1;        // 1 = singolo, 2 = doppio, 3 = triplo
 
-/* Alieni */
-const COLS = 10, ROWS = 5, CELL = 17;
-let aliens = [];            // {r,c,type,alive}
-let gridX = 0, gridY = 0;   // origine della griglia
-let gridDir = 1;
-let stepTimer = 0, stepFrame = 0, marchStep = 0;
-let aliveCount = 0;
-
-/* Proiettili */
-let lasers = [];            // {x,y}
-let bombs = [];             // {x,y,ph}
-let bombTimer = 0;
-
-/* UFO */
-let ufo = null;             // {x,dir}
-let ufoTimer = 12;
-
-/* Bunker */
-const BK_W = 22, BK_H = 14;
-let bunkers = [];           // {x,y,mask,canvas,dirty}
+/* Entita */
+let enemies = [];          // navi nemiche in volo
+let lasers = [];           // colpi del giocatore {x,y,vx}
+let bullets = [];          // colpi nemici {x,y,v}
+let powerups = [];         // capsule [P] {x,y,t}
+let spawnT = 1.0;
+let pulseT = 0, pulseAlt = false;
+let animT = 0;
 
 /* Effetti */
-let particles = [];         // {x,y,vx,vy,life,color}
-let popups = [];            // {x,y,text,life,color}
+let particles = [];        // {x,y,vx,vy,life,color}
+let popups = [];           // {x,y,text,life,color}
 let shake = 0;
 let flash = 0;
 
@@ -467,109 +459,114 @@ for (let i=0; i<44; i++)
 
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ============ Costruzione ondata ============ */
-function alienType(r){ return r===0 ? 'squid' : (r<3 ? 'crab' : 'octo'); }
-function alienPoints(t){ return t==='squid' ? 30 : (t==='crab' ? 20 : 10); }
-function alienW(t){ return SPR[t][0][0].length; }
-
-function buildWave(){
-  aliens = [];
-  for (let r=0; r<ROWS; r++)
-    for (let c=0; c<COLS; c++)
-      aliens.push({ r, c, type: alienType(r), alive: true });
-  aliveCount = ROWS*COLS;
-  gridX = (W - COLS*CELL) / 2;
-  gridY = 52 + Math.min(4, wave-1) * 9;
-  gridDir = 1;
-  stepTimer = 0; stepFrame = 0; marchStep = 0;
-  lasers = []; bombs = []; bombTimer = 1.2;
-  ufo = null; ufoSoundStop(); ufoTimer = 14 + Math.random()*10;
-  buildBunkers();
+/* ============ Nemici: squadriglie di 1/2/3 navi ============ */
+function enemySize(type){
+  const rows = SPR[type][0];
+  return { w: rows[0].length, h: rows.length };
 }
 
-function buildBunkers(){
-  bunkers = [];
-  const n = 4, gap = W/n;
+/* Posizione secondo lo schema di volo (funzioni pure del tempo di vita) */
+function enemyPos(e){
+  const t = e.t;
+  if (e.pat === 'dive'){
+    return { x: e.x0 + e.amp*Math.sin(e.w*t + e.phase), y: e.y0 + e.v*t };
+  }
+  if (e.pat === 'swoop'){
+    return { x: e.x0 + e.dir*e.v*t, y: e.y0 + 14*t + e.amp*Math.sin(e.w*t + e.phase) };
+  }
+  /* zigzag: onda triangolare, discesa lenta */
+  const tri = (2/Math.PI)*Math.asin(Math.sin(e.w*t + e.phase));
+  return { x: e.x0 + e.amp*tri, y: e.y0 + e.v*t };
+}
+
+function spawnGroup(){
+  /* dimensione del gruppo: 1, 2 o 3 — piu grande ai livelli alti */
+  const r = Math.random();
+  let n;
+  if (level <= 1)       n = r < 0.6 ? 1 : 2;
+  else if (level === 2) n = r < 0.35 ? 1 : (r < 0.8 ? 2 : 3);
+  else                  n = r < 0.22 ? 1 : (r < 0.62 ? 2 : 3);
+
+  /* tipo: dart comune, heavy raro all'inizio */
+  const tr = Math.random();
+  let type;
+  if (level <= 1)       type = tr < 0.7 ? 'dart' : 'wing';
+  else if (level === 2) type = tr < 0.5 ? 'dart' : (tr < 0.85 ? 'wing' : 'heavy');
+  else                  type = tr < 0.4 ? 'dart' : (tr < 0.75 ? 'wing' : 'heavy');
+  if (type === 'heavy' && n > 2) n = 2;
+
+  const spdMul = 1 + Math.min(0.7, (level-1)*0.09);
+  const def = ENEMY_DEF[type];
+
   for (let i=0; i<n; i++){
-    const mask = [];
-    for (let y=0; y<BK_H; y++){
-      const row = [];
-      for (let x=0; x<BK_W; x++){
-        let on = true;
-        const t = y;                                  // arco superiore
-        if (t===0 && (x<4 || x>=BK_W-4)) on = false;
-        if (t===1 && (x<3 || x>=BK_W-3)) on = false;
-        if (t===2 && (x<2 || x>=BK_W-2)) on = false;
-        if (t===3 && (x<1 || x>=BK_W-1)) on = false;
-        if (y>=BK_H-4){                               // arco inferiore (porta)
-          const d = y-(BK_H-4);
-          if (x >= 7-d && x <= BK_W-8+d) on = false;
-        }
-        row.push(on ? 1 : 0);
-      }
-      mask.push(row);
+    const e = {
+      type, pat: 'dive', t: 0, hp: def.hp, flash: 0,
+      x0: 0, y0: 0, v: 30, amp: 26, w: 2.2, phase: Math.random()*6.28, dir: 1,
+      fireT: 1.6 + Math.random()*2.6,
+      x: 0, y: -20
+    };
+    if (type === 'dart'){
+      e.pat = 'dive';
+      const cx0 = 40 + Math.random()*(W-80);
+      e.x0 = Math.min(W-34, Math.max(34, cx0 + (i-(n-1)/2)*26));
+      e.y0 = -12 - i*16 - (i%2)*6;              // formazione a V
+      e.v = (34 + Math.random()*10) * spdMul;
+      e.amp = 20 + Math.random()*14;
+      e.w = 2.0 + Math.random()*0.8;
+    } else if (type === 'wing'){
+      e.pat = 'swoop';
+      e.dir = Math.random() < 0.5 ? 1 : -1;
+      e.x0 = e.dir > 0 ? -16 - i*24 : W + 16 + i*24;
+      e.y0 = 34 + Math.random()*46;
+      e.v = (36 + Math.random()*10) * spdMul;
+      e.amp = 14 + Math.random()*10;
+      e.w = 2.6;
+    } else {
+      e.pat = 'zigzag';
+      e.x0 = 50 + Math.random()*(W-100) + (i ? (i%2 ? 44 : -44) : 0);
+      e.x0 = Math.min(W-40, Math.max(40, e.x0));
+      e.y0 = -14 - i*20;
+      e.v = (16 + Math.random()*5) * spdMul;
+      e.amp = 30 + Math.random()*16;
+      e.w = 1.5;
     }
-    const c = document.createElement('canvas');
-    c.width = BK_W; c.height = BK_H;
-    bunkers.push({ x: gap*i + (gap-BK_W)/2, y: 252, mask, canvas: c, dirty: true });
+    const p = enemyPos(e);
+    e.x = p.x; e.y = p.y;
+    enemies.push(e);
   }
-}
-function bunkerRepaint(b){
-  const g = b.canvas.getContext('2d');
-  g.clearRect(0,0,BK_W,BK_H);
-  g.fillStyle = COLORS.green;
-  for (let y=0; y<BK_H; y++)
-    for (let x=0; x<BK_W; x++)
-      if (b.mask[y][x]) g.fillRect(x,y,1,1);
-  b.dirty = false;
-}
-/* Erode il bunker attorno a un punto d'impatto (coordinate locali) */
-function bunkerDamage(b, lx, ly){
-  for (let i=0; i<14; i++){
-    const dx = Math.round((Math.random()-0.5)*5);
-    const dy = Math.round((Math.random()-0.5)*5);
-    const x = lx+dx, y = ly+dy;
-    if (x>=0 && x<BK_W && y>=0 && y<BK_H) b.mask[y][x] = 0;
-  }
-  for (let dy=-1; dy<=1; dy++)
-    for (let dx=-1; dx<=1; dx++){
-      const x = lx+dx, y = ly+dy;
-      if (x>=0 && x<BK_W && y>=0 && y<BK_H) b.mask[y][x] = 0;
-    }
-  b.dirty = true;
-}
-/* Punto (x,y) globale colpisce un bunker? Ritorna il bunker o null */
-function bunkerAt(x, y){
-  for (const b of bunkers){
-    const lx = Math.floor(x-b.x), ly = Math.floor(y-b.y);
-    if (lx>=0 && lx<BK_W && ly>=0 && ly<BK_H && b.mask[ly][lx]) return {b, lx, ly};
-  }
-  return null;
 }
 
 /* ============ Gestione stati ============ */
 function setState(s){ state = s; stateT = 0; }
 
 function startGame(){
-  score = 0; lives = 3; wave = 1; extraLifeGiven = false;
+  score = 0; lives = 3; level = 1; kills = 0; killsSincePow = 0;
+  nextLifeAt = 2500; laserLevel = 1;
+  hiscoreAtStart = hiscore;
+  enemies = []; lasers = []; bullets = []; powerups = [];
   particles = []; popups = [];
+  spawnT = 0.8; pulseT = 0;
   player.x = W/2; player.invuln = 0; player.cool = 0; player.targetX = null;
-  buildWave();
-  setState(ST.WAVEINTRO);
+  setState(ST.INTRO);
 }
 
 function addScore(n){
   score += n;
-  if (!extraLifeGiven && score >= 1500){
-    extraLifeGiven = true;
-    lives = Math.min(5, lives+1);
-    popups.push({ x: player.x, y: PLAYER_Y-14, text: 'VITA EXTRA', life: 1.4, color: COLORS.amber });
-    sfxExtraLife();
+  if (score >= nextLifeAt){
+    nextLifeAt += 2500;
+    if (lives < 5){
+      lives++;
+      popups.push({ x: player.x, y: PLAYER_Y-14, text: 'VITA EXTRA', life: 1.4, color: COLORS.amber });
+      sfxExtraLife();
+    }
   }
   if (score > hiscore){
     hiscore = score;
-    localStorage.setItem('li_hiscore', String(hiscore));
+    storeSet('li_hiscore', String(hiscore));
   }
+}
+function addScorePopup(x, y, text_, color){
+  popups.push({ x, y, text: text_, life: 1.1, color });
 }
 
 function boom(x, y, color, n){
@@ -580,17 +577,9 @@ function boom(x, y, color, n){
 }
 
 /* ============ Update ============ */
-function alienRect(a){
-  const w = alienW(a.type);
-  return {
-    x: gridX + a.c*CELL + (CELL-w)/2,
-    y: gridY + a.r*CELL,
-    w, h: 8
-  };
-}
-
 function update(dt){
   stateT += dt;
+  animT += dt;
   if (shake > 0) shake = Math.max(0, shake-dt*3);
   if (flash > 0) flash = Math.max(0, flash-dt*4);
 
@@ -610,7 +599,7 @@ function update(dt){
     case ST.ATTRACT:
       break; // si esce con startGame() dall'input
 
-    case ST.WAVEINTRO:
+    case ST.INTRO:
       if (stateT > 1.6) setState(ST.PLAY);
       break;
 
@@ -619,7 +608,8 @@ function update(dt){
       break;
 
     case ST.DYING:
-      updateBombs(dt, false);
+      updateEnemies(dt, false);
+      updatePowerups(dt, false);
       if (stateT > 1.1){
         if (lives <= 0){
           gameOver();
@@ -631,25 +621,27 @@ function update(dt){
       break;
 
     case ST.GAMEOVER:
+      updateEnemies(dt, false);
       if (stateT > 6) setState(ST.ATTRACT);
       break;
   }
 }
 
 function gameOver(){
-  ufoSoundStop();
   sfxGameOver();
+  bullets = [];
   setState(ST.GAMEOVER);
 }
 
 function playerDie(){
   if (player.invuln > 0) return;
   lives--;
+  laserLevel = Math.max(1, laserLevel-1);
   shake = 1; flash = 0.6;
   boom(player.x, PLAYER_Y+4, COLORS.green, 26);
   boom(player.x, PLAYER_Y+4, COLORS.white, 10);
   sfxPlayerBoom();
-  lasers = [];
+  bullets = [];
   setState(ST.DYING);
 }
 
@@ -657,187 +649,174 @@ function updatePlay(dt){
   /* --- movimento player --- */
   const kb = (keys.right?1:0) - (keys.left?1:0) + (pad.right?1:0) - (pad.left?1:0);
   if (kb !== 0){
-    player.x += kb * 120 * dt;
+    player.x += kb * 130 * dt;
     player.targetX = null;
   } else if (player.targetX != null){
     const d = player.targetX - player.x;
-    const step = Math.sign(d) * Math.min(Math.abs(d), 300*dt);
-    player.x += step;
+    player.x += Math.sign(d) * Math.min(Math.abs(d), 300*dt);
   }
   player.x = Math.max(9, Math.min(W-9, player.x));
   if (player.invuln > 0) player.invuln -= dt;
   if (player.cool > 0) player.cool -= dt;
   if ((keys.fire || pad.fire) && player.cool <= 0) fireLaser();
 
-  /* --- marcia alieni --- */
-  const ratio = aliveCount / (ROWS*COLS);
-  let interval = (0.08 + 0.62*ratio) * Math.pow(0.93, wave-1);
-  interval = Math.max(0.055, interval);
-  stepTimer += dt;
-  if (stepTimer >= interval){
-    stepTimer = 0;
-    stepFrame ^= 1;
-    marchStep++;
-    sfxMarch(marchStep);
-
-    /* limiti orizzontali della griglia (solo colonne vive) */
-    let minX = Infinity, maxX = -Infinity, maxY = -Infinity;
-    for (const a of aliens){
-      if (!a.alive) continue;
-      const r = alienRect(a);
-      minX = Math.min(minX, r.x); maxX = Math.max(maxX, r.x+r.w);
-      maxY = Math.max(maxY, r.y+r.h);
-    }
-    const dx = 3 * gridDir;
-    if ((gridDir>0 && maxX+dx > W-6) || (gridDir<0 && minX+dx < 6)){
-      gridDir *= -1;
-      gridY += 7;
-    } else {
-      gridX += dx;
-    }
-
-    /* alieni che passano sui bunker li erodono */
-    for (const a of aliens){
-      if (!a.alive) continue;
-      const r = alienRect(a);
-      for (const b of bunkers){
-        if (r.x < b.x+BK_W && r.x+r.w > b.x && r.y < b.y+BK_H && r.y+r.h > b.y){
-          for (let y=0; y<BK_H; y++)
-            for (let x=0; x<BK_W; x++){
-              const gx = b.x+x, gy = b.y+y;
-              if (gx>=r.x && gx<r.x+r.w && gy>=r.y && gy<r.y+r.h) b.mask[y][x] = 0;
-            }
-          b.dirty = true;
-        }
-      }
-    }
-
-    /* invasione: alieni arrivati alla linea del player */
-    if (maxY >= PLAYER_Y){
-      lives = 0;
-      playerDieInvasion();
-      return;
-    }
+  /* --- battito di fondo --- */
+  pulseT -= dt;
+  if (pulseT <= 0){
+    pulseT = Math.max(0.38, 0.62 - level*0.02);
+    pulseAlt = !pulseAlt;
+    sfxPulse(pulseAlt);
   }
 
-  /* --- laser del player --- */
+  /* --- arrivo squadriglie --- */
+  spawnT -= dt;
+  if (spawnT <= 0){
+    if (enemies.length < 7) spawnGroup();
+    spawnT = Math.max(1.0, 2.3 - level*0.13) + Math.random()*0.6;
+  }
+
+  updateEnemies(dt, true);
+
+  /* --- laser del giocatore --- */
   for (const l of lasers){
-    l.y -= 260*dt;
-    const hitB = bunkerAt(l.x, l.y);
-    if (hitB){ bunkerDamage(hitB.b, hitB.lx, hitB.ly); l.dead = true; continue; }
-    if (ufo && l.y < 46 && l.x > ufo.x && l.x < ufo.x+16){
-      const pts = [50,100,150,300][Math.floor(Math.random()*4)];
-      addScore(pts);
-      popups.push({ x: ufo.x+8, y: 40, text: String(pts), life: 1.2, color: COLORS.red });
-      boom(ufo.x+8, 42, COLORS.red, 16);
-      ufo = null; ufoSoundStop(); sfxUfoHit();
-      l.dead = true; continue;
-    }
-    for (const a of aliens){
-      if (!a.alive) continue;
-      const r = alienRect(a);
-      if (l.x >= r.x && l.x <= r.x+r.w && l.y >= r.y && l.y <= r.y+r.h){
-        a.alive = false; aliveCount--;
-        addScore(alienPoints(a.type));
-        boom(r.x+r.w/2, r.y+4, bandColor(r.y+4), 12);
-        sfxAlienHit();
+    l.y -= 320*dt;
+    l.x += (l.vx||0)*dt;
+    if (l.y < -6 || l.x < -4 || l.x > W+4){ l.dead = true; continue; }
+    for (const e of enemies){
+      if (e.dead) continue;
+      const s = enemySize(e.type);
+      const ex = e.x - s.w/2, ey = e.y;
+      if (l.x >= ex && l.x <= ex+s.w &&
+          ((l.y >= ey && l.y <= ey+s.h) || (l.y+4 >= ey && l.y+4 <= ey+s.h))){
         l.dead = true;
+        e.hp--;
+        if (e.hp <= 0){
+          e.dead = true;
+          killEnemy(e);
+        } else {
+          e.flash = 0.09;
+          sfxHitTick();
+        }
         break;
       }
     }
   }
-  lasers = lasers.filter(l => !l.dead && l.y > 30);
+  lasers = lasers.filter(l => !l.dead);
 
-  /* --- bombe aliene --- */
-  updateBombs(dt, true);
-
-  /* --- UFO --- */
-  if (ufo){
-    ufo.x += ufo.dir * 34 * dt;
-    if (ufo.x < -18 || ufo.x > W+2){ ufo = null; ufoSoundStop(); }
-  } else {
-    ufoTimer -= dt;
-    if (ufoTimer <= 0 && aliveCount > 4){
-      const dir = Math.random() < 0.5 ? 1 : -1;
-      ufo = { x: dir>0 ? -16 : W, dir };
-      ufoTimer = 16 + Math.random()*14;
-      ufoSoundStart();
-    }
-  }
-
-  /* --- ondata completata --- */
-  if (aliveCount === 0){
-    wave++;
-    sfxWaveClear();
-    buildWave();
-    setState(ST.WAVEINTRO);
-  }
-}
-
-function playerDieInvasion(){
-  player.invuln = 0;
-  shake = 1; flash = 0.6;
-  boom(player.x, PLAYER_Y+4, COLORS.green, 26);
-  sfxPlayerBoom();
-  ufoSoundStop();
-  setState(ST.DYING);
-}
-
-function updateBombs(dt, canSpawn){
-  if (canSpawn){
-    bombTimer -= dt;
-    const maxBombs = Math.min(3 + Math.floor(wave/2), 7);
-    if (bombTimer <= 0 && bombs.length < maxBombs && aliveCount > 0){
-      bombTimer = Math.max(0.25, (0.9 - wave*0.06)) + Math.random()*0.7;
-      /* scegli l'alieno più in basso di una colonna casuale viva */
-      const cols = [];
-      for (let c=0; c<COLS; c++){
-        let low = null;
-        for (const a of aliens) if (a.alive && a.c === c && (!low || a.r > low.r)) low = a;
-        if (low) cols.push(low);
-      }
-      if (cols.length){
-        const a = cols[Math.floor(Math.random()*cols.length)];
-        const r = alienRect(a);
-        bombs.push({ x: r.x+r.w/2, y: r.y+9, ph: 0 });
-      }
-    }
-  }
-  const spd = 52 + Math.min(60, wave*7);
-  for (const b of bombs){
-    b.y += spd*dt; b.ph += dt*14;
-    const hitB = bunkerAt(b.x, b.y+3);
-    if (hitB){ bunkerDamage(hitB.b, hitB.lx, hitB.ly); b.dead = true; continue; }
-    /* le bombe possono essere distrutte dal laser */
-    for (const l of lasers){
-      if (!l.dead && Math.abs(l.x-b.x) < 3 && Math.abs(l.y-b.y) < 5){
-        b.dead = true; l.dead = true;
-        boom(b.x, b.y, COLORS.white, 6);
-        sfxBombPop();
-      }
-    }
-    if (b.dead) continue;
-    if (state === ST.PLAY && player.invuln <= 0 &&
-        b.y+3 >= PLAYER_Y && b.y <= PLAYER_Y+8 &&
-        Math.abs(b.x - player.x) < 7){
+  /* --- colpi nemici --- */
+  for (const b of bullets){
+    b.y += b.v*dt;
+    if (b.y > GROUND_Y-2){ b.dead = true; boom(b.x, GROUND_Y-2, COLORS.dim, 3); continue; }
+    if (player.invuln <= 0 &&
+        b.y+4 >= PLAYER_Y+1 && b.y <= PLAYER_Y+8 &&
+        Math.abs(b.x - player.x) < 6){
       b.dead = true;
       playerDie();
       break;
     }
-    if (b.y > GROUND_Y-2){
-      b.dead = true;
-      boom(b.x, GROUND_Y-2, COLORS.dim, 4);
+  }
+  bullets = bullets.filter(b => !b.dead);
+
+  updatePowerups(dt, true);
+
+  /* --- livello: sale con gli abbattimenti --- */
+  const newLevel = 1 + Math.floor(kills/12);
+  if (newLevel > level){
+    level = newLevel;
+    popups.push({ x: W/2, y: 150, text: 'LIVELLO '+level, life: 1.5, color: COLORS.cyan });
+    sfxLevelUp();
+  }
+}
+
+function killEnemy(e){
+  const def = ENEMY_DEF[e.type];
+  addScore(def.pts);
+  addScorePopup(e.x, e.y, String(def.pts), def.color);
+  boom(e.x, e.y+4, def.color, e.type === 'heavy' ? 20 : 12);
+  sfxEnemyBoom(e.type === 'heavy');
+  kills++;
+  killsSincePow++;
+  if (killsSincePow >= 7){
+    killsSincePow = 0;
+    powerups.push({ x: Math.min(W-14, Math.max(14, e.x)), y: Math.max(20, e.y), t: 0 });
+  }
+}
+
+function updateEnemies(dt, canFire){
+  for (const e of enemies){
+    e.t += dt;
+    if (e.flash > 0) e.flash -= dt;
+    const p = enemyPos(e);
+    e.x = p.x; e.y = p.y;
+
+    /* fuoco nemico: raro, solo dentro lo schermo e sopra il giocatore */
+    if (canFire){
+      e.fireT -= dt;
+      if (e.fireT <= 0){
+        e.fireT = Math.max(1.4, 3.4 - level*0.18) + Math.random()*2.2;
+        const maxB = Math.min(8, 3 + level);
+        if (bullets.length < maxB && e.y > 26 && e.y < 210 && e.x > 6 && e.x < W-6){
+          bullets.push({ x: e.x, y: e.y + enemySize(e.type).h, v: Math.min(130, 68 + level*6) });
+        }
+      }
+    }
+
+    /* collisione col giocatore */
+    if (state === ST.PLAY && player.invuln <= 0 && !e.dead){
+      const s = enemySize(e.type);
+      if (e.x + s.w/2 > player.x-6 && e.x - s.w/2 < player.x+6 &&
+          e.y + s.h > PLAYER_Y+1 && e.y < PLAYER_Y+8){
+        e.dead = true;
+        killEnemy(e);
+        playerDie();
+      }
+    }
+
+    /* fuori dallo schermo: la nave se ne va, nessuna penalita */
+    if (e.t > 0.5 && (e.y > H+14 || e.x < -20 || e.x > W+20 || e.t > 45)) e.dead = true;
+  }
+  enemies = enemies.filter(e => !e.dead);
+}
+
+function updatePowerups(dt, canCatch){
+  for (const u of powerups){
+    u.t += dt;
+    u.y += 34*dt;
+    u.x += Math.sin(u.t*2.4)*8*dt;
+    if (u.y > GROUND_Y-4){ u.dead = true; continue; }
+    if (canCatch && state === ST.PLAY &&
+        u.y+10 > PLAYER_Y && u.y < PLAYER_Y+8 &&
+        Math.abs(u.x - player.x) < 10){
+      u.dead = true;
+      if (laserLevel < 3){
+        laserLevel++;
+        addScorePopup(player.x, PLAYER_Y-14, laserLevel === 2 ? 'LASER DOPPIO!' : 'LASER TRIPLO!', COLORS.green);
+      } else {
+        addScore(500);
+        addScorePopup(player.x, PLAYER_Y-14, 'BONUS 500', COLORS.amber);
+      }
+      sfxPowerup();
     }
   }
-  bombs = bombs.filter(b => !b.dead);
+  powerups = powerups.filter(u => !u.dead);
 }
 
 function fireLaser(){
   if (state !== ST.PLAY) return;
-  if (lasers.length >= 2) return;
-  player.cool = 0.30;
-  lasers.push({ x: player.x, y: PLAYER_Y-2 });
-  sfxLaser();
+  if (lasers.length >= 14) return;
+  player.cool = 0.16;
+  const y = PLAYER_Y-2;
+  if (laserLevel === 1){
+    lasers.push({ x: player.x, y, vx: 0 });
+  } else if (laserLevel === 2){
+    lasers.push({ x: player.x-5, y, vx: 0 });
+    lasers.push({ x: player.x+5, y, vx: 0 });
+  } else {
+    lasers.push({ x: player.x, y, vx: 0 });
+    lasers.push({ x: player.x-5, y, vx: -46 });
+    lasers.push({ x: player.x+5, y, vx: 46 });
+  }
+  sfxLaser(laserLevel);
 }
 
 /* ============ Rendering ============ */
@@ -864,8 +843,7 @@ function draw(){
 
   /* stelle */
   for (const s of stars){
-    const a = 0.25 + 0.2*Math.sin(s.tw);
-    cx.globalAlpha = a;
+    cx.globalAlpha = 0.25 + 0.2*Math.sin(s.tw);
     cx.fillStyle = s.s === 2 ? COLORS.cyan : COLORS.white;
     cx.fillRect(Math.round(s.x), Math.round(s.y), 1, s.s === 2 ? 2 : 1);
   }
@@ -883,52 +861,61 @@ function draw(){
   cx.fillStyle = COLORS.green;
   cx.fillRect(0, GROUND_Y, W, 1);
 
-  /* vite + ondata */
-  const shipIcon = sprite('ship', 0, COLORS.green);
+  /* vite, indicatore laser, livello */
+  const shipIcon = sprite('ship1', 0, COLORS.green);
   for (let i=0; i<Math.max(0, lives-1); i++)
     cx.drawImage(shipIcon, 8 + i*17, GROUND_Y+5);
-  text('ONDATA '+wave, W-8, GROUND_Y+6, COLORS.dim, 8, 'right');
+  text('LASER', W/2-40, GROUND_Y+6, COLORS.dim, 8);
+  for (let i=0; i<3; i++){
+    cx.fillStyle = i < laserLevel ? COLORS.green : '#1b2338';
+    cx.fillRect(W/2+8+i*8, GROUND_Y+6, 5, 7);
+  }
+  text('LV '+level, W-8, GROUND_Y+6, COLORS.dim, 8, 'right');
 
-  /* bunker */
-  for (const b of bunkers){
-    if (b.dirty) bunkerRepaint(b);
-    cx.drawImage(b.canvas, Math.round(b.x), b.y);
+  const frame = Math.floor(animT*6) % 2;
+
+  /* nemici */
+  for (const e of enemies){
+    const s = enemySize(e.type);
+    const col = e.flash > 0 ? COLORS.white : ENEMY_DEF[e.type].color;
+    cx.drawImage(sprite(e.type, frame, col), Math.round(e.x - s.w/2), Math.round(e.y));
   }
 
-  /* alieni */
-  for (const a of aliens){
-    if (!a.alive) continue;
-    const r = alienRect(a);
-    cx.drawImage(sprite(a.type, stepFrame, bandColor(r.y+4)), Math.round(r.x), Math.round(r.y));
+  /* capsule [P] */
+  for (const u of powerups){
+    const pulse = 0.6 + 0.4*Math.sin(u.t*6);
+    cx.globalAlpha = 0.35*pulse;
+    cx.fillStyle = COLORS.green;
+    cx.fillRect(Math.round(u.x)-7, Math.round(u.y)-1, 14, 13);
+    cx.globalAlpha = 1;
+    cx.fillStyle = '#03140a';
+    cx.fillRect(Math.round(u.x)-5, Math.round(u.y), 11, 11);
+    cx.strokeStyle = COLORS.green;
+    cx.strokeRect(Math.round(u.x)-4.5, Math.round(u.y)+0.5, 10, 10);
+    text('P', u.x, u.y+2, COLORS.green, 8, 'center');
   }
-
-  /* UFO */
-  if (ufo) cx.drawImage(sprite('ufo', 0, COLORS.red), Math.round(ufo.x), 38);
 
   /* player */
-  const showShip = state !== ST.DYING &&
+  const showShip = state !== ST.DYING && state !== ST.GAMEOVER &&
     !(player.invuln > 0 && Math.floor(player.invuln*10) % 2 === 0);
-  if (showShip && (state === ST.PLAY || state === ST.WAVEINTRO)){
-    cx.drawImage(sprite('ship', 0, COLORS.green), Math.round(player.x-6), PLAYER_Y);
+  if (showShip){
+    cx.drawImage(sprite('ship'+laserLevel, 0, COLORS.green), Math.round(player.x-6), PLAYER_Y);
   }
 
   /* laser */
-  cx.fillStyle = COLORS.white;
   for (const l of lasers){
+    cx.fillStyle = COLORS.white;
     cx.fillRect(Math.round(l.x), Math.round(l.y), 1, 5);
     cx.fillStyle = COLORS.cyan;
     cx.fillRect(Math.round(l.x), Math.round(l.y)+5, 1, 2);
-    cx.fillStyle = COLORS.white;
   }
 
-  /* bombe (zigzag) */
-  for (const b of bombs){
-    const c = bandColor(b.y);
-    cx.fillStyle = c;
-    const o = Math.floor(b.ph) % 2 === 0 ? 1 : -1;
-    cx.fillRect(Math.round(b.x)-o, Math.round(b.y), 1, 2);
-    cx.fillRect(Math.round(b.x), Math.round(b.y)+2, 1, 2);
-    cx.fillRect(Math.round(b.x)+o, Math.round(b.y)+4, 1, 2);
+  /* colpi nemici */
+  for (const b of bullets){
+    cx.fillStyle = COLORS.red;
+    cx.fillRect(Math.round(b.x)-1, Math.round(b.y), 2, 4);
+    cx.fillStyle = COLORS.white;
+    cx.fillRect(Math.round(b.x)-1, Math.round(b.y)+1, 2, 1);
   }
 
   /* particelle */
@@ -947,10 +934,9 @@ function draw(){
   cx.globalAlpha = 1;
 
   /* overlay di stato */
-  if (state === ST.WAVEINTRO){
-    text('ONDATA '+wave, W/2, 140, COLORS.cyan, 8, 'center');
-    if (wave === 1 && stateT < 1.2)
-      text('DIFENDI LA GALASSIA', W/2, 158, COLORS.dim, 8, 'center');
+  if (state === ST.INTRO){
+    text('LIVELLO 1', W/2, 140, COLORS.cyan, 8, 'center');
+    text('DIFENDI LA GALASSIA', W/2, 158, COLORS.dim, 8, 'center');
   }
   if (state === ST.GAMEOVER) drawGameOver();
   if (paused){
@@ -1001,34 +987,40 @@ function drawAttract(){
   const t = stateT;
 
   /* titolo con "aberrazione cromatica" */
-  cx.save();
-  text('LASER', W/2+2, 62+2, COLORS.magenta, 16, 'center');
-  text('LASER', W/2, 62, COLORS.cyan, 16, 'center');
-  text('INVADERS', W/2+2, 86+2, COLORS.magenta, 16, 'center');
-  text('INVADERS', W/2, 86, COLORS.cyan, 16, 'center');
-  cx.restore();
-  text('GALASSIA 1982', W/2, 112, COLORS.dim, 8, 'center');
+  text('LASER', W/2+2, 56+2, COLORS.magenta, 16, 'center');
+  text('LASER', W/2, 56, COLORS.cyan, 16, 'center');
+  text('INVADERS', W/2+2, 80+2, COLORS.magenta, 16, 'center');
+  text('INVADERS', W/2, 80, COLORS.cyan, 16, 'center');
+  text('GALASSIA 1982', W/2, 106, COLORS.dim, 8, 'center');
 
   /* tabella punti con sprite animati */
   const fr = Math.floor(t*2) % 2;
   const rows = [
-    ['ufo',   COLORS.red,   '? MISTERO', 150],
-    ['squid', COLORS.magenta,'30 PUNTI', 172],
-    ['crab',  COLORS.cyan,  '20 PUNTI', 194],
-    ['octo',  COLORS.green, '10 PUNTI', 216]
+    ['dart',  COLORS.cyan,    '50 PUNTI',  140],
+    ['wing',  COLORS.magenta, '100 PUNTI', 162],
+    ['heavy', COLORS.amber,   '150 PUNTI', 184]
   ];
   for (const [name, col, label, y] of rows){
-    const sp = sprite(name, name==='ufo'?0:fr, col);
-    cx.drawImage(sp, Math.round(W/2 - 46 - sp.width/2), y-1);
-    text('= '+label, W/2-30, y, col, 8);
+    const sp = sprite(name, fr, col);
+    cx.drawImage(sp, Math.round(W/2 - 52 - sp.width/2), y-1);
+    text('= '+label, W/2-36, y, col, 8);
   }
+  /* riga capsula [P] */
+  const py = 208;
+  cx.fillStyle = '#03140a';
+  cx.fillRect(W/2-52-5, py-1, 11, 11);
+  cx.strokeStyle = COLORS.green;
+  cx.strokeRect(W/2-52-4.5, py-0.5, 10, 10);
+  text('P', W/2-52, py+1, COLORS.green, 8, 'center');
+  text('= LASER DOPPIO', W/2-36, py, COLORS.green, 8);
+  text('E TRIPLO!', W/2-36, py+12, COLORS.green, 8);
 
   /* invito lampeggiante */
   if (Math.floor(t*2) % 2 === 0){
-    text(isTouch ? 'TOCCA PER GIOCARE' : 'PREMI START', W/2, 252, COLORS.white, 8, 'center');
+    text(isTouch ? 'TOCCA PER GIOCARE' : 'PREMI START', W/2, 250, COLORS.white, 8, 'center');
   }
-  text('RECORD '+pad6(hiscore), W/2, 276, COLORS.amber, 8, 'center');
-  text('(C) 1982 BACCHIN CORP.', W/2, 300, COLORS.dim, 8, 'center');
+  text('RECORD '+pad6(hiscore), W/2, 274, COLORS.amber, 8, 'center');
+  text('(C) 1982 BACCHIN CORP.', W/2, 298, COLORS.dim, 8, 'center');
 }
 
 function drawGameOver(){
@@ -1040,7 +1032,7 @@ function drawGameOver(){
   text(msg.slice(0,n), W/2, 132, COLORS.red, 12, 'center');
   if (stateT > msg.length*0.12 + 0.3){
     text('PUNTEGGIO '+pad6(score), W/2, 158, COLORS.white, 8, 'center');
-    if (score >= hiscore && score > 0 && Math.floor(stateT*3)%2===0)
+    if (score > hiscoreAtStart && score > 0 && Math.floor(stateT*3)%2===0)
       text('NUOVO RECORD!', W/2, 176, COLORS.amber, 8, 'center');
   }
 }
@@ -1135,16 +1127,17 @@ btnSound.addEventListener('click', () => { audioResume(); setMuted(!muted); });
 btnPause.addEventListener('click', () => togglePause());
 
 function togglePause(force){
-  if (state !== ST.PLAY && state !== ST.WAVEINTRO && state !== ST.DYING) return;
+  if (state !== ST.PLAY && state !== ST.INTRO && state !== ST.DYING) return;
   paused = force != null ? force : !paused;
   btnPause.textContent = paused ? 'RIPRENDI' : 'PAUSA';
   if (ac){
     if (paused) ac.suspend();
-    else if (!muted || true) ac.resume();
+    else ac.resume();
   }
 }
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden && state === ST.PLAY) togglePause(true);
+  if (document.hidden && (state === ST.PLAY || state === ST.INTRO || state === ST.DYING))
+    togglePause(true);
 });
 
 /* blocca lo scroll-rimbalzo su iOS */
@@ -1155,9 +1148,8 @@ const stage = document.getElementById('stage');
 function resize(){
   const sw = stage.clientWidth, sh = stage.clientHeight;
   const scale = Math.min(sw/(W+20), sh/(H+20));
-  const w = Math.floor(W*scale), h = Math.floor(H*scale);
-  screenEl.style.width = w+'px';
-  screenEl.style.height = h+'px';
+  screenEl.style.width = Math.floor(W*scale)+'px';
+  screenEl.style.height = Math.floor(H*scale)+'px';
 }
 new ResizeObserver(resize).observe(stage);
 addEventListener('orientationchange', () => setTimeout(resize, 200));
@@ -1165,12 +1157,9 @@ resize();
 
 /* ============ Loop principale ============ */
 let lastT = performance.now();
-let fontReady = false;
-if (document.fonts && document.fonts.ready)
-  document.fonts.ready.then(() => { fontReady = true; });
 try{
   if (document.fonts) document.fonts.load('8px "Press Start 2P"');
-}catch(e){ fontReady = true; }
+}catch(e){}
 
 function frame(now){
   const dt = Math.min(0.05, (now-lastT)/1000);
@@ -1180,6 +1169,19 @@ function frame(now){
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
+
+/* Interfaccia di debug per i collaudi automatici (non usata dal gioco) */
+window.__dbg = {
+  get state(){ return state; },
+  get score(){ return score; },
+  get lives(){ return lives; },
+  get level(){ return level; },
+  get laserLevel(){ return laserLevel; },
+  get enemies(){ return enemies.length; },
+  get kills(){ return kills; },
+  setLaser(n){ laserLevel = Math.max(1, Math.min(3, n)); },
+  spawnPowerup(){ powerups.push({ x: player.x, y: PLAYER_Y-40, t: 0 }); }
+};
 
 /* ============ Service worker (offline / PWA) ============ */
 if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
