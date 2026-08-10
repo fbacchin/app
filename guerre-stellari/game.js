@@ -232,6 +232,15 @@ function touchEnd(e) {
 canvas.addEventListener("touchend", touchEnd, { passive: false });
 canvas.addEventListener("touchcancel", touchEnd, { passive: false });
 
+// Un click del mouse equivale a INVIO nelle schermate di menu (e sblocca l'audio).
+canvas.addEventListener("mousedown", () => {
+  AudioFX.init();
+  if (G.paused || G.screen === "title" || G.screen === "crawl" ||
+      G.screen === "victory" || G.screen === "gameover") {
+    touchTapped = true;
+  }
+});
+
 function onTouchDrag(dx, dy) {
   if (G.screen === "space" && space) {
     space.player.x = clamp(space.player.x + dx * 1.5, 22, W - 22);
