@@ -117,7 +117,7 @@ body{
   padding:2px 10px 6px;
   gap:12px;
 }
-.padgroup{display:flex;gap:14px}
+.padgroup{display:flex;gap:14px;touch-action:none}
 .padbtn{
   width:72px;height:72px;border-radius:50%;
   border:2px solid #2a3350;
@@ -330,6 +330,12 @@ function audioInit(){
   try{
     ac = new (window.AudioContext || window.webkitAudioContext)();
   }catch(e){ return; }
+  /* su iPhone l'audio deve suonare anche con l'interruttore laterale su silenzioso */
+  try{ if (navigator.audioSession) navigator.audioSession.type = 'playback'; }catch(e){}
+  /* iOS mette il contesto in pausa per chiamate/Siri: riprendilo appena possibile */
+  ac.onstatechange = () => {
+    if (ac.state === 'suspended' && !paused && !document.hidden) ac.resume();
+  };
   const comp = ac.createDynamicsCompressor();
   comp.threshold.value = -18; comp.ratio.value = 8;
   master = ac.createGain();
@@ -352,7 +358,7 @@ function setMuted(m){
 }
 
 function noise(dur, freq, vol, type){
-  if (!ac || muted) return;
+  if (!ac || muted || ac.state !== 'running') return;
   const t = ac.currentTime;
   const s = ac.createBufferSource(); s.buffer = noiseBuf; s.loop = true;
   const f = ac.createBiquadFilter(); f.type = type || 'bandpass';
@@ -365,7 +371,7 @@ function noise(dur, freq, vol, type){
   s.start(t); s.stop(t+dur+0.02);
 }
 function tone(type, f0, f1, dur, vol, when){
-  if (!ac || muted) return;
+  if (!ac || muted || ac.state !== 'running') return;
   const t = ac.currentTime + (when||0);
   const o = ac.createOscillator(); o.type = type;
   o.frequency.setValueAtTime(f0, t);
@@ -686,8 +692,10 @@ function updatePlay(dt){
       if (e.dead) continue;
       const s = enemySize(e.type);
       const ex = e.x - s.w/2, ey = e.y;
+      /* test "spazzato": copre l'intero tragitto del colpo nel frame,
+         cosi il laser non attraversa i nemici ai framerate bassi */
       if (l.x >= ex && l.x <= ex+s.w &&
-          ((l.y >= ey && l.y <= ey+s.h) || (l.y+4 >= ey && l.y+4 <= ey+s.h))){
+          l.y <= ey+s.h && l.y + 4 + 320*dt >= ey){
         l.dead = true;
         e.hp--;
         if (e.hp <= 0){
@@ -744,6 +752,7 @@ function killEnemy(e){
 
 function updateEnemies(dt, canFire){
   for (const e of enemies){
+    if (e.dead) continue;
     e.t += dt;
     if (e.flash > 0) e.flash -= dt;
     const p = enemyPos(e);
@@ -880,6 +889,7 @@ function draw(){
 
   /* nemici */
   for (const e of enemies){
+    if (e.dead) continue;
     const s = enemySize(e.type);
     const col = e.flash > 0 ? COLORS.white : ENEMY_DEF[e.type].color;
     cx.drawImage(sprite(e.type, frame, col), Math.round(e.x - s.w/2), Math.round(e.y));
@@ -1120,9 +1130,43 @@ function holdButton(el, prop){
   el.addEventListener('pointercancel', off);
   el.addEventListener('lostpointercapture', off);
 }
-holdButton(document.getElementById('btnLeft'), 'left');
-holdButton(document.getElementById('btnRight'), 'right');
 holdButton(document.getElementById('btnFire'), 'fire');
+
+/* ◀ ▶ come zona unica: far scivolare il pollice tra i due cambia direzione */
+const padGroup = document.querySelector('.padgroup');
+const btnL = document.getElementById('btnLeft');
+const btnR = document.getElementById('btnRight');
+const dirPointers = new Map();   // pointerId -> 'left' | 'right'
+function dirFromPoint(clientX){
+  const rl = btnL.getBoundingClientRect(), rr = btnR.getBoundingClientRect();
+  return clientX < (rl.right + rr.left)/2 ? 'left' : 'right';
+}
+function refreshDirPad(){
+  const dirs = [...dirPointers.values()];
+  pad.left = dirs.includes('left');
+  pad.right = dirs.includes('right');
+  btnL.classList.toggle('held', pad.left);
+  btnR.classList.toggle('held', pad.right);
+}
+padGroup.addEventListener('pointerdown', e => {
+  e.preventDefault();
+  audioResume();
+  dirPointers.set(e.pointerId, dirFromPoint(e.clientX));
+  refreshDirPad();
+  try{ padGroup.setPointerCapture(e.pointerId); }catch(err){}
+});
+padGroup.addEventListener('pointermove', e => {
+  if (!dirPointers.has(e.pointerId)) return;
+  dirPointers.set(e.pointerId, dirFromPoint(e.clientX));
+  refreshDirPad();
+});
+function dirEnd(e){
+  dirPointers.delete(e.pointerId);
+  refreshDirPad();
+}
+padGroup.addEventListener('pointerup', dirEnd);
+padGroup.addEventListener('pointercancel', dirEnd);
+padGroup.addEventListener('lostpointercapture', dirEnd);
 
 const btnSound = document.getElementById('btnSound');
 const btnPause = document.getElementById('btnPause');
