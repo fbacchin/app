@@ -5,6 +5,12 @@
  "ch.gottardo.south": {
   "phase": "clear"
  },
+ "hr-ba.nova-sela.entry": {
+  "phase": "clear"
+ },
+ "hr-ba.nova-sela.exit": {
+  "phase": "clear"
+ },
  "hr-me.karasovici.entry": {
   "phase": "clear"
  },
