@@ -2253,5 +2253,25 @@
   "held": [
    "hr-rs.tovarnik"
   ]
+ },
+ {
+  "time": "2026-08-10T09:28:19Z",
+  "w": {
+   "ch.gottardo.south": 20,
+   "ch.gottardo.north": 40,
+   "hr-me.karasovici.exit": 30,
+   "hr-me.karasovici.entry": 60,
+   "hr-ba.nova-sela.exit": 30,
+   "hr-ba.nova-sela.entry": 30,
+   "hr-rs.bajakovo.exit": 30,
+   "hr-rs.bajakovo.entry": 30,
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 60,
+   "pl-ua.korczowa.exit": 120,
+   "pl-ua.hrebenne.exit": 0
+  }
  }
 ]
