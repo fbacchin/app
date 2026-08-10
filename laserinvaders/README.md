@@ -9,8 +9,9 @@ dipendenze, niente build, funziona anche offline.
 
 - **Desktop**: frecce ← → (o A/D) per muovere, **SPAZIO** per sparare
   (tieni premuto: fuoco automatico), **P** pausa, **M** audio.
-- **iPhone / iPad**: trascina il dito sullo schermo per muovere la navicella, oppure usa i
-  pulsanti ◀ ▶; tieni premuto **FUOCO** per sparare a raffica.
+- **iPhone / iPad**: trascina il dito in qualsiasi punto dello schermo per muovere la
+  navicella (movimento relativo: il dito non copre mai la nave); un unico pulsante,
+  **FUOCO** — tienilo premuto per sparare a raffica.
 - Ogni 7 astronavi abbattute cade una capsula **[P]**: prendila per passare al laser
   doppio e poi triplo (a laser già triplo vale 500 punti bonus).
 - Se vieni colpito perdi una vita e il laser scende di un livello.
@@ -27,9 +28,9 @@ dipendenze, niente build, funziona anche offline.
 ## Caratteristiche
 
 - Estetica CRT autentica: scanline, maschera RGB, vignettatura, accensione del tubo catodico.
-- Audio 100% sintetizzato con Web Audio API: il "pew" laser (doppio oscillatore in caduta
-  esponenziale, stile disco anni '80— il timbro sale col laser potenziato), esplosioni,
-  battito di fondo che accelera col livello.
+- Audio 100% sintetizzato con Web Audio API: il "fiu fiu" del laser (glissando sinusoidale
+  discendente, come i laser disco di "I Don't Feel Like Dancin'" degli Scissor Sisters —
+  il timbro sale col laser potenziato), esplosioni, battito di fondo che accelera col livello.
 - Font pixel (Press Start 2P) incorporato in base64: nessuna richiesta esterna.
 - PWA completa: manifest, service worker, icone — installabile e giocabile offline.
 

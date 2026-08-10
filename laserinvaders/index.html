@@ -117,25 +117,24 @@ body{
   padding:2px 10px 6px;
   gap:12px;
 }
-.padgroup{display:flex;gap:14px;touch-action:none}
+#dragHint{
+  font-size:7px;letter-spacing:1px;line-height:2.1;color:#4a5470;
+  padding-left:8px;
+}
 .padbtn{
-  width:72px;height:72px;border-radius:50%;
-  border:2px solid #2a3350;
+  border-radius:50%;
+  border:2px solid #432a50;
   background:rgba(10,13,26,.85);
-  color:var(--cyan);
-  font-family:var(--px);font-size:20px;
+  font-family:var(--px);
   display:flex;align-items:center;justify-content:center;
-  box-shadow:0 0 14px rgba(46,230,255,.12),inset 0 0 12px rgba(0,0,0,.6);
   touch-action:none;
 }
 .padbtn.fire{
-  width:88px;height:88px;
-  color:var(--magenta);font-size:10px;letter-spacing:1px;
-  border-color:#432a50;
+  width:96px;height:96px;
+  color:var(--magenta);font-size:11px;letter-spacing:1px;
   box-shadow:0 0 16px rgba(255,61,240,.18),inset 0 0 12px rgba(0,0,0,.6);
 }
-.padbtn.held{border-color:var(--cyan);color:#fff;background:rgba(46,230,255,.14)}
-.padbtn.fire.held{border-color:var(--magenta);background:rgba(255,61,240,.16)}
+.padbtn.fire.held{border-color:var(--magenta);color:#fff;background:rgba(255,61,240,.16)}
 @media (pointer:coarse){
   #controls{display:flex}
   #marquee{display:none}
@@ -170,10 +169,7 @@ body{
     </div>
   </div>
   <div id="controls">
-    <div class="padgroup">
-      <div class="padbtn" id="btnLeft" role="button" aria-label="Sinistra">&#9664;</div>
-      <div class="padbtn" id="btnRight" role="button" aria-label="Destra">&#9654;</div>
-    </div>
+    <div id="dragHint">TRASCINA SULLO<br>SCHERMO PER MUOVERE</div>
     <div class="padbtn fire" id="btnFire" role="button" aria-label="Fuoco">FUOCO</div>
   </div>
   <div id="hint">&#9664; &#9654; MUOVI &nbsp;·&nbsp; SPAZIO SPARA (TIENI PREMUTO) &nbsp;·&nbsp; P PAUSA &nbsp;·&nbsp; M AUDIO</div>
@@ -384,13 +380,14 @@ function tone(type, f0, f1, dur, vol, when){
   o.start(t); o.stop(t+dur+0.03);
 }
 
-/* Il "pew": due oscillatori in caduta esponenziale, il classico laser disco.
-   Con il laser potenziato il timbro sale leggermente. */
+/* Il "fiu": glissando sinusoidale morbido in discesa, come i laser disco
+   di "I Don't Feel Like Dancin'" degli Scissor Sisters. Due sinusoidi
+   leggermente scordate danno corpo; col laser potenziato parte piu in alto. */
 function sfxLaser(level){
-  const base = 1700 + level*220;
-  tone('square',   base,      150, 0.14, 0.26);
-  tone('sawtooth', base*1.55, 220, 0.12, 0.13);
-  noise(0.04, 5200, 0.08, 'highpass');
+  const base = 2400 + level*250;
+  tone('sine',     base,      210, 0.28, 0.42);
+  tone('sine',     base*1.011,225, 0.28, 0.20);
+  tone('triangle', base/2,    105, 0.24, 0.14);
 }
 function sfxHitTick(){
   noise(0.05, 2600, 0.18);
@@ -440,7 +437,7 @@ const GROUND_Y = 306;
 const PLAYER_Y = 286;
 
 /* Player */
-const player = { x: W/2, targetX: null, invuln: 0, cool: 0 };
+const player = { x: W/2, invuln: 0, cool: 0 };
 let laserLevel = 1;        // 1 = singolo, 2 = doppio, 3 = triplo
 
 /* Entita */
@@ -552,7 +549,7 @@ function startGame(){
   enemies = []; lasers = []; bullets = []; powerups = [];
   particles = []; popups = [];
   spawnT = 0.8; pulseT = 0;
-  player.x = W/2; player.invuln = 0; player.cool = 0; player.targetX = null;
+  player.x = W/2; player.invuln = 0; player.cool = 0;
   setState(ST.INTRO);
 }
 
@@ -620,7 +617,7 @@ function update(dt){
         if (lives <= 0){
           gameOver();
         } else {
-          player.x = W/2; player.targetX = null; player.invuln = 2.2;
+          player.x = W/2; player.invuln = 2.2;
           setState(ST.PLAY);
         }
       }
@@ -652,15 +649,9 @@ function playerDie(){
 }
 
 function updatePlay(dt){
-  /* --- movimento player --- */
-  const kb = (keys.right?1:0) - (keys.left?1:0) + (pad.right?1:0) - (pad.left?1:0);
-  if (kb !== 0){
-    player.x += kb * 130 * dt;
-    player.targetX = null;
-  } else if (player.targetX != null){
-    const d = player.targetX - player.x;
-    player.x += Math.sign(d) * Math.min(Math.abs(d), 300*dt);
-  }
+  /* --- movimento player (tastiera; il touch muove via trascinamento) --- */
+  const kb = (keys.right?1:0) - (keys.left?1:0);
+  if (kb !== 0) player.x += kb * 130 * dt;
   player.x = Math.max(9, Math.min(W-9, player.x));
   if (player.invuln > 0) player.invuln -= dt;
   if (player.cool > 0) player.cool -= dt;
@@ -1053,7 +1044,7 @@ function drawGameOver(){
 
 /* ============ Input ============ */
 const keys = { left:false, right:false, fire:false };
-const pad  = { left:false, right:false, fire:false };
+const pad  = { fire:false };
 const isTouch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
 
 function anyStart(){
@@ -1090,22 +1081,33 @@ function fireOnPress(){
   if (state === ST.PLAY && !paused && player.cool <= 0) fireLaser();
 }
 
-/* Touch: trascina sul canvas per muovere, pulsanti per muovere/sparare */
+/* Touch stile "Morte Nera": trascina il dito ovunque sullo schermo per
+   muovere la navicella (movimento relativo, il dito non copre la nave);
+   l'unico pulsante e FUOCO. */
 const screenEl = document.getElementById('screen');
-function canvasX(e){
-  const r = cv.getBoundingClientRect();
-  return (e.clientX - r.left) / r.width * W;
-}
+let dragId = null, dragLastX = 0;
 screenEl.addEventListener('pointerdown', e => {
   audioResume();
   if (state === ST.ATTRACT || state === ST.GAMEOVER){ anyStart(); return; }
   if (paused){ togglePause(false); return; }
-  if (e.pointerType !== 'mouse') player.targetX = canvasX(e);
+  if (e.pointerType !== 'mouse' && dragId === null){
+    dragId = e.pointerId;
+    dragLastX = e.clientX;
+    try{ screenEl.setPointerCapture(e.pointerId); }catch(err){}
+  }
 });
 screenEl.addEventListener('pointermove', e => {
-  if (e.pointerType !== 'mouse' && e.buttons !== 0 && state === ST.PLAY)
-    player.targetX = canvasX(e);
+  if (e.pointerId !== dragId) return;
+  const r = cv.getBoundingClientRect();
+  const dx = (e.clientX - dragLastX) / r.width * W;
+  dragLastX = e.clientX;
+  if (state === ST.PLAY && !paused)
+    player.x = Math.max(9, Math.min(W-9, player.x + dx*1.5));
 });
+function dragEnd(e){ if (e.pointerId === dragId) dragId = null; }
+screenEl.addEventListener('pointerup', dragEnd);
+screenEl.addEventListener('pointercancel', dragEnd);
+screenEl.addEventListener('lostpointercapture', dragEnd);
 
 function holdButton(el, prop){
   const ids = new Set();
@@ -1131,42 +1133,6 @@ function holdButton(el, prop){
   el.addEventListener('lostpointercapture', off);
 }
 holdButton(document.getElementById('btnFire'), 'fire');
-
-/* ◀ ▶ come zona unica: far scivolare il pollice tra i due cambia direzione */
-const padGroup = document.querySelector('.padgroup');
-const btnL = document.getElementById('btnLeft');
-const btnR = document.getElementById('btnRight');
-const dirPointers = new Map();   // pointerId -> 'left' | 'right'
-function dirFromPoint(clientX){
-  const rl = btnL.getBoundingClientRect(), rr = btnR.getBoundingClientRect();
-  return clientX < (rl.right + rr.left)/2 ? 'left' : 'right';
-}
-function refreshDirPad(){
-  const dirs = [...dirPointers.values()];
-  pad.left = dirs.includes('left');
-  pad.right = dirs.includes('right');
-  btnL.classList.toggle('held', pad.left);
-  btnR.classList.toggle('held', pad.right);
-}
-padGroup.addEventListener('pointerdown', e => {
-  e.preventDefault();
-  audioResume();
-  dirPointers.set(e.pointerId, dirFromPoint(e.clientX));
-  refreshDirPad();
-  try{ padGroup.setPointerCapture(e.pointerId); }catch(err){}
-});
-padGroup.addEventListener('pointermove', e => {
-  if (!dirPointers.has(e.pointerId)) return;
-  dirPointers.set(e.pointerId, dirFromPoint(e.clientX));
-  refreshDirPad();
-});
-function dirEnd(e){
-  dirPointers.delete(e.pointerId);
-  refreshDirPad();
-}
-padGroup.addEventListener('pointerup', dirEnd);
-padGroup.addEventListener('pointercancel', dirEnd);
-padGroup.addEventListener('lostpointercapture', dirEnd);
 
 const btnSound = document.getElementById('btnSound');
 const btnPause = document.getElementById('btnPause');
@@ -1227,6 +1193,7 @@ window.__dbg = {
   get laserLevel(){ return laserLevel; },
   get enemies(){ return enemies.length; },
   get kills(){ return kills; },
+  get playerX(){ return player.x; },
   setLaser(n){ laserLevel = Math.max(1, Math.min(3, n)); },
   spawnPowerup(){ powerups.push({ x: player.x, y: PLAYER_Y-40, t: 0 }); }
 };
