@@ -749,6 +749,10 @@ function updateEnemies(dt, canFire){
     const p = enemyPos(e);
     e.x = p.x; e.y = p.y;
 
+    /* una nave conta come "entrata in scena" solo quando raggiunge lo schermo:
+       le gregarie partono fino a 64px fuori e non vanno eliminate prima */
+    if (!e.seen && e.x > -14 && e.x < W+14 && e.y > -12 && e.y < H) e.seen = true;
+
     /* fuoco nemico: raro, solo dentro lo schermo e sopra il giocatore */
     if (canFire){
       e.fireT -= dt;
@@ -773,7 +777,7 @@ function updateEnemies(dt, canFire){
     }
 
     /* fuori dallo schermo: la nave se ne va, nessuna penalita */
-    if (e.t > 0.5 && (e.y > H+14 || e.x < -20 || e.x > W+20 || e.t > 45)) e.dead = true;
+    if ((e.seen && (e.y > H+14 || e.x < -20 || e.x > W+20)) || e.t > 45) e.dead = true;
   }
   enemies = enemies.filter(e => !e.dead);
 }
