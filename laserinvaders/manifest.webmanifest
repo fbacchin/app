@@ -1,0 +1,16 @@
+{
+  "name": "Laser Invaders",
+  "short_name": "Laser Invaders",
+  "description": "Sparatutto arcade stile anni '80: difendi la galassia a colpi di laser.",
+  "lang": "it",
+  "start_url": ".",
+  "scope": ".",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#05060f",
+  "theme_color": "#05060f",
+  "icons": [
+    { "src": "icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

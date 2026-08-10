@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Laser Invaders</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="description" content="Laser Invaders — sparatutto arcade anni '80. Difendi la galassia a colpi di laser.">
+<meta name="theme-color" content="#05060f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Laser Invaders">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-180.png">
+<style>
+/* ============ Font pixel incorporato (Press Start 2P, subset latino) ============ */
+@font-face{
+  font-family:'Press Start 2P';
+  font-style:normal;
+  font-weight:400;
+  font-display:block;
+  src:url(data:font/woff2;base64,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) format('woff2');
+}
+
+/* ============ Reset & palette ============ */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#05060f;
+  --room:#0a0c18;
+  --bezel:#0b0d14;
+  --bezel-edge:#232a3d;
+  --green:#39ff6e;
+  --cyan:#2ee6ff;
+  --magenta:#ff3df0;
+  --amber:#ffb300;
+  --red:#ff2b4a;
+  --px:'Press Start 2P',monospace;
+}
+html,body{height:100%}
+body{
+  background:radial-gradient(120% 90% at 50% 30%,var(--room) 0%,#020308 100%);
+  color:var(--green);
+  font-family:var(--px);
+  overflow:hidden;
+  touch-action:none;
+  -webkit-user-select:none;user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-text-size-adjust:100%;
+}
+
+/* ============ Layout cabinet ============ */
+#cabinet{
+  height:100%;
+  display:flex;flex-direction:column;align-items:center;
+  padding:calc(6px + env(safe-area-inset-top)) calc(6px + env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) calc(6px + env(safe-area-inset-left));
+  gap:8px;
+}
+#marquee{
+  flex:none;
+  font-size:13px;letter-spacing:2px;text-align:center;padding-top:6px;
+  color:var(--cyan);
+  text-shadow:0 0 8px rgba(46,230,255,.9),3px 3px 0 var(--magenta),3px 3px 8px rgba(255,61,240,.7);
+}
+#marquee small{display:block;font-size:7px;color:#5a637f;text-shadow:none;margin-top:6px;letter-spacing:3px}
+#stage{flex:1;align-self:stretch;position:relative;min-height:0}
+
+/* ============ Schermo CRT ============ */
+#screen{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  background:#000;
+  border:8px solid var(--bezel);
+  outline:2px solid var(--bezel-edge);
+  border-radius:14px;
+  box-shadow:0 0 70px rgba(46,230,255,.10),0 0 24px rgba(0,0,0,.9),inset 0 0 40px rgba(0,0,0,.7);
+  overflow:hidden;
+}
+#game{
+  display:block;width:100%;height:100%;
+  image-rendering:pixelated;image-rendering:crisp-edges;
+  background:#000;
+}
+#screen .fx{position:absolute;inset:0;pointer-events:none;border-radius:6px}
+#screen .scanlines{
+  background:repeating-linear-gradient(to bottom,rgba(0,0,0,.28) 0 1px,transparent 1px 3px);
+  mix-blend-mode:multiply;
+}
+#screen .rgbmask{
+  background:repeating-linear-gradient(to right,rgba(255,0,90,.06) 0 1px,rgba(0,255,140,.05) 1px 2px,rgba(0,120,255,.06) 2px 3px);
+}
+#screen .vignette{
+  background:radial-gradient(ellipse 90% 80% at 50% 48%,transparent 55%,rgba(0,0,0,.5) 100%);
+}
+#screen .flicker{background:#fff;opacity:0;animation:flick 7s infinite steps(1)}
+@keyframes flick{
+  0%,93%,100%{opacity:0}
+  94%{opacity:.015}95%{opacity:0}
+  96.5%{opacity:.02}97%{opacity:0}
+}
+
+/* ============ Pulsanti servizio (audio / pausa) ============ */
+#sysbtns{position:absolute;top:2px;right:2px;display:flex;gap:6px;z-index:5}
+.sysbtn{
+  font-family:var(--px);font-size:8px;letter-spacing:1px;
+  color:#7f8ab0;background:rgba(8,10,20,.75);
+  border:1px solid #2a3350;border-radius:6px;
+  padding:8px 9px;cursor:pointer;
+}
+.sysbtn:active{color:var(--cyan);border-color:var(--cyan)}
+.sysbtn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+
+/* ============ Controlli touch ============ */
+#controls{
+  flex:none;align-self:stretch;
+  display:none;
+  justify-content:space-between;align-items:center;
+  padding:2px 10px 6px;
+  gap:12px;
+}
+.padgroup{display:flex;gap:14px}
+.padbtn{
+  width:72px;height:72px;border-radius:50%;
+  border:2px solid #2a3350;
+  background:rgba(10,13,26,.85);
+  color:var(--cyan);
+  font-family:var(--px);font-size:20px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 14px rgba(46,230,255,.12),inset 0 0 12px rgba(0,0,0,.6);
+  touch-action:none;
+}
+.padbtn.fire{
+  width:88px;height:88px;
+  color:var(--magenta);font-size:10px;letter-spacing:1px;
+  border-color:#432a50;
+  box-shadow:0 0 16px rgba(255,61,240,.18),inset 0 0 12px rgba(0,0,0,.6);
+}
+.padbtn.held{border-color:var(--cyan);color:#fff;background:rgba(46,230,255,.14)}
+.padbtn.fire.held{border-color:var(--magenta);background:rgba(255,61,240,.16)}
+@media (pointer:coarse){
+  #controls{display:flex}
+  #marquee{display:none}
+}
+
+/* ============ Suggerimenti desktop ============ */
+#hint{
+  flex:none;font-size:7px;letter-spacing:2px;color:#4a5470;padding-bottom:4px;text-align:center;
+}
+@media (pointer:coarse){#hint{display:none}}
+@media (max-height:520px){#marquee{display:none}}
+
+@media (prefers-reduced-motion:reduce){
+  #screen .flicker{animation:none}
+}
+</style>
+</head>
+<body>
+<div id="cabinet">
+  <div id="marquee">LASER INVADERS<small>GALASSIA · 1982</small></div>
+  <div id="stage">
+    <div id="screen">
+      <canvas id="game" width="256" height="320"></canvas>
+      <div class="fx rgbmask"></div>
+      <div class="fx scanlines"></div>
+      <div class="fx vignette"></div>
+      <div class="fx flicker"></div>
+    </div>
+    <div id="sysbtns">
+      <button class="sysbtn" id="btnSound" aria-label="Attiva o disattiva audio">AUDIO ON</button>
+      <button class="sysbtn" id="btnPause" aria-label="Pausa">PAUSA</button>
+    </div>
+  </div>
+  <div id="controls">
+    <div class="padgroup">
+      <div class="padbtn" id="btnLeft" aria-label="Sinistra">&#9664;</div>
+      <div class="padbtn" id="btnRight" aria-label="Destra">&#9654;</div>
+    </div>
+    <div class="padbtn fire" id="btnFire" aria-label="Fuoco">FUOCO</div>
+  </div>
+  <div id="hint">&#9664; &#9654; MUOVI &nbsp;·&nbsp; SPAZIO SPARA &nbsp;·&nbsp; P PAUSA &nbsp;·&nbsp; M AUDIO</div>
+</div>
+
+<script>
+'use strict';
+/* =====================================================================
+   LASER INVADERS — sparatutto arcade stile 1982
+   Risoluzione logica 256x320, upscaling pixelated, audio Web Audio API.
+   ===================================================================== */
+
+const W = 256, H = 320;
+const cv = document.getElementById('game');
+const cx = cv.getContext('2d');
+
+const COLORS = {
+  green:'#39ff6e', cyan:'#2ee6ff', magenta:'#ff3df0',
+  amber:'#ffb300', red:'#ff2b4a', white:'#e8f6ff', dim:'#43507a'
+};
+
+/* Bande di colore "cellophane": come nei cabinet del 1978-82 il monitor era
+   monocromatico con strisce di gelatina colorata — il colore dipende dalla
+   riga dello schermo, quindi gli alieni cambiano colore mentre scendono. */
+function bandColor(y){
+  if (y < 34)  return COLORS.amber;
+  if (y < 100) return COLORS.magenta;
+  if (y < 170) return COLORS.cyan;
+  return COLORS.green;
+}
+
+/* ============ Sprite (bitmap in stringhe) ============ */
+const SPR = {
+  squid: [[
+    '...XX...',
+    '..XXXX..',
+    '.XXXXXX.',
+    'XX.XX.XX',
+    'XXXXXXXX',
+    '..X..X..',
+    '.X.XX.X.',
+    'X.X..X.X'
+  ],[
+    '...XX...',
+    '..XXXX..',
+    '.XXXXXX.',
+    'XX.XX.XX',
+    'XXXXXXXX',
+    '.X.XX.X.',
+    'X......X',
+    '.X....X.'
+  ]],
+  crab: [[
+    '..X.....X..',
+    '...X...X...',
+    '..XXXXXXX..',
+    '.XX.XXX.XX.',
+    'XXXXXXXXXXX',
+    'X.XXXXXXX.X',
+    'X.X.....X.X',
+    '...XX.XX...'
+  ],[
+    '..X.....X..',
+    'X..X...X..X',
+    'X.XXXXXXX.X',
+    'XXX.XXX.XXX',
+    'XXXXXXXXXXX',
+    '.XXXXXXXXX.',
+    '..X.....X..',
+    '.X.......X.'
+  ]],
+  octo: [[
+    '....XXXX....',
+    '.XXXXXXXXXX.',
+    'XXXXXXXXXXXX',
+    'XXX..XX..XXX',
+    'XXXXXXXXXXXX',
+    '...XX..XX...',
+    '..XX.XX.XX..',
+    'XX........XX'
+  ],[
+    '....XXXX....',
+    '.XXXXXXXXXX.',
+    'XXXXXXXXXXXX',
+    'XXX..XX..XXX',
+    'XXXXXXXXXXXX',
+    '..XXX..XXX..',
+    '.XX..XX..XX.',
+    '..XX....XX..'
+  ]],
+  ship: [[
+    '......X......',
+    '.....XXX.....',
+    '.....XXX.....',
+    '.XXXXXXXXXXX.',
+    'XXXXXXXXXXXXX',
+    'XXXXXXXXXXXXX',
+    'XXXXXXXXXXXXX',
+    'XXXXXXXXXXXXX'
+  ]],
+  ufo: [[
+    '.....XXXXXX.....',
+    '...XXXXXXXXXX...',
+    '..XXXXXXXXXXXX..',
+    '.XX.XX.XX.XX.XX.',
+    'XXXXXXXXXXXXXXXX',
+    '..XXX..XX..XXX..',
+    '...X........X...'
+  ]]
+};
+
+/* Cache degli sprite renderizzati (tipo+frame+colore -> canvas) */
+const sprCache = new Map();
+function sprite(name, frame, color){
+  const key = name+frame+color;
+  let c = sprCache.get(key);
+  if (!c){
+    const rows = SPR[name][frame];
+    c = document.createElement('canvas');
+    c.width = rows[0].length; c.height = rows.length;
+    const g = c.getContext('2d');
+    g.fillStyle = color;
+    for (let y=0; y<rows.length; y++)
+      for (let x=0; x<rows[y].length; x++)
+        if (rows[y][x] === 'X') g.fillRect(x,y,1,1);
+    sprCache.set(key,c);
+  }
+  return c;
+}
+
+/* ============ Audio (tutto sintetizzato) ============ */
+let ac = null, master = null, noiseBuf = null;
+let muted = localStorage.getItem('li_muted') === '1';
+
+function audioInit(){
+  if (ac) return;
+  try{
+    ac = new (window.AudioContext || window.webkitAudioContext)();
+  }catch(e){ return; }
+  const comp = ac.createDynamicsCompressor();
+  comp.threshold.value = -18; comp.ratio.value = 8;
+  master = ac.createGain();
+  master.gain.value = muted ? 0 : 0.5;
+  master.connect(comp); comp.connect(ac.destination);
+  const len = ac.sampleRate * 1;
+  noiseBuf = ac.createBuffer(1, len, ac.sampleRate);
+  const d = noiseBuf.getChannelData(0);
+  for (let i=0; i<len; i++) d[i] = Math.random()*2-1;
+}
+function audioResume(){
+  audioInit();
+  if (ac && ac.state === 'suspended') ac.resume();
+}
+function setMuted(m){
+  muted = m;
+  localStorage.setItem('li_muted', m ? '1' : '0');
+  if (master) master.gain.value = m ? 0 : 0.5;
+  btnSound.textContent = m ? 'AUDIO OFF' : 'AUDIO ON';
+}
+
+function noise(dur, freq, vol, type){
+  if (!ac || muted) return;
+  const t = ac.currentTime;
+  const s = ac.createBufferSource(); s.buffer = noiseBuf; s.loop = true;
+  const f = ac.createBiquadFilter(); f.type = type || 'bandpass';
+  f.frequency.setValueAtTime(freq, t);
+  f.frequency.exponentialRampToValueAtTime(Math.max(60, freq*0.25), t+dur);
+  const g = ac.createGain();
+  g.gain.setValueAtTime(vol, t);
+  g.gain.exponentialRampToValueAtTime(0.0001, t+dur);
+  s.connect(f); f.connect(g); g.connect(master);
+  s.start(t); s.stop(t+dur+0.02);
+}
+function tone(type, f0, f1, dur, vol, when){
+  if (!ac || muted) return;
+  const t = ac.currentTime + (when||0);
+  const o = ac.createOscillator(); o.type = type;
+  o.frequency.setValueAtTime(f0, t);
+  if (f1 && f1 !== f0) o.frequency.exponentialRampToValueAtTime(f1, t+dur);
+  const g = ac.createGain();
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(vol, t+0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001, t+dur);
+  o.connect(g); g.connect(master);
+  o.start(t); o.stop(t+dur+0.03);
+}
+
+/* Il "pew": due oscillatori in caduta esponenziale, il classico laser disco */
+function sfxLaser(){
+  tone('square',   1900, 150, 0.17, 0.35);
+  tone('sawtooth', 2900, 220, 0.15, 0.18);
+  noise(0.05, 5000, 0.10, 'highpass');
+}
+function sfxAlienHit(){
+  noise(0.12, 1400, 0.4);
+  tone('square', 420, 60, 0.12, 0.3);
+}
+function sfxBombPop(){
+  noise(0.06, 2400, 0.25);
+}
+function sfxPlayerBoom(){
+  noise(0.7, 900, 0.55, 'lowpass');
+  tone('sawtooth', 220, 28, 0.7, 0.4);
+}
+function sfxMarch(step){
+  const notes = [110, 104, 98, 92];
+  tone('square', notes[step % 4], notes[step % 4], 0.09, 0.22);
+  tone('triangle', notes[step % 4] / 2, notes[step % 4] / 2, 0.09, 0.25);
+}
+function sfxUfoHit(){
+  tone('square', 1200, 200, 0.35, 0.3);
+  noise(0.3, 2000, 0.3);
+}
+function sfxWaveClear(){
+  [523, 659, 784, 1047].forEach((f,i) => tone('square', f, f, 0.09, 0.25, i*0.09));
+}
+function sfxGameOver(){
+  [392, 330, 262, 196, 131].forEach((f,i) => tone('sawtooth', f, f*0.97, 0.18, 0.3, i*0.16));
+}
+function sfxExtraLife(){
+  [880, 1320].forEach((f,i) => tone('square', f, f, 0.09, 0.3, i*0.1));
+}
+
+/* UFO: sirena continua finché è in volo */
+let ufoOsc = null, ufoLfo = null, ufoGain = null;
+function ufoSoundStart(){
+  if (!ac || muted || ufoOsc) return;
+  ufoOsc = ac.createOscillator(); ufoOsc.type = 'triangle';
+  ufoOsc.frequency.value = 880;
+  ufoLfo = ac.createOscillator(); ufoLfo.frequency.value = 5;
+  const lg = ac.createGain(); lg.gain.value = 120;
+  ufoLfo.connect(lg); lg.connect(ufoOsc.frequency);
+  ufoGain = ac.createGain(); ufoGain.gain.value = 0.07;
+  ufoOsc.connect(ufoGain); ufoGain.connect(master);
+  ufoOsc.start(); ufoLfo.start();
+}
+function ufoSoundStop(){
+  if (ufoOsc){ try{ ufoOsc.stop(); ufoLfo.stop(); }catch(e){} }
+  ufoOsc = ufoLfo = ufoGain = null;
+}
+
+/* ============ Stato di gioco ============ */
+const ST = { BOOT:0, ATTRACT:1, WAVEINTRO:2, PLAY:3, DYING:4, GAMEOVER:5 };
+let state = ST.BOOT;
+let stateT = 0;            // tempo trascorso nello stato corrente
+let paused = false;
+
+let score = 0;
+let hiscore = parseInt(localStorage.getItem('li_hiscore') || '0', 10) || 0;
+let lives = 3;
+let wave = 1;
+let extraLifeGiven = false;
+
+const GROUND_Y = 306;
+const PLAYER_Y = 286;
+
+/* Player */
+const player = { x: W/2, w: 13, h: 8, targetX: null, invuln: 0, cool: 0 };
+
+/* Alieni */
+const COLS = 10, ROWS = 5, CELL = 17;
+let aliens = [];            // {r,c,type,alive}
+let gridX = 0, gridY = 0;   // origine della griglia
+let gridDir = 1;
+let stepTimer = 0, stepFrame = 0, marchStep = 0;
+let aliveCount = 0;
+
+/* Proiettili */
+let lasers = [];            // {x,y}
+let bombs = [];             // {x,y,ph}
+let bombTimer = 0;
+
+/* UFO */
+let ufo = null;             // {x,dir}
+let ufoTimer = 12;
+
+/* Bunker */
+const BK_W = 22, BK_H = 14;
+let bunkers = [];           // {x,y,mask,canvas,dirty}
+
+/* Effetti */
+let particles = [];         // {x,y,vx,vy,life,color}
+let popups = [];            // {x,y,text,life,color}
+let shake = 0;
+let flash = 0;
+
+/* Stelle di sfondo */
+const stars = [];
+for (let i=0; i<44; i++)
+  stars.push({ x: Math.random()*W, y: Math.random()*H, s: Math.random()<0.3?2:1, v: 2+Math.random()*6, tw: Math.random()*6.28 });
+
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ============ Costruzione ondata ============ */
+function alienType(r){ return r===0 ? 'squid' : (r<3 ? 'crab' : 'octo'); }
+function alienPoints(t){ return t==='squid' ? 30 : (t==='crab' ? 20 : 10); }
+function alienW(t){ return SPR[t][0][0].length; }
+
+function buildWave(){
+  aliens = [];
+  for (let r=0; r<ROWS; r++)
+    for (let c=0; c<COLS; c++)
+      aliens.push({ r, c, type: alienType(r), alive: true });
+  aliveCount = ROWS*COLS;
+  gridX = (W - COLS*CELL) / 2;
+  gridY = 52 + Math.min(4, wave-1) * 9;
+  gridDir = 1;
+  stepTimer = 0; stepFrame = 0; marchStep = 0;
+  lasers = []; bombs = []; bombTimer = 1.2;
+  ufo = null; ufoSoundStop(); ufoTimer = 14 + Math.random()*10;
+  buildBunkers();
+}
+
+function buildBunkers(){
+  bunkers = [];
+  const n = 4, gap = W/n;
+  for (let i=0; i<n; i++){
+    const mask = [];
+    for (let y=0; y<BK_H; y++){
+      const row = [];
+      for (let x=0; x<BK_W; x++){
+        let on = true;
+        const t = y;                                  // arco superiore
+        if (t===0 && (x<4 || x>=BK_W-4)) on = false;
+        if (t===1 && (x<3 || x>=BK_W-3)) on = false;
+        if (t===2 && (x<2 || x>=BK_W-2)) on = false;
+        if (t===3 && (x<1 || x>=BK_W-1)) on = false;
+        if (y>=BK_H-4){                               // arco inferiore (porta)
+          const d = y-(BK_H-4);
+          if (x >= 7-d && x <= BK_W-8+d) on = false;
+        }
+        row.push(on ? 1 : 0);
+      }
+      mask.push(row);
+    }
+    const c = document.createElement('canvas');
+    c.width = BK_W; c.height = BK_H;
+    bunkers.push({ x: gap*i + (gap-BK_W)/2, y: 252, mask, canvas: c, dirty: true });
+  }
+}
+function bunkerRepaint(b){
+  const g = b.canvas.getContext('2d');
+  g.clearRect(0,0,BK_W,BK_H);
+  g.fillStyle = COLORS.green;
+  for (let y=0; y<BK_H; y++)
+    for (let x=0; x<BK_W; x++)
+      if (b.mask[y][x]) g.fillRect(x,y,1,1);
+  b.dirty = false;
+}
+/* Erode il bunker attorno a un punto d'impatto (coordinate locali) */
+function bunkerDamage(b, lx, ly){
+  for (let i=0; i<14; i++){
+    const dx = Math.round((Math.random()-0.5)*5);
+    const dy = Math.round((Math.random()-0.5)*5);
+    const x = lx+dx, y = ly+dy;
+    if (x>=0 && x<BK_W && y>=0 && y<BK_H) b.mask[y][x] = 0;
+  }
+  for (let dy=-1; dy<=1; dy++)
+    for (let dx=-1; dx<=1; dx++){
+      const x = lx+dx, y = ly+dy;
+      if (x>=0 && x<BK_W && y>=0 && y<BK_H) b.mask[y][x] = 0;
+    }
+  b.dirty = true;
+}
+/* Punto (x,y) globale colpisce un bunker? Ritorna il bunker o null */
+function bunkerAt(x, y){
+  for (const b of bunkers){
+    const lx = Math.floor(x-b.x), ly = Math.floor(y-b.y);
+    if (lx>=0 && lx<BK_W && ly>=0 && ly<BK_H && b.mask[ly][lx]) return {b, lx, ly};
+  }
+  return null;
+}
+
+/* ============ Gestione stati ============ */
+function setState(s){ state = s; stateT = 0; }
+
+function startGame(){
+  score = 0; lives = 3; wave = 1; extraLifeGiven = false;
+  particles = []; popups = [];
+  player.x = W/2; player.invuln = 0; player.cool = 0; player.targetX = null;
+  buildWave();
+  setState(ST.WAVEINTRO);
+}
+
+function addScore(n){
+  score += n;
+  if (!extraLifeGiven && score >= 1500){
+    extraLifeGiven = true;
+    lives = Math.min(5, lives+1);
+    popups.push({ x: player.x, y: PLAYER_Y-14, text: 'VITA EXTRA', life: 1.4, color: COLORS.amber });
+    sfxExtraLife();
+  }
+  if (score > hiscore){
+    hiscore = score;
+    localStorage.setItem('li_hiscore', String(hiscore));
+  }
+}
+
+function boom(x, y, color, n){
+  for (let i=0; i<n; i++){
+    const a = Math.random()*6.28, v = 20+Math.random()*70;
+    particles.push({ x, y, vx: Math.cos(a)*v, vy: Math.sin(a)*v, life: 0.3+Math.random()*0.25, color });
+  }
+}
+
+/* ============ Update ============ */
+function alienRect(a){
+  const w = alienW(a.type);
+  return {
+    x: gridX + a.c*CELL + (CELL-w)/2,
+    y: gridY + a.r*CELL,
+    w, h: 8
+  };
+}
+
+function update(dt){
+  stateT += dt;
+  if (shake > 0) shake = Math.max(0, shake-dt*3);
+  if (flash > 0) flash = Math.max(0, flash-dt*4);
+
+  if (!reduceMotion)
+    for (const s of stars){ s.y += s.v*dt; s.tw += dt*3; if (s.y > H){ s.y = -2; s.x = Math.random()*W; } }
+
+  for (const p of particles){ p.x += p.vx*dt; p.y += p.vy*dt; p.life -= dt; }
+  particles = particles.filter(p => p.life > 0);
+  for (const p of popups){ p.y -= 12*dt; p.life -= dt; }
+  popups = popups.filter(p => p.life > 0);
+
+  switch (state){
+    case ST.BOOT:
+      if (stateT > 1.15) setState(ST.ATTRACT);
+      break;
+
+    case ST.ATTRACT:
+      break; // si esce con startGame() dall'input
+
+    case ST.WAVEINTRO:
+      if (stateT > 1.6) setState(ST.PLAY);
+      break;
+
+    case ST.PLAY:
+      updatePlay(dt);
+      break;
+
+    case ST.DYING:
+      updateBombs(dt, false);
+      if (stateT > 1.1){
+        if (lives <= 0){
+          gameOver();
+        } else {
+          player.x = W/2; player.targetX = null; player.invuln = 2.2;
+          setState(ST.PLAY);
+        }
+      }
+      break;
+
+    case ST.GAMEOVER:
+      if (stateT > 6) setState(ST.ATTRACT);
+      break;
+  }
+}
+
+function gameOver(){
+  ufoSoundStop();
+  sfxGameOver();
+  setState(ST.GAMEOVER);
+}
+
+function playerDie(){
+  if (player.invuln > 0) return;
+  lives--;
+  shake = 1; flash = 0.6;
+  boom(player.x, PLAYER_Y+4, COLORS.green, 26);
+  boom(player.x, PLAYER_Y+4, COLORS.white, 10);
+  sfxPlayerBoom();
+  lasers = [];
+  setState(ST.DYING);
+}
+
+function updatePlay(dt){
+  /* --- movimento player --- */
+  const kb = (keys.right?1:0) - (keys.left?1:0) + (pad.right?1:0) - (pad.left?1:0);
+  if (kb !== 0){
+    player.x += kb * 120 * dt;
+    player.targetX = null;
+  } else if (player.targetX != null){
+    const d = player.targetX - player.x;
+    const step = Math.sign(d) * Math.min(Math.abs(d), 300*dt);
+    player.x += step;
+  }
+  player.x = Math.max(9, Math.min(W-9, player.x));
+  if (player.invuln > 0) player.invuln -= dt;
+  if (player.cool > 0) player.cool -= dt;
+  if ((keys.fire || pad.fire) && player.cool <= 0) fireLaser();
+
+  /* --- marcia alieni --- */
+  const ratio = aliveCount / (ROWS*COLS);
+  let interval = (0.08 + 0.62*ratio) * Math.pow(0.93, wave-1);
+  interval = Math.max(0.055, interval);
+  stepTimer += dt;
+  if (stepTimer >= interval){
+    stepTimer = 0;
+    stepFrame ^= 1;
+    marchStep++;
+    sfxMarch(marchStep);
+
+    /* limiti orizzontali della griglia (solo colonne vive) */
+    let minX = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (const a of aliens){
+      if (!a.alive) continue;
+      const r = alienRect(a);
+      minX = Math.min(minX, r.x); maxX = Math.max(maxX, r.x+r.w);
+      maxY = Math.max(maxY, r.y+r.h);
+    }
+    const dx = 3 * gridDir;
+    if ((gridDir>0 && maxX+dx > W-6) || (gridDir<0 && minX+dx < 6)){
+      gridDir *= -1;
+      gridY += 7;
+    } else {
+      gridX += dx;
+    }
+
+    /* alieni che passano sui bunker li erodono */
+    for (const a of aliens){
+      if (!a.alive) continue;
+      const r = alienRect(a);
+      for (const b of bunkers){
+        if (r.x < b.x+BK_W && r.x+r.w > b.x && r.y < b.y+BK_H && r.y+r.h > b.y){
+          for (let y=0; y<BK_H; y++)
+            for (let x=0; x<BK_W; x++){
+              const gx = b.x+x, gy = b.y+y;
+              if (gx>=r.x && gx<r.x+r.w && gy>=r.y && gy<r.y+r.h) b.mask[y][x] = 0;
+            }
+          b.dirty = true;
+        }
+      }
+    }
+
+    /* invasione: alieni arrivati alla linea del player */
+    if (maxY >= PLAYER_Y){
+      lives = 0;
+      playerDieInvasion();
+      return;
+    }
+  }
+
+  /* --- laser del player --- */
+  for (const l of lasers){
+    l.y -= 260*dt;
+    const hitB = bunkerAt(l.x, l.y);
+    if (hitB){ bunkerDamage(hitB.b, hitB.lx, hitB.ly); l.dead = true; continue; }
+    if (ufo && l.y < 46 && l.x > ufo.x && l.x < ufo.x+16){
+      const pts = [50,100,150,300][Math.floor(Math.random()*4)];
+      addScore(pts);
+      popups.push({ x: ufo.x+8, y: 40, text: String(pts), life: 1.2, color: COLORS.red });
+      boom(ufo.x+8, 42, COLORS.red, 16);
+      ufo = null; ufoSoundStop(); sfxUfoHit();
+      l.dead = true; continue;
+    }
+    for (const a of aliens){
+      if (!a.alive) continue;
+      const r = alienRect(a);
+      if (l.x >= r.x && l.x <= r.x+r.w && l.y >= r.y && l.y <= r.y+r.h){
+        a.alive = false; aliveCount--;
+        addScore(alienPoints(a.type));
+        boom(r.x+r.w/2, r.y+4, bandColor(r.y+4), 12);
+        sfxAlienHit();
+        l.dead = true;
+        break;
+      }
+    }
+  }
+  lasers = lasers.filter(l => !l.dead && l.y > 30);
+
+  /* --- bombe aliene --- */
+  updateBombs(dt, true);
+
+  /* --- UFO --- */
+  if (ufo){
+    ufo.x += ufo.dir * 34 * dt;
+    if (ufo.x < -18 || ufo.x > W+2){ ufo = null; ufoSoundStop(); }
+  } else {
+    ufoTimer -= dt;
+    if (ufoTimer <= 0 && aliveCount > 4){
+      const dir = Math.random() < 0.5 ? 1 : -1;
+      ufo = { x: dir>0 ? -16 : W, dir };
+      ufoTimer = 16 + Math.random()*14;
+      ufoSoundStart();
+    }
+  }
+
+  /* --- ondata completata --- */
+  if (aliveCount === 0){
+    wave++;
+    sfxWaveClear();
+    buildWave();
+    setState(ST.WAVEINTRO);
+  }
+}
+
+function playerDieInvasion(){
+  player.invuln = 0;
+  shake = 1; flash = 0.6;
+  boom(player.x, PLAYER_Y+4, COLORS.green, 26);
+  sfxPlayerBoom();
+  ufoSoundStop();
+  setState(ST.DYING);
+}
+
+function updateBombs(dt, canSpawn){
+  if (canSpawn){
+    bombTimer -= dt;
+    const maxBombs = Math.min(3 + Math.floor(wave/2), 7);
+    if (bombTimer <= 0 && bombs.length < maxBombs && aliveCount > 0){
+      bombTimer = Math.max(0.25, (0.9 - wave*0.06)) + Math.random()*0.7;
+      /* scegli l'alieno più in basso di una colonna casuale viva */
+      const cols = [];
+      for (let c=0; c<COLS; c++){
+        let low = null;
+        for (const a of aliens) if (a.alive && a.c === c && (!low || a.r > low.r)) low = a;
+        if (low) cols.push(low);
+      }
+      if (cols.length){
+        const a = cols[Math.floor(Math.random()*cols.length)];
+        const r = alienRect(a);
+        bombs.push({ x: r.x+r.w/2, y: r.y+9, ph: 0 });
+      }
+    }
+  }
+  const spd = 52 + Math.min(60, wave*7);
+  for (const b of bombs){
+    b.y += spd*dt; b.ph += dt*14;
+    const hitB = bunkerAt(b.x, b.y+3);
+    if (hitB){ bunkerDamage(hitB.b, hitB.lx, hitB.ly); b.dead = true; continue; }
+    /* le bombe possono essere distrutte dal laser */
+    for (const l of lasers){
+      if (!l.dead && Math.abs(l.x-b.x) < 3 && Math.abs(l.y-b.y) < 5){
+        b.dead = true; l.dead = true;
+        boom(b.x, b.y, COLORS.white, 6);
+        sfxBombPop();
+      }
+    }
+    if (b.dead) continue;
+    if (state === ST.PLAY && player.invuln <= 0 &&
+        b.y+3 >= PLAYER_Y && b.y <= PLAYER_Y+8 &&
+        Math.abs(b.x - player.x) < 7){
+      b.dead = true;
+      playerDie();
+      break;
+    }
+    if (b.y > GROUND_Y-2){
+      b.dead = true;
+      boom(b.x, GROUND_Y-2, COLORS.dim, 4);
+    }
+  }
+  bombs = bombs.filter(b => !b.dead);
+}
+
+function fireLaser(){
+  if (state !== ST.PLAY) return;
+  if (lasers.length >= 2) return;
+  player.cool = 0.30;
+  lasers.push({ x: player.x, y: PLAYER_Y-2 });
+  sfxLaser();
+}
+
+/* ============ Rendering ============ */
+function text(str, x, y, color, size, align){
+  cx.font = (size||8) + 'px "Press Start 2P"';
+  cx.textAlign = align || 'left';
+  cx.textBaseline = 'top';
+  cx.fillStyle = color;
+  cx.fillText(str, Math.round(x), Math.round(y));
+}
+function pad6(n){ return String(n).padStart(6,'0'); }
+
+function draw(){
+  cx.setTransform(1,0,0,1,0,0);
+  cx.clearRect(0,0,W,H);
+  cx.fillStyle = '#000';
+  cx.fillRect(0,0,W,H);
+
+  if (state === ST.BOOT){ drawBoot(); return; }
+
+  if (shake > 0 && !reduceMotion){
+    cx.translate(Math.round((Math.random()-0.5)*shake*5), Math.round((Math.random()-0.5)*shake*4));
+  }
+
+  /* stelle */
+  for (const s of stars){
+    const a = 0.25 + 0.2*Math.sin(s.tw);
+    cx.globalAlpha = a;
+    cx.fillStyle = s.s === 2 ? COLORS.cyan : COLORS.white;
+    cx.fillRect(Math.round(s.x), Math.round(s.y), 1, s.s === 2 ? 2 : 1);
+  }
+  cx.globalAlpha = 1;
+
+  if (state === ST.ATTRACT){ drawAttract(); drawFlash(); return; }
+
+  /* --- HUD --- */
+  text('PUNTEGGIO', 8, 6, COLORS.dim, 8);
+  text(pad6(score), 8, 17, COLORS.amber, 8);
+  text('RECORD', W-8, 6, COLORS.dim, 8, 'right');
+  text(pad6(hiscore), W-8, 17, COLORS.amber, 8, 'right');
+
+  /* terreno */
+  cx.fillStyle = COLORS.green;
+  cx.fillRect(0, GROUND_Y, W, 1);
+
+  /* vite + ondata */
+  const shipIcon = sprite('ship', 0, COLORS.green);
+  for (let i=0; i<Math.max(0, lives-1); i++)
+    cx.drawImage(shipIcon, 8 + i*17, GROUND_Y+5);
+  text('ONDATA '+wave, W-8, GROUND_Y+6, COLORS.dim, 8, 'right');
+
+  /* bunker */
+  for (const b of bunkers){
+    if (b.dirty) bunkerRepaint(b);
+    cx.drawImage(b.canvas, Math.round(b.x), b.y);
+  }
+
+  /* alieni */
+  for (const a of aliens){
+    if (!a.alive) continue;
+    const r = alienRect(a);
+    cx.drawImage(sprite(a.type, stepFrame, bandColor(r.y+4)), Math.round(r.x), Math.round(r.y));
+  }
+
+  /* UFO */
+  if (ufo) cx.drawImage(sprite('ufo', 0, COLORS.red), Math.round(ufo.x), 38);
+
+  /* player */
+  const showShip = state !== ST.DYING &&
+    !(player.invuln > 0 && Math.floor(player.invuln*10) % 2 === 0);
+  if (showShip && (state === ST.PLAY || state === ST.WAVEINTRO)){
+    cx.drawImage(sprite('ship', 0, COLORS.green), Math.round(player.x-6), PLAYER_Y);
+  }
+
+  /* laser */
+  cx.fillStyle = COLORS.white;
+  for (const l of lasers){
+    cx.fillRect(Math.round(l.x), Math.round(l.y), 1, 5);
+    cx.fillStyle = COLORS.cyan;
+    cx.fillRect(Math.round(l.x), Math.round(l.y)+5, 1, 2);
+    cx.fillStyle = COLORS.white;
+  }
+
+  /* bombe (zigzag) */
+  for (const b of bombs){
+    const c = bandColor(b.y);
+    cx.fillStyle = c;
+    const o = Math.floor(b.ph) % 2 === 0 ? 1 : -1;
+    cx.fillRect(Math.round(b.x)-o, Math.round(b.y), 1, 2);
+    cx.fillRect(Math.round(b.x), Math.round(b.y)+2, 1, 2);
+    cx.fillRect(Math.round(b.x)+o, Math.round(b.y)+4, 1, 2);
+  }
+
+  /* particelle */
+  for (const p of particles){
+    cx.globalAlpha = Math.min(1, p.life*3);
+    cx.fillStyle = p.color;
+    cx.fillRect(Math.round(p.x), Math.round(p.y), 2, 2);
+  }
+  cx.globalAlpha = 1;
+
+  /* popup punti */
+  for (const p of popups){
+    cx.globalAlpha = Math.min(1, p.life*2);
+    text(p.text, p.x, p.y, p.color, 8, 'center');
+  }
+  cx.globalAlpha = 1;
+
+  /* overlay di stato */
+  if (state === ST.WAVEINTRO){
+    text('ONDATA '+wave, W/2, 140, COLORS.cyan, 8, 'center');
+    if (wave === 1 && stateT < 1.2)
+      text('DIFENDI LA GALASSIA', W/2, 158, COLORS.dim, 8, 'center');
+  }
+  if (state === ST.GAMEOVER) drawGameOver();
+  if (paused){
+    cx.fillStyle = 'rgba(0,0,0,0.6)';
+    cx.fillRect(0,0,W,H);
+    if (Math.floor(performance.now()/400) % 2 === 0)
+      text('PAUSA', W/2, 150, COLORS.amber, 8, 'center');
+  }
+
+  drawFlash();
+}
+
+function drawFlash(){
+  if (flash > 0){
+    cx.globalAlpha = flash*0.5;
+    cx.fillStyle = '#fff';
+    cx.fillRect(0,0,W,H);
+    cx.globalAlpha = 1;
+  }
+}
+
+/* Accensione CRT: linea orizzontale che sboccia a pieno schermo */
+function drawBoot(){
+  const t = stateT;
+  cx.fillStyle = '#000'; cx.fillRect(0,0,W,H);
+  if (t < 0.4){
+    const w = (t/0.4) * W;
+    cx.fillStyle = COLORS.white;
+    cx.globalAlpha = 0.9;
+    cx.fillRect((W-w)/2, H/2-1, w, 2);
+    cx.globalAlpha = 1;
+  } else if (t < 0.9){
+    const k = (t-0.4)/0.5;
+    const h = 2 + k*k*H;
+    cx.fillStyle = COLORS.white;
+    cx.globalAlpha = 0.85 - k*0.55;
+    cx.fillRect(0, (H-h)/2, W, h);
+    cx.globalAlpha = 1;
+  } else {
+    cx.fillStyle = '#fff';
+    cx.globalAlpha = Math.max(0, 1-(t-0.9)/0.25) * 0.3;
+    cx.fillRect(0,0,W,H);
+    cx.globalAlpha = 1;
+  }
+}
+
+function drawAttract(){
+  const t = stateT;
+
+  /* titolo con "aberrazione cromatica" */
+  cx.save();
+  text('LASER', W/2+2, 62+2, COLORS.magenta, 16, 'center');
+  text('LASER', W/2, 62, COLORS.cyan, 16, 'center');
+  text('INVADERS', W/2+2, 86+2, COLORS.magenta, 16, 'center');
+  text('INVADERS', W/2, 86, COLORS.cyan, 16, 'center');
+  cx.restore();
+  text('GALASSIA 1982', W/2, 112, COLORS.dim, 8, 'center');
+
+  /* tabella punti con sprite animati */
+  const fr = Math.floor(t*2) % 2;
+  const rows = [
+    ['ufo',   COLORS.red,   '? MISTERO', 150],
+    ['squid', COLORS.magenta,'30 PUNTI', 172],
+    ['crab',  COLORS.cyan,  '20 PUNTI', 194],
+    ['octo',  COLORS.green, '10 PUNTI', 216]
+  ];
+  for (const [name, col, label, y] of rows){
+    const sp = sprite(name, name==='ufo'?0:fr, col);
+    cx.drawImage(sp, Math.round(W/2 - 46 - sp.width/2), y-1);
+    text('= '+label, W/2-30, y, col, 8);
+  }
+
+  /* invito lampeggiante */
+  if (Math.floor(t*2) % 2 === 0){
+    text(isTouch ? 'TOCCA PER GIOCARE' : 'PREMI START', W/2, 252, COLORS.white, 8, 'center');
+  }
+  text('RECORD '+pad6(hiscore), W/2, 276, COLORS.amber, 8, 'center');
+  text('(C) 1982 BACCHIN CORP.', W/2, 300, COLORS.dim, 8, 'center');
+}
+
+function drawGameOver(){
+  cx.fillStyle = 'rgba(0,0,0,0.55)';
+  cx.fillRect(0, 118, W, 84);
+  /* scritta che si "digita" lettera per lettera */
+  const msg = 'FINE PARTITA';
+  const n = Math.min(msg.length, Math.floor(stateT/0.12));
+  text(msg.slice(0,n), W/2, 132, COLORS.red, 12, 'center');
+  if (stateT > msg.length*0.12 + 0.3){
+    text('PUNTEGGIO '+pad6(score), W/2, 158, COLORS.white, 8, 'center');
+    if (score >= hiscore && score > 0 && Math.floor(stateT*3)%2===0)
+      text('NUOVO RECORD!', W/2, 176, COLORS.amber, 8, 'center');
+  }
+}
+
+/* ============ Input ============ */
+const keys = { left:false, right:false, fire:false };
+const pad  = { left:false, right:false, fire:false };
+const isTouch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+
+function anyStart(){
+  audioResume();
+  if (paused){ togglePause(false); return; }
+  if (state === ST.ATTRACT) startGame();
+  else if (state === ST.GAMEOVER && stateT > 1.5) setState(ST.ATTRACT);
+}
+
+addEventListener('keydown', e => {
+  if (e.repeat) return;
+  audioResume();
+  switch (e.code){
+    case 'ArrowLeft': case 'KeyA': keys.left = true; e.preventDefault(); break;
+    case 'ArrowRight': case 'KeyD': keys.right = true; e.preventDefault(); break;
+    case 'Space':
+      e.preventDefault();
+      if (state === ST.ATTRACT || state === ST.GAMEOVER) anyStart();
+      else { keys.fire = true; fireOnPress(); }
+      break;
+    case 'Enter': anyStart(); break;
+    case 'KeyP': togglePause(); break;
+    case 'KeyM': setMuted(!muted); break;
+  }
+});
+addEventListener('keyup', e => {
+  switch (e.code){
+    case 'ArrowLeft': case 'KeyA': keys.left = false; break;
+    case 'ArrowRight': case 'KeyD': keys.right = false; break;
+    case 'Space': keys.fire = false; break;
+  }
+});
+function fireOnPress(){
+  if (state === ST.PLAY && !paused && player.cool <= 0) fireLaser();
+}
+
+/* Touch: trascina sul canvas per muovere, pulsanti per muovere/sparare */
+const screenEl = document.getElementById('screen');
+function canvasX(e){
+  const r = cv.getBoundingClientRect();
+  return (e.clientX - r.left) / r.width * W;
+}
+screenEl.addEventListener('pointerdown', e => {
+  audioResume();
+  if (state === ST.ATTRACT || state === ST.GAMEOVER){ anyStart(); return; }
+  if (paused){ togglePause(false); return; }
+  if (e.pointerType !== 'mouse') player.targetX = canvasX(e);
+});
+screenEl.addEventListener('pointermove', e => {
+  if (e.pointerType !== 'mouse' && e.buttons !== 0 && state === ST.PLAY)
+    player.targetX = canvasX(e);
+});
+
+function holdButton(el, prop){
+  const ids = new Set();
+  const on = e => {
+    e.preventDefault();
+    audioResume();
+    ids.add(e.pointerId);
+    pad[prop] = true;
+    el.classList.add('held');
+    if (prop === 'fire'){
+      if (state === ST.ATTRACT || state === ST.GAMEOVER) anyStart();
+      else fireOnPress();
+    }
+    try{ el.setPointerCapture(e.pointerId); }catch(err){}
+  };
+  const off = e => {
+    ids.delete(e.pointerId);
+    if (ids.size === 0){ pad[prop] = false; el.classList.remove('held'); }
+  };
+  el.addEventListener('pointerdown', on);
+  el.addEventListener('pointerup', off);
+  el.addEventListener('pointercancel', off);
+  el.addEventListener('lostpointercapture', off);
+}
+holdButton(document.getElementById('btnLeft'), 'left');
+holdButton(document.getElementById('btnRight'), 'right');
+holdButton(document.getElementById('btnFire'), 'fire');
+
+const btnSound = document.getElementById('btnSound');
+const btnPause = document.getElementById('btnPause');
+btnSound.textContent = muted ? 'AUDIO OFF' : 'AUDIO ON';
+btnSound.addEventListener('click', () => { audioResume(); setMuted(!muted); });
+btnPause.addEventListener('click', () => togglePause());
+
+function togglePause(force){
+  if (state !== ST.PLAY && state !== ST.WAVEINTRO && state !== ST.DYING) return;
+  paused = force != null ? force : !paused;
+  btnPause.textContent = paused ? 'RIPRENDI' : 'PAUSA';
+  if (ac){
+    if (paused) ac.suspend();
+    else if (!muted || true) ac.resume();
+  }
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && state === ST.PLAY) togglePause(true);
+});
+
+/* blocca lo scroll-rimbalzo su iOS */
+document.addEventListener('touchmove', e => e.preventDefault(), { passive:false });
+
+/* ============ Ridimensionamento ============ */
+const stage = document.getElementById('stage');
+function resize(){
+  const sw = stage.clientWidth, sh = stage.clientHeight;
+  const scale = Math.min(sw/(W+20), sh/(H+20));
+  const w = Math.floor(W*scale), h = Math.floor(H*scale);
+  screenEl.style.width = w+'px';
+  screenEl.style.height = h+'px';
+}
+new ResizeObserver(resize).observe(stage);
+addEventListener('orientationchange', () => setTimeout(resize, 200));
+resize();
+
+/* ============ Loop principale ============ */
+let lastT = performance.now();
+let fontReady = false;
+if (document.fonts && document.fonts.ready)
+  document.fonts.ready.then(() => { fontReady = true; });
+try{
+  if (document.fonts) document.fonts.load('8px "Press Start 2P"');
+}catch(e){ fontReady = true; }
+
+function frame(now){
+  const dt = Math.min(0.05, (now-lastT)/1000);
+  lastT = now;
+  if (!paused) update(dt);
+  draw();
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+/* ============ Service worker (offline / PWA) ============ */
+if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
+  addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
