@@ -31,9 +31,11 @@ dipendenze, niente build, funziona anche offline.
 ## Caratteristiche
 
 - Estetica CRT autentica: scanline, maschera RGB, vignettatura, accensione del tubo catodico.
-- Audio 100% sintetizzato con Web Audio API: il "fiu fiu" del laser (glissando sinusoidale
-  discendente, come i laser disco di "I Don't Feel Like Dancin'" degli Scissor Sisters —
-  il timbro sale col laser potenziato), esplosioni, battito di fondo che accelera col livello.
+- Audio 100% sintetizzato con Web Audio API: esplosioni, battito di fondo che accelera col
+  livello, e **4 timbri per il laser** selezionabili in gioco (pulsante in alto o tasto L):
+  **RETRO ZAP** (quadra graffiante da cabinato), **SYNTH SWEEP** (il "fiu fiu" morbido alla
+  "I Don't Feel Like Dancin'" degli Scissor Sisters), **UI CLICK** (tick sci-fi brevissimo),
+  **8BIT SHOOT** (chip a gradini stile NES). La scelta resta salvata sul dispositivo.
 - Font pixel (Press Start 2P) incorporato in base64: nessuna richiesta esterna.
 - PWA completa: manifest, service worker, icone — installabile e giocabile offline.
 

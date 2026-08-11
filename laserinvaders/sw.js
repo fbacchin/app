@@ -1,5 +1,5 @@
 /* Service worker: cache-first per giocare offline */
-const CACHE = 'laser-invaders-v6';
+const CACHE = 'laser-invaders-v7';
 const ASSETS = ['.', 'index.html', 'manifest.webmanifest', 'icon-180.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
