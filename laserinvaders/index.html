@@ -172,7 +172,7 @@ body{
     <div id="dragHint">TRASCINA SULLO<br>SCHERMO PER MUOVERE</div>
     <div class="padbtn fire" id="btnFire" role="button" aria-label="Fuoco">FUOCO</div>
   </div>
-  <div id="hint">&#9664; &#9654; MUOVI &nbsp;·&nbsp; SPAZIO SPARA (TIENI PREMUTO) &nbsp;·&nbsp; P PAUSA &nbsp;·&nbsp; M AUDIO</div>
+  <div id="hint">&#9664; &#9654; &#9650; &#9660; MUOVI &nbsp;·&nbsp; SPAZIO SPARA (TIENI PREMUTO) &nbsp;·&nbsp; P PAUSA &nbsp;·&nbsp; M AUDIO</div>
 </div>
 
 <script>
@@ -382,12 +382,13 @@ function tone(type, f0, f1, dur, vol, when){
 
 /* Il "fiu": glissando sinusoidale morbido in discesa, come i laser disco
    di "I Don't Feel Like Dancin'" degli Scissor Sisters. Due sinusoidi
-   leggermente scordate danno corpo; col laser potenziato parte piu in alto. */
-function sfxLaser(level){
-  const base = 2400 + level*250;
+   leggermente scordate danno corpo; piu raggi = piu acuto, piu spesso
+   = piu grave e corposo. */
+function sfxLaser(count, tier){
+  const base = Math.max(1500, 2400 + count*250 - tier*180);
   tone('sine',     base,      210, 0.28, 0.42);
   tone('sine',     base*1.011,225, 0.28, 0.20);
-  tone('triangle', base/2,    105, 0.24, 0.14);
+  tone('triangle', base/2,    105, 0.24, Math.min(0.3, 0.14 + tier*0.05));
 }
 function sfxHitTick(){
   noise(0.05, 2600, 0.18);
@@ -437,8 +438,17 @@ const GROUND_Y = 306;
 const PLAYER_Y = 286;
 
 /* Player */
-const player = { x: W/2, invuln: 0, cool: 0 };
-let laserLevel = 1;        // 1 = singolo, 2 = doppio, 3 = triplo
+const player = { x: W/2, y: PLAYER_Y, invuln: 0, cool: 0 };
+const PLAYER_MIN_Y = 130;                 // quanto in alto puo salire la navicella
+const PLAYER_MAX_Y = GROUND_Y - 12;
+
+/* Scala dei potenziamenti, infinita: (n%3)+1 raggi, spessore 1+n/3.
+   0=singolo, 1=doppio, 2=triplo, 3=singolo spesso, 4=doppio spesso, ... */
+let powerLevel = 0;
+const POWER_MAX = 20;                     // oltre: le capsule valgono punti
+function laserCount(){ return (powerLevel % 3) + 1; }
+function laserTier(){ return Math.floor(powerLevel / 3); }
+function laserWidth(){ return 1 + Math.min(6, laserTier()); }
 
 /* Entita */
 let enemies = [];          // navi nemiche in volo
@@ -544,12 +554,12 @@ function setState(s){ state = s; stateT = 0; }
 
 function startGame(){
   score = 0; lives = 3; level = 1; kills = 0; killsSincePow = 0;
-  nextLifeAt = 2500; laserLevel = 1;
+  nextLifeAt = 2500; powerLevel = 0;
   hiscoreAtStart = hiscore;
   enemies = []; lasers = []; bullets = []; powerups = [];
   particles = []; popups = [];
   spawnT = 0.8; pulseT = 0;
-  player.x = W/2; player.invuln = 0; player.cool = 0;
+  player.x = W/2; player.y = PLAYER_Y; player.invuln = 0; player.cool = 0;
   setState(ST.INTRO);
 }
 
@@ -559,7 +569,7 @@ function addScore(n){
     nextLifeAt += 2500;
     if (lives < 5){
       lives++;
-      popups.push({ x: player.x, y: PLAYER_Y-14, text: 'VITA EXTRA', life: 1.4, color: COLORS.amber });
+      popups.push({ x: player.x, y: player.y-14, text: 'VITA EXTRA', life: 1.4, color: COLORS.amber });
       sfxExtraLife();
     }
   }
@@ -617,7 +627,7 @@ function update(dt){
         if (lives <= 0){
           gameOver();
         } else {
-          player.x = W/2; player.invuln = 2.2;
+          player.x = W/2; player.y = PLAYER_Y; player.invuln = 2.2;
           setState(ST.PLAY);
         }
       }
@@ -639,20 +649,23 @@ function gameOver(){
 function playerDie(){
   if (player.invuln > 0) return;
   lives--;
-  laserLevel = Math.max(1, laserLevel-1);
+  powerLevel = Math.max(0, powerLevel-1);
   shake = 1; flash = 0.6;
-  boom(player.x, PLAYER_Y+4, COLORS.green, 26);
-  boom(player.x, PLAYER_Y+4, COLORS.white, 10);
+  boom(player.x, player.y+4, COLORS.green, 26);
+  boom(player.x, player.y+4, COLORS.white, 10);
   sfxPlayerBoom();
   bullets = [];
   setState(ST.DYING);
 }
 
 function updatePlay(dt){
-  /* --- movimento player (tastiera; il touch muove via trascinamento) --- */
-  const kb = (keys.right?1:0) - (keys.left?1:0);
-  if (kb !== 0) player.x += kb * 130 * dt;
+  /* --- movimento player in ogni direzione (tastiera; il touch trascina) --- */
+  const kx = (keys.right?1:0) - (keys.left?1:0);
+  const ky = (keys.down?1:0) - (keys.up?1:0);
+  if (kx !== 0) player.x += kx * 130 * dt;
+  if (ky !== 0) player.y += ky * 130 * dt;
   player.x = Math.max(9, Math.min(W-9, player.x));
+  player.y = Math.max(PLAYER_MIN_Y, Math.min(PLAYER_MAX_Y, player.y));
   if (player.invuln > 0) player.invuln -= dt;
   if (player.cool > 0) player.cool -= dt;
   if ((keys.fire || pad.fire) && player.cool <= 0) fireLaser();
@@ -685,10 +698,11 @@ function updatePlay(dt){
       const ex = e.x - s.w/2, ey = e.y;
       /* test "spazzato": copre l'intero tragitto del colpo nel frame,
          cosi il laser non attraversa i nemici ai framerate bassi */
-      if (l.x >= ex && l.x <= ex+s.w &&
+      const lw = (l.w || 1) / 2;
+      if (l.x + lw >= ex && l.x - lw <= ex+s.w &&
           l.y <= ey+s.h && l.y + 4 + 320*dt >= ey){
         l.dead = true;
-        e.hp--;
+        e.hp -= (l.dmg || 1);
         if (e.hp <= 0){
           e.dead = true;
           killEnemy(e);
@@ -707,7 +721,7 @@ function updatePlay(dt){
     b.y += b.v*dt;
     if (b.y > GROUND_Y-2){ b.dead = true; boom(b.x, GROUND_Y-2, COLORS.dim, 3); continue; }
     if (player.invuln <= 0 &&
-        b.y+4 >= PLAYER_Y+1 && b.y <= PLAYER_Y+8 &&
+        b.y+4 >= player.y+1 && b.y <= player.y+8 &&
         Math.abs(b.x - player.x) < 6){
       b.dead = true;
       playerDie();
@@ -769,7 +783,7 @@ function updateEnemies(dt, canFire){
     if (state === ST.PLAY && player.invuln <= 0 && !e.dead){
       const s = enemySize(e.type);
       if (e.x + s.w/2 > player.x-6 && e.x - s.w/2 < player.x+6 &&
-          e.y + s.h > PLAYER_Y+1 && e.y < PLAYER_Y+8){
+          e.y + s.h > player.y+1 && e.y < player.y+8){
         e.dead = true;
         killEnemy(e);
         playerDie();
@@ -789,15 +803,17 @@ function updatePowerups(dt, canCatch){
     u.x += Math.sin(u.t*2.4)*8*dt;
     if (u.y > GROUND_Y-4){ u.dead = true; continue; }
     if (canCatch && state === ST.PLAY &&
-        u.y+10 > PLAYER_Y && u.y < PLAYER_Y+8 &&
+        u.y+10 > player.y && u.y < player.y+8 &&
         Math.abs(u.x - player.x) < 10){
       u.dead = true;
-      if (laserLevel < 3){
-        laserLevel++;
-        addScorePopup(player.x, PLAYER_Y-14, laserLevel === 2 ? 'LASER DOPPIO!' : 'LASER TRIPLO!', COLORS.green);
+      if (powerLevel < POWER_MAX){
+        powerLevel++;
+        const n = laserCount();
+        const msg = n === 1 ? 'RAGGIO PIU POTENTE!' : (n === 2 ? 'LASER DOPPIO!' : 'LASER TRIPLO!');
+        addScorePopup(player.x, player.y-14, msg, COLORS.green);
       } else {
         addScore(500);
-        addScorePopup(player.x, PLAYER_Y-14, 'BONUS 500', COLORS.amber);
+        addScorePopup(player.x, player.y-14, 'BONUS 500', COLORS.amber);
       }
       sfxPowerup();
     }
@@ -807,20 +823,21 @@ function updatePowerups(dt, canCatch){
 
 function fireLaser(){
   if (state !== ST.PLAY) return;
-  if (lasers.length >= 14) return;
+  if (lasers.length >= 24) return;
   player.cool = 0.16;
-  const y = PLAYER_Y-2;
-  if (laserLevel === 1){
-    lasers.push({ x: player.x, y, vx: 0 });
-  } else if (laserLevel === 2){
-    lasers.push({ x: player.x-5, y, vx: 0 });
-    lasers.push({ x: player.x+5, y, vx: 0 });
+  const y = player.y-2;
+  const n = laserCount(), w = laserWidth(), dmg = 1 + laserTier();
+  if (n === 1){
+    lasers.push({ x: player.x, y, vx: 0, w, dmg });
+  } else if (n === 2){
+    lasers.push({ x: player.x-5, y, vx: 0, w, dmg });
+    lasers.push({ x: player.x+5, y, vx: 0, w, dmg });
   } else {
-    lasers.push({ x: player.x, y, vx: 0 });
-    lasers.push({ x: player.x-5, y, vx: -46 });
-    lasers.push({ x: player.x+5, y, vx: 46 });
+    lasers.push({ x: player.x, y, vx: 0, w, dmg });
+    lasers.push({ x: player.x-5, y, vx: -46, w, dmg });
+    lasers.push({ x: player.x+5, y, vx: 46, w, dmg });
   }
-  sfxLaser(laserLevel);
+  sfxLaser(n, laserTier());
 }
 
 /* ============ Rendering ============ */
@@ -871,9 +888,11 @@ function draw(){
     cx.drawImage(shipIcon, 8 + i*17, GROUND_Y+5);
   text('LASER', W/2-40, GROUND_Y+6, COLORS.dim, 8);
   for (let i=0; i<3; i++){
-    cx.fillStyle = i < laserLevel ? COLORS.green : '#1b2338';
+    cx.fillStyle = i < laserCount() ? COLORS.green : '#1b2338';
     cx.fillRect(W/2+8+i*8, GROUND_Y+6, 5, 7);
   }
+  if (laserTier() > 0)
+    text('x'+(laserTier()+1), W/2+36, GROUND_Y+6, COLORS.green, 8);
   text('LV '+level, W-8, GROUND_Y+6, COLORS.dim, 8, 'right');
 
   const frame = Math.floor(animT*6) % 2;
@@ -904,15 +923,22 @@ function draw(){
   const showShip = state !== ST.DYING && state !== ST.GAMEOVER &&
     !(player.invuln > 0 && Math.floor(player.invuln*10) % 2 === 0);
   if (showShip){
-    cx.drawImage(sprite('ship'+laserLevel, 0, COLORS.green), Math.round(player.x-6), PLAYER_Y);
+    cx.drawImage(sprite('ship'+laserCount(), 0, COLORS.green), Math.round(player.x-6), Math.round(player.y));
   }
 
-  /* laser */
+  /* laser (i raggi potenziati sono piu spessi, con un alone) */
   for (const l of lasers){
+    const lw = l.w || 1, lx = Math.round(l.x - lw/2);
+    if (lw > 1){
+      cx.globalAlpha = 0.35;
+      cx.fillStyle = COLORS.cyan;
+      cx.fillRect(lx-1, Math.round(l.y)-1, lw+2, 8);
+      cx.globalAlpha = 1;
+    }
     cx.fillStyle = COLORS.white;
-    cx.fillRect(Math.round(l.x), Math.round(l.y), 1, 5);
+    cx.fillRect(lx, Math.round(l.y), lw, 5);
     cx.fillStyle = COLORS.cyan;
-    cx.fillRect(Math.round(l.x), Math.round(l.y)+5, 1, 2);
+    cx.fillRect(lx, Math.round(l.y)+5, lw, 2);
   }
 
   /* colpi nemici */
@@ -1017,8 +1043,8 @@ function drawAttract(){
   cx.strokeStyle = COLORS.green;
   cx.strokeRect(W/2-52-4.5, py-0.5, 10, 10);
   text('P', W/2-52, py+1, COLORS.green, 8, 'center');
-  text('= LASER DOPPIO', W/2-36, py, COLORS.green, 8);
-  text('E TRIPLO!', W/2-36, py+12, COLORS.green, 8);
+  text('= LASER SEMPRE', W/2-36, py, COLORS.green, 8);
+  text('PIU POTENTE!', W/2-36, py+12, COLORS.green, 8);
 
   /* invito lampeggiante */
   if (Math.floor(t*2) % 2 === 0){
@@ -1043,7 +1069,7 @@ function drawGameOver(){
 }
 
 /* ============ Input ============ */
-const keys = { left:false, right:false, fire:false };
+const keys = { left:false, right:false, up:false, down:false, fire:false };
 const pad  = { fire:false };
 const isTouch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
 
@@ -1060,6 +1086,8 @@ addEventListener('keydown', e => {
   switch (e.code){
     case 'ArrowLeft': case 'KeyA': keys.left = true; e.preventDefault(); break;
     case 'ArrowRight': case 'KeyD': keys.right = true; e.preventDefault(); break;
+    case 'ArrowUp': case 'KeyW': keys.up = true; e.preventDefault(); break;
+    case 'ArrowDown': case 'KeyS': keys.down = true; e.preventDefault(); break;
     case 'Space':
       e.preventDefault();
       if (state === ST.ATTRACT || state === ST.GAMEOVER) anyStart();
@@ -1074,6 +1102,8 @@ addEventListener('keyup', e => {
   switch (e.code){
     case 'ArrowLeft': case 'KeyA': keys.left = false; break;
     case 'ArrowRight': case 'KeyD': keys.right = false; break;
+    case 'ArrowUp': case 'KeyW': keys.up = false; break;
+    case 'ArrowDown': case 'KeyS': keys.down = false; break;
     case 'Space': keys.fire = false; break;
   }
 });
@@ -1085,7 +1115,7 @@ function fireOnPress(){
    muovere la navicella (movimento relativo, il dito non copre la nave);
    l'unico pulsante e FUOCO. */
 const screenEl = document.getElementById('screen');
-let dragId = null, dragLastX = 0;
+let dragId = null, dragLastX = 0, dragLastY = 0;
 screenEl.addEventListener('pointerdown', e => {
   audioResume();
   if (state === ST.ATTRACT || state === ST.GAMEOVER){ anyStart(); return; }
@@ -1093,6 +1123,7 @@ screenEl.addEventListener('pointerdown', e => {
   if (e.pointerType !== 'mouse' && dragId === null){
     dragId = e.pointerId;
     dragLastX = e.clientX;
+    dragLastY = e.clientY;
     try{ screenEl.setPointerCapture(e.pointerId); }catch(err){}
   }
 });
@@ -1100,9 +1131,13 @@ screenEl.addEventListener('pointermove', e => {
   if (e.pointerId !== dragId) return;
   const r = cv.getBoundingClientRect();
   const dx = (e.clientX - dragLastX) / r.width * W;
+  const dy = (e.clientY - dragLastY) / r.height * H;
   dragLastX = e.clientX;
-  if (state === ST.PLAY && !paused)
+  dragLastY = e.clientY;
+  if (state === ST.PLAY && !paused){
     player.x = Math.max(9, Math.min(W-9, player.x + dx*1.5));
+    player.y = Math.max(PLAYER_MIN_Y, Math.min(PLAYER_MAX_Y, player.y + dy*1.5));
+  }
 });
 function dragEnd(e){ if (e.pointerId === dragId) dragId = null; }
 screenEl.addEventListener('pointerup', dragEnd);
@@ -1190,12 +1225,15 @@ window.__dbg = {
   get score(){ return score; },
   get lives(){ return lives; },
   get level(){ return level; },
-  get laserLevel(){ return laserLevel; },
   get enemies(){ return enemies.length; },
   get kills(){ return kills; },
   get playerX(){ return player.x; },
-  setLaser(n){ laserLevel = Math.max(1, Math.min(3, n)); },
-  spawnPowerup(){ powerups.push({ x: player.x, y: PLAYER_Y-40, t: 0 }); }
+  get playerY(){ return player.y; },
+  get laserLevel(){ return laserCount(); },
+  get powerLevel(){ return powerLevel; },
+  get laserTier(){ return laserTier(); },
+  setLaser(n){ powerLevel = Math.max(0, n); },
+  spawnPowerup(){ powerups.push({ x: player.x, y: player.y-40, t: 0 }); }
 };
 
 /* ============ Service worker (offline / PWA) ============ */
