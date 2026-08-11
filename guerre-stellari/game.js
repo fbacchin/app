@@ -127,6 +127,7 @@ const AudioFX = {
   hit()        { this.blip(300, 70, 0.25, "triangle", 0.3); this.noise(0.2, 0.25, 1600, 300); },
   torpedo()    { this.blip(180, 70, 0.6, "sine", 0.3); this.noise(0.45, 0.12, 900, 200); },
   lock()       { this.blip(880, 880, 0.07, "square", 0.12); },
+  warn()       { this.blip(520, 300, 0.09, "square", 0.09); },
   wave()       { this.blip(440, 660, 0.18, "square", 0.14); },
   bigBoom() {
     this.noise(2.8, 0.8, 3200, 60);
@@ -840,19 +841,31 @@ function drawApproach() {
 // FASE 2 — LA TRINCEA
 // ============================================================
 let trench = null;
-const TR = { CAMBACK: 1.6, TOPH: 1.35, SPAWN: 44, HORIZON: 0.40, F: 800 };
+const TR = { CAMBACK: 1.6, TOPH: 1.35, SPAWN: 50, HORIZON: 0.40, F: 800 };
 
 const trenchGreebles = (() => {
   const rng = mulberry32(424242);
   const out = [];
   for (let i = 0; i < 46; i++) {
     out.push({
+      type: "wall",
       side: rng() < 0.5 ? -1 : 1,
       y: 0.12 + rng() * 1.0,
       h: 0.06 + rng() * 0.22,
       zOff: rng() * 56,
       len: 0.8 + rng() * 2.6,
       a: 0.1 + rng() * 0.22,
+    });
+  }
+  // strisce sul pavimento: rafforzano la sensazione di velocità e il piano del suolo
+  for (let i = 0; i < 14; i++) {
+    out.push({
+      type: "floor",
+      x: -0.85 + rng() * 1.64,
+      w: 0.05 + rng() * 0.06,
+      zOff: rng() * 56,
+      len: 1 + rng() * 2.2,
+      a: 0.08 + rng() * 0.14,
     });
   }
   return out;
@@ -875,6 +888,9 @@ function initTrench() {
     fireCd: 0, tip: 0,
     locked: false,
     passes: 0,
+    warnObs: null,
+    slowT: 0,
+    hintT: 3.6,
   };
   G.trenchStartScore = G.score;
   showMsg("Vola nella trincea. Trova il condotto di scarico!", 3);
@@ -896,6 +912,7 @@ function trenchHitPlayer() {
   sh.shield--;
   AudioFX.hit();
   G.shake = 14;
+  trench.slowT = 0.9; // breve rallentamento per riprendere il controllo
   if (sh.shield < 0) {
     sh.lives--;
     AudioFX.boom();
@@ -916,45 +933,61 @@ function trenchHitPlayer() {
 function trenchSpawn() {
   const t = trench, rng = t.rng;
   const prog = clamp(t.dist / t.firstPortAt, 0, 1);
-  const r = rng();
-  if (r < 0.56) {
-    // barriera con varco
-    const kind = Math.floor(rng() * 6);
-    const gap = lerp(0.62, 0.46, prog);
+  const z = TR.SPAWN;
+  const roll = rng();
+
+  if (roll < 0.34) {
+    // struttura al suolo: si passa sopra o di lato (luci ambra sul bordo alto)
+    const v = rng();
     let o;
-    const z = TR.SPAWN;
-    if (kind === 0) o = { x0: -1.05, x1: rand2(rng, -0.2, 0.15), y0: 0, y1: rand2(rng, 0.5, 0.75), z };
-    else if (kind === 1) o = { x0: rand2(rng, -0.15, 0.2), x1: 1.05, y0: 0, y1: rand2(rng, 0.5, 0.75), z };
-    else if (kind === 2) o = { x0: -1.05, x1: 1.05, y0: rand2(rng, 0.55, 0.7), y1: TR.TOPH, z };
-    else if (kind === 3) o = { x0: -1.05, x1: 1.05, y0: 0, y1: rand2(rng, 0.38, 0.52), z };
-    else if (kind === 4) {
-      const c = rand2(rng, -0.4, 0.4);
-      o = { x0: c - 0.2, x1: c + 0.2, y0: 0, y1: TR.TOPH, z };
-    } else {
-      const gx = rand2(rng, -0.32, 0.32);
-      t.obstacles.push({ x0: -1.05, x1: gx - gap / 2, y0: 0, y1: TR.TOPH, z, hitDone: false });
-      o = { x0: gx + gap / 2, x1: 1.05, y0: 0, y1: TR.TOPH, z };
-    }
-    o.hitDone = false;
+    if (v < 0.3) o = { x0: -1.05, x1: rand2(rng, -0.1, 0.3), y0: 0, y1: rand2(rng, 0.5, 0.78) };
+    else if (v < 0.6) o = { x0: rand2(rng, -0.3, 0.1), x1: 1.05, y0: 0, y1: rand2(rng, 0.5, 0.78) };
+    else if (v < 0.85) {
+      const cx = rand2(rng, -0.35, 0.35);
+      o = { x0: cx - 0.42, x1: cx + 0.42, y0: 0, y1: rand2(rng, 0.5, 0.72) };
+    } else o = { x0: -1.05, x1: 1.05, y0: 0, y1: rand2(rng, 0.34, 0.46) };
+    o.kind = "building"; o.z = z; o.hitDone = false;
     t.obstacles.push(o);
+  } else if (roll < 0.56) {
+    // ponte sospeso tra le pareti: si passa sotto (luci azzurre sul bordo basso)
+    const b = rand2(rng, lerp(0.62, 0.5, prog), 0.72);
+    t.obstacles.push({ kind: "bridge", x0: -1.05, x1: 1.05, y0: b, y1: b + 0.3, z, hitDone: false });
+  } else if (roll < 0.72) {
+    // paratia sporgente dalla parete: scarta dall'altra parte (luci rosse sul bordo libero)
+    const fromLeft = rng() < 0.5;
+    const wdt = rand2(rng, lerp(0.75, 0.95, prog), 1.15);
+    const o = fromLeft
+      ? { x0: -1.05, x1: -1.05 + wdt, innerEdge: -1.05 + wdt }
+      : { x0: 1.05 - wdt, x1: 1.05, innerEdge: 1.05 - wdt };
+    o.kind = "fin"; o.y0 = 0; o.y1 = TR.TOPH; o.z = z; o.hitDone = false;
+    t.obstacles.push(o);
+  } else if (roll < 0.82) {
+    // colonna centrale (luci rosse su entrambi i bordi)
+    const cx = rand2(rng, -0.4, 0.4);
+    t.obstacles.push({ kind: "pillar", x0: cx - 0.2, x1: cx + 0.2, y0: 0, y1: TR.TOPH, z, hitDone: false });
   } else {
-    // torrette (1 o 2)
-    const n = rng() < 0.4 + prog * 0.3 ? 2 : 1;
-    for (let i = 0; i < n; i++) {
-      const side = rng() < 0.6 ? (rng() < 0.5 ? "left" : "right") : "floor";
-      const tur = {
-        side,
-        x: side === "left" ? -0.9 : side === "right" ? 0.9 : rand2(rng, -0.55, 0.55),
-        y: side === "floor" ? 0.09 : rand2(rng, 0.3, 0.95),
-        z: TR.SPAWN + i * 4,
-        hp: 2,
-        fireCd: rand2(rng, 0.7, 1.6),
-        hitDone: false,
-      };
-      t.turrets.push(tur);
-    }
+    // portale: varco illuminato in verde tra due paratie
+    const gx = rand2(rng, -0.3, 0.3);
+    const gh = lerp(0.34, 0.27, prog);
+    t.obstacles.push({ kind: "gate", x0: -1.05, x1: gx - gh, innerEdge: gx - gh, y0: 0, y1: TR.TOPH, z, hitDone: false });
+    t.obstacles.push({ kind: "gate", x0: gx + gh, x1: 1.05, innerEdge: gx + gh, y0: 0, y1: TR.TOPH, z, hitDone: false });
   }
-  t.nextSpawn = t.dist + lerp(rand2(rng, 10, 15), rand2(rng, 7.5, 11), prog);
+
+  // ogni tanto una torretta accompagna l'ostacolo
+  if (rng() < 0.35 + prog * 0.25) {
+    const side = rng() < 0.6 ? (rng() < 0.5 ? "left" : "right") : "floor";
+    t.turrets.push({
+      side,
+      x: side === "left" ? -0.9 : side === "right" ? 0.9 : rand2(rng, -0.55, 0.55),
+      y: side === "floor" ? 0.09 : rand2(rng, 0.3, 0.95),
+      z: z + rand2(rng, 3, 6),
+      hp: 2,
+      fireCd: rand2(rng, 0.7, 1.6),
+      hitDone: false,
+    });
+  }
+
+  t.nextSpawn = t.dist + lerp(rand2(rng, 15, 20), rand2(rng, 10.5, 14), prog);
 }
 
 const rand2 = (rng, a, b) => a + rng() * (b - a);
@@ -970,6 +1003,12 @@ function fireTorpedo() {
 function updateTrench(dt) {
   const t = trench, sh = t.ship;
   sh.inv = Math.max(0, sh.inv - dt);
+  t.slowT = Math.max(0, t.slowT - dt);
+  const spd = t.slowT > 0 ? t.speed * 0.55 : t.speed;
+  if (t.hintT > 0) {
+    t.hintT -= dt;
+    if (t.hintT <= 0) showMsg("Le luci segnano il bordo libero: ambra sopra · azzurro sotto · rosse/verdi di lato", 4);
+  }
   t.camX = sh.x * 0.5;
   t.camY = sh.y * 0.5 + 0.55;
   TR.F = H * 1.05;
@@ -989,7 +1028,7 @@ function updateTrench(dt) {
   sh.y = clamp(sh.y + sh.vy * dt, 0.08, 1.12);
 
   // avanzamento
-  t.dist += t.speed * dt;
+  t.dist += spd * dt;
 
   // spawn ostacoli finché non siamo in zona condotto
   if (!t.port && t.dist < t.portAt - 85 && t.dist >= t.nextSpawn) trenchSpawn();
@@ -1022,26 +1061,41 @@ function updateTrench(dt) {
   // ostacoli
   for (let i = t.obstacles.length - 1; i >= 0; i--) {
     const o = t.obstacles[i];
-    o.z -= t.speed * dt;
+    o.z -= spd * dt;
     if (o.z < -1) { t.obstacles.splice(i, 1); continue; }
     if (!o.hitDone && o.z < 0.9 && o.z > -0.6 &&
-        sh.x + 0.13 > o.x0 && sh.x - 0.13 < o.x1 &&
-        sh.y + 0.09 > o.y0 && sh.y - 0.09 < o.y1) {
+        sh.x + 0.115 > o.x0 && sh.x - 0.115 < o.x1 &&
+        sh.y + 0.08 > o.y0 && sh.y - 0.08 < o.y1) {
       o.hitDone = true;
       trenchHitPlayer();
       if (G.screen !== "trench") return;
     }
   }
 
+  // rotta di collisione: l'ostacolo più vicino che colpiresti mantenendo la rotta
+  t.warnObs = null;
+  let warnZ = Infinity;
+  for (const o of t.obstacles) {
+    if (o.z > 1.2 && o.z < 30 && o.z < warnZ &&
+        sh.x + 0.115 > o.x0 && sh.x - 0.115 < o.x1 &&
+        sh.y + 0.08 > o.y0 && sh.y - 0.08 < o.y1) {
+      warnZ = o.z; t.warnObs = o;
+    }
+  }
+  if (t.warnObs && !t.warnObs.warned && t.warnObs.z < 22) {
+    t.warnObs.warned = true;
+    AudioFX.warn();
+  }
+
   // torrette
   for (let i = t.turrets.length - 1; i >= 0; i--) {
     const tur = t.turrets[i];
-    tur.z -= t.speed * dt;
+    tur.z -= spd * dt;
     if (tur.z < -1) { t.turrets.splice(i, 1); continue; }
     tur.fireCd -= dt;
     const prog = clamp(t.dist / t.firstPortAt, 0, 1);
     if (tur.fireCd <= 0 && tur.z > 7 && tur.z < 38 && t.bolts.length < 10) {
-      const closing = t.speed + 11;
+      const closing = spd + 11;
       const tt = tur.z / closing;
       const txp = clamp(sh.x + sh.vx * tt * 0.7 + rand(-0.14, 0.14), -0.95, 0.95);
       const typ = clamp(sh.y + sh.vy * tt * 0.7 + rand(-0.12, 0.12), 0.05, 1.2);
@@ -1064,10 +1118,10 @@ function updateTrench(dt) {
   for (let i = t.bolts.length - 1; i >= 0; i--) {
     const b = t.bolts[i];
     b.x += b.vx * dt; b.y += b.vy * dt;
-    b.z += (b.vz - t.speed) * dt;
+    b.z += (b.vz - spd) * dt;
     if (b.z < -1.2) { t.bolts.splice(i, 1); continue; }
     if (sh.inv <= 0 && Math.abs(b.z) < 0.55 &&
-        Math.abs(b.x - sh.x) < 0.13 && Math.abs(b.y - sh.y) < 0.11) {
+        Math.abs(b.x - sh.x) < 0.12 && Math.abs(b.y - sh.y) < 0.10) {
       t.bolts.splice(i, 1);
       trenchHitPlayer();
       if (G.screen !== "trench") return;
@@ -1077,7 +1131,7 @@ function updateTrench(dt) {
   // laser del giocatore
   for (let i = t.lasers.length - 1; i >= 0; i--) {
     const l = t.lasers[i];
-    l.z += (l.vz + t.speed) * dt * 0.9;
+    l.z += (l.vz + spd) * dt * 0.9;
     let dead = l.z > TR.SPAWN + 4;
     if (!dead) {
       for (let j = t.turrets.length - 1; j >= 0; j--) {
@@ -1111,7 +1165,7 @@ function updateTrench(dt) {
   // siluri protonici
   for (let i = t.torps.length - 1; i >= 0; i--) {
     const tp = t.torps[i];
-    const closing = 30 + t.speed;
+    const closing = 30 + spd;
     tp.z += closing * dt;
     if (t.port) {
       const k = 3.2 * dt;
@@ -1153,6 +1207,7 @@ function updateTrench(dt) {
       if (dx * dx + dy * dy < 0.34 * 0.34) {
         // COLPITO!
         t.torps.splice(i, 1);
+        t.warnObs = null;
         G.score += 5000 + t.torpedoes * 500;
         saveHi();
         AudioFX.bigBoom();
@@ -1167,7 +1222,7 @@ function updateTrench(dt) {
 
   // condotto mancato?
   if (t.port) {
-    t.port.z -= t.speed * dt;
+    t.port.z -= spd * dt;
     if (t.port.z < 1.2) {
       t.port = null;
       t.passes++;
@@ -1191,7 +1246,7 @@ function updateTrench(dt) {
   // particelle 3D
   for (let i = t.parts3.length - 1; i >= 0; i--) {
     const p = t.parts3[i];
-    p.x += p.vx * dt; p.y += p.vy * dt; p.z -= t.speed * dt;
+    p.x += p.vx * dt; p.y += p.vy * dt; p.z -= spd * dt;
     p.life -= dt;
     if (p.life <= 0 || p.z < -1) t.parts3.splice(i, 1);
   }
@@ -1256,16 +1311,33 @@ function drawTrench(noHud) {
   poly([[p1.x, p1.y], [p2.x, p2.y], [p3.x, p3.y], [p4.x, p4.y]]);
   ctx.fillStyle = "#182031"; ctx.fill();
 
-  // greeble sulle pareti (si muovono con la distanza percorsa)
+  // spigoli della trincea: definiscono pavimento e cima delle pareti
+  for (const [ex, ey, col] of [
+    [-1, 0, "rgba(120,150,200,0.4)"], [1, 0, "rgba(120,150,200,0.4)"],
+    [-1, TR.TOPH, "rgba(150,180,255,0.3)"], [1, TR.TOPH, "rgba(150,180,255,0.3)"],
+  ]) {
+    const e1 = c(ex, ey, zn), e2 = c(ex, ey, zf);
+    ctx.strokeStyle = col;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(e1.x, e1.y); ctx.lineTo(e2.x, e2.y); ctx.stroke();
+  }
+
+  // greeble su pareti e pavimento (si muovono con la distanza percorsa)
   for (const gr of trenchGreebles) {
     let gz = (gr.zOff - t.dist) % 56;
     if (gz < 0) gz += 56;
     gz -= 6;
     if (gz < 0.2 || gz > zf - 2) continue;
-    const a1 = c(gr.side, gr.y, gz), a2 = c(gr.side, gr.y, gz + gr.len);
-    const b1 = c(gr.side, gr.y + gr.h, gz + gr.len), b2 = c(gr.side, gr.y + gr.h, gz);
-    poly([[a1.x, a1.y], [a2.x, a2.y], [b1.x, b1.y], [b2.x, b2.y]]);
     ctx.fillStyle = "rgba(120,145,190," + gr.a.toFixed(2) + ")";
+    if (gr.type === "floor") {
+      const a1 = c(gr.x, 0.003, gz), a2 = c(gr.x + gr.w, 0.003, gz);
+      const b1 = c(gr.x + gr.w, 0.003, gz + gr.len), b2 = c(gr.x, 0.003, gz + gr.len);
+      poly([[a1.x, a1.y], [a2.x, a2.y], [b1.x, b1.y], [b2.x, b2.y]]);
+    } else {
+      const a1 = c(gr.side, gr.y, gz), a2 = c(gr.side, gr.y, gz + gr.len);
+      const b1 = c(gr.side, gr.y + gr.h, gz + gr.len), b2 = c(gr.side, gr.y + gr.h, gz);
+      poly([[a1.x, a1.y], [a2.x, a2.y], [b1.x, b1.y], [b2.x, b2.y]]);
+    }
     ctx.fill();
   }
 
@@ -1285,7 +1357,7 @@ function drawTrench(noHud) {
   const spacing = 4;
   let zr = spacing - (t.dist % spacing);
   for (; zr < zf; zr += spacing) {
-    const a = clamp(1.1 - zr / zf, 0.08, 0.75);
+    const a = clamp(0.9 - zr / zf, 0.05, 0.45);
     ctx.strokeStyle = "rgba(90,140,210," + a.toFixed(2) + ")";
     ctx.lineWidth = zr < 6 ? 2 : 1;
     const q1 = c(-1, TR.TOPH, zr), q2 = c(-1, 0, zr), q3 = c(1, 0, zr), q4 = c(1, TR.TOPH, zr);
@@ -1305,7 +1377,7 @@ function drawTrench(noHud) {
   // lista di disegno ordinata per profondità (prima il lontano)
   const items = [];
   if (t.port) items.push({ z: t.port.z, fn: () => drawPort(t.port) });
-  for (const o of t.obstacles) items.push({ z: o.z, fn: () => drawBarrier(o) });
+  for (const o of t.obstacles) items.push({ z: o.z, fn: () => drawObstacle(o) });
   for (const tur of t.turrets) items.push({ z: tur.z, fn: () => drawTurret(tur) });
   for (const b of t.bolts) items.push({ z: b.z, fn: () => drawTrenchBolt(b, "rgba(80,255,120,0.95)", "#e2ffe8") });
   for (const l of t.lasers) items.push({ z: l.z, fn: () => drawTrenchBolt(l, "rgba(255,70,60,0.95)", "#ffe2df") });
@@ -1314,15 +1386,24 @@ function drawTrench(noHud) {
   items.sort((a, b) => b.z - a.z);
   for (const it of items) it.fn();
 
-  // ombra del caccia sul pavimento
+  // ombra del caccia sul pavimento + linea di quota tratteggiata
   const shp = proj(sh.x, 0, 0.3);
   ctx.fillStyle = "rgba(0,0,0,0.4)";
   ctx.beginPath();
   ctx.ellipse(shp.x, shp.y, MINWH * 0.06 * (1.3 - sh.y * 0.6), MINWH * 0.013, 0, 0, TAU);
   ctx.fill();
 
-  // il caccia
   const sp2 = proj(sh.x, sh.y, 0);
+  ctx.setLineDash([5, 6]);
+  ctx.strokeStyle = "rgba(140,180,255,0.3)";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(sp2.x, sp2.y + MINWH * 0.02);
+  ctx.lineTo(shp.x, shp.y);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // il caccia
   const flick = sh.inv > 0;
   drawXWingBack(sp2.x, sp2.y, MINWH * 0.085, clamp(-sh.vx * 0.55, -0.6, 0.6), flick, G.time);
 
@@ -1335,26 +1416,135 @@ function drawTrench(noHud) {
   }
 }
 
-function drawBarrier(o) {
-  const zB = o.z + 1.3;
-  const f1 = [proj(o.x0, o.y0, o.z), proj(o.x1, o.y0, o.z), proj(o.x1, o.y1, o.z), proj(o.x0, o.y1, o.z)];
-  const b1 = [proj(o.x0, o.y0, zB), proj(o.x1, o.y0, zB), proj(o.x1, o.y1, zB), proj(o.x0, o.y1, zB)];
-  // faccia posteriore + laterali
-  ctx.fillStyle = "#232b40";
-  poly(b1.map(p => [p.x, p.y])); ctx.fill();
-  ctx.fillStyle = "#1c2334";
-  poly([[f1[2].x, f1[2].y], [f1[3].x, f1[3].y], [b1[3].x, b1[3].y], [b1[2].x, b1[2].y]]); ctx.fill();
-  // faccia frontale
-  ctx.fillStyle = "#2b3450";
-  poly(f1.map(p => [p.x, p.y])); ctx.fill();
-  ctx.strokeStyle = "#4d5c85"; ctx.lineWidth = 1.5;
-  poly(f1.map(p => [p.x, p.y])); ctx.stroke();
-  // bordo di avvertimento
-  ctx.strokeStyle = "rgba(255,205,70," + (0.35 + 0.3 * Math.sin(G.time * 6)).toFixed(2) + ")";
-  ctx.lineWidth = Math.max(1.5, f1[0].s * 0.012);
-  ctx.beginPath();
-  ctx.moveTo(f1[2].x, f1[2].y); ctx.lineTo(f1[3].x, f1[3].y);
-  ctx.stroke();
+// Ogni famiglia di ostacoli ha una palette e un colore-luce che dice come superarlo:
+// ambra = passa sopra · azzurro = passa sotto · rosso = scarta di lato · verde = varco sicuro.
+const OB_PAL = {
+  building: { front: "#453f33", top: "#6e6450", side: "#332f26", back: "#2a271f", edge: "#8a7c5e", light: "#ffb347" },
+  bridge:   { front: "#33415c", top: "#54688c", side: "#273349", back: "#202b3d", edge: "#6c86b8", light: "#6fd6ff" },
+  fin:      { front: "#472f36", top: "#6b4650", side: "#35232a", back: "#291b20", edge: "#8f5a6a", light: "#ff6b6b" },
+  pillar:   { front: "#472f36", top: "#6b4650", side: "#35232a", back: "#291b20", edge: "#8f5a6a", light: "#ff6b6b" },
+  gate:     { front: "#472f36", top: "#6b4650", side: "#35232a", back: "#291b20", edge: "#8f5a6a", light: "#59ff8a" },
+};
+const OB_DEPTH = 1.4;
+
+// Scatola prospettica: mostra il "sopra" solo se la camera è più in alto e il
+// "sotto" solo se è più in basso — così si legge subito se un blocco è a terra
+// o sospeso, e se sei alla quota giusta per superarlo.
+function drawBox3D(x0, x1, y0, y1, z0, depth, pal, warn, grooves) {
+  const z1 = z0 + depth;
+  const f = [proj(x0, y0, z0), proj(x1, y0, z0), proj(x1, y1, z0), proj(x0, y1, z0)];
+  const b = [proj(x0, y0, z1), proj(x1, y0, z1), proj(x1, y1, z1), proj(x0, y1, z1)];
+  ctx.fillStyle = pal.back;
+  poly(b.map(p => [p.x, p.y])); ctx.fill();
+  if (trench.camY > y1) {
+    ctx.fillStyle = pal.top;
+    poly([[f[3].x, f[3].y], [f[2].x, f[2].y], [b[2].x, b[2].y], [b[3].x, b[3].y]]); ctx.fill();
+  }
+  if (trench.camY < y0) {
+    ctx.fillStyle = pal.side;
+    poly([[f[0].x, f[0].y], [f[1].x, f[1].y], [b[1].x, b[1].y], [b[0].x, b[0].y]]); ctx.fill();
+  }
+  if (trench.camX < x0) {
+    ctx.fillStyle = pal.side;
+    poly([[f[0].x, f[0].y], [f[3].x, f[3].y], [b[3].x, b[3].y], [b[0].x, b[0].y]]); ctx.fill();
+  }
+  if (trench.camX > x1) {
+    ctx.fillStyle = pal.side;
+    poly([[f[1].x, f[1].y], [f[2].x, f[2].y], [b[2].x, b[2].y], [b[1].x, b[1].y]]); ctx.fill();
+  }
+  ctx.fillStyle = pal.front;
+  poly(f.map(p => [p.x, p.y])); ctx.fill();
+  // scanalature sulla faccia frontale: danno scala quando il blocco è vicino
+  if (grooves && f[0].s > 120) {
+    ctx.strokeStyle = "rgba(0,0,0,0.28)";
+    ctx.lineWidth = 1;
+    const gl = (A, B, k) => [A.x + (B.x - A.x) * k, A.y + (B.y - A.y) * k];
+    for (const k of [1 / 3, 2 / 3]) {
+      const a = grooves === "h" ? gl(f[0], f[3], k) : gl(f[0], f[1], k);
+      const b2 = grooves === "h" ? gl(f[1], f[2], k) : gl(f[3], f[2], k);
+      ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b2[0], b2[1]); ctx.stroke();
+    }
+  }
+  ctx.strokeStyle = pal.edge;
+  ctx.lineWidth = 1.2;
+  poly(f.map(p => [p.x, p.y])); ctx.stroke();
+  if (warn) {
+    ctx.strokeStyle = "rgba(255,64,54," + (0.55 + 0.45 * Math.sin(G.time * 14)).toFixed(2) + ")";
+    ctx.lineWidth = Math.max(2, f[0].s * 0.014);
+    poly(f.map(p => [p.x, p.y])); ctx.stroke();
+  }
+  return f;
+}
+
+function drawGroundShadow(x0, x1, z, depth, alpha) {
+  const q = [proj(x0, 0.005, z), proj(x1, 0.005, z), proj(x1, 0.005, z + depth), proj(x0, 0.005, z + depth)];
+  ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
+  poly(q.map(p => [p.x, p.y])); ctx.fill();
+}
+
+function drawBeacon(x, y, z, color, phase) {
+  const p = proj(x, y, z);
+  const r = Math.max(1.8, p.s * 0.013);
+  const bl = 0.6 + 0.4 * Math.sin(G.time * 6 + phase);
+  const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 3.4);
+  g.addColorStop(0, color);
+  g.addColorStop(1, "rgba(0,0,0,0)");
+  ctx.globalAlpha = 0.8 * bl;
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(p.x, p.y, r * 3.4, 0, TAU); ctx.fill();
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = color;
+  ctx.beginPath(); ctx.arc(p.x, p.y, r * 0.95, 0, TAU); ctx.fill();
+  ctx.fillStyle = "#ffffff";
+  ctx.beginPath(); ctx.arc(p.x, p.y, r * 0.4, 0, TAU); ctx.fill();
+}
+
+function drawObstacle(o) {
+  const warn = o === trench.warnObs;
+  const pal = OB_PAL[o.kind] || OB_PAL.building;
+
+  if (o.kind === "bridge") {
+    // ombra proiettata sul pavimento: dice subito "questo è sopra di te"
+    drawGroundShadow(o.x0 + 0.06, o.x1 - 0.06, o.z + 0.15, OB_DEPTH, 0.28);
+    // piloni di sostegno verso il bordo delle pareti
+    for (const sx of [-0.94, 0.94]) {
+      const a = proj(sx - 0.035, o.y1, o.z), b2 = proj(sx + 0.035, o.y1, o.z);
+      const cT = proj(sx + 0.035, TR.TOPH, o.z), dT = proj(sx - 0.035, TR.TOPH, o.z);
+      ctx.fillStyle = pal.side;
+      poly([[a.x, a.y], [b2.x, b2.y], [cT.x, cT.y], [dT.x, dT.y]]); ctx.fill();
+    }
+    drawBox3D(o.x0, o.x1, o.y0, o.y1, o.z, OB_DEPTH, pal, warn, "h");
+    // luci azzurre sul bordo basso: passa sotto le luci
+    for (let i = 0; i < 5; i++) {
+      const bx = lerp(o.x0 + 0.12, o.x1 - 0.12, i / 4);
+      drawBeacon(bx, o.y0 - 0.015, o.z, pal.light, i * 1.3 + o.z);
+    }
+    return;
+  }
+
+  // tutte le altre strutture poggiano a terra: ombra di contatto
+  drawGroundShadow(Math.max(o.x0, -1), Math.min(o.x1, 1), o.z, OB_DEPTH, 0.4);
+  drawBox3D(o.x0, o.x1, o.y0, o.y1, o.z, OB_DEPTH, pal, warn, o.kind === "building" ? "h" : "v");
+
+  if (o.kind === "building") {
+    // luci ambra sul bordo alto: passa sopra le luci
+    const xa = Math.max(o.x0, -0.98) + 0.08, xb = Math.min(o.x1, 0.98) - 0.08;
+    const n = Math.max(2, Math.round((xb - xa) * 3));
+    for (let i = 0; i < n; i++) {
+      drawBeacon(lerp(xa, xb, n === 1 ? 0.5 : i / (n - 1)), o.y1 + 0.015, o.z, pal.light, i * 1.7 + o.z);
+    }
+  } else if (o.kind === "fin" || o.kind === "gate") {
+    // luci sul bordo verticale libero: passa da quel lato
+    for (let i = 0; i < 3; i++) {
+      drawBeacon(o.innerEdge, lerp(0.15, 1.05, i / 2), o.z, pal.light, i * 1.1 + o.z);
+    }
+  } else if (o.kind === "pillar") {
+    for (const ex of [o.x0, o.x1]) {
+      for (let i = 0; i < 3; i++) {
+        drawBeacon(ex, lerp(0.15, 1.05, i / 2), o.z, pal.light, i * 1.1 + ex * 4);
+      }
+    }
+  }
 }
 
 function drawTurret(tur) {
@@ -1362,23 +1552,29 @@ function drawTurret(tur) {
   const s = p.s * 0.09;
   ctx.save();
   ctx.translate(p.x, p.y);
+  // orientata rispetto alla superficie di appoggio: canne verso l'interno della trincea
+  if (tur.side === "left") ctx.rotate(Math.PI / 2);
+  else if (tur.side === "right") ctx.rotate(-Math.PI / 2);
+  // basamento
   ctx.fillStyle = "#333c58";
   ctx.strokeStyle = "#5a6890";
   ctx.lineWidth = 1;
-  ctx.fillRect(-s, -s * 0.7, s * 2, s * 1.4);
-  ctx.strokeRect(-s, -s * 0.7, s * 2, s * 1.4);
+  ctx.fillRect(-s, -s * 0.25, s * 2, s * 0.85);
+  ctx.strokeRect(-s, -s * 0.25, s * 2, s * 0.85);
+  // cupola
   ctx.fillStyle = "#465179";
-  ctx.beginPath(); ctx.arc(0, -s * 0.5, s * 0.55, 0, TAU); ctx.fill(); ctx.stroke();
-  // doppia canna verso la camera
-  ctx.strokeStyle = "#6b7ba8"; ctx.lineWidth = Math.max(1, s * 0.16);
+  ctx.beginPath(); ctx.arc(0, -s * 0.3, s * 0.6, Math.PI, 0); ctx.fill(); ctx.stroke();
+  // doppia canna che spunta dalla cupola
+  ctx.strokeStyle = "#6b7ba8";
+  ctx.lineWidth = Math.max(1, s * 0.16);
   ctx.beginPath();
-  ctx.moveTo(-s * 0.25, -s * 0.5); ctx.lineTo(-s * 0.25, s * 0.6);
-  ctx.moveTo(s * 0.25, -s * 0.5); ctx.lineTo(s * 0.25, s * 0.6);
+  ctx.moveTo(-s * 0.22, -s * 0.35); ctx.lineTo(-s * 0.22, -s * 1.15);
+  ctx.moveTo(s * 0.22, -s * 0.35); ctx.lineTo(s * 0.22, -s * 1.15);
   ctx.stroke();
   // luce di mira
   const warm = tur.fireCd < 0.4;
   ctx.fillStyle = warm ? "#ff5c5c" : "#7fd4ff";
-  ctx.beginPath(); ctx.arc(0, -s * 0.5, Math.max(1, s * 0.14), 0, TAU); ctx.fill();
+  ctx.beginPath(); ctx.arc(0, -s * 0.55, Math.max(1, s * 0.16), 0, TAU); ctx.fill();
   ctx.restore();
 }
 
