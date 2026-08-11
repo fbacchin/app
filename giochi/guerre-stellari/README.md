@@ -34,7 +34,7 @@ FUOCO e SILURO a destra.
 ## Esecuzione
 
 Apri `index.html` in un browser qualsiasi, oppure — se il repo è pubblicato con
-GitHub Pages — visita `https://<utente>.github.io/app/guerre-stellari/`.
+GitHub Pages — visita `https://<utente>.github.io/app/giochi/guerre-stellari/`.
 
 Il record personale viene salvato in `localStorage`.
 
