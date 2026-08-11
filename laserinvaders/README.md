@@ -13,11 +13,11 @@ dipendenze, niente build, funziona anche offline.
 - **iPhone / iPad**: trascina il dito in qualsiasi punto dello schermo per muovere la
   navicella in ogni direzione (movimento relativo: il dito non copre mai la nave);
   un unico pulsante, **FUOCO** — tienilo premuto per sparare a raffica.
-- Ogni 7 astronavi abbattute cade una capsula **[P]**. La scala dei potenziamenti è
-  infinita: laser singolo → doppio → triplo, poi si riparte da un **raggio più lungo**
-  che **trapassa le navi** (un colpo può abbatterne più d'una), di nuovo singolo →
-  doppio → triplo, poi ancora più lungo, e così via.
-- Se vieni colpito perdi una vita e il laser scende di un gradino.
+- Ogni 7 astronavi abbattute cade una capsula **[P]**. La scala dei potenziamenti sale
+  sempre, senza mai tornare indietro: laser singolo → doppio → triplo, poi arriva un
+  **drone gregario** che vola al tuo fianco e spara con te, poi un **secondo drone**,
+  e da lì in poi ogni capsula aumenta la **cadenza di fuoco** (fino a raddoppiarla).
+- Se vieni colpito perdi una vita e scendi di un gradino nella scala.
 - Vita extra ogni 2.500 punti. Il record resta salvato sul dispositivo.
 
 ## Le astronavi
