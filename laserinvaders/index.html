@@ -382,8 +382,8 @@ function tone(type, f0, f1, dur, vol, when){
 
 /* Il "fiu": glissando sinusoidale morbido in discesa, come i laser disco
    di "I Don't Feel Like Dancin'" degli Scissor Sisters. Due sinusoidi
-   leggermente scordate danno corpo; piu raggi = piu acuto, piu spesso
-   = piu grave e corposo. */
+   leggermente scordate danno corpo; piu raggi = piu acuto, raggio piu
+   lungo = piu grave e corposo. */
 function sfxLaser(count, tier){
   const base = Math.max(1500, 2400 + count*250 - tier*180);
   tone('sine',     base,      210, 0.28, 0.42);
@@ -442,13 +442,14 @@ const player = { x: W/2, y: PLAYER_Y, invuln: 0, cool: 0 };
 const PLAYER_MIN_Y = 130;                 // quanto in alto puo salire la navicella
 const PLAYER_MAX_Y = GROUND_Y - 12;
 
-/* Scala dei potenziamenti, infinita: (n%3)+1 raggi, spessore 1+n/3.
-   0=singolo, 1=doppio, 2=triplo, 3=singolo spesso, 4=doppio spesso, ... */
+/* Scala dei potenziamenti, infinita: (n%3)+1 raggi, lunghezza che cresce
+   con n/3. Un raggio lungo trapassa le navi: puo colpirne 1+n/3 per colpo.
+   0=singolo, 1=doppio, 2=triplo, 3=singolo lungo, 4=doppio lungo, ... */
 let powerLevel = 0;
 const POWER_MAX = 20;                     // oltre: le capsule valgono punti
 function laserCount(){ return (powerLevel % 3) + 1; }
 function laserTier(){ return Math.floor(powerLevel / 3); }
-function laserWidth(){ return 1 + Math.min(6, laserTier()); }
+function laserLen(){ return 5 + Math.min(6, laserTier())*9; }
 
 /* Entita */
 let enemies = [];          // navi nemiche in volo
@@ -691,18 +692,21 @@ function updatePlay(dt){
   for (const l of lasers){
     l.y -= 320*dt;
     l.x += (l.vx||0)*dt;
-    if (l.y < -6 || l.x < -4 || l.x > W+4){ l.dead = true; continue; }
+    const len = l.len || 5;
+    if (l.y < -(len+2) || l.x < -4 || l.x > W+4){ l.dead = true; continue; }
     for (const e of enemies){
       if (e.dead) continue;
+      if (l.hits && l.hits.has(e)) continue;
       const s = enemySize(e.type);
       const ex = e.x - s.w/2, ey = e.y;
-      /* test "spazzato": copre l'intero tragitto del colpo nel frame,
-         cosi il laser non attraversa i nemici ai framerate bassi */
-      const lw = (l.w || 1) / 2;
-      if (l.x + lw >= ex && l.x - lw <= ex+s.w &&
-          l.y <= ey+s.h && l.y + 4 + 320*dt >= ey){
-        l.dead = true;
-        e.hp -= (l.dmg || 1);
+      /* test "spazzato" sull'intera lunghezza del raggio (niente tunneling
+         ai framerate bassi); i raggi lunghi trapassano e restano attivi
+         finche non esauriscono i bersagli */
+      if (l.x >= ex && l.x <= ex+s.w &&
+          l.y <= ey+s.h && l.y + len + 320*dt >= ey){
+        if (!l.hits) l.hits = new Set();
+        l.hits.add(e);
+        e.hp--;
         if (e.hp <= 0){
           e.dead = true;
           killEnemy(e);
@@ -710,7 +714,7 @@ function updatePlay(dt){
           e.flash = 0.09;
           sfxHitTick();
         }
-        break;
+        if (l.hits.size >= 1 + (l.pierce||0)){ l.dead = true; break; }
       }
     }
   }
@@ -809,7 +813,7 @@ function updatePowerups(dt, canCatch){
       if (powerLevel < POWER_MAX){
         powerLevel++;
         const n = laserCount();
-        const msg = n === 1 ? 'RAGGIO PIU POTENTE!' : (n === 2 ? 'LASER DOPPIO!' : 'LASER TRIPLO!');
+        const msg = n === 1 ? 'RAGGIO PIU LUNGO!' : (n === 2 ? 'LASER DOPPIO!' : 'LASER TRIPLO!');
         addScorePopup(player.x, player.y-14, msg, COLORS.green);
       } else {
         addScore(500);
@@ -826,16 +830,16 @@ function fireLaser(){
   if (lasers.length >= 24) return;
   player.cool = 0.16;
   const y = player.y-2;
-  const n = laserCount(), w = laserWidth(), dmg = 1 + laserTier();
+  const n = laserCount(), len = laserLen(), pierce = laserTier();
   if (n === 1){
-    lasers.push({ x: player.x, y, vx: 0, w, dmg });
+    lasers.push({ x: player.x, y, vx: 0, len, pierce });
   } else if (n === 2){
-    lasers.push({ x: player.x-5, y, vx: 0, w, dmg });
-    lasers.push({ x: player.x+5, y, vx: 0, w, dmg });
+    lasers.push({ x: player.x-5, y, vx: 0, len, pierce });
+    lasers.push({ x: player.x+5, y, vx: 0, len, pierce });
   } else {
-    lasers.push({ x: player.x, y, vx: 0, w, dmg });
-    lasers.push({ x: player.x-5, y, vx: -46, w, dmg });
-    lasers.push({ x: player.x+5, y, vx: 46, w, dmg });
+    lasers.push({ x: player.x, y, vx: 0, len, pierce });
+    lasers.push({ x: player.x-5, y, vx: -46, len, pierce });
+    lasers.push({ x: player.x+5, y, vx: 46, len, pierce });
   }
   sfxLaser(n, laserTier());
 }
@@ -926,19 +930,13 @@ function draw(){
     cx.drawImage(sprite('ship'+laserCount(), 0, COLORS.green), Math.round(player.x-6), Math.round(player.y));
   }
 
-  /* laser (i raggi potenziati sono piu spessi, con un alone) */
+  /* laser (i raggi potenziati sono piu lunghi e trapassano le navi) */
   for (const l of lasers){
-    const lw = l.w || 1, lx = Math.round(l.x - lw/2);
-    if (lw > 1){
-      cx.globalAlpha = 0.35;
-      cx.fillStyle = COLORS.cyan;
-      cx.fillRect(lx-1, Math.round(l.y)-1, lw+2, 8);
-      cx.globalAlpha = 1;
-    }
+    const len = l.len || 5, lx = Math.round(l.x);
     cx.fillStyle = COLORS.white;
-    cx.fillRect(lx, Math.round(l.y), lw, 5);
+    cx.fillRect(lx, Math.round(l.y), 1, len);
     cx.fillStyle = COLORS.cyan;
-    cx.fillRect(lx, Math.round(l.y)+5, lw, 2);
+    cx.fillRect(lx, Math.round(l.y)+len, 1, 3);
   }
 
   /* colpi nemici */

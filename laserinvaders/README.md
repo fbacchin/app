@@ -14,9 +14,9 @@ dipendenze, niente build, funziona anche offline.
   navicella in ogni direzione (movimento relativo: il dito non copre mai la nave);
   un unico pulsante, **FUOCO** — tienilo premuto per sparare a raffica.
 - Ogni 7 astronavi abbattute cade una capsula **[P]**. La scala dei potenziamenti è
-  infinita: laser singolo → doppio → triplo, poi si riparte da un **raggio più spesso**
-  (e più potente: fa più danni) di nuovo singolo → doppio → triplo, poi ancora più
-  spesso, e così via.
+  infinita: laser singolo → doppio → triplo, poi si riparte da un **raggio più lungo**
+  che **trapassa le navi** (un colpo può abbatterne più d'una), di nuovo singolo →
+  doppio → triplo, poi ancora più lungo, e così via.
 - Se vieni colpito perdi una vita e il laser scende di un gradino.
 - Vita extra ogni 2.500 punti. Il record resta salvato sul dispositivo.
 
