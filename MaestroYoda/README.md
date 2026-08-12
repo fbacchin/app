@@ -48,4 +48,5 @@ con un account sviluppatore a pagamento dura un anno.
 
 Progetto amatoriale a scopo personale, per uso privato: Yoda e Guerre Stellari
 sono proprietà di Lucasfilm/Disney, quindi l'app non va distribuita su App
-Store. L'icona e il volto in-app sono disegni vettoriali originali "ispirati a".
+Store. L'icona e l'avatar in-app usano un'illustrazione cartoon di Yoda
+fornita dall'autore dell'app (`AppIcon` e `YodaPortrait` in Assets.xcassets).
