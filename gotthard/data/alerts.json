@@ -1,5 +1,20 @@
 [
  {
+  "firstSeen": "2026-08-13T06:39:09Z",
+  "id": "situation.644848.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "north",
+  "versionTime": "2026-08-13T06:37:41Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Faido und Tunnel Casletto-Tunnel Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Tunnel Tunnel de Casletto Situation: danger Raison: objets sur la chaussée",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Galleria Galleria Casletto Situazione: pericolo Causa: oggetto sulla strada"
+  },
+  "lastSeen": "2026-08-13T06:39:09Z"
+ },
+ {
   "firstSeen": "2026-08-12T14:06:21Z",
   "id": "situation.644658.1.1.1",
   "type": "AbnormalTraffic",
