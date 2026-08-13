@@ -5,7 +5,8 @@
  },
  "north": {
   "phase": "heavy",
-  "lastSent": "2026-08-13T10:03:30Z"
+  "lastSent": "2026-08-13T10:03:30Z",
+  "clearSince": "2026-08-13T19:36:21Z"
  },
  "tunnel": {
   "phase": "open"
