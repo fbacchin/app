@@ -12,14 +12,14 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Tunnel Tunnel de Casletto Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de droite fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Galleria Galleria Casletto Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa"
   },
-  "lastSeen": "2026-08-13T07:40:29Z"
+  "lastSeen": "2026-08-13T07:45:36Z"
  },
  {
   "firstSeen": "2026-08-13T07:40:29Z",
   "id": "situation.644861.1.1.1",
   "type": "AbnormalTraffic",
   "direction": "north",
-  "versionTime": "2026-08-13T07:38:34Z",
+  "versionTime": "2026-08-13T07:44:11Z",
   "km": 1.0,
   "wait": 10,
   "texts": {
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
   },
-  "lastSeen": "2026-08-13T07:40:29Z"
+  "lastSeen": "2026-08-13T07:45:36Z"
  },
  {
   "firstSeen": "2026-08-12T14:06:21Z",
