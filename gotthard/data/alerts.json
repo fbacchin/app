@@ -4,15 +4,15 @@
   "id": "situation.644861.1.1.1",
   "type": "AbnormalTraffic",
   "direction": "north",
-  "versionTime": "2026-08-13T12:21:57Z",
-  "km": 4.0,
-  "wait": 40,
+  "versionTime": "2026-08-13T16:20:30Z",
+  "km": 3.0,
+  "wait": 30,
   "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Anschluss Airolo Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
+   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Anschluss Airolo Sachlage: Stau Länge [km] 3.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 30",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: bouchon longueur [km] 3.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30"
   },
-  "lastSeen": "2026-08-13T16:16:53Z"
+  "lastSeen": "2026-08-13T16:21:59Z"
  },
  {
   "firstSeen": "2026-08-13T08:06:03Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-08-13T16:16:53Z"
+  "lastSeen": "2026-08-13T16:21:59Z"
  },
  {
   "firstSeen": "2026-08-13T12:52:18Z",
@@ -267,21 +267,5 @@
   },
   "lastSeen": "2026-08-11T16:34:01Z",
   "revokedAt": "2026-08-11T16:39:08Z"
- },
- {
-  "firstSeen": "2026-08-11T16:03:12Z",
-  "id": "situation.644520.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-08-11T15:59:06Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Parkplatz Lavorgo (Monda) und Anschluss Faido Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Parking Lavorgo (Monda) et Jonction autoroutière Faido Situation: danger Raison: objets sur la chaussée",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Parcheggio Lavorgo (Monda) E Svincolo autostradale Faido Situazione: pericolo Causa: oggetto sulla strada"
-  },
-  "lastSeen": "2026-08-11T16:18:38Z",
-  "revokedAt": "2026-08-11T16:23:45Z"
  }
 ]
