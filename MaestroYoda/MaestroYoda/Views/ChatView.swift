@@ -23,7 +23,7 @@ struct ChatView: View {
                     .font(.headline)
                     .tracking(1)
                     .foregroundStyle(Color.swYellow)
-                Text(viewModel.isTyping ? "sta meditando…" : "in ascolto nella Forza")
+                Text(headerSubtitle)
                     .font(.caption)
                     .foregroundStyle(.white.opacity(0.6))
             }
@@ -39,6 +39,13 @@ struct ChatView: View {
                 .fill(Color.saberGreen.opacity(0.25))
                 .frame(height: 0.5)
         }
+    }
+
+    private var headerSubtitle: String {
+        if viewModel.isTyping { return "sta meditando…" }
+        return viewModel.usesAppleIntelligence
+            ? "in ascolto, con Apple Intelligence"
+            : "in ascolto nella Forza"
     }
 
     // MARK: - Messaggi

@@ -12,10 +12,18 @@ amore e futuro.
 
 ## Come funziona
 
-- **Motore offline**: nessuna connessione richiesta. `YodaBrain` analizza la
-  domanda (parole chiave, domande sì/no, risposte brevi, saluti) e compone la
-  risposta pescando da oltre 120 frasi originali in stile Yoda, senza mai
-  ripetersi finché un argomento non si esaurisce.
+- **Apple Intelligence (se disponibile)**: su iPhone con iOS 26+ e Apple
+  Intelligence attiva, le risposte di Yoda sono generate dal modello
+  linguistico on-device di Apple (framework Foundation Models), istruito a
+  parlare come Yoda del doppiaggio italiano. La conversazione ha memoria del
+  contesto, tutto resta sul telefono e non serve internet. Nell'intestazione
+  della chat appare "in ascolto, con Apple Intelligence".
+- **Motore offline**: se Apple Intelligence non è disponibile (iPhone o iOS
+  più vecchi, funzione disattivata) — o se il modello dovesse fallire — l'app
+  passa automaticamente a `YodaBrain`, che analizza la domanda (parole chiave,
+  domande sì/no, risposte brevi, saluti) e compone la risposta pescando da
+  oltre 120 frasi originali in stile Yoda, senza mai ripetersi finché un
+  argomento non si esaurisce.
 - **Domande sì/no** («Devo…?», «Ce la farò…?»): risponde da oracolo, con
   leggera preferenza per l'incoraggiamento.
 - **Chicche nascoste**: prova a scrivere «lato oscuro», «quanti anni hai»,
@@ -23,7 +31,9 @@ amore e futuro.
 
 ## Installazione su iPhone
 
-1. Apri `MaestroYoda.xcodeproj` con **Xcode 16 o successivo** sul Mac.
+1. Apri `MaestroYoda.xcodeproj` con **Xcode 16 o successivo** sul Mac
+   (per includere Apple Intelligence serve **Xcode 26+**; con Xcode più
+   vecchi l'app si compila comunque e usa solo il motore offline).
 2. Seleziona il target *MaestroYoda* → scheda **Signing & Capabilities** →
    scegli il tuo **Team** (basta un Apple ID gratuito).
 3. Se Xcode lo chiede, cambia il *Bundle Identifier* in uno tuo
