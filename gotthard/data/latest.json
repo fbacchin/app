@@ -1,5 +1,5 @@
 {
- "time": "2026-08-13T13:02:32Z",
+ "time": "2026-08-13T13:07:39Z",
  "south": {
   "km": null,
   "wait": null
@@ -33,19 +33,6 @@
     "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Faido und Tunnel Piumogna-Tunnel Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen gesperrt",
     "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Tunnel Tunnel de Piumogna Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de droite fermée",
     "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Galleria Galleria Piumogna Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa"
-   }
-  },
-  {
-   "id": "situation.644914.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-08-13T12:43:21Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Chiasso und Parkplatz Dosierstelle Coldrerio Sachlage: Stau Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen gesperrt",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Chiasso et Parking Aire de dosage Coldrerio Situation: bouchon Raison: véhicule en panne Gestion du trafic: voie de droite fermée",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Chiasso E Parcheggio Area di dosaggio Coldrerio Situazione: colonna Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa"
    }
   },
   {
