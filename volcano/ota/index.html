@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Installa Volcano</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f6f6f4;
+    --card: #ffffff;
+    --ink: #1c1c1e;
+    --muted: #6b6b70;
+    --line: #e2e2e0;
+    --accent: #bc3e28;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121213;
+      --card: #1d1d1f;
+      --ink: #f2f2f0;
+      --muted: #9a9a9f;
+      --line: #2e2e31;
+      --accent: #ff6b4f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2rem 1.25rem 4rem;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    display: flex;
+    justify-content: center;
+  }
+  main { width: 100%; max-width: 30rem; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .app { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+  .app img { width: 64px; height: 64px; border-radius: 14px; display: block; }
+  .app h1 { margin: 0; font-size: 1.35rem; letter-spacing: -0.01em; }
+  .app p { margin: 0.15rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  a.install {
+    display: block;
+    text-align: center;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.95rem 1rem;
+    border-radius: 12px;
+    /* 44pt è il minimo tocco raccomandato da Apple */
+    min-height: 44px;
+  }
+  a.install:active { opacity: 0.8; }
+  h2 { font-size: 0.95rem; margin: 0 0 0.6rem; letter-spacing: 0.01em; }
+  ol, ul { margin: 0; padding-left: 1.2rem; }
+  li { margin-bottom: 0.5rem; }
+  li:last-child { margin-bottom: 0; }
+  p.note { color: var(--muted); font-size: 0.88rem; margin: 0.9rem 0 0; }
+  .warn {
+    border-left: 3px solid var(--accent);
+    padding-left: 0.85rem;
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85em;
+    background: var(--bg);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+  footer { color: var(--muted); font-size: 0.8rem; text-align: center; }
+</style>
+</head>
+<body>
+<main>
+
+  <div class="card">
+    <div class="app">
+      <img src="icon-512.png" alt="">
+      <div>
+        <h1>Volcano</h1>
+        <p>Monitoraggio informativo dei vulcani italiani</p>
+      </div>
+    </div>
+
+    <!--
+      Il link deve essere toccato da una pagina: digitare itms-services://
+      nella barra indirizzi di Safari su iOS recenti non apre nulla.
+      È il motivo per cui questa pagina esiste.
+    -->
+    <a class="install"
+       href="itms-services://?action=download-manifest&amp;url=https://fbacchin.github.io/app/volcano/ota/manifest.plist">
+      Installa Volcano
+    </a>
+
+    <p class="note">Da aprire con <strong>Safari su iPhone</strong>. Altri browser non gestiscono il protocollo di installazione.</p>
+  </div>
+
+  <div class="card">
+    <h2>Se l'installazione non parte</h2>
+    <ul>
+      <li>Il dispositivo dev'essere fra quelli registrati nel profilo di distribuzione: senza, iOS rifiuta l'installazione senza spiegare il motivo.</li>
+      <li>La prima apertura richiede di autorizzare lo sviluppatore in <code>Impostazioni › Generali › VPN e gestione dispositivo</code>.</li>
+      <li>Serve connessione: l'app si scarica in background dopo il tocco su Installa.</li>
+      <li>Se l'icona resta grigia e non si completa, il manifest o l'IPA non sono raggiungibili all'URL indicato.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Che cos'è questa app</h2>
+    <p class="warn">
+      Volcano aggrega dati provenienti da fonti scientifiche e istituzionali pubbliche.
+      Non è un sistema ufficiale di allerta, non effettua previsioni di eruzioni e non
+      sostituisce le comunicazioni di INGV, Protezione Civile o altre autorità competenti.
+      In caso di emergenza, seguire esclusivamente le istruzioni delle autorità locali.
+    </p>
+  </div>
+
+  <footer>Build di sviluppo — non distribuire</footer>
+
+</main>
+</body>
+</html>
