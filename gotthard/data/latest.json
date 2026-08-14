@@ -1,5 +1,5 @@
 {
- "time": "2026-08-14T13:56:39Z",
+ "time": "2026-08-14T14:01:45Z",
  "south": {
   "km": null,
   "wait": null
@@ -39,13 +39,13 @@
    "id": "situation.645208.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
    "direction": "north",
-   "versionTime": "2026-08-14T13:17:52Z",
+   "versionTime": "2026-08-14T14:01:09Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Verkehrsführung: temporäre Tunnelsperrungen",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Gestion du trafic: Fermeture par intermittence du tunnel",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Limitazione del traffico: blocco temporaneo del tunnel"
+    "de": "Freigegeben: A2 Chiasso -> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt",
+    "fr": "Libéré: A2 Chiasso -> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé",
+    "it": "Approvato: A2 Chiasso -> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso"
    }
   },
   {
