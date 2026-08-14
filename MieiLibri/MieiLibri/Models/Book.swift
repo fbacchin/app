@@ -13,6 +13,7 @@ struct Book: Identifiable, Codable, Equatable {
     var dateRead: Date
     var rating: Int
     var notes: String
+    var updatedAt: Date? = nil
 
     var authorsText: String {
         authors.isEmpty ? "Autore sconosciuto" : authors.joined(separator: ", ")

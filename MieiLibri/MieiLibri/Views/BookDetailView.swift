@@ -88,7 +88,7 @@ struct BookDetailView: View {
             }
         }
         .navigationTitle("Dettagli")
-        .navigationBarTitleDisplayMode(.inline)
+        .inlineNavigationTitle()
         .confirmationDialog(
             "Vuoi rimuovere questo libro dalla libreria?",
             isPresented: $confirmDelete,

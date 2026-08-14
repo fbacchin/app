@@ -1,5 +1,4 @@
 import SwiftUI
-import UIKit
 
 /// Ricerca nel catalogo di Google Books, con copertine nei risultati.
 struct SearchView: View {
@@ -17,17 +16,21 @@ struct SearchView: View {
                 SearchResultRow(book: book)
             }
             .listStyle(.plain)
-            .scrollDismissesKeyboard(.immediately)
+            .dismissKeyboardOnScroll()
             .overlay { overlayContent }
             .navigationTitle("Cerca libri")
-            .navigationBarTitleDisplayMode(.inline)
+            .inlineNavigationTitle()
+            #if os(iOS)
             .searchable(
                 text: $query,
                 placement: .navigationBarDrawer(displayMode: .always),
                 prompt: "Titolo, autore o ISBN"
             )
+            #else
+            .searchable(text: $query, prompt: "Titolo, autore o ISBN")
+            #endif
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button("Chiudi") { dismiss() }
                 }
             }
@@ -35,6 +38,9 @@ struct SearchView: View {
                 await search()
             }
         }
+        #if os(macOS)
+        .frame(minWidth: 540, minHeight: 600)
+        #endif
     }
 
     @ViewBuilder
@@ -134,7 +140,7 @@ private struct SearchResultRow: View {
 
     private func add() {
         guard !isSaved else { return }
-        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        playSuccessHaptic()
         Task {
             await library.add(book)
         }

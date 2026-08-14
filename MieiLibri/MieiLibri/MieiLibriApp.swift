@@ -9,5 +9,8 @@ struct MieiLibriApp: App {
             LibraryView()
                 .environmentObject(library)
         }
+        #if os(macOS)
+        .defaultSize(width: 950, height: 640)
+        #endif
     }
 }

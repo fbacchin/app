@@ -1,10 +1,9 @@
 import SwiftUI
-import UIKit
 
 /// Mostra la copertina di un libro: prima quella salvata in locale,
 /// altrimenti la scarica dall'URL remoto, con un segnaposto di riserva.
 struct BookCoverView: View {
-    var image: UIImage?
+    var image: PlatformImage?
     var url: URL?
     var width: CGFloat
 
@@ -14,7 +13,7 @@ struct BookCoverView: View {
     var body: some View {
         Group {
             if let image = image {
-                Image(uiImage: image)
+                Image(platformImage: image)
                     .resizable()
                     .scaledToFill()
             } else if let url = url {
@@ -55,6 +54,6 @@ struct BookCoverView: View {
     }
 
     private var placeholderBackground: some View {
-        Rectangle().fill(Color(.secondarySystemFill))
+        Rectangle().fill(.quaternary)
     }
 }

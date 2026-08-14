@@ -1,9 +1,12 @@
 import SwiftUI
 
 /// Schermata principale: l'elenco dei libri letti.
+/// Al primo avvio propone di collegare un account per la sincronizzazione.
 struct LibraryView: View {
     @EnvironmentObject private var library: Library
+    @Environment(\.scenePhase) private var scenePhase
     @State private var showSearch = false
+    @State private var showAccount = false
     @State private var filter = ""
 
     private var filteredBooks: [Book] {
@@ -17,37 +20,63 @@ struct LibraryView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if library.books.isEmpty {
-                    ContentUnavailableView {
-                        Label("Nessun libro", systemImage: "books.vertical")
-                    } description: {
-                        Text("Cerca un libro nel catalogo e aggiungilo alla tua libreria.")
-                    } actions: {
-                        Button("Cerca un libro") { showSearch = true }
-                            .buttonStyle(.borderedProminent)
-                    }
-                } else {
-                    bookList
+            if library.showsAccountGate {
+                AccountView(isGate: true)
+            } else {
+                mainContent
+            }
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                library.scheduleSync(after: 0.2)
+            }
+        }
+    }
+
+    private var mainContent: some View {
+        Group {
+            if library.books.isEmpty {
+                ContentUnavailableView {
+                    Label("Nessun libro", systemImage: "books.vertical")
+                } description: {
+                    Text("Cerca un libro nel catalogo e aggiungilo alla tua libreria.")
+                } actions: {
+                    Button("Cerca un libro") { showSearch = true }
+                        .buttonStyle(.borderedProminent)
                 }
+            } else {
+                bookList
             }
-            .navigationTitle("I miei libri")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showSearch = true
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                    .accessibilityLabel("Aggiungi un libro")
+        }
+        .navigationTitle("I miei libri")
+        .toolbar {
+            ToolbarItem(placement: .automatic) {
+                Button {
+                    showAccount = true
+                } label: {
+                    Image(systemName: library.isSignedIn ? "person.crop.circle.badge.checkmark" : "person.crop.circle")
                 }
+                .accessibilityLabel("Account e sincronizzazione")
             }
-            .sheet(isPresented: $showSearch) {
-                SearchView()
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    showSearch = true
+                } label: {
+                    Image(systemName: "plus")
+                }
+                .accessibilityLabel("Aggiungi un libro")
             }
-            .navigationDestination(for: String.self) { bookID in
-                BookDetailView(bookID: bookID)
+        }
+        .sheet(isPresented: $showSearch) {
+            SearchView()
+        }
+        .sheet(isPresented: $showAccount) {
+            NavigationStack {
+                AccountView(isGate: false)
             }
+        }
+        .navigationDestination(for: String.self) { bookID in
+            BookDetailView(bookID: bookID)
         }
     }
 
@@ -58,11 +87,21 @@ struct LibraryView: View {
                     NavigationLink(value: book.id) {
                         BookRowView(book: book)
                     }
+                    .contextMenu {
+                        Button("Rimuovi dalla libreria", role: .destructive) {
+                            library.remove(book)
+                        }
+                    }
                 }
                 .onDelete(perform: delete)
             } footer: {
-                if filter.isEmpty {
-                    Text(library.books.count == 1 ? "1 libro letto" : "\(library.books.count) libri letti")
+                VStack(alignment: .leading, spacing: 4) {
+                    if filter.isEmpty {
+                        Text(library.books.count == 1 ? "1 libro letto" : "\(library.books.count) libri letti")
+                    }
+                    if let status = library.syncStatusText {
+                        Text(status)
+                    }
                 }
             }
         }
