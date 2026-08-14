@@ -1,5 +1,5 @@
 {
- "time": "2026-08-14T13:10:39Z",
+ "time": "2026-08-14T13:15:46Z",
  "south": {
   "km": null,
   "wait": null
@@ -13,13 +13,13 @@
    "id": "situation.645055.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-08-14T12:30:14Z",
-   "km": 15.0,
-   "wait": 150,
+   "versionTime": "2026-08-14T13:15:07Z",
+   "km": 16.0,
+   "wait": 160,
    "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Wassen und Autobahndreieck Verzweigung Altdorf Sachlage: Stau Länge [km] 15.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 150",
-    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Wassen et Echangeur Echangeur d'Altdorf Situation: bouchon longueur [km] 15.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 150",
-    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Wassen E Raccordo autostradale Diramazione Altdorf Situazione: colonna lunghezza [km] 15.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 150"
+    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Wassen und Autobahndreieck Verzweigung Altdorf Sachlage: Stau Länge [km] 16.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 160",
+    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Wassen et Echangeur Echangeur d'Altdorf Situation: bouchon longueur [km] 16.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 160",
+    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Wassen E Raccordo autostradale Diramazione Altdorf Situazione: colonna lunghezza [km] 16.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 160"
    }
   },
   {
