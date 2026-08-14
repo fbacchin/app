@@ -39,39 +39,20 @@ Per installarla su un dispositivo fisico imposta il tuo team in
 
 ## Sincronizzazione tra Mac e iPhone
 
-Senza configurazione l'app funziona subito, ma tiene i dati solo sul singolo
-dispositivo. Per condividerli serve un progetto **Supabase** gratuito: fa da
-server per i dati (database Postgres) e gestisce gli account.
+**Il server è già configurato e pronto all'uso.** I dati stanno su un progetto
+[Supabase](https://supabase.com) (database Postgres + gestione account) del
+piano gratuito:
 
-### 1. Crea il progetto
+| | |
+|---|---|
+| Progetto | `fbacchin's Project` (`qtgbfbmldmxjsvrtehha`) |
+| Regione | Irlanda (`eu-west-1`) |
+| Tabella | `public.books`, con Row Level Security attiva |
 
-Su [supabase.com](https://supabase.com) crea un account e un nuovo progetto
-(piano *Free*). Scegli una regione vicina, per esempio *Frankfurt (eu-central-1)*.
+Le coordinate sono già scritte in `MieiLibri/Services/SupabaseConfig.swift`:
+basta compilare l'app.
 
-### 2. Crea la tabella
-
-Nella dashboard apri **SQL Editor**, incolla tutto il contenuto del file
-[`supabase/schema.sql`](supabase/schema.sql) e premi *Run*. Crea la tabella
-`books` con le regole di sicurezza: ogni utente può leggere e scrivere
-**soltanto i propri libri**.
-
-### 3. Collega l'app
-
-In **Project Settings → API** copia il *Project URL* e la *publishable key*
-(chiamata anche *anon key*), poi dalla cartella `MieiLibri` esegui:
-
-```bash
-./supabase/configura.sh https://TUOPROGETTO.supabase.co sb_publishable_LATUACHIAVE
-```
-
-Lo script scrive i due valori in `MieiLibri/Services/SupabaseConfig.swift`
-(in alternativa puoi modificarlo a mano). Ricompila e il gioco è fatto.
-
-> La chiave *publishable* è pensata per essere distribuita insieme all'app: da
-> sola non dà accesso ai dati, perché è il server a filtrare le righe per
-> utente tramite le policy di Row Level Security.
-
-### 4. Usala
+### Come usarla
 
 Al primo avvio l'app chiede di **registrarti** con email e password. Riceverai
 un'email di conferma: apri il collegamento e poi premi *Accedi*. Ripeti
@@ -80,6 +61,43 @@ compariranno da soli.
 
 Se preferisci non usare alcun account, tocca *Usa solo su questo dispositivo*:
 potrai attivare la sincronizzazione più avanti dal simbolo della persona.
+
+### Sulla chiave nel codice
+
+La chiave *publishable* presente in `SupabaseConfig.swift` è pensata per essere
+distribuita insieme alle app: da sola non dà accesso ai dati, perché è il
+server a filtrare le righe per utente. L'isolamento è stato verificato sul
+database con due utenti di prova:
+
+- un utente rilegge i propri libri; ✅
+- non vede quelli di un altro utente; ✅
+- non può cancellarli; ✅
+- senza login non si vede nulla. ✅
+
+> Se in futuro rendi pubblico il repository, considera di disattivare le
+> registrazioni libere dalla dashboard Supabase (*Authentication → Sign In /
+> Providers → Allow new users to sign up*) dopo aver registrato i tuoi
+> dispositivi: estranei non potrebbero comunque leggere i tuoi libri, ma
+> potrebbero creare account e consumare la quota del piano gratuito.
+
+### Ricreare il server altrove
+
+Se un giorno vuoi spostare i dati su un altro progetto Supabase: crea il
+progetto, incolla [`supabase/schema.sql`](supabase/schema.sql) nel *SQL
+Editor*, poi aggiorna le coordinate con
+
+```bash
+./supabase/configura.sh https://TUOPROGETTO.supabase.co sb_publishable_LATUACHIAVE
+```
+
+### Se la sincronizzazione smette di funzionare
+
+Sul piano gratuito Supabase **mette in pausa i progetti inutilizzati** dopo
+circa una settimana (era già successo a questo). In quel caso l'app continua a
+funzionare normalmente in locale e mostra un avviso di server non
+raggiungibile: per riattivarlo entra su [supabase.com](https://supabase.com),
+apri il progetto e premi *Restore project*. Ci vogliono un paio di minuti e
+nessun dato viene perso. Usando l'app con regolarità la pausa non scatta.
 
 ### Come funziona la sincronizzazione
 

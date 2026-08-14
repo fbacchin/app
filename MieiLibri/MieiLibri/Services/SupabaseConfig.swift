@@ -6,8 +6,8 @@ import Foundation
 /// i dati sono protetti dalle policy di Row Level Security sul server,
 /// quindi ogni utente vede soltanto i propri libri.
 enum SupabaseConfig {
-    static let url = URL(string: "https://CONFIGURA-IL-PROGETTO.supabase.co")!
-    static let anonKey = "CONFIGURA-LA-CHIAVE-PUBLISHABLE"
+    static let url = URL(string: "https://qtgbfbmldmxjsvrtehha.supabase.co")!
+    static let anonKey = "sb_publishable_--lu6fWBDPEzN7yrxPMevQ_KbjoUZqu"
 
     /// True quando il file è ancora da compilare con i dati del progetto.
     static var isPlaceholder: Bool {
