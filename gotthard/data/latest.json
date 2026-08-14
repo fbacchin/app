@@ -1,14 +1,27 @@
 {
- "time": "2026-08-14T09:50:34Z",
+ "time": "2026-08-14T09:55:39Z",
  "south": {
   "km": null,
   "wait": null
  },
  "north": {
-  "km": 4.0,
-  "wait": 40
+  "km": 5.0,
+  "wait": 50
  },
  "events": [
+  {
+   "id": "situation.645120.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "north",
+   "versionTime": "2026-08-14T09:50:45Z",
+   "km": 5.0,
+   "wait": 50,
+   "texts": {
+    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 5.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 50",
+    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 5.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 50",
+    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 5.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 50"
+   }
+  },
   {
    "id": "situation.645055.1.1.1",
    "type": "AbnormalTraffic",
@@ -20,19 +33,6 @@
     "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Amsteg und Autobahndreieck Verzweigung Altdorf Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 80",
     "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Amsteg et Echangeur Echangeur d'Altdorf Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 80",
     "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Amsteg E Raccordo autostradale Diramazione Altdorf Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 80"
-   }
-  },
-  {
-   "id": "situation.645120.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-08-14T08:40:35Z",
-   "km": 4.0,
-   "wait": 40,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
    }
   },
   {
