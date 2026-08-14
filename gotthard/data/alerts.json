@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Wassen et Echangeur Echangeur d'Altdorf Situation: bouchon longueur [km] 17.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 170",
    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Wassen E Raccordo autostradale Diramazione Altdorf Situazione: colonna lunghezza [km] 17.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 170"
   },
-  "lastSeen": "2026-08-14T13:31:06Z"
+  "lastSeen": "2026-08-14T13:36:13Z"
  },
  {
   "firstSeen": "2026-08-14T07:27:39Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato"
   },
-  "lastSeen": "2026-08-14T13:31:06Z"
+  "lastSeen": "2026-08-14T13:36:13Z"
  },
  {
   "firstSeen": "2026-08-14T07:27:39Z",
@@ -42,7 +42,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-08-14T13:31:06Z"
+  "lastSeen": "2026-08-14T13:36:13Z"
  },
  {
   "firstSeen": "2026-08-14T12:03:48Z",
@@ -57,7 +57,7 @@
    "fr": "Libéré: A2 St-Gothard -> Lucerne Jonction autoroutière Erstfeld Situation: sortie fermée excepté trafic local",
    "it": "Approvato: A2 S. Gottardo -> Luzern Svincolo autostradale Erstfeld Situazione: uscita chiusa eccezione traffico locale"
   },
-  "lastSeen": "2026-08-14T13:31:06Z"
+  "lastSeen": "2026-08-14T13:36:13Z"
  },
  {
   "firstSeen": "2026-08-14T12:03:48Z",
@@ -72,7 +72,7 @@
    "fr": "Libéré: A2 St-Gothard -> Lucerne Jonction autoroutière Amsteg Situation: sortie fermée excepté trafic local",
    "it": "Approvato: A2 S. Gottardo -> Luzern Svincolo autostradale Amsteg Situazione: uscita chiusa eccezione traffico locale"
   },
-  "lastSeen": "2026-08-14T13:31:06Z"
+  "lastSeen": "2026-08-14T13:36:13Z"
  },
  {
   "firstSeen": "2026-08-14T13:20:52Z",
@@ -87,7 +87,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Gestion du trafic: Fermeture par intermittence du tunnel",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Limitazione del traffico: blocco temporaneo del tunnel"
   },
-  "lastSeen": "2026-08-14T13:31:06Z"
+  "lastSeen": "2026-08-14T13:36:13Z"
  },
  {
   "firstSeen": "2026-08-14T03:58:09Z",
