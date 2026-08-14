@@ -1,21 +1,20 @@
 {
- "time": "2026-08-14T15:15:01Z",
+ "time": "2026-08-14T15:25:09Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
-   "updated": "2026-08-14T14:54:45Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "south": {
-     "wait": null
+     "wait": 20
     },
     "north": {
-     "wait": 50
+     "wait": null
     }
-   },
-   "held": true
+   }
   },
   "hr-me.karasovici": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": 30
@@ -26,7 +25,7 @@
    }
   },
   "hr-me.vitaljina": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": null
@@ -37,7 +36,7 @@
    }
   },
   "hr-ba.nova-sela": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": null
@@ -48,7 +47,7 @@
    }
   },
   "hr-ba.stara-gradiska": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": null
@@ -59,7 +58,7 @@
    }
   },
   "hr-rs.bajakovo": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": null
@@ -70,7 +69,7 @@
    }
   },
   "hr-rs.tovarnik": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": null
@@ -81,7 +80,7 @@
    }
   },
   "hu-rs.roszke": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": null
@@ -92,7 +91,7 @@
    }
   },
   "hu-rs.tompa": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": null
@@ -103,7 +102,7 @@
    }
   },
   "hu-ua.zahony": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -114,7 +113,7 @@
    }
   },
   "hu-ua.beregsurany": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -125,7 +124,7 @@
    }
   },
   "pl-ua.medyka": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": 60
@@ -136,7 +135,7 @@
    }
   },
   "pl-ua.korczowa": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": 60
@@ -147,7 +146,7 @@
    }
   },
   "pl-ua.dorohusk": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": null
@@ -158,7 +157,7 @@
    }
   },
   "pl-ua.hrebenne": {
-   "updated": "2026-08-14T15:15:01Z",
+   "updated": "2026-08-14T15:25:09Z",
    "directions": {
     "exit": {
      "wait": 0
@@ -172,7 +171,7 @@
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-08-14T15:13:23Z"
+   "sampled": "2026-08-14T15:23:37Z"
   },
   "hak": {
    "ok": true,
