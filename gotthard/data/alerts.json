@@ -4,7 +4,7 @@
   "id": "situation.645041.1.1.1",
   "type": "RoadOrCarriagewayOrLaneManagement",
   "direction": "north",
-  "versionTime": "2026-08-14T03:56:01Z",
+  "versionTime": "2026-08-14T03:58:26Z",
   "km": null,
   "wait": null,
   "texts": {
@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Erstfeld et Echangeur Echangeur d'Altdorf Situation: fermé Raison: accident Durée:  probable jusqu'à 14.08.2026 07:00",
    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Erstfeld E Raccordo autostradale Diramazione Altdorf Situazione: chiusa Causa: incidente Durata:  probabile fino 14.08.2026 07:00"
   },
-  "lastSeen": "2026-08-14T03:58:09Z"
+  "lastSeen": "2026-08-14T04:03:15Z"
  },
  {
   "firstSeen": "2026-08-13T07:40:29Z",
