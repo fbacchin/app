@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Supporto — Volcano</title>
+<style>
+  /* Palette derivata dall'AccentColor dell'app (#BC3E28). */
+  :root {
+    --accent: #BC3E28; --accent-soft: #FAEBE7; --ink: #241A17; --ink-soft: #6B5852;
+    --paper: #FAF8F7; --card: #FFFFFF; --line: #E7DCD8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #E87A62; --accent-soft: #33170F; --ink: #F1E9E7; --ink-soft: #B6A29C;
+      --paper: #14100F; --card: #201917; --line: #3A2C28;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; }
+  .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .app-icon { flex: none; border-radius: 12px; }
+  h1 { font-size: 1.9em; line-height: 1.2; }
+  .sub { color: var(--ink-soft); margin: 0 0 14px 64px; }
+  .updated { color: var(--ink-soft); margin: 4px 0 6px; font-size: .9em; }
+  .langbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 28px; }
+  .langbar button {
+    font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  }
+  .langbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  h2 { color: var(--accent); font-size: 1.25em; margin: 36px 0 10px; }
+  p, li {
+    color: var(--ink); margin-bottom: 10px;
+    text-align: justify; text-wrap: pretty;
+    -webkit-hyphens: auto; hyphens: auto;   /* senza sillabazione il giustificato apre buchi fra le parole */
+  }
+  .sub, .updated, summary { text-align: initial; hyphens: manual; }
+  ul { padding-left: 22px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 20px; margin: 14px 0;
+  }
+  .tldr { background: var(--accent-soft); border-color: transparent; }
+  .tldr p:last-child { margin-bottom: 0; }
+  a { color: var(--accent); }
+  .cta { display: inline-block; background: var(--accent); color: #fff; padding: 10px 22px;
+    border-radius: 99px; text-decoration: none; margin: 6px 0 4px; }
+  details { border-bottom: 1px solid var(--line); padding: 12px 0; }
+  details:last-child { border-bottom: none; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin-top: 8px; color: var(--ink-soft); }
+  details p:last-child { margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: .95em; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--ink-soft); font-weight: 600; }
+  footer { color: var(--ink-soft); font-size: .85em; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; text-align: center; }
+  footer a { white-space: nowrap; }
+  [lang-block] { display: none; }
+  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"],
+  html[data-lang="de"] [lang-block="de"], html[data-lang="fr"] [lang-block="fr"],
+  html[data-lang="es"] [lang-block="es"] { display: block; }
+</style>
+</head>
+<body>
+<main>
+  <div class="logo">
+    <img class="app-icon" src="icon.png" width="52" height="52" alt="Volcano">
+    <h1>Volcano</h1>
+  </div>
+  <p class="sub" lang-block="it">Supporto</p>
+  <p class="sub" lang-block="en">Support</p>
+  <p class="sub" lang-block="de">Support</p>
+  <p class="sub" lang-block="fr">Assistance</p>
+  <p class="sub" lang-block="es">Soporte</p>
+  <div class="langbar">
+    <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
+    <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
+    <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+  </div>
+
+  <!-- ITALIANO -->
+  <div lang-block="it">
+    <div class="card tldr">
+      <p><strong>Volcano è un'app informativa.</strong> Raccoglie dati già pubblicati da enti scientifici e li mostra sempre con la fonte e l'ora di lettura. Non è un sistema di allerta, non prevede eruzioni e non genera livelli di rischio propri. In caso di emergenza fanno fede solo le comunicazioni della Protezione Civile.</p>
+    </div>
+
+    <h2>Contatti</h2>
+    <p>Domande, problemi o suggerimenti? Scrivici — di solito rispondiamo entro un paio di giorni.</p>
+    <a class="cta" href="mailto:bacchin@tiscali.it?subject=Volcano%20supporto">Scrivi al supporto</a>
+
+    <h2>Domande frequenti</h2>
+    <div class="card">
+      <details>
+        <summary>Perché per molti vulcani non compaiono tipo, stato o ultima eruzione?</summary>
+        <p>Perché non abbiamo una fonte con licenza verificata che li dichiari. Quelle informazioni esistono, ma o stanno su pagine che non dichiarano alcuna licenza d'uso, o compaiono in forma discorsiva da cui dedurle sarebbe inventarle. Preferiamo una riga assente a un dato inventato: le righe senza dato semplicemente non vengono mostrate. Coordinate e quota, invece, vengono da Wikidata, che è di pubblico dominio.</p>
+      </details>
+      <details>
+        <summary>La scheda Bollettini è vuota</summary>
+        <p>I bollettini degli osservatori vulcanologici sono pubblici, ma le pagine che li ospitano non dichiarano una licenza che ne permetta la ripubblicazione. Finché non otteniamo conferma scritta, quella scheda resta vuota. È una scelta, non un guasto.</p>
+      </details>
+      <details>
+        <summary>L'app prevede le eruzioni?</summary>
+        <p>No, e non lo farà. Volcano non elabora previsioni e non assegna livelli di allerta: mostra ciò che gli enti hanno già pubblicato, con la data. Chi produce previsioni e allerte sono gli enti competenti, e le loro comunicazioni sono le uniche che contano.</p>
+      </details>
+      <details>
+        <summary>Non ricevo le notifiche</summary>
+        <p>Controlla tre cose, in quest'ordine: che le notifiche siano attive in Impostazioni di iOS → Notifiche → Volcano; che siano attive anche dentro l'app, in Impostazioni; e che la soglia di magnitudo non sia troppo alta. Con la soglia a 4.0 passano pochi eventi all'anno. Se non hai selezionato nessun vulcano riceverai le notifiche di tutti, che è il comportamento voluto.</p>
+      </details>
+      <details>
+        <summary>Perché l'app mi chiede la posizione?</summary>
+        <p>Solo per ordinare i vulcani per distanza e centrare la mappa. Il permesso viene chiesto quando scegli una di queste due cose, non all'avvio, e la posizione non lascia mai il telefono. Se lo neghi l'app funziona lo stesso: la lista viene ordinata alfabeticamente.</p>
+      </details>
+      <details>
+        <summary>Funziona senza connessione?</summary>
+        <p>Sì, per consultare quanto già scaricato. I dati vengono conservati in una cache locale e mostrati anche offline, con l'indicazione di quando sono stati letti l'ultima volta. Un dato vecchio ti viene mostrato dicendoti che è vecchio, invece di lasciarti una schermata bianca.</p>
+      </details>
+      <details>
+        <summary>Ogni dato riporta una licenza: perché?</summary>
+        <p>Perché i dati non sono nostri. Ogni scheda mostra da dove viene l'informazione, con quale licenza è pubblicata e quando l'abbiamo letta. Quando una licenza non è stata verificata leggendone il testo, l'app lo dice esplicitamente invece di lasciare il campo vuoto.</p>
+      </details>
+      <details>
+        <summary>Ho trovato un dato che mi sembra sbagliato</summary>
+        <p>Scrivici indicando il vulcano o l'evento e cosa non torna. Se l'errore è nostro lo correggiamo; se viene dalla fonte lo segnaliamo a chi l'ha pubblicato, perché non riscriviamo i dati altrui.</p>
+      </details>
+    </div>
+
+    <h2>Da dove vengono i dati</h2>
+    <ul>
+      <li><strong>Eventi sismici:</strong> INGV, servizio FDSN <em>event</em> — <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+      <li><strong>Coordinate e quota dei vulcani:</strong> <a href="https://www.wikidata.org">Wikidata</a>, per identificativo esplicito — <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></li>
+      <li><strong>Ultima eruzione di Vulcano:</strong> INGV Osservatorio Etneo — <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+    </ul>
+    <p>La selezione dei quindici vulcani è curata a mano; i numeri no. Ogni voce è scelta una per una, ma coordinate e quota vengono da un identificativo Wikidata esplicito, così restano verificabili aprendo la pagina corrispondente.</p>
+
+    <h2>Privacy</h2>
+    <p>Volcano non ha account, non usa strumenti di analisi e non integra librerie di terze parti. Leggi l'<a href="privacy-volcano.html">informativa completa</a>.</p>
+  </div>
+
+  <!-- ENGLISH -->
+  <div lang-block="en">
+    <div class="card tldr">
+      <p><strong>Volcano is an informational app.</strong> It gathers data already published by scientific institutions and always shows it with its source and the time it was read. It is not an alerting system, it does not forecast eruptions and it does not produce risk levels of its own. In an emergency, only communications from the Italian Civil Protection Department apply.</p>
+    </div>
+
+    <h2>Contact</h2>
+    <p>Questions, problems or suggestions? Write to us — we usually reply within a couple of days.</p>
+    <a class="cta" href="mailto:bacchin@tiscali.it?subject=Volcano%20support">Email support</a>
+
+    <h2>Frequently asked questions</h2>
+    <div class="card">
+      <details>
+        <summary>Why do many volcanoes show no type, status or last eruption?</summary>
+        <p>Because we have no source with a verified licence that states them. That information exists, but it either sits on pages that declare no licence at all, or appears as prose from which deducing it would mean inventing it. We prefer a missing row to an invented value: rows without data are simply not shown. Coordinates and elevation, by contrast, come from Wikidata, which is public domain.</p>
+      </details>
+      <details>
+        <summary>The Bulletins tab is empty</summary>
+        <p>The volcano observatories' bulletins are public, but the pages hosting them declare no licence permitting republication. Until we get written confirmation, that tab stays empty. It is a choice, not a fault.</p>
+      </details>
+      <details>
+        <summary>Does the app forecast eruptions?</summary>
+        <p>No, and it never will. Volcano produces no forecasts and assigns no alert levels: it shows what institutions have already published, with the date. Forecasts and alerts are produced by the competent authorities, and their communications are the only ones that count.</p>
+      </details>
+      <details>
+        <summary>I don't receive notifications</summary>
+        <p>Check three things, in this order: that notifications are allowed in iOS Settings → Notifications → Volcano; that they are also enabled inside the app, under Settings; and that your magnitude threshold is not too high. At 4.0, only a handful of events pass each year. If you have selected no volcanoes you will receive notifications for all of them, which is the intended behaviour.</p>
+      </details>
+      <details>
+        <summary>Why does the app ask for my location?</summary>
+        <p>Only to sort volcanoes by distance and to centre the map. Permission is requested when you choose one of those two things, not at launch, and your location never leaves the phone. If you deny it the app still works: the list is sorted alphabetically.</p>
+      </details>
+      <details>
+        <summary>Does it work without a connection?</summary>
+        <p>Yes, for browsing what you have already downloaded. Data is kept in a local cache and shown offline too, along with when it was last read. Stale data is shown while telling you it is stale, rather than leaving you a blank screen.</p>
+      </details>
+      <details>
+        <summary>Every item carries a licence — why?</summary>
+        <p>Because the data is not ours. Each record shows where the information comes from, under which licence it is published and when we read it. When a licence has not been verified by reading its text, the app says so explicitly instead of leaving the field blank.</p>
+      </details>
+      <details>
+        <summary>I found something that looks wrong</summary>
+        <p>Write to us naming the volcano or event and what does not add up. If the error is ours we fix it; if it comes from the source we report it to whoever published it, because we do not rewrite other people's data.</p>
+      </details>
+    </div>
+
+    <h2>Where the data comes from</h2>
+    <ul>
+      <li><strong>Seismic events:</strong> INGV, FDSN <em>event</em> web service — <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+      <li><strong>Volcano coordinates and elevation:</strong> <a href="https://www.wikidata.org">Wikidata</a>, by explicit identifier — <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></li>
+      <li><strong>Last eruption of Vulcano:</strong> INGV Osservatorio Etneo — <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+    </ul>
+    <p>The selection of fifteen volcanoes is curated by hand; the numbers are not. Each entry is chosen one by one, but coordinates and elevation come from an explicit Wikidata identifier, so they stay verifiable by opening the corresponding page.</p>
+
+    <h2>Privacy</h2>
+    <p>Volcano has no accounts, uses no analytics tools and bundles no third-party libraries. Read the <a href="privacy-volcano.html">full policy</a>.</p>
+  </div>
+
+  <!-- DEUTSCH -->
+  <div lang-block="de">
+    <div class="card tldr">
+      <p><strong>Volcano ist eine Informations-App.</strong> Sie sammelt bereits von wissenschaftlichen Einrichtungen veröffentlichte Daten und zeigt sie stets mit Quelle und Abrufzeit. Sie ist kein Warnsystem, sagt keine Ausbrüche voraus und erzeugt keine eigenen Gefahrenstufen. Im Notfall gelten ausschließlich die Mitteilungen des italienischen Zivilschutzes.</p>
+    </div>
+
+    <h2>Kontakt</h2>
+    <p>Fragen, Probleme oder Anregungen? Schreiben Sie uns — meist antworten wir innerhalb weniger Tage.</p>
+    <a class="cta" href="mailto:bacchin@tiscali.it?subject=Volcano%20Support">Support kontaktieren</a>
+
+    <h2>Häufige Fragen</h2>
+    <div class="card">
+      <details>
+        <summary>Warum fehlen bei vielen Vulkanen Typ, Status oder letzter Ausbruch?</summary>
+        <p>Weil uns keine Quelle mit geprüfter Lizenz vorliegt, die sie angibt. Diese Angaben existieren, stehen aber entweder auf Seiten ohne jede Lizenzangabe oder in Fließtext, aus dem sie abzuleiten hieße, sie zu erfinden. Uns ist eine fehlende Zeile lieber als ein erfundener Wert: Zeilen ohne Daten werden schlicht nicht angezeigt. Koordinaten und Höhe stammen dagegen aus Wikidata und sind gemeinfrei.</p>
+      </details>
+      <details>
+        <summary>Der Tab „Bulletins“ ist leer</summary>
+        <p>Die Bulletins der Vulkanobservatorien sind öffentlich, doch die Seiten, die sie beherbergen, nennen keine Lizenz, die eine erneute Veröffentlichung erlaubt. Bis wir eine schriftliche Bestätigung erhalten, bleibt dieser Tab leer. Das ist eine Entscheidung, kein Fehler.</p>
+      </details>
+      <details>
+        <summary>Sagt die App Ausbrüche voraus?</summary>
+        <p>Nein, und sie wird es nie tun. Volcano erstellt keine Prognosen und vergibt keine Warnstufen: Sie zeigt, was Einrichtungen bereits veröffentlicht haben, mit Datum. Prognosen und Warnungen erstellen die zuständigen Behörden, und nur deren Mitteilungen zählen.</p>
+      </details>
+      <details>
+        <summary>Ich erhalte keine Mitteilungen</summary>
+        <p>Prüfen Sie drei Dinge in dieser Reihenfolge: dass Mitteilungen in den iOS-Einstellungen → Mitteilungen → Volcano erlaubt sind; dass sie auch in der App unter „Einstellungen“ aktiviert sind; und dass Ihr Magnitudenschwellenwert nicht zu hoch ist. Bei 4.0 kommen jährlich nur wenige Ereignisse durch. Haben Sie keinen Vulkan ausgewählt, erhalten Sie Mitteilungen zu allen — das ist so gewollt.</p>
+      </details>
+      <details>
+        <summary>Warum fragt die App nach meinem Standort?</summary>
+        <p>Nur um Vulkane nach Entfernung zu sortieren und die Karte zu zentrieren. Die Erlaubnis wird abgefragt, wenn Sie eines von beidem wählen, nicht beim Start, und der Standort verlässt das Telefon nie. Verweigern Sie sie, funktioniert die App trotzdem: Die Liste wird alphabetisch sortiert.</p>
+      </details>
+      <details>
+        <summary>Funktioniert sie ohne Verbindung?</summary>
+        <p>Ja, zum Durchsehen bereits geladener Daten. Diese liegen in einem lokalen Zwischenspeicher und werden auch offline angezeigt, zusammen mit dem Zeitpunkt des letzten Abrufs. Veraltete Daten werden gezeigt und ausdrücklich als veraltet gekennzeichnet, statt Ihnen einen leeren Bildschirm zu hinterlassen.</p>
+      </details>
+      <details>
+        <summary>Warum trägt jede Angabe eine Lizenz?</summary>
+        <p>Weil die Daten nicht uns gehören. Jeder Datensatz zeigt, woher die Information stammt, unter welcher Lizenz sie veröffentlicht ist und wann wir sie gelesen haben. Wurde eine Lizenz nicht durch Lesen ihres Textes geprüft, sagt die App das ausdrücklich, statt das Feld leer zu lassen.</p>
+      </details>
+      <details>
+        <summary>Ich habe eine Angabe gefunden, die falsch wirkt</summary>
+        <p>Schreiben Sie uns und nennen Sie Vulkan oder Ereignis und was nicht stimmt. Liegt der Fehler bei uns, beheben wir ihn; stammt er aus der Quelle, melden wir ihn dort — fremde Daten schreiben wir nicht um.</p>
+      </details>
+    </div>
+
+    <h2>Woher die Daten stammen</h2>
+    <ul>
+      <li><strong>Seismische Ereignisse:</strong> INGV, FDSN-<em>event</em>-Webdienst — <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+      <li><strong>Koordinaten und Höhe der Vulkane:</strong> <a href="https://www.wikidata.org">Wikidata</a>, über explizite Kennung — <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></li>
+      <li><strong>Letzter Ausbruch von Vulcano:</strong> INGV Osservatorio Etneo — <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+    </ul>
+    <p>Die Auswahl der fünfzehn Vulkane ist von Hand kuratiert, die Zahlen sind es nicht. Jeder Eintrag wurde einzeln ausgewählt, doch Koordinaten und Höhe stammen aus einer expliziten Wikidata-Kennung und bleiben so durch Öffnen der jeweiligen Seite überprüfbar.</p>
+
+    <h2>Datenschutz</h2>
+    <p>Volcano hat keine Benutzerkonten, verwendet keine Analysewerkzeuge und bindet keine Bibliotheken Dritter ein. Lesen Sie die <a href="privacy-volcano.html">vollständige Erklärung</a>.</p>
+  </div>
+
+  <!-- FRANÇAIS -->
+  <div lang-block="fr">
+    <div class="card tldr">
+      <p><strong>Volcano est une application d'information.</strong> Elle rassemble des données déjà publiées par des organismes scientifiques et les affiche toujours avec leur source et l'heure de lecture. Ce n'est pas un système d'alerte : elle ne prévoit pas les éruptions et ne produit aucun niveau de risque qui lui soit propre. En cas d'urgence, seules les communications de la Protection civile italienne font foi.</p>
+    </div>
+
+    <h2>Contact</h2>
+    <p>Questions, problèmes ou suggestions ? Écrivez-nous — nous répondons généralement sous quelques jours.</p>
+    <a class="cta" href="mailto:bacchin@tiscali.it?subject=Volcano%20assistance">Contacter l'assistance</a>
+
+    <h2>Questions fréquentes</h2>
+    <div class="card">
+      <details>
+        <summary>Pourquoi le type, l'état ou la dernière éruption manquent-ils pour de nombreux volcans ?</summary>
+        <p>Parce que nous n'avons aucune source à licence vérifiée qui les indique. Ces informations existent, mais elles figurent soit sur des pages qui ne déclarent aucune licence, soit sous forme de texte suivi dont les déduire reviendrait à les inventer. Nous préférons une ligne absente à une valeur inventée : les lignes sans données ne sont tout simplement pas affichées. Les coordonnées et l'altitude, en revanche, proviennent de Wikidata, qui est dans le domaine public.</p>
+      </details>
+      <details>
+        <summary>L'onglet Bulletins est vide</summary>
+        <p>Les bulletins des observatoires volcanologiques sont publics, mais les pages qui les hébergent ne déclarent aucune licence autorisant leur republication. Tant que nous n'avons pas de confirmation écrite, cet onglet reste vide. C'est un choix, pas une panne.</p>
+      </details>
+      <details>
+        <summary>L'application prévoit-elle les éruptions ?</summary>
+        <p>Non, et elle ne le fera jamais. Volcano ne produit aucune prévision et n'attribue aucun niveau d'alerte : elle montre ce que les organismes ont déjà publié, avec la date. Les prévisions et les alertes sont produites par les autorités compétentes, et seules leurs communications comptent.</p>
+      </details>
+      <details>
+        <summary>Je ne reçois pas les notifications</summary>
+        <p>Vérifiez trois choses, dans cet ordre : que les notifications sont autorisées dans Réglages iOS → Notifications → Volcano ; qu'elles sont aussi activées dans l'application, sous Réglages ; et que votre seuil de magnitude n'est pas trop élevé. À 4.0, seuls quelques événements passent chaque année. Si vous n'avez sélectionné aucun volcan, vous recevrez les notifications de tous : c'est le comportement voulu.</p>
+      </details>
+      <details>
+        <summary>Pourquoi l'application demande-t-elle ma position ?</summary>
+        <p>Uniquement pour trier les volcans par distance et centrer la carte. L'autorisation est demandée lorsque vous choisissez l'une de ces deux actions, pas au lancement, et votre position ne quitte jamais le téléphone. Si vous la refusez, l'application fonctionne quand même : la liste est triée par ordre alphabétique.</p>
+      </details>
+      <details>
+        <summary>Fonctionne-t-elle sans connexion ?</summary>
+        <p>Oui, pour consulter ce qui a déjà été téléchargé. Les données sont conservées dans un cache local et affichées hors connexion, avec la date de dernière lecture. Une donnée ancienne vous est montrée en vous disant qu'elle est ancienne, plutôt que de vous laisser un écran vide.</p>
+      </details>
+      <details>
+        <summary>Chaque donnée porte une licence : pourquoi ?</summary>
+        <p>Parce que les données ne sont pas les nôtres. Chaque fiche indique d'où vient l'information, sous quelle licence elle est publiée et quand nous l'avons lue. Lorsqu'une licence n'a pas été vérifiée en lisant son texte, l'application le dit explicitement au lieu de laisser le champ vide.</p>
+      </details>
+      <details>
+        <summary>J'ai trouvé une donnée qui semble erronée</summary>
+        <p>Écrivez-nous en indiquant le volcan ou l'événement et ce qui ne va pas. Si l'erreur vient de nous, nous la corrigeons ; si elle vient de la source, nous la signalons à qui l'a publiée, car nous ne réécrivons pas les données d'autrui.</p>
+      </details>
+    </div>
+
+    <h2>D'où viennent les données</h2>
+    <ul>
+      <li><strong>Événements sismiques :</strong> INGV, service web FDSN <em>event</em> — <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+      <li><strong>Coordonnées et altitude des volcans :</strong> <a href="https://www.wikidata.org">Wikidata</a>, par identifiant explicite — <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></li>
+      <li><strong>Dernière éruption de Vulcano :</strong> INGV Osservatorio Etneo — <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+    </ul>
+    <p>La sélection des quinze volcans est faite à la main ; les chiffres, non. Chaque entrée est choisie une par une, mais les coordonnées et l'altitude proviennent d'un identifiant Wikidata explicite, et restent donc vérifiables en ouvrant la page correspondante.</p>
+
+    <h2>Confidentialité</h2>
+    <p>Volcano n'a pas de compte, n'utilise aucun outil d'analyse et n'intègre aucune bibliothèque tierce. Lisez la <a href="privacy-volcano.html">politique complète</a>.</p>
+  </div>
+
+  <!-- ESPAÑOL -->
+  <div lang-block="es">
+    <div class="card tldr">
+      <p><strong>Volcano es una aplicación informativa.</strong> Reúne datos ya publicados por organismos científicos y los muestra siempre con su fuente y la hora de lectura. No es un sistema de alerta, no predice erupciones y no genera niveles de riesgo propios. En caso de emergencia, solo son válidas las comunicaciones de la Protección Civil italiana.</p>
+    </div>
+
+    <h2>Contacto</h2>
+    <p>¿Preguntas, problemas o sugerencias? Escríbenos: solemos responder en un par de días.</p>
+    <a class="cta" href="mailto:bacchin@tiscali.it?subject=Volcano%20soporte">Escribir al soporte</a>
+
+    <h2>Preguntas frecuentes</h2>
+    <div class="card">
+      <details>
+        <summary>¿Por qué en muchos volcanes no aparecen tipo, estado o última erupción?</summary>
+        <p>Porque no tenemos una fuente con licencia verificada que los declare. Esa información existe, pero o está en páginas que no declaran licencia alguna, o aparece en forma discursiva de la que deducirla equivaldría a inventarla. Preferimos una fila ausente a un dato inventado: las filas sin datos simplemente no se muestran. Las coordenadas y la altitud, en cambio, proceden de Wikidata, que es de dominio público.</p>
+      </details>
+      <details>
+        <summary>La pestaña Boletines está vacía</summary>
+        <p>Los boletines de los observatorios volcanológicos son públicos, pero las páginas que los alojan no declaran una licencia que permita su republicación. Hasta que obtengamos confirmación por escrito, esa pestaña permanece vacía. Es una decisión, no una avería.</p>
+      </details>
+      <details>
+        <summary>¿La aplicación predice erupciones?</summary>
+        <p>No, y nunca lo hará. Volcano no elabora predicciones ni asigna niveles de alerta: muestra lo que los organismos ya han publicado, con la fecha. Las predicciones y las alertas las producen las autoridades competentes, y solo sus comunicaciones cuentan.</p>
+      </details>
+      <details>
+        <summary>No recibo notificaciones</summary>
+        <p>Comprueba tres cosas, en este orden: que las notificaciones estén permitidas en Ajustes de iOS → Notificaciones → Volcano; que también estén activadas dentro de la aplicación, en Ajustes; y que tu umbral de magnitud no sea demasiado alto. Con 4.0 pasan pocos eventos al año. Si no has seleccionado ningún volcán recibirás las notificaciones de todos, que es el comportamiento previsto.</p>
+      </details>
+      <details>
+        <summary>¿Por qué la aplicación pide mi ubicación?</summary>
+        <p>Solo para ordenar los volcanes por distancia y centrar el mapa. El permiso se pide cuando eliges una de esas dos cosas, no al arrancar, y la ubicación nunca sale del teléfono. Si lo deniegas la aplicación funciona igual: la lista se ordena alfabéticamente.</p>
+      </details>
+      <details>
+        <summary>¿Funciona sin conexión?</summary>
+        <p>Sí, para consultar lo ya descargado. Los datos se conservan en una caché local y se muestran también sin conexión, indicando cuándo se leyeron por última vez. Un dato antiguo se muestra diciéndote que es antiguo, en lugar de dejarte una pantalla en blanco.</p>
+      </details>
+      <details>
+        <summary>Cada dato lleva una licencia: ¿por qué?</summary>
+        <p>Porque los datos no son nuestros. Cada ficha muestra de dónde procede la información, con qué licencia está publicada y cuándo la leímos. Cuando una licencia no se ha verificado leyendo su texto, la aplicación lo dice explícitamente en lugar de dejar el campo vacío.</p>
+      </details>
+      <details>
+        <summary>He encontrado un dato que parece equivocado</summary>
+        <p>Escríbenos indicando el volcán o el evento y qué no cuadra. Si el error es nuestro lo corregimos; si viene de la fuente lo comunicamos a quien lo publicó, porque no reescribimos los datos ajenos.</p>
+      </details>
+    </div>
+
+    <h2>De dónde vienen los datos</h2>
+    <ul>
+      <li><strong>Eventos sísmicos:</strong> INGV, servicio web FDSN <em>event</em> — <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+      <li><strong>Coordenadas y altitud de los volcanes:</strong> <a href="https://www.wikidata.org">Wikidata</a>, por identificador explícito — <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a></li>
+      <li><strong>Última erupción de Vulcano:</strong> INGV Osservatorio Etneo — <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></li>
+    </ul>
+    <p>La selección de los quince volcanes está curada a mano; los números no. Cada entrada se elige una por una, pero las coordenadas y la altitud proceden de un identificador explícito de Wikidata, de modo que siguen siendo verificables abriendo la página correspondiente.</p>
+
+    <h2>Privacidad</h2>
+    <p>Volcano no tiene cuentas, no usa herramientas de análisis y no incorpora bibliotecas de terceros. Lee la <a href="privacy-volcano.html">política completa</a>.</p>
+  </div>
+
+  <footer>
+    <span lang-block="it">© 2026 Fabrizio Bacchin · <a href="privacy-volcano.html">Privacy</a></span>
+    <span lang-block="en">© 2026 Fabrizio Bacchin · <a href="privacy-volcano.html">Privacy</a></span>
+    <span lang-block="de">© 2026 Fabrizio Bacchin · <a href="privacy-volcano.html">Datenschutz</a></span>
+    <span lang-block="fr">© 2026 Fabrizio Bacchin · <a href="privacy-volcano.html">Confidentialité</a></span>
+    <span lang-block="es">© 2026 Fabrizio Bacchin · <a href="privacy-volcano.html">Privacidad</a></span>
+  </footer>
+</main>
+
+<script>
+  var LANGS = ["it", "en", "de", "fr", "es"];
+  function setLang(l) {
+    if (LANGS.indexOf(l) < 0) l = "en";
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    LANGS.forEach(function (x) {
+      document.getElementById("btn-" + x).setAttribute("aria-pressed", x === l);
+    });
+    try { localStorage.setItem("volcano-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("volcano-lang"); } catch (e) {}
+  var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+  setLang(saved || (LANGS.indexOf(nav) >= 0 ? nav : "en"));
+</script>
+<noscript><style>[lang-block]{display:block !important}</style></noscript>
+
+</body>
+</html>
