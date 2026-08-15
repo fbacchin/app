@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Informativa sulla privacy — Volcano</title>
+<style>
+  /* Palette derivata dall'AccentColor dell'app (#BC3E28). */
+  :root {
+    --accent: #BC3E28; --accent-soft: #FAEBE7; --ink: #241A17; --ink-soft: #6B5852;
+    --paper: #FAF8F7; --card: #FFFFFF; --line: #E7DCD8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #E87A62; --accent-soft: #33170F; --ink: #F1E9E7; --ink-soft: #B6A29C;
+      --paper: #14100F; --card: #201917; --line: #3A2C28;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; }
+  .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .app-icon { flex: none; border-radius: 12px; }
+  h1 { font-size: 1.9em; line-height: 1.2; }
+  .sub { color: var(--ink-soft); margin: 0 0 14px 64px; }
+  .updated { color: var(--ink-soft); margin: 4px 0 6px; font-size: .9em; }
+  .langbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 28px; }
+  .langbar button {
+    font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  }
+  .langbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  h2 { color: var(--accent); font-size: 1.25em; margin: 36px 0 10px; }
+  p, li {
+    color: var(--ink); margin-bottom: 10px;
+    text-align: justify; text-wrap: pretty;
+    -webkit-hyphens: auto; hyphens: auto;   /* senza sillabazione il giustificato apre buchi fra le parole */
+  }
+  .sub, .updated { text-align: initial; hyphens: manual; }
+  ul { padding-left: 22px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 20px; margin: 14px 0;
+  }
+  .tldr { background: var(--accent-soft); border-color: transparent; }
+  .tldr p:last-child { margin-bottom: 0; }
+  a { color: var(--accent); }
+  .cta { display: inline-block; background: var(--accent); color: #fff; padding: 10px 22px;
+    border-radius: 99px; text-decoration: none; margin: 6px 0 4px; }
+  details { border-bottom: 1px solid var(--line); padding: 12px 0; }
+  details:last-child { border-bottom: none; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin-top: 8px; color: var(--ink-soft); }
+  table { width: 100%; border-collapse: collapse; font-size: .95em; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--ink-soft); font-weight: 600; }
+  footer { color: var(--ink-soft); font-size: .85em; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; text-align: center; }
+  footer a { white-space: nowrap; }
+  [lang-block] { display: none; }
+  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"],
+  html[data-lang="de"] [lang-block="de"], html[data-lang="fr"] [lang-block="fr"],
+  html[data-lang="es"] [lang-block="es"] { display: block; }
+</style>
+</head>
+<body>
+<main>
+  <div class="logo">
+    <img class="app-icon" src="icon.png" width="52" height="52" alt="Volcano">
+    <h1>Volcano</h1>
+  </div>
+  <p class="sub" lang-block="it">Informativa sulla privacy</p>
+  <p class="sub" lang-block="en">Privacy Policy</p>
+  <p class="sub" lang-block="de">Datenschutzerklärung</p>
+  <p class="sub" lang-block="fr">Politique de confidentialité</p>
+  <p class="sub" lang-block="es">Política de privacidad</p>
+  <div class="langbar">
+    <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
+    <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
+    <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+  </div>
+
+  <!-- ITALIANO -->
+  <div lang-block="it">
+    <p class="updated">Volcano — ultimo aggiornamento 15 agosto 2026</p>
+
+    <div class="card tldr">
+      <p><strong>In breve.</strong> Volcano non ha account, non usa strumenti di analisi e non integra librerie di terze parti. La tua posizione non lascia mai il telefono. L'unica cosa che l'app invia, e solo se attivi le notifiche, è un identificativo casuale del dispositivo con le tue preferenze di notifica.</p>
+    </div>
+
+    <h2>1. Chi siamo</h2>
+    <p>Volcano è un'app iOS di Fabrizio Bacchin che raccoglie e mostra informazioni già pubbliche sui vulcani italiani. Per qualsiasi cosa riguardi questa informativa: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+
+    <h2>2. Non c'è nessun account</h2>
+    <p>Per usare Volcano non serve registrarsi. L'app non chiede né conserva nome, indirizzo email, numero di telefono o password, e non esiste modo di collegare l'uso dell'app a una persona.</p>
+
+    <h2>3. Posizione</h2>
+    <p>Se scegli di ordinare i vulcani per distanza, o apri la mappa, l'app chiede il permesso di accedere alla posizione mentre è in uso. La posizione serve solo a calcolare quanto dista ogni vulcano e a centrare la mappa: <strong>non viene inviata a nessun server, non viene salvata su disco e non viene condivisa con nessuno</strong>. Negare il permesso non impedisce di usare l'app: la lista viene ordinata alfabeticamente.</p>
+
+    <h2>4. Notifiche</h2>
+    <p>Le notifiche sono disattivate finché non le attivi. Attivandole, l'app invia al proprio server:</p>
+    <ul>
+      <li>un identificativo casuale generato sul dispositivo, che non è l'identificativo pubblicitario di Apple e non identifica la persona;</li>
+      <li>il token che Apple assegna al dispositivo per recapitare le notifiche;</li>
+      <li>le preferenze scelte: soglia di magnitudo, vulcani seguiti, lingua;</li>
+      <li>il fuso orario e la versione dell'app.</li>
+    </ul>
+    <p>Servono a decidere se un evento riguarda quel dispositivo e in che lingua scrivere il messaggio. Disattivando le notifiche dalle impostazioni dell'app, l'invio si interrompe.</p>
+
+    <h2>5. Cosa resta sul dispositivo</h2>
+    <p>I vulcani preferiti e le preferenze di visualizzazione restano nel telefono e non vengono mai inviati. I dati scaricati — eventi sismici, schede dei vulcani — vengono salvati in una cache locale per permettere la consultazione senza rete, e si cancellano disinstallando l'app.</p>
+
+    <h2>6. Nessuna analisi dell'uso</h2>
+    <p>Volcano non usa strumenti di analytics, non registra quali schermate apri, non raccoglie dati di utilizzo e non integra librerie di terze parti: tutte le sue dipendenze sono framework di Apple. Non traccia la tua attività su altre app o siti, e per questo iOS non ti mostra la richiesta di autorizzazione al tracciamento.</p>
+
+    <h2>7. Con chi comunica l'app</h2>
+    <p>Volcano parla <strong>solo</strong> con il proprio server, ospitato su Back4App (<code>parseapi.back4app.com</code>), e con il servizio di notifiche di Apple. Non contatta direttamente le fonti scientifiche: i dati arrivano già raccolti dal server. Nessun dato viene venduto o ceduto a terzi.</p>
+
+    <h2>8. Per quanto tempo</h2>
+    <p>L'identificativo del dispositivo e le preferenze di notifica restano finché le notifiche sono attive. Disattivarle o disinstallare l'app interrompe le notifiche; per la cancellazione del record dal server puoi scrivere all'indirizzo qui sotto, indicando che desideri rimuovere la tua installazione.</p>
+
+    <h2>9. I tuoi diritti</h2>
+    <p>Ai sensi del GDPR hai diritto di accedere ai tuoi dati, correggerli, cancellarli e opporti al trattamento. Poiché l'app non conosce l'identità di nessuno, l'unico dato riferibile a un dispositivo è l'identificativo casuale descritto sopra: va indicato nella richiesta perché possiamo darle seguito.</p>
+
+    <h2>10. Minori</h2>
+    <p>L'app non è rivolta ai minori di tredici anni e non raccoglie consapevolmente dati che li riguardino. Del resto non raccoglie dati che riguardino nessuno in particolare.</p>
+
+    <h2>11. I dati mostrati non sono dati nostri</h2>
+    <p>Volcano mostra informazioni pubblicate da enti scientifici, con fonte e data sempre indicate. <strong>Non è un sistema di allerta</strong>, non prevede eruzioni e non genera livelli di rischio propri. In caso di emergenza fanno fede esclusivamente le comunicazioni della Protezione Civile e delle autorità competenti.</p>
+
+    <h2>12. Modifiche</h2>
+    <p>Le modifiche a questa informativa saranno pubblicate su questa pagina con una nuova data di aggiornamento.</p>
+
+    <h2>13. Contatti</h2>
+    <p><a href="mailto:bacchin@tiscali.it?subject=Volcano%20privacy">bacchin@tiscali.it</a></p>
+  </div>
+
+  <!-- ENGLISH -->
+  <div lang-block="en">
+    <p class="updated">Volcano — last updated 15 August 2026</p>
+
+    <div class="card tldr">
+      <p><strong>In short.</strong> Volcano has no accounts, uses no analytics tools and bundles no third-party libraries. Your location never leaves your phone. The only thing the app sends — and only if you turn notifications on — is a random device identifier along with your notification preferences.</p>
+    </div>
+
+    <h2>1. Who we are</h2>
+    <p>Volcano is an iOS app by Fabrizio Bacchin that gathers and displays already-public information about Italian volcanoes. For anything related to this policy: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+
+    <h2>2. No account</h2>
+    <p>Volcano requires no sign-up. It never asks for or stores a name, email address, phone number or password, and there is no way to link app usage to a person.</p>
+
+    <h2>3. Location</h2>
+    <p>If you sort volcanoes by distance or open the map, the app asks for permission to use your location while the app is in use. Your location is used only to compute distances and to centre the map: <strong>it is never sent to any server, never written to disk and never shared</strong>. Denying permission does not prevent you from using the app — the list is sorted alphabetically instead.</p>
+
+    <h2>4. Notifications</h2>
+    <p>Notifications are off until you turn them on. When you do, the app sends to its own server:</p>
+    <ul>
+      <li>a random identifier generated on the device, which is not Apple's advertising identifier and does not identify you;</li>
+      <li>the token Apple assigns to your device for delivering notifications;</li>
+      <li>your chosen preferences: magnitude threshold, followed volcanoes, language;</li>
+      <li>your time zone and app version.</li>
+    </ul>
+    <p>These decide whether an event concerns your device and which language to write the message in. Turning notifications off in the app stops the sending.</p>
+
+    <h2>5. What stays on your device</h2>
+    <p>Favourite volcanoes and display preferences stay on your phone and are never sent. Downloaded data — seismic events, volcano records — is cached locally so the app works without a connection, and is deleted when you uninstall the app.</p>
+
+    <h2>6. No usage analytics</h2>
+    <p>Volcano uses no analytics tools, does not record which screens you open, collects no usage data and bundles no third-party libraries: every dependency is an Apple framework. It does not track your activity across other apps or websites, which is why iOS never shows you a tracking prompt.</p>
+
+    <h2>7. Who the app talks to</h2>
+    <p>Volcano talks <strong>only</strong> to its own server, hosted on Back4App (<code>parseapi.back4app.com</code>), and to Apple's notification service. It never contacts the scientific sources directly: data reaches it already collected by the server. No data is sold or shared with third parties.</p>
+
+    <h2>8. Retention</h2>
+    <p>Your device identifier and notification preferences are kept for as long as notifications are enabled. Turning them off or uninstalling the app stops notifications; to have the server record deleted, write to the address below stating that you want your installation removed.</p>
+
+    <h2>9. Your rights</h2>
+    <p>Under the GDPR you have the right to access, correct and erase your data and to object to its processing. Since the app does not know anyone's identity, the only data attributable to a device is the random identifier described above: please include it in your request so we can act on it.</p>
+
+    <h2>10. Children</h2>
+    <p>The app is not directed at children under thirteen and does not knowingly collect data about them. Then again, it does not collect data about anyone in particular.</p>
+
+    <h2>11. The data shown is not ours</h2>
+    <p>Volcano displays information published by scientific institutions, always with its source and date. <strong>It is not an alerting system</strong>, it does not forecast eruptions and it does not produce risk levels of its own. In an emergency, only communications from the Italian Civil Protection Department and the competent authorities apply.</p>
+
+    <h2>12. Changes</h2>
+    <p>Changes to this policy will be posted on this page with a new update date.</p>
+
+    <h2>13. Contact</h2>
+    <p><a href="mailto:bacchin@tiscali.it?subject=Volcano%20privacy">bacchin@tiscali.it</a></p>
+  </div>
+
+  <!-- DEUTSCH -->
+  <div lang-block="de">
+    <p class="updated">Volcano — zuletzt aktualisiert am 15. August 2026</p>
+
+    <div class="card tldr">
+      <p><strong>Kurz gefasst.</strong> Volcano hat keine Benutzerkonten, verwendet keine Analysewerkzeuge und bindet keine Bibliotheken Dritter ein. Ihr Standort verlässt Ihr Telefon nie. Das Einzige, was die App sendet — und nur wenn Sie Mitteilungen aktivieren —, ist eine zufällige Gerätekennung samt Ihren Mitteilungseinstellungen.</p>
+    </div>
+
+    <h2>1. Wer wir sind</h2>
+    <p>Volcano ist eine iOS-App von Fabrizio Bacchin, die bereits öffentliche Informationen über italienische Vulkane sammelt und anzeigt. Für alles, was diese Erklärung betrifft: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+
+    <h2>2. Kein Benutzerkonto</h2>
+    <p>Für Volcano ist keine Registrierung nötig. Die App fragt weder Namen, E-Mail-Adresse, Telefonnummer noch Passwort ab und speichert sie nicht, und es gibt keine Möglichkeit, die Nutzung mit einer Person zu verknüpfen.</p>
+
+    <h2>3. Standort</h2>
+    <p>Wenn Sie Vulkane nach Entfernung sortieren oder die Karte öffnen, bittet die App um die Erlaubnis, Ihren Standort während der Nutzung zu verwenden. Der Standort dient ausschließlich dazu, Entfernungen zu berechnen und die Karte zu zentrieren: <strong>Er wird an keinen Server gesendet, nicht auf die Festplatte geschrieben und mit niemandem geteilt</strong>. Wird die Erlaubnis verweigert, bleibt die App voll nutzbar — die Liste wird dann alphabetisch sortiert.</p>
+
+    <h2>4. Mitteilungen</h2>
+    <p>Mitteilungen sind deaktiviert, bis Sie sie einschalten. Danach sendet die App an ihren eigenen Server:</p>
+    <ul>
+      <li>eine auf dem Gerät erzeugte zufällige Kennung, die nicht Apples Werbekennung ist und Sie nicht identifiziert;</li>
+      <li>das Token, das Apple Ihrem Gerät zur Zustellung von Mitteilungen zuweist;</li>
+      <li>Ihre Einstellungen: Magnitudenschwellenwert, verfolgte Vulkane, Sprache;</li>
+      <li>Ihre Zeitzone und die App-Version.</li>
+    </ul>
+    <p>Damit wird entschieden, ob ein Ereignis Ihr Gerät betrifft und in welcher Sprache die Meldung verfasst wird. Wenn Sie Mitteilungen in den App-Einstellungen deaktivieren, endet die Übermittlung.</p>
+
+    <h2>5. Was auf dem Gerät bleibt</h2>
+    <p>Bevorzugte Vulkane und Anzeigeeinstellungen bleiben auf dem Telefon und werden nie gesendet. Heruntergeladene Daten — seismische Ereignisse, Vulkandatensätze — werden lokal zwischengespeichert, damit die App ohne Verbindung funktioniert, und beim Deinstallieren gelöscht.</p>
+
+    <h2>6. Keine Nutzungsanalyse</h2>
+    <p>Volcano verwendet keine Analysewerkzeuge, zeichnet nicht auf, welche Bildschirme Sie öffnen, erhebt keine Nutzungsdaten und bindet keine Bibliotheken Dritter ein: Jede Abhängigkeit ist ein Apple-Framework. Die App verfolgt Ihre Aktivität in anderen Apps oder auf Websites nicht — deshalb zeigt iOS Ihnen nie eine Tracking-Abfrage.</p>
+
+    <h2>7. Mit wem die App kommuniziert</h2>
+    <p>Volcano spricht <strong>ausschließlich</strong> mit dem eigenen Server bei Back4App (<code>parseapi.back4app.com</code>) und mit Apples Mitteilungsdienst. Die wissenschaftlichen Quellen kontaktiert sie nie direkt: Die Daten kommen bereits vom Server gesammelt an. Es werden keine Daten verkauft oder an Dritte weitergegeben.</p>
+
+    <h2>8. Speicherdauer</h2>
+    <p>Gerätekennung und Mitteilungseinstellungen bleiben gespeichert, solange Mitteilungen aktiviert sind. Deaktivieren oder Deinstallieren beendet die Mitteilungen; für die Löschung des Serverdatensatzes schreiben Sie an die unten stehende Adresse und geben Sie an, dass Ihre Installation entfernt werden soll.</p>
+
+    <h2>9. Ihre Rechte</h2>
+    <p>Nach der DSGVO haben Sie das Recht auf Auskunft, Berichtigung und Löschung Ihrer Daten sowie auf Widerspruch gegen die Verarbeitung. Da die App niemandes Identität kennt, ist die einzige einem Gerät zuordenbare Angabe die oben beschriebene zufällige Kennung: Bitte geben Sie sie in Ihrer Anfrage an, damit wir ihr nachkommen können.</p>
+
+    <h2>10. Kinder</h2>
+    <p>Die App richtet sich nicht an Kinder unter dreizehn Jahren und erhebt wissentlich keine Daten über sie. Sie erhebt ohnehin keine Daten über irgendjemanden im Besonderen.</p>
+
+    <h2>11. Die angezeigten Daten sind nicht unsere</h2>
+    <p>Volcano zeigt Informationen wissenschaftlicher Einrichtungen, stets mit Quelle und Datum. <strong>Es ist kein Warnsystem</strong>, es sagt keine Ausbrüche voraus und erzeugt keine eigenen Gefahrenstufen. Im Notfall gelten ausschließlich die Mitteilungen des italienischen Zivilschutzes und der zuständigen Behörden.</p>
+
+    <h2>12. Änderungen</h2>
+    <p>Änderungen dieser Erklärung werden auf dieser Seite mit neuem Aktualisierungsdatum veröffentlicht.</p>
+
+    <h2>13. Kontakt</h2>
+    <p><a href="mailto:bacchin@tiscali.it?subject=Volcano%20privacy">bacchin@tiscali.it</a></p>
+  </div>
+
+  <!-- FRANÇAIS -->
+  <div lang-block="fr">
+    <p class="updated">Volcano — dernière mise à jour le 15 août 2026</p>
+
+    <div class="card tldr">
+      <p><strong>En bref.</strong> Volcano n'a pas de compte, n'utilise aucun outil d'analyse et n'intègre aucune bibliothèque tierce. Votre position ne quitte jamais votre téléphone. La seule chose que l'application envoie — et uniquement si vous activez les notifications — est un identifiant aléatoire de l'appareil accompagné de vos préférences de notification.</p>
+    </div>
+
+    <h2>1. Qui nous sommes</h2>
+    <p>Volcano est une application iOS de Fabrizio Bacchin qui rassemble et affiche des informations déjà publiques sur les volcans italiens. Pour tout ce qui concerne cette politique : <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+
+    <h2>2. Aucun compte</h2>
+    <p>Volcano ne nécessite aucune inscription. L'application ne demande ni ne conserve nom, adresse e-mail, numéro de téléphone ou mot de passe, et il n'existe aucun moyen de relier son utilisation à une personne.</p>
+
+    <h2>3. Position</h2>
+    <p>Si vous choisissez de trier les volcans par distance ou si vous ouvrez la carte, l'application demande l'autorisation d'accéder à votre position pendant son utilisation. La position sert uniquement à calculer les distances et à centrer la carte : <strong>elle n'est envoyée à aucun serveur, jamais enregistrée sur le disque et jamais partagée</strong>. Refuser l'autorisation n'empêche pas d'utiliser l'application : la liste est alors triée par ordre alphabétique.</p>
+
+    <h2>4. Notifications</h2>
+    <p>Les notifications sont désactivées tant que vous ne les activez pas. Lorsque vous le faites, l'application envoie à son propre serveur :</p>
+    <ul>
+      <li>un identifiant aléatoire généré sur l'appareil, qui n'est pas l'identifiant publicitaire d'Apple et ne vous identifie pas ;</li>
+      <li>le jeton attribué par Apple à votre appareil pour la remise des notifications ;</li>
+      <li>vos préférences : seuil de magnitude, volcans suivis, langue ;</li>
+      <li>votre fuseau horaire et la version de l'application.</li>
+    </ul>
+    <p>Ces éléments servent à déterminer si un événement concerne votre appareil et dans quelle langue rédiger le message. En désactivant les notifications dans les réglages de l'application, l'envoi cesse.</p>
+
+    <h2>5. Ce qui reste sur votre appareil</h2>
+    <p>Les volcans favoris et les préférences d'affichage restent sur votre téléphone et ne sont jamais envoyés. Les données téléchargées — événements sismiques, fiches des volcans — sont mises en cache localement pour permettre la consultation hors connexion, et sont supprimées lors de la désinstallation.</p>
+
+    <h2>6. Aucune analyse d'utilisation</h2>
+    <p>Volcano n'utilise aucun outil d'analyse, n'enregistre pas les écrans que vous ouvrez, ne collecte aucune donnée d'utilisation et n'intègre aucune bibliothèque tierce : toutes ses dépendances sont des frameworks Apple. Elle ne suit pas votre activité sur d'autres applications ou sites, et c'est pourquoi iOS ne vous présente jamais de demande de suivi.</p>
+
+    <h2>7. Avec qui l'application communique</h2>
+    <p>Volcano communique <strong>uniquement</strong> avec son propre serveur, hébergé chez Back4App (<code>parseapi.back4app.com</code>), et avec le service de notifications d'Apple. Elle ne contacte jamais directement les sources scientifiques : les données lui parviennent déjà collectées par le serveur. Aucune donnée n'est vendue ni cédée à des tiers.</p>
+
+    <h2>8. Durée de conservation</h2>
+    <p>L'identifiant de l'appareil et les préférences de notification sont conservés tant que les notifications sont activées. Les désactiver ou désinstaller l'application y met fin ; pour faire supprimer l'enregistrement du serveur, écrivez à l'adresse ci-dessous en indiquant que vous souhaitez retirer votre installation.</p>
+
+    <h2>9. Vos droits</h2>
+    <p>Le RGPD vous donne le droit d'accéder à vos données, de les rectifier, de les effacer et de vous opposer à leur traitement. L'application ne connaissant l'identité de personne, la seule donnée rattachable à un appareil est l'identifiant aléatoire décrit plus haut : merci de l'indiquer dans votre demande afin que nous puissions y donner suite.</p>
+
+    <h2>10. Mineurs</h2>
+    <p>L'application ne s'adresse pas aux enfants de moins de treize ans et ne collecte pas sciemment de données les concernant. Elle ne collecte d'ailleurs de données concernant personne en particulier.</p>
+
+    <h2>11. Les données affichées ne sont pas les nôtres</h2>
+    <p>Volcano affiche des informations publiées par des organismes scientifiques, toujours avec leur source et leur date. <strong>Ce n'est pas un système d'alerte</strong> : l'application ne prévoit pas les éruptions et ne produit aucun niveau de risque qui lui soit propre. En cas d'urgence, seules les communications de la Protection civile italienne et des autorités compétentes font foi.</p>
+
+    <h2>12. Modifications</h2>
+    <p>Les modifications de cette politique seront publiées sur cette page avec une nouvelle date de mise à jour.</p>
+
+    <h2>13. Contact</h2>
+    <p><a href="mailto:bacchin@tiscali.it?subject=Volcano%20privacy">bacchin@tiscali.it</a></p>
+  </div>
+
+  <!-- ESPAÑOL -->
+  <div lang-block="es">
+    <p class="updated">Volcano — última actualización 15 de agosto de 2026</p>
+
+    <div class="card tldr">
+      <p><strong>En resumen.</strong> Volcano no tiene cuentas, no usa herramientas de análisis y no incorpora bibliotecas de terceros. Tu ubicación nunca sale del teléfono. Lo único que la aplicación envía —y solo si activas las notificaciones— es un identificador aleatorio del dispositivo junto con tus preferencias de notificación.</p>
+    </div>
+
+    <h2>1. Quiénes somos</h2>
+    <p>Volcano es una aplicación de iOS de Fabrizio Bacchin que reúne y muestra información ya pública sobre los volcanes italianos. Para cualquier cuestión relacionada con esta política: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+
+    <h2>2. No hay ninguna cuenta</h2>
+    <p>Volcano no requiere registro. La aplicación no solicita ni conserva nombre, dirección de correo, número de teléfono o contraseña, y no existe forma de vincular su uso con una persona.</p>
+
+    <h2>3. Ubicación</h2>
+    <p>Si eliges ordenar los volcanes por distancia o abres el mapa, la aplicación pide permiso para acceder a tu ubicación mientras está en uso. La ubicación sirve únicamente para calcular distancias y centrar el mapa: <strong>no se envía a ningún servidor, no se guarda en disco y no se comparte con nadie</strong>. Denegar el permiso no impide usar la aplicación: la lista se ordena alfabéticamente.</p>
+
+    <h2>4. Notificaciones</h2>
+    <p>Las notificaciones están desactivadas hasta que las actives. Al hacerlo, la aplicación envía a su propio servidor:</p>
+    <ul>
+      <li>un identificador aleatorio generado en el dispositivo, que no es el identificador publicitario de Apple y no te identifica;</li>
+      <li>el token que Apple asigna al dispositivo para entregar las notificaciones;</li>
+      <li>tus preferencias: umbral de magnitud, volcanes seguidos, idioma;</li>
+      <li>tu zona horaria y la versión de la aplicación.</li>
+    </ul>
+    <p>Sirven para decidir si un evento afecta a ese dispositivo y en qué idioma redactar el mensaje. Al desactivar las notificaciones en los ajustes de la aplicación, el envío se detiene.</p>
+
+    <h2>5. Qué permanece en el dispositivo</h2>
+    <p>Los volcanes favoritos y las preferencias de visualización permanecen en el teléfono y nunca se envían. Los datos descargados —eventos sísmicos, fichas de volcanes— se guardan en una caché local para permitir la consulta sin conexión, y se borran al desinstalar la aplicación.</p>
+
+    <h2>6. Ningún análisis de uso</h2>
+    <p>Volcano no utiliza herramientas de análisis, no registra qué pantallas abres, no recopila datos de uso ni incorpora bibliotecas de terceros: todas sus dependencias son frameworks de Apple. No rastrea tu actividad en otras aplicaciones o sitios web, y por eso iOS nunca te muestra la solicitud de permiso de rastreo.</p>
+
+    <h2>7. Con quién se comunica la aplicación</h2>
+    <p>Volcano habla <strong>solo</strong> con su propio servidor, alojado en Back4App (<code>parseapi.back4app.com</code>), y con el servicio de notificaciones de Apple. Nunca contacta directamente con las fuentes científicas: los datos llegan ya recopilados por el servidor. Ningún dato se vende ni se cede a terceros.</p>
+
+    <h2>8. Durante cuánto tiempo</h2>
+    <p>El identificador del dispositivo y las preferencias de notificación se conservan mientras las notificaciones estén activas. Desactivarlas o desinstalar la aplicación las interrumpe; para eliminar el registro del servidor, escribe a la dirección indicada abajo señalando que deseas retirar tu instalación.</p>
+
+    <h2>9. Tus derechos</h2>
+    <p>Conforme al RGPD tienes derecho a acceder a tus datos, rectificarlos, suprimirlos y oponerte a su tratamiento. Como la aplicación no conoce la identidad de nadie, el único dato atribuible a un dispositivo es el identificador aleatorio descrito arriba: indícalo en tu solicitud para que podamos atenderla.</p>
+
+    <h2>10. Menores</h2>
+    <p>La aplicación no está dirigida a menores de trece años y no recopila conscientemente datos sobre ellos. En realidad no recopila datos sobre nadie en particular.</p>
+
+    <h2>11. Los datos mostrados no son nuestros</h2>
+    <p>Volcano muestra información publicada por organismos científicos, siempre con su fuente y su fecha. <strong>No es un sistema de alerta</strong>, no predice erupciones y no genera niveles de riesgo propios. En caso de emergencia, solo son válidas las comunicaciones de la Protección Civil italiana y de las autoridades competentes.</p>
+
+    <h2>12. Modificaciones</h2>
+    <p>Las modificaciones de esta política se publicarán en esta página con una nueva fecha de actualización.</p>
+
+    <h2>13. Contacto</h2>
+    <p><a href="mailto:bacchin@tiscali.it?subject=Volcano%20privacy">bacchin@tiscali.it</a></p>
+  </div>
+
+  <footer>
+    <span lang-block="it">© 2026 Fabrizio Bacchin · <a href="support-volcano.html">Supporto</a></span>
+    <span lang-block="en">© 2026 Fabrizio Bacchin · <a href="support-volcano.html">Support</a></span>
+    <span lang-block="de">© 2026 Fabrizio Bacchin · <a href="support-volcano.html">Support</a></span>
+    <span lang-block="fr">© 2026 Fabrizio Bacchin · <a href="support-volcano.html">Assistance</a></span>
+    <span lang-block="es">© 2026 Fabrizio Bacchin · <a href="support-volcano.html">Soporte</a></span>
+  </footer>
+</main>
+
+<script>
+  var LANGS = ["it", "en", "de", "fr", "es"];
+  function setLang(l) {
+    if (LANGS.indexOf(l) < 0) l = "en";
+    document.documentElement.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    LANGS.forEach(function (x) {
+      document.getElementById("btn-" + x).setAttribute("aria-pressed", x === l);
+    });
+    try { localStorage.setItem("volcano-lang", l); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem("volcano-lang"); } catch (e) {}
+  var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+  setLang(saved || (LANGS.indexOf(nav) >= 0 ? nav : "en"));
+</script>
+<noscript><style>[lang-block]{display:block !important}</style></noscript>
+
+</body>
+</html>
