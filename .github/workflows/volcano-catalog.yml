@@ -1,0 +1,46 @@
+name: Volcano catalog refresh
+
+# Da copiare in `.github/workflows/` insieme a `volcano-sync.yml`.
+#
+# Qui il cron normale va benissimo: il catalogo dei vulcani cambia pochissime
+# volte l'anno, e se GitHub ritarda il run di qualche ora non cambia niente.
+# È il motivo per cui questo file non usa il loop lungo dell'altro.
+#
+# `includeCatalog: true` è necessario: `syncAllSources` di default **salta**
+# il catalogo, ed è la ragione per cui una prima esecuzione senza questo
+# parametro importava zero vulcani.
+on:
+  schedule:
+    - cron: "30 4 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: volcano-catalog
+  cancel-in-progress: false
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Ricarica catalogo, bollettini e webcam
+        env:
+          APP_ID: ${{ secrets.VOLCANO_B4A_APP_ID }}
+          REST_KEY: ${{ secrets.VOLCANO_B4A_REST_KEY }}
+          SYNC_TOKEN: ${{ secrets.VOLCANO_SYNC_TRIGGER_TOKEN }}
+        run: |
+          set -u
+          code=$(curl -s -o /tmp/out.json -w '%{http_code}' --max-time 300 \
+            -X POST \
+            -H "X-Parse-Application-Id: $APP_ID" \
+            -H "X-Parse-REST-API-Key: $REST_KEY" \
+            -H "Content-Type: application/json" \
+            -d "{\"token\":\"$SYNC_TOKEN\",\"job\":\"syncAllSources\",\"includeCatalog\":true}" \
+            "https://parseapi.back4app.com/functions/triggerSync" || echo 000)
+
+          echo "HTTP $code"
+          # Le fonti non verificate vengono saltate dal gate: è il
+          # comportamento atteso, non un errore.
+          head -c 600 /tmp/out.json | sed "s/$SYNC_TOKEN/***/g" || true
+          echo
+          [ "$code" = "200" ]

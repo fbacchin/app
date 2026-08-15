@@ -1,0 +1,59 @@
+name: Volcano sync
+
+# Da copiare in `.github/workflows/` del repository che ospita il cron
+# (oggi `fbacchin/app`). Vive qui nel progetto perché è parte della Fase 2:
+# senza questo, i job del backend non partono da soli.
+#
+# GitHub esegue i cron "best effort" e ritarda anche di ore quelli frequenti,
+# quindi un `*/10 * * * *` **non** produrrebbe una sincronizzazione ogni dieci
+# minuti. Si usa la stessa strategia dei collector di Gottardo e valichi: run
+# lunghi che chiamano in loop ogni dieci minuti per circa tre ore, incatenati
+# dal gruppo di concorrenza.
+#
+# A differenza di quei collector qui non si committa niente e non serve il
+# checkout: la sincronizzazione scrive su Parse, non nel repository.
+on:
+  schedule:
+    - cron: "0 */3 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: volcano-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 178
+    steps:
+      - name: Sincronizza gli eventi ogni 10 minuti per ~3 ore
+        env:
+          APP_ID: ${{ secrets.VOLCANO_B4A_APP_ID }}
+          REST_KEY: ${{ secrets.VOLCANO_B4A_REST_KEY }}
+          # Token dedicato, NON la master key: chi lo ottiene può soltanto far
+          # partire una sincronizzazione. Vedi docs/deploy-back4app.md §5.
+          SYNC_TOKEN: ${{ secrets.VOLCANO_SYNC_TRIGGER_TOKEN }}
+        run: |
+          set -u
+          for i in $(seq 1 18); do
+            code=$(curl -s -o /tmp/out.json -w '%{http_code}' --max-time 120 \
+              -X POST \
+              -H "X-Parse-Application-Id: $APP_ID" \
+              -H "X-Parse-REST-API-Key: $REST_KEY" \
+              -H "Content-Type: application/json" \
+              -d "{\"token\":\"$SYNC_TOKEN\",\"job\":\"syncEarthquakes\"}" \
+              "https://parseapi.back4app.com/functions/triggerSync" || echo 000)
+
+            # Un giro fallito non deve fermare il run: la sincronizzazione è
+            # idempotente e il giro successivo recupera. Il token non viene
+            # mai stampato.
+            if [ "$code" = "200" ]; then
+              echo "$(date -u +%FT%TZ) ok"
+            else
+              echo "$(date -u +%FT%TZ) fallito con HTTP $code"
+              head -c 300 /tmp/out.json | sed "s/$SYNC_TOKEN/***/g" || true
+              echo
+            fi
+
+            if [ "$i" -lt 18 ]; then sleep 600; fi
+          done
