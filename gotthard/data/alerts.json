@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Tunnel Tunnel de la Biaschina et Jonction autoroutière Faido Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de droite fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Galleria Galleria Biaschina E Svincolo autostradale Faido Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa"
   },
-  "lastSeen": "2026-08-15T02:02:41Z"
+  "lastSeen": "2026-08-15T02:07:48Z"
  },
  {
   "firstSeen": "2026-08-14T18:07:46Z",
@@ -316,20 +316,5 @@
   },
   "lastSeen": "2026-08-13T07:50:44Z",
   "revokedAt": "2026-08-13T07:55:49Z"
- },
- {
-  "firstSeen": "2026-08-12T14:06:21Z",
-  "id": "situation.644658.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-08-12T14:05:54Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso <-> Luzern zwischen Anschluss Amsteg und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5 Dauer: tagsüber voraussichtlich 31.08.2026 06:00 bis 04.09.2026 17:00",
-   "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Amsteg et Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la journée probable 31.08.2026 06:00 jusqu'à 04.09.2026 17:00",
-   "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Amsteg E Galleria Galleria San Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 31.08.2026 06:00 fino 04.09.2026 17:00"
-  },
-  "lastSeen": "2026-08-13T02:03:25Z"
  }
 ]
