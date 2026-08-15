@@ -1,0 +1,145 @@
+name: Volcano bulletins
+
+# Scarica i feed RSS dei bollettini INGV e li consegna al backend.
+#
+# ⚠️ Perché il download avviene **qui** e non su Back4App.
+#
+# I server di Back4App non raggiungono `ov.ingv.it` e `ct.ingv.it`: verificato
+# il 15 agosto 2026, due esecuzioni consecutive di `syncBulletins` con "fetch
+# failed" su tutti e cinque i feed di quei due host. Non è TLS — l'handshake
+# riesce da altrove su tutti e tre gli host — e non è il nostro codice, perché
+# `cme.ingv.it` viene scaricato correttamente dallo stesso importatore nello
+# stesso run. È qualcosa fra la rete di Back4App e quei due host, e non
+# abbiamo modo di intervenirci.
+#
+# Un runner GitHub li raggiunge. Quindi scarica lui e passa il testo grezzo
+# alla Cloud Function `ingestBulletinFeeds`, che lo dà in pasto **allo stesso**
+# parser, alla stessa normalizzazione e alla stessa deduplicazione del
+# percorso normale: cambia solo chi ha fatto la GET.
+#
+# Il Centro Monitoraggio Eolie **non** è qui: Back4App lo raggiunge da solo, e
+# continua a passare da `syncBulletins`. Aggiungerlo significherebbe importarlo
+# due volte — innocuo per la deduplicazione, ma inutile.
+#
+# Da copiare in `.github/workflows/` di `fbacchin/app`.
+on:
+  # I bollettini escono settimanalmente o mensilmente: ogni sei ore è già
+  # abbondante, e non ha senso la strategia a run lunghi usata per i terremoti.
+  schedule:
+    - cron: "20 */6 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: volcano-bulletins
+  cancel-in-progress: false
+
+jobs:
+  bulletins:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Scarica i feed e consegnali al backend
+        env:
+          APP_ID: ${{ secrets.VOLCANO_B4A_APP_ID }}
+          REST_KEY: ${{ secrets.VOLCANO_B4A_REST_KEY }}
+          SYNC_TOKEN: ${{ secrets.VOLCANO_SYNC_TRIGGER_TOKEN }}
+        run: |
+          set -u
+
+          # Gli URL devono coincidere **esattamente** con quelli in
+          # backend/cloud/config.js: la Cloud Function rifiuta ciò che non
+          # riconosce, apposta, perché altrimenti chi ha il token potrebbe
+          # farsi importare un feed qualsiasi.
+          OV_FEEDS="https://www.ov.ingv.it/index.php/monitoraggio-e-infrastrutture/bollettini-tutti/boll-sett-flegrei?format=rss
+          https://www.ov.ingv.it/index.php/monitoraggio-e-infrastrutture/bollettini-tutti/bollett-mensili-cf?format=rss
+          https://www.ov.ingv.it/index.php/monitoraggio-e-infrastrutture/bollettini-tutti/bollett-mensili-ves?format=rss
+          https://www.ov.ingv.it/index.php/monitoraggio-e-infrastrutture/bollettini-tutti/bollett-mensili-ischia?format=rss"
+
+          OE_FEEDS="https://www.ct.ingv.it/index.php/monitoraggio-e-sorveglianza/prodotti-del-monitoraggio/bollettini-settimanali-multidisciplinari?format=rss"
+
+          consegna() {
+            sorgente="$1"
+            elenco="$2"
+
+            # jq costruisce il JSON: incollare XML dentro una stringa a mano
+            # produrrebbe payload malformati al primo apice o accento.
+            : > /tmp/feeds.json
+            errori="[]"
+
+            for url in $elenco; do
+              url="$(echo "$url" | xargs)"   # toglie l'indentazione dell'heredoc
+              [ -z "$url" ] && continue
+
+              if curl -sfS --max-time 60 \
+                   -H 'Accept: application/rss+xml, application/xml' \
+                   -H 'User-Agent: VolcanoApp/1.0 (+https://github.com/fbacchin/app)' \
+                   "$url" -o /tmp/feed.xml
+              then
+                echo "  ✔ $(wc -c < /tmp/feed.xml) byte — $url"
+                jq -Rs --arg url "$url" '{url: $url, body: .}' < /tmp/feed.xml >> /tmp/feeds.json
+              else
+                echo "  ✘ non scaricato — $url"
+                errori="$(echo "$errori" | jq --arg u "$url" '. + [$u + ": download fallito dal runner"]')"
+              fi
+            done
+
+            # Nessun feed scaricato: si esce senza chiamare il backend, che
+            # rifiuterebbe comunque. Non è un fallimento del job — il giro
+            # successivo recupera, e i bollettini non sono urgenti.
+            if [ ! -s /tmp/feeds.json ]; then
+              echo "  nessun feed scaricato per $sorgente, salto"
+              return 0
+            fi
+
+            jq -n \
+              --arg token "$SYNC_TOKEN" \
+              --arg source "$sorgente" \
+              --argjson errori "$errori" \
+              --slurpfile feeds /tmp/feeds.json \
+              '{token: $token, source: $source, feeds: $feeds, errors: $errori}' \
+              > /tmp/payload.json
+
+            code=$(curl -s -o /tmp/out.json -w '%{http_code}' --max-time 180 \
+              -X POST \
+              -H "X-Parse-Application-Id: $APP_ID" \
+              -H "X-Parse-REST-API-Key: $REST_KEY" \
+              -H "Content-Type: application/json" \
+              --data @/tmp/payload.json \
+              "https://parseapi.back4app.com/functions/ingestBulletinFeeds" || echo 000)
+
+            # Il token non viene mai stampato, nemmeno in caso di errore.
+            if [ "$code" = "200" ]; then
+              echo "  → $sorgente importato"
+              jq -c '.result | {created: .recordsCreated, updated: .recordsUpdated, skipped: .recordsSkipped}' /tmp/out.json 2>/dev/null || true
+            else
+              echo "  → $sorgente fallito con HTTP $code"
+              head -c 400 /tmp/out.json | sed "s/$SYNC_TOKEN/***/g" || true
+              echo
+            fi
+          }
+
+          echo "Osservatorio Vesuviano"
+          consegna "ingv-bulletin-ov" "$OV_FEEDS"
+
+          echo "Osservatorio Etneo"
+          consegna "ingv-bulletin-oe" "$OE_FEEDS"
+
+      - name: Sincronizza il Centro Monitoraggio Eolie, che Back4App raggiunge
+        env:
+          APP_ID: ${{ secrets.VOLCANO_B4A_APP_ID }}
+          REST_KEY: ${{ secrets.VOLCANO_B4A_REST_KEY }}
+          SYNC_TOKEN: ${{ secrets.VOLCANO_SYNC_TRIGGER_TOKEN }}
+        run: |
+          set -u
+          # `syncBulletins` prova tutte e tre le fonti: OV e OE falliranno da
+          # Back4App e produrranno un SyncRun in errore, ma CME riesce e i
+          # record dei primi due sono già stati scritti dal passo precedente.
+          # L'importazione è idempotente, quindi non si duplica nulla.
+          code=$(curl -s -o /tmp/out.json -w '%{http_code}' --max-time 180 \
+            -X POST \
+            -H "X-Parse-Application-Id: $APP_ID" \
+            -H "X-Parse-REST-API-Key: $REST_KEY" \
+            -H "Content-Type: application/json" \
+            -d "{\"token\":\"$SYNC_TOKEN\",\"job\":\"syncBulletins\"}" \
+            "https://parseapi.back4app.com/functions/triggerSync" || echo 000)
+          echo "syncBulletins: HTTP $code"
