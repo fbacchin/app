@@ -1,9 +1,9 @@
 {
- "time": "2026-08-15T04:55:29Z",
+ "time": "2026-08-15T05:05:40Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "south": {
      "wait": null
@@ -14,7 +14,7 @@
    }
   },
   "hr-me.karasovici": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "exit": {
      "wait": null
@@ -25,7 +25,7 @@
    }
   },
   "hr-me.vitaljina": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "exit": {
      "wait": null
@@ -36,7 +36,7 @@
    }
   },
   "hr-ba.nova-sela": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "exit": {
      "wait": null
@@ -47,7 +47,7 @@
    }
   },
   "hr-ba.stara-gradiska": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "exit": {
      "wait": null
@@ -58,7 +58,7 @@
    }
   },
   "hr-rs.bajakovo": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "exit": {
      "wait": 30
@@ -69,7 +69,7 @@
    }
   },
   "hr-rs.tovarnik": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "exit": {
      "wait": 30
@@ -80,7 +80,7 @@
    }
   },
   "hu-rs.roszke": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "exit": {
      "wait": null
@@ -91,7 +91,7 @@
    }
   },
   "hu-rs.tompa": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "exit": {
      "wait": null
@@ -102,7 +102,7 @@
    }
   },
   "hu-ua.zahony": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -113,7 +113,7 @@
    }
   },
   "hu-ua.beregsurany": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -136,7 +136,7 @@
    "held": true
   },
   "pl-ua.korczowa": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "exit": {
      "wait": 60
@@ -147,7 +147,7 @@
    }
   },
   "pl-ua.dorohusk": {
-   "updated": "2026-08-15T04:55:29Z",
+   "updated": "2026-08-15T05:05:40Z",
    "directions": {
     "exit": {
      "wait": null
@@ -166,13 +166,14 @@
     "entry": {
      "wait": null
     }
-   }
+   },
+   "held": true
   }
  },
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-08-15T04:51:53Z"
+   "sampled": "2026-08-15T05:02:06Z"
   },
   "hak": {
    "ok": true,
@@ -193,8 +194,8 @@
    "url": "https://granica.gov.pl/Services/czasyService/soap_granica.php",
    "found": 4,
    "of": 4,
-   "waits": 2,
-   "ora_pl": "2026-08-15 06"
+   "waits": 1,
+   "ora_pl": "2026-08-15 07"
   }
  }
 }
