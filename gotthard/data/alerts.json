@@ -316,21 +316,5 @@
    "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Amsteg E Galleria Galleria San Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 31.08.2026 06:00 fino 04.09.2026 17:00"
   },
   "lastSeen": "2026-08-13T02:03:25Z"
- },
- {
-  "firstSeen": "2026-08-12T23:44:39Z",
-  "id": "situation.644790.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-08-12T23:41:17Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Ortschaft Göschenen und Ortschaft Andermatt Sachlage: Verkehrsbehinderung Ursache: Fahrzeugbrand",
-   "fr": "Libéré: H2 Airolo <-> Göschenen entre Localité Göschenen et Localité Andermatt Situation: trafic perturbé Raison: véhicule en feu",
-   "it": "Approvato: H2 Airolo <-> Göschenen tra Luogo Göschenen E Luogo Andermatt Situazione: problemi di traffico Causa: veicolo in fiamme"
-  },
-  "lastSeen": "2026-08-13T01:17:35Z",
-  "revokedAt": "2026-08-13T01:22:40Z"
  }
 ]
