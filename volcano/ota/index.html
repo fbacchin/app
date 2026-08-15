@@ -46,6 +46,11 @@
   .app img { width: 64px; height: 64px; border-radius: 14px; display: block; }
   .app h1 { margin: 0; font-size: 1.35rem; letter-spacing: -0.01em; }
   .app p { margin: 0.15rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  /* Cifre tabellari: fra una build e l'altra la riga non balla. */
+  .app p.build {
+    margin-top: 0.3rem; font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+  }
   a.install {
     display: block;
     text-align: center;
@@ -89,6 +94,14 @@
       <div>
         <h1>Volcano</h1>
         <p>Monitoraggio informativo dei vulcani italiani</p>
+        <!--
+          ⚠️ Riga scritta da make-manifest.sh, che legge i valori dentro
+          l'.ipa. Non modificarla a mano: il prossimo `./make-manifest.sh
+          Volcano.ipa` la sovrascrive, e un numero scritto qui a mano
+          resisterebbe giusto fino ad allora — dicendo nel frattempo una cosa
+          diversa dal binario che si sta installando.
+        -->
+        <p class="build" id="build">Versione 1.0 · build 1.0.5 — 15/08/2026</p>
       </div>
     </div>
 
