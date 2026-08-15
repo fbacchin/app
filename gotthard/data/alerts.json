@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 3.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30"
   },
-  "lastSeen": "2026-08-15T09:28:26Z"
+  "lastSeen": "2026-08-15T09:33:32Z"
  },
  {
   "firstSeen": "2026-08-15T06:08:49Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
   },
-  "lastSeen": "2026-08-15T09:28:26Z"
+  "lastSeen": "2026-08-15T09:33:32Z"
  },
  {
   "firstSeen": "2026-08-15T06:08:49Z",
@@ -42,22 +42,22 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-08-15T09:28:26Z"
+  "lastSeen": "2026-08-15T09:33:32Z"
  },
  {
   "firstSeen": "2026-08-15T09:13:07Z",
   "id": "situation.645379.1.1.1",
   "type": "AbnormalTraffic",
   "direction": "south",
-  "versionTime": "2026-08-15T09:09:11Z",
+  "versionTime": "2026-08-15T09:30:07Z",
   "km": null,
   "wait": null,
   "texts": {
-   "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Wassen Sachlage: Stau in der Ausfahrt Ursache: Verkehrsüberlastung",
-   "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Wassen Situation: bouchon dans la sortie Raison: surcharge de trafic",
-   "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Wassen Situazione: colonna in uscita Causa: traffico congestionato"
+   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Parkplatz Wassen, Dieden und Anschluss Wassen Sachlage: Stau in der Ausfahrt Ursache: Verkehrsüberlastung",
+   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Parking Wassen, Dieden et Jonction autoroutière Wassen Situation: bouchon dans la sortie Raison: surcharge de trafic",
+   "it": "Approvato: A2 Luzern -> S. Gottardo tra Parcheggio Wassen, Dieden E Svincolo autostradale Wassen Situazione: colonna in uscita Causa: traffico congestionato"
   },
-  "lastSeen": "2026-08-15T09:28:26Z"
+  "lastSeen": "2026-08-15T09:33:32Z"
  },
  {
   "firstSeen": "2026-08-15T01:52:28Z",
