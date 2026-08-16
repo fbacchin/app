@@ -1,5 +1,5 @@
 {
- "time": "2026-08-16T19:52:58Z",
+ "time": "2026-08-16T20:03:05Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
@@ -15,7 +15,7 @@
    "held": true
   },
   "hr-me.karasovici": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
      "wait": null
@@ -26,7 +26,7 @@
    }
   },
   "hr-me.vitaljina": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
      "wait": null
@@ -37,7 +37,7 @@
    }
   },
   "hr-ba.nova-sela": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
      "wait": 30
@@ -48,7 +48,7 @@
    }
   },
   "hr-ba.stara-gradiska": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
      "wait": null
@@ -59,10 +59,10 @@
    }
   },
   "hr-rs.bajakovo": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
-     "wait": 30
+     "wait": null
     },
     "entry": {
      "wait": 60
@@ -82,7 +82,7 @@
    "held": true
   },
   "hu-rs.roszke": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
      "wait": null
@@ -93,7 +93,7 @@
    }
   },
   "hu-rs.tompa": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
      "wait": null
@@ -104,7 +104,7 @@
    }
   },
   "hu-ua.zahony": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -115,7 +115,7 @@
    }
   },
   "hu-ua.beregsurany": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -126,7 +126,7 @@
    }
   },
   "pl-ua.medyka": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
      "wait": 60
@@ -137,7 +137,7 @@
    }
   },
   "pl-ua.korczowa": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
      "wait": 60
@@ -148,7 +148,7 @@
    }
   },
   "pl-ua.dorohusk": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
      "wait": null
@@ -159,7 +159,7 @@
    }
   },
   "pl-ua.hrebenne": {
-   "updated": "2026-08-16T19:52:58Z",
+   "updated": "2026-08-16T20:03:05Z",
    "directions": {
     "exit": {
      "wait": 0
@@ -173,14 +173,14 @@
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-08-16T19:52:28Z"
+   "sampled": "2026-08-16T20:02:40Z"
   },
   "hak": {
    "ok": true,
    "url": "https://www.hak.hr/info/stanje-na-cestama",
    "found": 6,
    "of": 6,
-   "waits": 3
+   "waits": 2
   },
   "police_hu": {
    "ok": true,
@@ -195,7 +195,7 @@
    "found": 4,
    "of": 4,
    "waits": 3,
-   "ora_pl": "2026-08-16 21"
+   "ora_pl": "2026-08-16 22"
   }
  }
 }
