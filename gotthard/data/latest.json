@@ -1,14 +1,27 @@
 {
- "time": "2026-08-16T08:59:19Z",
+ "time": "2026-08-16T09:04:25Z",
  "south": {
   "km": 1.0,
   "wait": 10
  },
  "north": {
-  "km": 4.0,
-  "wait": 40
+  "km": 5.0,
+  "wait": 50
  },
  "events": [
+  {
+   "id": "situation.645488.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "north",
+   "versionTime": "2026-08-16T09:03:51Z",
+   "km": 5.0,
+   "wait": 50,
+   "texts": {
+    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 5.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 50",
+    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 5.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 50",
+    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 5.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 50"
+   }
+  },
   {
    "id": "situation.645493.1.1.1",
    "type": "AbnormalTraffic",
@@ -23,16 +36,16 @@
    }
   },
   {
-   "id": "situation.645488.1.1.1",
+   "id": "situation.645497.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-08-16T08:45:38Z",
-   "km": 4.0,
-   "wait": 40,
+   "versionTime": "2026-08-16T09:02:26Z",
+   "km": null,
+   "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
+    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Faido und Tunnel Piumogna-Tunnel Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug",
+    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Tunnel Tunnel de Piumogna Situation: trafic perturbé Raison: véhicule en panne",
+    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Galleria Galleria Piumogna Situazione: problemi di traffico Causa: veicolo in avaria"
    }
   },
   {
