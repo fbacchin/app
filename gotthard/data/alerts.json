@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé travaux Durée: durant la nuit probable 07.09.2026 20:00 jusqu'à 25.09.2026 05:00",
    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso cantiere Durata: durante la notte probabile 07.09.2026 20:00 fino 25.09.2026 05:00"
   },
-  "lastSeen": "2026-08-17T21:35:49Z"
+  "lastSeen": "2026-08-17T21:40:56Z"
  },
  {
   "firstSeen": "2026-08-17T12:49:13Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Amsteg et Jonction autoroutière Erstfeld Situation: fermé travaux, longueur [km] 8.3 Durée: durant la nuit probable 15.09.2026 22:00 jusqu'à 17.09.2026 05:00 Recommandation: une déviation locale est en place",
    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Amsteg E Svincolo autostradale Erstfeld Situazione: chiusa cantiere, lunghezza [km] 8.3 Durata: durante la notte probabile 15.09.2026 22:00 fino 17.09.2026 05:00 Raccomandazione: seguire deviazione locale"
   },
-  "lastSeen": "2026-08-17T21:35:49Z"
+  "lastSeen": "2026-08-17T21:40:56Z"
  },
  {
   "firstSeen": "2026-08-17T12:49:13Z",
@@ -42,7 +42,7 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Jonction autoroutière Amsteg Situation: fermé travaux, longueur [km] 8.3 Durée: durant la nuit probable 14.09.2026 22:00 jusqu'à 15.09.2026 05:00 Recommandation: une déviation locale est en place",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Svincolo autostradale Amsteg Situazione: chiusa cantiere, lunghezza [km] 8.3 Durata: durante la notte probabile 14.09.2026 22:00 fino 15.09.2026 05:00 Raccomandazione: seguire deviazione locale"
   },
-  "lastSeen": "2026-08-17T21:35:49Z"
+  "lastSeen": "2026-08-17T21:40:56Z"
  },
  {
   "firstSeen": "2026-08-17T12:54:19Z",
@@ -57,7 +57,7 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Jonction autoroutière Amsteg Situation: fermé travaux, longueur [km] 8.3 Durée: durant la nuit probable 17.09.2026 22:00 jusqu'à 18.09.2026 05:00 Recommandation: une déviation locale est en place",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Svincolo autostradale Amsteg Situazione: chiusa cantiere, lunghezza [km] 8.3 Durata: durante la notte probabile 17.09.2026 22:00 fino 18.09.2026 05:00 Raccomandazione: seguire deviazione locale"
   },
-  "lastSeen": "2026-08-17T21:35:49Z"
+  "lastSeen": "2026-08-17T21:40:56Z"
  },
  {
   "firstSeen": "2026-08-17T17:55:59Z",
@@ -72,7 +72,7 @@
    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: travaux de construction Durée: durant la nuit probable 17.08.2026 23:00 jusqu'à 18.08.2026 05:00",
    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: lavori di costruzione Durata: durante la notte probabile 17.08.2026 23:00 fino 18.08.2026 05:00"
   },
-  "lastSeen": "2026-08-17T21:35:49Z"
+  "lastSeen": "2026-08-17T21:40:56Z"
  },
  {
   "firstSeen": "2026-08-17T07:42:41Z",
@@ -249,21 +249,5 @@
   },
   "lastSeen": "2026-08-16T09:24:49Z",
   "revokedAt": "2026-08-16T09:29:55Z"
- },
- {
-  "firstSeen": "2026-08-15T09:43:45Z",
-  "id": "situation.645385.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-08-15T09:40:11Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Bellinzona <-> Göschenen zwischen Ortschaft Faido und Anschluss Airolo-Nufenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
-   "fr": "Libéré: H2 Bellinzone <-> Göschenen entre Localité Faido et Jonction autoroutière Airolo-Nufenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
-   "it": "Approvato: H2 Bellinzona <-> Göschenen tra Luogo Faido E Svincolo autostradale Airolo-Nufenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
-  },
-  "lastSeen": "2026-08-15T21:39:48Z",
-  "revokedAt": "2026-08-16T01:35:08Z"
  }
 ]
