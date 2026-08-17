@@ -1,5 +1,5 @@
 {
- "time": "2026-08-17T01:34:35Z",
+ "time": "2026-08-17T01:39:41Z",
  "south": {
   "km": null,
   "wait": null
@@ -13,13 +13,13 @@
    "id": "situation.645575.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-08-17T01:04:54Z",
+   "versionTime": "2026-08-17T01:39:09Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Airolo und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Ursache: Unfall",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Airolo et Tunnel Tunnel du St-Gothard Situation: trafic perturbé Raison: accident",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Airolo E Galleria Galleria San Gottardo Situazione: problemi di traffico Causa: incidente"
+    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Airolo und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Ursache: Unfall Verkehrsführung: linker Fahrstreifen blockiert",
+    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Airolo et Tunnel Tunnel du St-Gothard Situation: trafic perturbé Raison: accident Gestion du trafic: voie de gauche bloquée",
+    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Airolo E Galleria Galleria San Gottardo Situazione: problemi di traffico Causa: incidente Limitazione del traffico: corsia di sinistra bloccata"
    }
   }
  ]
