@@ -3,14 +3,14 @@ import UIKit
 
 /// Palette "notte indaco, cromo ambra": tema unico e voluto, da schermo di gioco.
 enum Theme {
-    static let notte = Color(red: 0.063, green: 0.063, blue: 0.141)      // #101024
-    static let notteAlta = Color(red: 0.102, green: 0.102, blue: 0.227)  // #1a1a3a
-    static let pozzo = Color(red: 0.043, green: 0.043, blue: 0.098)      // #0b0b19
-    static let pannello = Color(red: 0.086, green: 0.086, blue: 0.188)   // #161630
-    static let telaio = Color(red: 0.149, green: 0.149, blue: 0.290)     // #26264a
-    static let telaioChiaro = Color(red: 0.204, green: 0.204, blue: 0.416)
+    static let notte = Color(red: 0.118, green: 0.118, blue: 0.259)      // #1e1e42
+    static let notteAlta = Color(red: 0.180, green: 0.180, blue: 0.376)  // #2e2e60
+    static let pozzo = Color(red: 0.078, green: 0.078, blue: 0.180)      // #14142e
+    static let pannello = Color(red: 0.149, green: 0.149, blue: 0.314)   // #262650
+    static let telaio = Color(red: 0.227, green: 0.227, blue: 0.439)     // #3a3a70
+    static let telaioChiaro = Color(red: 0.290, green: 0.290, blue: 0.541) // #4a4a8a
     static let avorio = Color(red: 0.918, green: 0.906, blue: 0.859)     // #eae7db
-    static let nebbia = Color(red: 0.561, green: 0.561, blue: 0.682)     // #8f8fae
+    static let nebbia = Color(red: 0.659, green: 0.659, blue: 0.784)     // #a8a8c8
     static let ambra = Color(red: 1.0, green: 0.706, blue: 0.329)        // #ffb454
 
     /// Colori dei pezzi, ordine I J L O S T Z.
@@ -38,11 +38,6 @@ struct TetrisView: View {
                 hud
                 stage
                 controls
-                Text("Trascina per muovere · tocca per ruotare · trascina giù per calare in fondo")
-                    .font(.system(size: 10, weight: .regular, design: .monospaced))
-                    .foregroundStyle(Theme.nebbia)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 8)
@@ -110,7 +105,7 @@ struct TetrisView: View {
                 .kerning(1.2)
                 .foregroundStyle(Theme.nebbia)
             Text("\(value)")
-                .font(.system(size: 19, weight: .bold, design: .monospaced))
+                .font(.system(size: 17, weight: .bold, design: .monospaced))
                 .monospacedDigit()
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
@@ -124,32 +119,13 @@ struct TetrisView: View {
         .overlay(RoundedRectangle(cornerRadius: 12).stroke(Theme.telaio, lineWidth: 1))
     }
 
-    // MARK: - Palco: tieni · pozzo · prossimi
+    // MARK: - Palco: il pozzo occupa tutto, tieni/prossimi in sovraimpressione
     private var stage: some View {
         GeometryReader { geo in
-            let sideW: CGFloat = 60
-            let gap: CGFloat = 10
-            let availW = geo.size.width - 2 * (sideW + gap)
-            let cell = max(10, floor(min(availW / CGFloat(Campo.cols), geo.size.height / CGFloat(Campo.rows))))
-            let wellW = cell * CGFloat(Campo.cols)
-            let wellH = cell * CGFloat(Campo.rows)
-            HStack(alignment: .top, spacing: gap) {
-                miniPanel("Tieni") {
-                    MiniPieceCanvas(kind: engine.holdKind, alpha: engine.canHold ? 1 : 0.38)
-                }
-                .frame(width: sideW)
-                boardArea(cell: cell)
-                    .frame(width: wellW, height: wellH)
-                miniPanel("Prossimi") {
-                    VStack(spacing: 2) {
-                        MiniPieceCanvas(kind: preview(0), alpha: 1)
-                        MiniPieceCanvas(kind: preview(1), alpha: 1)
-                        MiniPieceCanvas(kind: preview(2), alpha: 1)
-                    }
-                }
-                .frame(width: sideW)
-            }
-            .frame(width: geo.size.width, height: geo.size.height, alignment: .top)
+            let cell = max(10, floor(min(geo.size.width / CGFloat(Campo.cols), geo.size.height / CGFloat(Campo.rows))))
+            boardArea(cell: cell)
+                .frame(width: cell * CGFloat(Campo.cols), height: cell * CGFloat(Campo.rows))
+                .frame(width: geo.size.width, height: geo.size.height)
         }
     }
 
@@ -158,18 +134,18 @@ struct TetrisView: View {
         return i < q.count ? q[i] : nil
     }
 
-    private func miniPanel<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
-        VStack(spacing: 6) {
+    private func wellChip<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
+        VStack(spacing: 3) {
             Text(title.uppercased())
-                .font(.system(size: 8, weight: .semibold, design: .monospaced))
+                .font(.system(size: 7, weight: .semibold, design: .monospaced))
                 .kerning(1)
                 .foregroundStyle(Theme.nebbia)
             content()
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
-        .background(RoundedRectangle(cornerRadius: 12).fill(Theme.pannello.opacity(0.8)))
-        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Theme.telaio, lineWidth: 1))
+        .padding(.horizontal, 6)
+        .padding(.vertical, 4)
+        .background(RoundedRectangle(cornerRadius: 10).fill(Theme.notte.opacity(0.78)))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Theme.telaio, lineWidth: 1))
     }
 
     private func boardArea(cell: CGFloat) -> some View {
@@ -184,6 +160,24 @@ struct TetrisView: View {
         return ZStack {
             BoardView(snap: snap, cell: cell)
                 .gesture(dragGesture(cell: cell))
+            VStack {
+                HStack(alignment: .top) {
+                    wellChip("Tieni") {
+                        MiniPieceCanvas(kind: engine.holdKind, alpha: engine.canHold ? 1 : 0.38)
+                    }
+                    Spacer()
+                    wellChip("Prossimi") {
+                        HStack(spacing: 2) {
+                            MiniPieceCanvas(kind: preview(0), alpha: 1)
+                            MiniPieceCanvas(kind: preview(1), alpha: 1)
+                            MiniPieceCanvas(kind: preview(2), alpha: 1)
+                        }
+                    }
+                }
+                .padding(6)
+                Spacer()
+            }
+            .allowsHitTesting(false)
             boardOverlay
         }
         .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -516,7 +510,7 @@ struct MiniPieceCanvas: View {
     var body: some View {
         Canvas { ctx, size in
             guard let kind else { return }
-            let unit: CGFloat = 10
+            let unit: CGFloat = 8
             let cells = TetrisEngine.shapes[kind][0]
             let xs = cells.map { $0.x }
             let ys = cells.map { $0.y }
@@ -537,7 +531,7 @@ struct MiniPieceCanvas: View {
                          with: .color(.white.opacity(0.25 * alpha)))
             }
         }
-        .frame(width: 48, height: 40)
+        .frame(width: 36, height: 30)
     }
 }
 

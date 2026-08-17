@@ -14,12 +14,12 @@
    Tema unico e voluto: uno schermo di gioco. Tutti i colori sono
    dichiarati esplicitamente, il fondo non eredita mai dall'host. */
 :root{
-  --notte:#101024;        /* fondo pagina, indaco notte */
-  --pozzo:#0b0b19;        /* interno del pozzo */
-  --telaio:#26264a;       /* bordi e linee */
-  --telaio-soft:#191938;  /* pannelli */
+  --notte:#1e1e42;        /* fondo pagina, indaco notte */
+  --pozzo:#14142e;        /* interno del pozzo */
+  --telaio:#3a3a70;       /* bordi e linee */
+  --telaio-soft:#262650;  /* pannelli */
   --avorio:#eae7db;       /* testo primario */
-  --nebbia:#8f8fae;       /* testo attenuato */
+  --nebbia:#a8a8c8;       /* testo attenuato */
   --ambra:#ffb454;        /* accento VFD */
   --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
@@ -28,7 +28,7 @@
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
 body{
   background:var(--notte);
-  background-image:radial-gradient(120% 70% at 50% -10%,#1a1a3a 0%,var(--notte) 62%);
+  background-image:radial-gradient(120% 70% at 50% -10%,#2e2e60 0%,var(--notte) 62%);
   color:var(--avorio);
   font-family:var(--sans);
   touch-action:manipulation;
@@ -51,20 +51,20 @@ header{display:flex;align-items:center;justify-content:space-between;flex:none}
 .hdr-btns{display:flex;gap:8px}
 .chip{
   width:40px;height:40px;border-radius:12px;
-  background:linear-gradient(#20203f,#161630);
+  background:linear-gradient(#30305e,#242450);
   border:1px solid var(--telaio);
   color:var(--nebbia);font-size:17px;line-height:1;
   display:grid;place-items:center;
 }
-.chip:active{transform:translateY(1px);border-color:#3a3a72;color:var(--avorio)}
+.chip:active{transform:translateY(1px);border-color:#5a5aa8;color:var(--avorio)}
 
 /* ── quadro punteggi ── */
 #hud{display:flex;gap:8px;flex:none}
 .tile{
   flex:1;min-width:0;
-  background:rgba(22,22,48,.8);
+  background:rgba(38,38,80,.85);
   border:1px solid var(--telaio);border-radius:12px;
-  padding:6px 10px 7px;
+  padding:4px 10px 6px;
   display:flex;flex-direction:column;gap:1px;
 }
 .tile.main{flex:1.5}
@@ -74,34 +74,36 @@ header{display:flex;align-items:center;justify-content:space-between;flex:none}
 }
 .val{
   font-family:var(--mono);font-variant-numeric:tabular-nums;
-  font-size:19px;font-weight:700;color:var(--avorio);
+  font-size:17px;font-weight:700;color:var(--avorio);
   white-space:nowrap;overflow:hidden;
 }
 .tile.main .val{color:var(--ambra);text-shadow:0 0 14px rgba(255,180,84,.35)}
 
-/* ── palco: tieni · pozzo · prossimi ── */
-#stage{flex:1;min-height:0;display:flex;gap:10px;justify-content:center}
-.col{width:60px;flex:none;display:flex;flex-direction:column;gap:10px;min-height:0}
-.mini{
-  background:rgba(22,22,48,.8);
-  border:1px solid var(--telaio);border-radius:12px;
-  padding:7px 0 8px;display:flex;flex-direction:column;align-items:center;gap:6px;
-}
-.mini .lbl{font-size:8px}
-.mini canvas{display:block}
+/* ── palco: il pozzo occupa tutto, tieni/prossimi in sovraimpressione ── */
+#stage{flex:1;min-height:0;display:flex;justify-content:center}
 #wellWrap{
-  position:relative;flex:none;align-self:flex-start;
-  border:1px solid #33336b;border-radius:10px;overflow:hidden;
+  position:relative;flex:none;align-self:center;
+  border:1px solid #4a4a8a;border-radius:10px;overflow:hidden;
   background:var(--pozzo);
-  box-shadow:0 18px 50px rgba(0,0,0,.55),0 0 0 4px rgba(22,22,48,.55);
+  box-shadow:0 18px 50px rgba(0,0,0,.45),0 0 0 4px rgba(38,38,80,.55);
 }
 #well{display:block;touch-action:none}
+.wchip{
+  position:absolute;top:6px;z-index:1;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  background:rgba(30,30,66,.78);border:1px solid var(--telaio);border-radius:10px;
+  padding:4px 6px 5px;
+}
+.wchip.left{left:6px}
+.wchip.right{right:6px}
+.wchip .lbl{font-size:7px}
+.wchip canvas{display:block}
 
 /* ── velo (pronto / pausa / fine) ── */
 #overlay{
-  position:absolute;inset:0;
+  position:absolute;inset:0;z-index:2;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
-  background:rgba(11,11,25,.82);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  background:rgba(20,20,46,.84);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
   text-align:center;padding:18px;
 }
 #overlay.nascosto{display:none}
@@ -121,14 +123,14 @@ header{display:flex;align-items:center;justify-content:space-between;flex:none}
 .pad{display:flex;gap:10px;align-items:center}
 .key{
   width:58px;height:58px;border-radius:50%;
-  background:linear-gradient(#222244,#151530);
-  border:1px solid #34346a;
+  background:linear-gradient(#34346a,#242452);
+  border:1px solid #4a4a8a;
   color:var(--avorio);font-size:22px;line-height:1;
   display:grid;place-items:center;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 4px 14px rgba(0,0,0,.4);
   touch-action:none;
 }
-.key:active{transform:translateY(1px);background:linear-gradient(#2b2b56,#1b1b3a);border-color:#4a4a90}
+.key:active{transform:translateY(1px);background:linear-gradient(#40407e,#2c2c5e);border-color:#6a6ab8}
 .pad.azioni .key{color:var(--ambra);font-size:20px}
 .pad.azioni{display:grid;grid-template-columns:repeat(2,48px);gap:8px}
 .pad.azioni .key{width:48px;height:48px}
@@ -137,7 +139,7 @@ header{display:flex;align-items:center;justify-content:space-between;flex:none}
   font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--nebbia);
 }
 @media (hover:hover) and (pointer:fine){#pads{display:none}}
-@media (max-height:640px){.hint{display:none}}
+@media (pointer:coarse),(max-height:640px){.hint{display:none}}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
@@ -161,20 +163,16 @@ header{display:flex;align-items:center;justify-content:space-between;flex:none}
   </section>
 
   <section id="stage">
-    <aside class="col">
-      <div class="mini"><span class="lbl">Tieni</span><canvas id="cvHold" width="10" height="10"></canvas></div>
-    </aside>
     <div id="wellWrap">
       <canvas id="well" width="10" height="10"></canvas>
+      <div class="wchip left"><span class="lbl">Tieni</span><canvas id="cvHold" width="10" height="10"></canvas></div>
+      <div class="wchip right"><span class="lbl">Prossimi</span><canvas id="cvNext" width="10" height="10"></canvas></div>
       <div id="overlay">
         <div id="ovTitle">Pronto?</div>
         <p id="ovText"></p>
         <button id="ovBtn">Gioca</button>
       </div>
     </div>
-    <aside class="col">
-      <div class="mini"><span class="lbl">Prossimi</span><canvas id="cvNext" width="10" height="10"></canvas></div>
-    </aside>
   </section>
 
   <section id="pads" aria-label="Comandi">
@@ -489,14 +487,14 @@ function rebuildSprites(){
 function layout(){
   dpr=window.devicePixelRatio||1;
   const stage=$('#stage');
-  const availW=stage.clientWidth-2*70, availH=stage.clientHeight-2;
-  cell=Math.max(13,Math.floor(Math.min(availW/COLS,availH/ROWS)));
+  const availW=stage.clientWidth, availH=stage.clientHeight;
+  cell=Math.min(38,Math.max(13,Math.floor(Math.min(availW/COLS,availH/ROWS))));
   const W=cell*COLS,H=cell*ROWS;
   const wrap=$('#wellWrap');
   wrap.style.width=W+'px';wrap.style.height=H+'px';
   wellCv.style.width=W+'px';wellCv.style.height=H+'px';
   wellCv.width=Math.round(W*dpr);wellCv.height=Math.round(H*dpr);
-  sizeMini(holdCv,52,52);sizeMini(nextCv,52,150);
+  sizeMini(holdCv,36,32);sizeMini(nextCv,108,32);
   rebuildSprites();drawLogo();drawSide();
 }
 function sizeMini(cv,w,h){
@@ -554,13 +552,13 @@ function drawSide(){
   hctx.setTransform(dpr,0,0,dpr,0,0);hctx.clearRect(0,0,200,200);
   if(holdKind!==null){
     hctx.globalAlpha=canHold?1:.38;
-    drawMiniPiece(hctx,holdKind,26,26,11);
+    drawMiniPiece(hctx,holdKind,18,16,8);
     hctx.globalAlpha=1;
   }
-  nctx.setTransform(dpr,0,0,dpr,0,0);nctx.clearRect(0,0,200,300);
+  nctx.setTransform(dpr,0,0,dpr,0,0);nctx.clearRect(0,0,300,200);
   for(let i=0;i<3;i++){
     if(queue[i]===undefined)break;
-    drawMiniPiece(nctx,queue[i],26,25+i*50,11);
+    drawMiniPiece(nctx,queue[i],18+i*36,16,8);
   }
 }
 /* wordmark: lettere costruite con le tessere del gioco */
