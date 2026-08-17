@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 3.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30"
   },
-  "lastSeen": "2026-08-17T15:32:54Z"
+  "lastSeen": "2026-08-17T15:38:01Z"
  },
  {
   "firstSeen": "2026-08-17T07:57:58Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-08-17T15:32:54Z"
+  "lastSeen": "2026-08-17T15:38:01Z"
  },
  {
   "firstSeen": "2026-08-17T12:44:06Z",
@@ -42,7 +42,7 @@
    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé travaux Durée: durant la nuit probable 07.09.2026 20:00 jusqu'à 25.09.2026 05:00",
    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso cantiere Durata: durante la notte probabile 07.09.2026 20:00 fino 25.09.2026 05:00"
   },
-  "lastSeen": "2026-08-17T15:32:54Z"
+  "lastSeen": "2026-08-17T15:38:01Z"
  },
  {
   "firstSeen": "2026-08-17T12:49:13Z",
@@ -57,7 +57,7 @@
    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Amsteg et Jonction autoroutière Erstfeld Situation: fermé travaux, longueur [km] 8.3 Durée: durant la nuit probable 15.09.2026 22:00 jusqu'à 17.09.2026 05:00 Recommandation: une déviation locale est en place",
    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Amsteg E Svincolo autostradale Erstfeld Situazione: chiusa cantiere, lunghezza [km] 8.3 Durata: durante la notte probabile 15.09.2026 22:00 fino 17.09.2026 05:00 Raccomandazione: seguire deviazione locale"
   },
-  "lastSeen": "2026-08-17T15:32:54Z"
+  "lastSeen": "2026-08-17T15:38:01Z"
  },
  {
   "firstSeen": "2026-08-17T12:49:13Z",
@@ -72,7 +72,7 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Jonction autoroutière Amsteg Situation: fermé travaux, longueur [km] 8.3 Durée: durant la nuit probable 14.09.2026 22:00 jusqu'à 15.09.2026 05:00 Recommandation: une déviation locale est en place",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Svincolo autostradale Amsteg Situazione: chiusa cantiere, lunghezza [km] 8.3 Durata: durante la notte probabile 14.09.2026 22:00 fino 15.09.2026 05:00 Raccomandazione: seguire deviazione locale"
   },
-  "lastSeen": "2026-08-17T15:32:54Z"
+  "lastSeen": "2026-08-17T15:38:01Z"
  },
  {
   "firstSeen": "2026-08-17T12:54:19Z",
@@ -87,7 +87,7 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Jonction autoroutière Amsteg Situation: fermé travaux, longueur [km] 8.3 Durée: durant la nuit probable 17.09.2026 22:00 jusqu'à 18.09.2026 05:00 Recommandation: une déviation locale est en place",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Svincolo autostradale Amsteg Situazione: chiusa cantiere, lunghezza [km] 8.3 Durata: durante la notte probabile 17.09.2026 22:00 fino 18.09.2026 05:00 Raccomandazione: seguire deviazione locale"
   },
-  "lastSeen": "2026-08-17T15:32:54Z"
+  "lastSeen": "2026-08-17T15:38:01Z"
  },
  {
   "firstSeen": "2026-08-17T07:52:53Z",
@@ -280,21 +280,5 @@
   },
   "lastSeen": "2026-08-15T18:05:03Z",
   "revokedAt": "2026-08-15T19:52:29Z"
- },
- {
-  "firstSeen": "2026-08-15T14:45:46Z",
-  "id": "situation.645430.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-08-15T15:10:18Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Tunnel Stalvedro-Tunnel Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen blockiert",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Tunnel Tunnel de Stalvedro Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de droite bloquée",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Galleria Galleria Stalvedro Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra bloccata"
-  },
-  "lastSeen": "2026-08-15T15:37:02Z",
-  "revokedAt": "2026-08-15T15:42:09Z"
  }
 ]
