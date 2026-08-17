@@ -610,7 +610,7 @@ function showOverlay(){
   if(phase==='ready'){
     ovTitle.textContent='Pronto?';
     ovText.innerHTML=isTouch
-      ?'Trascina sul pozzo per muovere, tocca per ruotare, scorri in giù per calare.'
+      ?'Trascina sul pozzo per muovere, tocca per ruotare, trascina in giù per calare in fondo.'
       :'Frecce per muovere, <strong>↑</strong> ruota, <strong>spazio</strong> cala, <strong>C</strong> tiene, <strong>P</strong> pausa.';
     ovBtn.textContent='Gioca';
   }else if(phase==='paused'){
@@ -687,25 +687,25 @@ wellCv.addEventListener('pointerdown',e=>{
   if(phase!=='playing')return;
   wakeAudio();e.preventDefault();
   try{wellCv.setPointerCapture(e.pointerId)}catch(err){}
-  touch={id:e.pointerId,x0:e.clientX,y0:e.clientY,lx:e.clientX,ly:e.clientY,t0:performance.now(),moved:false,dropped:false};
+  touch={id:e.pointerId,x0:e.clientX,y0:e.clientY,lx:e.clientX,t0:performance.now(),moved:false,dropped:false,hs:0};
 });
 wellCv.addEventListener('pointermove',e=>{
-  if(!touch||e.pointerId!==touch.id||phase!=='playing')return;
+  if(!touch||e.pointerId!==touch.id||phase!=='playing'||touch.dropped)return;
+  /* trascinamento netto verso il basso = il pezzo cala subito in fondo */
+  const totDx=e.clientX-touch.x0, totDy=e.clientY-touch.y0;
+  if(touch.hs===0&&totDy>=Math.max(48,cell*1.5)&&totDy>1.5*Math.abs(totDx)){
+    touch.dropped=true;hardDrop();return;
+  }
   const step=cell*0.72;
-  let dx=e.clientX-touch.lx, dy=e.clientY-touch.ly;
-  while(dx>=step){if(tryShift(1)){touch.lx+=step;dx-=step;touch.moved=true;}else{touch.lx=e.clientX;dx=0;}}
-  while(dx<=-step){if(tryShift(-1)){touch.lx-=step;dx+=step;touch.moved=true;}else{touch.lx=e.clientX;dx=0;}}
-  while(dy>=step){if(softStep()){touch.ly+=step;dy-=step;touch.moved=true;}else{touch.ly=e.clientY;dy=0;}}
-  if(Math.abs(e.clientX-touch.x0)>12||Math.abs(e.clientY-touch.y0)>12)touch.moved=true;
+  let dx=e.clientX-touch.lx;
+  while(dx>=step){if(tryShift(1)){touch.lx+=step;dx-=step;touch.moved=true;touch.hs++;}else{touch.lx=e.clientX;dx=0;}}
+  while(dx<=-step){if(tryShift(-1)){touch.lx-=step;dx+=step;touch.moved=true;touch.hs++;}else{touch.lx=e.clientX;dx=0;}}
+  if(Math.abs(totDx)>12||Math.abs(totDy)>12)touch.moved=true;
 });
 wellCv.addEventListener('pointerup',e=>{
   if(!touch||e.pointerId!==touch.id)return;
   const dt=performance.now()-touch.t0;
-  const dx=e.clientX-touch.x0, dy=e.clientY-touch.y0;
-  if(phase==='playing'){
-    if(!touch.moved&&dt<260)rotate(1);
-    else if(dy>64&&dt<260&&dy>1.4*Math.abs(dx))hardDrop();
-  }
+  if(phase==='playing'&&!touch.dropped&&!touch.moved&&dt<260)rotate(1);
   touch=null;
 });
 wellCv.addEventListener('pointercancel',()=>{touch=null;});
@@ -716,7 +716,7 @@ document.addEventListener('visibilitychange',()=>{
 });
 
 $('#hint').textContent=isTouch
-  ?'Trascina sul pozzo per muovere · tocca per ruotare · scorri giù per calare'
+  ?'Trascina per muovere · tocca per ruotare · trascina giù per calare in fondo'
   :'← → muovi · ↓ scende · ↑/X ruota · Z ruota ⟲ · spazio cala · C tiene · P pausa';
 
 /* ── avvio ── */
