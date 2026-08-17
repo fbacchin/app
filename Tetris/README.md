@@ -19,9 +19,8 @@ App nativa scritta in SwiftUI, senza dipendenze esterne. Regole moderne del gioc
 | --- | --- |
 | Trascina a destra/sinistra sul pozzo | Sposta il pezzo |
 | Tocco sul pozzo | Ruota |
-| Trascina verso il basso | Discesa morbida |
-| Scorrimento rapido verso il basso | Cala subito (hard drop) |
-| Pulsanti ◀ ▼ ▶ | Movimento con auto-ripetizione |
+| Trascina verso il basso | Cala subito in fondo (hard drop) |
+| Pulsanti ◀ ▼ ▶ | Movimento con auto-ripetizione (▼ discesa morbida) |
 | ⟲ ⟳ | Rotazione |
 | ⇄ | Tieni il pezzo |
 | ⤓ | Cala subito |

@@ -38,7 +38,7 @@ struct TetrisView: View {
                 hud
                 stage
                 controls
-                Text("Trascina per muovere · tocca per ruotare · scorri giù per calare")
+                Text("Trascina per muovere · tocca per ruotare · trascina giù per calare in fondo")
                     .font(.system(size: 10, weight: .regular, design: .monospaced))
                     .foregroundStyle(Theme.nebbia)
                     .lineLimit(1)
@@ -241,7 +241,7 @@ struct TetrisView: View {
     private var overlayMessage: String {
         switch engine.phase {
         case .ready:
-            return "Trascina sul pozzo per muovere,\ntocca per ruotare,\nscorri in giù per calare."
+            return "Trascina sul pozzo per muovere,\ntocca per ruotare,\ntrascina in giù per calare in fondo."
         case .paused:
             return "Il pozzo ti aspetta."
         case .gameOver:
@@ -299,40 +299,40 @@ struct TetrisView: View {
                 guard engine.phase == .playing else { return }
                 if drag == nil {
                     drag = DragTracker(startLoc: v.location, lastLoc: v.location,
-                                       startTime: Date(), moved: false)
+                                       startTime: Date(), moved: false, dropped: false, hShifts: 0)
                 }
-                guard var t = drag else { return }
+                guard var t = drag, !t.dropped else { return }
+                // trascinamento netto verso il basso = il pezzo cala subito in fondo
+                let totDx = v.location.x - t.startLoc.x
+                let totDy = v.location.y - t.startLoc.y
+                if t.hShifts == 0, totDy >= max(48, cell * 1.5), totDy > 1.5 * abs(totDx) {
+                    t.dropped = true
+                    drag = t
+                    engine.hardDrop()
+                    return
+                }
                 let step = cell * 0.72
                 var dx = v.location.x - t.lastLoc.x
-                var dy = v.location.y - t.lastLoc.y
                 while dx >= step {
-                    if engine.shift(1) { t.lastLoc.x += step; dx -= step; t.moved = true }
+                    if engine.shift(1) { t.lastLoc.x += step; dx -= step; t.moved = true; t.hShifts += 1 }
                     else { t.lastLoc.x = v.location.x; dx = 0 }
                 }
                 while dx <= -step {
-                    if engine.shift(-1) { t.lastLoc.x -= step; dx += step; t.moved = true }
+                    if engine.shift(-1) { t.lastLoc.x -= step; dx += step; t.moved = true; t.hShifts += 1 }
                     else { t.lastLoc.x = v.location.x; dx = 0 }
                 }
-                while dy >= step {
-                    if engine.softStep() { t.lastLoc.y += step; dy -= step; t.moved = true }
-                    else { t.lastLoc.y = v.location.y; dy = 0 }
-                }
-                if abs(v.location.x - t.startLoc.x) > 12 || abs(v.location.y - t.startLoc.y) > 12 {
+                if abs(totDx) > 12 || abs(totDy) > 12 {
                     t.moved = true
                 }
                 drag = t
             }
-            .onEnded { v in
+            .onEnded { _ in
                 let t = drag
                 drag = nil
-                guard engine.phase == .playing, let tracker = t else { return }
+                guard engine.phase == .playing, let tracker = t, !tracker.dropped else { return }
                 let dt = Date().timeIntervalSince(tracker.startTime)
-                let dx = v.location.x - tracker.startLoc.x
-                let dy = v.location.y - tracker.startLoc.y
                 if !tracker.moved && dt < 0.26 {
                     engine.rotate(1)
-                } else if dy > 64 && dt < 0.26 && dy > 1.4 * abs(dx) {
-                    engine.hardDrop()
                 }
             }
     }
@@ -434,6 +434,8 @@ struct DragTracker {
     var lastLoc: CGPoint
     var startTime: Date
     var moved: Bool
+    var dropped: Bool
+    var hShifts: Int
 }
 
 // MARK: - Pozzo
