@@ -4,15 +4,15 @@
   "id": "situation.645575.1.1.1",
   "type": "AbnormalTraffic",
   "direction": "north",
-  "versionTime": "2026-08-17T01:39:09Z",
+  "versionTime": "2026-08-17T02:29:38Z",
   "km": null,
   "wait": null,
   "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Airolo und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Ursache: Unfall Verkehrsführung: linker Fahrstreifen blockiert",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Airolo et Tunnel Tunnel du St-Gothard Situation: trafic perturbé Raison: accident Gestion du trafic: voie de gauche bloquée",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Airolo E Galleria Galleria San Gottardo Situazione: problemi di traffico Causa: incidente Limitazione del traffico: corsia di sinistra bloccata"
+   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Airolo und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Ursache: Unfall",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Airolo et Tunnel Tunnel du St-Gothard Situation: trafic perturbé Raison: accident",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Airolo E Galleria Galleria San Gottardo Situazione: problemi di traffico Causa: incidente"
   },
-  "lastSeen": "2026-08-17T02:25:42Z"
+  "lastSeen": "2026-08-17T02:30:49Z"
  },
  {
   "firstSeen": "2026-08-16T07:12:06Z",
@@ -253,21 +253,5 @@
   },
   "lastSeen": "2026-08-15T10:55:23Z",
   "revokedAt": "2026-08-15T11:00:38Z"
- },
- {
-  "firstSeen": "2026-08-15T01:52:28Z",
-  "id": "situation.645336.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-08-15T01:51:37Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Tunnel Biaschina-Tunnel und Anschluss Faido Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen gesperrt",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Tunnel Tunnel de la Biaschina et Jonction autoroutière Faido Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de droite fermée",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Galleria Galleria Biaschina E Svincolo autostradale Faido Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa"
-  },
-  "lastSeen": "2026-08-15T02:28:16Z",
-  "revokedAt": "2026-08-15T02:33:21Z"
  }
 ]
