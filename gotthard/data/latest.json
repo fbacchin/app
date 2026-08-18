@@ -1,5 +1,5 @@
 {
- "time": "2026-08-18T12:31:20Z",
+ "time": "2026-08-18T12:36:27Z",
  "south": {
   "km": null,
   "wait": null
@@ -25,14 +25,14 @@
   {
    "id": "situation.645947.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-08-18T08:42:58Z",
+   "direction": "north",
+   "versionTime": "2026-08-18T12:34:54Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Chiasso <-> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 Chiasso <-> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-    "it": "Approvato: A2 Chiasso <-> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
+    "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
+    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
+    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
    }
   }
  ]
