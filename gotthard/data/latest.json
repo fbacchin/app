@@ -1,5 +1,5 @@
 {
- "time": "2026-08-18T01:41:02Z",
+ "time": "2026-08-18T01:46:08Z",
  "south": {
   "km": null,
   "wait": null
@@ -20,45 +20,6 @@
     "de": "Freigegeben: A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Bauarbeiten Dauer: nachts voraussichtlich 17.08.2026 23:00 bis 18.08.2026 05:00",
     "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: travaux de construction Durée: durant la nuit probable 17.08.2026 23:00 jusqu'à 18.08.2026 05:00",
     "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: lavori di costruzione Durata: durante la notte probabile 17.08.2026 23:00 fino 18.08.2026 05:00"
-   }
-  },
-  {
-   "id": "situation.645711.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "south",
-   "versionTime": "2026-08-17T12:49:19Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Erstfeld und Anschluss Amsteg Sachlage: Strecke gesperrt Baustelle, Länge [km] 8.3 Dauer: nachts voraussichtlich 17.09.2026 22:00 bis 18.09.2026 05:00 Empfehlung: eine lokale Umleitung ist eingerichtet",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Jonction autoroutière Amsteg Situation: fermé travaux, longueur [km] 8.3 Durée: durant la nuit probable 17.09.2026 22:00 jusqu'à 18.09.2026 05:00 Recommandation: une déviation locale est en place",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Svincolo autostradale Amsteg Situazione: chiusa cantiere, lunghezza [km] 8.3 Durata: durante la notte probabile 17.09.2026 22:00 fino 18.09.2026 05:00 Raccomandazione: seguire deviazione locale"
-   }
-  },
-  {
-   "id": "situation.645710.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "north",
-   "versionTime": "2026-08-17T12:48:41Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Amsteg und Anschluss Erstfeld Sachlage: Strecke gesperrt Baustelle, Länge [km] 8.3 Dauer: nachts voraussichtlich 15.09.2026 22:00 bis 17.09.2026 05:00 Empfehlung: eine lokale Umleitung ist eingerichtet",
-    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Amsteg et Jonction autoroutière Erstfeld Situation: fermé travaux, longueur [km] 8.3 Durée: durant la nuit probable 15.09.2026 22:00 jusqu'à 17.09.2026 05:00 Recommandation: une déviation locale est en place",
-    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Amsteg E Svincolo autostradale Erstfeld Situazione: chiusa cantiere, lunghezza [km] 8.3 Durata: durante la notte probabile 15.09.2026 22:00 fino 17.09.2026 05:00 Raccomandazione: seguire deviazione locale"
-   }
-  },
-  {
-   "id": "situation.645708.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "south",
-   "versionTime": "2026-08-17T12:47:52Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Erstfeld und Anschluss Amsteg Sachlage: Strecke gesperrt Baustelle, Länge [km] 8.3 Dauer: nachts voraussichtlich 14.09.2026 22:00 bis 15.09.2026 05:00 Empfehlung: eine lokale Umleitung ist eingerichtet",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Jonction autoroutière Amsteg Situation: fermé travaux, longueur [km] 8.3 Durée: durant la nuit probable 14.09.2026 22:00 jusqu'à 15.09.2026 05:00 Recommandation: une déviation locale est en place",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Svincolo autostradale Amsteg Situazione: chiusa cantiere, lunghezza [km] 8.3 Durata: durante la notte probabile 14.09.2026 22:00 fino 15.09.2026 05:00 Raccomandazione: seguire deviazione locale"
    }
   }
  ]
