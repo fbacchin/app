@@ -1,5 +1,20 @@
 [
  {
+  "firstSeen": "2026-08-17T17:55:59Z",
+  "id": "situation.645818.1.1.1",
+  "type": "RoadOrCarriagewayOrLaneManagement",
+  "direction": null,
+  "versionTime": "2026-08-17T17:53:50Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Bauarbeiten Dauer: nachts voraussichtlich 17.08.2026 23:00 bis 18.08.2026 05:00",
+   "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: travaux de construction Durée: durant la nuit probable 17.08.2026 23:00 jusqu'à 18.08.2026 05:00",
+   "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: lavori di costruzione Durata: durante la notte probabile 17.08.2026 23:00 fino 18.08.2026 05:00"
+  },
+  "lastSeen": "2026-08-18T00:49:38Z"
+ },
+ {
   "firstSeen": "2026-08-17T12:49:13Z",
   "id": "situation.645710.1.1.1",
   "type": "RoadOrCarriagewayOrLaneManagement",
@@ -41,21 +56,6 @@
    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Erstfeld und Anschluss Amsteg Sachlage: Strecke gesperrt Baustelle, Länge [km] 8.3 Dauer: nachts voraussichtlich 17.09.2026 22:00 bis 18.09.2026 05:00 Empfehlung: eine lokale Umleitung ist eingerichtet",
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Jonction autoroutière Amsteg Situation: fermé travaux, longueur [km] 8.3 Durée: durant la nuit probable 17.09.2026 22:00 jusqu'à 18.09.2026 05:00 Recommandation: une déviation locale est en place",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Svincolo autostradale Amsteg Situazione: chiusa cantiere, lunghezza [km] 8.3 Durata: durante la notte probabile 17.09.2026 22:00 fino 18.09.2026 05:00 Raccomandazione: seguire deviazione locale"
-  },
-  "lastSeen": "2026-08-18T00:44:32Z"
- },
- {
-  "firstSeen": "2026-08-17T17:55:59Z",
-  "id": "situation.645818.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": null,
-  "versionTime": "2026-08-17T17:53:50Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Bauarbeiten Dauer: nachts voraussichtlich 17.08.2026 23:00 bis 18.08.2026 05:00",
-   "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: travaux de construction Durée: durant la nuit probable 17.08.2026 23:00 jusqu'à 18.08.2026 05:00",
-   "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: lavori di costruzione Durata: durante la notte probabile 17.08.2026 23:00 fino 18.08.2026 05:00"
   },
   "lastSeen": "2026-08-18T00:44:32Z"
  },
