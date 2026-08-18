@@ -1,5 +1,20 @@
 [
  {
+  "firstSeen": "2026-08-18T07:13:53Z",
+  "id": "situation.645914.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "north",
+  "versionTime": "2026-08-18T07:13:05Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Wassen und Anschluss Amsteg Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
+   "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Wassen et Jonction autoroutière Amsteg Situation: danger Raison: objets sur la chaussée",
+   "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Wassen E Svincolo autostradale Amsteg Situazione: pericolo Causa: oggetto sulla strada"
+  },
+  "lastSeen": "2026-08-18T07:13:53Z"
+ },
+ {
   "firstSeen": "2026-08-18T06:02:03Z",
   "id": "situation.645895.1.1.1",
   "type": "AbnormalTraffic",
