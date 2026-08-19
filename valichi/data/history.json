@@ -4611,5 +4611,20 @@
   "held": [
    "pl-ua.korczowa"
   ]
+ },
+ {
+  "time": "2026-08-19T02:15:00Z",
+  "w": {
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 0,
+   "pl-ua.korczowa.exit": 0,
+   "pl-ua.hrebenne.exit": 0
+  },
+  "held": [
+   "pl-ua.korczowa"
+  ]
  }
 ]
