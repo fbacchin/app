@@ -1,5 +1,5 @@
 {
- "time": "2026-08-19T16:37:29Z",
+ "time": "2026-08-19T16:42:35Z",
  "south": {
   "km": null,
   "wait": null
@@ -33,19 +33,6 @@
     "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Erstfeld und Tunnel Seelisberg-Tunnel Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 45 Zusatz 2: mehrfach kurzfristige Sperrungen",
     "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Erstfeld et Tunnel Tunnel du Seelisberg Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 45 Complément 2: fermetures intermittentes de courte durée",
     "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Erstfeld E Galleria Galleria Seelisberg Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 45 Aggiunta 2: chiusure intermittenti di breve durata"
-   }
-  },
-  {
-   "id": "situation.646242.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-19T09:55:55Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Bellinzona -> Göschenen zwischen Ortschaft Airolo und Pass Gotthard-Pass Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: H2 Bellinzone -> Göschenen entre Localité Airolo et Col Col du St-Gothard Situation: trafic en accordéon Raison: surcharge de trafic",
-    "it": "Approvato: H2 Bellinzona -> Göschenen tra Luogo Airolo E Passo Passo del S. Gottardo Situazione: traffico fortemente rallentato Causa: traffico congestionato"
    }
   },
   {
