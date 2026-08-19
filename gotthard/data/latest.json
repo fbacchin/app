@@ -1,5 +1,5 @@
 {
- "time": "2026-08-19T18:24:41Z",
+ "time": "2026-08-19T18:29:47Z",
  "south": {
   "km": null,
   "wait": null
@@ -9,19 +9,6 @@
   "wait": null
  },
  "events": [
-  {
-   "id": "situation.646266.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-08-19T16:27:01Z",
-   "km": null,
-   "wait": 45,
-   "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Erstfeld und Tunnel Seelisberg-Tunnel Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 45 Zusatz 2: mehrfach kurzfristige Sperrungen",
-    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Erstfeld et Tunnel Tunnel du Seelisberg Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 45 Complément 2: fermetures intermittentes de courte durée",
-    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Erstfeld E Galleria Galleria Seelisberg Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 45 Aggiunta 2: chiusure intermittenti di breve durata"
-   }
-  },
   {
    "id": "situation.643199.1.1.1",
    "type": "AbnormalTraffic",
