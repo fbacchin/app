@@ -186,7 +186,7 @@ jobs:
             -authenticationKeyIssuerID "$ISSUER" \
             DEVELOPMENT_TEAM="$TEAM" \
             CODE_SIGN_STYLE=Automatic \
-            CURRENT_PROJECT_VERSION="$BUILD_NUMBER" \
+            CURRENT_PROJECT_VERSION="1.0.$BUILD_NUMBER" \
             | tee /tmp/archive.log | grep -E "error:|Signing|BUILD|Provisioning" || true
           grep -q "ARCHIVE SUCCEEDED" /tmp/archive.log
 
@@ -276,7 +276,7 @@ jobs:
           <div>
             <img src="icona-512.png" alt="">
             <h1>I miei libri</h1>
-            <p>Versione 1.0 (${GITHUB_RUN_NUMBER})</p>
+            <p>Versione 1.0 (1.0.${GITHUB_RUN_NUMBER})</p>
             <a href="itms-services://?action=download-manifest&url=${BASE}/manifest.plist">Installa sull'iPhone</a>
             <small>Apri questa pagina con Safari sull'iPhone. Dopo l'installazione, la prima
             volta vai in Impostazioni &rsaquo; Generali &rsaquo; VPN e gestione dispositivo e
