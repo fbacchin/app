@@ -19,8 +19,11 @@ on:
       metodo:
         description: 'Tipo di firma'
         type: choice
-        options: [release-testing, debugging, app-store-connect]
-        default: release-testing
+        # "debugging" (sviluppo) e' l'unico che funziona con una chiave API di
+        # ruolo App Manager: per i certificati di distribuzione, che servono a
+        # release-testing e app-store-connect, Apple richiede il ruolo Admin.
+        options: [debugging, release-testing, app-store-connect]
+        default: debugging
 
 concurrency:
   group: mieilibri-${{ github.ref }}
@@ -192,6 +195,12 @@ jobs:
             -authenticationKeyID "$KEY_ID" \
             -authenticationKeyIssuerID "$ISSUER" \
             | tee /tmp/export.log | grep -E "error:|Exported|EXPORT" || true
+          if grep -q "Cloud signing permission error" /tmp/export.log; then
+            echo "::error::La chiave API non puo' creare certificati di distribuzione. Usa il metodo 'debugging', oppure assegna alla chiave il ruolo Admin su App Store Connect."
+            exit 1
+          fi
+          grep -q "EXPORT SUCCEEDED" /tmp/export.log \
+            || { echo "::error::Esportazione fallita, vedi l'artefatto log-firma"; exit 1; }
           ls -la "$RUNNER_TEMP/export"
 
       - name: Carica su TestFlight

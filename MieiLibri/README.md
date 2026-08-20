@@ -81,24 +81,36 @@ nulla. Se preferisci, il workflow accetta anche la chiave codificata in
 base64: riconosce da solo quale delle due forme hai usato.
 
 **Ogni volta che vuoi una build**: apri la scheda *Actions*, scegli il workflow
-*MieiLibri*, premi *Run workflow*, spunta **firma** e lascia `release-testing`.
-Al termine apri con **Safari sull'iPhone**:
+*MieiLibri*, premi *Run workflow*, spunta **firma** e lascia il metodo
+predefinito `debugging`. Al termine apri con **Safari sull'iPhone**:
 
 ```
 https://fbacchin.github.io/app/MieiLibri/download/
 ```
 
 e tocca *Installa sull'iPhone*. Il tuo telefono è già registrato fra i
-dispositivi, quindi il profilo lo include automaticamente.
+dispositivi di sviluppo, quindi il profilo lo include automaticamente.
 
-Scegliendo invece `app-store-connect` come metodo, la build viene caricata su
-**TestFlight** e la installi dall'app TestFlight: più lento (Apple deve
-processare il binario) ma non pubblica nulla nel repository.
+### Perché `debugging` e non ad-hoc
 
-> ⚠️ Con `release-testing` l'IPA finisce in una cartella pubblica del
-> repository. L'app si installa comunque solo sui dispositivi registrati, ma il
-> profilo incluso nell'IPA contiene il Team ID e gli UDID dei tuoi dispositivi.
-> Se preferisci non esporli, usa TestFlight.
+`release-testing` (ad-hoc) e `app-store-connect` (TestFlight) richiedono un
+certificato di **distribuzione**, e per crearlo via cloud Apple pretende che la
+chiave API abbia ruolo **Admin**: con *App Manager* l'esportazione fallisce con
+`Cloud signing permission error`. La firma di **sviluppo** invece funziona con
+App Manager e basta e avanza, perché l'iPhone è già registrato. Se un giorno ti
+serve TestFlight, alza il ruolo della chiave ad Admin.
+
+### La cartella deve stare su `main`
+
+GitHub Pages serve dalla radice di `main`. Il workflow pubblica sul branch da
+cui viene lanciato, quindi se lo esegui da un branch di sviluppo ricordati di
+riportare `MieiLibri/download/` su `main`, altrimenti il collegamento risponde
+404. È lo stesso schema già usato da `volcano/ota/`.
+
+> ⚠️ L'IPA finisce in una cartella pubblica del repository. L'app si installa
+> comunque solo sui dispositivi registrati, ma il profilo incluso contiene il
+> Team ID e gli UDID dei tuoi dispositivi. Se preferisci non esporli, usa
+> TestFlight (che però richiede il ruolo Admin, vedi sopra).
 
 ## Sincronizzazione tra Mac e iPhone
 
