@@ -75,6 +75,9 @@ enum OpenLibraryAPI {
         if !anno.isEmpty {
             parti.append("first_publish_year:\(anno)")
         }
+        if let lingua = Preferenze.lingua.codiceOpenLibrary {
+            parti.append("language:\(lingua)")
+        }
         return parti.joined(separator: " AND ")
     }
 }

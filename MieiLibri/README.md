@@ -13,7 +13,11 @@ app iOS nativa e come app Mac nativa (non Catalyst).
   sotto il campo di ricerca. Restringere a titolo o autore evita i risultati
   strani che si ottengono cercando anche nel testo integrale. Un codice ISBN
   viene riconosciuto da solo. Si può inoltre filtrare per **anno** di
-  pubblicazione. I risultati mostrano la copertina di ogni libro.
+  pubblicazione e scegliere la **lingua** dei libri (Account ▸ Ricerca), così
+  lo stesso titolo non si ripete in ogni traduzione. Le edizioni doppie della
+  stessa opera vengono unite, tenendo quella con la copertina.
+- **Copertine ingrandibili**: toccando una copertina si apre a schermo intero,
+  con pizzico per allargare e doppio tocco per alternare.
 - **Libreria personale**: un tocco su ＋ aggiunge il libro all'elenco dei letti.
   La copertina viene scaricata e salvata sul dispositivo, così resta visibile
   anche senza connessione.

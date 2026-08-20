@@ -13,6 +13,12 @@ enum GoogleBooksAPI {
             URLQueryItem(name: "maxResults", value: quanti),
             URLQueryItem(name: "printType", value: "books"),
         ]
+        // Senza vincolo di lingua lo stesso titolo torna una volta per ogni
+        // edizione tradotta.
+        let lingua = Preferenze.lingua
+        if lingua != .tutte {
+            parametri.append(URLQueryItem(name: "langRestrict", value: lingua.rawValue))
+        }
         if !CatalogConfig.googleAPIKey.isEmpty {
             parametri.append(URLQueryItem(name: "key", value: CatalogConfig.googleAPIKey))
         }

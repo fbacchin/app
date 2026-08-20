@@ -8,6 +8,7 @@ struct AccountView: View {
     @Environment(\.dismiss) private var dismiss
     var isGate = false
 
+    @AppStorage("linguaLibri") private var lingua: LinguaLibri = .tutte
     @State private var email = ""
     @State private var password = ""
     @State private var isWorking = false
@@ -20,6 +21,7 @@ struct AccountView: View {
             } else {
                 signInContent
             }
+            sezioneCatalogo
         }
         .formStyle(.grouped)
         .safeAreaInset(edge: .bottom) {
@@ -39,6 +41,25 @@ struct AccountView: View {
         #if os(macOS)
         .frame(minWidth: 440, minHeight: 420)
         #endif
+    }
+
+    // MARK: - Ricerca nel catalogo
+
+    @ViewBuilder
+    private var sezioneCatalogo: some View {
+        // Senza vincolo di lingua i cataloghi elencano ogni traduzione come
+        // voce a sé, e lo stesso titolo si ripete molte volte.
+        Section {
+            Picker("Lingua dei libri", selection: $lingua) {
+                ForEach(LinguaLibri.allCases) { voce in
+                    Text(voce.etichetta).tag(voce)
+                }
+            }
+        } header: {
+            Text("Ricerca")
+        } footer: {
+            Text("Scegliendo una lingua, la ricerca non mostra più lo stesso libro ripetuto in ogni traduzione.")
+        }
     }
 
     // MARK: - Account collegato

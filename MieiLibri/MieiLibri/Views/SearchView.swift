@@ -7,6 +7,7 @@ struct SearchView: View {
     @EnvironmentObject private var library: Library
     @Environment(\.dismiss) private var dismiss
 
+    @AppStorage("linguaLibri") private var lingua: LinguaLibri = .tutte
     @State private var criteri = CatalogQuery()
     @State private var results: [RemoteBook] = []
     @State private var isLoading = false
@@ -45,7 +46,7 @@ struct SearchView: View {
                     Button("Chiudi") { dismiss() }
                 }
             }
-            .task(id: criteri) {
+            .task(id: ChiaveRicerca(criteri: criteri, lingua: lingua)) {
                 await search()
             }
         }
@@ -92,6 +93,10 @@ struct SearchView: View {
             Spacer()
             if criteri.sembraISBN {
                 Text("ricerca per ISBN")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            } else if lingua != .tutte {
+                Text(lingua.etichetta.lowercased())
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             }
@@ -168,6 +173,13 @@ struct SearchView: View {
         }
         isLoading = false
     }
+}
+
+/// Criteri e lingua insieme: basta che uno dei due cambi perché la ricerca
+/// venga rifatta.
+private struct ChiaveRicerca: Equatable {
+    let criteri: CatalogQuery
+    let lingua: LinguaLibri
 }
 
 /// Riga di un risultato: copertina, dati del libro e pulsante di aggiunta.

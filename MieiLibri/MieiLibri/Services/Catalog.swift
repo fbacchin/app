@@ -112,9 +112,9 @@ enum Catalog {
             guard let ripiego = try? await OpenLibraryAPI.search(criteri), !ripiego.isEmpty else {
                 throw motivo
             }
-            return filtraPerAnno(ripiego, criteri: criteri)
+            return rimuoviDoppioni(filtraPerAnno(ripiego, criteri: criteri))
         }
-        return filtraPerAnno(risultati, criteri: criteri)
+        return rimuoviDoppioni(filtraPerAnno(risultati, criteri: criteri))
     }
 
     /// Il filtro per anno si applica qui, non nella richiesta: Google Books non
@@ -125,6 +125,38 @@ enum Catalog {
         let anno = criteri.annoRipulito
         guard !anno.isEmpty else { return libri }
         return libri.filter { $0.publishedYear == anno }
+    }
+
+    /// I cataloghi elencano una voce per ogni edizione, così la stessa opera
+    /// compare più volte. Qui se ne tiene una sola, preferendo quella con la
+    /// copertina: senza immagine la riga sarebbe poco utile.
+    private static func rimuoviDoppioni(_ libri: [RemoteBook]) -> [RemoteBook] {
+        var posizioni: [String: Int] = [:]
+        var risultato: [RemoteBook] = []
+        for libro in libri {
+            let chiave = chiaveConfronto(libro)
+            if let indice = posizioni[chiave] {
+                if risultato[indice].coverURL == nil, libro.coverURL != nil {
+                    risultato[indice] = libro
+                }
+            } else {
+                posizioni[chiave] = risultato.count
+                risultato.append(libro)
+            }
+        }
+        return risultato
+    }
+
+    /// Titolo e primo autore, senza accenti, maiuscole e punteggiatura: basta
+    /// a riconoscere la stessa opera fra edizioni diverse.
+    private static func chiaveConfronto(_ libro: RemoteBook) -> String {
+        func normalizza(_ testo: String) -> String {
+            testo.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: nil)
+                .filter { $0.isLetter || $0.isNumber || $0.isWhitespace }
+                .split(separator: " ")
+                .joined(separator: " ")
+        }
+        return normalizza(libro.title) + "|" + normalizza(libro.authors.first ?? "")
     }
 }
 
@@ -138,6 +170,52 @@ extension CatalogError: Equatable {
         default:
             return false
         }
+    }
+}
+
+/// Lingua in cui cercare i libri. Senza vincolo lo stesso titolo compare
+/// molte volte, una per ogni edizione tradotta.
+enum LinguaLibri: String, CaseIterable, Identifiable {
+    case tutte = ""
+    case italiano = "it"
+    case inglese = "en"
+    case francese = "fr"
+    case tedesco = "de"
+    case spagnolo = "es"
+
+    var id: String { rawValue }
+
+    var etichetta: String {
+        switch self {
+        case .tutte: return "Tutte le lingue"
+        case .italiano: return "Italiano"
+        case .inglese: return "Inglese"
+        case .francese: return "Francese"
+        case .tedesco: return "Tedesco"
+        case .spagnolo: return "Spagnolo"
+        }
+    }
+
+    /// Google Books usa i codici a due lettere; Open Library quelli a tre
+    /// del catalogo MARC, che non si ricavano troncando i primi.
+    var codiceOpenLibrary: String? {
+        switch self {
+        case .tutte: return nil
+        case .italiano: return "ita"
+        case .inglese: return "eng"
+        case .francese: return "fre"
+        case .tedesco: return "ger"
+        case .spagnolo: return "spa"
+        }
+    }
+}
+
+/// Preferenze di ricerca, condivise fra interfaccia e cataloghi.
+enum Preferenze {
+    private static let chiaveLingua = "linguaLibri"
+
+    static var lingua: LinguaLibri {
+        LinguaLibri(rawValue: UserDefaults.standard.string(forKey: chiaveLingua) ?? "") ?? .tutte
     }
 }
 
