@@ -8,6 +8,7 @@ struct BookDetailView: View {
     let bookID: String
 
     @State private var confirmDelete = false
+    @State private var mostraCopertina = false
 
     var body: some View {
         if let book = library.book(with: bookID) {
@@ -26,6 +27,9 @@ struct BookDetailView: View {
                 VStack(spacing: 12) {
                     BookCoverView(image: library.localCover(for: book.id), url: book.coverURL, width: 130)
                         .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+                        .onTapGesture { mostraCopertina = true }
+                        .accessibilityAddTraits(.isButton)
+                        .accessibilityHint("Tocca per ingrandire la copertina")
                     Text(book.title)
                         .font(.title2.bold())
                         .multilineTextAlignment(.center)
@@ -99,6 +103,13 @@ struct BookDetailView: View {
                 dismiss()
             }
             Button("Annulla", role: .cancel) {}
+        }
+        .schermoIntero(isPresented: $mostraCopertina) {
+            CoverZoomView(
+                image: library.localCover(for: book.id),
+                url: book.coverURL,
+                titolo: book.title
+            )
         }
     }
 

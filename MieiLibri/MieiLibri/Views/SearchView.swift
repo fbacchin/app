@@ -175,11 +175,16 @@ private struct SearchResultRow: View {
     @EnvironmentObject private var library: Library
     let book: RemoteBook
 
+    @State private var mostraCopertina = false
+
     private var isSaved: Bool { library.contains(book.id) }
 
     var body: some View {
         HStack(spacing: 12) {
             BookCoverView(image: nil, url: book.coverURL, width: 46)
+                .onTapGesture { mostraCopertina = true }
+                .accessibilityAddTraits(.isButton)
+                .accessibilityHint("Tocca per ingrandire la copertina")
             VStack(alignment: .leading, spacing: 3) {
                 Text(book.title)
                     .font(.headline)
@@ -210,6 +215,9 @@ private struct SearchResultRow: View {
             .accessibilityLabel(isSaved ? "Già in libreria" : "Aggiungi alla libreria")
         }
         .padding(.vertical, 4)
+        .schermoIntero(isPresented: $mostraCopertina) {
+            CoverZoomView(image: nil, url: book.coverURL, titolo: book.title)
+        }
     }
 
     private var detailsText: String? {

@@ -58,6 +58,20 @@ extension View {
         #endif
     }
 
+    /// Presentazione a schermo intero su iPhone e iPad; su Mac, dove non
+    /// esiste, si usa una finestra di dialogo.
+    @ViewBuilder
+    func schermoIntero<Contenuto: View>(
+        isPresented: Binding<Bool>,
+        @ViewBuilder content: @escaping () -> Contenuto
+    ) -> some View {
+        #if os(iOS)
+        fullScreenCover(isPresented: isPresented, content: content)
+        #else
+        sheet(isPresented: isPresented, content: content)
+        #endif
+    }
+
     /// Tastiera numerica dove esiste (iPhone e iPad).
     func numericFieldStyle() -> some View {
         #if os(iOS)
