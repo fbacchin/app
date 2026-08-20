@@ -64,18 +64,21 @@ pagina da cui installare direttamente.
 2. Dalla stessa pagina annota **Key ID** e **Issuer ID**.
 3. Il **Team ID** (10 caratteri) è su
    [developer.apple.com](https://developer.apple.com/account) sotto *Membership*.
-4. Converti la chiave in base64 — sul Mac:
-   ```bash
-   base64 -i AuthKey_XXXXXXXXXX.p8 | pbcopy
-   ```
-5. Su GitHub, in *Settings ▸ Secrets and variables ▸ Actions*, aggiungi:
+4. Su GitHub, in *Settings ▸ Secrets and variables ▸ Actions*, aggiungi:
 
    | Segreto | Contenuto |
    |---|---|
    | `ASC_KEY_ID` | il Key ID (es. `ABCD123456`) |
    | `ASC_ISSUER_ID` | l'Issuer ID (un UUID) |
-   | `ASC_KEY_P8` | il `.p8` codificato in base64 |
+   | `ASC_KEY_P8` | il contenuto del file `.p8` |
    | `APPLE_TEAM_ID` | il Team ID |
+
+Il file `.p8` è un normale file di testo: aprilo con un qualsiasi editor e
+copia **tutto**, dalla riga `-----BEGIN PRIVATE KEY-----` a
+`-----END PRIVATE KEY-----` incluse, poi incollalo nel campo del segreto. I
+segreti di GitHub accettano valori su più righe, quindi non serve convertire
+nulla. Se preferisci, il workflow accetta anche la chiave codificata in
+base64: riconosce da solo quale delle due forme hai usato.
 
 **Ogni volta che vuoi una build**: apri la scheda *Actions*, scegli il workflow
 *MieiLibri*, premi *Run workflow*, spunta **firma** e lascia `release-testing`.

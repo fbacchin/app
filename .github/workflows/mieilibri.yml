@@ -105,11 +105,30 @@ jobs:
           KEY_ID: ${{ secrets.ASC_KEY_ID }}
         run: |
           mkdir -p "$HOME/private_keys"
-          printf '%s' "$P8" | base64 --decode > "$HOME/private_keys/AuthKey_${KEY_ID}.p8"
-          # La chiave deve essere un file PEM valido, altrimenti la firma fallisce piu' avanti
-          # con un errore poco chiaro.
-          head -1 "$HOME/private_keys/AuthKey_${KEY_ID}.p8" | grep -q "BEGIN PRIVATE KEY" \
-            || { echo "::error::ASC_KEY_P8 non e' un file .p8 valido codificato in base64"; exit 1; }
+          CHIAVE="$HOME/private_keys/AuthKey_${KEY_ID}.p8"
+          printf '%s' "$P8" > "$HOME/private_keys/originale"
+
+          # Il segreto va bene in due forme: il contenuto del .p8 incollato
+          # tale e quale (piu' righe, come lo si legge nel file) oppure la sua
+          # versione codificata in base64. Qui si riconosce quale delle due e'.
+          if grep -q "BEGIN PRIVATE KEY" "$HOME/private_keys/originale"; then
+            echo "Chiave riconosciuta: contenuto del file .p8"
+            cp "$HOME/private_keys/originale" "$CHIAVE"
+          else
+            echo "Chiave riconosciuta: base64, la decodifico"
+            tr -d ' \n\r' < "$HOME/private_keys/originale" \
+              | { base64 -d 2>/dev/null || base64 -D; } > "$CHIAVE" || true
+          fi
+          rm -f "$HOME/private_keys/originale"
+
+          # Senza questo controllo la firma fallirebbe molto piu' avanti con un
+          # errore poco comprensibile.
+          if ! grep -q "BEGIN PRIVATE KEY" "$CHIAVE"; then
+            echo "::error::ASC_KEY_P8 non contiene una chiave valida. Incolla il contenuto del file .p8 cosi' com'e', dalla riga -----BEGIN PRIVATE KEY----- fino a -----END PRIVATE KEY----- comprese."
+            exit 1
+          fi
+          chmod 600 "$CHIAVE"
+          echo "Chiave pronta."
 
       - name: Numero di build progressivo
         run: echo "BUILD_NUMBER=$GITHUB_RUN_NUMBER" >> "$GITHUB_ENV"
