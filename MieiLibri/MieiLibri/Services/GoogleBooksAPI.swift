@@ -16,7 +16,15 @@ enum GoogleBooksAPI {
         components.queryItems = parametri
         guard let url = components.url else { throw CatalogError.malformed }
 
-        let (data, response) = try await URLSession.shared.data(from: url)
+        var richiesta = URLRequest(url: url)
+        // Permette di restringere la chiave API a questa sola app dalla console
+        // Google: senza questa intestazione la restrizione rifiuterebbe tutto.
+        if !CatalogConfig.googleAPIKey.isEmpty,
+           let identificativo = Bundle.main.bundleIdentifier {
+            richiesta.setValue(identificativo, forHTTPHeaderField: "X-Ios-Bundle-Identifier")
+        }
+
+        let (data, response) = try await URLSession.shared.data(for: richiesta)
         guard let httpResponse = response as? HTTPURLResponse else { throw CatalogError.malformed }
         switch httpResponse.statusCode {
         case 200:

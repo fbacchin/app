@@ -125,18 +125,34 @@ che non ha quote per indirizzo IP. Il suo repertorio italiano è più povero, ma
 ricerca continua a funzionare. I messaggi distinguono i casi: *nessuna
 connessione* è un problema di rete, *il catalogo ha esaurito le richieste* no.
 
-Per avere la quota tutta per te, metti una chiave Google Books personale in
-`MieiLibri/Services/Catalog.swift`:
+### Una chiave Google personale
 
-```swift
-static let googleAPIKey = "LA-TUA-CHIAVE"
-```
+Con una chiave la quota diventa tua e il problema sparisce. Si crea gratis:
 
-Si crea gratis dalla [console Google Cloud](https://console.cloud.google.com/apis/library/books.googleapis.com)
-(*Abilita l'API Books ▸ Credenziali ▸ Crea credenziali ▸ Chiave API*). Poiché
-questo repository è pubblico, limita subito la chiave: *Restrizioni applicazione
-▸ App iOS* con l'identificativo `com.bacchin.MieiLibri`, e *Restrizioni API ▸
-solo Books API*.
+1. Apri la [console Google Cloud](https://console.cloud.google.com/) e crea un
+   progetto (o usane uno che hai già).
+2. Vai su [Books API](https://console.cloud.google.com/apis/library/books.googleapis.com)
+   e premi **Abilita**.
+3. *API e servizi ▸ Credenziali ▸ Crea credenziali ▸ Chiave API*. Copia la
+   chiave: inizia per `AIza…`.
+4. Premi **Modifica chiave API** e limitala:
+   - *Restrizioni API* → **Limita chiave** → solo **Books API**;
+   - *Restrizioni applicazione* → **App iOS** → aggiungi
+     `com.bacchin.MieiLibri` (l'app invia già l'intestazione che serve).
+
+**Dove metterla.** Questo repository è pubblico, quindi la chiave **non va
+messa nel codice e committata**. Due modi corretti:
+
+- **Build automatica** (consigliato): aggiungi su GitHub il segreto
+  `GOOGLE_BOOKS_KEY` in *Settings ▸ Secrets and variables ▸ Actions*. Il
+  workflow la inserisce al momento della compilazione e non la scrive mai nel
+  repository.
+- **Solo in locale**: dalla cartella `MieiLibri` esegui
+  ```bash
+  ./configura-catalogo.sh AIzaSy...
+  ```
+  che scrive la chiave in `MieiLibri/Services/Catalog.swift`. Ricordati di non
+  fare il commit di quella modifica.
 
 ## Sincronizzazione tra Mac e iPhone
 

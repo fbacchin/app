@@ -153,6 +153,18 @@ jobs:
           chmod 600 "$CHIAVE"
           echo "Chiave pronta."
 
+      - name: Chiave del catalogo (facoltativa)
+        env:
+          CHIAVE: ${{ secrets.GOOGLE_BOOKS_KEY }}
+        run: |
+          if [ -z "$CHIAVE" ]; then
+            echo "Nessuna chiave Google Books: l'app usera' la quota condivisa e, se esaurita, Open Library."
+            exit 0
+          fi
+          ./MieiLibri/configura-catalogo.sh "$CHIAVE"
+          # Il valore non deve comparire nel log ne' finire in un commit.
+          echo "Chiave del catalogo applicata."
+
       - name: Numero di build progressivo
         run: echo "BUILD_NUMBER=$GITHUB_RUN_NUMBER" >> "$GITHUB_ENV"
 
@@ -274,6 +286,9 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Si aggiunge soltanto la cartella pubblicata: eventuali modifiche
+          # ai sorgenti fatte durante la build (come la chiave del catalogo)
+          # non devono finire nel repository.
           git add "$DEST"
           git commit -m "Pubblica build ${GITHUB_RUN_NUMBER} di MieiLibri per iPhone [skip ci]" || { echo "nessuna modifica"; exit 0; }
           git push origin HEAD:"${GITHUB_REF_NAME}"
