@@ -1,0 +1,247 @@
+name: MieiLibri
+
+# Due lavori distinti:
+#  - "verifica" compila l'app senza firmarla: non serve alcun segreto.
+#  - "firma" produce l'IPA firmato e lo pubblica: servono i segreti Apple.
+on:
+  push:
+    branches: ['**']
+    paths:
+      - 'MieiLibri/**'
+      - '.github/workflows/mieilibri.yml'
+  workflow_dispatch:
+    inputs:
+      firma:
+        description: "Firma e pubblica l'app per iPhone"
+        type: boolean
+        default: false
+      metodo:
+        description: 'Tipo di firma'
+        type: choice
+        options: [release-testing, debugging, app-store-connect]
+        default: release-testing
+
+concurrency:
+  group: mieilibri-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PROGETTO: MieiLibri/MieiLibri.xcodeproj
+  SCHEMA: MieiLibri
+
+jobs:
+  verifica:
+    name: Verifica compilazione (iOS e macOS)
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Versione di Xcode
+        run: xcodebuild -version
+
+      - name: Compila per iPhone (senza firma)
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project "$PROGETTO" \
+            -scheme "$SCHEMA" \
+            -destination 'generic/platform=iOS' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            | tee /tmp/ios.log | grep -E "error:|warning:|BUILD" || true
+          grep -q "BUILD SUCCEEDED" /tmp/ios.log
+
+      - name: Compila per Mac (senza firma)
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project "$PROGETTO" \
+            -scheme "$SCHEMA" \
+            -destination 'platform=macOS' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            | tee /tmp/mac.log | grep -E "error:|warning:|BUILD" || true
+          grep -q "BUILD SUCCEEDED" /tmp/mac.log
+
+      - name: Conserva i log in caso di errore
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: log-compilazione
+          path: /tmp/*.log
+
+  firma:
+    name: Firma e pubblica per iPhone
+    if: github.event_name == 'workflow_dispatch' && inputs.firma
+    runs-on: macos-15
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Controlla che i segreti ci siano
+        env:
+          KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ISSUER: ${{ secrets.ASC_ISSUER_ID }}
+          P8: ${{ secrets.ASC_KEY_P8 }}
+          TEAM: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          mancanti=""
+          [ -z "$KEY_ID" ] && mancanti="$mancanti ASC_KEY_ID"
+          [ -z "$ISSUER" ] && mancanti="$mancanti ASC_ISSUER_ID"
+          [ -z "$P8" ]     && mancanti="$mancanti ASC_KEY_P8"
+          [ -z "$TEAM" ]   && mancanti="$mancanti APPLE_TEAM_ID"
+          if [ -n "$mancanti" ]; then
+            echo "::error::Segreti mancanti:$mancanti — aggiungili in Settings > Secrets and variables > Actions"
+            exit 1
+          fi
+
+      - name: Prepara la chiave di App Store Connect
+        env:
+          P8: ${{ secrets.ASC_KEY_P8 }}
+          KEY_ID: ${{ secrets.ASC_KEY_ID }}
+        run: |
+          mkdir -p "$HOME/private_keys"
+          printf '%s' "$P8" | base64 --decode > "$HOME/private_keys/AuthKey_${KEY_ID}.p8"
+          # La chiave deve essere un file PEM valido, altrimenti la firma fallisce piu' avanti
+          # con un errore poco chiaro.
+          head -1 "$HOME/private_keys/AuthKey_${KEY_ID}.p8" | grep -q "BEGIN PRIVATE KEY" \
+            || { echo "::error::ASC_KEY_P8 non e' un file .p8 valido codificato in base64"; exit 1; }
+
+      - name: Numero di build progressivo
+        run: echo "BUILD_NUMBER=$GITHUB_RUN_NUMBER" >> "$GITHUB_ENV"
+
+      - name: Archivia l'app
+        env:
+          KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ISSUER: ${{ secrets.ASC_ISSUER_ID }}
+          TEAM: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          set -o pipefail
+          xcodebuild archive \
+            -project "$PROGETTO" \
+            -scheme "$SCHEMA" \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/MieiLibri.xcarchive" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$HOME/private_keys/AuthKey_${KEY_ID}.p8" \
+            -authenticationKeyID "$KEY_ID" \
+            -authenticationKeyIssuerID "$ISSUER" \
+            DEVELOPMENT_TEAM="$TEAM" \
+            CODE_SIGN_STYLE=Automatic \
+            CURRENT_PROJECT_VERSION="$BUILD_NUMBER" \
+            | tee /tmp/archive.log | grep -E "error:|Signing|BUILD|Provisioning" || true
+          grep -q "ARCHIVE SUCCEEDED" /tmp/archive.log
+
+      - name: Esporta l'IPA firmato
+        env:
+          KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ISSUER: ${{ secrets.ASC_ISSUER_ID }}
+          TEAM: ${{ secrets.APPLE_TEAM_ID }}
+          METODO: ${{ inputs.metodo }}
+        run: |
+          set -o pipefail
+          BASE="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/MieiLibri/download"
+          cat > "$RUNNER_TEMP/ExportOptions.plist" <<PLIST
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key><string>${METODO}</string>
+            <key>teamID</key><string>${TEAM}</string>
+            <key>signingStyle</key><string>automatic</string>
+            <key>stripSwiftSymbols</key><true/>
+            <key>destination</key><string>export</string>
+            <key>manifest</key>
+            <dict>
+              <key>appURL</key><string>${BASE}/MieiLibri.ipa</string>
+              <key>displayImageURL</key><string>${BASE}/icona-57.png</string>
+              <key>fullSizeImageURL</key><string>${BASE}/icona-512.png</string>
+            </dict>
+          </dict>
+          </plist>
+          PLIST
+          xcodebuild -exportArchive \
+            -archivePath "$RUNNER_TEMP/MieiLibri.xcarchive" \
+            -exportPath "$RUNNER_TEMP/export" \
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$HOME/private_keys/AuthKey_${KEY_ID}.p8" \
+            -authenticationKeyID "$KEY_ID" \
+            -authenticationKeyIssuerID "$ISSUER" \
+            | tee /tmp/export.log | grep -E "error:|Exported|EXPORT" || true
+          ls -la "$RUNNER_TEMP/export"
+
+      - name: Carica su TestFlight
+        if: inputs.metodo == 'app-store-connect'
+        env:
+          KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ISSUER: ${{ secrets.ASC_ISSUER_ID }}
+        run: |
+          xcrun altool --upload-app -f "$RUNNER_TEMP/export/MieiLibri.ipa" -t ios \
+            --apiKey "$KEY_ID" --apiIssuer "$ISSUER"
+          echo "Caricato su TestFlight: apri l'app TestFlight sull'iPhone tra qualche minuto."
+
+      - name: Pubblica l'IPA nella cartella di download
+        if: inputs.metodo != 'app-store-connect'
+        run: |
+          DEST=MieiLibri/download
+          mkdir -p "$DEST"
+          cp "$RUNNER_TEMP/export/MieiLibri.ipa" "$DEST/MieiLibri.ipa"
+          cp "$RUNNER_TEMP/export/manifest.plist" "$DEST/manifest.plist"
+          sips -Z 57  MieiLibri/MieiLibri/Assets.xcassets/AppIcon.appiconset/AppIcon.png --out "$DEST/icona-57.png"  >/dev/null
+          sips -Z 512 MieiLibri/MieiLibri/Assets.xcassets/AppIcon.appiconset/AppIcon.png --out "$DEST/icona-512.png" >/dev/null
+
+          BASE="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/MieiLibri/download"
+          cat > "$DEST/index.html" <<HTML
+          <!doctype html>
+          <html lang="it">
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Installa I miei libri</title>
+          <style>
+            body { font-family: -apple-system, system-ui, sans-serif; margin: 0;
+                   min-height: 100vh; display: grid; place-items: center;
+                   background: #f7f4ef; color: #2b2118; text-align: center; padding: 24px; }
+            img { width: 120px; border-radius: 27px; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+            h1 { font-size: 1.5rem; margin: 20px 0 4px; }
+            p { color: #6b5d4d; margin: 0 0 28px; }
+            a { display: inline-block; background: #d97a13; color: #fff; text-decoration: none;
+                padding: 14px 32px; border-radius: 999px; font-weight: 600; font-size: 1.05rem; }
+            small { display: block; margin-top: 28px; color: #8a7a68; max-width: 30rem; }
+          </style>
+          <div>
+            <img src="icona-512.png" alt="">
+            <h1>I miei libri</h1>
+            <p>Build ${GITHUB_RUN_NUMBER}</p>
+            <a href="itms-services://?action=download-manifest&url=${BASE}/manifest.plist">Installa sull'iPhone</a>
+            <small>Apri questa pagina con Safari sull'iPhone. Dopo l'installazione, la prima
+            volta vai in Impostazioni &rsaquo; Generali &rsaquo; VPN e gestione dispositivo e
+            autorizza lo sviluppatore.</small>
+          </div>
+          HTML
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$DEST"
+          git commit -m "Pubblica build ${GITHUB_RUN_NUMBER} di MieiLibri per iPhone" || { echo "nessuna modifica"; exit 0; }
+          git push origin HEAD:"${GITHUB_REF_NAME}"
+          echo "### App pubblicata :iphone:" >> "$GITHUB_STEP_SUMMARY"
+          echo "Apri con Safari sull'iPhone: ${BASE}/" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Conserva l'IPA come artefatto
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MieiLibri-ipa
+          path: ${{ runner.temp }}/export/*
+          if-no-files-found: ignore
+
+      - name: Conserva i log in caso di errore
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: log-firma
+          path: /tmp/*.log

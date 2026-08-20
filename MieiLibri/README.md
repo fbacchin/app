@@ -74,11 +74,12 @@ database con due utenti di prova:
 - non può cancellarli; ✅
 - senza login non si vede nulla. ✅
 
-> Se in futuro rendi pubblico il repository, considera di disattivare le
-> registrazioni libere dalla dashboard Supabase (*Authentication → Sign In /
-> Providers → Allow new users to sign up*) dopo aver registrato i tuoi
-> dispositivi: estranei non potrebbero comunque leggere i tuoi libri, ma
-> potrebbero creare account e consumare la quota del piano gratuito.
+> ⚠️ **Questo repository è pubblico**, quindi la chiave è visibile a chiunque.
+> Non è un problema per i tuoi dati — l'isolamento qui sopra vale comunque — ma
+> conviene disattivare le registrazioni libere dalla dashboard Supabase
+> (*Authentication → Sign In / Providers → Allow new users to sign up*) subito
+> dopo aver registrato i tuoi dispositivi: altrimenti un estraneo può creare
+> account e consumare la quota del piano gratuito.
 
 ### Ricreare il server altrove
 
