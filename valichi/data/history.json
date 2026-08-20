@@ -1,24 +1,5 @@
 [
  {
-  "time": "2026-08-18T17:08:07Z",
-  "w": {
-   "ch.gottardo.north": 10,
-   "hr-rs.bajakovo.exit": 30,
-   "hr-rs.bajakovo.entry": 90,
-   "hu-ua.zahony.exit": 15,
-   "hu-ua.zahony.entry": 15,
-   "hu-ua.beregsurany.exit": 15,
-   "hu-ua.beregsurany.entry": 15,
-   "pl-ua.medyka.exit": 0,
-   "pl-ua.korczowa.exit": 0,
-   "pl-ua.hrebenne.exit": 0
-  },
-  "held": [
-   "ch.gottardo",
-   "pl-ua.medyka"
-  ]
- },
- {
   "time": "2026-08-18T17:28:18Z",
   "w": {
    "ch.gottardo.north": 10,
@@ -4455,6 +4436,26 @@
  },
  {
   "time": "2026-08-20T17:03:56Z",
+  "w": {
+   "ch.gottardo.north": 20,
+   "hr-rs.bajakovo.exit": 30,
+   "hr-rs.bajakovo.entry": 240,
+   "hr-rs.tovarnik.exit": 30,
+   "hr-rs.tovarnik.entry": 30,
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 0,
+   "pl-ua.korczowa.exit": 0,
+   "pl-ua.hrebenne.exit": 0
+  },
+  "held": [
+   "pl-ua.medyka"
+  ]
+ },
+ {
+  "time": "2026-08-20T17:14:05Z",
   "w": {
    "ch.gottardo.north": 20,
    "hr-rs.bajakovo.exit": 30,
