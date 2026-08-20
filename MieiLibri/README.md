@@ -112,6 +112,32 @@ riportare `MieiLibri/download/` su `main`, altrimenti il collegamento risponde
 > Team ID e gli UDID dei tuoi dispositivi. Se preferisci non esporli, usa
 > TestFlight (che però richiede il ruolo Admin, vedi sopra).
 
+## Se la ricerca dà errore
+
+La ricerca usa **Google Books**, che senza chiave attribuisce le richieste a una
+quota *condivisa fra tutti gli utenti che escono dallo stesso indirizzo IP*. Sui
+dati mobili l'indirizzo è quello dell'operatore, condiviso con molte persone:
+capita quindi di trovare la quota già esaurita e di ricevere un rifiuto
+(`HTTP 429`) pur avendo la connessione perfettamente funzionante.
+
+L'app se ne accorge e **ripiega automaticamente su [Open Library](https://openlibrary.org)**,
+che non ha quote per indirizzo IP. Il suo repertorio italiano è più povero, ma la
+ricerca continua a funzionare. I messaggi distinguono i casi: *nessuna
+connessione* è un problema di rete, *il catalogo ha esaurito le richieste* no.
+
+Per avere la quota tutta per te, metti una chiave Google Books personale in
+`MieiLibri/Services/Catalog.swift`:
+
+```swift
+static let googleAPIKey = "LA-TUA-CHIAVE"
+```
+
+Si crea gratis dalla [console Google Cloud](https://console.cloud.google.com/apis/library/books.googleapis.com)
+(*Abilita l'API Books ▸ Credenziali ▸ Crea credenziali ▸ Chiave API*). Poiché
+questo repository è pubblico, limita subito la chiave: *Restrizioni applicazione
+▸ App iOS* con l'identificativo `com.bacchin.MieiLibri`, e *Restrizioni API ▸
+solo Books API*.
+
 ## Sincronizzazione tra Mac e iPhone
 
 **Il server è già configurato e pronto all'uso.** I dati stanno su un progetto

@@ -8,7 +8,7 @@ struct SearchView: View {
     @State private var query = ""
     @State private var results: [RemoteBook] = []
     @State private var isLoading = false
-    @State private var loadFailed = false
+    @State private var errore: CatalogError?
 
     var body: some View {
         NavigationStack {
@@ -48,11 +48,11 @@ struct SearchView: View {
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         if isLoading && results.isEmpty {
             ProgressView("Ricerca in corso…")
-        } else if loadFailed {
+        } else if let errore {
             ContentUnavailableView(
-                "Errore di rete",
-                systemImage: "wifi.exclamationmark",
-                description: Text("Controlla la connessione e riprova.")
+                errore.errorDescription ?? "Ricerca non riuscita",
+                systemImage: errore == .offline ? "wifi.exclamationmark" : "books.vertical.circle",
+                description: Text(errore.suggerimento)
             )
         } else if trimmed.isEmpty {
             ContentUnavailableView(
@@ -70,22 +70,22 @@ struct SearchView: View {
         guard !trimmed.isEmpty else {
             results = []
             isLoading = false
-            loadFailed = false
+            errore = nil
             return
         }
         // Piccola pausa per non interrogare l'API a ogni carattere digitato.
         try? await Task.sleep(for: .milliseconds(350))
         guard !Task.isCancelled else { return }
         isLoading = true
-        loadFailed = false
+        errore = nil
         do {
-            let found = try await GoogleBooksAPI.search(trimmed)
+            let trovati = try await Catalog.search(trimmed)
             guard !Task.isCancelled else { return }
-            results = found
+            results = trovati
         } catch {
             if Task.isCancelled || (error as? URLError)?.code == .cancelled { return }
             results = []
-            loadFailed = true
+            errore = CatalogError.from(error)
         }
         isLoading = false
     }

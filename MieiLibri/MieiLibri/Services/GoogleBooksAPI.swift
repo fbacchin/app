@@ -1,27 +1,42 @@
 import Foundation
 
-enum GoogleBooksAPIError: Error {
-    case invalidResponse
-}
-
 /// Client minimale per la ricerca nel catalogo di Google Books.
 /// L'endpoint pubblico non richiede alcuna chiave API.
 enum GoogleBooksAPI {
     static func search(_ query: String) async throws -> [RemoteBook] {
         var components = URLComponents(string: "https://www.googleapis.com/books/v1/volumes")!
-        components.queryItems = [
+        var parametri = [
             URLQueryItem(name: "q", value: normalizedQuery(from: query)),
             URLQueryItem(name: "maxResults", value: "30"),
             URLQueryItem(name: "printType", value: "books"),
         ]
-        guard let url = components.url else { throw GoogleBooksAPIError.invalidResponse }
+        if !CatalogConfig.googleAPIKey.isEmpty {
+            parametri.append(URLQueryItem(name: "key", value: CatalogConfig.googleAPIKey))
+        }
+        components.queryItems = parametri
+        guard let url = components.url else { throw CatalogError.malformed }
 
         let (data, response) = try await URLSession.shared.data(from: url)
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw GoogleBooksAPIError.invalidResponse
+        guard let httpResponse = response as? HTTPURLResponse else { throw CatalogError.malformed }
+        switch httpResponse.statusCode {
+        case 200:
+            break
+        case 429:
+            // Quota esaurita: senza chiave e' condivisa fra tutti gli utenti
+            // che escono dallo stesso indirizzo IP.
+            throw CatalogError.rateLimited
+        case 403:
+            // Google usa 403 sia per la quota sia per chiavi non valide.
+            let corpo = String(data: data, encoding: .utf8) ?? ""
+            throw corpo.lowercased().contains("quota") ? CatalogError.rateLimited
+                                                       : CatalogError.server(403)
+        case let codice:
+            throw CatalogError.server(codice)
         }
 
-        let payload = try JSONDecoder().decode(SearchResponse.self, from: data)
+        guard let payload = try? JSONDecoder().decode(SearchResponse.self, from: data) else {
+            throw CatalogError.malformed
+        }
         var seenIDs = Set<String>()
         return (payload.items ?? []).compactMap { volume in
             guard let title = volume.volumeInfo.title, seenIDs.insert(volume.id).inserted else { return nil }
