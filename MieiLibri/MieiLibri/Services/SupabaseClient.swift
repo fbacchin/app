@@ -104,6 +104,39 @@ enum SupabaseClient {
         return session(from: payload, fallbackEmail: email)
     }
 
+    /// Ricostruisce la sessione a partire dai token ricevuti dal collegamento
+    /// contenuto nell'email di conferma.
+    static func session(accessToken: String, refreshToken: String, expiresIn: Double) async throws -> Session {
+        let profilo = try await user(accessToken: accessToken)
+        return Session(
+            accessToken: accessToken,
+            refreshToken: refreshToken,
+            userID: profilo.id,
+            email: profilo.email,
+            expiresAt: Date().addingTimeInterval(expiresIn)
+        )
+    }
+
+    /// Chiede al server a chi appartiene un token di accesso.
+    private static func user(accessToken: String) async throws -> (id: String, email: String) {
+        guard !SupabaseConfig.isPlaceholder else { throw SupabaseError.notConfigured }
+        guard let url = URL(string: SupabaseConfig.url.absoluteString + "/auth/v1/user") else {
+            throw SupabaseError.api(0, "Indirizzo del server non valido.")
+        }
+        var request = URLRequest(url: url)
+        request.setValue(SupabaseConfig.anonKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        let (data, response) = try await URLSession.shared.data(for: request)
+        try ensureOK(data: data, response: response)
+        let profilo = try decoder.decode(UserPayload.self, from: data)
+        return (profilo.id, profilo.email ?? "")
+    }
+
+    private struct UserPayload: Decodable {
+        let id: String
+        let email: String?
+    }
+
     static func refresh(_ old: Session) async throws -> Session {
         let data = try await postAuth(path: "token?grant_type=refresh_token", body: ["refresh_token": old.refreshToken])
         let payload = try decoder.decode(AuthPayload.self, from: data)

@@ -52,9 +52,29 @@ jobs:
             -scheme "$SCHEMA" \
             -destination 'generic/platform=iOS' \
             -configuration Debug \
+            -derivedDataPath "$RUNNER_TEMP/dd" \
             CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
             | tee /tmp/ios.log | grep -E "error:|warning:|BUILD" || true
           grep -q "BUILD SUCCEEDED" /tmp/ios.log
+
+      - name: Verifica che lo schema URL sia registrato nell'app
+        run: |
+          APP=$(find "$RUNNER_TEMP/dd/Build/Products" -name 'MieiLibri.app' -maxdepth 3 | head -1)
+          [ -n "$APP" ] || { echo "::error::app compilata non trovata"; exit 1; }
+          echo "Info.plist dell'app: $APP/Info.plist"
+          # Il plist parziale con CFBundleURLTypes deve essere stato unito a
+          # quello generato da Xcode: senza, il collegamento dell'email di
+          # conferma non riaprirebbe l'app.
+          SCHEMI=$(/usr/libexec/PlistBuddy -c "Print :CFBundleURLTypes:0:CFBundleURLSchemes:0" "$APP/Info.plist" 2>/dev/null || true)
+          if [ "$SCHEMI" != "mieilibri" ]; then
+            echo "::error::Lo schema URL 'mieilibri' non risulta registrato (letto: '${SCHEMI:-nulla}')"
+            /usr/libexec/PlistBuddy -c "Print" "$APP/Info.plist" | head -40
+            exit 1
+          fi
+          # Le chiavi generate da Xcode devono continuare a esserci.
+          NOME=$(/usr/libexec/PlistBuddy -c "Print :CFBundleDisplayName" "$APP/Info.plist" 2>/dev/null || true)
+          [ "$NOME" = "I miei libri" ] || { echo "::error::CFBundleDisplayName perso nell'unione (letto: '${NOME:-nulla}')"; exit 1; }
+          echo "Schema URL registrato correttamente, nome dell'app preservato."
 
       - name: Compila per Mac (senza firma)
         run: |

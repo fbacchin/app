@@ -125,6 +125,47 @@ final class Library: ObservableObject {
         return true
     }
 
+    /// Gestisce il collegamento con cui l'app viene aperta dalla pagina di
+    /// conferma dell'email: se contiene i token, esegue l'accesso da solo.
+    /// Restituisce il messaggio da mostrare, oppure nil se il collegamento
+    /// non riguarda l'autenticazione.
+    @discardableResult
+    func handleCallback(_ url: URL) async -> String? {
+        // I token arrivano nel frammento (dopo #), non nella query.
+        guard let frammento = URLComponents(url: url, resolvingAgainstBaseURL: false)?.fragment,
+              !frammento.isEmpty else { return nil }
+
+        var campi: [String: String] = [:]
+        for coppia in frammento.split(separator: "&") {
+            let parti = coppia.split(separator: "=", maxSplits: 1)
+            guard parti.count == 2 else { continue }
+            let chiave = String(parti[0])
+            let valore = String(parti[1]).removingPercentEncoding ?? String(parti[1])
+            campi[chiave] = valore
+        }
+
+        if let errore = campi["error_description"] ?? campi["error"] {
+            return errore.replacingOccurrences(of: "+", with: " ")
+        }
+        guard let accesso = campi["access_token"], let rinnovo = campi["refresh_token"] else {
+            return nil
+        }
+
+        do {
+            let nuova = try await SupabaseClient.session(
+                accessToken: accesso,
+                refreshToken: rinnovo,
+                expiresIn: Double(campi["expires_in"] ?? "") ?? 3600
+            )
+            storeSession(nuova)
+            localOnly = false
+            await initialMergeSync()
+            return "Email confermata: accesso eseguito."
+        } catch {
+            return friendlyError(error)
+        }
+    }
+
     func signOut() {
         storeSession(nil)
         dirtyIDs = []
