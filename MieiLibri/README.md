@@ -37,6 +37,66 @@ app iOS nativa e come app Mac nativa (non Catalyst).
 Per installarla su un dispositivo fisico imposta il tuo team in
 *Signing & Capabilities* del target `MieiLibri`.
 
+## Installare sull'iPhone
+
+### Il modo più rapido: da Xcode
+
+Se hai il Mac a portata di mano è questione di un minuto e non serve nient'altro:
+collega l'iPhone via cavo, selezionalo nella barra in alto di Xcode e premi ⌘R.
+Con un account sviluppatore la firma è automatica. Alla prima installazione
+l'iPhone chiede di autorizzare lo sviluppatore: *Impostazioni ▸ Generali ▸ VPN e
+gestione dispositivo*.
+
+### Senza Mac: la build automatica su GitHub
+
+Il workflow [`.github/workflows/mieilibri.yml`](../.github/workflows/mieilibri.yml)
+compila e firma l'app su un runner macOS di GitHub Actions (gratuito, perché il
+repository è pubblico) e pubblica il risultato in `MieiLibri/download/` con una
+pagina da cui installare direttamente.
+
+**Una volta sola**, crea una chiave API di App Store Connect e quattro segreti.
+
+1. Su [App Store Connect](https://appstoreconnect.apple.com) vai in *Users and
+   Access ▸ Integrations ▸ App Store Connect API ▸ Team Keys*, premi **+**, dai
+   un nome alla chiave e assegnale il ruolo **App Manager** (con *Developer* non
+   può creare i certificati). Scarica il file `.p8`: **si scarica una volta
+   sola**, conservalo.
+2. Dalla stessa pagina annota **Key ID** e **Issuer ID**.
+3. Il **Team ID** (10 caratteri) è su
+   [developer.apple.com](https://developer.apple.com/account) sotto *Membership*.
+4. Converti la chiave in base64 — sul Mac:
+   ```bash
+   base64 -i AuthKey_XXXXXXXXXX.p8 | pbcopy
+   ```
+5. Su GitHub, in *Settings ▸ Secrets and variables ▸ Actions*, aggiungi:
+
+   | Segreto | Contenuto |
+   |---|---|
+   | `ASC_KEY_ID` | il Key ID (es. `ABCD123456`) |
+   | `ASC_ISSUER_ID` | l'Issuer ID (un UUID) |
+   | `ASC_KEY_P8` | il `.p8` codificato in base64 |
+   | `APPLE_TEAM_ID` | il Team ID |
+
+**Ogni volta che vuoi una build**: apri la scheda *Actions*, scegli il workflow
+*MieiLibri*, premi *Run workflow*, spunta **firma** e lascia `release-testing`.
+Al termine apri con **Safari sull'iPhone**:
+
+```
+https://fbacchin.github.io/app/MieiLibri/download/
+```
+
+e tocca *Installa sull'iPhone*. Il tuo telefono è già registrato fra i
+dispositivi, quindi il profilo lo include automaticamente.
+
+Scegliendo invece `app-store-connect` come metodo, la build viene caricata su
+**TestFlight** e la installi dall'app TestFlight: più lento (Apple deve
+processare il binario) ma non pubblica nulla nel repository.
+
+> ⚠️ Con `release-testing` l'IPA finisce in una cartella pubblica del
+> repository. L'app si installa comunque solo sui dispositivi registrati, ma il
+> profilo incluso nell'IPA contiene il Team ID e gli UDID dei tuoi dispositivi.
+> Se preferisci non esporli, usa TestFlight.
+
 ## Sincronizzazione tra Mac e iPhone
 
 **Il server è già configurato e pronto all'uso.** I dati stanno su un progetto
