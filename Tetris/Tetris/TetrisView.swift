@@ -235,7 +235,7 @@ struct TetrisView: View {
     private var overlayMessage: String {
         switch engine.phase {
         case .ready:
-            return "Trascina sul pozzo per muovere,\ntocca per ruotare,\ntrascina in giù per calare in fondo."
+            return "Tocca ai lati per spostare,\nal centro per ruotare.\nTrascina: il pezzo segue il dito;\nin giù cala in fondo."
         case .paused:
             return "Il pozzo ti aspetta."
         case .gameOver:
@@ -286,37 +286,46 @@ struct TetrisView: View {
         }
     }
 
-    // MARK: - Gesti sul pozzo
+    // MARK: - Gesti sul pozzo: guida assistita
     private func dragGesture(cell: CGFloat) -> some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { v in
                 guard engine.phase == .playing else { return }
                 if drag == nil {
-                    drag = DragTracker(startLoc: v.location, lastLoc: v.location,
-                                       startTime: Date(), moved: false, dropped: false, hShifts: 0)
+                    let wellWidth = cell * CGFloat(Campo.cols)
+                    let xr = v.startLocation.x / wellWidth
+                    let zone = xr < 0.35 ? -1 : (xr > 0.65 ? 1 : 0)
+                    let fingerCol = Int(floor(v.startLocation.x / cell))
+                    drag = DragTracker(startLoc: v.startLocation, startTime: Date(),
+                                       moved: false, dropped: false, zone: zone,
+                                       grabCol: (engine.current?.x ?? 3) - fingerCol, colMoves: 0)
                 }
                 guard var t = drag, !t.dropped else { return }
-                // trascinamento netto verso il basso = il pezzo cala subito in fondo
                 let totDx = v.location.x - t.startLoc.x
                 let totDy = v.location.y - t.startLoc.y
-                if t.hShifts == 0, totDy >= max(48, cell * 1.5), totDy > 1.5 * abs(totDx) {
+                // trascinamento netto verso il basso = il pezzo cala subito in fondo
+                if t.colMoves == 0, totDy >= max(48, cell * 1.5), totDy > 1.5 * abs(totDx) {
                     t.dropped = true
                     drag = t
                     engine.hardDrop()
                     return
                 }
-                let step = cell * 0.72
-                var dx = v.location.x - t.lastLoc.x
-                while dx >= step {
-                    if engine.shift(1) { t.lastLoc.x += step; dx -= step; t.moved = true; t.hShifts += 1 }
-                    else { t.lastLoc.x = v.location.x; dx = 0 }
-                }
-                while dx <= -step {
-                    if engine.shift(-1) { t.lastLoc.x -= step; dx += step; t.moved = true; t.hShifts += 1 }
-                    else { t.lastLoc.x = v.location.x; dx = 0 }
-                }
-                if abs(totDx) > 12 || abs(totDy) > 12 {
-                    t.moved = true
+                if abs(totDx) > 12 || abs(totDy) > 12 { t.moved = true }
+                // guida assistita: il pezzo segue la colonna del dito
+                if abs(totDx) > cell * 0.4, let cur = engine.current {
+                    let target = Int(floor(v.location.x / cell)) + t.grabCol
+                    var x = cur.x
+                    var guardCount = 0
+                    while x < target, guardCount < Campo.cols {
+                        guardCount += 1
+                        if !engine.shift(1) { break }
+                        x += 1; t.colMoves += 1; t.moved = true
+                    }
+                    while x > target, guardCount < Campo.cols {
+                        guardCount += 1
+                        if !engine.shift(-1) { break }
+                        x -= 1; t.colMoves += 1; t.moved = true
+                    }
                 }
                 drag = t
             }
@@ -326,7 +335,7 @@ struct TetrisView: View {
                 guard engine.phase == .playing, let tracker = t, !tracker.dropped else { return }
                 let dt = Date().timeIntervalSince(tracker.startTime)
                 if !tracker.moved && dt < 0.26 {
-                    engine.rotate(1)
+                    if tracker.zone == 0 { engine.rotate(1) } else { engine.shift(tracker.zone) }
                 }
             }
     }
@@ -425,11 +434,12 @@ struct BoardSnapshot {
 
 struct DragTracker {
     var startLoc: CGPoint
-    var lastLoc: CGPoint
     var startTime: Date
     var moved: Bool
     var dropped: Bool
-    var hShifts: Int
+    var zone: Int
+    var grabCol: Int
+    var colMoves: Int
 }
 
 // MARK: - Pozzo
