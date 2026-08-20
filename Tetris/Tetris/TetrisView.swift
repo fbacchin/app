@@ -235,7 +235,7 @@ struct TetrisView: View {
     private var overlayMessage: String {
         switch engine.phase {
         case .ready:
-            return "Tocca ai lati per spostare,\nal centro per ruotare.\nTrascina: il pezzo segue il dito;\nin giù cala in fondo."
+            return "Tocca per ruotare.\nTrascina: il pezzo segue il dito;\nin giù cala in fondo."
         case .paused:
             return "Il pozzo ti aspetta."
         case .gameOver:
@@ -292,12 +292,9 @@ struct TetrisView: View {
             .onChanged { v in
                 guard engine.phase == .playing else { return }
                 if drag == nil {
-                    let wellWidth = cell * CGFloat(Campo.cols)
-                    let xr = v.startLocation.x / wellWidth
-                    let zone = xr < 0.35 ? -1 : (xr > 0.65 ? 1 : 0)
                     let fingerCol = Int(floor(v.startLocation.x / cell))
                     drag = DragTracker(startLoc: v.startLocation, startTime: Date(),
-                                       moved: false, dropped: false, zone: zone,
+                                       moved: false, dropped: false,
                                        grabCol: (engine.current?.x ?? 3) - fingerCol, colMoves: 0)
                 }
                 guard var t = drag, !t.dropped else { return }
@@ -334,8 +331,9 @@ struct TetrisView: View {
                 drag = nil
                 guard engine.phase == .playing, let tracker = t, !tracker.dropped else { return }
                 let dt = Date().timeIntervalSince(tracker.startTime)
+                // tocco rapido ovunque = ruota
                 if !tracker.moved && dt < 0.26 {
-                    if tracker.zone == 0 { engine.rotate(1) } else { engine.shift(tracker.zone) }
+                    engine.rotate(1)
                 }
             }
     }
@@ -437,7 +435,6 @@ struct DragTracker {
     var startTime: Date
     var moved: Bool
     var dropped: Bool
-    var zone: Int
     var grabCol: Int
     var colMoves: Int
 }

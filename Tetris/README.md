@@ -17,8 +17,7 @@ App nativa scritta in SwiftUI, senza dipendenze esterne. Regole moderne del gioc
 
 | Gesto / tasto | Azione |
 | --- | --- |
-| Tocco al centro del pozzo | Ruota |
-| Tocco a sinistra/destra | Sposta di una colonna |
+| Tocco sul pozzo | Ruota |
 | Trascina in orizzontale | Guida assistita: il pezzo segue il dito colonna per colonna |
 | Trascina verso il basso | Cala subito in fondo (hard drop) |
 | Pulsanti ◀ ▼ ▶ | Movimento con auto-ripetizione (▼ discesa morbida) |
