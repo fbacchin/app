@@ -204,6 +204,13 @@ struct BookRowView: View {
                         .font(.caption)
                         .foregroundStyle(.tertiary)
                 }
+                if let riassunto = book.summary, !riassunto.isEmpty {
+                    Text(riassunto)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(2)
+                        .padding(.top, 1)
+                }
             }
         }
         .padding(.vertical, 4)

@@ -14,6 +14,7 @@ create table public.books (
   isbn text,
   page_count integer,
   cover_url text,
+  summary text,
   date_read timestamptz not null default now(),
   rating integer not null default 0 check (rating between 0 and 5),
   notes text not null default '',

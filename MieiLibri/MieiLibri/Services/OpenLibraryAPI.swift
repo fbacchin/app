@@ -11,7 +11,7 @@ enum OpenLibraryAPI {
             URLQueryItem(name: "limit", value: quanti),
             URLQueryItem(
                 name: "fields",
-                value: "key,title,author_name,first_publish_year,isbn,cover_i,number_of_pages_median,publisher"
+                value: "key,title,author_name,first_publish_year,isbn,cover_i,number_of_pages_median,publisher,first_sentence"
             ),
         ]
         guard let url = components.url else { throw CatalogError.malformed }
@@ -39,7 +39,8 @@ enum OpenLibraryAPI {
                 pageCount: doc.number_of_pages_median,
                 coverURL: doc.cover_i.flatMap {
                     URL(string: "https://covers.openlibrary.org/b/id/\($0)-M.jpg")
-                }
+                },
+                summary: doc.first_sentence?.valore
             )
         }
     }
@@ -97,4 +98,22 @@ private struct Doc: Decodable {
     let isbn: [String]?
     let cover_i: Int?
     let number_of_pages_median: Int?
+    let first_sentence: TestoFlessibile?
+}
+
+/// Alcuni campi di Open Library arrivano come stringa singola e altri come
+/// elenco, a seconda del libro: questo tipo accetta entrambe le forme.
+struct TestoFlessibile: Decodable {
+    let valore: String?
+
+    init(from decoder: Decoder) throws {
+        let contenitore = try decoder.singleValueContainer()
+        if let singola = try? contenitore.decode(String.self) {
+            valore = singola
+        } else if let elenco = try? contenitore.decode([String].self) {
+            valore = elenco.first
+        } else {
+            valore = nil
+        }
+    }
 }

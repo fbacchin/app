@@ -68,6 +68,7 @@ final class Library: ObservableObject {
             isbn: remote.isbn,
             pageCount: remote.pageCount,
             coverURL: remote.coverURL,
+            summary: remote.summary,
             dateRead: .now,
             rating: 0,
             notes: "",

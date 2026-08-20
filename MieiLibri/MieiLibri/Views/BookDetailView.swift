@@ -43,6 +43,13 @@ struct BookDetailView: View {
                 .listRowSeparator(.hidden)
             }
 
+            if let riassunto = book.summary, !riassunto.isEmpty {
+                Section("Riassunto") {
+                    Text(riassunto)
+                        .font(.callout)
+                }
+            }
+
             Section("La mia lettura") {
                 DatePicker(
                     "Letto il",

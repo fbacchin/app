@@ -66,7 +66,8 @@ enum GoogleBooksAPI {
                 publishedYear: year(from: info.publishedDate),
                 isbn: isbn(from: info.industryIdentifiers),
                 pageCount: info.pageCount,
-                coverURL: secureURL(from: info.imageLinks?.thumbnail ?? info.imageLinks?.smallThumbnail)
+                coverURL: secureURL(from: info.imageLinks?.thumbnail ?? info.imageLinks?.smallThumbnail),
+                summary: testoSemplice(info.description)
             )
         }
     }
@@ -103,6 +104,21 @@ enum GoogleBooksAPI {
         return identifiers.first(where: { $0.type == "ISBN_10" })?.identifier
     }
 
+    /// Le descrizioni di Google contengono spesso marcatori HTML, che a schermo
+    /// comparirebbero come tali: qui si riducono a testo semplice.
+    private static func testoSemplice(_ html: String?) -> String? {
+        guard let html, !html.isEmpty else { return nil }
+        var testo = html.replacingOccurrences(of: "<[^>]+>", with: " ", options: .regularExpression)
+        for (entita, carattere) in [("&amp;", "&"), ("&lt;", "<"), ("&gt;", ">"),
+                                    ("&quot;", "\""), ("&#39;", "'"), ("&nbsp;", " ")] {
+            testo = testo.replacingOccurrences(of: entita, with: carattere)
+        }
+        testo = testo
+            .replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        return testo.isEmpty ? nil : testo
+    }
+
     /// Google Books restituisce spesso URL http://, ma App Transport Security richiede https.
     private static func secureURL(from string: String?) -> URL? {
         guard var string = string else { return nil }
@@ -130,6 +146,7 @@ private struct VolumeInfo: Decodable {
     let publisher: String?
     let publishedDate: String?
     let pageCount: Int?
+    let description: String?
     let industryIdentifiers: [IndustryIdentifier]?
     let imageLinks: ImageLinks?
 }

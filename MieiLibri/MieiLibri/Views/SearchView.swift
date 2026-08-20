@@ -213,6 +213,13 @@ private struct SearchResultRow: View {
                         .foregroundStyle(.tertiary)
                         .lineLimit(1)
                 }
+                if let riassunto = book.summary, !riassunto.isEmpty {
+                    Text(riassunto)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(2)
+                        .padding(.top, 1)
+                }
             }
             Spacer(minLength: 8)
             Button {

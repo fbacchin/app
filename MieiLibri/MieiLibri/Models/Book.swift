@@ -10,6 +10,7 @@ struct Book: Identifiable, Codable, Equatable {
     var isbn: String?
     var pageCount: Int?
     var coverURL: URL?
+    var summary: String?
     var dateRead: Date
     var rating: Int
     var notes: String

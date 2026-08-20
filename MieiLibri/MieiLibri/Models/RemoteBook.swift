@@ -10,4 +10,5 @@ struct RemoteBook: Identifiable, Equatable {
     let isbn: String?
     let pageCount: Int?
     let coverURL: URL?
+    let summary: String?
 }

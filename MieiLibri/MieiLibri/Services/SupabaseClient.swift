@@ -43,6 +43,7 @@ struct BookRecord: Codable {
     var isbn: String?
     var pageCount: Int?
     var coverUrl: String?
+    var summary: String?
     var dateRead: Date
     var rating: Int
     var notes: String
@@ -58,6 +59,7 @@ struct BookRecord: Codable {
         isbn = book.isbn
         pageCount = book.pageCount
         coverUrl = book.coverURL?.absoluteString
+        summary = book.summary
         dateRead = book.dateRead
         rating = book.rating
         notes = book.notes
@@ -74,6 +76,7 @@ struct BookRecord: Codable {
             isbn: isbn,
             pageCount: pageCount,
             coverURL: coverUrl.flatMap { URL(string: $0) },
+            summary: summary,
             dateRead: dateRead,
             rating: rating,
             notes: notes,
