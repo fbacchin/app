@@ -22,6 +22,12 @@ struct AccountView: View {
             }
         }
         .formStyle(.grouped)
+        .safeAreaInset(edge: .bottom) {
+            Text(AppInfo.descrizione)
+                .font(.footnote)
+                .foregroundStyle(.tertiary)
+                .padding(.bottom, 10)
+        }
         .navigationTitle(isGate ? "Benvenuto" : "Account")
         .toolbar {
             if !isGate {

@@ -102,6 +102,7 @@ struct LibraryView: View {
                     if let status = library.syncStatusText {
                         Text(status)
                     }
+                    Text(AppInfo.descrizione)
                 }
             }
         }
