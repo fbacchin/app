@@ -14,10 +14,9 @@ enum AppInfo {
         Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "—"
     }
 
-    /// Riga da mostrare: evita di ripetere il numero quando la versione lo
-    /// contiene già, come accade nelle build prodotte da GitHub Actions.
+    /// Riga da mostrare: la versione resta 1.0, fra parentesi il numero di
+    /// build, che si incrementa a ogni compilazione automatica.
     static var descrizione: String {
-        versione.hasSuffix(".\(build)") ? "Versione \(versione)"
-                                        : "Versione \(versione) (\(build))"
+        "Versione \(versione) (\(build))"
     }
 }

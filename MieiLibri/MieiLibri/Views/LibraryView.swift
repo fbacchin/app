@@ -34,39 +34,21 @@ struct LibraryView: View {
     }
 
     private var mainContent: some View {
-        Group {
-            if library.books.isEmpty {
-                ContentUnavailableView {
-                    Label("Nessun libro", systemImage: "books.vertical")
-                } description: {
-                    Text("Cerca un libro nel catalogo e aggiungilo alla tua libreria.")
-                } actions: {
-                    Button("Cerca un libro") { showSearch = true }
-                        .buttonStyle(.borderedProminent)
-                }
-            } else {
-                bookList
+        VStack(spacing: 0) {
+            intestazione
+            if !library.books.isEmpty {
+                campoFiltro
             }
+            contenuto
         }
+        // La barra di navigazione di sistema riserva al titolo grande una
+        // fascia fissa, che lascia molto spazio vuoto in cima. Qui il titolo
+        // se lo disegna la schermata, con lo stesso carattere ma subito sotto
+        // la barra di stato.
+        #if os(iOS)
+        .toolbar(.hidden, for: .navigationBar)
+        #endif
         .navigationTitle("I miei libri")
-        .toolbar {
-            ToolbarItem(placement: .automatic) {
-                Button {
-                    showAccount = true
-                } label: {
-                    Image(systemName: library.isSignedIn ? "person.crop.circle.badge.checkmark" : "person.crop.circle")
-                }
-                .accessibilityLabel("Account e sincronizzazione")
-            }
-            ToolbarItem(placement: .primaryAction) {
-                Button {
-                    showSearch = true
-                } label: {
-                    Image(systemName: "plus")
-                }
-                .accessibilityLabel("Aggiungi un libro")
-            }
-        }
         .sheet(isPresented: $showSearch) {
             SearchView()
         }
@@ -77,6 +59,81 @@ struct LibraryView: View {
         }
         .navigationDestination(for: String.self) { bookID in
             BookDetailView(bookID: bookID)
+        }
+    }
+
+    // MARK: - Intestazione
+
+    private var intestazione: some View {
+        HStack(spacing: 18) {
+            Text("I miei libri")
+                .font(.largeTitle.bold())
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+            Spacer(minLength: 8)
+            Button {
+                showAccount = true
+            } label: {
+                Image(systemName: library.isSignedIn
+                      ? "person.crop.circle.badge.checkmark"
+                      : "person.crop.circle")
+                    .font(.title2)
+            }
+            .accessibilityLabel("Account e sincronizzazione")
+            Button {
+                showSearch = true
+            } label: {
+                Image(systemName: "plus")
+                    .font(.title2)
+            }
+            .accessibilityLabel("Aggiungi un libro")
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 2)
+        .padding(.bottom, 10)
+    }
+
+    private var campoFiltro: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "magnifyingglass")
+                .foregroundStyle(.secondary)
+            TextField("Filtra la libreria", text: $filter)
+                .textFieldStyle(.plain)
+                .autocorrectionDisabled()
+            if !filter.isEmpty {
+                Button {
+                    filter = ""
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Cancella il filtro")
+            }
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .background(.quaternary.opacity(0.4), in: RoundedRectangle(cornerRadius: 10))
+        .padding(.horizontal, 16)
+        .padding(.bottom, 8)
+    }
+
+    // MARK: - Contenuto
+
+    @ViewBuilder
+    private var contenuto: some View {
+        if library.books.isEmpty {
+            ContentUnavailableView {
+                Label("Nessun libro", systemImage: "books.vertical")
+            } description: {
+                Text("Cerca un libro nel catalogo e aggiungilo alla tua libreria.")
+            } actions: {
+                Button("Cerca un libro") { showSearch = true }
+                    .buttonStyle(.borderedProminent)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            bookList
         }
     }
 
@@ -106,7 +163,7 @@ struct LibraryView: View {
                 }
             }
         }
-        .searchable(text: $filter, prompt: "Filtra la libreria")
+        .listStyle(.plain)
     }
 
     private func delete(at offsets: IndexSet) {
