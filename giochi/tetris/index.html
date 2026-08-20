@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#101024">
+<meta name="theme-color" content="#1e1e42">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Tetris">
@@ -609,7 +609,7 @@ function showOverlay(){
   if(phase==='ready'){
     ovTitle.textContent='Pronto?';
     ovText.innerHTML=isTouch
-      ?'Tocca ai lati per spostare, al centro per ruotare. Trascina e il pezzo segue il dito; in giù cala in fondo.'
+      ?'Tocca per ruotare. Tieni premuto ai lati e il pezzo scivola; trascina e ti segue; in giù cala in fondo.'
       :'Frecce per muovere, <strong>↑</strong> ruota, <strong>spazio</strong> cala, <strong>C</strong> tiene, <strong>P</strong> pausa.';
     ovBtn.textContent='Gioca';
   }else if(phase==='paused'){
@@ -733,9 +733,8 @@ wellCv.addEventListener('pointerup',e=>{
   if(!touch||e.pointerId!==touch.id)return;
   stopAssist(touch);
   const dt=performance.now()-touch.t0;
-  if(phase==='playing'&&!touch.dropped&&!touch.assisted&&!touch.moved&&dt<260){
-    if(touch.zone===0)rotate(1);else tryShift(touch.zone);
-  }
+  /* tocco rapido ovunque = ruota; lo spostamento resta su pressione prolungata e trascinamento */
+  if(phase==='playing'&&!touch.dropped&&!touch.assisted&&!touch.moved&&dt<260)rotate(1);
   touch=null;
 });
 wellCv.addEventListener('pointercancel',()=>{if(touch)stopAssist(touch);touch=null;});
@@ -756,10 +755,15 @@ function setVph(){
   const h=window.visualViewport?Math.round(window.visualViewport.height):window.innerHeight;
   document.documentElement.style.setProperty('--vph',h+'px');
 }
-setVph();
+function refit(){setVph();layout();}
+refit();
+/* iOS a volte riporta dimensioni sbagliate nei primi istanti senza poi avvisare: rimisura */
+setTimeout(refit,250);setTimeout(refit,800);setTimeout(refit,2000);
 new ResizeObserver(()=>layout()).observe($('#stage'));
-addEventListener('resize',()=>{setVph();layout();});
-if(window.visualViewport)window.visualViewport.addEventListener('resize',()=>{setVph();layout();});
+addEventListener('resize',refit);
+addEventListener('orientationchange',()=>setTimeout(refit,120));
+addEventListener('pageshow',refit);
+if(window.visualViewport)window.visualViewport.addEventListener('resize',refit);
 /* blocca ogni scorrimento o rimbalzo della pagina: il gioco resta inchiodato allo schermo */
 document.addEventListener('touchmove',e=>e.preventDefault(),{passive:false});
 addEventListener('scroll',()=>{if(window.scrollY)window.scrollTo(0,0);});
