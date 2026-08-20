@@ -47,22 +47,84 @@ enum CatalogError: LocalizedError {
     }
 }
 
+/// I criteri con cui cercare nel catalogo.
+struct CatalogQuery: Equatable {
+    /// Dove cercare il testo digitato. Cercare ovunque include anche la
+    /// descrizione e il testo integrale, e produce spesso risultati inattesi:
+    /// per questo si può restringere a titolo o autore.
+    enum Ambito: String, CaseIterable, Identifiable {
+        case tutto, titolo, autore
+
+        var id: String { rawValue }
+
+        var etichetta: String {
+            switch self {
+            case .tutto: return "Tutto"
+            case .titolo: return "Titolo"
+            case .autore: return "Autore"
+            }
+        }
+    }
+
+    var testo: String = ""
+    var ambito: Ambito = .tutto
+    /// Anno di pubblicazione, vuoto quando non si filtra.
+    var anno: String = ""
+
+    var testoRipulito: String {
+        testo.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    var annoRipulito: String {
+        let a = anno.trimmingCharacters(in: .whitespaces)
+        return (a.count == 4 && a.allSatisfy(\.isNumber)) ? a : ""
+    }
+
+    var isEmpty: Bool { testoRipulito.isEmpty }
+
+    /// Vero quando il testo è un codice ISBN: in quel caso l'ambito non conta.
+    var sembraISBN: Bool {
+        let compatta = testoRipulito
+            .replacingOccurrences(of: "-", with: "")
+            .replacingOccurrences(of: " ", with: "")
+        return (compatta.count == 10 || compatta.count == 13) && compatta.allSatisfy(\.isNumber)
+    }
+
+    var isbnCompatto: String {
+        testoRipulito
+            .replacingOccurrences(of: "-", with: "")
+            .replacingOccurrences(of: " ", with: "")
+    }
+}
+
 /// Coordina i cataloghi disponibili: Google Books ha il repertorio migliore in
 /// italiano, ma senza chiave la sua quota è condivisa fra molti utenti e può
 /// esaurirsi. In quel caso si ripiega su Open Library, che non ha quote.
 enum Catalog {
-    static func search(_ query: String) async throws -> [RemoteBook] {
+    static func search(_ criteri: CatalogQuery) async throws -> [RemoteBook] {
+        let risultati: [RemoteBook]
         do {
-            return try await GoogleBooksAPI.search(query)
+            risultati = try await GoogleBooksAPI.search(criteri)
         } catch {
             let motivo = CatalogError.from(error)
             // Senza rete non ha senso interrogare un secondo catalogo.
             guard motivo != .offline else { throw motivo }
-            if let ripiego = try? await OpenLibraryAPI.search(query), !ripiego.isEmpty {
-                return ripiego
+            guard let ripiego = try? await OpenLibraryAPI.search(criteri), !ripiego.isEmpty else {
+                throw motivo
             }
-            throw motivo
+            return filtraPerAnno(ripiego, criteri: criteri)
         }
+        return filtraPerAnno(risultati, criteri: criteri)
+    }
+
+    /// Il filtro per anno si applica qui, non nella richiesta: Google Books non
+    /// offre un parametro per la data di pubblicazione, quindi filtrare al
+    /// ritorno è l'unico modo di comportarsi allo stesso modo con entrambi i
+    /// cataloghi.
+    private static func filtraPerAnno(_ libri: [RemoteBook], criteri: CatalogQuery) -> [RemoteBook] {
+        let anno = criteri.annoRipulito
+        guard !anno.isEmpty else { return libri }
+        return libri.filter { $0.publishedYear == anno }
     }
 }
 

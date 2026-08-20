@@ -1,51 +1,110 @@
 import SwiftUI
 
-/// Ricerca nel catalogo di Google Books, con copertine nei risultati.
+/// Ricerca nel catalogo, con copertine nei risultati.
+/// Si può scegliere se cercare ovunque, solo nel titolo o solo nell'autore,
+/// e restringere i risultati a un anno di pubblicazione.
 struct SearchView: View {
     @EnvironmentObject private var library: Library
     @Environment(\.dismiss) private var dismiss
 
-    @State private var query = ""
+    @State private var criteri = CatalogQuery()
     @State private var results: [RemoteBook] = []
     @State private var isLoading = false
     @State private var errore: CatalogError?
 
     var body: some View {
         NavigationStack {
-            List(results) { book in
-                SearchResultRow(book: book)
+            VStack(spacing: 0) {
+                filtroAnno
+                Divider()
+                List(results) { book in
+                    SearchResultRow(book: book)
+                }
+                .listStyle(.plain)
+                .dismissKeyboardOnScroll()
+                .overlay { overlayContent }
             }
-            .listStyle(.plain)
-            .dismissKeyboardOnScroll()
-            .overlay { overlayContent }
             .navigationTitle("Cerca libri")
             .inlineNavigationTitle()
             #if os(iOS)
             .searchable(
-                text: $query,
+                text: $criteri.testo,
                 placement: .navigationBarDrawer(displayMode: .always),
-                prompt: "Titolo, autore o ISBN"
+                prompt: promptRicerca
             )
             #else
-            .searchable(text: $query, prompt: "Titolo, autore o ISBN")
+            .searchable(text: $criteri.testo, prompt: promptRicerca)
             #endif
+            .searchScopes($criteri.ambito) {
+                ForEach(CatalogQuery.Ambito.allCases) { ambito in
+                    Text(ambito.etichetta).tag(ambito)
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Chiudi") { dismiss() }
                 }
             }
-            .task(id: query) {
+            .task(id: criteri) {
                 await search()
             }
         }
         #if os(macOS)
-        .frame(minWidth: 540, minHeight: 600)
+        .frame(minWidth: 560, minHeight: 620)
         #endif
     }
 
+    private var promptRicerca: String {
+        switch criteri.ambito {
+        case .tutto: return "Titolo, autore o ISBN"
+        case .titolo: return "Titolo del libro"
+        case .autore: return "Nome dell'autore"
+        }
+    }
+
+    // MARK: - Filtro per anno
+
+    private var filtroAnno: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "calendar")
+                .foregroundStyle(.secondary)
+            Text("Anno")
+                .foregroundStyle(.secondary)
+            TextField("qualsiasi", text: $criteri.anno)
+                .numericFieldStyle()
+                .frame(width: 90)
+                .textFieldStyle(.roundedBorder)
+                .onChange(of: criteri.anno) { _, nuovo in
+                    // Solo quattro cifre: qualunque altra cosa non e' un anno.
+                    let cifre = String(nuovo.filter(\.isNumber).prefix(4))
+                    if cifre != nuovo { criteri.anno = cifre }
+                }
+            if !criteri.anno.isEmpty {
+                Button {
+                    criteri.anno = ""
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Togli il filtro sull'anno")
+            }
+            Spacer()
+            if criteri.sembraISBN {
+                Text("ricerca per ISBN")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+            }
+        }
+        .font(.subheadline)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 8)
+    }
+
+    // MARK: - Stati della schermata
+
     @ViewBuilder
     private var overlayContent: some View {
-        let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         if isLoading && results.isEmpty {
             ProgressView("Ricerca in corso…")
         } else if let errore {
@@ -54,32 +113,52 @@ struct SearchView: View {
                 systemImage: errore == .offline ? "wifi.exclamationmark" : "books.vertical.circle",
                 description: Text(errore.suggerimento)
             )
-        } else if trimmed.isEmpty {
+        } else if criteri.isEmpty {
             ContentUnavailableView(
                 "Cerca nel catalogo",
                 systemImage: "magnifyingglass",
-                description: Text("Cerca per titolo, autore o ISBN.\nI risultati arrivano da Google Libri.")
+                description: Text(descrizioneIniziale)
+            )
+        } else if results.isEmpty && !criteri.annoRipulito.isEmpty {
+            // Distinzione utile: il libro potrebbe esistere, ma non in
+            // quell'anno fra i risultati trovati.
+            ContentUnavailableView(
+                "Nessun risultato del \(criteri.annoRipulito)",
+                systemImage: "calendar.badge.exclamationmark",
+                description: Text("Prova a togliere il filtro sull'anno: l'edizione trovata potrebbe avere una data diversa.")
             )
         } else if results.isEmpty {
-            ContentUnavailableView.search(text: trimmed)
+            ContentUnavailableView.search(text: criteri.testoRipulito)
         }
     }
 
+    private var descrizioneIniziale: String {
+        switch criteri.ambito {
+        case .tutto:
+            return "Cerca per titolo, autore o ISBN.\nPuoi restringere la ricerca con le linguette qui sopra."
+        case .titolo:
+            return "Digita il titolo del libro."
+        case .autore:
+            return "Digita il nome dell'autore."
+        }
+    }
+
+    // MARK: - Ricerca
+
     private func search() async {
-        let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else {
+        guard !criteri.isEmpty else {
             results = []
             isLoading = false
             errore = nil
             return
         }
-        // Piccola pausa per non interrogare l'API a ogni carattere digitato.
+        // Piccola pausa per non interrogare il catalogo a ogni carattere digitato.
         try? await Task.sleep(for: .milliseconds(350))
         guard !Task.isCancelled else { return }
         isLoading = true
         errore = nil
         do {
-            let trovati = try await Catalog.search(trimmed)
+            let trovati = try await Catalog.search(criteri)
             guard !Task.isCancelled else { return }
             results = trovati
         } catch {

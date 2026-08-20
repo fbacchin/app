@@ -3,11 +3,12 @@ import Foundation
 /// Catalogo di riserva, usato quando Google Books non è disponibile.
 /// Open Library è gratuito e senza quote per singolo indirizzo IP.
 enum OpenLibraryAPI {
-    static func search(_ query: String) async throws -> [RemoteBook] {
+    static func search(_ criteri: CatalogQuery) async throws -> [RemoteBook] {
         var components = URLComponents(string: "https://openlibrary.org/search.json")!
+        let quanti = criteri.annoRipulito.isEmpty ? "30" : "40"
         components.queryItems = [
-            URLQueryItem(name: "q", value: normalizedQuery(from: query)),
-            URLQueryItem(name: "limit", value: "30"),
+            URLQueryItem(name: "q", value: interrogazione(per: criteri)),
+            URLQueryItem(name: "limit", value: quanti),
             URLQueryItem(
                 name: "fields",
                 value: "key,title,author_name,first_publish_year,isbn,cover_i,number_of_pages_median,publisher"
@@ -53,15 +54,28 @@ enum OpenLibraryAPI {
         return "ol-" + ripulita
     }
 
-    /// Come per Google, una query di sole cifre viene cercata come ISBN.
-    private static func normalizedQuery(from query: String) -> String {
-        let compatta = query
-            .replacingOccurrences(of: "-", with: "")
-            .replacingOccurrences(of: " ", with: "")
-        if compatta.count == 10 || compatta.count == 13, compatta.allSatisfy(\.isNumber) {
-            return "isbn:\(compatta)"
+    /// Traduce i criteri nella sintassi di Open Library. A differenza di Google,
+    /// qui l'anno si può indicare nella richiesta stessa, il che restringe i
+    /// risultati alla fonte.
+    private static func interrogazione(per criteri: CatalogQuery) -> String {
+        var parti: [String] = []
+
+        if criteri.sembraISBN {
+            parti.append("isbn:\(criteri.isbnCompatto)")
+        } else {
+            let testo = criteri.testoRipulito
+            switch criteri.ambito {
+            case .tutto:  parti.append(testo)
+            case .titolo: parti.append("title:\"\(testo)\"")
+            case .autore: parti.append("author:\"\(testo)\"")
+            }
         }
-        return query
+
+        let anno = criteri.annoRipulito
+        if !anno.isEmpty {
+            parti.append("first_publish_year:\(anno)")
+        }
+        return parti.joined(separator: " AND ")
     }
 }
 

@@ -3,11 +3,14 @@ import Foundation
 /// Client minimale per la ricerca nel catalogo di Google Books.
 /// L'endpoint pubblico non richiede alcuna chiave API.
 enum GoogleBooksAPI {
-    static func search(_ query: String) async throws -> [RemoteBook] {
+    static func search(_ criteri: CatalogQuery) async throws -> [RemoteBook] {
         var components = URLComponents(string: "https://www.googleapis.com/books/v1/volumes")!
+        // Filtrando per anno si scarta parte dei risultati a valle, quindi
+        // conviene chiederne di piu' (40 e' il massimo ammesso).
+        let quanti = criteri.annoRipulito.isEmpty ? "30" : "40"
         var parametri = [
-            URLQueryItem(name: "q", value: normalizedQuery(from: query)),
-            URLQueryItem(name: "maxResults", value: "30"),
+            URLQueryItem(name: "q", value: interrogazione(per: criteri)),
+            URLQueryItem(name: "maxResults", value: quanti),
             URLQueryItem(name: "printType", value: "books"),
         ]
         if !CatalogConfig.googleAPIKey.isEmpty {
@@ -62,15 +65,22 @@ enum GoogleBooksAPI {
         }
     }
 
-    /// Una query di sole cifre (10 o 13) viene trattata come ricerca per ISBN.
-    private static func normalizedQuery(from query: String) -> String {
-        let compact = query
-            .replacingOccurrences(of: "-", with: "")
-            .replacingOccurrences(of: " ", with: "")
-        if compact.count == 10 || compact.count == 13, compact.allSatisfy(\.isNumber) {
-            return "isbn:\(compact)"
+    /// Traduce i criteri negli operatori di Google Books. Senza operatore la
+    /// ricerca copre anche descrizione e testo integrale, da cui i risultati
+    /// inattesi; "intitle" e "inauthor" la restringono al campo voluto.
+    private static func interrogazione(per criteri: CatalogQuery) -> String {
+        if criteri.sembraISBN {
+            return "isbn:\(criteri.isbnCompatto)"
         }
-        return query
+        let testo = criteri.testoRipulito
+        switch criteri.ambito {
+        case .tutto:
+            return testo
+        case .titolo:
+            return "intitle:\"\(testo)\""
+        case .autore:
+            return "inauthor:\"\(testo)\""
+        }
     }
 
     private static func year(from publishedDate: String?) -> String? {

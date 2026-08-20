@@ -8,9 +8,12 @@ app iOS nativa e come app Mac nativa (non Catalyst).
 
 ## Funzionalità
 
-- **Ricerca nel catalogo**: cerca per titolo, autore o ISBN nel catalogo di
-  [Google Books](https://developers.google.com/books) (API pubblica e gratuita,
-  nessuna chiave richiesta). I risultati mostrano la copertina di ogni libro.
+- **Ricerca nel catalogo**: cerca in [Google Books](https://developers.google.com/books)
+  scegliendo l'ambito — **Tutto**, **Titolo** o **Autore** — con le linguette
+  sotto il campo di ricerca. Restringere a titolo o autore evita i risultati
+  strani che si ottengono cercando anche nel testo integrale. Un codice ISBN
+  viene riconosciuto da solo. Si può inoltre filtrare per **anno** di
+  pubblicazione. I risultati mostrano la copertina di ogni libro.
 - **Libreria personale**: un tocco su ＋ aggiunge il libro all'elenco dei letti.
   La copertina viene scaricata e salvata sul dispositivo, così resta visibile
   anche senza connessione.

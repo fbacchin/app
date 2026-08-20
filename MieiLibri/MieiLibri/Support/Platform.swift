@@ -58,6 +58,15 @@ extension View {
         #endif
     }
 
+    /// Tastiera numerica dove esiste (iPhone e iPad).
+    func numericFieldStyle() -> some View {
+        #if os(iOS)
+        return keyboardType(.numberPad)
+        #else
+        return self
+        #endif
+    }
+
     /// Impostazioni consigliate per un campo password.
     func passwordFieldStyle() -> some View {
         #if os(iOS)
