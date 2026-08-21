@@ -1,5 +1,5 @@
 {
- "time": "2026-08-21T09:50:41Z",
+ "time": "2026-08-21T09:55:47Z",
  "south": {
   "km": 3.0,
   "wait": 30
@@ -9,6 +9,19 @@
   "wait": 60
  },
  "events": [
+  {
+   "id": "situation.646747.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "north",
+   "versionTime": "2026-08-21T09:52:33Z",
+   "km": 6.0,
+   "wait": 60,
+   "texts": {
+    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 6 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 60",
+    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 6 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 60",
+    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 6 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 60"
+   }
+  },
   {
    "id": "situation.646760.1.1.1",
    "type": "AbnormalTraffic",
@@ -23,16 +36,16 @@
    }
   },
   {
-   "id": "situation.646747.1.1.1",
+   "id": "situation.646795.1.1.1",
    "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-08-21T09:47:27Z",
-   "km": 6.0,
-   "wait": 60,
+   "direction": null,
+   "versionTime": "2026-08-21T09:55:36Z",
+   "km": null,
+   "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 6.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 60",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 6.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 60",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 6.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 60"
+    "de": "Freigegeben: H2 Göschenen <-> Flüelen zwischen Ortschaft Erstfeld und Anschluss Göschenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
+    "fr": "Libéré: H2 Göschenen <-> Flüelen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
+    "it": "Approvato: H2 Göschenen <-> Flüelen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
    }
   },
   {
