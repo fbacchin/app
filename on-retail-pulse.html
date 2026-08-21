@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="theme-color" content="#000000" />
+<title>On Retail Pulse</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #DCDCDC; }
+  * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+  button:focus-visible, textarea:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const { useState } = React;
+
+/* ------------------- On brand tokens ------------------- */
+const HN = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+const C = {
+  paper: "#EEEEEE", card: "#FFFFFF", ink: "#000000", inkSoft: "#595959",
+  black: "#000000", lime: "#E2FBAF", fail: "#C8102E", greyBtn: "#B4B4B4",
+  line: "#E0E0E0", chip: "#EEEEEE",
+};
+const F = { display: HN, body: HN };
+
+const scoreBg = (s) => (s >= 85 ? C.lime : s >= 70 ? C.inkSoft : C.fail);
+const scoreFg = (s) => (s >= 85 ? C.black : "#FFFFFF");
+const scoreText = (s) => (s >= 85 ? C.black : s >= 70 ? C.inkSoft : C.fail);
+
+/* ------------------- Icons (inline SVG) ------------------- */
+function Svg(p) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={p.size || 18} height={p.size || 18}
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth={p.sw || 2} strokeLinecap="round" strokeLinejoin="round"
+      style={p.style}>{p.children}</svg>
+  );
+}
+const IArrowLeft = (p) => <Svg {...p}><path d="M19 12H5" /><path d="M12 19l-7-7 7-7" /></Svg>;
+const ICheck = (p) => <Svg {...p}><path d="M20 6L9 17l-5-5" /></Svg>;
+const IX = (p) => <Svg {...p}><path d="M18 6L6 18" /><path d="M6 6l12 12" /></Svg>;
+const IFlag = (p) => <Svg {...p}><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><path d="M4 22v-7" /></Svg>;
+const ICamera = (p) => <Svg {...p}><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" /><circle cx="12" cy="13" r="3" /></Svg>;
+const IChevronDown = (p) => <Svg {...p}><path d="M6 9l6 6 6-6" /></Svg>;
+const ISend = (p) => <Svg {...p}><path d="M22 2L11 13" /><path d="M22 2l-7 20-4-9-9-4 22-7z" /></Svg>;
+const IMapPin = (p) => <Svg {...p}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></Svg>;
+const IAlert = (p) => <Svg {...p}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" /><path d="M12 9v4" /><path d="M12 17h.01" /></Svg>;
+const IClipboard = (p) => <Svg {...p}><rect x="8" y="2" width="8" height="4" rx="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /></Svg>;
+const IChart = (p) => <Svg {...p}><path d="M3 3v18h18" /><path d="M8 17V9" /><path d="M13 17V5" /><path d="M18 17v-6" /></Svg>;
+const ICheckCircle = (p) => <Svg {...p}><circle cx="12" cy="12" r="10" /><path d="M8.5 12.5l2.5 2.5 5-6" /></Svg>;
+
+/* ------------------- Persistence (works in Safari; silently in-memory elsewhere) ------------------- */
+const storage = {
+  load() { try { return JSON.parse(localStorage.getItem("on-pulse") || "{}"); } catch (e) { return {}; } },
+  save(v) { try { localStorage.setItem("on-pulse", JSON.stringify(v)); } catch (e) {} },
+};
+
+/* ------------------- Seed data — real On locations ------------------- */
+const ZONES = [
+  { id: "window", name: "Window & Facade", items: [
+    "Window display matches current campaign guidelines",
+    "Glass, frames and external signage clean and intact",
+    "Window lighting on and correctly aimed",
+  ]},
+  { id: "entrance", name: "Entrance", items: [
+    "Entrance area clear, mats and doors in good condition",
+    "Client greeted within 30 seconds (observed)",
+    "Traffic counter working and positioned correctly",
+  ]},
+  { id: "floor", name: "Sales Floor", items: [
+    "VM setup compliant with latest directive",
+    "Size runs and floor stock complete on key franchises",
+    "Price tags present, correct and consistent",
+    "Music, scent and temperature on brand standard",
+  ]},
+  { id: "fitting", name: "Fitting Rooms", items: [
+    "Rooms clean; hooks, mirrors and seats intact",
+    "Try-on product returned to floor within 15 minutes",
+    "Staff check-in during fitting (observed)",
+  ]},
+  { id: "cash", name: "Cash Desk", items: [
+    "Queue time under 3 minutes at peak",
+    "Add-on and CRM capture proposed at checkout",
+    "Desk clean, no personal items visible",
+  ]},
+  { id: "boh", name: "Back of House", items: [
+    "Stockroom organised by category and season",
+    "Deliveries processed within 24 hours",
+    "Safety exits and corridors fully clear",
+  ]},
+];
+
+const STORES = [
+  { id: 1, name: "Zürich — Flagship", region: "EMEA", lastScore: 94, due: "Due today", trend: [90, 92, 91, 93, 94] },
+  { id: 2, name: "London — Regent Street", region: "EMEA", lastScore: 89, due: "Due today", trend: [86, 88, 87, 90, 89] },
+  { id: 3, name: "Paris — Flagship", region: "EMEA", lastScore: 86, due: "Tue 25 Aug", trend: [84, 83, 85, 87, 86] },
+  { id: 4, name: "Milano", region: "EMEA", lastScore: 83, due: "Wed 26 Aug", trend: [80, 82, 81, 84, 83] },
+  { id: 5, name: "Berlin — Mitte", region: "EMEA", lastScore: 81, due: "Thu 27 Aug", trend: [78, 80, 79, 82, 81] },
+  { id: 6, name: "Madrid — Serrano", region: "EMEA", lastScore: 77, due: "Fri 28 Aug", trend: [74, 76, 75, 78, 77] },
+  { id: 7, name: "New York — NoHo", region: "Americas", lastScore: 91, due: "Due today", trend: [88, 90, 89, 92, 91] },
+  { id: 8, name: "Chicago — Rush Street", region: "Americas", lastScore: 87, due: "Mon 24 Aug", trend: [84, 86, 85, 88, 87] },
+  { id: 9, name: "Los Angeles", region: "Americas", lastScore: 84, due: "Tue 25 Aug", trend: [82, 83, 82, 85, 84] },
+  { id: 10, name: "Miami", region: "Americas", lastScore: 72, due: "Wed 26 Aug", trend: [76, 74, 73, 71, 72] },
+  { id: 11, name: "Santiago — Parque Arauco", region: "Americas", lastScore: 68, due: "Thu 27 Aug", trend: [74, 72, 70, 67, 68] },
+  { id: 12, name: "Tokyo", region: "APAC", lastScore: 90, due: "Due today", trend: [87, 89, 88, 91, 90] },
+  { id: 13, name: "Shanghai — Flagship", region: "APAC", lastScore: 85, due: "Mon 24 Aug", trend: [82, 84, 83, 86, 85] },
+  { id: 14, name: "Sydney — Bondi Junction", region: "APAC", lastScore: 82, due: "Tue 25 Aug", trend: [79, 81, 80, 83, 82] },
+  { id: 15, name: "Hong Kong — Sha Tin", region: "APAC", lastScore: 79, due: "Wed 26 Aug", trend: [82, 81, 80, 78, 79] },
+  { id: 16, name: "Bangkok — Iconsiam", region: "APAC", lastScore: 74, due: "Fri 28 Aug", trend: [78, 76, 75, 73, 74] },
+];
+const REGIONS = ["EMEA", "Americas", "APAC"];
+
+/* ------------------- Building blocks ------------------- */
+function ScorePill({ value }) {
+  return (
+    <div style={{
+      width: 48, height: 30, borderRadius: 6, background: scoreBg(value),
+      color: scoreFg(value), display: "flex", alignItems: "center",
+      justifyContent: "center", fontFamily: F.body, fontWeight: 700,
+      fontSize: 15, flexShrink: 0,
+    }}>{value}</div>
+  );
+}
+
+function Sparkline({ data }) {
+  const w = 84, h = 28, min = Math.min(...data) - 4, max = Math.max(...data) + 4;
+  const pts = data.map((v, i) =>
+    ((i / (data.length - 1)) * w) + "," + (h - ((v - min) / (max - min)) * h)).join(" ");
+  return (
+    <svg width={w} height={h} style={{ display: "block" }}>
+      <polyline points={pts} fill="none" stroke="#000" strokeWidth="1.5"
+        strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function SectionLabel({ children }) {
+  return (
+    <div style={{
+      fontFamily: F.display, fontWeight: 700, fontSize: 12, letterSpacing: 2.5,
+      textTransform: "uppercase", color: C.inkSoft, margin: "22px 20px 8px",
+    }}>{children}</div>
+  );
+}
+
+const RATINGS = [
+  { key: "pass", label: "Pass", Icon: ICheck, bg: "#E2FBAF", fg: "#000000" },
+  { key: "flag", label: "Flag", Icon: IFlag, bg: "#595959", fg: "#FFFFFF" },
+  { key: "fail", label: "Fail", Icon: IX, bg: "#C8102E", fg: "#FFFFFF" },
+];
+
+function RatingTag({ value, onChange }) {
+  return (
+    <div style={{ display: "flex", border: "1px solid " + C.line, borderRadius: 8, overflow: "hidden", background: "#FAFAFA" }}>
+      {RATINGS.map((r, i) => {
+        const active = value === r.key;
+        return (
+          <button key={r.key} onClick={() => onChange(active ? null : r.key)}
+            style={{
+              flex: 1, display: "flex", alignItems: "center", justifyContent: "center",
+              gap: 5, padding: "9px 0", border: "none", cursor: "pointer",
+              borderLeft: i > 0 ? "1px solid " + C.line : "none",
+              background: active ? r.bg : "transparent",
+              color: active ? r.fg : C.inkSoft,
+              fontFamily: F.display, fontWeight: 700, fontSize: 12.5,
+              letterSpacing: 1.5, textTransform: "uppercase",
+              transition: "background 0.15s",
+            }}>
+            <r.Icon size={14} sw={2.5} />{r.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ------------------- Stores screen ------------------- */
+function StoresScreen({ visits, onStart }) {
+  const eff = (s) => (visits[s.id] ? visits[s.id].score : s.lastScore);
+  return (
+    <div>
+      <header style={{ padding: "26px 20px 4px" }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+          <span style={{ fontFamily: F.display, fontWeight: 800, fontSize: 40, color: C.black, lineHeight: 1, letterSpacing: -1 }}>On</span>
+          <span style={{ fontFamily: F.display, fontWeight: 700, fontSize: 15, letterSpacing: 3, textTransform: "uppercase", background: C.lime, color: C.black, padding: "3px 8px" }}>Retail Pulse</span>
+        </div>
+        <div style={{ fontFamily: F.body, fontWeight: 500, fontSize: 12, letterSpacing: 1.5, textTransform: "uppercase", color: C.inkSoft, marginTop: 10 }}>
+          16 stores · 3 regions
+        </div>
+      </header>
+
+      {REGIONS.map((region) => (
+        <div key={region}>
+          <SectionLabel>{region}</SectionLabel>
+          <div style={{ padding: "0 16px", display: "flex", flexDirection: "column", gap: 10 }}>
+            {STORES.filter((s) => s.region === region).map((s) => {
+              const visited = visits[s.id];
+              return (
+                <div key={s.id} style={{ background: C.card, borderRadius: 12, border: "1px solid " + C.line, padding: "14px 14px 12px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                    <ScorePill value={eff(s)} />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontFamily: F.body, fontWeight: 700, fontSize: 15, color: C.ink }}>{s.name}</div>
+                      <div style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: F.body, fontSize: 12.5, color: C.inkSoft, marginTop: 2 }}>
+                        <IMapPin size={12} /> {s.region}
+                        <span style={{
+                          fontFamily: F.body, fontWeight: visited || s.due === "Due today" ? 700 : 400,
+                          fontSize: 11.5, marginLeft: 4, letterSpacing: 0.5,
+                          color: visited ? C.ink : s.due === "Due today" ? C.fail : C.inkSoft,
+                          textTransform: "uppercase",
+                          background: visited ? C.lime : "transparent",
+                          padding: visited ? "1px 6px" : 0,
+                        }}>
+                          {visited ? "Visited " + visited.date : s.due}
+                        </span>
+                      </div>
+                    </div>
+                    <button onClick={() => onStart(s)} style={{
+                      background: C.black, color: "#fff", border: "none", borderRadius: 8,
+                      padding: "10px 14px", fontFamily: F.display, fontWeight: 700,
+                      fontSize: 12, letterSpacing: 1.5, textTransform: "uppercase", cursor: "pointer",
+                    }}>
+                      {visited ? "Revisit" : "Start visit"}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+      <div style={{ height: 90 }} />
+    </div>
+  );
+}
+
+/* ------------------- Visit screen ------------------- */
+function VisitScreen({ store, answers, setAnswers, onBack, onComplete }) {
+  const [openZone, setOpenZone] = useState(ZONES[0].id);
+  const totalItems = ZONES.reduce((n, z) => n + z.items.length, 0);
+  const rated = Object.values(answers).filter((a) => a.rating).length;
+
+  const setAnswer = (itemId, patch) =>
+    setAnswers((prev) => ({ ...prev, [itemId]: { ...prev[itemId], ...patch } }));
+  const zoneDone = (z) => z.items.every((_, i) => (answers[z.id + "-" + i] || {}).rating);
+
+  return (
+    <div>
+      <header style={{ padding: "18px 16px 14px", background: C.black, color: "#fff", position: "sticky", top: 0, zIndex: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <button onClick={onBack} aria-label="Back to stores" style={{
+            background: "rgba(255,255,255,0.14)", border: "none", borderRadius: 8,
+            width: 34, height: 34, display: "flex", alignItems: "center",
+            justifyContent: "center", color: "#fff", cursor: "pointer",
+          }}><IArrowLeft size={18} /></button>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: F.display, fontWeight: 700, fontSize: 18, letterSpacing: 0.3, lineHeight: 1.1 }}>{store.name}</div>
+            <div style={{ fontFamily: F.body, fontSize: 10.5, letterSpacing: 2, textTransform: "uppercase", color: C.greyBtn, marginTop: 3 }}>
+              Store walk · {rated}/{totalItems} checks
+            </div>
+          </div>
+        </div>
+        <div style={{ height: 4, background: "rgba(255,255,255,0.2)", borderRadius: 2, marginTop: 12, overflow: "hidden" }}>
+          <div style={{ height: "100%", width: (rated / totalItems) * 100 + "%", background: C.lime, transition: "width 0.25s" }} />
+        </div>
+      </header>
+
+      <div style={{ padding: "16px 16px 0" }}>
+        {ZONES.map((z, zi) => {
+          const open = openZone === z.id;
+          const done = zoneDone(z);
+          return (
+            <div key={z.id} style={{ display: "flex", gap: 12 }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <div style={{
+                  width: 36, height: 36, borderRadius: 10, flexShrink: 0,
+                  background: done ? C.lime : open ? C.black : C.card,
+                  border: "1px solid " + (done || open ? "transparent" : C.line),
+                  color: done ? C.black : open ? "#fff" : C.inkSoft,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontFamily: F.display, fontWeight: 800, fontSize: 15,
+                }}>
+                  {done ? <ICheck size={18} sw={2.5} /> : zi + 1}
+                </div>
+                {zi < ZONES.length - 1 && (
+                  <div style={{ width: 2, flex: 1, background: done ? C.black : C.line, minHeight: 12 }} />
+                )}
+              </div>
+
+              <div style={{ flex: 1, paddingBottom: 14, minWidth: 0 }}>
+                <button onClick={() => setOpenZone(open ? null : z.id)} style={{
+                  width: "100%", display: "flex", alignItems: "center", gap: 8,
+                  background: "none", border: "none", padding: "8px 0 6px",
+                  cursor: "pointer", textAlign: "left",
+                }}>
+                  <span style={{ fontFamily: F.display, fontWeight: 700, fontSize: 14, textTransform: "uppercase", letterSpacing: 2, color: C.ink, flex: 1 }}>{z.name}</span>
+                  <span style={{ fontFamily: F.body, fontWeight: 500, fontSize: 11.5, color: C.inkSoft }}>
+                    {z.items.filter((_, i) => (answers[z.id + "-" + i] || {}).rating).length}/{z.items.length}
+                  </span>
+                  <IChevronDown size={16} style={{ transform: open ? "rotate(180deg)" : "none", transition: "transform 0.2s", color: C.inkSoft }} />
+                </button>
+
+                {open && z.items.map((text, i) => {
+                  const itemId = z.id + "-" + i;
+                  const a = answers[itemId] || {};
+                  const needsDetail = a.rating === "flag" || a.rating === "fail";
+                  return (
+                    <div key={itemId} style={{ background: C.card, border: "1px solid " + C.line, borderRadius: 10, padding: 12, marginBottom: 8 }}>
+                      <div style={{ fontFamily: F.body, fontSize: 14, color: C.ink, marginBottom: 10, lineHeight: 1.35 }}>{text}</div>
+                      <RatingTag value={a.rating || null} onChange={(r) => setAnswer(itemId, { rating: r })} />
+                      {needsDetail && (
+                        <div style={{ marginTop: 10 }}>
+                          <textarea value={a.note || ""} onChange={(e) => setAnswer(itemId, { note: e.target.value })}
+                            placeholder="What did you find? Action needed?" rows={2}
+                            style={{
+                              width: "100%", resize: "none", border: "1px solid " + C.line,
+                              borderRadius: 8, padding: "9px 10px", fontFamily: F.body,
+                              fontSize: 13.5, color: C.ink, background: "#FAFAFA", outline: "none",
+                            }} />
+                          <button onClick={() => setAnswer(itemId, { photo: !a.photo })} style={{
+                            marginTop: 6, display: "flex", alignItems: "center", gap: 6,
+                            background: a.photo ? C.lime : C.chip,
+                            border: "1px solid " + (a.photo ? C.black : C.line),
+                            color: a.photo ? C.black : C.inkSoft,
+                            borderRadius: 8, padding: "7px 11px", cursor: "pointer",
+                            fontFamily: F.body, fontWeight: 500, fontSize: 12.5,
+                          }}>
+                            <ICamera size={14} />{a.photo ? "Photo attached · IMG_0421" : "Add photo"}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div style={{ padding: "4px 16px 90px" }}>
+        <button onClick={onComplete} disabled={rated === 0} style={{
+          width: "100%", padding: "15px 0", borderRadius: 10, border: "none",
+          background: rated === totalItems ? C.lime : rated > 0 ? C.black : C.chip,
+          color: rated === totalItems ? C.black : rated > 0 ? "#fff" : C.inkSoft,
+          cursor: rated > 0 ? "pointer" : "default",
+          fontFamily: F.display, fontWeight: 800, fontSize: 14,
+          letterSpacing: 2.5, textTransform: "uppercase",
+        }}>
+          {rated === totalItems ? "Complete visit" : "Complete visit (" + rated + "/" + totalItems + ")"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------- Report screen ------------------- */
+function ReportScreen({ store, answers, onBack, onSent }) {
+  const [sent, setSent] = useState(false);
+
+  const calc = (items) => {
+    const rated = items.filter((a) => a && a.rating);
+    if (!rated.length) return null;
+    const pts = rated.reduce((n, a) => n + (a.rating === "pass" ? 1 : a.rating === "flag" ? 0.5 : 0), 0);
+    return Math.round((pts / rated.length) * 100);
+  };
+
+  const overall = calc(Object.values(answers));
+  const zoneScores = ZONES.map((z) => ({ zone: z, score: calc(z.items.map((_, i) => answers[z.id + "-" + i])) }));
+  const issues = [];
+  ZONES.forEach((z) => z.items.forEach((text, i) => {
+    const a = answers[z.id + "-" + i];
+    if (a && (a.rating === "flag" || a.rating === "fail")) issues.push(Object.assign({ zone: z.name, text }, a));
+  }));
+
+  const bigNumColor = overall == null ? "#fff" : overall >= 85 ? C.lime : overall >= 70 ? C.greyBtn : C.fail;
+  const today = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+
+  return (
+    <div>
+      <header style={{ padding: "18px 16px 8px", display: "flex", alignItems: "center", gap: 10 }}>
+        <button onClick={onBack} aria-label="Back to checklist" style={{
+          background: C.card, border: "1px solid " + C.line, borderRadius: 8,
+          width: 34, height: 34, display: "flex", alignItems: "center",
+          justifyContent: "center", color: C.ink, cursor: "pointer",
+        }}><IArrowLeft size={18} /></button>
+        <div style={{ fontFamily: F.display, fontWeight: 700, fontSize: 15, textTransform: "uppercase", letterSpacing: 2.5, color: C.ink }}>Visit report</div>
+      </header>
+
+      <div style={{ margin: "8px 16px 0", background: C.black, borderRadius: 14, padding: "22px 18px", color: "#fff" }}>
+        <div style={{ fontFamily: F.body, fontSize: 10.5, letterSpacing: 2, textTransform: "uppercase", color: C.greyBtn }}>{store.name} · {today}</div>
+        <div style={{ display: "flex", alignItems: "flex-end", gap: 12, marginTop: 10 }}>
+          <div style={{ fontFamily: F.display, fontWeight: 800, fontSize: 64, lineHeight: 0.9, color: bigNumColor, letterSpacing: -2 }}>{overall == null ? "—" : overall}</div>
+          <div style={{ fontFamily: F.display, fontWeight: 700, fontSize: 12, letterSpacing: 2.5, textTransform: "uppercase", paddingBottom: 8, color: C.greyBtn }}>Store score</div>
+        </div>
+        <div style={{ fontFamily: F.body, fontSize: 13, color: C.greyBtn, marginTop: 10 }}>
+          {issues.length === 0 ? "No open issues. Sign off." : issues.length + " issue" + (issues.length > 1 ? "s" : "") + " to close."}
+        </div>
+      </div>
+
+      <SectionLabel>Score by zone</SectionLabel>
+      <div style={{ margin: "0 16px", background: C.card, border: "1px solid " + C.line, borderRadius: 12, padding: "6px 14px" }}>
+        {zoneScores.map(({ zone, score }, i) => (
+          <div key={zone.id} style={{
+            display: "flex", alignItems: "center", gap: 10, padding: "10px 0",
+            borderBottom: i < zoneScores.length - 1 ? "1px solid " + C.line : "none",
+          }}>
+            <div style={{ fontFamily: F.body, fontSize: 13.5, color: C.ink, width: 118, flexShrink: 0 }}>{zone.name}</div>
+            <div style={{ flex: 1, height: 7, background: C.chip, borderRadius: 4, overflow: "hidden" }}>
+              {score != null && <div style={{ height: "100%", width: score + "%", background: C.black, borderRadius: 4 }} />}
+            </div>
+            <div style={{ fontFamily: F.body, fontWeight: 700, fontSize: 13, width: 30, textAlign: "right", color: score == null ? C.inkSoft : scoreText(score) }}>{score == null ? "—" : score}</div>
+          </div>
+        ))}
+      </div>
+
+      {issues.length > 0 && (
+        <React.Fragment>
+          <SectionLabel>Follow-up actions</SectionLabel>
+          <div style={{ margin: "0 16px", display: "flex", flexDirection: "column", gap: 8 }}>
+            {issues.map((iss, i) => (
+              <div key={i} style={{
+                background: C.card, border: "1px solid " + C.line, borderRadius: 10,
+                borderLeft: "4px solid " + (iss.rating === "fail" ? C.fail : C.inkSoft),
+                padding: "11px 12px",
+              }}>
+                <div style={{ fontFamily: F.body, fontWeight: 700, fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: C.inkSoft }}>{iss.zone} · {iss.rating}</div>
+                <div style={{ fontFamily: F.body, fontSize: 14, color: C.ink, marginTop: 3 }}>{iss.text}</div>
+                {iss.note && <div style={{ fontFamily: F.body, fontSize: 13, color: C.inkSoft, marginTop: 4, fontStyle: "italic" }}>"{iss.note}"</div>}
+                {iss.photo && (
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: 5, marginTop: 6, fontFamily: F.body, fontWeight: 500, fontSize: 11.5, color: C.ink, background: C.lime, padding: "3px 8px", borderRadius: 6 }}>
+                    <ICamera size={12} /> IMG_0421.jpg
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </React.Fragment>
+      )}
+
+      <div style={{ padding: "20px 16px 90px" }}>
+        {sent ? (
+          <div style={{
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+            padding: "15px 0", borderRadius: 10, background: C.lime, color: C.black,
+            fontFamily: F.display, fontWeight: 800, fontSize: 13, letterSpacing: 2, textTransform: "uppercase",
+          }}><ICheckCircle size={18} /> Sent to HQ</div>
+        ) : (
+          <button onClick={() => { setSent(true); setTimeout(() => onSent(overall, issues.length), 1200); }} style={{
+            width: "100%", display: "flex", alignItems: "center", justifyContent: "center",
+            gap: 8, padding: "15px 0", borderRadius: 10, border: "none",
+            background: C.lime, color: C.black, cursor: "pointer",
+            fontFamily: F.display, fontWeight: 800, fontSize: 14,
+            letterSpacing: 2.5, textTransform: "uppercase",
+          }}><ISend size={17} /> Send report to HQ</button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------- Dashboard ------------------- */
+function DashboardScreen({ visits }) {
+  const eff = (s) => (visits[s.id] ? visits[s.id].score : s.lastScore);
+  const avg = Math.round(STORES.reduce((n, s) => n + eff(s), 0) / STORES.length);
+  const ranked = STORES.slice().sort((a, b) => eff(b) - eff(a));
+  const critical = STORES.filter((s) => eff(s) < 70);
+  const regionAvg = (r) => {
+    const rs = STORES.filter((s) => s.region === r);
+    return Math.round(rs.reduce((n, s) => n + eff(s), 0) / rs.length);
+  };
+
+  return (
+    <div>
+      <header style={{ padding: "26px 20px 4px" }}>
+        <div style={{ fontFamily: F.display, fontWeight: 800, fontSize: 26, letterSpacing: -0.5, color: C.ink }}>Global overview</div>
+        <div style={{ fontFamily: F.body, fontWeight: 500, fontSize: 11.5, letterSpacing: 1.5, textTransform: "uppercase", color: C.inkSoft, marginTop: 4 }}>
+          16 stores · EMEA / Americas / APAC
+        </div>
+      </header>
+
+      <div style={{ display: "flex", gap: 10, margin: "16px 16px 0" }}>
+        <div style={{ flex: 1, background: C.black, borderRadius: 12, padding: "14px 14px 12px", color: "#fff" }}>
+          <div style={{ fontFamily: F.display, fontWeight: 800, fontSize: 34, lineHeight: 1, color: C.lime }}>{avg}</div>
+          <div style={{ fontFamily: F.body, fontWeight: 500, fontSize: 10.5, letterSpacing: 1.5, textTransform: "uppercase", color: C.greyBtn, marginTop: 5 }}>Global score</div>
+        </div>
+        <div style={{ flex: 1, background: C.card, border: "1px solid " + C.line, borderRadius: 12, padding: "14px 14px 12px" }}>
+          <div style={{ fontFamily: F.display, fontWeight: 800, fontSize: 34, lineHeight: 1, color: critical.length ? C.fail : C.ink }}>{critical.length}</div>
+          <div style={{ fontFamily: F.body, fontWeight: 500, fontSize: 10.5, letterSpacing: 1.5, textTransform: "uppercase", color: C.inkSoft, marginTop: 5 }}>Stores below 70</div>
+        </div>
+      </div>
+
+      {critical.length > 0 && (
+        <div style={{
+          margin: "10px 16px 0", display: "flex", alignItems: "center", gap: 8,
+          background: "#FBECEA", border: "1px solid " + C.fail, borderRadius: 10,
+          padding: "10px 12px", fontFamily: F.body, fontSize: 13, color: C.fail,
+        }}>
+          <IAlert size={15} style={{ flexShrink: 0 }} />
+          <span>{critical.map((s) => s.name).join(", ")}: action plan this week.</span>
+        </div>
+      )}
+
+      <SectionLabel>Regions</SectionLabel>
+      <div style={{ margin: "0 16px", background: C.card, border: "1px solid " + C.line, borderRadius: 12, padding: "6px 14px" }}>
+        {REGIONS.map((r, i) => {
+          const v = regionAvg(r);
+          return (
+            <div key={r} style={{
+              display: "flex", alignItems: "center", gap: 10, padding: "10px 0",
+              borderBottom: i < REGIONS.length - 1 ? "1px solid " + C.line : "none",
+            }}>
+              <div style={{ fontFamily: F.body, fontWeight: 700, fontSize: 13.5, color: C.ink, width: 80, flexShrink: 0 }}>{r}</div>
+              <div style={{ flex: 1, height: 7, background: C.chip, borderRadius: 4, overflow: "hidden" }}>
+                <div style={{ height: "100%", width: v + "%", background: C.black, borderRadius: 4 }} />
+              </div>
+              <div style={{ fontFamily: F.body, fontWeight: 700, fontSize: 13, width: 30, textAlign: "right", color: scoreText(v) }}>{v}</div>
+            </div>
+          );
+        })}
+      </div>
+
+      <SectionLabel>Ranking</SectionLabel>
+      <div style={{ margin: "0 16px 90px", background: C.card, border: "1px solid " + C.line, borderRadius: 12, padding: "4px 14px" }}>
+        {ranked.map((s, i) => (
+          <div key={s.id} style={{
+            display: "flex", alignItems: "center", gap: 12, padding: "12px 0",
+            borderBottom: i < ranked.length - 1 ? "1px solid " + C.line : "none",
+          }}>
+            <div style={{ fontFamily: F.body, fontWeight: 500, fontSize: 12, color: C.inkSoft, width: 16 }}>{i + 1}</div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontFamily: F.body, fontWeight: 700, fontSize: 14, color: C.ink, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{s.name}</div>
+              <div style={{ fontFamily: F.body, fontSize: 10.5, letterSpacing: 1, textTransform: "uppercase", color: C.inkSoft, marginTop: 1 }}>{s.region}</div>
+            </div>
+            <Sparkline data={s.trend} />
+            <ScorePill value={eff(s)} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------- App shell ------------------- */
+function RetailPulse() {
+  const [tab, setTab] = useState("stores");
+  const [screen, setScreen] = useState("tabs");
+  const [activeStore, setActiveStore] = useState(null);
+  const [answers, setAnswers] = useState({});
+  const [visits, setVisits] = useState(() => storage.load().visits || {});
+
+  const startVisit = (store) => { setActiveStore(store); setAnswers({}); setScreen("visit"); };
+
+  const handleSent = (score, issueCount) => {
+    const today = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+    const next = Object.assign({}, visits);
+    next[activeStore.id] = { score: score, issues: issueCount, date: today };
+    setVisits(next);
+    storage.save({ visits: next });
+    setScreen("tabs");
+    setTab("dashboard");
+  };
+
+  const showTabs = screen === "tabs";
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#DCDCDC", display: "flex", justifyContent: "center", fontFamily: F.body }}>
+      <div style={{ width: "100%", maxWidth: 430, minHeight: "100vh", background: C.paper, position: "relative" }}>
+        {screen === "visit" && (
+          <VisitScreen store={activeStore} answers={answers} setAnswers={setAnswers}
+            onBack={() => setScreen("tabs")} onComplete={() => setScreen("report")} />
+        )}
+        {screen === "report" && (
+          <ReportScreen store={activeStore} answers={answers}
+            onBack={() => setScreen("visit")} onSent={handleSent} />
+        )}
+        {showTabs && (tab === "stores" ? <StoresScreen visits={visits} onStart={startVisit} /> : <DashboardScreen visits={visits} />)}
+
+        {showTabs && (
+          <nav style={{
+            position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)",
+            width: "100%", maxWidth: 430, display: "flex",
+            background: C.card, borderTop: "1px solid " + C.line,
+            paddingBottom: "env(safe-area-inset-bottom)",
+          }}>
+            {[
+              { key: "stores", label: "Visits", Icon: IClipboard },
+              { key: "dashboard", label: "Dashboard", Icon: IChart },
+            ].map((t) => {
+              const active = tab === t.key;
+              return (
+                <button key={t.key} onClick={() => setTab(t.key)} style={{
+                  flex: 1, display: "flex", flexDirection: "column", alignItems: "center",
+                  gap: 3, padding: "10px 0 12px", background: "none", border: "none",
+                  cursor: "pointer", color: active ? C.black : C.greyBtn,
+                }}>
+                  <t.Icon size={21} sw={active ? 2.4 : 1.8} />
+                  <span style={{ fontFamily: F.display, fontWeight: 700, fontSize: 11, letterSpacing: 1.5, textTransform: "uppercase" }}>{t.label}</span>
+                </button>
+              );
+            })}
+          </nav>
+        )}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<RetailPulse />);
+</script>
+</body>
+</html>
