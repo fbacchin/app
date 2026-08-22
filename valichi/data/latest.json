@@ -1,9 +1,9 @@
 {
- "time": "2026-08-22T14:08:26Z",
+ "time": "2026-08-22T14:18:35Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "south": {
      "wait": 50
@@ -14,7 +14,7 @@
    }
   },
   "hr-me.karasovici": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": null
@@ -25,7 +25,7 @@
    }
   },
   "hr-me.vitaljina": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": null
@@ -48,7 +48,7 @@
    "held": true
   },
   "hr-ba.stara-gradiska": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": null
@@ -59,7 +59,7 @@
    }
   },
   "hr-rs.bajakovo": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": 30
@@ -70,7 +70,7 @@
    }
   },
   "hr-rs.tovarnik": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": null
@@ -81,7 +81,7 @@
    }
   },
   "hu-rs.roszke": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": null
@@ -92,7 +92,7 @@
    }
   },
   "hu-rs.tompa": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": null
@@ -103,7 +103,7 @@
    }
   },
   "hu-ua.zahony": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -114,7 +114,7 @@
    }
   },
   "hu-ua.beregsurany": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -125,7 +125,7 @@
    }
   },
   "pl-ua.medyka": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": 120
@@ -136,7 +136,7 @@
    }
   },
   "pl-ua.korczowa": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": 60
@@ -147,7 +147,7 @@
    }
   },
   "pl-ua.dorohusk": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": null
@@ -158,7 +158,7 @@
    }
   },
   "pl-ua.hrebenne": {
-   "updated": "2026-08-22T14:08:26Z",
+   "updated": "2026-08-22T14:18:35Z",
    "directions": {
     "exit": {
      "wait": 0
@@ -172,7 +172,7 @@
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-08-22T14:06:47Z"
+   "sampled": "2026-08-22T14:16:59Z"
   },
   "hak": {
    "ok": true,
