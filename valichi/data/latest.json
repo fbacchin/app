@@ -1,9 +1,9 @@
 {
- "time": "2026-08-22T21:53:52Z",
+ "time": "2026-08-22T22:03:58Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
-   "updated": "2026-08-22T21:53:52Z",
+   "updated": "2026-08-22T22:03:58Z",
    "directions": {
     "south": {
      "wait": null
@@ -14,7 +14,7 @@
    }
   },
   "hr-me.karasovici": {
-   "updated": "2026-08-22T21:53:52Z",
+   "updated": "2026-08-22T22:03:58Z",
    "directions": {
     "exit": {
      "wait": null
@@ -25,7 +25,7 @@
    }
   },
   "hr-me.vitaljina": {
-   "updated": "2026-08-22T21:53:52Z",
+   "updated": "2026-08-22T22:03:58Z",
    "directions": {
     "exit": {
      "wait": null
@@ -36,7 +36,7 @@
    }
   },
   "hr-ba.nova-sela": {
-   "updated": "2026-08-22T21:53:52Z",
+   "updated": "2026-08-22T22:03:58Z",
    "directions": {
     "exit": {
      "wait": null
@@ -47,7 +47,7 @@
    }
   },
   "hr-ba.stara-gradiska": {
-   "updated": "2026-08-22T21:53:52Z",
+   "updated": "2026-08-22T22:03:58Z",
    "directions": {
     "exit": {
      "wait": null
@@ -66,10 +66,11 @@
     "entry": {
      "wait": 180
     }
-   }
+   },
+   "held": true
   },
   "hr-rs.tovarnik": {
-   "updated": "2026-08-22T21:53:52Z",
+   "updated": "2026-08-22T22:03:58Z",
    "directions": {
     "exit": {
      "wait": null
@@ -80,7 +81,7 @@
    }
   },
   "hu-rs.roszke": {
-   "updated": "2026-08-22T21:53:52Z",
+   "updated": "2026-08-22T22:03:58Z",
    "directions": {
     "exit": {
      "wait": null
@@ -91,7 +92,7 @@
    }
   },
   "hu-rs.tompa": {
-   "updated": "2026-08-22T21:53:52Z",
+   "updated": "2026-08-22T22:03:58Z",
    "directions": {
     "exit": {
      "wait": null
@@ -102,7 +103,7 @@
    }
   },
   "hu-ua.zahony": {
-   "updated": "2026-08-22T21:53:52Z",
+   "updated": "2026-08-22T22:03:58Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -113,7 +114,7 @@
    }
   },
   "hu-ua.beregsurany": {
-   "updated": "2026-08-22T21:53:52Z",
+   "updated": "2026-08-22T22:03:58Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -132,7 +133,8 @@
     "entry": {
      "wait": null
     }
-   }
+   },
+   "held": true
   },
   "pl-ua.korczowa": {
    "updated": "2026-08-22T21:53:52Z",
@@ -143,10 +145,11 @@
     "entry": {
      "wait": null
     }
-   }
+   },
+   "held": true
   },
   "pl-ua.dorohusk": {
-   "updated": "2026-08-22T21:53:52Z",
+   "updated": "2026-08-22T22:03:58Z",
    "directions": {
     "exit": {
      "wait": null
@@ -165,20 +168,21 @@
     "entry": {
      "wait": null
     }
-   }
+   },
+   "held": true
   }
  },
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-08-22T21:51:14Z"
+   "sampled": "2026-08-22T22:01:24Z"
   },
   "hak": {
    "ok": true,
    "url": "https://www.hak.hr/info/stanje-na-cestama",
    "found": 6,
    "of": 6,
-   "waits": 4
+   "waits": 3
   },
   "police_hu": {
    "ok": true,
@@ -188,12 +192,13 @@
    "waits": 4
   },
   "granica_pl": {
-   "ok": true,
+   "ok": false,
    "url": "https://granica.gov.pl/Services/czasyService/soap_granica.php",
-   "found": 4,
+   "found": 0,
    "of": 4,
-   "waits": 3,
-   "ora_pl": "2026-08-22 23"
+   "waits": 0,
+   "ora_pl": "2026-08-23 00",
+   "error": "Medyka: Remote end closed connection without response | Korczowa: Remote end closed connection without response | Dorohusk: Remote end closed connection without response | Hrebenne: Remote end closed connection without response"
   }
  }
 }
