@@ -18,9 +18,11 @@ app iOS nativa e come app Mac nativa (non Catalyst).
   stessa opera vengono unite, tenendo quella con la copertina.
 - **Copertine ingrandibili**: toccando una copertina si apre a schermo intero,
   con pizzico per allargare e doppio tocco per alternare.
-- **Libreria personale**: un tocco su ＋ aggiunge il libro all'elenco dei letti.
-  La copertina viene scaricata e salvata sul dispositivo, così resta visibile
-  anche senza connessione.
+- **Libreria per autore**: la schermata principale elenca gli autori letti;
+  scegliendone uno si vedono i suoi libri, ordinati **dal più recente di
+  pubblicazione al più vecchio** (quelli senza anno in fondo). Un tocco su ＋
+  aggiunge un libro. La copertina viene scaricata e salvata sul dispositivo,
+  così resta visibile anche senza connessione.
 - **Dettagli di lettura**: data di lettura, valutazione da 1 a 5 stelle e note
   personali. Le modifiche si salvano automaticamente.
 - **Sincronizzazione iPhone ↔ Mac**: con un account gratuito i libri, i voti e
