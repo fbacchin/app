@@ -18,6 +18,9 @@ app iOS nativa e come app Mac nativa (non Catalyst).
   stessa opera vengono unite, tenendo quella con la copertina.
 - **Copertine ingrandibili**: toccando una copertina si apre a schermo intero,
   con pizzico per allargare e doppio tocco per alternare.
+- **Trama**: due righe di anteprima fra i risultati e nella libreria, per esteso
+  nel dettaglio. Fra i risultati basta toccarla per leggerla tutta. Il testo è
+  giustificato su entrambi i margini.
 - **Libreria per autore**: la schermata principale elenca gli autori letti;
   scegliendone uno si vedono i suoi libri, ordinati **dal più recente di
   pubblicazione al più vecchio** (quelli senza anno in fondo). Un tocco su ＋

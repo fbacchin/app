@@ -262,10 +262,7 @@ struct BookRowView: View {
                         .foregroundStyle(.tertiary)
                 }
                 if let riassunto = book.summary, !riassunto.isEmpty {
-                    Text(riassunto)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(2)
+                    TestoGiustificato(testo: riassunto, stile: .piccolo, righeMassime: 2)
                         .padding(.top, 1)
                 }
             }

@@ -3,6 +3,8 @@ import SwiftUI
 #if canImport(UIKit)
 import UIKit
 typealias PlatformImage = UIImage
+typealias PlatformFont = UIFont
+typealias PlatformColor = UIColor
 
 extension Image {
     init(platformImage: PlatformImage) {
@@ -12,6 +14,8 @@ extension Image {
 #elseif canImport(AppKit)
 import AppKit
 typealias PlatformImage = NSImage
+typealias PlatformFont = NSFont
+typealias PlatformColor = NSColor
 
 extension Image {
     init(platformImage: PlatformImage) {

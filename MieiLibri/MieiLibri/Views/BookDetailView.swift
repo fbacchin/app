@@ -44,9 +44,8 @@ struct BookDetailView: View {
             }
 
             if let riassunto = book.summary, !riassunto.isEmpty {
-                Section("Riassunto") {
-                    Text(riassunto)
-                        .font(.callout)
+                Section("Trama") {
+                    TestoGiustificato(testo: riassunto, stile: .corpo, attenuato: false)
                 }
             }
 

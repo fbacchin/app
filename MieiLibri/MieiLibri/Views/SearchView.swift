@@ -188,6 +188,7 @@ private struct SearchResultRow: View {
     let book: RemoteBook
 
     @State private var mostraCopertina = false
+    @State private var mostraTrama = false
 
     private var isSaved: Bool { library.contains(book.id) }
 
@@ -214,11 +215,17 @@ private struct SearchResultRow: View {
                         .lineLimit(1)
                 }
                 if let riassunto = book.summary, !riassunto.isEmpty {
-                    Text(riassunto)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(2)
-                        .padding(.top, 1)
+                    VStack(alignment: .leading, spacing: 2) {
+                        TestoGiustificato(testo: riassunto, stile: .piccolo, righeMassime: 2)
+                        Text("Leggi tutto")
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(Color.accentColor)
+                    }
+                    .padding(.top, 2)
+                    .contentShape(Rectangle())
+                    .onTapGesture { mostraTrama = true }
+                    .accessibilityAddTraits(.isButton)
+                    .accessibilityHint("Tocca per leggere tutta la trama")
                 }
             }
             Spacer(minLength: 8)
@@ -236,6 +243,15 @@ private struct SearchResultRow: View {
         .padding(.vertical, 4)
         .schermoIntero(isPresented: $mostraCopertina) {
             CoverZoomView(image: nil, url: book.coverURL, titolo: book.title)
+        }
+        .sheet(isPresented: $mostraTrama) {
+            TramaView(
+                titolo: book.title,
+                autori: book.authors.isEmpty ? Book.autoreIgnoto : book.authors.joined(separator: ", "),
+                anno: book.publishedYear,
+                testo: book.summary ?? "",
+                coverURL: book.coverURL
+            )
         }
     }
 
