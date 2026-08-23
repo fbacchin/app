@@ -1,14 +1,27 @@
 {
- "time": "2026-08-23T14:00:54Z",
+ "time": "2026-08-23T14:05:59Z",
  "south": {
-  "km": 3.0,
-  "wait": 30
+  "km": 2.0,
+  "wait": 20
  },
  "north": {
   "km": 5.0,
   "wait": 50
  },
  "events": [
+  {
+   "id": "situation.647143.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "south",
+   "versionTime": "2026-08-23T14:04:02Z",
+   "km": 2.0,
+   "wait": 20,
+   "texts": {
+    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 2.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
+    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
+    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
+   }
+  },
   {
    "id": "situation.647177.1.1.1",
    "type": "AbnormalTraffic",
@@ -20,19 +33,6 @@
     "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Ortschaft Hospental und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 30",
     "fr": "Libéré: H2 Airolo -> Flüelen entre Localité Hospental et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
     "it": "Approvato: H2 Airolo -> Flüelen tra Luogo Hospental E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30"
-   }
-  },
-  {
-   "id": "situation.647143.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-08-23T13:23:10Z",
-   "km": 3.0,
-   "wait": 30,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 3.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 30",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 3.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30"
    }
   },
   {
