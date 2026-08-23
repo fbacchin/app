@@ -1,5 +1,5 @@
 {
- "time": "2026-08-23T22:02:38Z",
+ "time": "2026-08-23T22:12:46Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
@@ -15,7 +15,7 @@
    "held": true
   },
   "hr-me.karasovici": {
-   "updated": "2026-08-23T22:02:38Z",
+   "updated": "2026-08-23T22:12:46Z",
    "directions": {
     "exit": {
      "wait": null
@@ -26,7 +26,7 @@
    }
   },
   "hr-me.vitaljina": {
-   "updated": "2026-08-23T22:02:38Z",
+   "updated": "2026-08-23T22:12:46Z",
    "directions": {
     "exit": {
      "wait": null
@@ -49,7 +49,7 @@
    "held": true
   },
   "hr-ba.stara-gradiska": {
-   "updated": "2026-08-23T22:02:38Z",
+   "updated": "2026-08-23T22:12:46Z",
    "directions": {
     "exit": {
      "wait": null
@@ -60,7 +60,7 @@
    }
   },
   "hr-rs.bajakovo": {
-   "updated": "2026-08-23T22:02:38Z",
+   "updated": "2026-08-23T22:12:46Z",
    "directions": {
     "exit": {
      "wait": 30
@@ -83,7 +83,7 @@
    "held": true
   },
   "hu-rs.roszke": {
-   "updated": "2026-08-23T22:02:38Z",
+   "updated": "2026-08-23T22:12:46Z",
    "directions": {
     "exit": {
      "wait": null
@@ -94,7 +94,7 @@
    }
   },
   "hu-rs.tompa": {
-   "updated": "2026-08-23T22:02:38Z",
+   "updated": "2026-08-23T22:12:46Z",
    "directions": {
     "exit": {
      "wait": null
@@ -105,7 +105,7 @@
    }
   },
   "hu-ua.zahony": {
-   "updated": "2026-08-23T22:02:38Z",
+   "updated": "2026-08-23T22:12:46Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -116,7 +116,7 @@
    }
   },
   "hu-ua.beregsurany": {
-   "updated": "2026-08-23T22:02:38Z",
+   "updated": "2026-08-23T22:12:46Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -127,7 +127,7 @@
    }
   },
   "pl-ua.medyka": {
-   "updated": "2026-08-23T21:52:30Z",
+   "updated": "2026-08-23T22:12:46Z",
    "directions": {
     "exit": {
      "wait": 60
@@ -135,11 +135,10 @@
     "entry": {
      "wait": null
     }
-   },
-   "held": true
+   }
   },
   "pl-ua.korczowa": {
-   "updated": "2026-08-23T21:52:30Z",
+   "updated": "2026-08-23T22:12:46Z",
    "directions": {
     "exit": {
      "wait": 120
@@ -147,11 +146,10 @@
     "entry": {
      "wait": null
     }
-   },
-   "held": true
+   }
   },
   "pl-ua.dorohusk": {
-   "updated": "2026-08-23T22:02:38Z",
+   "updated": "2026-08-23T22:12:46Z",
    "directions": {
     "exit": {
      "wait": null
@@ -162,7 +160,7 @@
    }
   },
   "pl-ua.hrebenne": {
-   "updated": "2026-08-23T21:52:30Z",
+   "updated": "2026-08-23T22:12:46Z",
    "directions": {
     "exit": {
      "wait": 0
@@ -170,14 +168,13 @@
     "entry": {
      "wait": null
     }
-   },
-   "held": true
+   }
   }
  },
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-08-23T22:01:23Z"
+   "sampled": "2026-08-23T22:11:34Z"
   },
   "hak": {
    "ok": true,
@@ -194,13 +191,12 @@
    "waits": 4
   },
   "granica_pl": {
-   "ok": false,
+   "ok": true,
    "url": "https://granica.gov.pl/Services/czasyService/soap_granica.php",
-   "found": 0,
+   "found": 4,
    "of": 4,
-   "waits": 0,
-   "ora_pl": "2026-08-24 00",
-   "error": "Medyka: Remote end closed connection without response | Korczowa: Remote end closed connection without response | Dorohusk: Remote end closed connection without response | Hrebenne: Remote end closed connection without response"
+   "waits": 3,
+   "ora_pl": "2026-08-24 00"
   }
  }
 }
