@@ -1,5 +1,5 @@
 {
- "time": "2026-08-23T11:42:51Z",
+ "time": "2026-08-23T11:47:57Z",
  "south": {
   "km": 5.0,
   "wait": 50
@@ -39,13 +39,13 @@
    "id": "situation.647177.1.1.1",
    "type": "AbnormalTraffic",
    "direction": null,
-   "versionTime": "2026-08-23T11:23:28Z",
+   "versionTime": "2026-08-23T11:45:34Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Ortschaft Hospental und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: H2 Airolo -> Flüelen entre Localité Hospental et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic",
-    "it": "Approvato: H2 Airolo -> Flüelen tra Luogo Hospental E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato"
+    "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Ortschaft Andermatt und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung",
+    "fr": "Libéré: H2 Airolo -> Flüelen entre Localité Andermatt et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic",
+    "it": "Approvato: H2 Airolo -> Flüelen tra Luogo Andermatt E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato"
    }
   },
   {
