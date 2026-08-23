@@ -5484,5 +5484,24 @@
   "held": [
    "hr-ba.nova-sela"
   ]
+ },
+ {
+  "time": "2026-08-23T16:58:46Z",
+  "w": {
+   "ch.gottardo.north": 40,
+   "hr-ba.nova-sela.entry": 30,
+   "hr-rs.bajakovo.entry": 90,
+   "hr-rs.tovarnik.entry": 30,
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 180,
+   "pl-ua.korczowa.exit": 60,
+   "pl-ua.hrebenne.exit": 0
+  },
+  "held": [
+   "hr-ba.nova-sela"
+  ]
  }
 ]
