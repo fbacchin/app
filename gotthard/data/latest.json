@@ -1,27 +1,14 @@
 {
- "time": "2026-08-23T14:56:57Z",
+ "time": "2026-08-23T15:02:06Z",
  "south": {
-  "km": 1.0,
-  "wait": 10
+  "km": null,
+  "wait": null
  },
  "north": {
   "km": 5.0,
   "wait": 50
  },
  "events": [
-  {
-   "id": "situation.647143.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-08-23T14:30:00Z",
-   "km": 1.0,
-   "wait": 10,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
-   }
-  },
   {
    "id": "situation.647177.1.1.1",
    "type": "AbnormalTraffic",
@@ -59,19 +46,6 @@
     "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Amsteg und Anschluss Erstfeld Sachlage: Stau Ursache: Verkehrsüberlastung",
     "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Amsteg et Jonction autoroutière Erstfeld Situation: bouchon Raison: surcharge de trafic",
     "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Amsteg E Svincolo autostradale Erstfeld Situazione: colonna Causa: traffico congestionato"
-   }
-  },
-  {
-   "id": "situation.647158.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "south",
-   "versionTime": "2026-08-23T09:18:29Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Göschenen Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Göschenen Situation: entrée fermée",
-    "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata"
    }
   },
   {
