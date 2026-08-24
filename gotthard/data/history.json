@@ -4030,5 +4030,12 @@
   "northDelay": 0,
   "southQueueKm": null,
   "northQueueKm": null
+ },
+ {
+  "time": "2026-08-24T05:55:53Z",
+  "southDelay": 0,
+  "northDelay": 0,
+  "southQueueKm": null,
+  "northQueueKm": null
  }
 ]
