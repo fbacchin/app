@@ -1,22 +1,5 @@
 [
  {
-  "time": "2026-08-22T00:58:26Z",
-  "w": {
-   "hr-me.karasovici.exit": 30,
-   "hr-me.karasovici.entry": 120,
-   "hr-rs.bajakovo.exit": 90,
-   "hr-rs.bajakovo.entry": 360,
-   "hr-rs.tovarnik.entry": 120,
-   "hu-ua.zahony.exit": 15,
-   "hu-ua.zahony.entry": 15,
-   "hu-ua.beregsurany.exit": 15,
-   "hu-ua.beregsurany.entry": 15,
-   "pl-ua.medyka.exit": 60,
-   "pl-ua.korczowa.exit": 60,
-   "pl-ua.hrebenne.exit": 0
-  }
- },
- {
   "time": "2026-08-22T01:08:32Z",
   "w": {
    "hr-me.karasovici.exit": 30,
@@ -5367,6 +5350,19 @@
   "time": "2026-08-24T00:54:30Z",
   "w": {
    "hr-rs.bajakovo.exit": 30,
+   "hr-rs.bajakovo.entry": 60,
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 120,
+   "pl-ua.korczowa.exit": 60,
+   "pl-ua.hrebenne.exit": 0
+  }
+ },
+ {
+  "time": "2026-08-24T01:04:34Z",
+  "w": {
    "hr-rs.bajakovo.entry": 60,
    "hu-ua.zahony.exit": 15,
    "hu-ua.zahony.entry": 15,
