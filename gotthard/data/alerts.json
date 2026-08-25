@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: fermé travaux, longueur [km] 3.65 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.0 Durée: durant la nuit probable 28.09.2026 20:00 jusqu'à 30.09.2026 05:00 Recommandation: déviation en place",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: chiusa cantiere, lunghezza [km] 3.65 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0 Durata: durante la notte probabile 28.09.2026 20:00 fino 30.09.2026 05:00 Raccomandazione: deviazione in corso"
   },
-  "lastSeen": "2026-08-25T16:32:48Z"
+  "lastSeen": "2026-08-25T16:37:55Z"
  },
  {
   "firstSeen": "2026-08-25T08:41:16Z",
@@ -221,21 +221,5 @@
   },
   "lastSeen": "2026-08-23T17:55:59Z",
   "revokedAt": "2026-08-23T18:01:05Z"
- },
- {
-  "firstSeen": "2026-08-23T10:56:57Z",
-  "id": "situation.647177.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-08-23T15:45:05Z",
-  "km": null,
-  "wait": 15,
-  "texts": {
-   "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Ortschaft Hospental und Anschluss Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 15",
-   "fr": "Libéré: H2 Airolo -> Flüelen entre Localité Hospental et Jonction autoroutière Göschenen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 15",
-   "it": "Approvato: H2 Airolo -> Flüelen tra Luogo Hospental E Svincolo autostradale Göschenen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15"
-  },
-  "lastSeen": "2026-08-23T16:34:08Z",
-  "revokedAt": "2026-08-23T16:39:13Z"
  }
 ]
