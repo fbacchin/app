@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b1014">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Pong">
+<meta name="description" content="Pong: il classico da bar, in una pagina sola. Contro il computer o in due sullo stesso schermo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1014'/%3E%3Crect x='8' y='18' width='6' height='28' rx='3' fill='%235df2a0'/%3E%3Crect x='50' y='12' width='6' height='28' rx='3' fill='%23ffb26b'/%3E%3Ccircle cx='32' cy='34' r='5' fill='%23eef3ef'/%3E%3C/svg%3E">
+<title>Pong</title>
+<style>
+/* ══ Pong · notte fredda, fosforo verde ══
+   Uno schermo di gioco: ogni colore è dichiarato, il fondo non eredita
+   mai dall'host. Tema unico e voluto, niente variante chiara. */
+:root{
+  --notte:#0b1014;      /* fondo pagina */
+  --campo:#0e161b;      /* interno del campo */
+  --telaio:#1e2d33;     /* bordi, linea di metà campo */
+  --pannello:#131e24;   /* pannelli HUD */
+  --avorio:#eef3ef;     /* testo primario, palla */
+  --nebbia:#8ba3a8;     /* testo attenuato */
+  --fosforo:#5df2a0;    /* giocatore 1, accento */
+  --ambra:#ffb26b;      /* giocatore 2 / computer */
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+body{
+  background:var(--notte);
+  background-image:radial-gradient(120% 70% at 50% -10%,#16242b 0%,var(--notte) 62%);
+  color:var(--avorio);
+  font-family:var(--sans);
+  touch-action:manipulation;
+  -webkit-user-select:none;user-select:none;
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible{outline:2px solid var(--fosforo);outline-offset:3px;border-radius:12px}
+
+#app{
+  height:100dvh;height:100vh;
+  display:flex;flex-direction:column;gap:10px;
+  padding:calc(env(safe-area-inset-top) + 10px) 12px calc(env(safe-area-inset-bottom) + 10px);
+  max-width:760px;margin:0 auto;
+}
+
+/* ── testata ── */
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex:none}
+#marchio{
+  font-family:var(--mono);font-size:19px;font-weight:600;letter-spacing:.42em;
+  color:var(--fosforo);text-shadow:0 0 18px rgba(93,242,160,.35);padding-left:.2em;
+}
+.hdr-btns{display:flex;gap:8px}
+.chip{
+  min-width:42px;height:34px;padding:0 11px;border-radius:11px;
+  background:var(--pannello);border:1px solid var(--telaio);
+  color:var(--nebbia);font-size:14px;line-height:1;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.chip[aria-pressed="true"]{color:var(--fosforo);border-color:#2c4a44}
+.chip:active{transform:translateY(1px)}
+
+/* ── punteggio ── */
+#hud{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;flex:none}
+.lato{
+  background:var(--pannello);border:1px solid var(--telaio);border-radius:14px;
+  padding:8px 12px;display:flex;flex-direction:column;gap:2px;min-width:0;
+}
+.lato.p2{align-items:flex-end;text-align:right}
+.lato .chi{
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--nebbia);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;
+}
+.lato .pt{font-family:var(--mono);font-size:30px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.lato.p1{border-left:3px solid var(--fosforo)} .lato.p1 .pt{color:var(--fosforo)}
+.lato.p2{border-right:3px solid var(--ambra)}  .lato.p2 .pt{color:var(--ambra)}
+#mezzo{text-align:center;color:var(--nebbia);font-size:10px;letter-spacing:.12em;text-transform:uppercase;line-height:1.5}
+#mezzo b{display:block;font-family:var(--mono);font-size:14px;color:var(--avorio);letter-spacing:.04em}
+@media (max-width:430px){.extra{display:none}}
+
+/* ── campo ── */
+#stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative}
+#wrap{position:relative}
+#campo{display:block;width:100%;height:100%;border-radius:16px;touch-action:none;background:var(--campo)}
+
+#overlay{
+  position:absolute;inset:0;border-radius:16px;
+  background:rgba(8,14,17,.92);backdrop-filter:blur(3px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  padding:16px;text-align:center;overflow-y:auto;
+}
+@media (max-height:640px){#overlay{gap:9px}#ovTesto{display:none}}
+#overlay[hidden]{display:none}
+#ovTitolo{font-family:var(--mono);font-size:clamp(20px,5vw,28px);letter-spacing:.06em}
+#ovTesto{color:var(--nebbia);font-size:13px;line-height:1.55;max-width:34ch}
+#ovBtn{
+  margin-top:2px;padding:12px 30px;border-radius:13px;
+  background:var(--fosforo);color:#07110c;font-weight:700;letter-spacing:.05em;
+  box-shadow:0 8px 26px rgba(93,242,160,.22);
+}
+#ovBtn:active{transform:translateY(1px)}
+
+/* segmenti di scelta (modalità, difficoltà) */
+.scelta{display:flex;flex-direction:column;gap:6px;align-items:center}
+.scelta .et{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--nebbia)}
+.seg{display:inline-flex;background:var(--pannello);border:1px solid var(--telaio);border-radius:12px;padding:3px;gap:3px}
+.seg button{
+  padding:7px 14px;border-radius:9px;font-size:13px;color:var(--nebbia);white-space:nowrap;
+}
+.seg button[aria-pressed="true"]{background:#20343a;color:var(--avorio)}
+.scelta[hidden]{display:none}
+
+.hint{flex:none;text-align:center;color:var(--nebbia);font-size:11px;line-height:1.5;min-height:1.5em}
+@media (pointer:coarse),(max-height:620px){.hint{display:none}}
+@media (max-height:560px){#marchio{font-size:16px} .lato .pt{font-size:24px}}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div id="marchio">PONG</div>
+    <div class="hdr-btns">
+      <button id="btnSuono" class="chip" aria-label="Attiva o disattiva audio" aria-pressed="true">♪</button>
+      <button id="btnPausa" class="chip" aria-label="Pausa">❚❚</button>
+      <button id="btnMenu" class="chip" aria-label="Torna al menu">⤺</button>
+    </div>
+  </header>
+
+  <section id="hud" aria-label="Punteggio" aria-live="polite">
+    <div class="lato p1"><span class="chi" id="nome1">Tu</span><span class="pt" id="pt1">0</span></div>
+    <div id="mezzo"><b id="scambio">0</b>scambio<span class="extra"> · record <span id="recordScambio">0</span></span></div>
+    <div class="lato p2"><span class="chi"><span id="nome2">Computer</span><span class="extra" id="livHud"></span></span><span class="pt" id="pt2">0</span></div>
+  </section>
+
+  <section id="stage">
+    <div id="wrap">
+      <canvas id="campo" width="10" height="10" aria-label="Campo da gioco"></canvas>
+    </div>
+    <div id="overlay">
+        <div id="ovTitolo">Pong</div>
+        <p id="ovTesto"></p>
+        <div class="scelta" id="scModo">
+          <span class="et">Modalità</span>
+          <div class="seg" role="group" aria-label="Modalità">
+            <button data-modo="cpu">1 giocatore</button>
+            <button data-modo="due">2 giocatori</button>
+          </div>
+        </div>
+        <div class="scelta" id="scLiv">
+          <span class="et">Computer</span>
+          <div class="seg" role="group" aria-label="Difficoltà">
+            <button data-liv="0">Facile</button>
+            <button data-liv="1">Normale</button>
+            <button data-liv="2">Difficile</button>
+          </div>
+        </div>
+        <button id="ovBtn">Gioca</button>
+    </div>
+  </section>
+
+  <p class="hint" id="hint"></p>
+</div>
+
+<script>
+'use strict';
+/* ═══════════════ PONG ═══════════════
+   Campo in unità logiche (160×100), disegnato in scala sul canvas:
+   la fisica non dipende dalla risoluzione dello schermo.
+   Rimbalzo con angolo dal punto d'impatto, effetto dalla racchetta
+   in movimento, palla che accelera a ogni scambio. Partita a 11,
+   con due punti di vantaggio. */
+
+const W=160;                   /* larghezza del campo, unità logiche */
+let   H=100;                   /* altezza: si adatta allo spazio, fra questi limiti */
+const H_MIN=80, H_MAX=112;
+const PW=2.6, PX=5;            /* racchetta: spessore, distanza dal bordo */
+let   PH=17;                   /* altezza racchetta: sempre il 17% del campo */
+const BR=1.6;                  /* raggio palla */
+const V0=86, VMAX=200, VUP=1.032;   /* velocità iniziale, massima, crescita per colpo */
+const ANG=0.92;                /* angolo massimo di uscita (rad) dal bordo racchetta */
+const VY_MIN_X=0.42;           /* frazione minima di velocità orizzontale */
+const UMANO=155;               /* velocità racchetta umana (unità/s) */
+const SERVIZIO_MS=850, PUNTO_MS=650;
+const OBIETTIVO=11;
+
+const LIVELLI=[
+  {nome:'Facile',    v:74,  reaz:230, err:13,  centro:.55},
+  {nome:'Normale',   v:112, reaz:130, err:6.5, centro:.75},
+  {nome:'Difficile', v:158, reaz:65,  err:2.2, centro:.92}
+];
+
+const $=s=>document.querySelector(s);
+const cv=$('#campo'), ctx=cv.getContext('2d');
+const overlay=$('#overlay'), ovTitolo=$('#ovTitolo'), ovTesto=$('#ovTesto'), ovBtn=$('#ovBtn');
+const scModo=$('#scModo'), scLiv=$('#scLiv'), btnSuono=$('#btnSuono'), btnPausa=$('#btnPausa'), btnMenu=$('#btnMenu');
+
+const store={
+  get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+
+/* ── stato ── */
+let modo=store.get('pong_modo','cpu');        /* cpu | due */
+let liv=Math.min(2,Math.max(0,store.get('pong_liv',1)|0));
+let muto=store.get('pong_muto',false);
+let recordScambio=store.get('pong_record_scambio',0);
+
+let fase='menu';                              /* menu | servizio | gioco | pausa | fine */
+let scala=1, ruotato=false;                   /* px per unità logica; campo verticale su schermi alti */
+let p1,p2,palla,pt1,pt2,scambio,timer,vincitore,serveVerso,daFase;
+let lampoMuro=0, lampoP1=0, lampoP2=0, scia=[];
+
+const tasti=Object.create(null);
+const punt={1:null,2:null};                   /* trascinamento: {id,y} per lato */
+
+/* ── suono (WebAudio, bip generati) ── */
+let actx=null;
+function tono(f,dur,ritardo,tipo,gain){
+  if(muto||!actx)return;
+  const t0=actx.currentTime+(ritardo||0);
+  const o=actx.createOscillator(), g=actx.createGain();
+  o.type=tipo||'square'; o.frequency.value=f;
+  g.gain.setValueAtTime(0.0001,t0);
+  g.gain.exponentialRampToValueAtTime(gain||0.09,t0+0.006);
+  g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+  o.connect(g).connect(actx.destination);
+  o.start(t0); o.stop(t0+dur+0.05);
+}
+const sfx={
+  racchetta(v){tono(240+v*220,.045,0,'square',.09)},
+  muro(){tono(160,.04,0,'square',.07)},
+  punto(){tono(196,.09,0,'triangle',.11);tono(131,.13,.08,'triangle',.1)},
+  servizio(){tono(392,.05,0,'sine',.07)},
+  vittoria(){[523,659,784,1047].forEach((f,i)=>tono(f,.12,i*.1,'square',.09))},
+  sconfitta(){[330,262,196,147].forEach((f,i)=>tono(f,.14,i*.12,'triangle',.1))}
+};
+function svegliaAudio(){
+  if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}
+  if(actx&&actx.state==='suspended')actx.resume();
+}
+
+/* ── impostazione partita ── */
+function nuovaRacchetta(x){return {x,y:H/2,v:0,prec:H/2,mira:H/2,mira_t:0};}
+function nuovaPartita(){
+  p1=nuovaRacchetta(PX);
+  p2=nuovaRacchetta(W-PX-PW);
+  pt1=0; pt2=0; scambio=0; vincitore=null;
+  serveVerso=Math.random()<.5?-1:1;
+  scia.length=0;
+  preparaServizio();
+  aggiornaHud();
+}
+function preparaServizio(){
+  const ang=(Math.random()*2-1)*0.35;
+  palla={x:W/2,y:H/2+(Math.random()*2-1)*18,vx:Math.cos(ang)*V0*serveVerso,vy:Math.sin(ang)*V0,v:V0,colpi:0};
+  scambio=0;
+  fase='servizio'; timer=SERVIZIO_MS;
+  aggiornaHud();
+}
+function punto(chi){
+  if(chi===1)pt1++; else pt2++;
+  sfx.punto();
+  serveVerso=chi===1?1:-1;                    /* serve verso chi ha subito */
+  const alto=Math.max(pt1,pt2), basso=Math.min(pt1,pt2);
+  if(alto>=OBIETTIVO&&alto-basso>=2){
+    vincitore=pt1>pt2?1:2;
+    fase='fine';
+    if(modo==='cpu') (vincitore===1?sfx.vittoria:sfx.sconfitta)();
+    else sfx.vittoria();
+    mostraFine();
+  }else{
+    fase='punto'; timer=PUNTO_MS;
+  }
+  aggiornaHud();
+}
+
+/* ── fisica ── */
+function limita(v,a,b){return v<a?a:v>b?b:v;}
+
+function muoviRacchetta(p,dir,vmax,dt){
+  p.prec=p.y;
+  if(dir!==0)p.y=limita(p.y+dir*vmax*dt,PH/2,H-PH/2);
+  p.v=dt>0?(p.y-p.prec)/dt:0;
+}
+function seguiRacchetta(p,mira,vmax,dt){
+  p.prec=p.y;
+  const t=limita(mira,PH/2,H-PH/2), d=t-p.y, passo=vmax*dt;
+  p.y+=Math.abs(d)<=passo?d:Math.sign(d)*passo;
+  p.v=dt>0?(p.y-p.prec)/dt:0;
+}
+
+/* dove arriverà la palla sulla verticale x, riflettendo su alto e basso */
+function previsione(x){
+  if(palla.vx===0)return palla.y;
+  const t=(x-palla.x)/palla.vx;
+  if(t<=0)return palla.y;
+  let y=palla.y+palla.vy*t;
+  const luce=H-2*BR;
+  y=((y-BR)%(2*luce)+2*luce)%(2*luce);
+  return (y>luce?2*luce-y:y)+BR;
+}
+
+function cervello(dt){
+  const p=p2, L=LIVELLI[liv];
+  p.mira_t-=dt*1000;
+  if(p.mira_t<=0){                                   /* rilegge il campo a intervalli: è il suo tempo di reazione */
+    p.mira_t=L.reaz;
+    if(palla.vx>0){
+      const arrivo=previsione(p.x-BR);
+      const distanza=(p.x-palla.x)/W;                 /* più è lontana, più sbaglia */
+      p.mira=arrivo+(Math.random()*2-1)*L.err*(0.45+distanza);
+    }else{
+      p.mira=H/2+(p.mira-H/2)*(1-L.centro)+(Math.random()*2-1)*3;
+    }
+  }
+  seguiRacchetta(p,p.mira,L.v,dt);
+}
+
+function rimbalzoRacchetta(p,verso){
+  /* angolo dal punto d'impatto + effetto dalla racchetta in movimento */
+  const off=limita((palla.y-p.y)/(PH/2),-1,1);
+  palla.colpi++; scambio++;
+  if(scambio>recordScambio){recordScambio=scambio;store.set('pong_record_scambio',recordScambio);}
+  palla.v=Math.min(palla.v*VUP,VMAX);
+  let ang=off*ANG;
+  let vx=Math.cos(ang)*palla.v*verso;
+  let vy=Math.sin(ang)*palla.v+limita(p.v,-260,260)*0.16;
+  const n=Math.hypot(vx,vy)||1;
+  vx=vx/n*palla.v; vy=vy/n*palla.v;
+  const minx=palla.v*VY_MIN_X;                          /* mai troppo verticale */
+  if(Math.abs(vx)<minx){
+    vx=Math.sign(vx||verso)*minx;
+    vy=Math.sign(vy||1)*Math.sqrt(Math.max(palla.v*palla.v-vx*vx,0));
+  }
+  palla.vx=vx; palla.vy=vy;
+  if(verso>0){palla.x=p.x+PW+BR; lampoP1=1;} else {palla.x=p.x-BR; lampoP2=1;}
+  sfx.racchetta(limita(Math.abs(off),0,1));
+}
+
+function passo(dt){
+  const px=palla.x;
+  palla.x+=palla.vx*dt; palla.y+=palla.vy*dt;
+
+  if(palla.y-BR<0){palla.y=BR;palla.vy=Math.abs(palla.vy);lampoMuro=1;sfx.muro();}
+  else if(palla.y+BR>H){palla.y=H-BR;palla.vy=-Math.abs(palla.vy);lampoMuro=1;sfx.muro();}
+
+  /* racchetta sinistra: piano d'urto sulla faccia destra */
+  if(palla.vx<0){
+    const piano=p1.x+PW;
+    if(px-BR>=piano&&palla.x-BR<=piano){
+      const t=(piano-(px-BR))/(palla.x-px)||0;
+      const y=palla.y-palla.vy*dt*(1-t);
+      if(y>=p1.y-PH/2-BR&&y<=p1.y+PH/2+BR){palla.y=y;rimbalzoRacchetta(p1,1);}
+    }
+  }else if(palla.vx>0){
+    const piano=p2.x;
+    if(px+BR<=piano&&palla.x+BR>=piano){
+      const t=(piano-(px+BR))/(palla.x-px)||0;
+      const y=palla.y-palla.vy*dt*(1-t);
+      if(y>=p2.y-PH/2-BR&&y<=p2.y+PH/2+BR){palla.y=y;rimbalzoRacchetta(p2,-1);}
+    }
+  }
+
+  if(palla.x<-BR*2)punto(2);
+  else if(palla.x>W+BR*2)punto(1);
+}
+
+/* ── comandi ── */
+function dirTasti(su,giu){return (tasti[giu]?1:0)-(tasti[su]?1:0);}
+function dirFrecce(){return ruotato?(dirTasti('arrowleft','arrowright')||dirTasti('arrowup','arrowdown'))
+                                   :(dirTasti('arrowup','arrowdown')||dirTasti('arrowleft','arrowright'));}
+function dirWS(){return ruotato?(dirTasti('a','d')||dirTasti('w','s')):(dirTasti('w','s')||dirTasti('a','d'));}
+
+function aggiornaGiocatori(dt){
+  /* giocatore 1: trascinamento se attivo, altrimenti tastiera */
+  if(punt[1]!==null){
+    seguiRacchetta(p1,punt[1].y,UMANO*2.6,dt);
+  }else{
+    const d=modo==='cpu'?(dirWS()||dirFrecce()):dirWS();
+    muoviRacchetta(p1,d,UMANO,dt);
+  }
+  if(modo==='cpu'){
+    cervello(dt);
+  }else if(punt[2]!==null){
+    seguiRacchetta(p2,punt[2].y,UMANO*2.6,dt);
+  }else{
+    muoviRacchetta(p2,dirFrecce(),UMANO,dt);
+  }
+}
+
+/* ── ciclo ── */
+let ultimo=0, acc=0;
+const DT=1/240;
+function ciclo(ts){
+  requestAnimationFrame(ciclo);
+  if(!ultimo)ultimo=ts;
+  let dt=(ts-ultimo)/1000; ultimo=ts;
+  if(dt>0.1)dt=0.1;                       /* dopo uno stacco non si teletrasporta */
+
+  lampoMuro=Math.max(0,lampoMuro-dt*4.5);
+  lampoP1=Math.max(0,lampoP1-dt*4.5);
+  lampoP2=Math.max(0,lampoP2-dt*4.5);
+
+  if(fase==='gioco'||fase==='servizio'||fase==='punto'){
+    if(fase!=='gioco'){
+      timer-=dt*1000;
+      if(fase==='servizio'){
+        aggiornaGiocatori(dt);
+        if(timer<=0){fase='gioco';sfx.servizio();}
+      }else if(timer<=0){preparaServizio();}
+    }
+    if(fase==='gioco'){
+      acc+=dt;
+      let giri=0;
+      while(acc>=DT&&giri<40){
+        aggiornaGiocatori(DT);
+        passo(DT);
+        acc-=DT; giri++;
+        if(fase!=='gioco'){acc=0;break;}
+      }
+      if(fase==='gioco'){
+        scia.push({x:palla.x,y:palla.y});
+        if(scia.length>9)scia.shift();
+      }
+      aggiornaHud();
+    }
+  }
+  disegna();
+}
+
+/* ── disegno ── */
+const wrap=$('#wrap'), stage=$('#stage');
+let ultimaMisura='';
+function misuraCampo(){
+  const s=stage.getBoundingClientRect();
+  if(s.width<2||s.height<2)return;
+  /* schermo alto e stretto: il campo ruota, le racchette vanno sopra e sotto.
+     In più il lato corto si adatta, così il campo riempie davvero lo spazio. */
+  const vert=s.height>s.width*1.06;
+  const nuovaH=Math.round(limita(vert?W*s.width/s.height:W*s.height/s.width,H_MIN,H_MAX));
+  if(nuovaH!==H||vert!==ruotato){
+    H=nuovaH; PH=H*0.17; ruotato=vert;
+    if(p1)p1.y=limita(p1.y,PH/2,H-PH/2);
+    if(p2){p2.y=limita(p2.y,PH/2,H-PH/2);p2.mira=limita(p2.mira,PH/2,H-PH/2);}
+    if(palla)palla.y=limita(palla.y,BR,H-BR);
+    ultimaMisura='';
+    aggiornaSuggerimento();
+  }
+  const larga=ruotato?H:W, alta=ruotato?W:H;
+  const w=Math.min(s.width,s.height*larga/alta), h=w*alta/larga;
+  const firma=Math.round(w)+'x'+Math.round(h);
+  if(firma===ultimaMisura)return;
+  ultimaMisura=firma;
+  wrap.style.width=w+'px'; wrap.style.height=h+'px';
+}
+function ridimensiona(){
+  misuraCampo();
+  const r=cv.getBoundingClientRect();
+  if(r.width<2)return;
+  const dpr=Math.min(window.devicePixelRatio||1,2.5);
+  const w=Math.round(r.width*dpr), h=Math.round(r.height*dpr);
+  if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}
+  scala=w/(ruotato?H:W);
+}
+/* due sistemi di riferimento: schermo (per fondo, linee, punteggio in filigrana)
+   e campo (per racchette e palla, sempre in unità logiche) */
+function vistaSchermo(){ctx.setTransform(scala,0,0,scala,0,0);}
+function vistaCampo(){
+  if(ruotato)ctx.setTransform(0,-scala,scala,0,0,W*scala);   /* x logica verso l'alto: il giocatore 1 sta in basso */
+  else ctx.setTransform(scala,0,0,scala,0,0);
+}
+function rettTondo(x,y,w,h,r){
+  ctx.beginPath();
+  if(ctx.roundRect)ctx.roundRect(x,y,w,h,r);
+  else ctx.rect(x,y,w,h);
+  ctx.fill();
+}
+function disegna(){
+  ridimensiona();
+  const SW=ruotato?H:W, SH=ruotato?W:H;      /* misure in unità, viste dallo schermo */
+  vistaSchermo();
+  ctx.clearRect(0,0,SW,SH);
+
+  /* fondo campo */
+  ctx.fillStyle='#0e161b'; ctx.fillRect(0,0,SW,SH);
+  const g=ctx.createRadialGradient(SW/2,SH/2,4,SW/2,SH/2,Math.max(SW,SH)*0.62);
+  g.addColorStop(0,'rgba(93,242,160,.055)'); g.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=g; ctx.fillRect(0,0,SW,SH);
+
+  /* sponde, con lampo al rimbalzo */
+  ctx.fillStyle=`rgba(150,220,235,${0.1+lampoMuro*0.5})`;
+  if(ruotato){ctx.fillRect(0,0,0.7,SH);ctx.fillRect(SW-0.7,0,0.7,SH);}
+  else{ctx.fillRect(0,0,SW,0.7);ctx.fillRect(0,SH-0.7,SW,0.7);}
+
+  /* linea di metà campo */
+  ctx.fillStyle='#22343b';
+  if(ruotato)for(let x=3;x<SW-2;x+=7)ctx.fillRect(x,SH/2-0.45,4,0.9);
+  else for(let y=3;y<SH-2;y+=7)ctx.fillRect(SW/2-0.45,y,0.9,4);
+
+  /* punteggio in filigrana, dalla parte di chi lo ha fatto */
+  ctx.font=`600 ${Math.min(SW,SH)*0.4}px ui-monospace,SFMono-Regular,Menlo,monospace`;
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  const c1=ruotato?[SW/2,SH*0.73]:[SW*0.29,SH*0.42];
+  const c2=ruotato?[SW/2,SH*0.27]:[SW*0.71,SH*0.42];
+  ctx.fillStyle='rgba(93,242,160,.07)'; ctx.fillText(String(pt1??0),c1[0],c1[1]);
+  ctx.fillStyle='rgba(255,178,107,.07)'; ctx.fillText(String(pt2??0),c2[0],c2[1]);
+
+  if(!p1){vistaCampo();return;}
+  vistaCampo();
+
+  /* racchette */
+  disegnaRacchetta(p1,'#5df2a0',lampoP1);
+  disegnaRacchetta(p2,'#ffb26b',lampoP2);
+
+  /* palla e scia */
+  if(fase==='gioco'||fase==='servizio'||fase==='pausa'){
+    scia.forEach((s,i)=>{
+      const a=(i+1)/scia.length*0.22;
+      ctx.fillStyle=`rgba(238,243,239,${a})`;
+      rettTondo(s.x-BR*0.8,s.y-BR*0.8,BR*1.6,BR*1.6,BR*0.6);
+    });
+    const pulse=fase==='servizio'?1+Math.sin(performance.now()/90)*0.12:1;
+    ctx.save();
+    ctx.shadowColor='rgba(238,243,239,.65)'; ctx.shadowBlur=10;
+    ctx.fillStyle='#eef3ef';
+    rettTondo(palla.x-BR*pulse,palla.y-BR*pulse,BR*2*pulse,BR*2*pulse,BR*0.75);
+    ctx.restore();
+  }
+
+  /* conto alla rovescia al servizio */
+  if(fase==='servizio'){
+    const n=Math.ceil(timer/300);
+    if(n>0){
+      vistaSchermo();
+      ctx.font=`600 ${Math.min(SW,SH)*0.13}px ui-monospace,SFMono-Regular,Menlo,monospace`;
+      ctx.fillStyle='rgba(238,243,239,.5)';
+      ctx.fillText(String(n),SW/2,SH*0.16);
+    }
+  }
+}
+function disegnaRacchetta(p,colore,lampo){
+  ctx.save();
+  ctx.shadowColor=colore; ctx.shadowBlur=6+lampo*16;
+  ctx.fillStyle=colore;
+  rettTondo(p.x,p.y-PH/2,PW,PH,PW/2);
+  ctx.restore();
+}
+
+/* ── HUD e schermate ── */
+let hudPrec='';
+function aggiornaHud(){
+  const firma=[pt1,pt2,scambio,recordScambio,modo,liv].join('|');
+  if(firma===hudPrec)return;
+  hudPrec=firma;
+  $('#pt1').textContent=pt1??0;
+  $('#pt2').textContent=pt2??0;
+  $('#scambio').textContent=scambio??0;
+  $('#recordScambio').textContent=recordScambio;
+  $('#nome1').textContent=modo==='cpu'?'Tu':'Giocatore 1';
+  $('#nome2').textContent=modo==='cpu'?'Computer':'Giocatore 2';
+  $('#livHud').textContent=modo==='cpu'?' · '+LIVELLI[liv].nome:'';
+}
+function mostraOverlay(titolo,testo,bottone,scelte){
+  ovTitolo.textContent=titolo;
+  ovTesto.textContent=testo;
+  ovBtn.textContent=bottone;
+  scModo.hidden=!scelte; scLiv.hidden=!scelte||modo!=='cpu';
+  overlay.hidden=false;
+}
+function menu(){
+  fase='menu';
+  p1=p1||nuovaRacchetta(PX); p2=p2||nuovaRacchetta(W-PX-PW);
+  pt1=0; pt2=0; scambio=0; palla=null; scia.length=0;
+  aggiornaHud();
+  mostraOverlay('Pong',
+    modo==='cpu'
+      ? 'Primo a '+OBIETTIVO+' punti, con due di vantaggio. La palla accelera a ogni scambio: colpiscila di punta per angolarla.'
+      : 'Uno per lato, primo a '+OBIETTIVO+' punti con due di vantaggio. Trascinate ognuno dalla vostra metà, o usate i tasti.',
+    'Gioca', true);
+  sincronizzaScelte();
+}
+function mostraFine(){
+  const io=vincitore===1;
+  const titolo=modo==='cpu'?(io?'Hai vinto':'Ha vinto il computer'):('Vince il giocatore '+vincitore);
+  mostraOverlay(titolo,pt1+' – '+pt2+' · scambio più lungo mai giocato: '+recordScambio+' colpi','Rivincita',true);
+  sincronizzaScelte();
+}
+function sincronizzaScelte(){
+  scModo.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.modo===modo)));
+  scLiv.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.liv===liv)));
+  scLiv.hidden=modo!=='cpu';
+}
+function avvia(){
+  svegliaAudio();
+  overlay.hidden=true;
+  nuovaPartita();
+}
+function pausa(){
+  if(fase==='pausa'){fase=daFase;overlay.hidden=true;ultimo=0;return;}
+  if(fase!=='gioco'&&fase!=='servizio'&&fase!=='punto')return;
+  daFase=fase==='punto'?'punto':fase;
+  fase='pausa';
+  mostraOverlay('Pausa',pt1+' – '+pt2,'Riprendi',false);
+}
+function sincronizzaSuono(){
+  btnSuono.textContent=muto?'♪̸':'♪';
+  btnSuono.setAttribute('aria-pressed',String(!muto));
+}
+
+/* ── eventi ── */
+ovBtn.addEventListener('click',()=>{
+  svegliaAudio();
+  if(fase==='pausa')pausa(); else avvia();
+});
+btnPausa.addEventListener('click',()=>{svegliaAudio();pausa();});
+btnMenu.addEventListener('click',()=>{overlay.hidden=false;menu();});
+btnSuono.addEventListener('click',()=>{muto=!muto;store.set('pong_muto',muto);svegliaAudio();sincronizzaSuono();});
+
+scModo.addEventListener('click',e=>{
+  const b=e.target.closest('button[data-modo]'); if(!b)return;
+  modo=b.dataset.modo; store.set('pong_modo',modo);
+  sincronizzaScelte(); aggiornaHud(); aggiornaSuggerimento();
+  if(fase==='menu'||fase==='fine')mostraTestoMenu();
+});
+scLiv.addEventListener('click',e=>{
+  const b=e.target.closest('button[data-liv]'); if(!b)return;
+  liv=+b.dataset.liv; store.set('pong_liv',liv);
+  sincronizzaScelte(); aggiornaHud();
+});
+function mostraTestoMenu(){
+  ovTesto.textContent=modo==='cpu'
+    ? 'Primo a '+OBIETTIVO+' punti, con due di vantaggio. La palla accelera a ogni scambio: colpiscila di punta per angolarla.'
+    : 'Uno per lato, primo a '+OBIETTIVO+' punti con due di vantaggio. Trascinate ognuno dalla vostra metà, o usate i tasti.';
+}
+
+addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase();
+  if(k===' '||k==='enter'){
+    e.preventDefault(); svegliaAudio();
+    if(fase==='menu'||fase==='fine')avvia(); else pausa();
+    return;
+  }
+  if(k==='m'){muto=!muto;store.set('pong_muto',muto);sincronizzaSuono();return;}
+  if(k.startsWith('arrow'))e.preventDefault();
+  tasti[k]=true;
+});
+addEventListener('keyup',e=>{tasti[e.key.toLowerCase()]=false;});
+addEventListener('blur',()=>{for(const k in tasti)tasti[k]=false;});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&fase==='gioco')pausa();});
+
+/* trascinamento: metà sinistra = giocatore 1, metà destra = giocatore 2 */
+function latoDi(e){
+  const r=cv.getBoundingClientRect();
+  return ruotato
+    ? ((e.clientY-r.top)>r.height/2?1:2)      /* verticale: il giocatore 1 sta in basso */
+    : ((e.clientX-r.left)<r.width/2?1:2);
+}
+function yDi(e){
+  const r=cv.getBoundingClientRect();
+  const t=ruotato?(e.clientX-r.left)/r.width:(e.clientY-r.top)/r.height;
+  return limita(t*H,PH/2,H-PH/2);
+}
+cv.addEventListener('pointerdown',e=>{
+  svegliaAudio();
+  if(fase==='menu'||fase==='fine')return;
+  const lato=modo==='cpu'?1:latoDi(e);
+  e.preventDefault();
+  try{cv.setPointerCapture(e.pointerId)}catch(err){}
+  punt[lato]={id:e.pointerId,y:yDi(e)};
+});
+cv.addEventListener('pointermove',e=>{
+  for(const lato of [1,2]){
+    if(punt[lato]&&punt[lato].id===e.pointerId){e.preventDefault();punt[lato].y=yDi(e);}
+  }
+});
+function rilascia(e){
+  for(const lato of [1,2]) if(punt[lato]&&punt[lato].id===e.pointerId)punt[lato]=null;
+}
+cv.addEventListener('pointerup',rilascia);
+cv.addEventListener('pointercancel',rilascia);
+cv.addEventListener('contextmenu',e=>e.preventDefault());
+
+function aggiornaSuggerimento(){
+  const t=$('#hint'); if(!t)return;
+  t.textContent=modo==='cpu'
+    ? (ruotato?'A / D o ← / → per muoverti · trascina sul campo · spazio per pausa · M per il suono'
+             : 'W / S o ↑ / ↓ per muoverti · trascina sul campo · spazio per pausa · M per il suono')
+    : (ruotato?'Giocatore 1 (in basso): A / D · Giocatore 2 (in alto): ← / → · spazio per pausa'
+             : 'Giocatore 1: W / S · Giocatore 2: ↑ / ↓ · spazio per pausa · M per il suono');
+}
+
+addEventListener('resize',ridimensiona);
+addEventListener('orientationchange',()=>setTimeout(ridimensiona,150));
+
+sincronizzaSuono();
+aggiornaSuggerimento();
+menu();
+requestAnimationFrame(ciclo);
+</script>
+</body>
+</html>
