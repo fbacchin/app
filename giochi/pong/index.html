@@ -177,7 +177,12 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;fl
 const W=160;                   /* larghezza del campo, unità logiche */
 let   H=100;                   /* altezza: si adatta allo spazio, fra questi limiti */
 const H_MIN=80, H_MAX=112;
-const PW=2.6, PX=5;            /* racchetta: spessore, distanza dal bordo */
+const PW=2.6;                  /* spessore della racchetta */
+let   PX=5;                    /* distanza dal proprio fondo: su schermo tattile
+                                  è più larga, così il dito sta dietro la racchetta
+                                  e non la copre */
+const PX_MOUSE=5, PX_DITO=15;
+const tocco=matchMedia('(pointer:coarse)').matches;
 let   PH=17;                   /* altezza racchetta: sempre il 17% del campo */
 const BR=1.6;                  /* raggio palla */
 const V0=78, VMAX=172, VUP=1.026;   /* velocità iniziale, massima, crescita per colpo */
@@ -187,10 +192,14 @@ const UMANO=155;               /* velocità racchetta umana (unità/s) */
 const SERVIZIO_MS=850, PUNTO_MS=650;
 const OBIETTIVO=11;
 
+/* v: velocità della racchetta · reaz: ogni quanto rilegge il campo ·
+   err: quanto sbaglia la previsione · soglia: quanto aspetta prima di
+   mettersi in moto · centro: quanto torna al centro fra uno scambio e l'altro ·
+   sbadato: quante volte su cento lascia perdere del tutto un colpo */
 const LIVELLI=[
-  {nome:'Facile',    v:62,  reaz:280, err:17, centro:.5},
-  {nome:'Normale',   v:98,  reaz:155, err:8,  centro:.72},
-  {nome:'Difficile', v:148, reaz:70,  err:2.5,centro:.92}
+  {nome:'Facile',    v:54,  reaz:340, err:24, soglia:.42, centro:.30, sbadato:22},
+  {nome:'Normale',   v:86,  reaz:200, err:12, soglia:.18, centro:.60, sbadato:8},
+  {nome:'Difficile', v:140, reaz:85,  err:3.5,soglia:0,   centro:.90, sbadato:0}
 ];
 
 const $=s=>document.querySelector(s);
@@ -245,7 +254,13 @@ function svegliaAudio(){
 
 /* ── impostazione partita ── */
 function nuovaRacchetta(x){return {x,y:H/2,v:0,prec:H/2,mira:H/2,mira_t:0};}
+function applicaBordo(){
+  PX=tocco?PX_DITO:PX_MOUSE;
+  if(p1)p1.x=PX;
+  if(p2)p2.x=W-PX-PW;
+}
 function nuovaPartita(){
+  applicaBordo();
   p1=nuovaRacchetta(PX);
   p2=nuovaRacchetta(W-PX-PW);
   pt1=0; pt2=0; scambio=0; vincitore=null;
@@ -256,6 +271,7 @@ function nuovaPartita(){
 }
 function preparaServizio(){
   const ang=(Math.random()*2-1)*0.35;
+  if(p2)p2.rinuncia=false;
   palla={x:W/2,y:H/2+(Math.random()*2-1)*18,vx:Math.cos(ang)*V0*serveVerso,vy:Math.sin(ang)*V0,v:V0,colpi:0};
   scambio=0;
   fase='servizio'; timer=SERVIZIO_MS;
@@ -315,7 +331,10 @@ function cervello(dt){
   p.mira_t-=dt*1000;
   if(p.mira_t<=0){                                   /* rilegge il campo a intervalli: è il suo tempo di reazione */
     p.mira_t=L.reaz;
-    if(palla.vx>0){
+    /* si muove solo quando la palla viene verso di lui ed è già oltre la soglia:
+       ai livelli bassi parte tardi, e ogni tanto questo colpo lo lascia andare */
+    const inArrivo=palla.vx>0&&palla.x>W*L.soglia;
+    if(inArrivo&&!p.rinuncia){
       const arrivo=previsione(p.x-BR);
       const distanza=(p.x-palla.x)/W;                 /* più è lontana, più sbaglia */
       p.mira=arrivo+(Math.random()*2-1)*L.err*(0.45+distanza);
@@ -343,7 +362,12 @@ function rimbalzoRacchetta(p,verso){
     vy=Math.sign(vy||1)*Math.sqrt(Math.max(palla.v*palla.v-vx*vx,0));
   }
   palla.vx=vx; palla.vy=vy;
-  if(verso>0){palla.x=p.x+PW+BR; lampoP1=1;} else {palla.x=p.x-BR; lampoP2=1;}
+  if(verso>0){
+    palla.x=p.x+PW+BR; lampoP1=1;
+    if(modo==='cpu')p2.rinuncia=Math.random()*100<LIVELLI[liv].sbadato;   /* questo colpo lo insegue o no */
+  }else{
+    palla.x=p.x-BR; lampoP2=1;
+  }
   sfx.racchetta(limita(Math.abs(off),0,1));
 }
 
@@ -613,6 +637,7 @@ function mostraOverlay(titolo,testo,bottone,scelte){
 }
 function menu(){
   fase='menu';
+  applicaBordo();
   p1=p1||nuovaRacchetta(PX); p2=p2||nuovaRacchetta(W-PX-PW);
   pt1=0; pt2=0; scambio=0; palla=null; scia.length=0;
   aggiornaHud();
