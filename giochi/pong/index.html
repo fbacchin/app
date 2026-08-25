@@ -34,13 +34,15 @@ body{
   color:var(--avorio);
   font-family:var(--sans);
   touch-action:manipulation;
-  -webkit-user-select:none;user-select:none;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
 }
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 button:focus-visible{outline:2px solid var(--fosforo);outline-offset:3px;border-radius:12px}
 
 #app{
-  height:100dvh;height:100vh;
+  /* --h è l'altezza davvero visibile, misurata da visualViewport: su Safari
+     100vh comprende la barra degli strumenti e il fondo del campo sparisce sotto */
+  height:100vh;height:100dvh;height:var(--h,100dvh);
   display:flex;flex-direction:column;gap:10px;
   padding:calc(env(safe-area-inset-top) + 10px) 12px calc(env(safe-area-inset-bottom) + 10px);
   max-width:760px;margin:0 auto;
@@ -81,13 +83,13 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;fl
 @media (max-width:430px){.extra{display:none}}
 
 /* ── campo ── */
-#stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative}
+#stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;touch-action:none}
 #wrap{position:relative}
 #campo{display:block;width:100%;height:100%;border-radius:16px;touch-action:none;background:var(--campo)}
 
 #overlay{
   position:absolute;inset:0;border-radius:16px;
-  background:rgba(8,14,17,.92);backdrop-filter:blur(3px);
+  background:rgba(8,14,17,.92);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   padding:16px;text-align:center;overflow-y:auto;
 }
@@ -178,7 +180,7 @@ const H_MIN=80, H_MAX=112;
 const PW=2.6, PX=5;            /* racchetta: spessore, distanza dal bordo */
 let   PH=17;                   /* altezza racchetta: sempre il 17% del campo */
 const BR=1.6;                  /* raggio palla */
-const V0=86, VMAX=200, VUP=1.032;   /* velocità iniziale, massima, crescita per colpo */
+const V0=78, VMAX=172, VUP=1.026;   /* velocità iniziale, massima, crescita per colpo */
 const ANG=0.92;                /* angolo massimo di uscita (rad) dal bordo racchetta */
 const VY_MIN_X=0.42;           /* frazione minima di velocità orizzontale */
 const UMANO=155;               /* velocità racchetta umana (unità/s) */
@@ -186,9 +188,9 @@ const SERVIZIO_MS=850, PUNTO_MS=650;
 const OBIETTIVO=11;
 
 const LIVELLI=[
-  {nome:'Facile',    v:74,  reaz:230, err:13,  centro:.55},
-  {nome:'Normale',   v:112, reaz:130, err:6.5, centro:.75},
-  {nome:'Difficile', v:158, reaz:65,  err:2.2, centro:.92}
+  {nome:'Facile',    v:62,  reaz:280, err:17, centro:.5},
+  {nome:'Normale',   v:98,  reaz:155, err:8,  centro:.72},
+  {nome:'Difficile', v:148, reaz:70,  err:2.5,centro:.92}
 ];
 
 const $=s=>document.querySelector(s);
@@ -208,9 +210,9 @@ let muto=store.get('pong_muto',false);
 let recordScambio=store.get('pong_record_scambio',0);
 
 let fase='menu';                              /* menu | servizio | gioco | pausa | fine */
-let scala=1, ruotato=false;                   /* px per unità logica; campo verticale su schermi alti */
+let scala=1, ruotato=false, sfondo=null;                   /* px per unità logica; campo verticale su schermi alti */
 let p1,p2,palla,pt1,pt2,scambio,timer,vincitore,serveVerso,daFase;
-let lampoMuro=0, lampoP1=0, lampoP2=0, scia=[];
+let lampoMuro=0, lampoP1=0, lampoP2=0, scia=[], cennoFino=0;
 
 const tasti=Object.create(null);
 const punt={1:null,2:null};                   /* trascinamento: {id,y} per lato */
@@ -282,6 +284,12 @@ function limita(v,a,b){return v<a?a:v>b?b:v;}
 function muoviRacchetta(p,dir,vmax,dt){
   p.prec=p.y;
   if(dir!==0)p.y=limita(p.y+dir*vmax*dt,PH/2,H-PH/2);
+  p.v=dt>0?(p.y-p.prec)/dt:0;
+}
+/* il dito comanda diretto: nessun tetto di velocità, la racchetta è lì dove la porti */
+function portaRacchetta(p,mira,dt){
+  p.prec=p.y;
+  p.y=limita(mira,PH/2,H-PH/2);
   p.v=dt>0?(p.y-p.prec)/dt:0;
 }
 function seguiRacchetta(p,mira,vmax,dt){
@@ -376,7 +384,7 @@ function dirWS(){return ruotato?(dirTasti('a','d')||dirTasti('w','s')):(dirTasti
 function aggiornaGiocatori(dt){
   /* giocatore 1: trascinamento se attivo, altrimenti tastiera */
   if(punt[1]!==null){
-    seguiRacchetta(p1,punt[1].y,UMANO*2.6,dt);
+    portaRacchetta(p1,punt[1].y,dt);
   }else{
     const d=modo==='cpu'?(dirWS()||dirFrecce()):dirWS();
     muoviRacchetta(p1,d,UMANO,dt);
@@ -384,7 +392,7 @@ function aggiornaGiocatori(dt){
   if(modo==='cpu'){
     cervello(dt);
   }else if(punt[2]!==null){
-    seguiRacchetta(p2,punt[2].y,UMANO*2.6,dt);
+    portaRacchetta(p2,punt[2].y,dt);
   }else{
     muoviRacchetta(p2,dirFrecce(),UMANO,dt);
   }
@@ -432,7 +440,18 @@ function ciclo(ts){
 
 /* ── disegno ── */
 const wrap=$('#wrap'), stage=$('#stage');
-let ultimaMisura='';
+let ultimaMisura='', daRimisurare=true, riq=null;
+/* il riquadro del campo cambia solo quando cambia la finestra: tenerlo in cache
+   evita di forzare un ricalcolo del layout a ogni fotogramma (è lì che si perdeva fluidità) */
+function riquadro(){
+  if(!riq)riq=cv.getBoundingClientRect();
+  return riq;
+}
+function altezzaVisibile(){
+  const vv=window.visualViewport;
+  document.documentElement.style.setProperty('--h',((vv?vv.height:window.innerHeight))+'px');
+}
+function impagina(){daRimisurare=true;}
 function misuraCampo(){
   const s=stage.getBoundingClientRect();
   if(s.width<2||s.height<2)return;
@@ -440,7 +459,9 @@ function misuraCampo(){
      In più il lato corto si adatta, così il campo riempie davvero lo spazio. */
   const vert=s.height>s.width*1.06;
   const nuovaH=Math.round(limita(vert?W*s.width/s.height:W*s.height/s.width,H_MIN,H_MAX));
-  if(nuovaH!==H||vert!==ruotato){
+  /* la barra del browser che compare e sparisce cambia l'altezza di poco:
+     si ridisegna il campo, ma le proporzioni di gioco restano ferme */
+  if(Math.abs(nuovaH-H)>=4||vert!==ruotato){
     H=nuovaH; PH=H*0.17; ruotato=vert;
     if(p1)p1.y=limita(p1.y,PH/2,H-PH/2);
     if(p2){p2.y=limita(p2.y,PH/2,H-PH/2);p2.mira=limita(p2.mira,PH/2,H-PH/2);}
@@ -456,13 +477,17 @@ function misuraCampo(){
   wrap.style.width=w+'px'; wrap.style.height=h+'px';
 }
 function ridimensiona(){
+  if(!daRimisurare)return;
+  daRimisurare=false;
+  altezzaVisibile();
   misuraCampo();
-  const r=cv.getBoundingClientRect();
-  if(r.width<2)return;
-  const dpr=Math.min(window.devicePixelRatio||1,2.5);
-  const w=Math.round(r.width*dpr), h=Math.round(r.height*dpr);
+  riq=cv.getBoundingClientRect();
+  if(riq.width<2){daRimisurare=true;return;}
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  const w=Math.round(riq.width*dpr), h=Math.round(riq.height*dpr);
   if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}
   scala=w/(ruotato?H:W);
+  sfondo=null;
 }
 /* due sistemi di riferimento: schermo (per fondo, linee, punteggio in filigrana)
    e campo (per racchette e palla, sempre in unità logiche) */
@@ -485,9 +510,11 @@ function disegna(){
 
   /* fondo campo */
   ctx.fillStyle='#0e161b'; ctx.fillRect(0,0,SW,SH);
-  const g=ctx.createRadialGradient(SW/2,SH/2,4,SW/2,SH/2,Math.max(SW,SH)*0.62);
-  g.addColorStop(0,'rgba(93,242,160,.055)'); g.addColorStop(1,'rgba(0,0,0,0)');
-  ctx.fillStyle=g; ctx.fillRect(0,0,SW,SH);
+  if(!sfondo){
+    sfondo=ctx.createRadialGradient(SW/2,SH/2,4,SW/2,SH/2,Math.max(SW,SH)*0.62);
+    sfondo.addColorStop(0,'rgba(93,242,160,.055)'); sfondo.addColorStop(1,'rgba(0,0,0,0)');
+  }
+  ctx.fillStyle=sfondo; ctx.fillRect(0,0,SW,SH);
 
   /* sponde, con lampo al rimbalzo */
   ctx.fillStyle=`rgba(150,220,235,${0.1+lampoMuro*0.5})`;
@@ -511,8 +538,8 @@ function disegna(){
   vistaCampo();
 
   /* racchette */
-  disegnaRacchetta(p1,'#5df2a0',lampoP1);
-  disegnaRacchetta(p2,'#ffb26b',lampoP2);
+  disegnaRacchetta(p1,'#5df2a0',lampoP1,'rgba(93,242,160,.22)');
+  disegnaRacchetta(p2,'#ffb26b',lampoP2,'rgba(255,178,107,.22)');
 
   /* palla e scia */
   if(fase==='gioco'||fase==='servizio'||fase==='pausa'){
@@ -522,11 +549,25 @@ function disegna(){
       rettTondo(s.x-BR*0.8,s.y-BR*0.8,BR*1.6,BR*1.6,BR*0.6);
     });
     const pulse=fase==='servizio'?1+Math.sin(performance.now()/90)*0.12:1;
-    ctx.save();
-    ctx.shadowColor='rgba(238,243,239,.65)'; ctx.shadowBlur=10;
+    ctx.fillStyle='rgba(238,243,239,.16)';
+    rettTondo(palla.x-BR*1.9,palla.y-BR*1.9,BR*3.8,BR*3.8,BR*1.4);
     ctx.fillStyle='#eef3ef';
     rettTondo(palla.x-BR*pulse,palla.y-BR*pulse,BR*2*pulse,BR*2*pulse,BR*0.75);
-    ctx.restore();
+  }
+
+  /* al primo tocco: come si muove la racchetta */
+  if(cennoFino>performance.now()&&fase!=='pausa'){
+    const resta=(cennoFino-performance.now())/2800;
+    vistaSchermo();
+    ctx.globalAlpha=Math.min(1,resta*3)*0.75;
+    ctx.font=`500 ${Math.min(SW,SH)*0.045}px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif`;
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillStyle='#eef3ef';
+    ctx.fillText(modo==='cpu'?'Trascina il dito per muovere la racchetta'
+                             :'Ognuno trascina dalla sua metà',
+                 SW/2, ruotato?SH*0.62:SH*0.62);
+    ctx.globalAlpha=1;
+    vistaCampo();
   }
 
   /* conto alla rovescia al servizio */
@@ -540,12 +581,12 @@ function disegna(){
     }
   }
 }
-function disegnaRacchetta(p,colore,lampo){
-  ctx.save();
-  ctx.shadowColor=colore; ctx.shadowBlur=6+lampo*16;
+function disegnaRacchetta(p,colore,lampo,alone){
+  const a=1.1+lampo*1.6;
+  ctx.fillStyle=alone;
+  rettTondo(p.x-PW*(a-1)/2,p.y-PH/2-PW*(a-1)/2,PW*a,PH+PW*(a-1),PW);
   ctx.fillStyle=colore;
   rettTondo(p.x,p.y-PH/2,PW,PH,PW/2);
-  ctx.restore();
 }
 
 /* ── HUD e schermate ── */
@@ -554,6 +595,7 @@ function aggiornaHud(){
   const firma=[pt1,pt2,scambio,recordScambio,modo,liv].join('|');
   if(firma===hudPrec)return;
   hudPrec=firma;
+  impagina();                       /* il punteggio a due cifre può cambiare l'ingombro */
   $('#pt1').textContent=pt1??0;
   $('#pt2').textContent=pt2??0;
   $('#scambio').textContent=scambio??0;
@@ -596,6 +638,7 @@ function avvia(){
   svegliaAudio();
   overlay.hidden=true;
   nuovaPartita();
+  if(matchMedia('(pointer:coarse)').matches)cennoFino=performance.now()+2800;
 }
 function pausa(){
   if(fase==='pausa'){fase=daFase;overlay.hidden=true;ultimo=0;return;}
@@ -652,15 +695,15 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden&&fase==='gi
 
 /* trascinamento: metà sinistra = giocatore 1, metà destra = giocatore 2 */
 function latoDi(e){
-  const r=cv.getBoundingClientRect();
+  const r=riquadro();
   return ruotato
     ? ((e.clientY-r.top)>r.height/2?1:2)      /* verticale: il giocatore 1 sta in basso */
     : ((e.clientX-r.left)<r.width/2?1:2);
 }
-function yDi(e){
-  const r=cv.getBoundingClientRect();
-  const t=ruotato?(e.clientX-r.left)/r.width:(e.clientY-r.top)/r.height;
-  return limita(t*H,PH/2,H-PH/2);
+/* posizione del dito lungo l'asse su cui scorrono le racchette, in unità di campo */
+function assoDi(e){
+  const r=riquadro();
+  return ruotato?(e.clientX-r.left)/r.width*H:(e.clientY-r.top)/r.height*H;
 }
 cv.addEventListener('pointerdown',e=>{
   svegliaAudio();
@@ -668,11 +711,17 @@ cv.addEventListener('pointerdown',e=>{
   const lato=modo==='cpu'?1:latoDi(e);
   e.preventDefault();
   try{cv.setPointerCapture(e.pointerId)}catch(err){}
-  punt[lato]={id:e.pointerId,y:yDi(e)};
+  /* si parte da dove sta la racchetta: il dito la spinge, non la teletrasporta */
+  const p=lato===1?p1:p2;
+  punt[lato]={id:e.pointerId,asse0:assoDi(e),y0:p.y,y:p.y};
 });
 cv.addEventListener('pointermove',e=>{
   for(const lato of [1,2]){
-    if(punt[lato]&&punt[lato].id===e.pointerId){e.preventDefault();punt[lato].y=yDi(e);}
+    const t=punt[lato];
+    if(t&&t.id===e.pointerId){
+      e.preventDefault();
+      t.y=limita(t.y0+(assoDi(e)-t.asse0),PH/2,H-PH/2);
+    }
   }
 });
 function rilascia(e){
@@ -684,6 +733,7 @@ cv.addEventListener('contextmenu',e=>e.preventDefault());
 
 function aggiornaSuggerimento(){
   const t=$('#hint'); if(!t)return;
+  impagina();
   t.textContent=modo==='cpu'
     ? (ruotato?'A / D o ← / → per muoverti · trascina sul campo · spazio per pausa · M per il suono'
              : 'W / S o ↑ / ↓ per muoverti · trascina sul campo · spazio per pausa · M per il suono')
@@ -691,8 +741,14 @@ function aggiornaSuggerimento(){
              : 'Giocatore 1: W / S · Giocatore 2: ↑ / ↓ · spazio per pausa · M per il suono');
 }
 
-addEventListener('resize',ridimensiona);
-addEventListener('orientationchange',()=>setTimeout(ridimensiona,150));
+addEventListener('resize',impagina);
+addEventListener('orientationchange',()=>{impagina();setTimeout(impagina,200);setTimeout(impagina,600);});
+if(window.visualViewport){
+  visualViewport.addEventListener('resize',impagina);
+  visualViewport.addEventListener('scroll',impagina);
+}
+addEventListener('scroll',()=>{window.scrollTo(0,0);impagina();});
+altezzaVisibile();
 
 sincronizzaSuono();
 aggiornaSuggerimento();
