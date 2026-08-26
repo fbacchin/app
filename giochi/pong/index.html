@@ -104,6 +104,30 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;fl
 }
 #ovBtn:active{transform:translateY(1px)}
 
+/* pulsanti del menu */
+.azioni{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:2px}
+.secondario{
+  padding:11px 18px;border-radius:12px;font-size:13px;
+  background:var(--pannello);border:1px solid var(--telaio);color:var(--nebbia);
+}
+.secondario:active{transform:translateY(1px)}
+
+/* classifica */
+#classifica{display:flex;flex-direction:column;gap:12px;width:100%;max-width:420px;text-align:left}
+#classifica[hidden]{display:none}
+#overlay.vista-classifica #ovTitolo,
+#overlay.vista-classifica #ovTesto,
+#overlay.vista-classifica .scelta,
+#overlay.vista-classifica .azioni{display:none}
+.cl-testa{font-family:var(--mono);font-size:20px;letter-spacing:.06em;text-align:center;color:var(--avorio)}
+.cl-sez{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--nebbia);margin:2px 0 -4px 2px}
+.cl-box{background:var(--pannello);border:1px solid var(--telaio);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:7px}
+.cl-riga{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:10px;font-size:13px;color:var(--avorio)}
+.cl-riga .nota{color:var(--nebbia);font-size:11px;display:block}
+.cl-riga .val{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cl-riga .vinta{color:var(--fosforo)} .cl-riga .persa{color:var(--ambra)}
+.cl-vuoto{color:var(--nebbia);font-size:13px;line-height:1.55;text-align:center;padding:6px 0}
+
 /* segmenti di scelta (modalità, difficoltà) */
 .scelta{display:flex;flex-direction:column;gap:6px;align-items:center}
 .scelta .et{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--nebbia)}
@@ -158,7 +182,18 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;fl
             <button data-liv="2">Difficile</button>
           </div>
         </div>
-        <button id="ovBtn">Gioca</button>
+        <div class="azioni">
+          <button id="ovBtn">Gioca</button>
+          <button id="btnClassifica" class="secondario">Classifica</button>
+        </div>
+        <div id="classifica" hidden>
+          <div class="cl-testa">Classifica</div>
+          <div id="clCorpo"></div>
+          <div class="azioni" style="display:flex">
+            <button id="btnAzzera" class="secondario">Azzera</button>
+            <button id="btnIndietro" class="secondario">Indietro</button>
+          </div>
+        </div>
     </div>
   </section>
 
@@ -217,6 +252,7 @@ let modo=store.get('pong_modo','cpu');        /* cpu | due */
 let liv=Math.min(2,Math.max(0,store.get('pong_liv',1)|0));
 let muto=store.get('pong_muto',false);
 let recordScambio=store.get('pong_record_scambio',0);
+let scambioPartita=0;                          /* scambio più lungo della partita in corso */
 
 let fase='menu';                              /* menu | servizio | gioco | pausa | fine */
 let scala=1, ruotato=false, sfondo=null;                   /* px per unità logica; campo verticale su schermi alti */
@@ -263,7 +299,7 @@ function nuovaPartita(){
   applicaBordo();
   p1=nuovaRacchetta(PX);
   p2=nuovaRacchetta(W-PX-PW);
-  pt1=0; pt2=0; scambio=0; vincitore=null;
+  pt1=0; pt2=0; scambio=0; vincitore=null; scambioPartita=0;
   serveVerso=Math.random()<.5?-1:1;
   scia.length=0;
   preparaServizio();
@@ -285,6 +321,7 @@ function punto(chi){
   if(alto>=OBIETTIVO&&alto-basso>=2){
     vincitore=pt1>pt2?1:2;
     fase='fine';
+    registraPartita();
     if(modo==='cpu') (vincitore===1?sfx.vittoria:sfx.sconfitta)();
     else sfx.vittoria();
     mostraFine();
@@ -349,6 +386,7 @@ function rimbalzoRacchetta(p,verso){
   /* angolo dal punto d'impatto + effetto dalla racchetta in movimento */
   const off=limita((palla.y-p.y)/(PH/2),-1,1);
   palla.colpi++; scambio++;
+  if(scambio>scambioPartita)scambioPartita=scambio;
   if(scambio>recordScambio){recordScambio=scambio;store.set('pong_record_scambio',recordScambio);}
   palla.v=Math.min(palla.v*VUP,VMAX);
   let ang=off*ANG;
@@ -613,6 +651,81 @@ function disegnaRacchetta(p,colore,lampo,alone){
   rettTondo(p.x,p.y-PH/2,PW,PH,PW/2);
 }
 
+/* ── classifica: storico delle partite giocate su questo dispositivo ── */
+function storico(){const v=store.get('pong_storico',[]);return Array.isArray(v)?v:[];}
+function registraPartita(){
+  const st=storico();
+  st.unshift({t:Date.now(),modo,liv,a:pt1,b:pt2,s:scambioPartita});
+  store.set('pong_storico',st.slice(0,60));
+}
+function data(ms){
+  const d=new Date(ms);
+  return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0');
+}
+function riga(nome,nota,valore,classe){
+  return '<div class="cl-riga"><span>'+nome+(nota?'<span class="nota">'+nota+'</span>':'')+
+         '</span><span class="val'+(classe?' '+classe:'')+'">'+valore+'</span></div>';
+}
+function compilaClassifica(){
+  const st=storico(), corpo=$('#clCorpo');
+  if(!st.length){
+    corpo.innerHTML='<div class="cl-box"><p class="cl-vuoto">Ancora nessuna partita finita.<br>Gioca la prima e comincia a riempirla.</p></div>';
+    return;
+  }
+  let html='';
+
+  /* bilancio contro il computer, livello per livello */
+  html+='<div class="cl-sez">Contro il computer</div><div class="cl-box">';
+  LIVELLI.forEach((L,i)=>{
+    const p=st.filter(m=>m.modo==='cpu'&&m.liv===i);
+    const v=p.filter(m=>m.a>m.b).length, s=p.length-v;
+    const nette=p.filter(m=>m.a>m.b).sort((x,y)=>(y.a-y.b)-(x.a-x.b))[0];
+    html+=riga(L.nome, p.length?(nette?'migliore vittoria '+nette.a+' – '+nette.b:'nessuna vittoria')+' · '+p.length+(p.length===1?' partita':' partite'):'mai giocato',
+               p.length?v+' – '+s:'—', v>s?'vinta':(s>v?'persa':''));
+  });
+  html+='</div>';
+
+  /* due giocatori */
+  const due=st.filter(m=>m.modo==='due');
+  if(due.length){
+    const g1=due.filter(m=>m.a>m.b).length;
+    html+='<div class="cl-sez">Due giocatori</div><div class="cl-box">'+
+          riga('Giocatore 1 – Giocatore 2',due.length+(due.length===1?' partita':' partite'),g1+' – '+(due.length-g1))+'</div>';
+  }
+
+  /* record */
+  const tutte=st.length, vinteCpu=st.filter(m=>m.modo==='cpu'&&m.a>m.b).length;
+  html+='<div class="cl-sez">Record</div><div class="cl-box">'+
+        riga('Scambio più lungo','in una partita finita',Math.max(recordScambio,...st.map(m=>m.s||0))+' colpi')+
+        riga('Partite giocate','',tutte)+
+        riga('Vittorie sul computer','',vinteCpu)+
+        '</div>';
+
+  /* ultime partite */
+  html+='<div class="cl-sez">Ultime partite</div><div class="cl-box">';
+  st.slice(0,6).forEach(m=>{
+    const io=m.a>m.b;
+    const chi=m.modo==='cpu'?'Computer · '+(LIVELLI[m.liv]||{nome:'?'}).nome:'Due giocatori';
+    html+=riga(data(m.t)+' · '+chi, m.s?'scambio più lungo '+m.s+' colpi':'',
+               m.a+' – '+m.b, m.modo==='cpu'?(io?'vinta':'persa'):'');
+  });
+  html+='</div>';
+
+  corpo.innerHTML=html;
+}
+let azzeraArmato=0;
+function apriClassifica(){
+  compilaClassifica();
+  azzeraArmato=0; $('#btnAzzera').textContent='Azzera';
+  $('#classifica').hidden=false;
+  overlay.classList.add('vista-classifica');
+  overlay.hidden=false;
+}
+function chiudiClassifica(){
+  $('#classifica').hidden=true;
+  overlay.classList.remove('vista-classifica');
+}
+
 /* ── HUD e schermate ── */
 let hudPrec='';
 function aggiornaHud(){
@@ -629,6 +742,7 @@ function aggiornaHud(){
   $('#livHud').textContent=modo==='cpu'?' · '+LIVELLI[liv].nome:'';
 }
 function mostraOverlay(titolo,testo,bottone,scelte){
+  chiudiClassifica();
   ovTitolo.textContent=titolo;
   ovTesto.textContent=testo;
   ovBtn.textContent=bottone;
@@ -661,6 +775,7 @@ function sincronizzaScelte(){
 }
 function avvia(){
   svegliaAudio();
+  chiudiClassifica();
   overlay.hidden=true;
   nuovaPartita();
   if(matchMedia('(pointer:coarse)').matches)cennoFino=performance.now()+2800;
@@ -683,6 +798,21 @@ ovBtn.addEventListener('click',()=>{
   if(fase==='pausa')pausa(); else avvia();
 });
 btnPausa.addEventListener('click',()=>{svegliaAudio();pausa();});
+$('#btnClassifica').addEventListener('click',apriClassifica);
+$('#btnIndietro').addEventListener('click',chiudiClassifica);
+$('#btnAzzera').addEventListener('click',e=>{
+  const b=e.currentTarget;
+  if(!azzeraArmato){                                  /* due passaggi: una svista non cancella tutto */
+    azzeraArmato=setTimeout(()=>{azzeraArmato=0;b.textContent='Azzera';},4000);
+    b.textContent='Cancello tutto?';
+    return;
+  }
+  clearTimeout(azzeraArmato); azzeraArmato=0; b.textContent='Azzera';
+  store.set('pong_storico',[]);
+  recordScambio=0; store.set('pong_record_scambio',0);
+  hudPrec=''; aggiornaHud();
+  compilaClassifica();
+});
 btnMenu.addEventListener('click',()=>{overlay.hidden=false;menu();});
 btnSuono.addEventListener('click',()=>{muto=!muto;store.set('pong_muto',muto);svegliaAudio();sincronizzaSuono();});
 
@@ -707,10 +837,12 @@ addEventListener('keydown',e=>{
   const k=e.key.toLowerCase();
   if(k===' '||k==='enter'){
     e.preventDefault(); svegliaAudio();
+    if(!$('#classifica').hidden){chiudiClassifica();return;}
     if(fase==='menu'||fase==='fine')avvia(); else pausa();
     return;
   }
   if(k==='m'){muto=!muto;store.set('pong_muto',muto);sincronizzaSuono();return;}
+  if(k==='escape'&&!$('#classifica').hidden){chiudiClassifica();return;}
   if(k.startsWith('arrow'))e.preventDefault();
   tasti[k]=true;
 });
