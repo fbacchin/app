@@ -1,5 +1,5 @@
 {
- "time": "2026-08-27T02:54:47Z",
+ "time": "2026-08-27T02:59:52Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,45 +8,5 @@
   "km": null,
   "wait": null
  },
- "events": [
-  {
-   "id": "situation.648040.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-26T14:00:11Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso <-> Luzern zwischen Anschluss Wassen und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5 Dauer: tagsüber voraussichtlich 28.09.2026 07:00 bis 02.10.2026 17:00",
-    "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Wassen et Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la journée probable 28.09.2026 07:00 jusqu'à 02.10.2026 17:00",
-    "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Wassen E Galleria Galleria San Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 28.09.2026 07:00 fino 02.10.2026 17:00"
-   }
-  },
-  {
-   "id": "situation.648039.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-26T13:59:29Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso <-> Luzern zwischen Anschluss Wassen und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5 Dauer: tagsüber voraussichtlich 14.09.2026 07:00 bis 18.09.2026 17:00",
-    "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Wassen et Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la journée probable 14.09.2026 07:00 jusqu'à 18.09.2026 17:00",
-    "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Wassen E Galleria Galleria San Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 14.09.2026 07:00 fino 18.09.2026 17:00"
-   }
-  },
-  {
-   "id": "situation.648038.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-26T13:59:17Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Gotthard <-> Luzern zwischen Anschluss Amsteg und Parkplatz Gurtnellen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5 Dauer: tagsüber voraussichtlich 15.10.2026 07:00 bis 15.10.2026 17:00",
-    "fr": "Libéré: A2 St-Gothard <-> Lucerne entre Jonction autoroutière Amsteg et Parking Gurtnellen Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la journée probable 15.10.2026 07:00 jusqu'à 15.10.2026 17:00",
-    "it": "Approvato: A2 S. Gottardo <-> Luzern tra Svincolo autostradale Amsteg E Parcheggio Gurtnellen Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 15.10.2026 07:00 fino 15.10.2026 17:00"
-   }
-  }
- ]
+ "events": []
 }
