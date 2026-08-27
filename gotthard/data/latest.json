@@ -1,64 +1,25 @@
 {
- "time": "2026-08-27T10:06:15Z",
+ "time": "2026-08-27T18:21:04Z",
  "south": {
-  "km": 4.0,
+  "km": null,
   "wait": null
  },
  "north": {
-  "km": 5.0,
+  "km": null,
   "wait": null
  },
  "events": [
   {
-   "id": "situation.648258.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-08-27T10:04:59Z",
-   "km": 5.0,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 5.0 Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 5.0 Raison: surcharge de trafic",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 5.0 Causa: traffico congestionato"
-   }
-  },
-  {
-   "id": "situation.648270.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-08-27T09:47:45Z",
-   "km": 4.0,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Anschluss Göschenen Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato"
-   }
-  },
-  {
-   "id": "situation.648274.1.1.1",
-   "type": "AbnormalTraffic",
+   "id": "situation.648437.1.1.1",
+   "type": "RoadOrCarriagewayOrLaneManagement",
    "direction": null,
-   "versionTime": "2026-08-27T10:01:15Z",
+   "versionTime": "2026-08-27T18:06:39Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: H2 Flüelen -> Airolo zwischen Anschluss Göschenen und Ortschaft Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: H2 Flüelen -> Airolo entre Jonction autoroutière Göschenen et Localité Göschenen Situation: bouchon Raison: surcharge de trafic",
-    "it": "Approvato: H2 Flüelen -> Airolo tra Svincolo autostradale Göschenen E Luogo Göschenen Situazione: colonna Causa: traffico congestionato"
-   }
-  },
-  {
-   "id": "situation.648273.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-27T09:59:49Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Göschenen <-> Flüelen zwischen Ortschaft Erstfeld und Anschluss Göschenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen Dauer:  voraussichtlich 27.08.2026 11:59",
-    "fr": "Libéré: H2 Göschenen <-> Flüelen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus Durée:  probable 27.08.2026 11:59",
-    "it": "Approvato: H2 Göschenen <-> Flüelen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi Durata:  probabile 27.08.2026 11:59"
+    "de": "Freigegeben: A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Bauarbeiten Dauer: nachts voraussichtlich 27.08.2026 23:00 bis 28.08.2026 05:00",
+    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: travaux de construction Durée: durant la nuit probable 27.08.2026 23:00 jusqu'à 28.08.2026 05:00",
+    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: lavori di costruzione Durata: durante la notte probabile 27.08.2026 23:00 fino 28.08.2026 05:00"
    }
   },
   {
@@ -72,32 +33,6 @@
     "de": "Freigegeben: A2 Chiasso <-> Gotthard zwischen Anschluss Faido und Anschluss Quinto Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.9 Verkehrsführung: Verkehr wird über die Gegenfahrbahn geleitet Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5 Dauer:  voraussichtlich 12.09.2026 20:00 bis 13.09.2026 04:30",
     "fr": "Libéré: A2 Chiasso <-> St-Gothard entre Jonction autoroutière Faido et Jonction autoroutière Quinto Situation: trafic perturbé travaux, longueur [km] 0.9 Gestion du trafic: trafic bidirectionnel Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée:  probable 12.09.2026 20:00 jusqu'à 13.09.2026 04:30",
     "it": "Approvato: A2 Chiasso <-> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Limitazione del traffico: circolazione bidirezionale Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata:  probabile 12.09.2026 20:00 fino 13.09.2026 04:30"
-   }
-  },
-  {
-   "id": "situation.648267.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-08-27T09:09:27Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Pannenfahrzeug",
-    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: véhicule en panne",
-    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: veicolo in avaria"
-   }
-  },
-  {
-   "id": "situation.648259.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "north",
-   "versionTime": "2026-08-27T08:39:19Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
    }
   },
   {
@@ -124,84 +59,6 @@
     "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Anschluss Airolo und Anschluss Quinto Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.7 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 7.35 Dauer:  voraussichtlich 10.09.2026 07:30 bis 10.09.2026 12:00",
     "fr": "Libéré: A2 St-Gothard -> Chiasso entre Jonction autoroutière Airolo et Jonction autoroutière Quinto Situation: trafic perturbé travaux, longueur [km] 0.7 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 7.35 Durée:  probable 10.09.2026 07:30 jusqu'à 10.09.2026 12:00",
     "it": "Approvato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Airolo E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 7.35 Durata:  probabile 10.09.2026 07:30 fino 10.09.2026 12:00"
-   }
-  },
-  {
-   "id": "situation.631029.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-27T05:13:29Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.3 Dauer:  voraussichtlich 10.06.2026 07:00 bis 18.09.2026 17:00",
-    "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3 Durée:  probable 10.06.2026 07:00 jusqu'à 18.09.2026 17:00",
-    "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3 Durata:  probabile 10.06.2026 07:00 fino 18.09.2026 17:00"
-   }
-  },
-  {
-   "id": "situation.646018.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-27T05:05:44Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.52 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.3 Dauer:  voraussichtlich 17.08.2026 07:00 bis 18.09.2026 17:00",
-    "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux, longueur [km] 0.52 Gestion du trafic: circulation alternée à une voie Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3 Durée:  probable 17.08.2026 07:00 jusqu'à 18.09.2026 17:00",
-    "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere, lunghezza [km] 0.52 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3 Durata:  probabile 17.08.2026 07:00 fino 18.09.2026 17:00"
-   }
-  },
-  {
-   "id": "situation.648204.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-27T05:04:45Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.39 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.3 Dauer:  voraussichtlich 31.08.2026 07:00 bis 20.11.2026 17:00",
-    "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux, longueur [km] 0.39 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3 Durée:  probable 31.08.2026 07:00 jusqu'à 20.11.2026 17:00",
-    "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere, lunghezza [km] 0.39 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3 Durata:  probabile 31.08.2026 07:00 fino 20.11.2026 17:00"
-   }
-  },
-  {
-   "id": "situation.636587.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-27T05:02:30Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.45 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.3 Dauer:  voraussichtlich 02.07.2026 07:00 bis 30.09.2026 17:00",
-    "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux, longueur [km] 0.45 Gestion du trafic: circulation alternée à une voie Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3 Durée:  probable 02.07.2026 07:00 jusqu'à 30.09.2026 17:00",
-    "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere, lunghezza [km] 0.45 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3 Durata:  probabile 02.07.2026 07:00 fino 30.09.2026 17:00"
-   }
-  },
-  {
-   "id": "situation.648201.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-27T04:59:28Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.37 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.3 Dauer:  voraussichtlich 31.08.2026 07:00 bis 20.11.2026 17:00",
-    "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux, longueur [km] 0.37 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3 Durée:  probable 31.08.2026 07:00 jusqu'à 20.11.2026 17:00",
-    "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere, lunghezza [km] 0.37 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3 Durata:  probabile 31.08.2026 07:00 fino 20.11.2026 17:00"
-   }
-  },
-  {
-   "id": "situation.626453.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-08-27T04:58:08Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.3 Dauer:  voraussichtlich 22.05.2026 07:00 bis 30.09.2026 17:00",
-    "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3 Durée:  probable 22.05.2026 07:00 jusqu'à 30.09.2026 17:00",
-    "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3 Durata:  probabile 22.05.2026 07:00 fino 30.09.2026 17:00"
    }
   }
  ]

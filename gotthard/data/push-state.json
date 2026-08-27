@@ -1,13 +1,16 @@
 {
  "south": {
   "phase": "queued",
-  "lastSent": "2026-08-27T09:25:26Z"
+  "lastSent": "2026-08-27T09:25:26Z",
+  "clearSince": "2026-08-27T18:21:04Z"
  },
  "north": {
   "phase": "queued",
-  "lastSent": "2026-08-27T09:15:13Z"
+  "lastSent": "2026-08-27T09:15:13Z",
+  "clearSince": "2026-08-27T18:21:04Z"
  },
  "tunnel": {
-  "phase": "closed"
+  "phase": "closed",
+  "openSince": "2026-08-27T18:21:04Z"
  }
 }
