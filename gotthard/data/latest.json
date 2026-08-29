@@ -1,5 +1,5 @@
 {
- "time": "2026-08-29T13:40:59Z",
+ "time": "2026-08-29T13:46:05Z",
  "south": {
   "km": 8.0,
   "wait": 80
@@ -46,19 +46,6 @@
     "de": "Freigegeben: H2 Airolo -> Göschenen zwischen Ortschaft Andermatt und Ortschaft Göschenen Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
     "fr": "Libéré: H2 Airolo -> Göschenen entre Localité Andermatt et Localité Göschenen Situation: trafic en accordéon Raison: surcharge de trafic",
     "it": "Approvato: H2 Airolo -> Göschenen tra Luogo Andermatt E Luogo Göschenen Situazione: traffico fortemente rallentato Causa: traffico congestionato"
-   }
-  },
-  {
-   "id": "situation.648871.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "south",
-   "versionTime": "2026-08-29T10:25:17Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Amsteg Sachlage: Ausfahrt gesperrt",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Amsteg Situation: sortie fermée",
-    "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Amsteg Situazione: uscita chiusa"
    }
   },
   {
