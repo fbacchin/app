@@ -1,5 +1,5 @@
 {
- "time": "2026-08-29T13:00:09Z",
+ "time": "2026-08-29T13:05:15Z",
  "south": {
   "km": 8.0,
   "wait": 80
@@ -46,19 +46,6 @@
     "de": "Freigegeben: H2 Airolo -> Göschenen zwischen Ortschaft Andermatt und Ortschaft Göschenen Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
     "fr": "Libéré: H2 Airolo -> Göschenen entre Localité Andermatt et Localité Göschenen Situation: trafic en accordéon Raison: surcharge de trafic",
     "it": "Approvato: H2 Airolo -> Göschenen tra Luogo Andermatt E Luogo Göschenen Situazione: traffico fortemente rallentato Causa: traffico congestionato"
-   }
-  },
-  {
-   "id": "situation.648893.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-08-29T12:35:16Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Raststätte San Gottardo Sud Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: linker Fahrstreifen blockiert",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Aire de service San Gottardo Sud Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de gauche bloquée",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Area di servizio San Gottardo Sud Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di sinistra bloccata"
    }
   },
   {
