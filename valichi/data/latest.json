@@ -1,43 +1,42 @@
 {
- "time": "2026-08-28T20:19:48Z",
+ "time": "2026-08-29T01:30:39Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "south": {
-     "wait": 30
+     "wait": null
     },
     "north": {
-     "wait": 30
+     "wait": null
     }
    }
   },
   "hr-me.karasovici": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
      "wait": null
     },
     "entry": {
-     "wait": 180
+     "wait": null
     }
    }
   },
   "hr-me.vitaljina": {
-   "updated": "2026-08-28T19:59:33Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
-     "wait": 30
+     "wait": null
     },
     "entry": {
-     "wait": 240
+     "wait": null
     }
-   },
-   "held": true
+   }
   },
   "hr-ba.nova-sela": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
      "wait": null
@@ -48,7 +47,7 @@
    }
   },
   "hr-ba.stara-gradiska": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
      "wait": null
@@ -59,30 +58,29 @@
    }
   },
   "hr-rs.bajakovo": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
-     "wait": 60
+     "wait": null
     },
     "entry": {
-     "wait": 120
+     "wait": null
     }
    }
   },
   "hr-rs.tovarnik": {
-   "updated": "2026-08-28T19:59:33Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
-     "wait": 60
+     "wait": null
     },
     "entry": {
-     "wait": 60
+     "wait": null
     }
-   },
-   "held": true
+   }
   },
   "hu-rs.roszke": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
      "wait": null
@@ -93,7 +91,7 @@
    }
   },
   "hu-rs.tompa": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
      "wait": null
@@ -104,7 +102,7 @@
    }
   },
   "hu-ua.zahony": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -115,7 +113,7 @@
    }
   },
   "hu-ua.beregsurany": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -126,7 +124,7 @@
    }
   },
   "pl-ua.medyka": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
      "wait": 0
@@ -137,7 +135,7 @@
    }
   },
   "pl-ua.korczowa": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
      "wait": 60
@@ -148,7 +146,7 @@
    }
   },
   "pl-ua.dorohusk": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
      "wait": null
@@ -159,7 +157,7 @@
    }
   },
   "pl-ua.hrebenne": {
-   "updated": "2026-08-28T20:19:48Z",
+   "updated": "2026-08-29T01:30:39Z",
    "directions": {
     "exit": {
      "wait": 0
@@ -173,14 +171,16 @@
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-08-28T17:16:30Z"
+   "sampled": "2026-08-29T01:29:34Z"
   },
   "hak": {
-   "ok": true,
+   "ok": false,
    "url": "https://www.hak.hr/info/stanje-na-cestama",
-   "found": 6,
+   "found": 0,
    "of": 6,
-   "waits": 3
+   "waits": 0,
+   "error": "nessun valico riconosciuto nella pagina",
+   "excerpt": "izvjesce o stanju na cestama prohodnost cesta događaji na cestama stanje na autocestama ceste zatvorene zbog radova privremena prometna regulacija ostali događaji vremenski uvjeti vremenski uvjeti zimski uvjeti bura granicni prijelazi pomorski promet zeljeznicki promet ogranicenja za teretna vozila prometna prognoza granicni prijelazi granicni prijelazi savjeti vozacima voznja po mokrim i skliskim"
   },
   "police_hu": {
    "ok": true,
@@ -195,7 +195,7 @@
    "found": 4,
    "of": 4,
    "waits": 3,
-   "ora_pl": "2026-08-28 22"
+   "ora_pl": "2026-08-29 03"
   }
  }
 }
