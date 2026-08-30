@@ -3227,5 +3227,21 @@
    "pl-ua.korczowa",
    "pl-ua.medyka"
   ]
+ },
+ {
+  "time": "2026-08-30T22:13:38Z",
+  "w": {
+   "hr-me.karasovici.entry": 90,
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 60,
+   "pl-ua.korczowa.exit": 60,
+   "pl-ua.hrebenne.exit": 120
+  },
+  "held": [
+   "hr-me.karasovici"
+  ]
  }
 ]
