@@ -12,7 +12,7 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen Col Col du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.15 Gestion du trafic: Régulation de la circulation par de la signalisation lumineuse Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.0 Durée:  probable 07.09.2026 07:00 jusqu'à 18.09.2026 17:00",
    "it": "Approvato: H2 Airolo <-> Göschenen Passo Passo del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: Regolazione semaforica del traffico  Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0 Durata:  probabile 07.09.2026 07:00 fino 18.09.2026 17:00"
   },
-  "lastSeen": "2026-08-31T18:36:49Z"
+  "lastSeen": "2026-08-31T18:41:54Z"
  },
  {
   "firstSeen": "2026-08-31T09:11:54Z",
@@ -282,21 +282,5 @@
   },
   "lastSeen": "2026-08-29T20:02:51Z",
   "revokedAt": "2026-08-29T20:07:56Z"
- },
- {
-  "firstSeen": "2026-08-29T06:10:45Z",
-  "id": "situation.648799.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-08-29T18:29:18Z",
-  "km": 1.0,
-  "wait": 10,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
-  },
-  "lastSeen": "2026-08-29T18:40:18Z",
-  "revokedAt": "2026-08-29T18:45:25Z"
  }
 ]
