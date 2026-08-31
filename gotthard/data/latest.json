@@ -1,14 +1,27 @@
 {
- "time": "2026-08-31T11:24:36Z",
+ "time": "2026-08-31T11:29:42Z",
  "south": {
-  "km": 3.0,
-  "wait": 30
+  "km": 9.0,
+  "wait": 90
  },
  "north": {
   "km": 3.0,
   "wait": 30
  },
  "events": [
+  {
+   "id": "situation.649142.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "south",
+   "versionTime": "2026-08-31T11:26:58Z",
+   "km": 9.0,
+   "wait": 90,
+   "texts": {
+    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Erstfeld und Anschluss Göschenen Sachlage: Stau Länge [km] 9.0 Ursache: Bauarbeiten Zusatz 1: Zeitverlust Anz. [min] 90",
+    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 9.0 Raison: travaux de construction Complément 1: retards Nbre. [min] 90",
+    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 9.0 Causa: lavori di costruzione Aggiunta 1: ritardi No. [min] 90"
+   }
+  },
   {
    "id": "situation.649148.1.1.1",
    "type": "AbnormalTraffic",
@@ -23,16 +36,16 @@
    }
   },
   {
-   "id": "situation.649142.1.1.1",
-   "type": "AbnormalTraffic",
+   "id": "situation.649162.1.1.1",
+   "type": "RoadOrCarriagewayOrLaneManagement",
    "direction": "south",
-   "versionTime": "2026-08-31T10:44:47Z",
-   "km": 3.0,
-   "wait": 30,
+   "versionTime": "2026-08-31T11:27:45Z",
+   "km": null,
+   "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 3.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 30",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 3.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30"
+    "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Göschenen Sachlage: Einfahrt gesperrt",
+    "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Göschenen Situation: entrée fermée",
+    "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata"
    }
   },
   {
