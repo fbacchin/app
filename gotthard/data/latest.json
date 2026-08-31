@@ -1,5 +1,5 @@
 {
- "time": "2026-08-31T11:29:42Z",
+ "time": "2026-08-31T11:34:49Z",
  "south": {
   "km": 9.0,
   "wait": 90
@@ -46,19 +46,6 @@
     "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Göschenen Sachlage: Einfahrt gesperrt",
     "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Göschenen Situation: entrée fermée",
     "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata"
-   }
-  },
-  {
-   "id": "situation.649157.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-08-31T09:51:10Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Tunnel Naxberg-Tunnel Sachlage: stockender Verkehr Ursache: Bauarbeiten",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Tunnel Tunnel Naxberg Situation: trafic en accordéon Raison: travaux de construction",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Galleria Galleria Naxberg Situazione: traffico fortemente rallentato Causa: lavori di costruzione"
    }
   },
   {
