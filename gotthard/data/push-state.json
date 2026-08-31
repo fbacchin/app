@@ -1,8 +1,7 @@
 {
  "south": {
-  "phase": "heavy",
-  "lastSent": "2026-08-31T11:29:42Z",
-  "clearSince": "2026-08-31T17:10:12Z"
+  "phase": "clear",
+  "lastSent": "2026-08-31T17:30:35Z"
  },
  "north": {
   "phase": "queued",
