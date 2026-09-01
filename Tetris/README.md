@@ -29,4 +29,4 @@ Con una tastiera collegata (iPad): frecce per muovere, ↑ o X ruota, Z ruota al
 
 ## Versione web
 
-La stessa partita si gioca dal browser: `giochi/tetris/index.html` in questo repository.
+La stessa partita si gioca dal browser su https://fbacchin.github.io/Giochi/tetris/ (sorgente nel repository [fbacchin/Giochi](https://github.com/fbacchin/Giochi), cartella `tetris/`), anche installabile sulla schermata Home e giocabile senza rete.
