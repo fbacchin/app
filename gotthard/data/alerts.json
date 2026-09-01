@@ -4,15 +4,45 @@
   "id": "situation.649462.1.1.1",
   "type": "AbnormalTraffic",
   "direction": "south",
-  "versionTime": "2026-09-01T08:02:45Z",
-  "km": 1.0,
-  "wait": 10,
+  "versionTime": "2026-09-01T08:21:08Z",
+  "km": null,
+  "wait": 15,
   "texts": {
-   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
-   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
-   "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
+   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Ursache: Bauarbeiten Zusatz 1: Zeitverlust Anz. [min] 15",
+   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon Raison: travaux de construction Complément 1: retards Nbre. [min] 15",
+   "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna Causa: lavori di costruzione Aggiunta 1: ritardi No. [min] 15"
   },
-  "lastSeen": "2026-09-01T08:19:05Z"
+  "lastSeen": "2026-09-01T08:24:10Z"
+ },
+ {
+  "firstSeen": "2026-09-01T08:24:10Z",
+  "id": "situation.649473.1.1.1",
+  "type": "RoadOrCarriagewayOrLaneManagement",
+  "direction": "south",
+  "versionTime": "2026-09-01T08:23:21Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Göschenen Sachlage: Einfahrt gesperrt",
+   "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Göschenen Situation: entrée fermée",
+   "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata"
+  },
+  "lastSeen": "2026-09-01T08:24:10Z"
+ },
+ {
+  "firstSeen": "2026-09-01T08:24:10Z",
+  "id": "situation.649472.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": null,
+  "versionTime": "2026-09-01T08:22:57Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: H2 Göschenen <-> Flüelen zwischen Ortschaft Erstfeld und Anschluss Göschenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
+   "fr": "Libéré: H2 Göschenen <-> Flüelen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
+   "it": "Approvato: H2 Göschenen <-> Flüelen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
+  },
+  "lastSeen": "2026-09-01T08:24:10Z"
  },
  {
   "firstSeen": "2026-08-31T17:10:12Z",
