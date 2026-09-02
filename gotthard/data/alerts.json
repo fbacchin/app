@@ -1,20 +1,5 @@
 [
  {
-  "firstSeen": "2026-09-02T12:27:45Z",
-  "id": "situation.649802.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "south",
-  "versionTime": "2026-09-02T12:25:12Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Parkplatz Gurtnellen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.7 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.0 Dauer: tagsüber voraussichtlich 16.09.2026 07:00 bis 16.09.2026 11:00",
-   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Parking Gurtnellen Situation: trafic perturbé travaux, longueur [km] 0.7 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.0 Durée: durant la journée probable 16.09.2026 07:00 jusqu'à 16.09.2026 11:00",
-   "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Parcheggio Gurtnellen Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0 Durata: durante il giorno probabile 16.09.2026 07:00 fino 16.09.2026 11:00"
-  },
-  "lastSeen": "2026-09-02T22:28:52Z"
- },
- {
   "firstSeen": "2026-09-02T16:45:07Z",
   "id": "situation.649889.1.1.1",
   "type": "AbnormalTraffic",
@@ -26,6 +11,21 @@
    "de": "Freigegeben: A2 Chiasso <-> Gotthard zwischen Anschluss Quinto und Anschluss Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.65 Verkehrsführung: veränderte Verkehrsführung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 7.3 Dauer: nachts voraussichtlich 14.09.2026 20:00 bis 18.09.2026 05:00",
    "fr": "Libéré: A2 Chiasso <-> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: trafic perturbé travaux, longueur [km] 0.65 Gestion du trafic: nouveau plan de circulation sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 7.3 Durée: durant la nuit probable 14.09.2026 20:00 jusqu'à 18.09.2026 05:00",
    "it": "Approvato: A2 Chiasso <-> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.65 Limitazione del traffico: nuova viabilità ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 7.3 Durata: durante la notte probabile 14.09.2026 20:00 fino 18.09.2026 05:00"
+  },
+  "lastSeen": "2026-09-02T22:33:58Z"
+ },
+ {
+  "firstSeen": "2026-09-02T12:27:45Z",
+  "id": "situation.649802.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "south",
+  "versionTime": "2026-09-02T12:25:12Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Parkplatz Gurtnellen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.7 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.0 Dauer: tagsüber voraussichtlich 16.09.2026 07:00 bis 16.09.2026 11:00",
+   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Parking Gurtnellen Situation: trafic perturbé travaux, longueur [km] 0.7 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.0 Durée: durant la journée probable 16.09.2026 07:00 jusqu'à 16.09.2026 11:00",
+   "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Parcheggio Gurtnellen Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0 Durata: durante il giorno probabile 16.09.2026 07:00 fino 16.09.2026 11:00"
   },
   "lastSeen": "2026-09-02T22:28:52Z"
  },
