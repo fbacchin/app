@@ -3077,5 +3077,15 @@
    "hu-ua.beregsurany",
    "hu-ua.zahony"
   ]
+ },
+ {
+  "time": "2026-09-02T21:17:50Z",
+  "w": {
+   "hr-rs.bajakovo.entry": 60,
+   "hr-rs.tovarnik.entry": 30,
+   "pl-ua.medyka.exit": 0,
+   "pl-ua.korczowa.exit": 0,
+   "pl-ua.hrebenne.exit": 0
+  }
  }
 ]
