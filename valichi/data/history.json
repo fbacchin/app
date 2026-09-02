@@ -2854,5 +2854,20 @@
    "pl-ua.korczowa.exit": 0,
    "pl-ua.hrebenne.exit": 0
   }
+ },
+ {
+  "time": "2026-09-02T13:24:46Z",
+  "w": {
+   "ch.gottardo.south": 20,
+   "ch.gottardo.north": 10,
+   "hr-rs.bajakovo.entry": 90,
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 0,
+   "pl-ua.korczowa.exit": 0,
+   "pl-ua.hrebenne.exit": 0
+  }
  }
 ]
