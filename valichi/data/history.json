@@ -2769,5 +2769,20 @@
   "held": [
    "pl-ua.medyka"
   ]
+ },
+ {
+  "time": "2026-09-02T05:37:02Z",
+  "w": {
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 0,
+   "pl-ua.korczowa.exit": 0,
+   "pl-ua.hrebenne.exit": 0
+  },
+  "held": [
+   "pl-ua.medyka"
+  ]
  }
 ]
