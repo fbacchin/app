@@ -1,52 +1,12 @@
 {
- "time": "2026-09-03T16:31:50Z",
+ "time": "2026-09-03T17:26:10Z",
  "south": {
-  "km": 1.0,
-  "wait": 10
+  "km": null,
+  "wait": null
  },
  "north": {
-  "km": 1.0,
-  "wait": 10
+  "km": null,
+  "wait": null
  },
- "events": [
-  {
-   "id": "situation.650055.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-09-03T16:16:39Z",
-   "km": 1.0,
-   "wait": 10,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
-   }
-  },
-  {
-   "id": "situation.650067.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-09-03T16:05:07Z",
-   "km": 1.0,
-   "wait": 10,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
-   }
-  },
-  {
-   "id": "situation.649949.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-09-03T04:05:39Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Tunnel Seelisberg-Tunnel und Anschluss Amsteg Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 4.0 Dauer: tagsüber voraussichtlich 08.09.2026 08:00 bis 11.09.2026 16:00",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Tunnel Tunnel du Seelisberg et Jonction autoroutière Amsteg Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 4.0 Durée: durant la journée probable 08.09.2026 08:00 jusqu'à 11.09.2026 16:00",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Galleria Galleria Seelisberg E Svincolo autostradale Amsteg Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0 Durata: durante il giorno probabile 08.09.2026 08:00 fino 11.09.2026 16:00"
-   }
-  }
- ]
+ "events": []
 }
