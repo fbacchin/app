@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Tunnel Tunnel du Seelisberg et Jonction autoroutière Amsteg Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 4.0 Durée: durant la journée probable 08.09.2026 08:00 jusqu'à 11.09.2026 16:00",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Galleria Galleria Seelisberg E Svincolo autostradale Amsteg Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0 Durata: durante il giorno probabile 08.09.2026 08:00 fino 11.09.2026 16:00"
   },
-  "lastSeen": "2026-09-03T09:58:16Z"
+  "lastSeen": "2026-09-03T10:03:21Z"
  },
  {
   "firstSeen": "2026-09-03T09:22:37Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
   },
-  "lastSeen": "2026-09-03T09:58:16Z"
+  "lastSeen": "2026-09-03T10:03:21Z"
  },
  {
   "firstSeen": "2026-09-03T09:22:37Z",
@@ -42,7 +42,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 3.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30"
   },
-  "lastSeen": "2026-09-03T09:58:16Z"
+  "lastSeen": "2026-09-03T10:03:21Z"
  },
  {
   "firstSeen": "2026-09-03T09:22:37Z",
@@ -57,7 +57,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-09-03T09:58:16Z"
+  "lastSeen": "2026-09-03T10:03:21Z"
  },
  {
   "firstSeen": "2026-09-03T09:37:53Z",
@@ -72,7 +72,7 @@
    "fr": "Libéré: H2 Göschenen <-> Flüelen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus Durée:  probable 03.09.2026 11:36",
    "it": "Approvato: H2 Göschenen <-> Flüelen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi Durata:  probabile 03.09.2026 11:36"
   },
-  "lastSeen": "2026-09-03T09:58:16Z"
+  "lastSeen": "2026-09-03T10:03:21Z"
  },
  {
   "firstSeen": "2026-09-03T09:42:58Z",
@@ -87,7 +87,7 @@
    "fr": "Libéré: A2 St-Gothard -> Lucerne Jonction autoroutière Göschenen Situation: entrée fermée Raison: surcharge de trafic",
    "it": "Approvato: A2 S. Gottardo -> Luzern Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata Causa: traffico congestionato"
   },
-  "lastSeen": "2026-09-03T09:58:16Z"
+  "lastSeen": "2026-09-03T10:03:21Z"
  },
  {
   "firstSeen": "2026-09-03T05:16:49Z",
