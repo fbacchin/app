@@ -281,21 +281,5 @@
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Parcheggio Gurtnellen Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0 Durata: durante il giorno probabile 16.09.2026 07:00 fino 16.09.2026 11:00"
   },
   "lastSeen": "2026-09-03T00:21:05Z"
- },
- {
-  "firstSeen": "2026-09-02T04:39:08Z",
-  "id": "situation.649660.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": null,
-  "versionTime": "2026-09-02T21:15:50Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso <-> Luzern zwischen Anschluss Airolo und Anschluss Göschenen Sachlage: Strecke gesperrt Ursache: Ausnahmetransport Dauer:  voraussichtlich bis 03.09.2026 01:00",
-   "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Airolo et Jonction autoroutière Göschenen Situation: fermé Raison: convoi exceptionnel Durée:  probable jusqu'à 03.09.2026 01:00",
-   "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Airolo E Svincolo autostradale Göschenen Situazione: chiusa Causa: trasporto eccezionale Durata:  probabile fino 03.09.2026 01:00"
-  },
-  "lastSeen": "2026-09-02T21:52:59Z",
-  "revokedAt": "2026-09-02T21:58:04Z"
  }
 ]
