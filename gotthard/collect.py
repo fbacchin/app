@@ -137,17 +137,34 @@ FRESHNESS = timedelta(hours=6)
 MINUTES_PER_KM = 10
 
 # --- Notifiche push (Back4App) ---
-# Inviate quando una coda si forma (>= NOTIFY_START), diventa pesante
-# (>= NOTIFY_HEAVY, una volta) e quando si dissolve (< NOTIFY_CLEAR).
-# Lo stato per direzione vive in data/push-state.json (committato) e un
-# cooldown evita raffiche di notifiche.
+#
+# Dal 05.09.2026 le soglie sono in CHILOMETRI e le sceglie l'utente nelle
+# impostazioni dell'app; il collector le legge dalla riga `_Installation`.
+# Prima erano in minuti e uguali per tutti — coda formata a 20 minuti,
+# escalation a 60, fine sotto i 10 — e su un fine settimana da bollino nero
+# producevano un flusso di notifiche che nessuno leggeva piu'.
+#
+# Due cose sono cambiate insieme, e vale la pena dire perche':
+#   - **una notifica sola per episodio e per utente**. L'escalation "coda
+#     pesante" e' stata tolta: chi ha scelto 6 km riceve un avviso quando la
+#     coda arriva a 6 km e nient'altro finche' non finisce.
+#   - **i destinatari si scelgono, non si prendono tutti**. `send_push` accetta
+#     un filtro sulle installazioni; senza, andrebbe a tutti come prima.
 PUSH_APP_ID = os.environ.get("B4A_APP_ID", "")
 PUSH_MASTER_KEY = os.environ.get("B4A_MASTER_KEY", "")
-NOTIFY_START = 20   # minuti di attesa: coda formata
-NOTIFY_HEAVY = 60   # minuti: escalation "coda pesante"
-NOTIFY_CLEAR = 10   # sotto questa soglia la coda è considerata finita
+
+# Le soglie offerte dall'app. Elenco chiuso: il collector ragiona per gruppi di
+# destinatari, e un cursore libero darebbe un gruppo per ogni valore possibile.
+SOGLIE_KM = [2, 4, 6, 8, 10]
+# Il valore che vale per chi NON ha mai scritto la preferenza — cioe' chi non
+# ha aggiornato l'app. Scelta dell'utente il 05.09.2026: il diluvio di
+# notifiche doveva finire per tutti, non solo per chi aggiorna.
+SOGLIA_KM_PREDEFINITA = 6
+# Sotto questo valore la coda e' considerata finita. Un chilometro, cioe' i
+# vecchi 10 minuti al rapporto documentato di 10 min/km.
+FINE_CODA_KM = 1
 PUSH_COOLDOWN = timedelta(minutes=45)
-# La coda deve restare sotto NOTIFY_CLEAR per almeno questo tempo prima di
+# La coda deve restare sotto FINE_CODA_KM per almeno questo tempo prima di
 # annunciare "finita": sull'area di dosaggio di Airolo il messaggio ufficiale
 # viene revocato e riemesso a impulsi, quindi un singolo buco nel feed non
 # significa che il traffico è tornato scorrevole.
@@ -533,14 +550,49 @@ def delay_minutes(entry):
     return 0
 
 
-def send_push(alert):
-    """Invia una notifica al canale global via Back4App (Master Key)."""
+def destinatari(soglie=None, direzione=None, chiusure=False):
+    """Il filtro sulle installazioni: chi deve ricevere questa notifica.
+
+    ⚠️ Una preferenza ASSENTE non significa "escluso": significa "non l'ha mai
+    scelta", cioe' il valore predefinito. Chi non aggiorna l'app non scrive mai
+    quei campi, ed erano la maggioranza dei 232 dispositivi il giorno in cui
+    questo codice e' stato scritto. Dimenticare il ramo `$exists: False` li
+    lascerebbe tutti senza notifiche senza che nessuno se ne accorga.
+
+    Parse non accetta due `$or` nello stesso oggetto — la seconda chiave
+    sovrascriverebbe la prima in silenzio — quindi le condizioni si mettono in
+    `$and`.
+    """
+    condizioni = []
+    if soglie is not None:
+        varianti = [{"pushCodaKm": {"$in": list(soglie)}}]
+        if SOGLIA_KM_PREDEFINITA in soglie:
+            varianti.append({"pushCodaKm": {"$exists": False}})
+        condizioni.append({"$or": varianti})
+    if chiusure:
+        condizioni.append({"$or": [{"pushChiusure": True},
+                                   {"pushChiusure": {"$exists": False}}]})
+    if direzione:
+        condizioni.append({"$or": [{"pushDirezione": "both"},
+                                   {"pushDirezione": {"$exists": False}},
+                                   {"pushDirezione": direzione}]})
+    where = {"channels": "global", "deviceType": "ios"}
+    if condizioni:
+        where["$and"] = condizioni
+    return where
+
+
+def send_push(alert, where=None):
+    """Invia una notifica via Back4App (Master Key).
+
+    Senza `where` va a tutti, che e' il comportamento di prima.
+    """
     if not PUSH_APP_ID or not PUSH_MASTER_KEY:
         return False
     request = urllib.request.Request(
         "https://parseapi.back4app.com/push",
         data=json.dumps({
-            "where": {"channels": "global", "deviceType": "ios"},
+            "where": where or {"channels": "global", "deviceType": "ios"},
             "data": {"alert": alert, "sound": "default", "badge": "Increment"},
         }).encode("utf-8"),
         headers={
@@ -559,16 +611,70 @@ def send_push(alert):
         return False
 
 
+# Un'attesa dichiarata puo' essere sbagliata, e in un modo riconoscibile: il
+# 04.09.2026 e' arrivata una coda di 10 km con 10 MINUTI di attesa. Dieci
+# chilometri in dieci minuti sono sessanta all'ora — non e' una coda, e il
+# numero giusto erano 100 minuti (km x MINUTES_PER_KM).
+#
+# Stessa malattia del 02.08.2026, quando "[km] 7.0 ... ritardi No. [h] 70"
+# erano 70 minuti etichettati come ore: si crede al valore dichiarato solo se
+# il risultato resta plausibile.
+#
+# Si corregge SOLO l'attesa troppo bassa rispetto ai chilometri. Il contrario
+# — pochi km, attesa lunga — e' normale: all'area di dosaggio di Airolo si sta
+# fermi in poche centinaia di metri per mezz'ora, e "correggerlo" cancellerebbe
+# code vere. La soglia e' larga di proposito (un quarto del previsto, e solo da
+# 3 km in su): prende gli errori di un ordine di grandezza, non uniforma il
+# traffico a una formula.
+KM_MINIMI_PER_CONTROLLO = 3
+FATTORE_IMPLAUSIBILE = 4
+
+
+def attesa_implausibile(km, minuti):
+    if km is None or minuti is None:
+        return False
+    if km < KM_MINIMI_PER_CONTROLLO:
+        return False
+    return minuti * FATTORE_IMPLAUSIBILE < km * MINUTES_PER_KM
+
+
 def effective_wait(entry):
+    km = entry["km"]
     if entry["wait"] is not None:
+        if attesa_implausibile(km, entry["wait"]):
+            return round(km * MINUTES_PER_KM)
         return entry["wait"]
+    if km is not None:
+        return round(km * MINUTES_PER_KM)
+    return 0
+
+
+def km_efficaci(entry):
+    """I chilometri di coda, stimati dai minuti quando la fonte da' solo quelli.
+
+    E' l'inverso della stima gia' in uso nell'altro verso (MINUTES_PER_KM):
+    il VMZ, quando li scrive tutti e due, usa 10 minuti per chilometro. Senza
+    questo ripiego un messaggio con i soli minuti non farebbe scattare nessuna
+    soglia, e le soglie adesso sono in chilometri.
+    """
     if entry["km"] is not None:
-        return round(entry["km"] * MINUTES_PER_KM)
+        return entry["km"]
+    if entry["wait"] is not None:
+        return entry["wait"] / MINUTES_PER_KM
     return 0
 
 
 def update_notifications(state, now):
-    """Confronta lo stato attuale con l'ultimo notificato e invia se serve."""
+    """Una notifica per episodio e per utente, alla soglia che ha scelto lui.
+
+    L'episodio e' la vita di una coda in una direzione: comincia quando supera
+    la piu' bassa delle soglie offerte, finisce quando resta sotto
+    FINE_CODA_KM per CLEAR_CONFIRM. Dentro l'episodio ogni soglia si accende
+    UNA volta sola — `soglieAvvisate` in push-state.json tiene il conto — e
+    ognuna raggiunge solo chi quella soglia l'ha scelta. Cosi' una coda che
+    cresce da 2 a 10 km manda cinque notifiche in tutto, ma nessuno ne riceve
+    piu' di una.
+    """
     state_file = HISTORY_FILE.parent / "push-state.json"
     try:
         push_state = json.loads(state_file.read_text())
@@ -577,44 +683,51 @@ def update_notifications(state, now):
 
     labels = {"south": "Southbound", "north": "Northbound"}
     for direction in ("south", "north"):
+        km = km_efficaci(state[direction])
         wait = effective_wait(state[direction])
-        km = state[direction]["km"]
         entry = push_state.get(direction, {})
-        phase = entry.get("phase", "clear")
-        last_sent = parse_time(entry.get("lastSent") or "")
+        avvisate = [s for s in entry.get("soglieAvvisate", []) if s in SOGLIE_KM]
+        # Passaggio dallo schema vecchio (05.09.2026). Se al momento del
+        # rilascio una coda e' in corso, `soglieAvvisate` non esiste e il
+        # codice nuovo la leggerebbe come "mai avvisata": manderebbe in un
+        # colpo solo una notifica a ogni gruppo, per una coda di cui tutti
+        # erano gia' stati avvisati. Si considerano gia' fatte le soglie che
+        # la coda attuale ha superato — la fine arrivera' regolarmente.
+        if not avvisate and entry.get("phase") in ("queued", "heavy"):
+            avvisate = [s for s in SOGLIE_KM if km >= s]
         clear_since = parse_time(entry.get("clearSince") or "")
-        cooling = last_sent is not None and now - last_sent < PUSH_COOLDOWN
+        last_sent = parse_time(entry.get("lastSent") or "")
 
-        # Tiene traccia da quando la coda è sotto soglia, a prescindere da
-        # invii e cooldown: se torna sopra, la fine non era reale e il
-        # conteggio riparte da zero (vedi CLEAR_CONFIRM).
-        if phase in ("queued", "heavy"):
-            clear_since = None if wait >= NOTIFY_CLEAR else (clear_since or now)
+        # Da quando la coda e' sotto soglia, a prescindere dagli invii: se
+        # risale, la fine non era reale e il conteggio riparte da zero.
+        if avvisate:
+            clear_since = None if km >= FINE_CODA_KM else (clear_since or now)
         else:
             clear_since = None
 
         km_part = f"{km:g} km queue · " if km else "queue · "
-        message = None
-        new_phase = phase
-        if phase == "clear" and wait >= NOTIFY_START:
-            message = f"🚦 {labels[direction]}: {km_part}~{wait} min wait"
-            new_phase = "queued"
-        elif phase == "queued" and wait >= NOTIFY_HEAVY:
-            message = f"⚠️ {labels[direction]}: heavy queue — {km_part}~{wait} min wait"
-            new_phase = "heavy"
-        elif (phase in ("queued", "heavy") and clear_since is not None
-              and now - clear_since >= CLEAR_CONFIRM):
-            message = f"✅ {labels[direction]}: queue cleared"
-            new_phase = "clear"
 
-        if message and not cooling and send_push(message):
-            phase = new_phase
-            last_sent = now
-            if new_phase == "clear":
+        # 1. le soglie appena superate, dalla piu' alta: se una coda salta da 0
+        #    a 8 km in un giro, chi ha scelto 8 riceve il messaggio giusto.
+        for soglia in sorted(SOGLIE_KM, reverse=True):
+            if km < soglia or soglia in avvisate:
+                continue
+            messaggio = f"🚦 {labels[direction]}: {km_part}~{wait} min wait"
+            if send_push(messaggio, destinatari(soglie=[soglia], direzione=direction)):
+                avvisate.append(soglia)
+                last_sent = now
+
+        # 2. la fine, solo a chi era stato avvisato dell'inizio. Annunciare la
+        #    fine di una coda a chi non sapeva che ci fosse e' rumore puro.
+        if avvisate and clear_since is not None and now - clear_since >= CLEAR_CONFIRM:
+            messaggio = f"✅ {labels[direction]}: queue cleared"
+            if send_push(messaggio, destinatari(soglie=sorted(avvisate), direzione=direction)):
+                avvisate = []
                 clear_since = None
+                last_sent = now
 
         new_entry = {
-            "phase": phase,
+            "soglieAvvisate": sorted(avvisate),
             "lastSent": last_sent.isoformat().replace("+00:00", "Z") if last_sent else None,
         }
         if clear_since is not None:
@@ -659,20 +772,31 @@ def update_tunnel_notifications(tunnel, now):
     phase = entry.get("phase", "open")
     open_since = parse_time(entry.get("openSince") or "")
 
+    # Chi riceve: chi non ha spento le chiusure. La direzione conta solo se la
+    # fonte l'ha dichiarata — una chiusura senza direzione riguarda tutti, e
+    # filtrarla per senso di marcia terrebbe all'oscuro meta' degli utenti.
+    a_chi = destinatari(chiusure=True, direzione=tunnel["direzione"])
+
     if tunnel["chiuso"]:
         open_since = None
         if phase != "closed":
             testo = TUNNEL_CHIUSO.get(tunnel["direzione"], TUNNEL_CHIUSO[None])
-            if send_push(testo):
+            if send_push(testo, a_chi):
                 phase = "closed"
     elif phase == "closed":
+        # La riapertura va a chi ha ricevuto la chiusura: il filtro di
+        # direzione qui e' quello di ADESSO, e la chiusura poteva averne un
+        # altro. Si usa il piu' largo — chiusure attive, nessun senso di
+        # marcia — perche' lasciare qualcuno a credere il tunnel ancora
+        # chiuso e' peggio di un avviso di riapertura in piu'.
+        riapertura = destinatari(chiusure=True)
         if tunnel["revocato"]:
-            if send_push(TUNNEL_RIAPERTO):
+            if send_push(TUNNEL_RIAPERTO, riapertura):
                 phase = "open"
                 open_since = None
         else:
             open_since = open_since or now
-            if now - open_since >= CLEAR_CONFIRM and send_push(TUNNEL_RIAPERTO):
+            if now - open_since >= CLEAR_CONFIRM and send_push(TUNNEL_RIAPERTO, riapertura):
                 phase = "open"
                 open_since = None
     else:

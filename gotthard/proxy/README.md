@@ -16,7 +16,7 @@ condivisa fra tutti i client.
 |---|---|
 | `main.js` | tutto: trasporto, magazzino, schermo pronto, tabelle, la funzione `gotthard`, le correzioni a mano e il lavoro `aggiorna` (ogni 4 minuti) |
 | `ripasso.js` | le regole della rilettura a finestra larga: ogni quanto tocca e quanto indietro chiedere. Gira **dentro** `aggiorna` — su Back4App si schedula un lavoro solo — e resta il lavoro `ripassa` per i lanci a mano |
-| `prove/` | 268 prove, da lanciare prima di ogni distribuzione |
+| `prove/` | 274 prove, da lanciare prima di ogni distribuzione |
 
 ## Le chiavi
 
@@ -72,8 +72,8 @@ cd gotthard/proxy
 for f in prove/*.js; do node "$f" | tail -1; done
 ```
 
-Attese: `108/108`, `51/51`, `45/45`, `37/37`, `27/27`. Il collector ha le sue,
-accanto a lui: `python3 ../prova_collector.py` → `21/21`.
+Attese: `108/108`, `51/51`, `45/45`, `37/37`, `33/33`. Il collector ha le sue,
+accanto a lui: `python3 ../prova_collector.py` → `50/50`.
 
 ## Cosa sorvegliano le prove
 
@@ -91,7 +91,9 @@ commento in testa dice quale.
   un cantiere programmato, etichettarla nelle quattro lingue e col senso di
   marcia.
 - **`prova_tabelle.js`** — le tabelle leggibili (`Attuale`, `Avvisi`,
-  `Storico`) e lo schermo pronto.
+  `Storico`), lo schermo pronto, e il controllo di plausibilità sull'attesa
+  dichiarata: il 04.09.2026 la fonte ha pubblicato una coda di 10 km con 10
+  minuti di attesa, cioè sessanta all'ora.
 - **`prova_correzioni.js`** — le correzioni a mano dei due storici. La prova
   che conta è l'ultima: `history.json` vero, riscritto senza toccarlo, deve
   tornare identico byte per byte — se non lo è, un giorno un commit di

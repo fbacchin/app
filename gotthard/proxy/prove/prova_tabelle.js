@@ -52,9 +52,11 @@ const sorgente = fs.readFileSync(
 // cloud/, non da qui, altrimenti il require di ripasso.js non si risolve.
 const richiedi = (p) => require(p.startsWith(".") ? require("path").join(__dirname, "..", p) : p);
 const modulo = new Function("require",
-  sorgente + "\n;return { aggiornaTabelle, costruisciPayload };")(richiedi);
+  sorgente + "\n;return { aggiornaTabelle, costruisciPayload, attesaDi, attesaImplausibile };")(richiedi);
 const aggiornaTabelle = modulo.aggiornaTabelle;
 const costruisciPayload = modulo.costruisciPayload;
+const attesaDi = modulo.attesaDi;
+const attesaImplausibile = modulo.attesaImplausibile;
 const applicaRevocheManuali = modulo.applicaRevocheManuali; // deve essere undefined: la revoca a mano non e piu appiccicosa
 
 // --- le situazioni finte ---
@@ -200,6 +202,20 @@ const primaVistaOriginale = rigaManuale.get("primaVista").getTime();
     typeof applicaRevocheManuali === "undefined"]);
   prove.push(["ne' un campo revocheManuali nello stato salvato",
     !fs.readFileSync(path.join(__dirname, "..", "main.js"), "utf8").includes("revocheManuali")]);
+  // --- l'attesa implausibile (04.09.2026): 10 km con 10 minuti ---
+  prove.push(["10 km con 10 minuti e' implausibile", attesaImplausibile(10, 10) === true]);
+  const corretta = attesaDi("AbnormalTraffic", "ritardi No. [min] 10", 10);
+  prove.push(["  e viene corretta a 100, cioe' km x 10", corretta.minuti === 100]);
+  prove.push(["  ed e' segnata come stimata, non come letta dalla fonte",
+    corretta.stimata === true]);
+  const normale = attesaDi("AbnormalTraffic", "ritardi No. [min] 60", 6);
+  prove.push(["6 km con 60 minuti resta com'e'",
+    normale.minuti === 60 && normale.stimata === false]);
+  prove.push(["pochi km e attesa lunga NON si corregge: e' l'area di dosaggio",
+    attesaDi("AbnormalTraffic", "ritardi No. [min] 30", 0.5).minuti === 30]);
+  prove.push(["un cantiere non passa dal controllo: non e' una coda",
+    attesaDi("MaintenanceWorks", "ritardi No. [min] 10", 10).minuti === 10]);
+
   let ok = 0;
   for (const [nome, esito] of prove) {
     console.log(esito ? "  OK  " : "  NO  ", nome);

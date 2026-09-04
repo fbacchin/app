@@ -29,7 +29,9 @@ def ok(nome, esito):
 
 # --- le push finiscono qui invece che ai telefoni ------------------------
 inviate = []
-c.send_push = lambda testo: (inviate.append(testo), True)[1]
+c.send_push = lambda testo, dove=None: (inviate.append((testo, dove)), True)[1]
+def testi():
+    return [x[0] for x in inviate]
 
 # --- un documento come li manda la fonte ---------------------------------
 def documento(situazioni):
@@ -149,7 +151,7 @@ def con_stato_pulito(fn):
         (Path(d)).mkdir(exist_ok=True)
         inviate.clear()
         fn()
-    return list(inviate)
+    return testi()
 
 def giro(tunnel, quando=None):
     c.update_tunnel_notifications(tunnel, quando or ADESSO)
@@ -212,6 +214,153 @@ with tempfile.TemporaryDirectory() as d:
     dopo = json.loads(stato.read_text())
     ok("la chiusura scrive la sua chiave senza toccare quelle delle direzioni",
        dopo.get("south", {}).get("phase") == "queued" and dopo["tunnel"]["phase"] == "closed")
+
+# =========================================================================
+# Le soglie in km e i destinatari (05.09.2026)
+#
+# Il difetto che queste prove sorvegliano non e' ancora successo, ed e' il
+# motivo per cui sono scritte adesso: una preferenza ASSENTE non significa
+# "escluso", significa "mai scelta", cioe' il valore predefinito. Chi non
+# aggiorna l'app non scrive mai quei campi. Sbagliare quel ramo lascerebbe la
+# maggioranza dei dispositivi senza notifiche, e in silenzio.
+# =========================================================================
+
+def condizioni(dove):
+    """Le condizioni in $and, come lista, per guardarci dentro."""
+    return dove.get("$and", [])
+
+d = c.destinatari(soglie=[c.SOGLIA_KM_PREDEFINITA])
+varianti = condizioni(d)[0]["$or"]
+ok("alla soglia predefinita rientra anche chi il campo non ce l'ha",
+   {"pushCodaKm": {"$exists": False}} in varianti)
+ok("  e chi l'ha scelta esplicitamente",
+   {"pushCodaKm": {"$in": [c.SOGLIA_KM_PREDEFINITA]}} in varianti)
+
+altra = [s for s in c.SOGLIE_KM if s != c.SOGLIA_KM_PREDEFINITA][0]
+varianti = condizioni(c.destinatari(soglie=[altra]))[0]["$or"]
+ok("a una soglia diversa dalla predefinita NON rientra chi non ha scelto",
+   {"pushCodaKm": {"$exists": False}} not in varianti)
+
+d = c.destinatari(soglie=[6], direzione="south")
+ok("due filtri stanno in $and, non in due $or che si sovrascriverebbero",
+   len(condizioni(d)) == 2 and "$or" not in d)
+dirs = condizioni(d)[1]["$or"]
+ok("la direzione ammette 'both', l'assenza e quella richiesta",
+   {"pushDirezione": "both"} in dirs
+   and {"pushDirezione": {"$exists": False}} in dirs
+   and {"pushDirezione": "south"} in dirs)
+
+d = c.destinatari(chiusure=True)
+ok("le chiusure raggiungono chi non le ha mai spente",
+   {"pushChiusure": {"$exists": False}} in condizioni(d)[0]["$or"])
+ok("la coda non entra nel filtro delle chiusure",
+   all("pushCodaKm" not in json.dumps(x) for x in condizioni(d)))
+
+# --- la macchina a stati ---
+def coda(km=None, minuti=None):
+    return {"km": km, "wait": minuti}
+
+def giro_code(sud, nord=None, quando=None):
+    c.update_notifications({"south": sud, "north": nord or coda()}, quando or ADESSO)
+
+def con_code(fn):
+    with tempfile.TemporaryDirectory() as dd:
+        c.HISTORY_FILE = Path(dd) / "history.json"
+        inviate.clear()
+        fn()
+    return list(inviate)
+
+fatte = con_code(lambda: giro_code(coda(km=3)))
+ok("una coda di 3 km avvisa solo chi ha scelto 2", len(fatte) == 1
+   and fatte[0][1]["$and"][0]["$or"][0] == {"pushCodaKm": {"$in": [2]}})
+
+fatte = con_code(lambda: giro_code(coda(km=0.5)))
+ok("mezzo chilometro non avvisa nessuno", fatte == [])
+
+fatte = con_code(lambda: giro_code(coda(km=8)))
+soglie = [x[1]["$and"][0]["$or"][0]["pushCodaKm"]["$in"][0] for x in fatte]
+ok("una coda di 8 km avvisa le quattro soglie sotto, una volta ciascuna",
+   sorted(soglie) == [2, 4, 6, 8])
+ok("  e dalla piu' alta, cosi' nessuno riceve la soglia sbagliata per primo",
+   soglie == [8, 6, 4, 2])
+
+def cresce():
+    giro_code(coda(km=3))
+    giro_code(coda(km=5), quando=ADESSO + timedelta(minutes=5))
+    giro_code(coda(km=7), quando=ADESSO + timedelta(minutes=10))
+fatte = con_code(cresce)
+soglie = [x[1]["$and"][0]["$or"][0]["pushCodaKm"]["$in"][0] for x in fatte]
+ok("una coda che cresce non riavvisa chi ha gia' ricevuto",
+   sorted(soglie) == [2, 4, 6] and len(soglie) == len(set(soglie)))
+
+def cresce_e_finisce():
+    giro_code(coda(km=5))
+    giro_code(coda(km=0), quando=ADESSO + timedelta(minutes=10))
+    giro_code(coda(km=0), quando=ADESSO + timedelta(minutes=40))
+fatte = con_code(cresce_e_finisce)
+ok("la fine arriva dopo la conferma", fatte[-1][0].endswith("queue cleared"))
+finali = fatte[-1][1]["$and"][0]["$or"][0]["pushCodaKm"]["$in"]
+ok("  e va SOLO a chi era stato avvisato dell'inizio", finali == [2, 4])
+ok("  cioe' non a chi aveva scelto 6 e non ha mai saputo della coda",
+   6 not in finali)
+
+def finisce_senza_inizio():
+    giro_code(coda(km=0))
+    giro_code(coda(km=0), quando=ADESSO + timedelta(minutes=40))
+ok("nessuna coda, nessun 'coda finita'", con_code(finisce_senza_inizio) == [])
+
+# La coda scende, risale, riscende. Il minuto 35 e' scelto apposta: dista 25
+# minuti dalla PRIMA discesa (piu' di CLEAR_CONFIRM) e 15 dalla seconda (meno).
+# Se il conto alla rovescia non ripartisse, li' arriverebbe un "coda finita"
+# mentre la coda c'e' ancora stata cinque minuti prima.
+def rialza_la_testa(fino_a):
+    giro_code(coda(km=5))
+    giro_code(coda(km=0), quando=ADESSO + timedelta(minutes=10))
+    giro_code(coda(km=5), quando=ADESSO + timedelta(minutes=15))
+    giro_code(coda(km=0), quando=ADESSO + timedelta(minutes=20))
+    giro_code(coda(km=0), quando=ADESSO + timedelta(minutes=fino_a))
+
+fatte = con_code(lambda: rialza_la_testa(35))
+ok("una coda che risale azzera il conto alla rovescia: al minuto 35 niente fine",
+   [x for x in fatte if "cleared" in x[0]] == [])
+fatte = con_code(lambda: rialza_la_testa(45))
+ok("  e la fine arriva al minuto 45, venti dopo la discesa VERA",
+   len([x for x in fatte if "cleared" in x[0]]) == 1)
+
+fatte = con_code(lambda: giro_code(coda(minuti=30)))
+soglie = [x[1]["$and"][0]["$or"][0]["pushCodaKm"]["$in"][0] for x in fatte]
+ok("senza km si stimano dai minuti: 30 min = 3 km, avvisa solo il 2",
+   soglie == [2])
+
+# --- il passaggio dallo schema vecchio di push-state.json ---
+def con_stato_vecchio(fase, km_ora):
+    with tempfile.TemporaryDirectory() as dd:
+        c.HISTORY_FILE = Path(dd) / "history.json"
+        (Path(dd) / "push-state.json").write_text(json.dumps(
+            {"south": {"phase": fase, "lastSent": None}}))
+        inviate.clear()
+        c.update_notifications({"south": coda(km=km_ora), "north": coda()}, ADESSO)
+        return list(inviate)
+
+ok("una coda gia' in corso al rilascio NON rimanda tutto da capo",
+   con_stato_vecchio("queued", 7) == [])
+ok("  e se era 'heavy' vale lo stesso", con_stato_vecchio("heavy", 7) == [])
+ok("uno stato vecchio 'clear' non blocca invece una coda nuova",
+   len(con_stato_vecchio("clear", 3)) == 1)
+
+# --- l'attesa implausibile (04.09.2026) ---
+ok("10 km con 10 minuti e' implausibile", c.attesa_implausibile(10, 10) is True)
+ok("  e viene corretta a 100, cioe' km x 10",
+   c.effective_wait({"km": 10, "wait": 10}) == 100)
+ok("6 km con 60 minuti e' normale e non si tocca",
+   c.effective_wait({"km": 6, "wait": 60}) == 60)
+ok("6 km con 40 minuti resta com'e': la soglia non uniforma il traffico",
+   c.effective_wait({"km": 6, "wait": 40}) == 40)
+ok("pochi km e attesa lunga NON si corregge: e' l'area di dosaggio",
+   c.effective_wait({"km": 0.5, "wait": 30}) == 30)
+ok("sotto i 3 km non si controlla: i rapporti su numeri piccoli sono rumore",
+   c.attesa_implausibile(2, 1) is False)
+ok("senza km non si puo' giudicare", c.attesa_implausibile(None, 10) is False)
 
 n = sum(1 for _, e in prove if e)
 print("=== collector: corridoio, chiusura, push ===")

@@ -371,9 +371,48 @@ function waitMinutes(text) {
  * moltiplicarla darebbe un'attesa che non esiste.
  */
 const MINUTI_PER_KM = 10;
+/**
+ * Un'attesa dichiarata puo' essere sbagliata, e in un modo riconoscibile.
+ *
+ * Il 04.09.2026 e' arrivata una coda di **10 km con 10 minuti** di attesa.
+ * Dieci chilometri percorsi in dieci minuti sono sessanta all'ora: non e' una
+ * coda, e il numero giusto erano 100 minuti — km x MINUTI_PER_KM.
+ *
+ * Non e' il primo caso di numero malato dalla stessa fonte: il 02.08.2026
+ * aveva pubblicato "[km] 7.0 ... ritardi No. [h] 70", cioe' 70 MINUTI
+ * etichettati come ore. La regola di allora e' la stessa di adesso — si crede
+ * al valore dichiarato solo se il risultato resta plausibile — applicata a un
+ * campo diverso.
+ *
+ * ⚠️ Si corregge **una sola direzione dell'errore**: l'attesa troppo BASSA
+ * rispetto ai chilometri. Il contrario — pochi chilometri e attesa lunga — e'
+ * normale e non va toccato: all'area di dosaggio di Airolo si sta fermi in
+ * poche centinaia di metri per mezz'ora. Correggere anche quello vorrebbe dire
+ * cancellare code vere.
+ *
+ * La soglia e' larga di proposito (un quarto del previsto, e solo da 3 km in
+ * su): serve a prendere gli errori di un ordine di grandezza, non a
+ * uniformare il traffico a una formula.
+ */
+const KM_MINIMI_PER_CONTROLLO = 3;
+const FATTORE_IMPLAUSIBILE = 4;
+
+function attesaImplausibile(km, minuti) {
+  if (km === null || minuti === null) return false;
+  if (km < KM_MINIMI_PER_CONTROLLO) return false;
+  return minuti * FATTORE_IMPLAUSIBILE < km * MINUTI_PER_KM;
+}
+
 function attesaDi(type, testo, km) {
   const letta = waitMinutes(testo);
-  if (letta !== null) return { minuti: letta, stimata: false };
+  if (letta !== null) {
+    if (type === "AbnormalTraffic" && attesaImplausibile(km, letta)) {
+      // Segnata come stimata: la tabella e la scheda distinguono gia' i minuti
+      // letti dalla fonte da quelli calcolati da noi, e questo e' un calcolo.
+      return { minuti: Math.round(km * MINUTI_PER_KM), stimata: true };
+    }
+    return { minuti: letta, stimata: false };
+  }
   if (km === null || type !== "AbnormalTraffic") return { minuti: null, stimata: false };
   return { minuti: Math.round(km * MINUTI_PER_KM), stimata: true };
 }
