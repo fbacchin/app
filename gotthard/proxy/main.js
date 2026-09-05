@@ -2097,6 +2097,105 @@ Parse.Cloud.define("storicoGitHub", async (request) => {
   throw ultimo;
 });
 
+// ------------------------------------------------- la telemetria (Gottardo Dati)
+//
+// Legge da PostHog per il quadro "Uso" di Gottardo Dati.
+//
+// ⚠️ **Perche' passa da qui e non dall'app.** La chiave che l'app porta dentro
+// (`phc_…`) sa solo SCRIVERE eventi. Per leggerli serve una *personal API key*
+// (`phx_…`), che apre in lettura e scrittura l'intero account PostHog: in un
+// binario non ci va, nemmeno in un'app che installa una persona sola. Sta
+// nell'ambiente, come OTD_KEY e GH_TOKEN.
+//
+// 🔴 **E l'app non manda mai SQL.** Chiede un rapporto per nome; le
+// interrogazioni stanno scritte qui sotto. Accettare una query dal client
+// vorrebbe dire dare a chiunque scompatti l'app la lettura di tutto il
+// progetto attraverso di noi — la chiave sarebbe al sicuro e i dati no.
+
+const PH_PROGETTO = "266806";
+const PH_SERVER = "https://eu.posthog.com";
+const PH_CHIAVE = (typeof process !== "undefined" && process.env && process.env.POSTHOG_KEY) || "";
+
+/**
+ * Le interrogazioni, verificate sul progetto vero il 05.09.2026.
+ *
+ * I nomi dei parametri contengono punti (`app.bacchin.schermata`), quindi si
+ * accedono con le parentesi quadre: la forma `properties.app.bacchin.schermata`
+ * verrebbe letta come una discesa dentro oggetti annidati e darebbe vuoto.
+ */
+const INTERROGAZIONI = {
+  // Una sola interrogazione per tutte le ripartizioni: il valore interessante
+  // sta in un parametro diverso per ogni evento, e `coalesce` prende quello
+  // che c'e'. Cosi' si paga un giro di rete invece di cinque.
+  ripartizione: `
+    SELECT
+        event AS evento,
+        coalesce(
+            properties['app.bacchin.schermata'],
+            properties['app.bacchin.webcam'],
+            properties['app.bacchin.direzione'],
+            properties['app.bacchin.ore'],
+            properties['app.bacchin.motivo'],
+            '—'
+        ) AS valore,
+        count() AS quanti
+    FROM events
+    WHERE timestamp >= now() - INTERVAL 7 DAY
+    GROUP BY evento, valore
+    ORDER BY evento ASC, quanti DESC
+    LIMIT 60`,
+
+  giorni: `
+    SELECT
+        toDate(timestamp) AS giorno,
+        uniq(person_id) AS persone,
+        count() AS eventi
+    FROM events
+    WHERE timestamp >= now() - INTERVAL 14 DAY
+    GROUP BY giorno
+    ORDER BY giorno DESC
+    LIMIT 14`,
+};
+
+async function interrogaPostHog(sql) {
+  if (!PH_CHIAVE) {
+    throw new Error("variabile d'ambiente POSTHOG_KEY assente: impostarla nelle " +
+      "Server Settings di Back4App (personal API key con permesso Query Read)");
+  }
+  const res = await fetch(PH_SERVER + "/api/projects/" + PH_PROGETTO + "/query/", {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + PH_CHIAVE,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query: { kind: "HogQLQuery", query: sql } }),
+  });
+  const testo = await res.text();
+  if (res.status < 200 || res.status >= 300) {
+    let motivo = testo.slice(0, 300);
+    try { motivo = JSON.parse(testo).detail || motivo; } catch (e) { /* non era JSON */ }
+    throw new Error("PostHog HTTP " + res.status + ": " + motivo);
+  }
+  // PostHog risponde con righe come elenchi di valori, nell'ordine delle
+  // colonne. Si restituiscono cosi' come sono: l'app sa cosa ha chiesto.
+  return (JSON.parse(testo).results) || [];
+}
+
+Parse.Cloud.define("telemetria", async (request) => {
+  const { codice } = request.params || {};
+  if (codice !== CODICE_MANUALE) throw new Error("codice non valido");
+
+  const [ripartizione, giorni] = await Promise.all([
+    interrogaPostHog(INTERROGAZIONI.ripartizione),
+    interrogaPostHog(INTERROGAZIONI.giorni),
+  ]);
+
+  return {
+    ripartizione: ripartizione.map((r) => ({ evento: r[0], valore: r[1], quanti: r[2] })),
+    giorni: giorni.map((r) => ({ giorno: r[0], persone: r[1], eventi: r[2] })),
+  };
+});
+
 // ------------------------------------------------- il ripasso
 //
 // Registra il lavoro `ripassa` per i lanci a mano. Il ripasso periodico
