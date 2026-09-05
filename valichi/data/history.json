@@ -1,34 +1,5 @@
 [
  {
-  "time": "2026-09-03T05:50:09Z",
-  "w": {
-   "hr-rs.bajakovo.entry": 30,
-   "hu-ua.zahony.exit": 15,
-   "hu-ua.zahony.entry": 15,
-   "hu-ua.beregsurany.exit": 15,
-   "hu-ua.beregsurany.entry": 15,
-   "pl-ua.medyka.exit": 0,
-   "pl-ua.korczowa.exit": 0,
-   "pl-ua.hrebenne.exit": 0
-  }
- },
- {
-  "time": "2026-09-03T06:00:17Z",
-  "w": {
-   "hr-rs.bajakovo.entry": 30,
-   "hu-ua.zahony.exit": 15,
-   "hu-ua.zahony.entry": 15,
-   "hu-ua.beregsurany.exit": 15,
-   "hu-ua.beregsurany.entry": 15,
-   "pl-ua.medyka.exit": 0,
-   "pl-ua.korczowa.exit": 0,
-   "pl-ua.hrebenne.exit": 0
-  },
-  "held": [
-   "pl-ua.hrebenne"
-  ]
- },
- {
   "time": "2026-09-03T06:10:25Z",
   "w": {
    "hr-rs.bajakovo.entry": 30,
@@ -3629,5 +3600,22 @@
    "pl-ua.korczowa.exit": 0,
    "pl-ua.hrebenne.exit": 0
   }
+ },
+ {
+  "time": "2026-09-05T06:08:41Z",
+  "w": {
+   "ch.gottardo.south": 30,
+   "hr-rs.bajakovo.entry": 30,
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 0,
+   "pl-ua.korczowa.exit": 0,
+   "pl-ua.hrebenne.exit": 0
+  },
+  "held": [
+   "pl-ua.hrebenne"
+  ]
  }
 ]
