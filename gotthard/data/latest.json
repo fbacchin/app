@@ -1,5 +1,5 @@
 {
- "time": "2026-09-06T08:13:55Z",
+ "time": "2026-09-06T08:19:00Z",
  "south": {
   "km": 2.0,
   "wait": 20
@@ -13,7 +13,7 @@
    "id": "situation.650730.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-09-06T08:13:24Z",
+   "versionTime": "2026-09-06T08:14:51Z",
    "km": 1.0,
    "wait": 10,
    "texts": {
@@ -39,7 +39,7 @@
    "id": "situation.650731.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
    "direction": "north",
-   "versionTime": "2026-09-06T08:13:28Z",
+   "versionTime": "2026-09-06T08:15:48Z",
    "km": null,
    "wait": null,
    "texts": {
