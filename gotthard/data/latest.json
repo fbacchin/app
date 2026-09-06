@@ -1,5 +1,5 @@
 {
- "time": "2026-09-06T15:18:02Z",
+ "time": "2026-09-06T15:23:07Z",
  "south": {
   "km": null,
   "wait": null
@@ -33,6 +33,19 @@
     "de": "Freigegeben: H2 Airolo -> Göschenen zwischen Ortschaft Hospental und Ortschaft Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 30",
     "fr": "Libéré: H2 Airolo -> Göschenen entre Localité Hospental et Localité Göschenen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
     "it": "Approvato: H2 Airolo -> Göschenen tra Luogo Hospental E Luogo Göschenen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30"
+   }
+  },
+  {
+   "id": "situation.650790.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "north",
+   "versionTime": "2026-09-06T15:21:59Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Amsteg und Anschluss Erstfeld Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: mehrfach kurzfristige Sperrungen",
+    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Amsteg et Jonction autoroutière Erstfeld Situation: bouchon Raison: surcharge de trafic Complément 1: fermetures intermittentes de courte durée",
+    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Amsteg E Svincolo autostradale Erstfeld Situazione: colonna Causa: traffico congestionato Aggiunta 1: chiusure intermittenti di breve durata"
    }
   },
   {
