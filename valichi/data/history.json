@@ -1,50 +1,5 @@
 [
  {
-  "time": "2026-09-04T13:16:15Z",
-  "w": {
-   "ch.gottardo.south": 60,
-   "ch.gottardo.north": 40,
-   "hr-rs.bajakovo.entry": 60,
-   "hr-rs.tovarnik.entry": 30,
-   "hu-ua.zahony.exit": 15,
-   "hu-ua.zahony.entry": 15,
-   "hu-ua.beregsurany.exit": 15,
-   "hu-ua.beregsurany.entry": 15,
-   "pl-ua.korczowa.exit": 0,
-   "pl-ua.hrebenne.exit": 0
-  }
- },
- {
-  "time": "2026-09-04T13:26:22Z",
-  "w": {
-   "ch.gottardo.south": 60,
-   "ch.gottardo.north": 40,
-   "hr-rs.bajakovo.entry": 60,
-   "hr-rs.tovarnik.entry": 30,
-   "hu-ua.zahony.exit": 15,
-   "hu-ua.zahony.entry": 15,
-   "hu-ua.beregsurany.exit": 15,
-   "hu-ua.beregsurany.entry": 15,
-   "pl-ua.korczowa.exit": 0,
-   "pl-ua.hrebenne.exit": 0
-  }
- },
- {
-  "time": "2026-09-04T13:36:28Z",
-  "w": {
-   "ch.gottardo.south": 60,
-   "ch.gottardo.north": 40,
-   "hr-rs.bajakovo.entry": 60,
-   "hr-rs.tovarnik.entry": 30,
-   "hu-ua.zahony.exit": 15,
-   "hu-ua.zahony.entry": 15,
-   "hu-ua.beregsurany.exit": 15,
-   "hu-ua.beregsurany.entry": 15,
-   "pl-ua.korczowa.exit": 0,
-   "pl-ua.hrebenne.exit": 0
-  }
- },
- {
   "time": "2026-09-04T13:46:35Z",
   "w": {
    "ch.gottardo.south": 60,
@@ -3637,6 +3592,22 @@
    "ch.gottardo.north": 60,
    "hr-rs.bajakovo.entry": 30,
    "hr-rs.tovarnik.entry": 30,
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.korczowa.exit": 60,
+   "pl-ua.hrebenne.exit": 0
+  }
+ },
+ {
+  "time": "2026-09-06T13:46:27Z",
+  "w": {
+   "ch.gottardo.south": 50,
+   "ch.gottardo.north": 50,
+   "hr-me.karasovici.entry": 90,
+   "hr-rs.bajakovo.entry": 30,
+   "hr-rs.tovarnik.exit": 30,
    "hu-ua.zahony.exit": 15,
    "hu-ua.zahony.entry": 15,
    "hu-ua.beregsurany.exit": 15,
