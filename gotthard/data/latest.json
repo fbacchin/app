@@ -1,25 +1,38 @@
 {
- "time": "2026-09-06T16:24:11Z",
+ "time": "2026-09-06T16:29:16Z",
  "south": {
   "km": null,
   "wait": null
  },
  "north": {
-  "km": 5.0,
-  "wait": 50
+  "km": 4.0,
+  "wait": 40
  },
  "events": [
   {
    "id": "situation.650788.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-09-06T15:30:17Z",
+   "versionTime": "2026-09-06T16:29:09Z",
    "km": null,
-   "wait": 10,
+   "wait": 20,
    "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Wassen und Tunnel Teiftal-Tunnel Sachlage: Stau Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen gesperrt Zusatz 1: Zeitverlust Anz. [min] 10",
-    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Wassen et Tunnel Tunnel Teiftal Situation: bouchon Raison: véhicule en panne Gestion du trafic: voie de droite fermée Complément 1: retards Nbre. [min] 10",
-    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Wassen E Galleria Galleria Teiftal Situazione: colonna Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa Aggiunta 1: ritardi No. [min] 10"
+    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Wassen und Tunnel Teiftal-Tunnel Sachlage: Stau Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen gesperrt Zusatz 1: Zeitverlust Anz. [min] 20",
+    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Wassen et Tunnel Tunnel Teiftal Situation: bouchon Raison: véhicule en panne Gestion du trafic: voie de droite fermée Complément 1: retards Nbre. [min] 20",
+    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Wassen E Galleria Galleria Teiftal Situazione: colonna Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa Aggiunta 1: ritardi No. [min] 20"
+   }
+  },
+  {
+   "id": "situation.650781.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "north",
+   "versionTime": "2026-09-06T16:25:53Z",
+   "km": 4.0,
+   "wait": 40,
+   "texts": {
+    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
+    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
+    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
    }
   },
   {
@@ -33,19 +46,6 @@
     "de": "Freigegeben: H2 Airolo -> Göschenen zwischen Ortschaft Hospental und Ortschaft Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
     "fr": "Libéré: H2 Airolo -> Göschenen entre Localité Hospental et Localité Göschenen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
     "it": "Approvato: H2 Airolo -> Göschenen tra Luogo Hospental E Luogo Göschenen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
-   }
-  },
-  {
-   "id": "situation.650781.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-09-06T14:43:50Z",
-   "km": 5.0,
-   "wait": 50,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 5 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 50",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 5 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 50",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 5 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 50"
    }
   },
   {
