@@ -269,21 +269,5 @@
   },
   "lastSeen": "2026-09-05T09:55:56Z",
   "revokedAt": "2026-09-05T10:01:02Z"
- },
- {
-  "firstSeen": "2026-09-05T07:12:18Z",
-  "id": "situation.650596.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": "south",
-  "versionTime": "2026-09-05T07:09:58Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Gotthard -> Chiasso Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Pannenfahrzeug",
-   "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: véhicule en panne",
-   "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: veicolo in avaria"
-  },
-  "lastSeen": "2026-09-05T07:22:28Z",
-  "revokedAt": "2026-09-05T07:27:33Z"
  }
 ]
