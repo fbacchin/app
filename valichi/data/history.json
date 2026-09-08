@@ -3475,5 +3475,16 @@
   "held": [
    "pl-ua.medyka"
   ]
+ },
+ {
+  "time": "2026-09-08T04:55:46Z",
+  "w": {
+   "pl-ua.medyka.exit": 0,
+   "pl-ua.korczowa.exit": 0,
+   "pl-ua.hrebenne.exit": 0
+  },
+  "held": [
+   "pl-ua.medyka"
+  ]
  }
 ]
