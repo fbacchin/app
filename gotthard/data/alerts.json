@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Tunnel Tunnel Taubach et Jonction autoroutière Amsteg Situation: trafic perturbé travaux, longueur [km] 0.15 Gestion du trafic: nouveau plan de circulation sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la journée probable 22.09.2026 08:00 jusqu'à 22.09.2026 17:00",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Galleria Galleria Taubach E Svincolo autostradale Amsteg Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: nuova viabilità ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 22.09.2026 08:00 fino 22.09.2026 17:00"
   },
-  "lastSeen": "2026-09-08T16:48:13Z"
+  "lastSeen": "2026-09-08T16:53:19Z"
  },
  {
   "firstSeen": "2026-09-08T09:18:10Z",
@@ -298,37 +298,5 @@
   },
   "lastSeen": "2026-09-06T17:22:14Z",
   "revokedAt": "2026-09-06T17:27:20Z"
- },
- {
-  "firstSeen": "2026-09-06T13:07:14Z",
-  "id": "situation.650768.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-09-06T15:29:58Z",
-  "km": null,
-  "wait": 20,
-  "texts": {
-   "de": "Freigegeben: H2 Airolo -> Göschenen zwischen Ortschaft Hospental und Ortschaft Göschenen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
-   "fr": "Libéré: H2 Airolo -> Göschenen entre Localité Hospental et Localité Göschenen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
-   "it": "Approvato: H2 Airolo -> Göschenen tra Luogo Hospental E Luogo Göschenen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
-  },
-  "lastSeen": "2026-09-06T16:49:36Z",
-  "revokedAt": "2026-09-06T16:54:41Z"
- },
- {
-  "firstSeen": "2026-09-06T15:23:07Z",
-  "id": "situation.650790.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-09-06T15:23:14Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Amsteg und Anschluss Erstfeld Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: mehrfach kurzfristige Sperrungen",
-   "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Amsteg et Jonction autoroutière Erstfeld Situation: bouchon Raison: surcharge de trafic Complément 1: fermetures intermittentes de courte durée",
-   "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Amsteg E Svincolo autostradale Erstfeld Situazione: colonna Causa: traffico congestionato Aggiunta 1: chiusure intermittenti di breve durata"
-  },
-  "lastSeen": "2026-09-06T16:49:36Z",
-  "revokedAt": "2026-09-06T16:54:41Z"
  }
 ]
