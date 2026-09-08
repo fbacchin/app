@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Tunnel Tunnel Taubach et Jonction autoroutière Amsteg Situation: trafic perturbé travaux, longueur [km] 0.15 Gestion du trafic: nouveau plan de circulation sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la journée probable 22.09.2026 08:00 jusqu'à 22.09.2026 17:00",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Galleria Galleria Taubach E Svincolo autostradale Amsteg Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: nuova viabilità ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 22.09.2026 08:00 fino 22.09.2026 17:00"
   },
-  "lastSeen": "2026-09-08T20:07:23Z"
+  "lastSeen": "2026-09-08T20:12:30Z"
  },
  {
   "firstSeen": "2026-09-08T09:18:10Z",
@@ -266,21 +266,5 @@
    "it": "Approvato: H2 Göschenen <-> Flüelen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
   },
   "lastSeen": "2026-09-06T21:06:44Z"
- },
- {
-  "firstSeen": "2026-09-06T08:13:55Z",
-  "id": "situation.650731.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": "north",
-  "versionTime": "2026-09-06T08:15:48Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
-  },
-  "lastSeen": "2026-09-06T20:10:48Z",
-  "revokedAt": "2026-09-06T21:42:19Z"
  }
 ]
