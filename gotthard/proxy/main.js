@@ -2343,6 +2343,7 @@ const INTERROGAZIONI = {
         count() AS quanti
     FROM events
     WHERE timestamp >= now() - INTERVAL 7 DAY
+      AND event LIKE 'gotthard.%'   -- solo questa app: il progetto puo' ospitarne altre
     GROUP BY evento, valore
     ORDER BY evento ASC, quanti DESC
     LIMIT 60`,
@@ -2354,6 +2355,7 @@ const INTERROGAZIONI = {
         count() AS eventi
     FROM events
     WHERE timestamp >= now() - INTERVAL 14 DAY
+      AND event LIKE 'gotthard.%'
     GROUP BY giorno
     ORDER BY giorno DESC
     LIMIT 14`,
