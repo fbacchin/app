@@ -235,21 +235,5 @@
   },
   "lastSeen": "2026-09-06T21:47:24Z",
   "revokedAt": "2026-09-06T21:52:28Z"
- },
- {
-  "firstSeen": "2026-09-06T17:27:20Z",
-  "id": "situation.650771.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-09-06T17:25:23Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Amsteg und Autobahndreieck Verzweigung Altdorf Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: mehrfach kurzfristige Sperrungen",
-   "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Amsteg et Echangeur Echangeur d'Altdorf Situation: bouchon Raison: surcharge de trafic Complément 1: fermetures intermittentes de courte durée",
-   "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Amsteg E Raccordo autostradale Diramazione Altdorf Situazione: colonna Causa: traffico congestionato Aggiunta 1: chiusure intermittenti di breve durata"
-  },
-  "lastSeen": "2026-09-06T21:27:04Z",
-  "revokedAt": "2026-09-06T21:32:08Z"
  }
 ]
