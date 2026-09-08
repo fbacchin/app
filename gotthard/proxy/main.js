@@ -103,7 +103,14 @@ const SOAP_BODY = `<?xml version="1.0" encoding="utf-8"?>
 // UN lettore a ritmo costante — il lavoro pianificato, ogni 4 minuti. La
 // funzione serve la risposta che il job ha preparato, e chiama la fonte in
 // proprio SOLO se il job risulta fermo da piu' di due giri.
-const PAYLOAD_FRESCO_MS = 10 * 60 * 1000;    // due giri del job + margine
+// Due giri del job + margine. Il job gira ogni 5 minuti (dall'08.09.2026:
+// era ogni 4, ed e' la voce piu' grossa del piano Back4App — ogni esecuzione
+// e' una richiesta contata; il cruscotto Free ammette una pianificazione
+// sola, quindi niente ritmo notturno separato). Cinque minuti e' anche
+// esattamente il tetto di R1 per l'If-Modified-Since. Sotto questa soglia
+// l'app riceve il dato pronto; sopra, prende il ripiego e chiama la fonte da
+// sola — quindi la soglia deve stare comodamente oltre due giri.
+const PAYLOAD_FRESCO_MS = 12 * 60 * 1000;
 const LUCCHETTO_SYNC_MS = 2 * 60 * 1000;     // un solo sync per volta
 const INCREMENTALE_MAX_MS = 5 * 60 * 1000;   // R1: oltre, vale come riavvio
 const FINESTRA_MASSIMA_MS = 24 * 3600 * 1000; // tetto alla finestra dopo un fermo lungo
@@ -120,6 +127,20 @@ const MEMORIA_REVOCHE_MS = 60 * 60 * 1000;   // R4: i 60 min della piattaforma
 
 // IL RIPASSO — la lettura a finestra larga — NON sta qui: e' un lavoro suo,
 // in ripasso.js, con la sua schedulazione. Vedi quel file per il perche'.
+// LA LETTURA COMPLETA, una al giorno (R1). Non serve a fotografare il
+// presente — non lo fa, e' piena di record fermi da anni — ma a vedere cio'
+// che l'incrementale non puo' portare per costruzione: un evento ANNUNCIATO
+// IN ANTICIPO e mai piu' toccato. La chiusura notturna del Gottardo era nel
+// feed dal 17.08 con versionTime immutato: in tre settimane di incrementali
+// non e' passata una volta sola, e il 07.09 alle 20:00 il tunnel era chiuso
+// con l'app che diceva "libera" (ADEV-653).
+const COMPLETA_PERIODO_MS = 20 * 3600 * 1000;   // R1: "one query per day"
+// Di tutto il corridoio si tiene solo cio' che vale adesso o sta per valere.
+// Tre giorni sono due margini in uno: coprono una lettura saltata, e tengono
+// la riga di Stato piccola (99 record attivi nella cattura del 07.09.2026,
+// che salvati per intero peserebbero quanto tutto il resto del magazzino).
+const COMPLETA_ORIZZONTE_MS = 72 * 3600 * 1000;
+
 const FINESTRA_CODE_MS = 6 * 3600 * 1000;    // schede: messaggi di coda freschi
 const FINESTRA_EVENTI_MS = 12 * 3600 * 1000; // lista avvisi
 const POTATURA_MS = 13 * 3600 * 1000;        // il magazzino tiene solo il mostrabile
@@ -492,35 +513,107 @@ function sullaAutostrada(lower) {
   return !/\bh2\b/.test(lower);
 }
 
-// I qualificatori che dicono "solo in certe ore", senza dire quali. Quando
-// c'e' uno di questi la fonte NON ci mette in mano gli orari, quindi non
-// possiamo affermare che la chiusura sia in corso adesso: il messaggio resta
-// fra gli avvisi, ma senza l'etichetta. `untilFurtherNotice` invece non e'
-// una restrizione oraria — e' l'opposto, dice che vale da adesso e basta —
-// ed e' proprio come era scritta la chiusura del 03.08.2026.
-const QUALIFICATORI_A_ORARIO = new Set([
-  "duringTheNight", "duringTheDayTime", "severalTimes",
-]);
+// I qualificatori dicono che dentro il periodo la validita' NON e' continua:
+// il cantiere torna ogni notte, o ogni giorno, dentro l'intervallo
+// dichiarato. Fino al 07.09.2026 bastavano a far scartare il messaggio —
+// "non sappiamo quando" — e per quella riga il tunnel e' rimasto chiuso
+// dalle 20:00 alle 05:00 senza che l'app lo dicesse: situation.645705.1.1.1,
+// annunciata il 17.08 e mai mostrata (ADEV-653 e ADEV-654).
+//
+// L'orario la fonte ce lo da', solo non nel campo che ci si aspetterebbe.
+// DATEX II avrebbe `recurringTimePeriodOfDay`: nella cattura completa del
+// 07.09.2026 quel campo non compare NEMMENO UNA VOLTA su 5444 record, e
+// nemmeno `recurringDayWeekMonthPeriod`, `applicableDay` o gli altri della
+// famiglia. L'orario sta invece negli ESTREMI DEL PERIODO: `startOfPeriod`
+// porta l'ora d'inizio della finestra, `endOfPeriod` quella di fine, e le
+// due date dicono da quando a quando si ripete.
+//
+// Misurato su 1657 record `duringTheNight` della stessa cattura:
+// 18:00->03:00 (510 volte), 20:00->03:00 (190), 19:00->03:00 (166),
+// 19:00->04:00 (114)... tutte finestre serali, e 1605 su 1654 si estendono
+// oltre il giorno singolo. Un periodo CONTINUO di tre settimane etichettato
+// "di notte" non vorrebbe dire niente: l'inviluppo e' l'intervallo, la
+// coppia di orari e' la finestra che si ripete dentro.
+const QUALIFICATORI_RICORRENTI = new Set(["duringTheNight", "duringTheDayTime"]);
+
+// `severalTimes` non da' nessuna finestra da cui ricavare l'orario: dice
+// "piu' volte" e si ferma li'. Resta l'unico caso in cui davvero non
+// sappiamo, e resta scartato. Un record su 5444 nella stessa cattura.
+const QUALIFICATORI_OPACHI = new Set(["severalTimes"]);
+
+// `untilFurtherNotice` non compare in nessuno dei due elenchi: non e' una
+// restrizione oraria, e' l'opposto — dice che vale da adesso e fino a nuovo
+// avviso, ed e' come era scritta la chiusura del 03.08.2026.
+
+// NON leggiamo i giorni della settimana, di proposito. La chiusura del
+// Gottardo porta «Mo-FR, jeweils in den Nächten von 20:00 bis 05:00 Uhr»
+// in una nota interna, e quel "Mo-FR" restringerebbe la finestra ai giorni
+// feriali. Ma su 1657 record `duringTheNight` soltanto CINQUE dicono
+// qualcosa sui giorni, e lo dicono in cinque forme diverse fra loro:
+// «So - Fr», «So/Mo Do/Fr», «Mo Do», «Mo Di Do», «Mo-». Leggere quella
+// prosa con un'espressione regolare e' lo stesso errore del 03.08.2026 in
+// vestito nuovo. Senza il giorno la finestra e' piu' larga del vero e il
+// sabato notte possiamo annunciare una chiusura che non c'e': e' un difetto,
+// ma e' il difetto meno grave dei due. Chi legge "chiuso" e trova aperto
+// perde un minuto; chi legge "libera" e trova il tunnel sbarrato ha fatto
+// il viaggio per niente — ed e' quello che e' successo il 7 settembre.
+
+/** Adesso cade dentro il periodo, preso come intervallo continuo. */
+function dentroPeriodo(p, adesso) {
+  return (!p.da || Date.parse(p.da) <= adesso) && (!p.a || Date.parse(p.a) >= adesso);
+}
+
+/**
+ * Adesso cade dentro la finestra che si RIPETE dentro il periodo.
+ *
+ * Due condizioni: dentro l'inviluppo (le date), e dentro la fascia oraria
+ * (gli orari dei due estremi). La fascia puo' scavalcare la mezzanotte — e
+ * per un cantiere notturno lo fa sempre — quindi il confronto e' circolare.
+ *
+ * Tutto in UTC, come i dati: l'ora legale svizzera sposta la finestra vera
+ * di due ore rispetto a questi numeri, ma la sposta allo stesso modo su
+ * entrambi gli estremi, e il confronto e' fra grandezze omogenee.
+ */
+function dentroFinestraRicorrente(p, adesso) {
+  const da = p.da ? Date.parse(p.da) : NaN;
+  const a = p.a ? Date.parse(p.a) : NaN;
+  // Senza tutti e due gli estremi non c'e' nessuna finestra da ricavare.
+  if (isNaN(da) || isNaN(a)) return false;
+  if (adesso < da || adesso > a) return false;
+  const minuti = (t) => { const d = new Date(t); return d.getUTCHours() * 60 + d.getUTCMinutes(); };
+  const inizio = minuti(da), fine = minuti(a), ora = minuti(adesso);
+  if (inizio === fine) return true;                       // finestra piena
+  return inizio < fine
+    ? (ora >= inizio && ora < fine)                       // dentro la giornata
+    : (ora >= inizio || ora < fine);                      // a cavallo della mezzanotte
+}
 
 /**
  * Il messaggio e' in vigore ADESSO, o parla di qualcosa di programmato?
  *
- * Tre domande, tutte a dati dichiarati dalla fonte:
- *   - vale solo in certe ore che non conosciamo? allora no;
+ * Domande, tutte a dati dichiarati dalla fonte:
+ *   - porta un qualificatore opaco? allora non lo sappiamo, e vale no;
  *   - comincia dopo adesso? allora no;
- *   - ha dei periodi di validita'? allora adesso deve cadere dentro uno.
+ *   - non ha periodi? allora vale adesso, a meno che sia ricorrente: una
+ *     ricorrenza senza periodo e' una finestra senza orari, e li' davvero
+ *     non c'e' niente da cui dedurre;
+ *   - ha periodi? adesso deve cadere dentro uno — per intero se il periodo
+ *     e' continuo, dentro la fascia oraria se si ripete.
  *
  * Un messaggio senza niente di tutto questo vale adesso: e' il caso normale
  * di una coda o di un incidente. Vale anche per le voci di magazzino
  * salvate prima del 04.08.2026, che questi campi non ce li hanno.
  */
 function inVigore(s, adesso) {
-  if ((s.qualificatori || []).some((q) => QUALIFICATORI_A_ORARIO.has(q))) return false;
+  const qualificatori = s.qualificatori || [];
+  if (qualificatori.some((q) => QUALIFICATORI_OPACHI.has(q))) return false;
   if (s.inizioValidita && Date.parse(s.inizioValidita) > adesso) return false;
+  const ricorrente = qualificatori.some((q) => QUALIFICATORI_RICORRENTI.has(q));
   const periodi = s.periodi || [];
-  if (!periodi.length) return true;
-  return periodi.some((p) =>
-    (!p.da || Date.parse(p.da) <= adesso) && (!p.a || Date.parse(p.a) >= adesso));
+  if (!periodi.length) return !ricorrente;
+  return periodi.some((p) => ricorrente
+    ? dentroFinestraRicorrente(p, adesso)
+    : dentroPeriodo(p, adesso));
 }
 
 /**
@@ -1406,7 +1499,11 @@ function costruisciPayload(magazzino, revoche, modo, recordTotali, adesso) {
     const it = s.texts.it || "";
     const lower = it.toLowerCase();
     const eta = adesso - Date.parse(s.versionTime);
-    if (eta > FINESTRA_EVENTI_MS) continue;
+    // La finestra di freschezza tiene fuori i messaggi vecchi, ma una
+    // chiusura programmata E' vecchia per definizione: quella del Gottardo
+    // porta il `versionTime` del 17.08 e vale stanotte. Per lei decide
+    // `inVigore`, gia' verificato in conProgrammate.
+    if (!s.programmata && eta > FINESTRA_EVENTI_MS) continue;
 
     const km = queueKm(it);
     const attesa = attesaDi(s.type, it, km);
@@ -1432,6 +1529,10 @@ function costruisciPayload(magazzino, revoche, modo, recordTotali, adesso) {
                   directionStated: !!s.direzioneFonte,
                   versionTime: s.versionTime, km, wait,
                   waitStimato: attesa.stimata, chiusura,
+                  // `programmata` distingue una chiusura ANNUNCIATA dalla
+                  // fonte da una osservata adesso: l'app puo' dirlo a chi
+                  // legge invece di farlo credere un rilevamento.
+                  programmata: !!s.programmata,
                   texts: chiusura ? conEtichettaChiusura(s.texts, direction) : s.texts });
 
     // Stato delle code: solo A2, solo messaggi freschi, solo coi portali.
@@ -1722,11 +1823,112 @@ Parse.Cloud.define("gotthard", async () => {
  * funzione (quando la risposta in cache e' scaduta) sia dal lavoro
  * pianificato che gira ogni 4 minuti.
  */
+/**
+ * La lettura completa del feed, al massimo una al giorno (R1).
+ *
+ * Esiste per una sola ragione: l'incrementale porta cio' che CAMBIA, e un
+ * evento annunciato in anticipo non cambia piu'. La chiusura notturna del
+ * Gottardo stava nel feed dal 17.08.2026 con `versionTime` fermo; in tre
+ * settimane di letture incrementali non e' passata una volta, e non sarebbe
+ * passata mai. Il 07.09 alle 20:00 il tunnel era chiuso e l'app diceva
+ * "libera" (ADEV-653).
+ *
+ * Il risultato NON entra nel magazzino: sta in un campo suo. Il magazzino ha
+ * il ciclo di vita del cookbook (R3 mutazione, R4 revoca) e ci si arriva
+ * solo dall'incrementale; queste sono un catalogo che si riscrive intero a
+ * ogni lettura. Tenerli separati e' quello che impedisce a una lettura
+ * completa — che e' piena di record fermi da anni — di sporcare lo stato
+ * buono, che era la ragione per cui era stata tolta.
+ *
+ * Un fallimento qui non tocca il giro: si tengono le programmate di ieri e
+ * si riprova al prossimo giro, perche' `ultimaCompleta` non viene segnato.
+ */
+async function programmateAggiornate(row, adesso) {
+  const salvate = (row && row.get("programmate")) || [];
+  const ultima = row && row.get("ultimaCompleta");
+  if (ultima && adesso - ultima.getTime() < COMPLETA_PERIODO_MS) return salvate;
+
+  let situazioni;
+  try {
+    const r = await fetchFeed(null, { etichettaModo: "completo" });
+    ({ situazioni } = estraiSituazioni(r.xml));
+    r.diario.modo = "completo";
+    await registraChiamata(r.diario);
+  } catch (e) {
+    return salvate;
+  }
+
+  const fresche = Object.values(situazioni).filter((s) => {
+    if (s.revocata) return false;
+    // SOLO LE CHIUSURE DEL TUNNEL. Provato il 07.09.2026 sulla cattura vera:
+    // senza questa riga passano 15 situazioni "in vigore adesso" e quattordici
+    // sono rumore perenne — "problemi di traffico cantiere" sul passo, con
+    // periodi che vanno dal 2021 al 2028. E' esattamente il motivo per cui la
+    // lettura completa era stata tolta. Qui non serve a rifare la lista degli
+    // avvisi, che l'incrementale fa bene: serve a non tacere su una chiusura
+    // annunciata in anticipo. Allargarla e' una scelta da fare a parte, con
+    // in mano una regola per distinguere un cantiere da un avviso permanente.
+    if (!chiusuraDelTunnel(s, (s.texts.it || "").toLowerCase())) return false;
+    // Senza periodo dichiarato non e' un evento programmato: e' roba che
+    // l'incrementale porta da se', e qui farebbe solo massa.
+    const periodi = s.periodi || [];
+    if (!periodi.length) return false;
+    return periodi.some((p) => {
+      const da = p.da ? Date.parse(p.da) : NaN;
+      const a = p.a ? Date.parse(p.a) : NaN;
+      if (!isNaN(a) && a < adesso) return false;                            // gia' finito
+      if (!isNaN(da) && da > adesso + COMPLETA_ORIZZONTE_MS) return false;  // troppo in la'
+      return true;
+    });
+  }).map((s) => Object.assign({}, s, { programmata: true }));
+
+  try {
+    row.set("programmate", fresche);
+    row.set("ultimaCompleta", new Date(adesso));
+    await row.save(null, { useMasterKey: true });
+  } catch (e) {
+    // Il catalogo non e' un ingranaggio: se non si salva, il prossimo giro
+    // rifa' la lettura. Meglio una richiesta in piu' che un giro perso.
+  }
+  return fresche;
+}
+
+/**
+ * Il magazzino piu' le programmate che valgono ADESSO.
+ *
+ * Copia di lavoro, non lo stato salvato: cosi' payload e tabelle vedono la
+ * stessa cosa senza che il catalogo entri nel ciclo di vita del cookbook.
+ * Se una situazione sta in tutti e due, vince il magazzino: l'incrementale
+ * ha per forza la versione piu' fresca.
+ */
+function conProgrammate(magazzino, programmate, adesso) {
+  const vista = Object.assign({}, magazzino);
+  for (const s of programmate || []) {
+    if (vista[s.id]) continue;
+    if (!inVigore(s, adesso)) continue;
+    vista[s.id] = s;
+  }
+  return vista;
+}
+
 async function giroCompleto(rigaNota, opzioni) {
   const dati = await sincronizza(opzioni);
+  const adesso = Date.now();
+
+  // Il catalogo dei programmati, rinfrescato una volta al giorno, e la vista
+  // che ne esce: e' quella che vedono sia il payload sia le tabelle.
+  //
+  // MAI sul percorso interattivo. `veloce` vuol dire che dall'altra parte
+  // c'e' un telefono che aspetta: la lettura completa sono 22 MB (misurati
+  // il 07.09.2026) e Back4App ucciderebbe la funzione lasciando l'app con un
+  // 408. Il catalogo lo rinfresca il lavoro pianificato, che ha tempo.
+  const programmate = (opzioni && opzioni.veloce)
+    ? ((dati.riga && dati.riga.get("programmate")) || [])
+    : await programmateAggiornate(dati.riga, adesso);
+  const vista = conProgrammate(dati.magazzino, programmate, adesso);
 
   const payload = costruisciPayload(
-    dati.magazzino, dati.revoche, dati.modo, dati.recordTotali, Date.now());
+    vista, dati.revoche, dati.modo, dati.recordTotali, adesso);
 
   // L'ordine conta. Prima si scrivono le tabelle — fra cui il campione di
   // Storico di questo giro — poi si rilegge la serie da li' per il grafico:
@@ -1736,7 +1938,7 @@ async function giroCompleto(rigaNota, opzioni) {
   // Le tabelle non possono far fallire la risposta: se il database fa i
   // capricci, l'app riceve comunque le schede e gli avvisi.
   try {
-    await aggiornaTabelle(payload, dati.magazzino, dati.situazioni);
+    await aggiornaTabelle(payload, vista, dati.situazioni);
   } catch (e) {
     payload.tabelleError = String(e.message || e);
   }

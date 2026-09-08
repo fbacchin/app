@@ -33,7 +33,7 @@ global.Parse.Object.destroyAll = async () => {};
 const sorgente = fs.readFileSync(path.join(__dirname, "..", "main.js"), "utf8");
 const richiedi = (p) => require(p.startsWith(".") ? path.join(__dirname, "..", p) : p);
 const m = new Function("require", sorgente +
-  "\n;return { estraiSituazioni, chiusuraDelTunnel, conEtichettaChiusura, senzaPrefissoDiStato, inVigore, PUNTO_TUNNEL };")(richiedi);
+  "\n;return { estraiSituazioni, chiusuraDelTunnel, conEtichettaChiusura, senzaPrefissoDiStato, inVigore, conProgrammate, PUNTO_TUNNEL };")(richiedi);
 
 const prove = [];
 const ok = (nome, esito) => prove.push([nome, !!esito]);
@@ -262,6 +262,56 @@ const TUNNEL_ALTROVE = {
     ok("  e il magazzino tiene il testo GREZZO, senza etichetta",
       !/TUNNEL CHIUSO/.test(s.texts.it));
   }
+
+  // --- la chiusura notturna ricorrente (07.09.2026) -------------------------
+  //
+  // Il 07.09.2026 alle 20:00 il tunnel e' stato chiuso per cantiere, ogni
+  // notte fino al 25 settembre, e l'app ha detto "libera" tutta la sera. Il
+  // messaggio c'era nel feed dal 17 agosto: non passava dall'incrementale
+  // (versionTime fermo) e comunque `duringTheNight` lo faceva scartare.
+  // I valori sono quelli veri di situation.645705.1.1.1.
+  const notturno = {
+    id: "situation.645705.1",
+    versionTime: "2026-08-17T12:41:48Z",
+    inizioValidita: "2026-08-17T12:38:00Z",
+    periodi: [{ da: "2026-09-07T18:00:00Z", a: "2026-09-25T03:00:00Z" }],
+    qualificatori: ["duringTheNight"],
+    texts: { it: "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso cantiere" },
+    punti: [m.PUNTO_TUNNEL],
+    revocata: false,
+  };
+  const alle = (g, h, min) => Date.UTC(2026, 8, g, h, min || 0);
+
+  ok("la chiusura notturna vale alle 18:00Z, cioe' le 20:00 in Svizzera",
+     m.inVigore(notturno, alle(7, 18)) === true);
+  ok("  mezz'ora prima ancora no", m.inVigore(notturno, alle(7, 17, 30)) === false);
+  ok("  a mezzanotte passata si', la finestra scavalca il giorno",
+     m.inVigore(notturno, alle(8, 1)) === true);
+  ok("  alle 03:00Z, cioe' le 05:00, ha finito",
+     m.inVigore(notturno, alle(8, 3)) === false);
+  ok("  a mezzogiorno no: e' notturna, non continua",
+     m.inVigore(notturno, alle(8, 10)) === false);
+  ok("  e si ripete la settimana dopo", m.inVigore(notturno, alle(14, 22)) === true);
+  ok("  finito l'inviluppo non vale piu'", m.inVigore(notturno, alle(26, 21)) === false);
+
+  ok("severalTimes resta scartato: non da' nessuna finestra da cui dedurre",
+     m.inVigore(Object.assign({}, notturno, { qualificatori: ["severalTimes"] }),
+                alle(7, 19)) === false);
+  ok("ricorrente senza periodo: la finestra non c'e', e non si inventa",
+     m.inVigore(Object.assign({}, notturno, { periodi: [] }), alle(7, 19)) === false);
+  ok("senza qualificatore lo stesso periodo e' continuo: vale a mezzogiorno",
+     m.inVigore(Object.assign({}, notturno, { qualificatori: [] }),
+                alle(8, 10)) === true);
+
+  // --- il catalogo dei programmati entra nella vista solo quando vale ------
+  const programmata = Object.assign({}, notturno, { programmata: true });
+  ok("dentro la finestra la programmata entra nella vista",
+     Object.keys(m.conProgrammate({}, [programmata], alle(7, 21))).length === 1);
+  ok("  fuori dalla finestra no: annunciata non vuol dire in corso",
+     Object.keys(m.conProgrammate({}, [programmata], alle(8, 10))).length === 0);
+  ok("  e se la stessa situazione e' gia' nel magazzino vince l'incrementale",
+     m.conProgrammate({ "situation.645705.1": { id: "situation.645705.1", fresca: true } },
+                      [programmata], alle(7, 21))["situation.645705.1"].fresca === true);
 
   let n = 0;
   console.log("=== chiusura del tunnel ===");

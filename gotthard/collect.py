@@ -101,12 +101,45 @@ FRASI_CHIUSURA = [
     "tunnel fermé", "tunnel ferme",     # fr
     "tunnel closed",                    # en
 ]
-# I qualificatori che dicono "solo in certe ore" senza dire quali: con uno di
-# questi non possiamo affermare che la chiusura sia in corso adesso. Quattro
-# valori in 34548 blocchi d'archivio; `untilFurtherNotice` non e' fra questi
-# perche' non e' una restrizione — dice "da adesso e fino a nuovo avviso", ed
-# e' come era scritta la chiusura del 03.08.2026.
-QUALIFICATORI_A_ORARIO = {"duringTheNight", "duringTheDayTime", "severalTimes"}
+# I qualificatori dicono che dentro il periodo la validita' NON e' continua:
+# il cantiere torna ogni notte, o ogni giorno, dentro l'intervallo dichiarato.
+# Fino al 07.09.2026 bastavano a far scartare il messaggio — "non sappiamo
+# quando" — e per quella riga il tunnel e' rimasto chiuso dalle 20:00 alle
+# 05:00 senza che partisse nessuna notifica: situation.645705.1.1.1,
+# annunciata il 17.08 e mai segnalata (ADEV-654).
+#
+# L'orario la fonte ce lo da', solo non nel campo che ci si aspetterebbe.
+# DATEX II avrebbe `recurringTimePeriodOfDay`: nella cattura completa del
+# 07.09.2026 non compare NEMMENO UNA VOLTA su 5444 record, e nemmeno gli
+# altri della famiglia. L'orario sta negli ESTREMI DEL PERIODO —
+# `startOfPeriod` porta l'ora d'inizio della finestra, `endOfPeriod` quella
+# di fine — e le due date dicono da quando a quando si ripete.
+#
+# Misurato su 1657 record `duringTheNight` della stessa cattura:
+# 18:00->03:00 (510 volte), 20:00->03:00 (190), 19:00->03:00 (166),
+# 19:00->04:00 (114)... tutte finestre serali, e 1605 su 1654 vanno oltre il
+# giorno singolo. Un periodo CONTINUO di tre settimane etichettato "di notte"
+# non vorrebbe dire niente.
+QUALIFICATORI_RICORRENTI = {"duringTheNight", "duringTheDayTime"}
+
+# `severalTimes` non da' nessuna finestra da cui ricavare l'orario: dice
+# "piu' volte" e si ferma li'. Resta l'unico caso in cui davvero non sappiamo,
+# e resta scartato. Un record su 5444 nella stessa cattura.
+QUALIFICATORI_OPACHI = {"severalTimes"}
+
+# `untilFurtherNotice` non e' in nessuno dei due: non e' una restrizione
+# oraria, e' l'opposto — vale da adesso e fino a nuovo avviso, ed e' come era
+# scritta la chiusura del 03.08.2026.
+#
+# NON leggiamo i giorni della settimana, di proposito: la chiusura del
+# Gottardo porta «Mo-FR, jeweils in den Nächten von 20:00 bis 05:00 Uhr» in
+# una nota interna, ma su 1657 record solo CINQUE dicono qualcosa sui giorni,
+# in cinque forme diverse fra loro («So - Fr», «So/Mo Do/Fr», «Mo Do», «Mo Di
+# Do», «Mo-»). Leggere quella prosa e' lo stesso errore del 03.08 in vestito
+# nuovo. Senza il giorno la finestra e' piu' larga del vero e il sabato notte
+# possiamo annunciare una chiusura che non c'e': e' il difetto meno grave dei
+# due — chi legge "chiuso" e trova aperto perde un minuto, chi legge "libera"
+# e trova il tunnel sbarrato ha fatto il viaggio per niente.
 
 # La direzione come la dichiara la fonte, non come la si indovina dal testo.
 # Verificato il 03.08.2026 su 50 concordanze e zero contraddizioni.
@@ -353,24 +386,60 @@ def direzione_codificata(record):
     return None
 
 
-def in_vigore(record, now):
-    """Il messaggio vale ADESSO, o parla di qualcosa di programmato?
+def dentro_finestra_ricorrente(da, a, now):
+    """`now` cade nella finestra che si RIPETE dentro il periodo?
 
-    Tre domande, tutte su dati dichiarati dalla fonte:
-      - vale solo in certe ore che non conosciamo? allora no;
-      - comincia dopo adesso? allora no;
-      - ha dei periodi di validita'? allora adesso deve cadere dentro uno.
+    Due condizioni: dentro l'inviluppo (le date) e dentro la fascia oraria
+    (gli orari dei due estremi). La fascia puo' scavalcare la mezzanotte — e
+    per un cantiere notturno lo fa sempre — quindi il confronto e' circolare.
 
-    Senza niente di tutto questo vale adesso: e' il caso normale di una coda.
+    Tutto in UTC come i dati: l'ora legale sposta la finestra vera di due ore,
+    ma la sposta su entrambi gli estremi, e il confronto resta omogeneo.
     """
+    if da is None or a is None:
+        return False                      # senza due estremi non c'e' finestra
+    if now < da or now > a:
+        return False                      # fuori dall'inviluppo
+    minuti = lambda t: t.hour * 60 + t.minute
+    inizio, fine, ora = minuti(da), minuti(a), minuti(now)
+    if inizio == fine:
+        return True                       # finestra piena
+    if inizio < fine:
+        return inizio <= ora < fine       # dentro la giornata
+    return ora >= inizio or ora < fine    # a cavallo della mezzanotte
+
+
+def qualificatori_di(record):
+    """I qualificatori di validita' dichiarati dal record."""
+    fuori = set()
     for ext in (e for e in record.iter() if local(e.tag) == "validityExtension"):
         for enum in (x for x in ext.iter()
                      if local(x.tag) == "elementEnumerationExtension"):
             nome = next((c.text for c in enum if local(c.tag) == "element"), "")
             valore = next((c.text for c in enum if local(c.tag) == "value"), "")
-            if ((nome or "").strip() == "validityStatus"
-                    and (valore or "").strip() in QUALIFICATORI_A_ORARIO):
-                return False
+            if (nome or "").strip() == "validityStatus" and valore:
+                fuori.add(valore.strip())
+    return fuori
+
+
+def in_vigore(record, now):
+    """Il messaggio vale ADESSO, o parla di qualcosa di programmato?
+
+    Domande, tutte su dati dichiarati dalla fonte:
+      - porta un qualificatore opaco? allora non lo sappiamo, e vale no;
+      - comincia dopo adesso? allora no;
+      - non ha periodi? vale adesso, a meno che sia ricorrente: una
+        ricorrenza senza periodo e' una finestra senza orari, e li' davvero
+        non c'e' niente da cui dedurre;
+      - ha periodi? `now` deve cadere dentro uno — per intero se il periodo
+        e' continuo, dentro la fascia oraria se si ripete.
+
+    Senza niente di tutto questo vale adesso: e' il caso normale di una coda.
+    """
+    qualificatori = qualificatori_di(record)
+    if qualificatori & QUALIFICATORI_OPACHI:
+        return False
+    ricorrente = bool(qualificatori & QUALIFICATORI_RICORRENTI)
 
     inizi = [t for t in (parse_time((e.text or "").strip())
                          for e in record.iter()
@@ -380,13 +449,16 @@ def in_vigore(record, now):
 
     periodi = [p for p in record.iter() if local(p.tag) == "validPeriod"]
     if not periodi:
-        return True
+        return not ricorrente
     for p in periodi:
         da = next((parse_time((c.text or "").strip()) for c in p
                    if local(c.tag) == "startOfPeriod"), None)
         a = next((parse_time((c.text or "").strip()) for c in p
                   if local(c.tag) == "endOfPeriod"), None)
-        if (da is None or da <= now) and (a is None or a >= now):
+        if ricorrente:
+            if dentro_finestra_ricorrente(da, a, now):
+                return True
+        elif (da is None or da <= now) and (a is None or a >= now):
             return True
     return False
 
@@ -593,7 +665,13 @@ def send_push(alert, where=None):
         "https://parseapi.back4app.com/push",
         data=json.dumps({
             "where": where or {"channels": "global", "deviceType": "ios"},
-            "data": {"alert": alert, "sound": "default", "badge": "Increment"},
+            # Niente "badge": "Increment" (tolto l'08.09.2026, ADEV-652). Le
+            # notizie di quest'app scadono: un contatore che accumula "coda
+            # di 6 km" di tre giorni fa non conta cose da leggere, conta le
+            # volte che l'app e' stata ignorata — e lo mostra sull'icona. Il
+            # 07.09 il massimo era 310, e meta' delle installazioni ne aveva
+            # uno a tre cifre. La notifica resta; il pallino no.
+            "data": {"alert": alert, "sound": "default"},
         }).encode("utf-8"),
         headers={
             "X-Parse-Application-Id": PUSH_APP_ID,

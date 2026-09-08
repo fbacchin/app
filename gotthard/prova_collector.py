@@ -362,6 +362,76 @@ ok("sotto i 3 km non si controlla: i rapporti su numeri piccoli sono rumore",
    c.attesa_implausibile(2, 1) is False)
 ok("senza km non si puo' giudicare", c.attesa_implausibile(None, 10) is False)
 
+# --- la chiusura notturna ricorrente (07.09.2026) ---
+#
+# Il 07.09.2026 alle 20:00 il tunnel e' stato chiuso per cantiere, ogni notte
+# fino al 25 settembre, e non e' partita nessuna notifica. Il messaggio
+# arrivava — il collector legge il feed intero — ma `duringTheNight` lo
+# faceva scartare come "non sappiamo quando". L'orario c'era, negli estremi
+# del periodo. Il record e' quello vero: situation.645705.1.1.1.
+import xml.etree.ElementTree as _ET
+
+_NOTTURNO = _ET.fromstring("""
+<situationRecord xmlns="http://datex2.eu/schema/2/2_0">
+  <validity>
+    <validityStatus>active</validityStatus>
+    <validityTimeSpecification>
+      <overallStartTime>2026-08-17T12:38:00.000000Z</overallStartTime>
+      <validPeriod>
+        <startOfPeriod>2026-09-07T18:00:00.000000Z</startOfPeriod>
+        <endOfPeriod>2026-09-25T03:00:00.000000Z</endOfPeriod>
+      </validPeriod>
+    </validityTimeSpecification>
+    <validityExtension>
+      <elementEnumerationExtension>
+        <element>validityStatus</element><value>duringTheNight</value>
+      </elementEnumerationExtension>
+    </validityExtension>
+  </validity>
+</situationRecord>""")
+
+def _alle(giorno, ora, minuto=0):
+    return datetime(2026, 9, giorno, ora, minuto, tzinfo=timezone.utc)
+
+ok("la chiusura notturna vale alle 18:00Z, cioe' le 20:00 in Svizzera",
+   c.in_vigore(_NOTTURNO, _alle(7, 18)) is True)
+ok("  mezz'ora prima ancora no", c.in_vigore(_NOTTURNO, _alle(7, 17, 30)) is False)
+ok("  a mezzanotte passata si', la finestra scavalca il giorno",
+   c.in_vigore(_NOTTURNO, _alle(8, 1)) is True)
+ok("  un minuto prima delle 03:00Z ancora si'",
+   c.in_vigore(_NOTTURNO, _alle(8, 2, 59)) is True)
+ok("  alle 03:00Z, cioe' le 05:00, ha finito",
+   c.in_vigore(_NOTTURNO, _alle(8, 3)) is False)
+ok("  a mezzogiorno no: e' una chiusura notturna, non continua",
+   c.in_vigore(_NOTTURNO, _alle(8, 10)) is False)
+ok("  e si ripete la settimana dopo", c.in_vigore(_NOTTURNO, _alle(14, 22)) is True)
+ok("  l'ultima notte e' quella del 25", c.in_vigore(_NOTTURNO, _alle(25, 2)) is True)
+ok("  finito l'inviluppo non vale piu'", c.in_vigore(_NOTTURNO, _alle(26, 21)) is False)
+
+_OPACO = _ET.fromstring(_ET.tostring(_NOTTURNO).decode().replace(
+    "duringTheNight", "severalTimes"))
+ok("severalTimes resta scartato: non da' nessuna finestra da cui dedurre",
+   c.in_vigore(_OPACO, _alle(7, 19)) is False)
+
+_SENZA_PERIODO = _ET.fromstring("""
+<situationRecord xmlns="http://datex2.eu/schema/2/2_0"><validity>
+  <validityExtension><elementEnumerationExtension>
+    <element>validityStatus</element><value>duringTheNight</value>
+  </elementEnumerationExtension></validityExtension>
+</validity></situationRecord>""")
+ok("ricorrente SENZA periodo: la finestra non c'e', e non si inventa",
+   c.in_vigore(_SENZA_PERIODO, _alle(7, 19)) is False)
+
+_CONTINUO = _ET.fromstring("""
+<situationRecord xmlns="http://datex2.eu/schema/2/2_0"><validity>
+  <validityTimeSpecification><validPeriod>
+    <startOfPeriod>2026-09-07T18:00:00Z</startOfPeriod>
+    <endOfPeriod>2026-09-25T03:00:00Z</endOfPeriod>
+  </validPeriod></validityTimeSpecification>
+</validity></situationRecord>""")
+ok("senza qualificatore lo stesso periodo e' continuo: vale anche a mezzogiorno",
+   c.in_vigore(_CONTINUO, _alle(8, 10)) is True)
+
 n = sum(1 for _, e in prove if e)
 print("=== collector: corridoio, chiusura, push ===")
 for nome, esito in prove:
