@@ -2321,8 +2321,8 @@ const PH_CHIAVE = (typeof process !== "undefined" && process.env && process.env.
 /**
  * Le interrogazioni, verificate sul progetto vero il 05.09.2026.
  *
- * I nomi dei parametri contengono punti (`app.bacchin.schermata`), quindi si
- * accedono con le parentesi quadre: la forma `properties.app.bacchin.schermata`
+ * I nomi dei parametri contengono punti (`gotthard.schermata`), quindi si
+ * accedono con le parentesi quadre: la forma `properties.gotthard.schermata`
  * verrebbe letta come una discesa dentro oggetti annidati e darebbe vuoto.
  */
 const INTERROGAZIONI = {
@@ -2333,11 +2333,11 @@ const INTERROGAZIONI = {
     SELECT
         event AS evento,
         coalesce(
-            properties['app.bacchin.schermata'],
-            properties['app.bacchin.webcam'],
-            properties['app.bacchin.direzione'],
-            properties['app.bacchin.ore'],
-            properties['app.bacchin.motivo'],
+            properties['gotthard.schermata'],
+            properties['gotthard.webcam'],
+            properties['gotthard.direzione'],
+            properties['gotthard.ore'],
+            properties['gotthard.motivo'],
             '—'
         ) AS valore,
         count() AS quanti
