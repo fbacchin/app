@@ -3432,5 +3432,13 @@
    "hu-ua.beregsurany",
    "hu-ua.zahony"
   ]
+ },
+ {
+  "time": "2026-09-08T03:49:08Z",
+  "w": {
+   "pl-ua.medyka.exit": 0,
+   "pl-ua.korczowa.exit": 0,
+   "pl-ua.hrebenne.exit": 0
+  }
  }
 ]
