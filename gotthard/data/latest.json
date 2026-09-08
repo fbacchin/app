@@ -1,5 +1,5 @@
 {
- "time": "2026-09-08T10:29:25Z",
+ "time": "2026-09-08T12:29:59Z",
  "south": {
   "km": 2.0,
   "wait": 20
@@ -36,16 +36,16 @@
    }
   },
   {
-   "id": "situation.651217.1.1.1",
+   "id": "situation.651245.1.1.1",
    "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-09-08T09:45:20Z",
+   "direction": "north",
+   "versionTime": "2026-09-08T12:25:10Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Anschluss Wassen Sachlage: stockender Verkehr Ursache: Bauarbeiten Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Jonction autoroutière Wassen Situation: trafic en accordéon Raison: travaux de construction Gestion du trafic: rétrécissement des voies sur une voie de circulation",
-    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Wassen Situazione: traffico fortemente rallentato Causa: lavori di costruzione Limitazione del traffico: corsie strette ridotta su una corsia"
+    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Erstfeld und Autobahndreieck Verzweigung Altdorf Sachlage: Stau Ursache: Unfall",
+    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Erstfeld et Echangeur Echangeur d'Altdorf Situation: bouchon Raison: accident",
+    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Erstfeld E Raccordo autostradale Diramazione Altdorf Situazione: colonna Causa: incidente"
    }
   },
   {
