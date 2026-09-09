@@ -1,124 +1,5 @@
 [
  {
-  "time": "2026-09-07T07:46:45Z",
-  "southDelay": 10,
-  "northDelay": 0,
-  "southQueueKm": 1.0,
-  "northQueueKm": null
- },
- {
-  "time": "2026-09-07T07:51:50Z",
-  "southDelay": 10,
-  "northDelay": 0,
-  "southQueueKm": 1.0,
-  "northQueueKm": null
- },
- {
-  "time": "2026-09-07T07:56:55Z",
-  "southDelay": 10,
-  "northDelay": 0,
-  "southQueueKm": 1.0,
-  "northQueueKm": null
- },
- {
-  "time": "2026-09-07T08:02:00Z",
-  "southDelay": 10,
-  "northDelay": 0,
-  "southQueueKm": 1.0,
-  "northQueueKm": null
- },
- {
-  "time": "2026-09-07T08:07:07Z",
-  "southDelay": 10,
-  "northDelay": 0,
-  "southQueueKm": 1.0,
-  "northQueueKm": null
- },
- {
-  "time": "2026-09-07T08:12:12Z",
-  "southDelay": 10,
-  "northDelay": 10,
-  "southQueueKm": 1.0,
-  "northQueueKm": 1.0
- },
- {
-  "time": "2026-09-07T08:17:18Z",
-  "southDelay": 10,
-  "northDelay": 10,
-  "southQueueKm": 1.0,
-  "northQueueKm": 1.0
- },
- {
-  "time": "2026-09-07T08:22:23Z",
-  "southDelay": 10,
-  "northDelay": 10,
-  "southQueueKm": 1.0,
-  "northQueueKm": 1.0
- },
- {
-  "time": "2026-09-07T08:27:28Z",
-  "southDelay": 10,
-  "northDelay": 10,
-  "southQueueKm": 1.0,
-  "northQueueKm": 1.0
- },
- {
-  "time": "2026-09-07T08:32:33Z",
-  "southDelay": 30,
-  "northDelay": 10,
-  "southQueueKm": 3.0,
-  "northQueueKm": 1.0
- },
- {
-  "time": "2026-09-07T08:37:39Z",
-  "southDelay": 30,
-  "northDelay": 10,
-  "southQueueKm": 3.0,
-  "northQueueKm": 1.0
- },
- {
-  "time": "2026-09-07T08:42:45Z",
-  "southDelay": 30,
-  "northDelay": 10,
-  "southQueueKm": 3.0,
-  "northQueueKm": 1.0
- },
- {
-  "time": "2026-09-07T08:47:50Z",
-  "southDelay": 30,
-  "northDelay": 20,
-  "southQueueKm": 3.0,
-  "northQueueKm": 2.0
- },
- {
-  "time": "2026-09-07T08:52:57Z",
-  "southDelay": 30,
-  "northDelay": 20,
-  "southQueueKm": 3.0,
-  "northQueueKm": 2.0
- },
- {
-  "time": "2026-09-07T08:58:02Z",
-  "southDelay": 30,
-  "northDelay": 20,
-  "southQueueKm": 3.0,
-  "northQueueKm": 2.0
- },
- {
-  "time": "2026-09-07T09:03:08Z",
-  "southDelay": 30,
-  "northDelay": 20,
-  "southQueueKm": 3.0,
-  "northQueueKm": 2.0
- },
- {
-  "time": "2026-09-07T09:08:13Z",
-  "southDelay": 30,
-  "northDelay": 20,
-  "southQueueKm": 3.0,
-  "northQueueKm": 2.0
- },
- {
   "time": "2026-09-07T12:51:06Z",
   "southDelay": 60,
   "northDelay": 60,
@@ -2959,5 +2840,12 @@
   "northDelay": 0,
   "southQueueKm": null,
   "northQueueKm": null
+ },
+ {
+  "time": "2026-09-09T09:23:48Z",
+  "southDelay": 20,
+  "northDelay": 30,
+  "southQueueKm": 2.0,
+  "northQueueKm": 3.0
  }
 ]
