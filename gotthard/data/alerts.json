@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: bouchon longueur [km] 5.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 50",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: colonna lunghezza [km] 5.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 50"
   },
-  "lastSeen": "2026-09-09T15:35:56Z"
+  "lastSeen": "2026-09-09T15:41:04Z"
  },
  {
   "firstSeen": "2026-09-09T09:23:48Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-09-09T15:35:56Z"
+  "lastSeen": "2026-09-09T15:41:04Z"
  },
  {
   "firstSeen": "2026-09-09T09:23:48Z",
@@ -217,52 +217,5 @@
   },
   "lastSeen": "2026-09-08T06:03:48Z",
   "revokedAt": "2026-09-08T07:41:32Z"
- },
- {
-  "firstSeen": "2026-09-07T08:12:12Z",
-  "id": "situation.650944.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-09-07T15:06:02Z",
-  "km": 4.0,
-  "wait": 40,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
-  },
-  "lastSeen": "2026-09-07T15:38:53Z",
-  "revokedAt": "2026-09-07T18:01:56Z"
- },
- {
-  "firstSeen": "2026-09-07T08:27:28Z",
-  "id": "situation.650954.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": "north",
-  "versionTime": "2026-09-07T08:24:36Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
-  },
-  "lastSeen": "2026-09-07T15:38:53Z",
-  "revokedAt": "2026-09-07T18:01:56Z"
- },
- {
-  "firstSeen": "2026-09-07T12:51:06Z",
-  "id": "situation.650983.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-09-07T12:05:56Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Anschluss Airolo-Nufenen und Pass Gotthard-Pass Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-   "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Col Col du St-Gothard Situation: trafic en accordéon Raison: surcharge de trafic",
-   "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Passo Passo del S. Gottardo Situazione: traffico fortemente rallentato Causa: traffico congestionato"
-  },
-  "lastSeen": "2026-09-07T15:38:53Z"
  }
 ]
