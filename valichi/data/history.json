@@ -1,21 +1,5 @@
 [
  {
-  "time": "2026-09-08T02:20:15Z",
-  "w": {
-   "hu-ua.zahony.exit": 15,
-   "hu-ua.zahony.entry": 15,
-   "hu-ua.beregsurany.exit": 15,
-   "hu-ua.beregsurany.entry": 15,
-   "pl-ua.medyka.exit": 0,
-   "pl-ua.korczowa.exit": 0,
-   "pl-ua.hrebenne.exit": 0
-  },
-  "held": [
-   "hu-ua.beregsurany",
-   "hu-ua.zahony"
-  ]
- },
- {
   "time": "2026-09-08T02:31:23Z",
   "w": {
    "hu-ua.zahony.exit": 15,
@@ -3006,6 +2990,18 @@
  },
  {
   "time": "2026-09-10T02:20:04Z",
+  "w": {
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 0,
+   "pl-ua.korczowa.exit": 60,
+   "pl-ua.hrebenne.exit": 60
+  }
+ },
+ {
+  "time": "2026-09-10T02:30:10Z",
   "w": {
    "hu-ua.zahony.exit": 15,
    "hu-ua.zahony.entry": 15,
