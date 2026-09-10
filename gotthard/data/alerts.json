@@ -219,21 +219,5 @@
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Wassen Situazione: traffico fortemente rallentato Causa: lavori di costruzione Limitazione del traffico: corsie strette ridotta su una corsia"
   },
   "lastSeen": "2026-09-08T10:29:25Z"
- },
- {
-  "firstSeen": "2026-09-08T05:38:22Z",
-  "id": "situation.651171.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "south",
-  "versionTime": "2026-09-08T05:37:30Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Parkplatz Dosierstelle Coldrerio und Parkplatz Chiasso-Warenzoll Sachlage: Stau für LKW Ursache: Verkehrsüberlastung",
-   "fr": "Libéré: A2 St-Gothard -> Chiasso entre Parking Aire de dosage Coldrerio et Parking Chiasso-Douane commercial Situation: bouchon pour poids lourd Raison: surcharge de trafic",
-   "it": "Approvato: A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Coldrerio E Parcheggio Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato"
-  },
-  "lastSeen": "2026-09-08T06:03:48Z",
-  "revokedAt": "2026-09-08T07:41:32Z"
  }
 ]
