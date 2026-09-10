@@ -113,10 +113,17 @@ SOURCE_URLS = {
     "police_hu": [
         "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo",
     ],
+    # Il gemello bosniaco di HAK. Fonte di RISERVA per i due valichi
+    # HR ↔ BA: HAK elenca solo i valichi con una coda da dichiarare, e Nova
+    # Sela e Stara Gradiška non ci sono mai comparsi in due giorni di
+    # osservazione.
+    "bihamk": [
+        "https://bihamk.ba/spi/stanje-na-cesti-u-bih/granicni-prijelazi",
+    ],
     # granica.gov.pl non è qui: non è più una pagina da spianare ma il
     # servizio SOAP ufficiale, e ha un adapter tutto suo (fonte_granica_pl).
 }
-SOURCE_LANG = {"hak": "hr", "police_hu": "hu"}
+SOURCE_LANG = {"hak": "hr", "police_hu": "hu", "bihamk": "bs"}
 
 # --- vocabolario multilingue, tutto in forma GIÀ SPIANATA (minuscole,
 # senza accenti: "óra"→"ora", "zadržavanja"→"zadrzavanja") ---
@@ -141,7 +148,8 @@ ENTRY_WORDS = ["ulaz", "belep", "wjazd", "entry", "ingresso"]
 # distingue auto/camion/bus, perché l'app parla ai viaggiatori, non agli
 # spedizionieri. I prefissi coprono le declinazioni.
 CAR_WORDS = ["osobna", "osobni", "szemely", "osobowe", "osobowy",
-             "samochody osobowe", "cars", "autovetture"]
+             "samochody osobowe", "cars", "autovetture",
+             "putnick"]   # bs/hr: "putnička vozila" sono le auto
 OTHER_VEHICLE_WORDS = ["teretna", "teretni", "kamion", "autobus",
                        "teherg", "tehergepkocsi", "busz",
                        "ciezarowe", "ciezarowy", "autokar",
@@ -684,6 +692,96 @@ def fonte_pagina(source, crossings):
     return campioni, salute, finestre
 
 
+# --- BIHAMK: le schede dei valichi bosniaci -----------------------------
+
+class _SchedeBIHAMK(HTMLParser):
+    """Le schede <article> della pagina BIHAMK: un <h3> col nome del valico
+    ("GP Bijača") e un paragrafo con lo stato. Si legge la struttura, non il
+    testo appiattito: le 46 schede sono contigue e da spianate i valichi si
+    contaminerebbero a vicenda."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.schede = []
+        self._dentro = 0
+        self._in_titolo = False
+        self._nome = []
+        self._testo = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "article":
+            self._dentro += 1
+            if self._dentro == 1:
+                self._nome, self._testo = [], []
+        elif self._dentro and tag == "h3" and not self._nome:
+            self._in_titolo = True
+
+    def handle_endtag(self, tag):
+        if tag == "h3":
+            self._in_titolo = False
+        elif tag == "article" and self._dentro:
+            self._dentro -= 1
+            if self._dentro == 0:
+                nome = re.sub(r"\s+", " ", "".join(self._nome)).strip()
+                testo = re.sub(r"\s+", " ", "".join(self._testo)).strip()
+                if nome:
+                    self.schede.append((nome, testo))
+
+    def handle_data(self, data):
+        if not self._dentro:
+            return
+        (self._nome if self._in_titolo else self._testo).append(data)
+
+
+# L'ora che BIHAMK dichiara in testa al rapporto ("10.09.2026. u 09:41
+# sati"). Finisce nel registro: è l'unico modo di accorgersi che la pagina
+# è ferma, perché le schede non hanno un timestamp proprio.
+BIHAMK_ORA = re.compile(r"\d{2}\.\d{2}\.\d{4}\.\s*u\s*\d{1,2}[:.]\d{2}\s*sati")
+
+
+def estrai_bihamk(html, crossings):
+    """Campioni BIHAMK, uno per scheda.
+
+    Attenzione a che cosa dice davvero questa fonte. BIHAMK riferisce il
+    lato BOSNIACO: le code che descrive sono quelle di chi esce dalla BiH
+    verso la Croazia, cioè la direzione `entry` del nostro modello. Non
+    distingue le direzioni, quindi l'altra resta IGNOTA — riempirle
+    entrambe con lo stesso numero sarebbe affermare una cosa che la fonte
+    non ha detto.
+
+    La frase ordinaria è un TETTO ("Zadržavanja putničkih vozila nisu duža
+    od 30 minuta"), non una misura: 30 è il limite superiore dichiarato, ed
+    è conservativo nella direzione giusta. Come si scrive quando la coda
+    c'è davvero non lo sappiamo ancora: al 10.09.2026 tutte e 46 le schede
+    riportavano la frase standard. Il registro delle finestre serve a
+    tarare il giorno che cambia.
+    """
+    parser = _SchedeBIHAMK()
+    try:
+        parser.feed(html)
+    except Exception:
+        return {}, {}
+    trovata = BIHAMK_ORA.search(html_in_testo(html))
+    quando = trovata.group(0) if trovata else "ora non dichiarata"
+    campioni = {}
+    finestre = {}
+    for nome, testo in parser.schede:
+        piatto = spiana(nome)
+        crossing = next(
+            (c for c in crossings
+             if any(n in piatto
+                    for n in (c.get("fallback") or {}).get("matchNames", []))),
+            None)
+        if crossing is None:
+            continue
+        direzione = (crossing.get("fallback") or {}).get("direction", "entry")
+        letto = {d: None for d in crossing.get("directions", {"exit": "", "entry": ""})}
+        letto[direzione] = attesa_nel_segmento(spiana(testo))
+        campioni[crossing["id"]] = letto
+        finestre[crossing["id"]] = f"{quando} · {nome}: {testo}"[:400]
+    return campioni, finestre
+
+
 # --- granica.gov.pl: il servizio SOAP ufficiale -------------------------
 
 # L'endpoint e il suo WSDL rispondono solo sull'host SENZA www:
@@ -904,11 +1002,13 @@ def fonte_gotthard(crossings):
 ESTRATTORI = {
     "hak": estrai_hak,
     "police_hu": estrai_police_hu,
+    "bihamk": estrai_bihamk,
 }
 
 FONTI = {
     "hak": lambda c: fonte_pagina("hak", c),
     "police_hu": lambda c: fonte_pagina("police_hu", c),
+    "bihamk": lambda c: fonte_pagina("bihamk", c),
     "granica_pl": fonte_granica_pl,
     "gotthard": fonte_gotthard,
 }
@@ -1083,6 +1183,15 @@ def prova():
         # in entrambe le direzioni. Röszke compare solo nei paragrafi di
         # spiegazione e Tompa non compare affatto: il confine con la Serbia
         # su questa pagina non ha blocchi di attesa.
+        # La riserva bosniaca. Il 10.09.2026 tutte e 46 le schede portavano
+        # la frase standard, quindi qui si collauda il tetto dei 30 minuti e
+        # — soprattutto — che l'uscita resti IGNOTA: BIHAMK riferisce solo il
+        # lato bosniaco, e inventarle la direzione opposta sarebbe il tipo di
+        # bugia che questo progetto non fa.
+        "bihamk": {
+            "hr-ba.nova-sela": {"exit": None, "entry": 30},
+            "hr-ba.stara-gradiska": {"exit": None, "entry": 30},
+        },
         "police_hu": {
             "hu-rs.roszke": {"exit": None, "entry": None},
             "hu-ua.zahony": {"exit": 15, "entry": 15},
@@ -1091,6 +1200,13 @@ def prova():
     }
 
     errori = 0
+    # I valichi di una fonte di riserva stanno in per_fonte sotto la fonte
+    # PRINCIPALE: qui si rimettono insieme guardando il campo fallback.
+    for crossing in attivi:
+        riserva = (crossing.get("fallback") or {}).get("source")
+        if riserva:
+            per_fonte.setdefault(riserva, []).append(crossing)
+
     for source, expected in attese.items():
         fixture = PROVE_DIR / f"{source}.html"
         campioni, _ = ESTRATTORI[source](fixture.read_text(),
@@ -1170,6 +1286,35 @@ def main():
         campioni.update(estratti)
         salute_fonti[source] = salute
         finestre.update(finestre_fonte)
+
+    # --- seconda passata: le fonti di riserva --------------------------
+    # Qualche valico ha una fonte secondaria che parla quando la principale
+    # tace: HAK elenca solo i valichi con una coda da dichiarare, e chi non
+    # c'è resta ignoto anche quando la coda esiste davvero. La riserva
+    # riempie SOLO i buchi — dove la principale ha un valore vince lei,
+    # perché è più precisa: per direzione e per categoria di veicolo.
+    per_riserva = {}
+    for crossing in attivi:
+        riserva = crossing.get("fallback") or {}
+        if riserva.get("source"):
+            per_riserva.setdefault(riserva["source"], []).append(crossing)
+
+    for source, crossings in per_riserva.items():
+        try:
+            estratti, salute, finestre_fonte = FONTI[source](crossings)
+        except Exception as exc:
+            estratti, salute, finestre_fonte = {}, {"ok": False, "error": repr(exc)}, {}
+        salute_fonti[source] = salute
+        # Chiave distinta: la finestra della riserva non deve cancellare
+        # dal registro quella della fonte principale.
+        for cid, finestra in finestre_fonte.items():
+            finestre[f"{cid}@{source}"] = finestra
+        for cid, letto in estratti.items():
+            unito = dict(campioni.get(cid) or {})
+            for direzione, valore in letto.items():
+                if valore is not None and unito.get(direzione) is None:
+                    unito[direzione] = valore
+            campioni[cid] = unito
 
     # Stato precedente: serve alla tenuta (held) per i valichi senza campione.
     try:

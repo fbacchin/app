@@ -51,6 +51,7 @@ che questo progetto possa produrre (lezione del Gottardo).
 |---|---|---|---|
 | `gotthard` (file interno) | Gottardo | ✅ attiva | riusa `gotthard/data/latest.json` già raccolto dal collector gemello: zero rete, zero quota doppia |
 | `hak` (hak.hr) | HR ↔ ME / BA / RS | ✅ attiva | tabella del MUP in fondo a `/info/stanje-na-cestama`, letta a celle. ⚠️ elenca **solo i valichi con una coda da dichiarare**: chi non è in tabella è ignoto, non libero. Vicoli ciechi da non riprovare: `/info/granicni-prijelazi/` è 404 e `m.hak.hr/stanje.asp?id=2` — che pure si intitola "Granični prijelazi" — è la pagina AVVISI, prosa senza un solo numero |
+| `bihamk` (bihamk.ba) | HR ↔ BA, **di riserva** | ✅ attiva | il gemello bosniaco di HAK. Interviene solo dove HAK tace, che per Nova Sela e Stara Gradiška è quasi sempre. ⚠️ riferisce il **lato bosniaco**: le code che descrive sono di chi esce dalla BiH, quindi riempie solo `entry` e lascia `exit` ignota. Il valore ordinario è un **tetto** ("nisu duža od 30 minuta"), non una misura |
 | `police_hu` (police.hu Határinfó) | HU ↔ RS / UA | ⚠️ parziale | HU–UA (Záhony, Beregsurány) ha i blocchi di attesa; **HU–RS no**: Röszke compare solo nei paragrafi di spiegazione e Tompa non compare affatto, quindi restano ignoti. HU–RO esclusa: Romania in Schengen dal 1.1.2025. Serve una seconda fonte per il confine serbo |
 | `granica_pl` (granica.gov.pl) | PL ↔ UA | ✅ attiva | servizio **SOAP** ufficiale, operazione `getCzasyWszystko`. ⚠️ tre cose da sapere: l'endpoint e il WSDL rispondono solo **senza `www.`** (con `www.` è 500); le durate sono **ore**, anche decimali (`0.5`); il servizio pubblica solo le uscite dalla Polonia (`czas_osobowe_wjazd` è `-` a ogni ora e a ogni valico), quindi UA → PL resta ignoto |
 | `otd_ch` | San Bernardino | 🔜 | stesso feed DATEX II del Gottardo, stessa chiave `OTD_API_KEY`: si estende il filtro del corridoio (attenzione alla quota condivisa) |
@@ -74,6 +75,12 @@ di sviluppo non raggiunge le fonti). Primo giro il 09.08.2026, esiti in
   dei due URL uno era 404 e l'altro non conteneva numeri. Da qui i due
   parser strutturali (tabella per HAK, blocchi per police.hu) e il
   passaggio da 0 a 8 attese note su 15 valichi;
+- **BIHAMK entra il 10.09.2026 e va ancora tarato**: quel giorno tutte e 46
+  le schede riportavano la stessa frase standard, cioè "niente da
+  segnalare". Come BIHAMK scriva quando la coda c'è davvero non lo sappiamo,
+  e indovinarlo è l'errore che è già costato un giro ad agosto. Il parser è
+  in produzione a leggere; alla prima giornata di code si guardano le
+  finestre `hr-ba.*@bihamk` nel registro e si taratura sul testo vero;
 - il registro resta lo strumento: a ogni modifica di formato le finestre
   mostrano il testo vero su cui adeguare i parser. Poi si rifà la cattura
   in `prove/` — che ora sono **pagine reali**, non imitazioni — e si
@@ -99,6 +106,28 @@ due strategie, e si sceglie la struttura quando c'è:
 - **granica.gov.pl** — non è più una pagina: si interroga il servizio SOAP
   (`fonte_granica_pl`), una chiamata per valico, e i valori arrivano già
   separati per direzione e categoria.
+- **BIHAMK** — parser di schede (`estrai_bihamk`): la pagina è un elenco di
+  `<article>` con un `<h3>` per il nome e un paragrafo per lo stato.
+
+**Le fonti di riserva.** Un valico può dichiarare nel catalogo un campo
+`fallback` (`source`, `matchNames`, `direction`): una seconda fonte che
+viene interrogata in una passata a parte e che **riempie solo i buchi**.
+Dove la fonte principale ha un valore vince lei, perché è più precisa — per
+direzione e per categoria di veicolo. Serve perché HAK elenca solo i valichi
+con una coda da dichiarare: in due giorni di osservazione Nova Sela, Stara
+Gradiška e Tovarnik non ci sono mai comparsi, e restavano ignoti anche
+quando la coda c'era. Nel registro la finestra della riserva si scrive con
+la chiave `<valico>@<fonte>`, così non cancella quella della principale.
+
+**Cosa NON abbiamo usato, e perché.** granica.rs copre tutti e sei i valichi
+croati con minuti, direzione e ora del rilevamento, e sarebbe stata la
+soluzione più comoda. Dichiara però la propria metodologia: il valore è
+«izračunata iz poslednjeg kadra sa kamere i izmerene dužine kolone». Un
+"nessuna coda" così non è la fonte che dichiara qualcosa, è l'uscita di un
+algoritmo di visione su un fotogramma: telecamera sporca o controluce e
+diventa uno zero falso. Fuori anche per una ragione non tecnica —
+ripubblicare in un'app a pagamento il dato derivato di un sito terzo, senza
+API né licenza dichiarata, è una questione aperta.
 
 **Sul SOAP polacco, una cautela che vale la pena scrivere.** Il servizio
 indicizza per ora locale polacca e risponde **anche per ore che non sono
