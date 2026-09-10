@@ -11,6 +11,9 @@
  "hr-ba.nova-sela.exit": {
   "phase": "clear"
  },
+ "hr-ba.stara-gradiska.entry": {
+  "phase": "clear"
+ },
  "hr-me.karasovici.entry": {
   "phase": "clear"
  },
