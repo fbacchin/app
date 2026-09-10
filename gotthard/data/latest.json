@@ -1,5 +1,5 @@
 {
- "time": "2026-09-10T17:36:06Z",
+ "time": "2026-09-10T17:41:12Z",
  "south": {
   "km": null,
   "wait": null
@@ -59,19 +59,6 @@
     "de": "Freigegeben: A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Baustelle, Länge [km] 17.0 Dauer: nachts voraussichtlich 28.09.2026 20:00 bis 30.09.2026 05:00",
     "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé travaux, longueur [km] 17.0 Durée: durant la nuit probable 28.09.2026 20:00 jusqu'à 30.09.2026 05:00",
     "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso cantiere, lunghezza [km] 17.0 Durata: durante la notte probabile 28.09.2026 20:00 fino 30.09.2026 05:00"
-   }
-  },
-  {
-   "id": "situation.651810.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "north",
-   "versionTime": "2026-09-10T09:00:47Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
    }
   }
  ]
