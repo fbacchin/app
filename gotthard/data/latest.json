@@ -1,5 +1,5 @@
 {
- "time": "2026-09-10T15:17:16Z",
+ "time": "2026-09-10T15:22:22Z",
  "south": {
   "km": 3.0,
   "wait": 30
@@ -72,19 +72,6 @@
     "de": "Freigegeben: A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Baustelle, Länge [km] 17.0 Dauer: nachts voraussichtlich 28.09.2026 20:00 bis 30.09.2026 05:00",
     "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé travaux, longueur [km] 17.0 Durée: durant la nuit probable 28.09.2026 20:00 jusqu'à 30.09.2026 05:00",
     "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso cantiere, lunghezza [km] 17.0 Durata: durante la notte probabile 28.09.2026 20:00 fino 30.09.2026 05:00"
-   }
-  },
-  {
-   "id": "situation.651840.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-09-10T10:59:49Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Göschenen <-> Flüelen zwischen Ortschaft Erstfeld und Anschluss Göschenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
-    "fr": "Libéré: H2 Göschenen <-> Flüelen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
-    "it": "Approvato: H2 Göschenen <-> Flüelen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
    }
   },
   {
