@@ -1,5 +1,5 @@
 {
- "time": "2026-09-10T12:07:05Z",
+ "time": "2026-09-10T12:17:18Z",
  "south": {
   "km": 5.0,
   "wait": 50
@@ -33,6 +33,32 @@
     "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 5.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 50",
     "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 5.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 50",
     "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 5.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 50"
+   }
+  },
+  {
+   "id": "situation.651853.1.1.1",
+   "type": "RoadOrCarriagewayOrLaneManagement",
+   "direction": null,
+   "versionTime": "2026-09-10T12:14:15Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Baustelle, Länge [km] 17.0 Dauer: nachts voraussichtlich 30.09.2026 20:00 bis 02.10.2026 05:00",
+    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé travaux, longueur [km] 17.0 Durée: durant la nuit probable 30.09.2026 20:00 jusqu'à 02.10.2026 05:00",
+    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso cantiere, lunghezza [km] 17.0 Durata: durante la notte probabile 30.09.2026 20:00 fino 02.10.2026 05:00"
+   }
+  },
+  {
+   "id": "situation.651851.1.1.1",
+   "type": "RoadOrCarriagewayOrLaneManagement",
+   "direction": null,
+   "versionTime": "2026-09-10T12:12:52Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Baustelle, Länge [km] 17.0 Dauer: nachts voraussichtlich 28.09.2026 20:00 bis 30.09.2026 05:00",
+    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé travaux, longueur [km] 17.0 Durée: durant la nuit probable 28.09.2026 20:00 jusqu'à 30.09.2026 05:00",
+    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso cantiere, lunghezza [km] 17.0 Durata: durante la notte probabile 28.09.2026 20:00 fino 30.09.2026 05:00"
    }
   },
   {
