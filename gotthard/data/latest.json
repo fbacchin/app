@@ -1,5 +1,5 @@
 {
- "time": "2026-09-11T15:08:14Z",
+ "time": "2026-09-11T15:13:22Z",
  "south": {
   "km": 4.0,
   "wait": 40
@@ -33,97 +33,6 @@
     "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
     "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
     "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
-   }
-  },
-  {
-   "id": "situation.531976.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-09-11T13:15:09Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H11 Meiringen <-> Wassen Ortschaft Nessental Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: wechselseitige Verkehrsführung Dauer:  voraussichtlich 01.04.2025 00:00 bis 31.08.2025 23:59",
-    "fr": "Libéré: H11 Meiringen <-> Wassen Localité Nessental Situation: trafic perturbé travaux Gestion du trafic: circulation alternée à une voie Durée:  probable 01.04.2025 00:00 jusqu'à 31.08.2025 23:59",
-    "it": "Approvato: H11 Meiringen <-> Wassen Luogo Nessental Situazione: problemi di traffico cantiere Limitazione del traffico: circolazione a corsie alternate Durata:  probabile 01.04.2025 00:00 fino 31.08.2025 23:59"
-   }
-  },
-  {
-   "id": "situation.532430.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-09-11T13:15:09Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H11 Meiringen <-> Wassen zwischen Ortschaft Wiler (Gadmental) und Ortschaft Nessental Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: wechselseitige Verkehrsführung Dauer:  voraussichtlich 31.03.2025 00:00 bis 30.05.2025 23:59",
-    "fr": "Libéré: H11 Meiringen <-> Wassen entre Localité Wiler (Gadmental) et Localité Nessental Situation: trafic perturbé travaux Gestion du trafic: circulation alternée à une voie Durée:  probable 31.03.2025 00:00 jusqu'à 30.05.2025 23:59",
-    "it": "Approvato: H11 Meiringen <-> Wassen tra Luogo Wiler (Gadmental) E Luogo Nessental Situazione: problemi di traffico cantiere Limitazione del traffico: circolazione a corsie alternate Durata:  probabile 31.03.2025 00:00 fino 30.05.2025 23:59"
-   }
-  },
-  {
-   "id": "situation.538201.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-09-11T13:15:09Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H11 Meiringen <-> Wassen zwischen Ortschaft Innertkirchen und Pass Susten-Pass Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: wechselseitige Verkehrsführung Dauer:  voraussichtlich bis 30.10.2025 23:59",
-    "fr": "Libéré: H11 Meiringen <-> Wassen entre Localité Innertkirchen et Col Col du Susten Situation: trafic perturbé travaux Gestion du trafic: circulation alternée à une voie Durée:  probable jusqu'à 30.10.2025 23:59",
-    "it": "Approvato: H11 Meiringen <-> Wassen tra Luogo Innertkirchen E Passo Passo del Susten Situazione: problemi di traffico cantiere Limitazione del traffico: circolazione a corsie alternate Durata:  probabile fino 30.10.2025 23:59"
-   }
-  },
-  {
-   "id": "situation.539522.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-09-11T13:15:09Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H11 Meiringen <-> Wassen zwischen Ortschaft Innertkirchen und Pass Susten-Pass Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: wechselseitige Verkehrsführung Dauer:  voraussichtlich 08.05.2025 00:00 bis 06.06.2025 23:59",
-    "fr": "Libéré: H11 Meiringen <-> Wassen entre Localité Innertkirchen et Col Col du Susten Situation: trafic perturbé travaux Gestion du trafic: circulation alternée à une voie Durée:  probable 08.05.2025 00:00 jusqu'à 06.06.2025 23:59",
-    "it": "Approvato: H11 Meiringen <-> Wassen tra Luogo Innertkirchen E Passo Passo del Susten Situazione: problemi di traffico cantiere Limitazione del traffico: circolazione a corsie alternate Durata:  probabile 08.05.2025 00:00 fino 06.06.2025 23:59"
-   }
-  },
-  {
-   "id": "situation.540151.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-09-11T13:15:09Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Bellinzona <-> Airolo zwischen Ortschaft Pollegio und Ortschaft Biasca Sachlage: Verkehrsbehinderung Baustelle Dauer:  voraussichtlich 25.04.2025 00:00 bis 16.05.2025 23:59",
-    "fr": "Libéré: H2 Bellinzone <-> Airolo entre Localité Pollegio et Localité Biasca Situation: trafic perturbé travaux Durée:  probable 25.04.2025 00:00 jusqu'à 16.05.2025 23:59",
-    "it": "Approvato: H2 Bellinzona <-> Airolo tra Luogo Pollegio E Luogo Biasca Situazione: problemi di traffico cantiere Durata:  probabile 25.04.2025 00:00 fino 16.05.2025 23:59"
-   }
-  },
-  {
-   "id": "situation.541400.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-09-11T13:15:09Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H11 Meiringen <-> Wassen Ortschaft Nessental Sachlage: Strecke gesperrt Ursache: Bauarbeiten Dauer:  voraussichtlich 14.05.2025 20:00 bis 15.05.2025 06:00",
-    "fr": "Libéré: H11 Meiringen <-> Wassen Localité Nessental Situation: fermé Raison: travaux de construction Durée:  probable 14.05.2025 20:00 jusqu'à 15.05.2025 06:00",
-    "it": "Approvato: H11 Meiringen <-> Wassen Luogo Nessental Situazione: chiusa Causa: lavori di costruzione Durata:  probabile 14.05.2025 20:00 fino 15.05.2025 06:00"
-   }
-  },
-  {
-   "id": "situation.541410.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-09-11T13:15:09Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H11 Meiringen <-> Wassen zwischen Ortschaft Nessental und Ortschaft Furen Sachlage: Strecke gesperrt Ursache: Bauarbeiten Dauer:  voraussichtlich 21.05.2025 20:00 bis 22.05.2025 05:00",
-    "fr": "Libéré: H11 Meiringen <-> Wassen entre Localité Nessental et Localité Furen Situation: fermé Raison: travaux de construction Durée:  probable 21.05.2025 20:00 jusqu'à 22.05.2025 05:00",
-    "it": "Approvato: H11 Meiringen <-> Wassen tra Luogo Nessental E Luogo Furen Situazione: chiusa Causa: lavori di costruzione Durata:  probabile 21.05.2025 20:00 fino 22.05.2025 05:00"
    }
   },
   {
