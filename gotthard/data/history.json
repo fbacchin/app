@@ -3292,9 +3292,9 @@
  {
   "time": "2026-09-12T15:57:10Z",
   "southDelay": 0,
-  "northDelay": 0,
+  "northDelay": 40,
   "southQueueKm": null,
-  "northQueueKm": null
+  "northQueueKm": 4.0
  },
  {
   "time": "2026-09-12T16:02:14Z",
