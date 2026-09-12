@@ -12,14 +12,14 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato"
   },
-  "lastSeen": "2026-09-12T06:26:24Z"
+  "lastSeen": "2026-09-12T06:31:28Z"
  },
  {
   "firstSeen": "2026-09-12T06:26:24Z",
   "id": "situation.652330.1.1.1",
   "type": "RoadOrCarriagewayOrLaneManagement",
   "direction": null,
-  "versionTime": "2026-09-12T06:25:16Z",
+  "versionTime": "2026-09-12T06:26:32Z",
   "km": null,
   "wait": null,
   "texts": {
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: véhicule en panne",
    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: veicolo in avaria"
   },
-  "lastSeen": "2026-09-12T06:26:24Z"
+  "lastSeen": "2026-09-12T06:31:28Z"
  },
  {
   "firstSeen": "2026-09-11T09:21:43Z",
