@@ -1,5 +1,5 @@
 {
- "time": "2026-09-13T15:51:03Z",
+ "time": "2026-09-13T15:56:07Z",
  "south": {
   "km": null,
   "wait": null
@@ -9,19 +9,6 @@
   "wait": 40
  },
  "events": [
-  {
-   "id": "situation.652482.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-09-13T15:26:46Z",
-   "km": null,
-   "wait": 10,
-   "texts": {
-    "de": "Freigegeben: H2 Bellinzona -> Göschenen zwischen Ortschaft Airolo und Ortschaft Göschenen Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
-    "fr": "Libéré: H2 Bellinzone -> Göschenen entre Localité Airolo et Localité Göschenen Situation: trafic en accordéon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
-    "it": "Approvato: H2 Bellinzona -> Göschenen tra Luogo Airolo E Luogo Göschenen Situazione: traffico fortemente rallentato Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
-   }
-  },
   {
    "id": "situation.652459.1.1.1",
    "type": "AbnormalTraffic",
