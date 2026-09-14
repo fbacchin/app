@@ -12,7 +12,22 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Jonction autoroutière Wassen Situation: trafic en accordéon Raison: travaux de construction Gestion du trafic: rétrécissement des voies sur une voie de circulation",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Wassen Situazione: traffico fortemente rallentato Causa: lavori di costruzione Limitazione del traffico: corsie strette ridotta su una corsia"
   },
-  "lastSeen": "2026-09-14T07:45:16Z"
+  "lastSeen": "2026-09-14T07:50:20Z"
+ },
+ {
+  "firstSeen": "2026-09-14T07:50:20Z",
+  "id": "situation.652648.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "south",
+  "versionTime": "2026-09-14T07:49:01Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Erstfeld und Anschluss Amsteg Sachlage: Stau Ursache: Verkehrsüberlastung",
+   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Jonction autoroutière Amsteg Situation: bouchon Raison: surcharge de trafic",
+   "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Svincolo autostradale Amsteg Situazione: colonna Causa: traffico congestionato"
+  },
+  "lastSeen": "2026-09-14T07:50:20Z"
  },
  {
   "firstSeen": "2026-09-13T07:30:42Z",
