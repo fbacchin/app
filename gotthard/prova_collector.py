@@ -201,6 +201,62 @@ def buco_e_ritorno():
 ok("un buco del feed non fa annunciare una riapertura falsa",
    con_stato_pulito(buco_e_ritorno) == ["🚧 Gotthard tunnel closed"])
 
+# --- la riapertura dice la direzione (ADEV-678, 12.09.2026) ---------------
+def riapre_sud():
+    giro(chiuso("south"))
+    giro(aperto(revocato=True))
+ok("chiusura verso sud: la riapertura dice verso sud",
+   con_stato_pulito(riapre_sud) ==
+   ["🚧 Gotthard tunnel closed southbound", "✅ Gotthard tunnel reopened southbound"])
+
+def riapre_nord_senza_revoca():
+    giro(chiuso("north"))
+    giro(aperto(), ADESSO + timedelta(minutes=5))
+    giro(aperto(), ADESSO + timedelta(minutes=26))
+ok("  anche verso nord, e anche quando la riapertura arriva per conferma",
+   con_stato_pulito(riapre_nord_senza_revoca) ==
+   ["🚧 Gotthard tunnel closed northbound", "✅ Gotthard tunnel reopened northbound"])
+
+def si_allarga():
+    giro(chiuso("south"))
+    giro(chiuso(None), ADESSO + timedelta(minutes=5))   # ora in entrambi i sensi
+    giro(aperto(revocato=True), ADESSO + timedelta(minutes=10))
+ok("una chiusura che si allarga ai due sensi riapre senza direzione",
+   con_stato_pulito(si_allarga) ==
+   ["🚧 Gotthard tunnel closed southbound", "✅ Gotthard tunnel reopened"])
+
+def buco_senza_perdere_la_direzione():
+    giro(chiuso("south"))
+    giro(aperto(), ADESSO + timedelta(minutes=5))          # buco del feed
+    giro(chiuso("south"), ADESSO + timedelta(minutes=10))
+    giro(aperto(revocato=True), ADESSO + timedelta(minutes=15))
+ok("un buco del feed non fa dimenticare la direzione",
+   con_stato_pulito(buco_senza_perdere_la_direzione) ==
+   ["🚧 Gotthard tunnel closed southbound", "✅ Gotthard tunnel reopened southbound"])
+
+with tempfile.TemporaryDirectory() as d:
+    c.HISTORY_FILE = Path(d) / "history.json"
+    inviate.clear()
+    c.update_tunnel_notifications(chiuso("south"), ADESSO)
+    salvato = json.loads((Path(d) / "push-state.json").read_text())["tunnel"]
+    c.update_tunnel_notifications(aperto(revocato=True), ADESSO)
+    dopo = json.loads((Path(d) / "push-state.json").read_text())["tunnel"]
+ok("la direzione sta nello stato mentre e' chiuso, e sparisce alla riapertura",
+   salvato.get("direzione") == "south" and "direzione" not in dopo)
+
+# Il doppione del 12.09 veniva dal workflow, non da qui: lo stato del giro
+# delle 13:01 non era stato salvato perche' il git push era stato rifiutato,
+# e il giro delle 13:06 ripartiva da «closed». Questa prova fissa il
+# presupposto su cui regge la correzione nel workflow: se lo stato E' salvato,
+# un giro successivo non rimanda nulla.
+def stato_salvato_nessun_doppione():
+    giro(chiuso("south"))
+    giro(aperto(revocato=True), ADESSO + timedelta(minutes=10))
+    giro(aperto(revocato=True), ADESSO + timedelta(minutes=15))
+ok("con lo stato salvato, la riapertura parte una volta sola",
+   con_stato_pulito(stato_salvato_nessun_doppione) ==
+   ["🚧 Gotthard tunnel closed southbound", "✅ Gotthard tunnel reopened southbound"])
+
 ok("tunnel sempre aperto: nessuna push",
    con_stato_pulito(lambda: (giro(aperto()), giro(aperto()))) == [])
 

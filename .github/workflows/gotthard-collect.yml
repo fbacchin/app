@@ -3,8 +3,19 @@ name: Collect Gotthard history
 # GitHub esegue i cron "best effort" e ritarda anche di ore quelli frequenti.
 # Strategia: run lunghi che campionano in loop ogni 5 minuti per ~3 ore e
 # committano a ogni campione; il gruppo di concorrenza incatena i run in coda.
-# Sync col remoto via fetch+reset (mai pull/rebase: un merge conflittuale
-# aveva committato marcatori <<<<<<< dentro il JSON corrompendolo).
+# Sync col remoto via fetch+reset a inizio giro (mai pull/merge: un merge
+# conflittuale aveva committato marcatori <<<<<<< dentro il JSON corrompendolo).
+#
+# Se il push viene rifiutato si RITENTA con un rebase, invece di buttare il
+# giro (ADEV-678). Il rifiuto e' quasi sempre valichi-collect, che pusha sullo
+# stesso main alla stessa cadenza: 1-2 volte ogni run da 3 ore. Buttare il giro
+# non perde solo un campione: perde push-state.json, e il giro dopo rimanda la
+# stessa notifica. E' cosi' che il 12.09.2026 «tunnel reopened» e' arrivato due
+# volte, alle 13:01 e alle 13:06 UTC.
+# Il rebase qui e' sicuro perche' l'altro workflow scrive solo in valichi/, e
+# noi solo in gotthard/data/: non possono confliggere. Se un conflitto ci fosse
+# comunque, `git rebase` si ferma senza committare niente, lo si annulla, e si
+# ricade nel comportamento di prima.
 on:
   schedule:
     - cron: "*/30 * * * *"
@@ -37,7 +48,19 @@ jobs:
             if python3 gotthard/collect.py; then
               git add gotthard/data/
               git diff --cached --quiet || git commit -m "gotthard sample $(date -u +%FT%TZ)"
-              git push origin main || echo "push fallito, campione perso: riprovo al prossimo giro"
+              if ! git push origin main; then
+                salvato=""
+                for tentativo in 1 2 3; do
+                  sleep $((tentativo * 5))
+                  if git fetch origin main && git rebase origin/main && git push origin main; then
+                    salvato="si"
+                    echo "push riuscito al tentativo $tentativo dopo rebase"
+                    break
+                  fi
+                  git rebase --abort 2>/dev/null || true
+                done
+                [ -n "$salvato" ] || echo "push fallito dopo 3 tentativi, campione perso: riprovo al prossimo giro"
+              fi
             fi
             if [ "$i" -lt 34 ]; then sleep 300; fi
           done

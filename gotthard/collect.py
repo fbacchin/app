@@ -821,7 +821,15 @@ TUNNEL_CHIUSO = {
     "south": "🚧 Gotthard tunnel closed southbound",
     "north": "🚧 Gotthard tunnel closed northbound",
 }
-TUNNEL_RIAPERTO = "✅ Gotthard tunnel reopened"
+# La riapertura dice la direzione come la chiusura (ADEV-678). Prima era un
+# testo solo: chi aveva ricevuto «closed southbound» si vedeva arrivare un
+# «reopened» generico, e con due notifiche ravvicinate non poteva capire se
+# fossero due direzioni o un doppione.
+TUNNEL_RIAPERTO = {
+    None: "✅ Gotthard tunnel reopened",
+    "south": "✅ Gotthard tunnel reopened southbound",
+    "north": "✅ Gotthard tunnel reopened northbound",
+}
 
 
 def update_tunnel_notifications(tunnel, now):
@@ -849,6 +857,9 @@ def update_tunnel_notifications(tunnel, now):
     entry = push_state.get("tunnel", {})
     phase = entry.get("phase", "open")
     open_since = parse_time(entry.get("openSince") or "")
+    # La direzione della chiusura annunciata, per ripeterla nella riapertura.
+    # Va ricordata: quando il tunnel riapre la fonte non la dice piu'.
+    direzione_chiusa = entry.get("direzione")
 
     # Chi riceve: chi non ha spento le chiusure. La direzione conta solo se la
     # fonte l'ha dichiarata — una chiusura senza direzione riguarda tutti, e
@@ -861,6 +872,11 @@ def update_tunnel_notifications(tunnel, now):
             testo = TUNNEL_CHIUSO.get(tunnel["direzione"], TUNNEL_CHIUSO[None])
             if send_push(testo, a_chi):
                 phase = "closed"
+                direzione_chiusa = tunnel["direzione"]
+        elif tunnel["direzione"] != direzione_chiusa:
+            # Una chiusura partita in un senso che si allarga, o cambia senso:
+            # la riapertura non puo' piu' nominare una direzione sola.
+            direzione_chiusa = None
     elif phase == "closed":
         # La riapertura va a chi ha ricevuto la chiusura: il filtro di
         # direzione qui e' quello di ADESSO, e la chiusura poteva averne un
@@ -868,13 +884,14 @@ def update_tunnel_notifications(tunnel, now):
         # marcia — perche' lasciare qualcuno a credere il tunnel ancora
         # chiuso e' peggio di un avviso di riapertura in piu'.
         riapertura = destinatari(chiusure=True)
+        testo_riapertura = TUNNEL_RIAPERTO.get(direzione_chiusa, TUNNEL_RIAPERTO[None])
         if tunnel["revocato"]:
-            if send_push(TUNNEL_RIAPERTO, riapertura):
+            if send_push(testo_riapertura, riapertura):
                 phase = "open"
                 open_since = None
         else:
             open_since = open_since or now
-            if now - open_since >= CLEAR_CONFIRM and send_push(TUNNEL_RIAPERTO, riapertura):
+            if now - open_since >= CLEAR_CONFIRM and send_push(testo_riapertura, riapertura):
                 phase = "open"
                 open_since = None
     else:
@@ -883,6 +900,8 @@ def update_tunnel_notifications(tunnel, now):
     nuovo = {"phase": phase}
     if open_since is not None:
         nuovo["openSince"] = open_since.isoformat().replace("+00:00", "Z")
+    if phase == "closed" and direzione_chiusa:
+        nuovo["direzione"] = direzione_chiusa
     push_state["tunnel"] = nuovo
     state_file.write_text(json.dumps(push_state, indent=1))
 
