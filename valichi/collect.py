@@ -1153,6 +1153,46 @@ def scrivi_registro(salute_fonti, finestre, now):
 
 # --- prova offline -----------------------------------------------------
 
+def prova_stato_notifiche(attivi):
+    """Fissa il presupposto su cui poggia il ritentativo del push nel
+    workflow: la fase di una notifica vive SOLO in push-state.json.
+
+    Due giri a 90 minuti di distanza (oltre il cooldown) con la stessa coda
+    di 45 minuti. Se lo stato del primo giro arriva al secondo, la notifica
+    parte una volta sola. Se va perso — il commit buttato per un push
+    rifiutato — il secondo giro riparte da "clear" e la rimanda: è il
+    doppione del Gottardo del 12.09.2026, e questa prova lo riproduce.
+    Niente rete: send_push è sostituita da un contatore.
+    """
+    import tempfile
+    global PUSH_STATE_FILE, send_push
+    originali = (PUSH_STATE_FILE, send_push)
+    crossing = next(c for c in attivi if c["id"] == "pl-ua.medyka")
+    per_id = {crossing["id"]: crossing}
+    stato = {crossing["id"]: {"directions": {"exit": {"wait": 45},
+                                             "entry": {"wait": None}}}}
+    inizio = datetime(2026, 9, 14, 13, 0, tzinfo=timezone.utc)
+    errori = 0
+    try:
+        for caso, stato_salvato in (("stato salvato", True), ("stato perso", False)):
+            inviate = []
+            send_push = lambda canale, testo: inviate.append(testo) or True
+            with tempfile.TemporaryDirectory() as cartella:
+                PUSH_STATE_FILE = Path(cartella) / "push-state.json"
+                update_notifications(stato, per_id, inizio)
+                if not stato_salvato:
+                    PUSH_STATE_FILE.unlink()   # il commit del primo giro non è mai arrivato
+                update_notifications(stato, per_id, inizio + timedelta(minutes=90))
+            attese = 1 if stato_salvato else 2
+            esito = "ok" if len(inviate) == attese else "SBAGLIATO"
+            if esito != "ok":
+                errori += 1
+            print(f"  {'notifiche':>10}  {caso:<22} attese {attese} inviate {len(inviate)}  {esito}")
+    finally:
+        PUSH_STATE_FILE, send_push = originali
+    return errori
+
+
 def prova():
     """Fa girare la catena di estrazione sulle fixture in prove/ e verifica
     i valori attesi. Niente rete: è il collaudo del PARSER, non delle fonti
@@ -1246,6 +1286,8 @@ def prova():
             errori += 1
         print(f"  {'granica_pl':>10}  {crossing_id:<22} "
               f"atteso {atteso}  letto {avuto}  {esito}")
+
+    errori += prova_stato_notifiche(attivi)
 
     fixture = PROVE_DIR / "gotthard.latest.json"
     dati = json.loads(fixture.read_text())

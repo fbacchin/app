@@ -3,9 +3,26 @@ name: Collect valichi history
 # Stessa strategia del collector del Gottardo (vedi gotthard-collect.yml):
 # i cron di GitHub sono "best effort", quindi run lunghi ~3 ore che
 # campionano in loop e committano a ogni giro, incatenati dal gruppo di
-# concorrenza. Sync col remoto via fetch+reset (mai pull/rebase: un merge
-# conflittuale aveva committato marcatori <<<<<<< dentro un JSON del
-# Gottardo corrompendolo).
+# concorrenza. A inizio giro il sync col remoto è fetch+reset.
+#
+# Se il push viene rifiutato si RITENTA con un rebase, invece di buttare il
+# giro. Questo workflow e gotthard-collect.yml pushano sullo stesso main a
+# cadenze che si incrociano: quando l'altro pusha fra il nostro fetch e il
+# nostro push, il push viene rifiutato ("fetch first", oppure "cannot lock
+# ref" se i due arrivano insieme). Buttare il giro perde il campione e,
+# peggio, perde push-state.json: il giro dopo riparte dalla fase vecchia e
+# RIMANDA la stessa notifica. Sul Gottardo è successo il 12.09.2026 (due
+# «reopened» a 5 minuti); qui, fra il 12 e il 14.09, 8 giri persi su 187,
+# per fortuna con le notifiche ancora spente.
+#
+# Un tempo la regola era "mai pull/rebase", dopo un merge conflittuale che
+# aveva scritto marcatori <<<<<<< dentro un JSON del Gottardo. Il rebase qui
+# è sicuro per un motivo preciso: questo workflow scrive solo i quattro file
+# di valichi/data/ elencati nel git add, il Gottardo solo gotthard/data/, e
+# due commit che toccano cartelle disgiunte non possono andare in conflitto.
+# Se un conflitto ci fosse comunque, `git rebase` si ferma SENZA committare
+# niente, lo si annulla con --abort e si ricade nel comportamento di prima:
+# giro perso, ma nessun JSON corrotto.
 #
 # Cadenza 10 minuti, non 5: le fonti di frontiera si aggiornano più
 # lentamente del feed svizzero (granica dichiara 8 aggiornamenti al giorno)
@@ -50,7 +67,19 @@ jobs:
               # senza mai arrivare su GitHub (successo due volte al Gottardo).
               git add valichi/data/latest.json valichi/data/history.json valichi/data/push-state.json valichi/data/sources-log.jsonl
               git diff --cached --quiet || git commit -m "valichi sample $(date -u +%FT%TZ)"
-              git push origin main || echo "push fallito, campione perso: riprovo al prossimo giro"
+              if ! git push origin main; then
+                salvato=""
+                for tentativo in 1 2 3; do
+                  sleep $((tentativo * 5))
+                  if git fetch origin main && git rebase origin/main && git push origin main; then
+                    salvato="si"
+                    echo "push riuscito al tentativo $tentativo dopo rebase"
+                    break
+                  fi
+                  git rebase --abort 2>/dev/null || true
+                done
+                [ -n "$salvato" ] || echo "push fallito dopo 3 tentativi, campione perso: riprovo al prossimo giro"
+              fi
             fi
             if [ "$i" -lt 17 ]; then sleep 600; fi
           done
