@@ -19,7 +19,7 @@ name: Collect Gotthard history
 #
 # A fine run il job `next` lancia da solo il run successivo (workflow_dispatch).
 # Il cron da solo non bastava: il 14.09.2026 fra un run e l'altro ci sono stati
-# buchi di 3 ore, e il 15.09 il run finito alle 05:41 UTC alle 07:55 non aveva
+# buchi di 3 ore, e il 15.09 il run finito alle 05:41 UTC alle 07:47 non aveva
 # ancora un successore.
 # Il GITHUB_TOKEN puo' farlo: gli eventi del token non creano run, TRANNE
 # workflow_dispatch e repository_dispatch (docs GitHub, "Triggering a workflow
@@ -27,8 +27,15 @@ name: Collect Gotthard history
 # finche' questo non finisce, quindi non ne girano mai due insieme; se nel
 # frattempo arriva un cron, uno dei due pending viene cancellato e ne resta uno.
 # Il cron rimane come rete di sicurezza se la catena si interrompe.
-# Annullare a mano un run ferma la catena (`!cancelled()`); per fermarla del
-# tutto: `gh workflow disable gotthard-collect.yml -R fbacchin/app`.
+#
+# FRENO: il successivo parte solo se la raccolta e' finita BENE. Se il run
+# fallisce subito (checkout rotto, runner guasto, file sbagliato) rilanciarlo
+# vorrebbe dire un run fallito al minuto, all'infinito. Con il freno la catena
+# si ferma e la fa ripartire il cron, che col guasto ancora li' fallisce una
+# volta ogni tanto invece che di continuo. Il prezzo: anche un run lungo che
+# fallisce alla fine aspetta il cron. Annullare a mano un run ferma la catena
+# allo stesso modo; per fermarla del tutto:
+# `gh workflow disable gotthard-collect.yml -R fbacchin/app`.
 on:
   schedule:
     - cron: "*/30 * * * *"
@@ -80,7 +87,7 @@ jobs:
 
   next:
     needs: collect
-    if: ${{ !cancelled() && github.ref == 'refs/heads/main' }}
+    if: ${{ needs.collect.result == 'success' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:

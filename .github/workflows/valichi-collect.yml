@@ -36,8 +36,13 @@ name: Collect valichi history
 # Il GITHUB_TOKEN puo' farlo perche' workflow_dispatch e' un'eccezione alla
 # regola "gli eventi del token non creano run". Il run lanciato resta `pending`
 # nel gruppo di concorrenza finche' questo non finisce: mai due insieme. Il cron
-# resta come rete di sicurezza. Annullare a mano un run ferma la catena; per
-# fermarla del tutto: `gh workflow disable valichi-collect.yml -R fbacchin/app`.
+# resta come rete di sicurezza.
+#
+# FRENO: il successivo parte solo se la raccolta e' finita BENE. Un run che
+# fallisce subito, rilanciato, diventerebbe un run fallito al minuto
+# all'infinito; cosi' invece la catena si ferma e la riprende il cron. Annullare
+# a mano un run ferma la catena allo stesso modo; per fermarla del tutto:
+# `gh workflow disable valichi-collect.yml -R fbacchin/app`.
 on:
   schedule:
     - cron: "*/30 * * * *"
@@ -94,7 +99,7 @@ jobs:
 
   next:
     needs: collect
-    if: ${{ !cancelled() && github.ref == 'refs/heads/main' }}
+    if: ${{ needs.collect.result == 'success' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
