@@ -30,6 +30,14 @@ name: Collect valichi history
 #
 # NB: gli scheduled workflow girano solo dal branch di default — questo
 # file si attiva quando arriva su main.
+#
+# A fine run il job `next` lancia da solo il run successivo (workflow_dispatch),
+# come in gotthard-collect.yml: il cron da solo lasciava buchi anche di ore.
+# Il GITHUB_TOKEN puo' farlo perche' workflow_dispatch e' un'eccezione alla
+# regola "gli eventi del token non creano run". Il run lanciato resta `pending`
+# nel gruppo di concorrenza finche' questo non finisce: mai due insieme. Il cron
+# resta come rete di sicurezza. Annullare a mano un run ferma la catena; per
+# fermarla del tutto: `gh workflow disable valichi-collect.yml -R fbacchin/app`.
 on:
   schedule:
     - cron: "*/30 * * * *"
@@ -83,3 +91,16 @@ jobs:
             fi
             if [ "$i" -lt 17 ]; then sleep 600; fi
           done
+
+  next:
+    needs: collect
+    if: ${{ !cancelled() && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    steps:
+      - name: Queue the next run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run valichi-collect.yml --ref main -R "$GITHUB_REPOSITORY"

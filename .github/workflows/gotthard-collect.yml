@@ -16,6 +16,19 @@ name: Collect Gotthard history
 # noi solo in gotthard/data/: non possono confliggere. Se un conflitto ci fosse
 # comunque, `git rebase` si ferma senza committare niente, lo si annulla, e si
 # ricade nel comportamento di prima.
+#
+# A fine run il job `next` lancia da solo il run successivo (workflow_dispatch).
+# Il cron da solo non bastava: il 14.09.2026 fra un run e l'altro ci sono stati
+# buchi di 3 ore, e il 15.09 il run finito alle 05:41 UTC alle 07:55 non aveva
+# ancora un successore.
+# Il GITHUB_TOKEN puo' farlo: gli eventi del token non creano run, TRANNE
+# workflow_dispatch e repository_dispatch (docs GitHub, "Triggering a workflow
+# from a workflow"). Il run lanciato resta `pending` nel gruppo di concorrenza
+# finche' questo non finisce, quindi non ne girano mai due insieme; se nel
+# frattempo arriva un cron, uno dei due pending viene cancellato e ne resta uno.
+# Il cron rimane come rete di sicurezza se la catena si interrompe.
+# Annullare a mano un run ferma la catena (`!cancelled()`); per fermarla del
+# tutto: `gh workflow disable gotthard-collect.yml -R fbacchin/app`.
 on:
   schedule:
     - cron: "*/30 * * * *"
@@ -64,3 +77,16 @@ jobs:
             fi
             if [ "$i" -lt 34 ]; then sleep 300; fi
           done
+
+  next:
+    needs: collect
+    if: ${{ !cancelled() && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    steps:
+      - name: Queue the next run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run gotthard-collect.yml --ref main -R "$GITHUB_REPOSITORY"
