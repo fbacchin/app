@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: bouchon longueur [km] 5.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 50",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: colonna lunghezza [km] 5.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 50"
   },
-  "lastSeen": "2026-09-16T13:52:16Z"
+  "lastSeen": "2026-09-16T13:57:21Z"
  },
  {
   "firstSeen": "2026-09-16T08:47:02Z",
@@ -27,7 +27,52 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-09-16T13:52:16Z"
+  "lastSeen": "2026-09-16T13:57:21Z"
+ },
+ {
+  "firstSeen": "2026-09-16T13:57:21Z",
+  "id": "situation.653356.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": null,
+  "versionTime": "2026-09-16T13:56:33Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: H2 Flüelen -> Airolo zwischen Anschluss Göschenen und Ortschaft Andermatt Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.2 Dauer:  voraussichtlich 21.09.2026 07:00 bis 02.10.2026 18:00",
+   "fr": "Libéré: H2 Flüelen -> Airolo entre Jonction autoroutière Göschenen et Localité Andermatt Situation: trafic perturbé travaux, longueur [km] 0.2 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.2 Durée:  probable 21.09.2026 07:00 jusqu'à 02.10.2026 18:00",
+   "it": "Approvato: H2 Flüelen -> Airolo tra Svincolo autostradale Göschenen E Luogo Andermatt Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.2 Durata:  probabile 21.09.2026 07:00 fino 02.10.2026 18:00"
+  },
+  "lastSeen": "2026-09-16T13:57:21Z"
+ },
+ {
+  "firstSeen": "2026-09-16T13:57:21Z",
+  "id": "situation.653353.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": null,
+  "versionTime": "2026-09-16T13:54:45Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: H2 Göschenen -> Airolo zwischen Ortschaft Andermatt und Ortschaft Hospental Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.2 Dauer:  voraussichtlich 23.09.2026 07:00 bis 30.09.2026 18:00",
+   "fr": "Libéré: H2 Göschenen -> Airolo entre Localité Andermatt et Localité Hospental Situation: trafic perturbé travaux, longueur [km] 0.1 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.2 Durée:  probable 23.09.2026 07:00 jusqu'à 30.09.2026 18:00",
+   "it": "Approvato: H2 Göschenen -> Airolo tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.2 Durata:  probabile 23.09.2026 07:00 fino 30.09.2026 18:00"
+  },
+  "lastSeen": "2026-09-16T13:57:21Z"
+ },
+ {
+  "firstSeen": "2026-09-16T13:57:21Z",
+  "id": "situation.653352.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": null,
+  "versionTime": "2026-09-16T13:53:41Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: H2 Flüelen -> Airolo zwischen Anschluss Göschenen und Ortschaft Andermatt Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.2 Dauer: tagsüber voraussichtlich 22.09.2026 08:00 bis 24.09.2026 16:30",
+   "fr": "Libéré: H2 Flüelen -> Airolo entre Jonction autoroutière Göschenen et Localité Andermatt Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: circulation alternée à une voie Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.2 Durée: durant la journée probable 22.09.2026 08:00 jusqu'à 24.09.2026 16:30",
+   "it": "Approvato: H2 Flüelen -> Airolo tra Svincolo autostradale Göschenen E Luogo Andermatt Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.2 Durata: durante il giorno probabile 22.09.2026 08:00 fino 24.09.2026 16:30"
+  },
+  "lastSeen": "2026-09-16T13:57:21Z"
  },
  {
   "firstSeen": "2026-09-16T09:33:02Z",
@@ -42,7 +87,8 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
   },
-  "lastSeen": "2026-09-16T13:52:16Z"
+  "lastSeen": "2026-09-16T13:52:16Z",
+  "revokedAt": "2026-09-16T13:57:21Z"
  },
  {
   "firstSeen": "2026-09-15T09:20:38Z",
