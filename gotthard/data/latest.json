@@ -1,5 +1,5 @@
 {
- "time": "2026-09-16T16:45:07Z",
+ "time": "2026-09-16T16:50:11Z",
  "south": {
   "km": null,
   "wait": null
@@ -72,19 +72,6 @@
     "de": "Freigegeben: H2 Flüelen -> Airolo zwischen Anschluss Göschenen und Ortschaft Andermatt Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.2 Dauer: tagsüber voraussichtlich 22.09.2026 08:00 bis 24.09.2026 16:30",
     "fr": "Libéré: H2 Flüelen -> Airolo entre Jonction autoroutière Göschenen et Localité Andermatt Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: circulation alternée à une voie Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.2 Durée: durant la journée probable 22.09.2026 08:00 jusqu'à 24.09.2026 16:30",
     "it": "Approvato: H2 Flüelen -> Airolo tra Svincolo autostradale Göschenen E Luogo Andermatt Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.2 Durata: durante il giorno probabile 22.09.2026 08:00 fino 24.09.2026 16:30"
-   }
-  },
-  {
-   "id": "situation.653270.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "north",
-   "versionTime": "2026-09-16T08:42:37Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
    }
   }
  ]
