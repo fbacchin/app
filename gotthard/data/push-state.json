@@ -4,8 +4,10 @@
   "lastSent": "2026-09-14T17:00:47Z"
  },
  "north": {
-  "soglieAvvisate": [],
-  "lastSent": "2026-09-15T16:35:33Z"
+  "soglieAvvisate": [
+   2
+  ],
+  "lastSent": "2026-09-16T09:07:39Z"
  },
  "tunnel": {
   "phase": "open"
