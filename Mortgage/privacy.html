@@ -41,7 +41,11 @@
   .foot { color: var(--muted); font-size: 14px; margin-top: 28px; text-align: center; }
   .date { color: var(--muted); font-size: 14px; }
   [lang-block] { display: none; }
-  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"] { display: block; }
+  html[data-lang="it"] [lang-block="it"],
+  html[data-lang="en"] [lang-block="en"],
+  html[data-lang="de"] [lang-block="de"],
+  html[data-lang="es"] [lang-block="es"],
+  html[data-lang="fr"] [lang-block="fr"] { display: block; }
   .ic { display:inline-block; width:1.6em; }
   .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--bg);
          border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; font-size: .9em; }
@@ -55,10 +59,16 @@
   </header>
   <p class="sub" lang-block="it">Informativa sulla privacy · Mortgage Calculator e Mortgage Calculator Light</p>
   <p class="sub" lang-block="en">Privacy policy · Mortgage Calculator and Mortgage Calculator Light</p>
+  <p class="sub" lang-block="de">Datenschutzerklärung · Mortgage Calculator und Mortgage Calculator Light</p>
+  <p class="sub" lang-block="es">Política de privacidad · Mortgage Calculator y Mortgage Calculator Light</p>
+  <p class="sub" lang-block="fr">Politique de confidentialité · Mortgage Calculator et Mortgage Calculator Light</p>
 
   <div class="langbar">
     <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
     <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
   </div>
 
   <!-- ============================ ITALIANO ============================ -->
@@ -271,23 +281,351 @@
     </section>
   </div>
 
+  <!-- ============================ DE ============================ -->
+  <div lang-block="de">
+    <p class="date">Gültig ab 17. September 2026</p>
+
+    <section class="card">
+      <h2>Kurz gefasst</h2>
+      <p>Mortgage Calculator und Mortgage Calculator Light sind Apps von Fabrizio Bacchin (Schweiz); diese Erklärung gilt für beide. Die Apps <b>erheben keine personenbezogenen Daten</b>: kein Konto, kein Profil, kein Datenverkauf. Erhoben werden nur <b>anonyme Nutzungsstatistiken</b> — welche Tabs geöffnet und welche Funktionen genutzt werden, niemals die Zahlen, die du eingibst — weiter unten vollständig beschrieben. Die Hypothekendaten, die du eingibst, <b>bleiben auf deinem Gerät</b> (bei aktivierten Mitteilungen werden nur anonyme technische Daten registriert — siehe unten). <b>Mortgage Calculator enthält überhaupt keine Werbung.</b> <b>Mortgage Calculator Light</b>, die kostenlose Version, zeigt Google-AdMob-Werbung und <b>fragt in Europa nach deiner Einwilligung</b>, bevor auch nur eine einzige Anzeige angefordert wird.</p>
+    </section>
+
+    <section class="card">
+      <h2>Die beiden Apps</h2>
+      <table>
+        <tr><th>App</th><th>Werbung</th><th>Nutzungsstatistiken</th><th>Tracking</th></tr>
+        <tr><td>Mortgage Calculator (kostenpflichtig)</td><td>Keine. Die App enthält keinen Werbecode.</td><td>Ja, anonym</td><td>Nein, nie</td></tr>
+        <tr><td>Mortgage Calculator Light (kostenlos)</td><td>Banner und Vollbildanzeigen von Google AdMob — siehe die Abschnitte unten.</td><td>Ja, anonym</td><td>Nur mit deiner Erlaubnis</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Auf deinem Gerät gespeicherte Daten</h2>
+      <p>Die Apps speichern lokal, im eigenen Sandbox-Container, ausschliesslich die <b>Hypothekenparameter</b>, die du eingibst — Betrag, Startdatum, Zinssatz und Laufzeit — damit sie nach einem Neustart wieder da sind und zwischen den Tabs Berechnung, Tilgungsplan und Szenarien geteilt werden können. Mortgage Calculator Light speichert dort auch deine <b>Einwilligungsentscheidungen</b> zur Werbung.</p>
+      <p>Alle Berechnungen — Rate, Tilgungsplan, Szenarien — laufen <b>vollständig auf dem Gerät</b>: Es werden keine Daten an irgendeinen Server gesendet, und es gibt keine Cloud-Synchronisierung.</p>
+    </section>
+
+    <section class="card">
+      <h2>Export des Tilgungsplans</h2>
+      <p>Im Tab Tilgungsplan kannst du den Plan als <b>CSV</b> oder <b>PDF</b> exportieren. Die Datei wird auf dem Gerät erzeugt und an das <b>iOS-Teilen-Menü</b> übergeben: Du entscheidest, ob du sie sicherst, druckst oder versendest — und an wen. Die Apps laden diese Dateien nirgendwohin hoch.</p>
+    </section>
+
+    <section class="card">
+      <h2>Nutzungsstatistiken</h2>
+      <p>Beide Apps messen, <b>wie sie genutzt werden</b>, um zu verstehen, welche Funktionen wirklich helfen und welche nicht. Der Dienst ist <b>PostHog</b>, auf dessen <b>europäischen</b> Servern (<code>eu.i.posthog.com</code>). Die Erhebung ist anonym: kein Konto, kein Profil, nichts, was sich auf dich zurückführen lässt.</p>
+      <p>Die Apps senden <b>nur</b> diese sieben Signale und nichts sonst:</p>
+      <table>
+        <tr><th>Signal</th><th>Was es aussagt</th></tr>
+        <tr><td>Tab geöffnet</td><td>Welcher der vier Tabs geöffnet wurde: Berechnung, Tilgungsplan, Szenarien, App-Info.</td></tr>
+        <tr><td>Berechnung abgeschlossen</td><td>Dass eine Berechnung zu Ende geführt wurde. <b>Nicht</b> der Betrag, <b>nicht</b> die Rate, <b>nicht</b> der Zinssatz, <b>nicht</b> die Laufzeit.</td></tr>
+        <tr><td>Plan exportiert</td><td>Dass ein Plan exportiert wurde, und ob als PDF oder CSV. Niemals der Inhalt der Datei.</td></tr>
+        <tr><td>Startdatum geändert</td><td>Dass das Startdatum geändert wurde. <b>Nicht</b> welches Datum.</td></tr>
+        <tr><td>Szenario geändert</td><td>Dass im Tab Szenarien der Regler für Zins oder Laufzeit bewegt wurde. <b>Nicht</b> die Werte.</td></tr>
+        <tr><td>Ergebnis der Einwilligung</td><td>Nur in Mortgage Calculator Light: ob die Werbeeinwilligung erteilt, verweigert oder nicht erforderlich war.</td></tr>
+        <tr><td>Ergebnis des Trackings</td><td>Nur in Mortgage Calculator Light: ob du Apples Dialog erlaubt oder abgelehnt hast. Nicht die IDFA, nur die Antwort.</td></tr>
+      </table>
+      <p>Jedem Signal ist eine einzige weitere Information beigefügt: <b>welche der beiden Apps</b> es gesendet hat. Es wird kein Standort erhoben, es werden keine eigenen Kennungen erzeugt, es wird kein von dir geschriebener Text gesendet und <b>keine der Zahlen, die du eingibst</b>. Es gibt keine Bildschirmaufzeichnung. Diese Statistiken sind kein Tracking und verwenden die IDFA nicht: Tracking betrifft ausschliesslich die Werbung in Mortgage Calculator Light und wird unten beschrieben.</p>
+      <p>Datenschutzerklärung von PostHog: <a href="https://posthog.com/privacy" target="_blank" rel="noopener">posthog.com/privacy</a>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Push-Mitteilungen</h2>
+      <p>Wenn du Mitteilungen aktivierst, registriert die App beim Dienst <b>Back4App</b> (Parse-Plattform) einige technische Angaben:</p>
+      <ul>
+        <li>das <b>APNs-Token</b> des Geräts, von Apple erzeugt, nötig für die Zustellung;</li>
+        <li>eine <b>anonyme Installationskennung</b> zur Verwaltung der Zustellungen;</li>
+        <li>technische Basisdaten wie Gerätetyp, App-Version und Zeitzone.</li>
+      </ul>
+      <p>Diese Daten sind nicht mit deiner Identität verknüpft und werden ausschliesslich für den Betrieb der Mitteilungen verwendet. Wenn du Mitteilungen ablehnst oder in den Einstellungen deaktivierst, wird das Token unbrauchbar; du kannst die Löschung über den Kontakt unten verlangen.</p>
+    </section>
+
+    <section class="card">
+      <h2>Werbung — nur Mortgage Calculator Light</h2>
+      <p>Mortgage Calculator Light ist dank Werbung kostenlos — ein Banner in den Tabs Berechnung, Tilgungsplan und Szenarien sowie gelegentliche Vollbildanzeigen — ausgeliefert von <b>Google AdMob</b>. Zur Auswahl und Messung der Anzeigen kann Google verarbeiten:</p>
+      <ul>
+        <li>die <b>technischen Kennungen</b> des Geräts und, <b>nur wenn du das Tracking erlaubt hast</b>, die IDFA;</li>
+        <li>die <b>IP-Adresse</b> (die einen ungefähren Standort verrät) und technische Angaben zum Gerät;</li>
+        <li>Daten zur <b>Interaktion mit Anzeigen</b> (Einblendungen, Tippen).</li>
+      </ul>
+      <p>Wie Google diese Daten verarbeitet, steht in der <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a> und auf der Seite <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">«Wie Google Daten verwendet»</a>. Mortgage Calculator enthält nichts davon.</p>
+    </section>
+
+    <section class="card">
+      <h2>Deine Einwilligung — nur Mortgage Calculator Light</h2>
+      <p>Beim ersten Start zeigt die App, wenn du dich im Europäischen Wirtschaftsraum oder im Vereinigten Königreich befindest, das <b>Einwilligungsformular</b> von Google: Du kannst zwischen <b>personalisierter Werbung</b> und <b>allgemeiner Werbung</b> wählen, die nicht auf deinen Interessen beruht. Vor deiner Wahl wird keine einzige Anzeige angefordert. Du kannst deine Wahl <b>jederzeit ändern oder widerrufen</b>, im Tab <b>App-Info</b> unter <b>Datenschutzeinstellungen → Einwilligung verwalten</b>.</p>
+      <p>Direkt nach dem Google-Formular zeigt die App <b>Apples Systemdialog</b> (App Tracking Transparency) und fragt, ob du Tracking erlaubst. Das sind zwei getrennte Fragen: die erste betrifft die europäische Einwilligung, die zweite die <b>Werbekennung (IDFA)</b> deines iPhones.</p>
+      <ul>
+        <li>Wenn du <b>erlaubst</b>, wird die IDFA für Google verfügbar und die Werbung kann personalisiert werden. In diesem Fall findet Tracking zu Werbezwecken statt — genau deshalb wird um Erlaubnis gefragt.</li>
+        <li>Wenn du <b>ablehnst</b> oder nicht antwortest, gibt iOS die IDFA nicht heraus: Die Werbung bleibt allgemein. Die App erzwingt nichts und nutzt keine Ersatzkennung, um deine Wahl zu umgehen.</li>
+      </ul>
+      <p>Du kannst es jederzeit ändern unter <b>Einstellungen → Datenschutz &amp; Sicherheit → Tracking</b>.</p>
+      <p>Die App funktioniert unabhängig von deiner Wahl gleich: Es ändert sich nur die Werbung, nicht der Funktionsumfang.</p>
+    </section>
+
+    <section class="card">
+      <h2>Was wir nicht tun</h2>
+      <ul>
+        <li>Kein Konto und kein Nutzerprofil</li>
+        <li>Keine Bildschirmaufzeichnung, in keiner der beiden Apps</li>
+        <li>Kein Tracking in Mortgage Calculator, und keines in Mortgage Calculator Light, sofern du es nicht erlaubst</li>
+        <li>Kein Zugriff auf deinen Standort: Die Apps fragen ihn nie ab</li>
+        <li>Keine Werbung in der kostenpflichtigen Version</li>
+        <li>Kein Verkauf und keine kommerzielle Weitergabe deiner Daten</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Deine Rechte und Kontakt</h2>
+      <p>Nach der DSGVO und dem Schweizer Datenschutzgesetz (revDSG) hast du das Recht, deine Einwilligung jederzeit zu widerrufen (siehe oben), Auskunft über die im Abschnitt zu den Mitteilungen beschriebenen technischen Daten oder deren Löschung zu verlangen und dich an die zuständige Aufsichtsbehörde zu wenden. Bei Fragen zu dieser Erklärung schreib an <a href="mailto:bacchin@tiscali.it?subject=Mortgage%20Calculator%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Für Rechte gegenüber den von Google verarbeiteten Daten wende dich an die in Googles Erklärung genannten Kanäle.</p>
+    </section>
+
+    <section class="card">
+      <h2>Änderungen</h2>
+      <p>Änderungen an dieser Erklärung werden auf dieser Seite veröffentlicht, mit Aktualisierung des Gültigkeitsdatums.</p>
+    </section>
+  </div>
+
+  <!-- ============================ ES ============================ -->
+  <div lang-block="es">
+    <p class="date">En vigor desde el 17 de septiembre de 2026</p>
+
+    <section class="card">
+      <h2>En resumen</h2>
+      <p>Mortgage Calculator y Mortgage Calculator Light son apps de Fabrizio Bacchin (Suiza) y esta política se aplica a ambas. Las apps <b>no recogen datos personales</b>: sin cuenta, sin perfil, sin venta de datos. Solo recogen <b>estadísticas de uso anónimas</b> — qué pestañas se abren y qué funciones se usan, nunca las cifras que introduces — descritas al detalle más abajo. Los datos de la hipoteca que introduces <b>se quedan en tu dispositivo</b> (si activas las notificaciones, solo se registran datos técnicos anónimos: ver más abajo). <b>Mortgage Calculator no contiene ninguna publicidad.</b> <b>Mortgage Calculator Light</b>, la versión gratuita, muestra anuncios de Google AdMob y, en Europa, <b>te pide el consentimiento</b> antes de solicitar un solo anuncio.</p>
+    </section>
+
+    <section class="card">
+      <h2>Las dos apps</h2>
+      <table>
+        <tr><th>App</th><th>Publicidad</th><th>Estadísticas de uso</th><th>Seguimiento</th></tr>
+        <tr><td>Mortgage Calculator (de pago)</td><td>Ninguna. La app no contiene código publicitario.</td><td>Sí, anónimas</td><td>No, nunca</td></tr>
+        <tr><td>Mortgage Calculator Light (gratuita)</td><td>Banners y anuncios a pantalla completa de Google AdMob — ver las secciones dedicadas.</td><td>Sí, anónimas</td><td>Solo si lo autorizas</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Datos guardados en tu dispositivo</h2>
+      <p>Las apps guardan localmente, en su propio contenedor aislado, únicamente los <b>parámetros de la hipoteca</b> que introduces — importe, fecha de inicio, tipo de interés y plazo — para recuperarlos al reiniciar y poder compartirlos entre las pestañas Cálculo, Cuadro de amortización y Escenarios. Mortgage Calculator Light guarda ahí también tus <b>decisiones de consentimiento</b> sobre la publicidad.</p>
+      <p>Todos los cálculos — cuota, cuadro de amortización, escenarios — se hacen <b>enteramente en el dispositivo</b>: no se envía ningún dato a ningún servidor y no existe sincronización en la nube.</p>
+    </section>
+
+    <section class="card">
+      <h2>Exportación del cuadro de amortización</h2>
+      <p>Desde la pestaña Cuadro de amortización puedes exportarlo en formato <b>CSV</b> o <b>PDF</b>. El archivo se genera en el dispositivo y se entrega al <b>panel de compartir de iOS</b>: tú decides si guardarlo, imprimirlo o enviarlo, y a quién. Las apps no suben ni transmiten estos archivos a ninguna parte.</p>
+    </section>
+
+    <section class="card">
+      <h2>Estadísticas de uso</h2>
+      <p>Ambas apps miden <b>cómo se usan</b>, para entender qué funciones sirven de verdad y cuáles no. El servicio es <b>PostHog</b>, en sus servidores <b>europeos</b> (<code>eu.i.posthog.com</code>). La recogida es anónima: no hay cuenta, no hay perfil y ningún dato permite identificarte.</p>
+      <p>De la app salen <b>solo</b> estas siete señales, y nada más:</p>
+      <table>
+        <tr><th>Señal</th><th>Qué indica</th></tr>
+        <tr><td>Pestaña abierta</td><td>Cuál de las cuatro pestañas se ha abierto: Cálculo, Cuadro de amortización, Escenarios, Info app.</td></tr>
+        <tr><td>Cálculo completado</td><td>Que un cálculo se ha llevado a término. <b>No</b> el importe, <b>no</b> la cuota, <b>no</b> el tipo, <b>no</b> el plazo.</td></tr>
+        <tr><td>Cuadro exportado</td><td>Que se ha exportado un cuadro, y si en PDF o en CSV. Nunca el contenido del archivo.</td></tr>
+        <tr><td>Fecha de inicio modificada</td><td>Que se ha cambiado la fecha de inicio. <b>No</b> qué fecha.</td></tr>
+        <tr><td>Escenario modificado</td><td>Que en la pestaña Escenarios se ha movido el deslizador del tipo o el del plazo. <b>No</b> los valores.</td></tr>
+        <tr><td>Resultado del consentimiento</td><td>Solo en Mortgage Calculator Light: si el consentimiento a la publicidad se concedió, se denegó o no era necesario.</td></tr>
+        <tr><td>Resultado del seguimiento</td><td>Solo en Mortgage Calculator Light: si autorizaste o rechazaste el aviso de Apple. No el IDFA, solo la respuesta.</td></tr>
+      </table>
+      <p>A cada señal se adjunta una única información más: <b>cuál de las dos apps</b> la ha enviado. No se recoge la ubicación, no se crean identificadores propios, no se envía ningún texto escrito por ti y <b>ninguna de las cifras que introduces</b>. No hay grabación de pantalla. Estas estadísticas no son seguimiento y no usan el IDFA: el seguimiento afecta solo a la publicidad de Mortgage Calculator Light y se describe más abajo.</p>
+      <p>Política de PostHog: <a href="https://posthog.com/privacy" target="_blank" rel="noopener">posthog.com/privacy</a>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Notificaciones push</h2>
+      <p>Si decides activar las notificaciones, la app registra en el servicio <b>Back4App</b> (plataforma Parse) algunos datos técnicos:</p>
+      <ul>
+        <li>el <b>token APNs</b> del dispositivo, generado por Apple, necesario para entregar las notificaciones;</li>
+        <li>un <b>identificador anónimo de instalación</b>, usado para gestionar los envíos;</li>
+        <li>datos técnicos básicos como el tipo de dispositivo, la versión de la app y la zona horaria.</li>
+      </ul>
+      <p>Estos datos no están vinculados a tu identidad y se usan exclusivamente para el funcionamiento de las notificaciones. Si rechazas o desactivas las notificaciones en Ajustes, el token queda inutilizable; puedes pedir su eliminación escribiendo al contacto de más abajo.</p>
+    </section>
+
+    <section class="card">
+      <h2>Publicidad — solo Mortgage Calculator Light</h2>
+      <p>Mortgage Calculator Light es gratuita gracias a los anuncios — un banner en las pestañas Cálculo, Cuadro de amortización y Escenarios, y anuncios ocasionales a pantalla completa — servidos por <b>Google AdMob</b>. Para seleccionar y medir los anuncios, Google puede tratar:</p>
+      <ul>
+        <li>los <b>identificadores técnicos</b> del dispositivo y, <b>solo si has autorizado el seguimiento</b>, el IDFA;</li>
+        <li>la <b>dirección IP</b> (que indica una ubicación aproximada) e información técnica del dispositivo;</li>
+        <li>datos de <b>interacción con los anuncios</b> (impresiones, toques).</li>
+      </ul>
+      <p>Cómo trata Google estos datos se describe en la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidad de Google</a> y en la página <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">«Cómo usa Google los datos»</a>. Mortgage Calculator no contiene nada de esto.</p>
+    </section>
+
+    <section class="card">
+      <h2>Tu consentimiento — solo Mortgage Calculator Light</h2>
+      <p>En el primer inicio, si te encuentras en el Espacio Económico Europeo o en el Reino Unido, la app muestra el <b>formulario de consentimiento</b> de Google: puedes elegir entre <b>anuncios personalizados</b> y <b>anuncios genéricos</b>, no basados en tus intereses. No se solicita ningún anuncio antes de que hayas elegido. Puedes <b>cambiar o retirar tu elección en cualquier momento</b> desde la pestaña <b>Info app</b>, en <b>Ajustes de privacidad → Gestionar consentimiento</b>.</p>
+      <p>Justo después del formulario de Google, la app muestra el <b>aviso del sistema de Apple</b> (App Tracking Transparency) y te pregunta si autorizas el seguimiento. Son dos preguntas distintas: la primera se refiere al consentimiento europeo, la segunda al <b>identificador publicitario (IDFA)</b> de tu iPhone.</p>
+      <ul>
+        <li>Si <b>lo autorizas</b>, el IDFA queda disponible para Google y los anuncios pueden personalizarse. En ese caso sí hay seguimiento con fines publicitarios, y es justamente por eso que se pide permiso.</li>
+        <li>Si <b>lo rechazas</b>, o no respondes, iOS no facilita el IDFA: los anuncios siguen siendo genéricos. La app no fuerza nada ni usa ningún identificador alternativo para eludir tu elección.</li>
+      </ul>
+      <p>Puedes cambiar de idea en cualquier momento en <b>Ajustes → Privacidad y seguridad → Seguimiento</b>.</p>
+      <p>La app funciona igual sea cual sea tu elección: solo cambian los anuncios, no las funciones.</p>
+    </section>
+
+    <section class="card">
+      <h2>Lo que no hacemos</h2>
+      <ul>
+        <li>Sin cuenta y sin perfil de usuario</li>
+        <li>Sin grabación de pantalla, en ninguna de las dos apps</li>
+        <li>Sin seguimiento en Mortgage Calculator, y ninguno en Mortgage Calculator Light si no lo autorizas</li>
+        <li>Sin acceso a tu ubicación: las apps nunca la solicitan</li>
+        <li>Sin publicidad en la versión de pago</li>
+        <li>Sin venta ni cesión comercial de tus datos</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Tus derechos y contacto</h2>
+      <p>Conforme al RGPD y a la ley suiza de protección de datos (nLPD) tienes derecho a retirar el consentimiento en cualquier momento (ver más arriba), a solicitar el acceso o la eliminación de los datos técnicos descritos en la sección de notificaciones, y a dirigirte a la autoridad de control competente. Para cualquier duda sobre esta política escribe a <a href="mailto:bacchin@tiscali.it?subject=Mortgage%20Calculator%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Para ejercer tus derechos sobre los datos tratados por Google, consulta los canales indicados en la política de Google.</p>
+    </section>
+
+    <section class="card">
+      <h2>Modificaciones</h2>
+      <p>Cualquier modificación de esta política se publicará en esta página, actualizando la fecha de entrada en vigor.</p>
+    </section>
+  </div>
+
+  <!-- ============================ FR ============================ -->
+  <div lang-block="fr">
+    <p class="date">En vigueur depuis le 17 septembre 2026</p>
+
+    <section class="card">
+      <h2>En bref</h2>
+      <p>Mortgage Calculator et Mortgage Calculator Light sont des apps de Fabrizio Bacchin (Suisse) et cette politique vaut pour les deux. Les apps <b>ne collectent aucune donnée personnelle</b> : pas de compte, pas de profil, aucune vente de données. Elles ne collectent que des <b>statistiques d'usage anonymes</b> — quels onglets sont ouverts et quelles fonctions sont utilisées, jamais les chiffres que vous saisissez — décrites en détail plus bas. Les données de prêt que vous saisissez <b>restent sur votre appareil</b> (si vous activez les notifications, seules des données techniques anonymes sont enregistrées : voir plus bas). <b>Mortgage Calculator ne contient aucune publicité.</b> <b>Mortgage Calculator Light</b>, la version gratuite, affiche des publicités Google AdMob et, en Europe, <b>vous demande votre consentement</b> avant de solliciter la moindre annonce.</p>
+    </section>
+
+    <section class="card">
+      <h2>Les deux apps</h2>
+      <table>
+        <tr><th>App</th><th>Publicité</th><th>Statistiques d'usage</th><th>Suivi</th></tr>
+        <tr><td>Mortgage Calculator (payante)</td><td>Aucune. L'app ne contient aucun code publicitaire.</td><td>Oui, anonymes</td><td>Non, jamais</td></tr>
+        <tr><td>Mortgage Calculator Light (gratuite)</td><td>Bannières et annonces plein écran de Google AdMob — voir les sections dédiées.</td><td>Oui, anonymes</td><td>Seulement si vous l'autorisez</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Données conservées sur votre appareil</h2>
+      <p>Les apps conservent localement, dans leur propre conteneur isolé, uniquement les <b>paramètres du prêt</b> que vous saisissez — montant, date de début, taux d'intérêt et durée — afin de les retrouver au redémarrage et de les partager entre les onglets Calcul, Tableau d'amortissement et Scénarios. Mortgage Calculator Light y enregistre aussi vos <b>choix de consentement</b> à la publicité.</p>
+      <p>Tous les calculs — mensualité, tableau d'amortissement, scénarios — se font <b>entièrement sur l'appareil</b> : aucune donnée n'est envoyée à un serveur et il n'existe aucune synchronisation dans le cloud.</p>
+    </section>
+
+    <section class="card">
+      <h2>Export du tableau d'amortissement</h2>
+      <p>Depuis l'onglet Tableau d'amortissement, vous pouvez exporter le tableau au format <b>CSV</b> ou <b>PDF</b>. Le fichier est généré sur l'appareil et remis à la <b>feuille de partage iOS</b> : c'est vous qui décidez de l'enregistrer, de l'imprimer ou de l'envoyer, et à qui. Les apps ne téléversent ni ne transmettent ces fichiers nulle part.</p>
+    </section>
+
+    <section class="card">
+      <h2>Statistiques d'usage</h2>
+      <p>Les deux apps mesurent <b>comment elles sont utilisées</b>, afin de comprendre quelles fonctions servent vraiment et lesquelles non. Le service est <b>PostHog</b>, sur ses serveurs <b>européens</b> (<code>eu.i.posthog.com</code>). La collecte est anonyme : pas de compte, pas de profil, et aucune donnée ne permet de remonter jusqu'à vous.</p>
+      <p>Les apps n'envoient <b>que</b> ces sept signaux, et rien d'autre :</p>
+      <table>
+        <tr><th>Signal</th><th>Ce qu'il indique</th></tr>
+        <tr><td>Onglet ouvert</td><td>Lequel des quatre onglets a été ouvert : Calcul, Tableau d'amortissement, Scénarios, Infos app.</td></tr>
+        <tr><td>Calcul terminé</td><td>Qu'un calcul a été mené à son terme. <b>Pas</b> le montant, <b>pas</b> la mensualité, <b>pas</b> le taux, <b>pas</b> la durée.</td></tr>
+        <tr><td>Tableau exporté</td><td>Qu'un tableau a été exporté, et si c'était en PDF ou en CSV. Jamais le contenu du fichier.</td></tr>
+        <tr><td>Date de début modifiée</td><td>Que la date de début a été changée. <b>Pas</b> quelle date.</td></tr>
+        <tr><td>Scénario modifié</td><td>Que dans l'onglet Scénarios le curseur du taux ou celui de la durée a été déplacé. <b>Pas</b> les valeurs.</td></tr>
+        <tr><td>Résultat du consentement</td><td>Mortgage Calculator Light uniquement : si le consentement publicitaire a été accordé, refusé ou n'était pas nécessaire.</td></tr>
+        <tr><td>Résultat du suivi</td><td>Mortgage Calculator Light uniquement : si vous avez autorisé ou refusé l'invite d'Apple. Pas l'IDFA, seulement la réponse.</td></tr>
+      </table>
+      <p>Une seule information supplémentaire accompagne chaque signal : <b>laquelle des deux apps</b> l'a envoyé. Aucune localisation n'est collectée, aucun identifiant de notre part n'est créé, aucun texte écrit par vous n'est envoyé, et <b>aucun des chiffres que vous saisissez</b>. Il n'y a pas d'enregistrement de l'écran. Ces statistiques ne sont pas du suivi et n'utilisent pas l'IDFA : le suivi ne concerne que la publicité de Mortgage Calculator Light, décrite plus bas.</p>
+      <p>Politique de PostHog : <a href="https://posthog.com/privacy" target="_blank" rel="noopener">posthog.com/privacy</a>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Notifications push</h2>
+      <p>Si vous choisissez d'activer les notifications, l'app enregistre auprès du service <b>Back4App</b> (plateforme Parse) quelques informations techniques :</p>
+      <ul>
+        <li>le <b>jeton APNs</b> de l'appareil, généré par Apple, nécessaire à la remise des notifications ;</li>
+        <li>un <b>identifiant d'installation anonyme</b>, utilisé pour gérer les envois ;</li>
+        <li>des données techniques de base comme le type d'appareil, la version de l'app et le fuseau horaire.</li>
+      </ul>
+      <p>Ces données ne sont pas liées à votre identité et servent exclusivement au fonctionnement des notifications. Si vous refusez ou désactivez les notifications dans Réglages, le jeton devient inutilisable ; vous pouvez en demander la suppression en écrivant au contact ci-dessous.</p>
+    </section>
+
+    <section class="card">
+      <h2>Publicité — Mortgage Calculator Light uniquement</h2>
+      <p>Mortgage Calculator Light est gratuite grâce à la publicité — une bannière dans les onglets Calcul, Tableau d'amortissement et Scénarios, et des annonces plein écran occasionnelles — diffusées par <b>Google AdMob</b>. Pour sélectionner et mesurer les annonces, Google peut traiter :</p>
+      <ul>
+        <li>les <b>identifiants techniques</b> de l'appareil et, <b>uniquement si vous avez autorisé le suivi</b>, l'IDFA ;</li>
+        <li>l'<b>adresse IP</b> (qui indique une localisation approximative) et des informations techniques sur l'appareil ;</li>
+        <li>des données d'<b>interaction avec les annonces</b> (impressions, touchers).</li>
+      </ul>
+      <p>La manière dont Google traite ces données est décrite dans la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">politique de confidentialité de Google</a> et sur la page <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">« Comment Google utilise les données »</a>. Mortgage Calculator ne contient rien de tout cela.</p>
+    </section>
+
+    <section class="card">
+      <h2>Votre consentement — Mortgage Calculator Light uniquement</h2>
+      <p>Au premier lancement, si vous vous trouvez dans l'Espace économique européen ou au Royaume-Uni, l'app affiche le <b>formulaire de consentement</b> de Google : vous pouvez choisir entre <b>publicités personnalisées</b> et <b>publicités génériques</b>, non fondées sur vos centres d'intérêt. Aucune annonce n'est sollicitée avant votre choix. Vous pouvez <b>modifier ou retirer votre choix à tout moment</b> depuis l'onglet <b>Infos app</b>, sous <b>Réglages de confidentialité → Gérer le consentement</b>.</p>
+      <p>Juste après le formulaire de Google, l'app affiche l'<b>invite système d'Apple</b> (App Tracking Transparency) et vous demande si vous autorisez le suivi. Ce sont deux questions distinctes : la première porte sur le consentement européen, la seconde sur l'<b>identifiant publicitaire (IDFA)</b> de votre iPhone.</p>
+      <ul>
+        <li>Si vous <b>autorisez</b>, l'IDFA devient accessible à Google et les publicités peuvent être personnalisées. Dans ce cas, il y a bien suivi à des fins publicitaires, et c'est précisément pour cela que la permission est demandée.</li>
+        <li>Si vous <b>refusez</b>, ou ne répondez pas, iOS ne communique pas l'IDFA : les publicités restent génériques. L'app ne force rien et n'utilise aucun identifiant de substitution pour contourner votre choix.</li>
+      </ul>
+      <p>Vous pouvez changer d'avis à tout moment dans <b>Réglages → Confidentialité et sécurité → Suivi</b>.</p>
+      <p>L'app fonctionne de la même façon quel que soit votre choix : seules les publicités changent, pas les fonctions.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ce que nous ne faisons pas</h2>
+      <ul>
+        <li>Aucun compte et aucun profil utilisateur</li>
+        <li>Aucun enregistrement de l'écran, dans aucune des deux apps</li>
+        <li>Aucun suivi dans Mortgage Calculator, et aucun dans Mortgage Calculator Light si vous ne l'autorisez pas</li>
+        <li>Aucun accès à votre localisation : les apps ne la demandent jamais</li>
+        <li>Aucune publicité dans la version payante</li>
+        <li>Aucune vente ni partage commercial de vos données</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Vos droits et contact</h2>
+      <p>En vertu du RGPD et de la loi suisse sur la protection des données (nLPD), vous avez le droit de retirer votre consentement à tout moment (voir plus haut), de demander l'accès aux données techniques décrites dans la section sur les notifications ou leur suppression, et de saisir l'autorité de contrôle compétente. Pour toute question sur cette politique, écrivez à <a href="mailto:bacchin@tiscali.it?subject=Mortgage%20Calculator%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Pour exercer vos droits sur les données traitées par Google, reportez-vous aux canaux indiqués dans la politique de Google.</p>
+    </section>
+
+    <section class="card">
+      <h2>Modifications</h2>
+      <p>Toute modification de cette politique sera publiée sur cette page, avec mise à jour de la date d'entrée en vigueur.</p>
+    </section>
+  </div>
+
   <p class="foot">
     <span lang-block="it">Mortgage Calculator e Mortgage Calculator Light · <a href="support.html">Supporto</a></span>
     <span lang-block="en">Mortgage Calculator and Mortgage Calculator Light · <a href="support.html">Support</a></span>
+    <span lang-block="de">Mortgage Calculator und Mortgage Calculator Light · <a href="support.html">Support</a></span>
+    <span lang-block="es">Mortgage Calculator y Mortgage Calculator Light · <a href="support.html">Soporte</a></span>
+    <span lang-block="fr">Mortgage Calculator et Mortgage Calculator Light · <a href="support.html">Assistance</a></span>
   </p>
 </div>
 
 <script>
+  var LINGUE = ["it", "en", "de", "es", "fr"];
   function setLang(l) {
+    if (LINGUE.indexOf(l) < 0) { l = "en"; }
     document.documentElement.setAttribute("data-lang", l);
     document.documentElement.lang = l;
-    document.getElementById("btn-it").setAttribute("aria-pressed", l === "it");
-    document.getElementById("btn-en").setAttribute("aria-pressed", l === "en");
+    LINGUE.forEach(function (x) {
+      var b = document.getElementById("btn-" + x);
+      if (b) { b.setAttribute("aria-pressed", x === l); }
+    });
     try { localStorage.setItem("mortgage-lang", l); } catch (e) {}
+  }
+  // Lingua preferita del browser, fra quelle che la pagina ha davvero.
+  function linguaDelBrowser() {
+    var elenco = navigator.languages || [navigator.language || "en"];
+    for (var i = 0; i < elenco.length; i++) {
+      var due = String(elenco[i]).toLowerCase().slice(0, 2);
+      if (LINGUE.indexOf(due) >= 0) { return due; }
+    }
+    return "en";
   }
   var saved = null;
   try { saved = localStorage.getItem("mortgage-lang"); } catch (e) {}
-  setLang(saved || ((navigator.language || "en").toLowerCase().indexOf("it") === 0 ? "it" : "en"));
+  setLang(saved || linguaDelBrowser());
 </script>
 <noscript><style>[lang-block]{display:block !important}</style></noscript>
 </body>
