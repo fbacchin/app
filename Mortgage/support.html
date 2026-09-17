@@ -41,7 +41,11 @@
   .foot { color: var(--muted); font-size: 14px; margin-top: 28px; text-align: center; }
   .date { color: var(--muted); font-size: 14px; }
   [lang-block] { display: none; }
-  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"] { display: block; }
+  html[data-lang="it"] [lang-block="it"],
+  html[data-lang="en"] [lang-block="en"],
+  html[data-lang="de"] [lang-block="de"],
+  html[data-lang="es"] [lang-block="es"],
+  html[data-lang="fr"] [lang-block="fr"] { display: block; }
   .ic { display:inline-block; width:1.6em; }
   .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--bg);
          border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; font-size: .9em; }
@@ -55,10 +59,16 @@
   </header>
   <p class="sub" lang-block="it">Supporto e guida all'uso · Mortgage Calculator e Mortgage Calculator Light</p>
   <p class="sub" lang-block="en">Support and user guide · Mortgage Calculator and Mortgage Calculator Light</p>
+  <p class="sub" lang-block="de">Support und Anleitung · Mortgage Calculator und Mortgage Calculator Light</p>
+  <p class="sub" lang-block="es">Soporte y guía de uso · Mortgage Calculator y Mortgage Calculator Light</p>
+  <p class="sub" lang-block="fr">Assistance et guide · Mortgage Calculator et Mortgage Calculator Light</p>
 
   <div class="langbar">
     <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
     <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
   </div>
 
   <!-- ============================ ITALIANO ============================ -->
@@ -118,7 +128,7 @@
     <section class="card">
       <h2><span class="ic">▣</span>La pubblicità — solo la versione Light</h2>
       <p>Mortgage Calculator Light è gratuita grazie agli annunci di <b>Google AdMob</b>: un <b>banner</b> nelle schede Calcolo, Piano ammort. e Scenari e, ogni tanto, un <b>annuncio a schermo intero</b>. Mortgage Calculator non contiene alcuna pubblicità.</p>
-      <p>Al primo avvio, in Europa, l'app ti chiede le <b>preferenze sul consenso</b> (annunci personalizzati o generici) e non richiede alcun annuncio prima della tua scelta; l'app <b>non chiede mai il tracciamento</b> di Apple. Puoi cambiare idea in ogni momento da <b>App info → Impostazioni privacy</b>. I dettagli sono nell'<a href="privacy.html">informativa sulla privacy</a>.</p>
+      <p>Al primo avvio, in Europa, l'app ti chiede le <b>preferenze sul consenso</b> (annunci personalizzati o generici) e non richiede alcun annuncio prima della tua scelta; subito dopo mostra l'<b>avviso di tracciamento di Apple</b>: se lo autorizzi gli annunci possono essere personalizzati, se lo rifiuti restano generici — l'app funziona allo stesso modo in entrambi i casi. Puoi cambiare idea in ogni momento da <b>App info → Impostazioni privacy</b> e da <b>Impostazioni → Privacy e sicurezza → Tracciamento</b>. I dettagli sono nell'<a href="privacy.html">informativa sulla privacy</a>.</p>
       <p>Se preferisci un'esperienza <b>senza pubblicità</b>, cerca <b>Mortgage Calculator</b> sull'App Store.</p>
     </section>
 
@@ -207,7 +217,7 @@
     <section class="card">
       <h2><span class="ic">▣</span>Advertising — Light version only</h2>
       <p>Mortgage Calculator Light is free thanks to <b>Google AdMob</b> ads: a <b>banner</b> in the Calculation, Amort. plan and Scenarios tabs and, occasionally, a <b>full-screen ad</b>. Mortgage Calculator contains no advertising.</p>
-      <p>On first launch, in Europe, the app asks for your <b>consent preferences</b> (personalised or generic ads) and requests no ad before you have chosen; the app <b>never asks for Apple's tracking</b> permission. You can change your mind at any time from <b>App info → Privacy settings</b>. Details are in the <a href="privacy.html">privacy policy</a>.</p>
+      <p>On first launch, in Europe, the app asks for your <b>consent preferences</b> (personalised or generic ads) and requests no ad before you have chosen; right after, it shows <b>Apple's tracking prompt</b>: if you allow it, ads can be personalised; if you refuse, they stay generic — the app works the same either way. You can change your mind at any time in <b>App info → Privacy settings</b> and in <b>Settings → Privacy &amp; Security → Tracking</b>. You can change your mind at any time from <b>App info → Privacy settings</b>. Details are in the <a href="privacy.html">privacy policy</a>.</p>
       <p>If you prefer an <b>ad-free</b> experience, look for <b>Mortgage Calculator</b> on the App Store.</p>
     </section>
 
@@ -239,23 +249,306 @@
     </section>
   </div>
 
+  <!-- ============================ DE ============================ -->
+  <div lang-block="de">
+    <section class="card">
+      <h2><span class="ic">◎</span>Was die Apps tun</h2>
+      <p>Mortgage Calculator berechnet die <b>Rate deiner Hypothek</b> und zeigt dir, was hinter dieser Zahl steckt: wie viel Tilgung, wie viel Zinsen, wie sich das Rate für Rate verändert und was bei einem anderen Zinssatz oder einer anderen Laufzeit passieren würde. Alle Berechnungen laufen auf dem Gerät, auch ohne Verbindung.</p>
+      <p>Es gibt zwei Versionen mit identischem Funktionsumfang: <b>Mortgage Calculator</b> (kostenpflichtig, ohne jede Werbung) und <b>Mortgage Calculator Light</b> (kostenlos, werbefinanziert). Diese Anleitung gilt für beide.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">∑</span>Der Tab Berechnung</h2>
+      <p>Der Ausgangspunkt. Du stellst vier Angaben ein:</p>
+      <ul>
+        <li>den <b>Betrag</b> der Hypothek;</li>
+        <li>das <b>Startdatum</b> — tippe auf das Datum, um den Kalender zu öffnen;</li>
+        <li>den jährlichen <b>Zinssatz</b> mit dem Regler (Schrittweite 0,05 %);</li>
+        <li>die <b>Laufzeit</b> in Jahren mit dem Regler.</li>
+      </ul>
+      <p>Die <b>monatliche Rate</b> wird bei jeder Änderung sofort neu berechnet, zusammen mit der <b>Gesamtrückzahlung</b> und den <b>gesamten Zinsen</b>. Der Balken unten zeigt auf einen Blick das Verhältnis zwischen <b>Tilgung</b> (grün) und <b>Zinsen</b> (orange) über die gesamte Laufzeit.</p>
+      <p>Die Berechnung folgt der <b>Annuitätenmethode</b> mit konstanter Rate, die bei nahezu allen Hypotheken verwendet wird: Die Rate bleibt über die gesamte Laufzeit gleich, nur ihre innere Zusammensetzung ändert sich.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>Der Tab Tilgungsplan</h2>
+      <p>Die Aufschlüsselung <b>Rate für Rate</b>. Oben bleiben Gesamtzinsen, Gesamtrückzahlung und monatliche Rate immer sichtbar; darunter läuft die vollständige Liste der Raten, jede mit:</p>
+      <ul>
+        <li>der <b>Nummer</b> der Rate und ihrem <b>Fälligkeitsdatum</b> (die erste fällt mit dem Startdatum zusammen);</li>
+        <li>dem <b>Tilgungsanteil</b> und dem <b>Zinsanteil</b>, mit einem Balken für das Verhältnis;</li>
+        <li>der <b>Restschuld</b> nach der Zahlung.</li>
+      </ul>
+      <p>Beim Scrollen nach unten färbt sich der Balken zunehmend grün: der typische Effekt der Annuitätentilgung, bei der anfangs vor allem Zinsen und gegen Ende vor allem Tilgung gezahlt werden.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">⇪</span>Den Plan exportieren</h2>
+      <p>Mit der <b>Teilen</b>-Taste exportierst du den vollständigen Plan in zwei Formaten:</p>
+      <ul>
+        <li><b>CSV</b> — zum Öffnen in Numbers, Excel oder Google Tabellen und zur Weiterverarbeitung. Die Daten sind im ISO-Format (<span class="kbd">jjjj-mm-tt</span>) und die Zahlen mit Dezimalpunkt, damit der Import in jeder Sprache funktioniert.</li>
+        <li><b>PDF</b> — ein Dokument, fertig zum Drucken oder Versenden, mit dem App-Logo, der Zusammenfassung der Hypothek im Kopf und der vollständig gesetzten Tabelle.</li>
+      </ul>
+      <p>Die Datei wird im Moment des Exports erzeugt und an das iOS-Teilen-Menü übergeben: Du entscheidest, wo du sie sicherst oder an wen du sie sendest.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📊</span>Der Tab Szenarien</h2>
+      <p>Er beantwortet die Frage «was wäre, wenn…». Mit den beiden Reglern änderst du <b>Zinssatz</b> und <b>Laufzeit</b> und siehst sofort die neue Rate.</p>
+      <p>Das Diagramm zeigt acht Laufzeiten im Vergleich — von 5 bis 40 Jahren — und für jede eine zweigeteilte Säule: Der <b>grüne</b> Teil ist das Kapital, das sich nie ändert, weil es die geliehene Summe ist; der <b>orange</b> Teil sind die Zinsen, die mit längerer Laufzeit wachsen. Über jeder Säule steht die zugehörige <b>Rate</b>.</p>
+      <p>Das ist der direkteste Weg, den grundlegenden Zielkonflikt jeder Hypothek zu sehen: Eine längere Laufzeit senkt die Rate, erhöht aber die Gesamtzinsen. Hervorgehoben ist die Säule der von dir gewählten Laufzeit.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">ℹ</span>Der Tab App-Info</h2>
+      <p>Enthält die Version der App, eine kurze Erklärung jedes Tabs und die Hinweise. In der Light-Version enthält er ausserdem die Taste <b>Datenschutzeinstellungen</b>, um die Entscheidungen zur Werbeeinwilligung zu überprüfen.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>Die Werbung — nur die Light-Version</h2>
+      <p>Mortgage Calculator Light ist dank der Anzeigen von <b>Google AdMob</b> kostenlos: ein <b>Banner</b> in den Tabs Berechnung, Tilgungsplan und Szenarien und gelegentlich eine <b>Vollbildanzeige</b>. Mortgage Calculator enthält keinerlei Werbung.</p>
+      <p>Beim ersten Start fragt die App in Europa nach deinen <b>Einwilligungspräferenzen</b> (personalisierte oder allgemeine Werbung) und fordert vor deiner Wahl keine Anzeige an. Direkt danach zeigt sie <b>Apples Tracking-Dialog</b>: Erlaubst du ihn, kann die Werbung personalisiert werden; lehnst du ab, bleibt sie allgemein — die App funktioniert in beiden Fällen gleich. Du kannst es jederzeit unter <b>App-Info → Datenschutzeinstellungen</b> und in <b>Einstellungen → Datenschutz &amp; Sicherheit → Tracking</b> ändern. Die Einzelheiten stehen in der <a href="privacy.html">Datenschutzerklärung</a>.</p>
+      <p>Wenn du eine Nutzung <b>ohne Werbung</b> bevorzugst, suche im App Store nach <b>Mortgage Calculator</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Mitteilungen</h2>
+      <p>Die App kann dir gelegentlich eine Mitteilung zu Neuerungen senden. Die Erlaubnis wird beim ersten Start abgefragt; du kannst sie jederzeit unter <b>Einstellungen → Mitteilungen</b> ändern.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Häufige Fragen</h2>
+      <ul>
+        <li><b>Die Rate erscheint nicht</b> — es braucht einen Betrag grösser als null: Tippe auf das Feld «Hypothekenbetrag» und gib ihn ein.</li>
+        <li><b>Warum nennt meine Bank eine andere Rate?</b> — die Apps berechnen die reine Rate aus Tilgung und Zinsen. Die Rate der Bank kann Versicherungen, Bearbeitungskosten oder Abgaben enthalten und andere Rundungen verwenden.</li>
+        <li><b>Welchen Zinssatz soll ich eingeben?</b> — den <b>nominalen Jahreszins</b> der Hypothek, nicht den Effektivzins, der auch die Nebenkosten enthält.</li>
+        <li><b>Die letzte Rate hat einen anderen Betrag</b> — das ist richtig: Sie wird um wenige Rappen angepasst, damit die Restschuld exakt auf null geht.</li>
+        <li><b>Kann ich sie für eine variabel verzinste Hypothek nutzen?</b> — du kannst jeden Zinssatz simulieren, aber der Plan wird mit diesem Satz über die gesamte Laufzeit fest gerechnet. Um die Wirkung einer Erhöhung zu verstehen, nutze den Tab Szenarien.</li>
+        <li><b>Der Banner-Bereich ist leer</b> (nur Light) — das passiert, wenn keine Anzeigen verfügbar sind oder die Verbindung fehlt: Es ist kein Fehler.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✱</span>Hinweis</h2>
+      <p>Die Apps sind ein Rechen- und Simulationswerkzeug, keine Finanzberatung. Die Ergebnisse haben Richtwertcharakter: Für eine verbindliche Entscheidung ziehe immer die Unterlagen deines Kreditinstituts heran.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✎</span>Kontakt</h2>
+      <p>Ein Problem gefunden oder eine Funktion vermisst? Schreib an <a href="mailto:bacchin@tiscali.it?subject=Mortgage%20Calculator%20%E2%80%94%20Support">bacchin@tiscali.it</a>. Nenne das iPhone-Modell, die iOS-Version und die App-Version (im Tab App-Info): Das hilft, schneller zu antworten.</p>
+    </section>
+  </div>
+
+  <!-- ============================ ES ============================ -->
+  <div lang-block="es">
+    <section class="card">
+      <h2><span class="ic">◎</span>Qué hacen las apps</h2>
+      <p>Mortgage Calculator calcula la <b>cuota de tu hipoteca</b> y te muestra qué hay detrás de ese número: cuánto pagas de capital, cuánto de intereses, cómo cambia cuota a cuota y qué pasaría con otro tipo o con otro plazo. Todos los cálculos se hacen en el dispositivo, también sin conexión.</p>
+      <p>Existe en dos versiones, idénticas en funciones: <b>Mortgage Calculator</b> (de pago, sin publicidad alguna) y <b>Mortgage Calculator Light</b> (gratuita, financiada con anuncios). Esta guía vale para ambas.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">∑</span>La pestaña Cálculo</h2>
+      <p>Es el punto de partida. Defines cuatro datos:</p>
+      <ul>
+        <li>el <b>importe</b> de la hipoteca;</li>
+        <li>la <b>fecha de inicio</b> — toca la fecha para abrir el calendario;</li>
+        <li>el <b>tipo de interés</b> anual, con el deslizador (paso del 0,05 %);</li>
+        <li>el <b>plazo</b> en años, con el deslizador.</li>
+      </ul>
+      <p>La <b>cuota mensual</b> se recalcula al instante con cada cambio, junto con el <b>total devuelto</b> y el <b>total de intereses</b>. La barra inferior muestra de un vistazo la proporción entre <b>capital</b> (verde) e <b>intereses</b> (naranja) a lo largo de toda la hipoteca.</p>
+      <p>El cálculo usa el <b>método francés</b> de cuota constante, el que emplean casi todas las hipotecas: la cuota permanece igual durante todo el plazo y lo que cambia es su composición interna.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>La pestaña Amortización</h2>
+      <p>Es el detalle <b>cuota a cuota</b>. Arriba quedan siempre visibles el total de intereses, el total devuelto y la cuota mensual; debajo se desplaza la lista completa de cuotas, cada una con:</p>
+      <ul>
+        <li>el <b>número</b> de la cuota y su <b>fecha de vencimiento</b> (la primera coincide con la fecha de inicio);</li>
+        <li>la parte de <b>capital</b> y la parte de <b>intereses</b>, con una barra que muestra su relación;</li>
+        <li>el <b>capital pendiente</b> después del pago.</li>
+      </ul>
+      <p>Al desplazarte hacia abajo verás cómo la barra vira progresivamente al verde: es el efecto típico de la amortización francesa, donde al principio se pagan sobre todo intereses y hacia el final sobre todo capital.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">⇪</span>Exportar el cuadro</h2>
+      <p>Con el botón de <b>compartir</b> puedes exportar el cuadro completo en dos formatos:</p>
+      <ul>
+        <li><b>CSV</b> — para abrirlo en Numbers, Excel u Hojas de cálculo de Google y reelaborarlo. Las fechas van en formato ISO (<span class="kbd">aaaa-mm-dd</span>) y los números con punto decimal, de modo que la importación funciona en cualquier idioma.</li>
+        <li><b>PDF</b> — un documento listo para imprimir o enviar, con el logo de la app, el resumen de la hipoteca en la cabecera y la tabla completa maquetada.</li>
+      </ul>
+      <p>El archivo se crea en el momento y se entrega al panel de compartir de iOS: decides tú dónde guardarlo o a quién enviarlo.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📊</span>La pestaña Escenarios</h2>
+      <p>Sirve para responder a la pregunta «¿y si…?». Con los dos deslizadores cambias <b>tipo</b> y <b>plazo</b> y ves al instante la nueva cuota.</p>
+      <p>El gráfico muestra ocho plazos comparados — de 5 a 40 años — y para cada uno una columna dividida en dos: la parte <b>verde</b> es el capital, que nunca cambia porque es la suma que has pedido prestada; la parte <b>naranja</b> son los intereses, que crecen al alargarse el plazo. Sobre cada columna está la <b>cuota</b> correspondiente.</p>
+      <p>Es la forma más directa de ver el compromiso de fondo de toda hipoteca: alargar el plazo baja la cuota, pero sube el total de intereses. La columna destacada es la del plazo que has elegido.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">ℹ</span>La pestaña Info app</h2>
+      <p>Contiene la versión de la app, una explicación breve de cada pestaña y los avisos. En la versión Light contiene además el botón <b>Ajustes de privacidad</b> para revisar las decisiones sobre el consentimiento publicitario.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>La publicidad — solo la versión Light</h2>
+      <p>Mortgage Calculator Light es gratuita gracias a los anuncios de <b>Google AdMob</b>: un <b>banner</b> en las pestañas Cálculo, Amortización y Escenarios y, de vez en cuando, un <b>anuncio a pantalla completa</b>. Mortgage Calculator no contiene publicidad alguna.</p>
+      <p>En el primer inicio, en Europa, la app te pide las <b>preferencias de consentimiento</b> (anuncios personalizados o genéricos) y no solicita ningún anuncio antes de tu elección. Justo después muestra el <b>aviso de seguimiento de Apple</b>: si lo autorizas, los anuncios pueden personalizarse; si lo rechazas, siguen siendo genéricos — la app funciona igual en ambos casos. Puedes cambiarlo cuando quieras desde <b>Info app → Ajustes de privacidad</b> y en <b>Ajustes → Privacidad y seguridad → Seguimiento</b>. Los detalles están en la <a href="privacy.html">política de privacidad</a>.</p>
+      <p>Si prefieres una experiencia <b>sin publicidad</b>, busca <b>Mortgage Calculator</b> en el App Store.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Notificaciones</h2>
+      <p>La app puede enviarte alguna notificación ocasional sobre novedades. El permiso se pide en el primer inicio; puedes cambiarlo cuando quieras en <b>Ajustes → Notificaciones</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Preguntas frecuentes</h2>
+      <ul>
+        <li><b>La cuota no aparece</b> — hace falta un importe mayor que cero: toca el campo «Importe de la hipoteca» y escríbelo.</li>
+        <li><b>¿Por qué mi banco me da otra cuota?</b> — las apps calculan la cuota pura de capital e intereses. La cuota que te propone el banco puede incluir seguros, gastos de gestión o impuestos, y usar redondeos distintos.</li>
+        <li><b>¿Qué tipo debo introducir?</b> — el tipo <b>nominal anual</b> (TIN) de la hipoteca, no la TAE, que incluye también los costes accesorios.</li>
+        <li><b>La última cuota tiene un importe distinto</b> — es correcto: se ajusta unos céntimos para dejar el capital pendiente exactamente a cero.</li>
+        <li><b>¿Puedo usarla para una hipoteca variable?</b> — puedes simular cualquier tipo, pero el cuadro se calcula manteniéndolo fijo durante todo el plazo. Para entender el efecto de una subida, usa la pestaña Escenarios.</li>
+        <li><b>El espacio del banner está vacío</b> (solo Light) — ocurre cuando no hay anuncios disponibles o falta la red: no es un error.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✱</span>Aviso</h2>
+      <p>Las apps son una herramienta de cálculo y simulación, no asesoramiento financiero. Los resultados tienen valor orientativo: para un compromiso real consulta siempre la documentación facilitada por tu entidad de crédito.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✎</span>Contacto</h2>
+      <p>¿Has encontrado un problema o echas en falta una función? Escribe a <a href="mailto:bacchin@tiscali.it?subject=Mortgage%20Calculator%20%E2%80%94%20Supporto">bacchin@tiscali.it</a>. Indica el modelo de iPhone, la versión de iOS y la versión de la app (está en la pestaña Info app): ayuda a responder más rápido.</p>
+    </section>
+  </div>
+
+  <!-- ============================ FR ============================ -->
+  <div lang-block="fr">
+    <section class="card">
+      <h2><span class="ic">◎</span>Ce que font les apps</h2>
+      <p>Mortgage Calculator calcule la <b>mensualité de votre prêt</b> et vous montre ce qui se cache derrière ce chiffre : combien vous payez en capital, combien en intérêts, comment cela évolue d'une mensualité à l'autre et ce qui se passerait avec un autre taux ou une autre durée. Tous les calculs se font sur l'appareil, même hors connexion.</p>
+      <p>Il existe en deux versions, identiques par leurs fonctions : <b>Mortgage Calculator</b> (payante, sans aucune publicité) et <b>Mortgage Calculator Light</b> (gratuite, financée par la publicité). Ce guide vaut pour les deux.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">∑</span>L'onglet Calcul</h2>
+      <p>C'est le point de départ. Vous réglez quatre données :</p>
+      <ul>
+        <li>le <b>montant</b> du prêt ;</li>
+        <li>la <b>date de début</b> — touchez la date pour ouvrir le calendrier ;</li>
+        <li>le <b>taux d'intérêt</b> annuel, avec le curseur (pas de 0,05 %) ;</li>
+        <li>la <b>durée</b> en années, avec le curseur.</li>
+      </ul>
+      <p>La <b>mensualité</b> se recalcule instantanément à chaque modification, avec le <b>total remboursé</b> et le <b>total des intérêts</b>. La barre du bas montre d'un coup d'œil la proportion entre <b>capital</b> (vert) et <b>intérêts</b> (orange) sur toute la durée du prêt.</p>
+      <p>Le calcul utilise la <b>méthode française</b> à mensualité constante, celle retenue par la quasi-totalité des prêts : la mensualité reste identique pendant toute la durée et c'est sa composition interne qui change.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>L'onglet Amortissement</h2>
+      <p>C'est le détail <b>mensualité par mensualité</b>. En haut restent toujours visibles le total des intérêts, le total remboursé et la mensualité ; en dessous défile la liste complète des échéances, chacune avec :</p>
+      <ul>
+        <li>le <b>numéro</b> de la mensualité et sa <b>date d'échéance</b> (la première coïncide avec la date de début) ;</li>
+        <li>la part de <b>capital</b> et la part d'<b>intérêts</b>, avec une barre qui en montre le rapport ;</li>
+        <li>le <b>capital restant dû</b> après le paiement.</li>
+      </ul>
+      <p>En faisant défiler vers le bas, vous verrez la barre virer progressivement au vert : c'est l'effet typique de l'amortissement français, où l'on paie surtout des intérêts au début et surtout du capital vers la fin.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">⇪</span>Exporter le tableau</h2>
+      <p>Avec le bouton de <b>partage</b>, vous pouvez exporter le tableau complet en deux formats :</p>
+      <ul>
+        <li><b>CSV</b> — pour l'ouvrir dans Numbers, Excel ou Google Sheets et le retravailler. Les dates sont au format ISO (<span class="kbd">aaaa-mm-jj</span>) et les nombres avec un point décimal, afin que l'import fonctionne dans toutes les langues.</li>
+        <li><b>PDF</b> — un document prêt à imprimer ou à envoyer, avec le logo de l'app, le récapitulatif du prêt en tête et le tableau complet mis en page.</li>
+      </ul>
+      <p>Le fichier est créé sur le moment et remis à la feuille de partage iOS : c'est vous qui décidez où l'enregistrer ou à qui l'envoyer.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📊</span>L'onglet Scénarios</h2>
+      <p>Il sert à répondre à la question « et si… ». Avec les deux curseurs, vous changez <b>taux</b> et <b>durée</b> et voyez aussitôt la nouvelle mensualité.</p>
+      <p>Le graphique montre huit durées comparées — de 5 à 40 ans — et pour chacune une colonne en deux parties : la partie <b>verte</b> est le capital, qui ne change jamais puisque c'est la somme empruntée ; la partie <b>orange</b> représente les intérêts, qui augmentent avec la durée. Au-dessus de chaque colonne figure la <b>mensualité</b> correspondante.</p>
+      <p>C'est la façon la plus directe de voir l'arbitrage fondamental de tout prêt : allonger la durée abaisse la mensualité, mais augmente le total des intérêts. La colonne mise en évidence est celle de la durée que vous avez choisie.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">ℹ</span>L'onglet Infos app</h2>
+      <p>Il contient la version de l'app, une explication succincte de chaque onglet et les avertissements. Dans la version Light, il contient aussi le bouton <b>Réglages de confidentialité</b> pour revoir les choix de consentement publicitaire.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>La publicité — version Light uniquement</h2>
+      <p>Mortgage Calculator Light est gratuite grâce aux annonces de <b>Google AdMob</b> : une <b>bannière</b> dans les onglets Calcul, Amortissement et Scénarios et, de temps en temps, une <b>annonce plein écran</b>. Mortgage Calculator ne contient aucune publicité.</p>
+      <p>Au premier lancement, en Europe, l'app vous demande vos <b>préférences de consentement</b> (publicités personnalisées ou génériques) et ne sollicite aucune annonce avant votre choix. Juste après, elle affiche l'<b>invite de suivi d'Apple</b> : si vous l'autorisez, les publicités peuvent être personnalisées ; si vous refusez, elles restent génériques — l'app fonctionne de la même façon dans les deux cas. Vous pouvez le changer à tout moment depuis <b>Infos app → Réglages de confidentialité</b> et dans <b>Réglages → Confidentialité et sécurité → Suivi</b>. Les détails sont dans la <a href="privacy.html">politique de confidentialité</a>.</p>
+      <p>Si vous préférez une expérience <b>sans publicité</b>, cherchez <b>Mortgage Calculator</b> sur l'App Store.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Notifications</h2>
+      <p>L'app peut vous envoyer quelques notifications occasionnelles sur les nouveautés. L'autorisation est demandée au premier lancement ; vous pouvez la modifier quand vous voulez dans <b>Réglages → Notifications</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Questions fréquentes</h2>
+      <ul>
+        <li><b>La mensualité n'apparaît pas</b> — il faut un montant supérieur à zéro : touchez le champ « Montant du prêt » et saisissez-le.</li>
+        <li><b>Pourquoi ma banque m'annonce-t-elle une autre mensualité ?</b> — les apps calculent la mensualité pure de capital et d'intérêts. Celle que propose la banque peut inclure assurances, frais de dossier ou taxes, et utiliser d'autres arrondis.</li>
+        <li><b>Quel taux dois-je saisir ?</b> — le taux <b>nominal annuel</b> du prêt, pas le TAEG, qui comprend aussi les frais annexes.</li>
+        <li><b>La dernière mensualité a un montant différent</b> — c'est normal : elle est ajustée de quelques centimes pour ramener le capital restant dû exactement à zéro.</li>
+        <li><b>Puis-je l'utiliser pour un prêt à taux variable ?</b> — vous pouvez simuler n'importe quel taux, mais le tableau est calculé en le gardant fixe sur toute la durée. Pour comprendre l'effet d'une hausse, utilisez l'onglet Scénarios.</li>
+        <li><b>L'emplacement de la bannière est vide</b> (Light uniquement) — cela arrive quand aucune annonce n'est disponible ou que le réseau manque : ce n'est pas une erreur.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✱</span>Avertissement</h2>
+      <p>Les apps sont un outil de calcul et de simulation, pas un conseil financier. Les résultats ont une valeur indicative : pour un engagement réel, référez-vous toujours aux documents fournis par votre établissement de crédit.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✎</span>Contact</h2>
+      <p>Vous avez trouvé un problème, ou une fonction vous manque ? Écrivez à <a href="mailto:bacchin@tiscali.it?subject=Mortgage%20Calculator%20%E2%80%94%20Supporto">bacchin@tiscali.it</a>. Indiquez le modèle d'iPhone, la version d'iOS et la version de l'app (dans l'onglet Infos app) : cela aide à répondre plus vite.</p>
+    </section>
+  </div>
+
   <p class="foot">
     <span lang-block="it">Mortgage Calculator e Mortgage Calculator Light · <a href="privacy.html">Informativa sulla privacy</a></span>
     <span lang-block="en">Mortgage Calculator and Mortgage Calculator Light · <a href="privacy.html">Privacy policy</a></span>
+    <span lang-block="de">Mortgage Calculator und Mortgage Calculator Light · <a href="privacy.html">Datenschutzerklärung</a></span>
+    <span lang-block="es">Mortgage Calculator y Mortgage Calculator Light · <a href="privacy.html">Política de privacidad</a></span>
+    <span lang-block="fr">Mortgage Calculator et Mortgage Calculator Light · <a href="privacy.html">Politique de confidentialité</a></span>
   </p>
 </div>
 
 <script>
+  var LINGUE = ["it", "en", "de", "es", "fr"];
   function setLang(l) {
+    if (LINGUE.indexOf(l) < 0) { l = "en"; }
     document.documentElement.setAttribute("data-lang", l);
     document.documentElement.lang = l;
-    document.getElementById("btn-it").setAttribute("aria-pressed", l === "it");
-    document.getElementById("btn-en").setAttribute("aria-pressed", l === "en");
+    LINGUE.forEach(function (x) {
+      var b = document.getElementById("btn-" + x);
+      if (b) { b.setAttribute("aria-pressed", x === l); }
+    });
     try { localStorage.setItem("mortgage-lang", l); } catch (e) {}
+  }
+  // Lingua preferita del browser, fra quelle che la pagina ha davvero.
+  function linguaDelBrowser() {
+    var elenco = navigator.languages || [navigator.language || "en"];
+    for (var i = 0; i < elenco.length; i++) {
+      var due = String(elenco[i]).toLowerCase().slice(0, 2);
+      if (LINGUE.indexOf(due) >= 0) { return due; }
+    }
+    return "en";
   }
   var saved = null;
   try { saved = localStorage.getItem("mortgage-lang"); } catch (e) {}
-  setLang(saved || ((navigator.language || "en").toLowerCase().indexOf("it") === 0 ? "it" : "en"));
+  setLang(saved || linguaDelBrowser());
 </script>
 <noscript><style>[lang-block]{display:block !important}</style></noscript>
 </body>
