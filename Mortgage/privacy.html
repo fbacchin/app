@@ -73,9 +73,9 @@
     <section class="card">
       <h2>Le due app</h2>
       <table>
-        <tr><th>App</th><th>Pubblicità</th><th>Statistiche d'uso</th></tr>
-        <tr><td>Mortgage Calculator (a pagamento)</td><td>Nessuna. L'app non contiene codice pubblicitario.</td><td>Sì, anonime</td></tr>
-        <tr><td>Mortgage Calculator Light (gratuita)</td><td>Banner e annunci a schermo intero di Google AdMob — vedi le sezioni dedicate.</td><td>Sì, anonime</td></tr>
+        <tr><th>App</th><th>Pubblicità</th><th>Statistiche d'uso</th><th>Tracciamento</th></tr>
+        <tr><td>Mortgage Calculator (a pagamento)</td><td>Nessuna. L'app non contiene codice pubblicitario.</td><td>Sì, anonime</td><td>No, mai</td></tr>
+        <tr><td>Mortgage Calculator Light (gratuita)</td><td>Banner e annunci a schermo intero di Google AdMob — vedi le sezioni dedicate.</td><td>Sì, anonime</td><td>Solo se lo autorizzi</td></tr>
       </table>
     </section>
 
@@ -93,7 +93,7 @@
     <section class="card">
       <h2>Statistiche d'uso</h2>
       <p>Entrambe le app misurano <b>come vengono usate</b>, per capire quali funzioni servono davvero e quali no. Il servizio è <b>PostHog</b>, sui server <b>europei</b> (<code>eu.i.posthog.com</code>). La raccolta è anonima: non c'è account, non c'è profilo, e nessun dato permette di risalire a te.</p>
-      <p>Escono dall'app <b>soltanto</b> questi sei segnali, e nient'altro:</p>
+      <p>Escono dall'app <b>soltanto</b> questi sette segnali, e nient'altro:</p>
       <table>
         <tr><th>Segnale</th><th>Che cosa dice</th></tr>
         <tr><td>Apertura di una scheda</td><td>Quale delle quattro schede è stata aperta: Calcolo, Piano di ammortamento, Scenari, App info.</td></tr>
@@ -102,8 +102,9 @@
         <tr><td>Data di inizio modificata</td><td>Che la data di inizio è stata cambiata. <b>Non</b> quale data.</td></tr>
         <tr><td>Scenario modificato</td><td>Che nella scheda Scenari è stato mosso il cursore del tasso o quello della durata. <b>Non</b> i valori.</td></tr>
         <tr><td>Esito del consenso</td><td>Solo in Mortgage Calculator Light: se il consenso alla pubblicità è stato dato, negato o non era necessario.</td></tr>
+        <tr><td>Esito del tracciamento</td><td>Solo in Mortgage Calculator Light: se hai autorizzato o rifiutato il prompt di Apple. Non l'IDFA, solo la risposta.</td></tr>
       </table>
-      <p>A ogni segnale è allegata una sola informazione in più: <b>quale delle due app</b> lo ha mandato. Non viene raccolta la posizione, non vengono creati identificatori nostri, non viene mandato alcun testo scritto da te, e <b>nessun numero fra quelli che inserisci</b>. Non c'è registrazione dello schermo e non c'è alcun tracciamento fra app diverse o fra siti.</p>
+      <p>A ogni segnale è allegata una sola informazione in più: <b>quale delle due app</b> lo ha mandato. Non viene raccolta la posizione, non vengono creati identificatori nostri, non viene mandato alcun testo scritto da te, e <b>nessun numero fra quelli che inserisci</b>. Non c'è registrazione dello schermo. Queste statistiche non sono tracciamento e non usano l'IDFA: il tracciamento riguarda solo la pubblicità di Mortgage Calculator Light, ed è descritto più sotto.</p>
       <p>Informativa di PostHog: <a href="https://posthog.com/privacy" target="_blank" rel="noopener">posthog.com/privacy</a>.</p>
     </section>
 
@@ -122,7 +123,7 @@
       <h2>Pubblicità — solo Mortgage Calculator Light</h2>
       <p>Mortgage Calculator Light è gratuita grazie agli annunci — un banner nelle schermate Calcolo, Piano di ammortamento e Scenari, e occasionali annunci a schermo intero — serviti da <b>Google AdMob</b>. Per selezionare e misurare gli annunci, Google può trattare:</p>
       <ul>
-        <li>gli <b>identificatori tecnici</b> del dispositivo — <b>non</b> l'IDFA, l'identificatore pubblicitario, che non viene raccolto;</li>
+        <li>gli <b>identificatori tecnici</b> del dispositivo e, <b>solo se hai autorizzato il tracciamento</b>, l'IDFA;</li>
         <li>l'<b>indirizzo IP</b> (che indica una posizione approssimativa) e informazioni tecniche sul dispositivo;</li>
         <li>dati di <b>interazione con gli annunci</b> (impressioni, tocchi).</li>
       </ul>
@@ -132,7 +133,12 @@
     <section class="card">
       <h2>Il tuo consenso — solo Mortgage Calculator Light</h2>
       <p>Al primo avvio, se ti trovi nello Spazio Economico Europeo o nel Regno Unito, l'app mostra il <b>modulo di consenso</b> di Google: puoi scegliere tra <b>annunci personalizzati</b> e <b>annunci generici</b>, non basati sui tuoi interessi. Nessun annuncio viene richiesto prima che tu abbia espresso la tua scelta. Puoi <b>cambiare o revocare la scelta in ogni momento</b> dalla scheda <b>App info</b> dell'app, alla voce <b>Impostazioni privacy → Gestisci il consenso</b>.</p>
-      <p>L'app <b>non richiede l'autorizzazione al tracciamento</b> di Apple (App Tracking Transparency) e <b>non raccoglie l'identificatore pubblicitario (IDFA)</b>: senza quell'autorizzazione iOS non lo rende disponibile, quindi non viene né usato né trasmesso.</p>
+      <p>Subito dopo il modulo di Google, l'app mostra il <b>prompt di sistema di Apple</b> (App Tracking Transparency) e ti chiede se autorizzare il tracciamento. Sono due domande distinte: la prima riguarda il consenso europeo, la seconda l'<b>identificatore pubblicitario (IDFA)</b> del tuo iPhone.</p>
+      <ul>
+        <li>Se <b>autorizzi</b>, l'IDFA diventa disponibile a Google e gli annunci possono essere personalizzati. In questo caso c'è tracciamento a fini pubblicitari, ed è il motivo per cui il permesso viene chiesto.</li>
+        <li>Se <b>rifiuti</b>, o se non rispondi, iOS non rende disponibile l'IDFA: gli annunci restano generici. L'app non forza nulla e non usa alcun identificatore alternativo per aggirare la scelta.</li>
+      </ul>
+      <p>Puoi cambiare idea in ogni momento da <b>Impostazioni → Privacy e sicurezza → Tracciamento</b> di iOS.</p>
       <p>L'app funziona allo stesso modo qualunque scelta tu faccia: cambiano solo gli annunci, non le funzioni.</p>
     </section>
 
@@ -140,7 +146,8 @@
       <h2>Cosa non facciamo</h2>
       <ul>
         <li>Nessun account e nessun profilo utente</li>
-        <li>Nessun tracciamento fra app diverse o fra siti, e nessuna registrazione dello schermo</li>
+        <li>Nessuna registrazione dello schermo, in nessuna delle due app</li>
+        <li>Nessun tracciamento in Mortgage Calculator, e nessuno in Mortgage Calculator Light se non lo autorizzi</li>
         <li>Nessuna raccolta dei numeri che inserisci: importi, rate, tassi e durate non lasciano mai il dispositivo</li>
         <li>Nessun accesso alla posizione: le app non la richiedono mai</li>
         <li>Nessuna pubblicità nella versione a pagamento</li>
@@ -171,9 +178,9 @@
     <section class="card">
       <h2>The two apps</h2>
       <table>
-        <tr><th>App</th><th>Advertising</th><th>Usage statistics</th></tr>
-        <tr><td>Mortgage Calculator (paid)</td><td>None. The app contains no advertising code.</td><td>Yes, anonymous</td></tr>
-        <tr><td>Mortgage Calculator Light (free)</td><td>Google AdMob banners and full-screen ads — see the sections below.</td><td>Yes, anonymous</td></tr>
+        <tr><th>App</th><th>Advertising</th><th>Usage statistics</th><th>Tracking</th></tr>
+        <tr><td>Mortgage Calculator (paid)</td><td>None. The app contains no advertising code.</td><td>Yes, anonymous</td><td>No, never</td></tr>
+        <tr><td>Mortgage Calculator Light (free)</td><td>Google AdMob banners and full-screen ads — see the sections below.</td><td>Yes, anonymous</td><td>Only if you allow it</td></tr>
       </table>
     </section>
 
@@ -191,7 +198,7 @@
     <section class="card">
       <h2>Usage statistics</h2>
       <p>Both apps measure <b>how they are used</b>, to understand which features genuinely help and which do not. The service is <b>PostHog</b>, hosted on its <b>European</b> servers (<code>eu.i.posthog.com</code>). Collection is anonymous: there is no account, no profile, and nothing that can be traced back to you.</p>
-      <p>The apps send <b>only</b> these six signals, and nothing else:</p>
+      <p>The apps send <b>only</b> these seven signals, and nothing else:</p>
       <table>
         <tr><th>Signal</th><th>What it says</th></tr>
         <tr><td>Tab opened</td><td>Which of the four tabs was opened: Calculator, Amortization plan, Scenarios, App info.</td></tr>
@@ -200,8 +207,9 @@
         <tr><td>Start date changed</td><td>That the start date was changed. <b>Not</b> which date.</td></tr>
         <tr><td>Scenario changed</td><td>That the rate or term slider was moved in the Scenarios tab. <b>Not</b> the values.</td></tr>
         <tr><td>Consent outcome</td><td>Mortgage Calculator Light only: whether advertising consent was granted, refused, or not required.</td></tr>
+        <tr><td>Tracking outcome</td><td>Mortgage Calculator Light only: whether you allowed or refused Apple's prompt. Not the IDFA, just the answer.</td></tr>
       </table>
-      <p>One further item travels with each signal: <b>which of the two apps</b> sent it. No location is collected, no identifiers of ours are created, no text you write is sent, and <b>none of the figures you enter</b>. There is no screen recording and no tracking across apps or websites.</p>
+      <p>One further item travels with each signal: <b>which of the two apps</b> sent it. No location is collected, no identifiers of ours are created, no text you write is sent, and <b>none of the figures you enter</b>. There is no screen recording. These statistics are not tracking and do not use the IDFA: tracking concerns only advertising in Mortgage Calculator Light, described below.</p>
       <p>PostHog's policy: <a href="https://posthog.com/privacy" target="_blank" rel="noopener">posthog.com/privacy</a>.</p>
     </section>
 
@@ -220,7 +228,7 @@
       <h2>Advertising — Mortgage Calculator Light only</h2>
       <p>Mortgage Calculator Light is free thanks to advertising — a banner in the Calculation, Amortization plan and Scenarios screens, plus occasional full-screen ads — served by <b>Google AdMob</b>. To select and measure ads, Google may process:</p>
       <ul>
-        <li><b>technical identifiers</b> of the device — <b>not</b> the IDFA advertising identifier, which is not collected;</li>
+        <li><b>technical identifiers</b> of the device and, <b>only if you allowed tracking</b>, the IDFA;</li>
         <li>your <b>IP address</b> (which indicates an approximate location) and technical device information;</li>
         <li><b>ad interaction</b> data (impressions, taps).</li>
       </ul>
@@ -230,7 +238,12 @@
     <section class="card">
       <h2>Your consent — Mortgage Calculator Light only</h2>
       <p>On first launch, if you are in the European Economic Area or the United Kingdom, the app shows Google's <b>consent form</b>: you can choose between <b>personalised ads</b> and <b>generic ads</b> not based on your interests. No ad is requested before you have made your choice. You can <b>change or withdraw your choice at any time</b> from the app's <b>App info</b> tab, under <b>Privacy settings → Manage consent</b>.</p>
-      <p>The app <b>does not request Apple's tracking authorisation</b> (App Tracking Transparency) and <b>does not collect the advertising identifier (IDFA)</b>: without that authorisation iOS does not make it available, so it is neither used nor transmitted.</p>
+      <p>Right after Google's form, the app shows <b>Apple's system prompt</b> (App Tracking Transparency) and asks whether you allow tracking. These are two distinct questions: the first is about European consent, the second about your iPhone's <b>advertising identifier (IDFA)</b>.</p>
+      <ul>
+        <li>If you <b>allow</b> it, the IDFA becomes available to Google and ads can be personalised. In that case tracking for advertising purposes does take place, which is exactly why permission is asked.</li>
+        <li>If you <b>refuse</b>, or do not answer, iOS withholds the IDFA and ads stay generic. The app forces nothing and uses no alternative identifier to work around your choice.</li>
+      </ul>
+      <p>You can change your mind at any time in <b>Settings &rarr; Privacy &amp; Security &rarr; Tracking</b>.</p>
       <p>The app works exactly the same whichever choice you make: only the ads change, never the features.</p>
     </section>
 
@@ -238,7 +251,8 @@
       <h2>What we don't do</h2>
       <ul>
         <li>No account and no user profile</li>
-        <li>No tracking across apps or websites, and no screen recording</li>
+        <li>No screen recording, in either app</li>
+        <li>No tracking in Mortgage Calculator, and none in Mortgage Calculator Light unless you allow it</li>
         <li>No collection of the figures you enter: amounts, payments, rates and terms never leave the device</li>
         <li>No access to your location: the apps never request it</li>
         <li>No advertising in the paid version</li>
