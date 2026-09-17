@@ -12,7 +12,7 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux, longueur [km] 1.0 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3 Durée:  probable 17.09.2026 07:00 jusqu'à 13.11.2026 17:00",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3 Durata:  probabile 17.09.2026 07:00 fino 13.11.2026 17:00"
   },
-  "lastSeen": "2026-09-17T08:15:06Z"
+  "lastSeen": "2026-09-17T08:20:11Z"
  },
  {
   "firstSeen": "2026-09-17T05:52:48Z",
@@ -184,21 +184,5 @@
    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Coldrerio E Parcheggio Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato"
   },
   "lastSeen": "2026-09-15T11:44:54Z"
- },
- {
-  "firstSeen": "2026-09-15T07:49:20Z",
-  "id": "situation.652920.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "south",
-  "versionTime": "2026-09-15T07:02:35Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Parkplatz Dosierstelle Coldrerio und Zollstation Chiasso-Brogeda Sachlage: Stau für LKW Ursache: Verkehrsüberlastung",
-   "fr": "Libéré: A2 St-Gothard -> Chiasso entre Parking Aire de dosage Coldrerio et Poste de douane Chiasso-Brogeda Situation: bouchon pour poids lourd Raison: surcharge de trafic",
-   "it": "Approvato: A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Coldrerio E Dogana Chiasso Brogeda Situazione: colonna per autocarro Causa: traffico congestionato"
-  },
-  "lastSeen": "2026-09-15T08:19:44Z",
-  "revokedAt": "2026-09-15T08:24:48Z"
  }
 ]
