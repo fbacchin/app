@@ -1,5 +1,5 @@
 {
- "time": "2026-09-18T15:57:17Z",
+ "time": "2026-09-18T16:02:21Z",
  "south": {
   "km": 3.0,
   "wait": 30
@@ -9,6 +9,19 @@
   "wait": 40
  },
  "events": [
+  {
+   "id": "situation.653924.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "south",
+   "versionTime": "2026-09-18T15:59:26Z",
+   "km": null,
+   "wait": 20,
+   "texts": {
+    "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Parkplatz Dosierstelle Coldrerio und Zollstation Chiasso-Brogeda Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
+    "fr": "Libéré: A2 St-Gothard -> Chiasso entre Parking Aire de dosage Coldrerio et Poste de douane Chiasso-Brogeda Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
+    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Coldrerio E Dogana Chiasso Brogeda Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
+   }
+  },
   {
    "id": "situation.653774.1.1.1",
    "type": "AbnormalTraffic",
