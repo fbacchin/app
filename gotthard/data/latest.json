@@ -1,5 +1,5 @@
 {
- "time": "2026-09-18T17:08:53Z",
+ "time": "2026-09-18T17:13:58Z",
  "south": {
   "km": 3.0,
   "wait": 30
@@ -33,19 +33,6 @@
     "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 3.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 30",
     "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 3.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
     "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30"
-   }
-  },
-  {
-   "id": "situation.653968.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-09-18T17:04:04Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Tunnel Piottino-Tunnel und Anschluss Quinto Sachlage: Stau in der Ausfahrt Ursache: Sportveranstaltung",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Tunnel Tunnel du Piottino et Jonction autoroutière Quinto Situation: bouchon dans la sortie Raison: manifestation sportive",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Galleria Galleria Piottino E Svincolo autostradale Quinto Situazione: colonna in uscita Causa: manifestazione sportiva"
    }
   },
   {
