@@ -77,22 +77,31 @@ html[data-lang="es"] [lang-block="es"] { display: block; }
   </div>
 
   <div lang-block="it">
-    <p class="date">In vigore dal 28 luglio 2026</p>
+    <p class="date">In vigore dal 18 settembre 2026</p>
     <section class="card">
       <h2>In breve</h2>
-      <p>Leasing Calculators e Leasing Calculator Light sono app di Fabrizio Bacchin (Svizzera) e questa informativa vale per entrambe. Le app <b>non raccolgono dati personali</b>: nessun account, nessuno strumento di analisi, nessuna vendita di dati. I dati del leasing che inserisci <b>restano sul tuo dispositivo</b> (per le notifiche push, se le attivi, vengono registrati solo dati tecnici anonimi — vedi sotto). <b>Leasing Calculators non contiene alcuna pubblicità.</b> <b>Leasing Calculator Light</b>, la versione gratuita, mostra annunci di Google AdMob e <b>ti chiede due volte il permesso</b> — il consenso di Google e l'autorizzazione al tracciamento di Apple — prima di richiedere anche un solo annuncio.</p>
+      <p>Leasing Calculators e Leasing Calculator Light sono app di Fabrizio Bacchin (Svizzera) e questa informativa vale per entrambe. Le app <b>non raccolgono dati personali</b>: nessun account, nessun profilo, nessuna vendita di dati. Raccolgono soltanto <b>statistiche d'uso anonime</b> — quali schede vengono aperte e quali funzioni usate, mai gli importi che inserisci — descritte per intero più sotto. I dati del leasing che inserisci <b>restano sul tuo dispositivo</b> (per le notifiche push, se le attivi, vengono registrati solo dati tecnici anonimi — vedi sotto). <b>Leasing Calculators non contiene alcuna pubblicità.</b> <b>Leasing Calculator Light</b>, la versione gratuita, mostra annunci di Google AdMob e <b>ti chiede due volte il permesso</b> — il consenso di Google e l'autorizzazione al tracciamento di Apple — prima di richiedere anche un solo annuncio.</p>
     </section>
     <section class="card">
       <h2>Le due app</h2>
-      <table><tr><th>App</th><th>Pubblicità</th></tr><tr><td>Leasing Calculators (a pagamento)</td><td>Nessuna. L'app non contiene codice pubblicitario.</td></tr><tr><td>Leasing Calculator Light (gratuita)</td><td>Banner e annunci a schermo intero di Google AdMob — vedi le sezioni dedicate.</td></tr></table>
+      <table><tr><th>App</th><th>Pubblicità</th><th>Statistiche d'uso</th></tr><tr><td>Leasing Calculators (a pagamento)</td><td>Nessuna. L'app non contiene codice pubblicitario.</td><td>Sì, anonime</td></tr><tr><td>Leasing Calculator Light (gratuita)</td><td>Banner e annunci a schermo intero di Google AdMob — vedi le sezioni dedicate.</td><td>Sì, anonime</td></tr></table>
     </section>
     <section class="card">
       <h2>Dati salvati sul tuo dispositivo</h2>
-      <p>Le app conservano localmente, nel proprio contenitore sandbox, soltanto i <b>parametri del leasing</b> che inserisci — valore del bene, maxicanone, riscatto finale, durata, tasso, modalità anticipata o posticipata e data della prima rata — così da ritrovarli al riavvio e da poterli condividere fra le schede Calcolo, Rate e Confronto. Leasing Calculator Light vi salva anche le <b>scelte di consenso</b> alla pubblicità.</p><p>Tutti i calcoli — rata, piano rate, confronti — avvengono <b>interamente sul dispositivo</b>: nessun dato viene inviato ad alcun server, e non esiste alcuna sincronizzazione sul cloud.</p>
+      <p>Le app conservano localmente, nel proprio contenitore sandbox, soltanto i <b>parametri del leasing</b> che inserisci — valore del bene, maxicanone, riscatto finale, durata, tasso, modalità anticipata o posticipata e data della prima rata — così da ritrovarli al riavvio e da poterli condividere fra le schede Calcolo, Rate e Confronto. Leasing Calculator Light vi salva anche le <b>scelte di consenso</b> alla pubblicità.</p><p>Tutti i calcoli — rata, piano rate, confronti — avvengono <b>interamente sul dispositivo</b>: i numeri che inserisci non vengono inviati ad alcun server, e non esiste alcuna sincronizzazione sul cloud.</p>
     </section>
     <section class="card">
       <h2>Esportazione del piano rate</h2>
       <p>Dalla scheda Rate puoi esportare il piano in formato <b>CSV</b> o <b>PDF</b>. Il file viene generato sul dispositivo e passato al <b>pannello di condivisione di iOS</b>: sei tu a scegliere se salvarlo, stamparlo o inviarlo, e a chi. Le app non caricano né trasmettono questi file da nessuna parte.</p>
+    </section>
+
+    <section class="card">
+      <h2>Statistiche d'uso</h2>
+      <p>Entrambe le app misurano <b>come vengono usate</b>, per capire quali funzioni servono davvero e quali no. Il servizio è <b>PostHog</b>, sui server <b>europei</b> (<code>eu.i.posthog.com</code>). La raccolta è anonima: non c'è account, non c'è profilo, e nessun dato permette di risalire a te.</p>
+      <p>Escono dall'app <b>soltanto</b> questi quattro segnali, e nient'altro:</p>
+      <table><tr><th>Segnale</th><th>Che cosa dice</th></tr><tr><td>Apertura di una scheda</td><td>Quale delle quattro schede è stata aperta: Calcolo, Rate, Confronto, App info.</td></tr><tr><td>Calcolo completato</td><td>Che un calcolo è stato portato a termine, al massimo una volta per avvio. Porta con sé due sole informazioni: il <b>tipo di bene</b> scelto (veicolo, macchinario o immobile) e se la durata è <b>entro i 120 mesi o oltre</b>. <b>Non</b> il valore del bene, <b>non</b> la rata, <b>non</b> il tasso, <b>non</b> maxicanone e riscatto, <b>non</b> la durata esatta.</td></tr><tr><td>Piano esportato</td><td>Che è stato esportato il piano rate, e se in PDF o in CSV. Mai il contenuto del file.</td></tr><tr><td>Simulazione usata</td><td>Che nella scheda Confronto è stato mosso il cursore della durata o quello del tasso, al massimo una volta per visita. <b>Non</b> i valori.</td></tr></table>
+      <p>A ogni segnale è allegata una sola informazione in più: <b>quale delle due app</b> lo ha mandato. Non viene raccolta la posizione, non vengono creati identificatori né profili, non viene mandato alcun testo scritto da te, e <b>nessuno degli importi che inserisci</b>. Non c'è registrazione dello schermo. Queste statistiche non sono tracciamento e non usano l'IDFA: il tracciamento riguarda solo la pubblicità di Leasing Calculator Light, ed è descritto più sotto.</p>
+      <p>Informativa di PostHog: <a href="https://posthog.com/privacy" target="_blank" rel="noopener">posthog.com/privacy</a>.</p>
     </section>
     <section class="card">
       <h2>Notifiche push</h2>
@@ -108,7 +117,7 @@ html[data-lang="es"] [lang-block="es"] { display: block; }
     </section>
     <section class="card">
       <h2>Cosa non facciamo</h2>
-      <ul><li>Nessun account e nessun profilo utente</li><li>Nessuna statistica né misurazione dell'utilizzo da parte nostra</li><li>Nessun accesso alla posizione: le app non la richiedono mai</li><li>Nessuna pubblicità e nessun tracciamento nella versione a pagamento</li><li>Nessuna vendita o condivisione dei tuoi dati a fini commerciali</li></ul>
+      <ul><li>Nessun account e nessun profilo utente</li><li>Nessuna raccolta degli importi che inserisci: valore del bene, maxicanone, riscatto, rata, tasso e durata esatta non lasciano mai il dispositivo</li><li>Nessuna registrazione dello schermo, in nessuna delle due app</li><li>Nessun accesso alla posizione: le app non la richiedono mai</li><li>Nessuna pubblicità e nessun tracciamento nella versione a pagamento</li><li>Nessuna vendita o condivisione dei tuoi dati a fini commerciali</li></ul>
     </section>
     <section class="card">
       <h2>I tuoi diritti e contatti</h2>
@@ -120,22 +129,31 @@ html[data-lang="es"] [lang-block="es"] { display: block; }
     </section>
   </div>
   <div lang-block="en">
-    <p class="date">Effective from 28 July 2026</p>
+    <p class="date">Effective from 18 September 2026</p>
     <section class="card">
       <h2>In short</h2>
-      <p>Leasing Calculators and Leasing Calculator Light are apps by Fabrizio Bacchin (Switzerland) and this policy covers both. The apps <b>collect no personal data</b>: no account, no analytics, no data selling. The lease figures you enter <b>stay on your device</b> (for push notifications, if you enable them, only anonymous technical data is registered — see below). <b>Leasing Calculators contains no advertising at all.</b> <b>Leasing Calculator Light</b>, the free version, shows Google AdMob ads and <b>asks your permission twice</b> — Google's consent form and Apple's tracking authorisation — before requesting a single ad.</p>
+      <p>Leasing Calculators and Leasing Calculator Light are apps by Fabrizio Bacchin (Switzerland) and this policy covers both. The apps <b>collect no personal data</b>: no account, no profile, no data selling. They collect only <b>anonymous usage statistics</b> — which tabs are opened and which features are used, never the amounts you enter — described in full below. The lease figures you enter <b>stay on your device</b> (for push notifications, if you enable them, only anonymous technical data is registered — see below). <b>Leasing Calculators contains no advertising at all.</b> <b>Leasing Calculator Light</b>, the free version, shows Google AdMob ads and <b>asks your permission twice</b> — Google's consent form and Apple's tracking authorisation — before requesting a single ad.</p>
     </section>
     <section class="card">
       <h2>The two apps</h2>
-      <table><tr><th>App</th><th>Advertising</th></tr><tr><td>Leasing Calculators (paid)</td><td>None. The app contains no advertising code.</td></tr><tr><td>Leasing Calculator Light (free)</td><td>Google AdMob banners and full-screen ads — see the sections below.</td></tr></table>
+      <table><tr><th>App</th><th>Advertising</th><th>Usage statistics</th></tr><tr><td>Leasing Calculators (paid)</td><td>None. The app contains no advertising code.</td><td>Yes, anonymous</td></tr><tr><td>Leasing Calculator Light (free)</td><td>Google AdMob banners and full-screen ads — see the sections below.</td><td>Yes, anonymous</td></tr></table>
     </section>
     <section class="card">
       <h2>Data stored on your device</h2>
-      <p>The apps store locally, inside their own sandbox container, only the <b>lease parameters</b> you enter — asset value, down payment, final buyout, term, interest rate, payments in advance or in arrears, and the first instalment date — so they can be restored on relaunch and shared between the Calculation, Instalments and Comparison tabs. Leasing Calculator Light also stores your <b>advertising consent choices</b> there.</p><p>All calculations — instalment, plan, comparisons — happen <b>entirely on the device</b>: no data is sent to any server, and there is no cloud synchronisation.</p>
+      <p>The apps store locally, inside their own sandbox container, only the <b>lease parameters</b> you enter — asset value, down payment, final buyout, term, interest rate, payments in advance or in arrears, and the first instalment date — so they can be restored on relaunch and shared between the Calculation, Instalments and Comparison tabs. Leasing Calculator Light also stores your <b>advertising consent choices</b> there.</p><p>All calculations — instalment, plan, comparisons — happen <b>entirely on the device</b>: the figures you enter are never sent to any server, and there is no cloud synchronisation.</p>
     </section>
     <section class="card">
       <h2>Exporting the instalment plan</h2>
       <p>From the Instalments tab you can export the plan as <b>CSV</b> or <b>PDF</b>. The file is generated on the device and handed to the <b>iOS share sheet</b>: you decide whether to save, print or send it, and to whom. The apps never upload or transmit these files anywhere.</p>
+    </section>
+
+    <section class="card">
+      <h2>Usage statistics</h2>
+      <p>Both apps measure <b>how they are used</b>, to understand which features are actually needed and which are not. The service is <b>PostHog</b>, on its <b>European</b> servers (<code>eu.i.posthog.com</code>). Collection is anonymous: there is no account, no profile, and no data that could identify you.</p>
+      <p><b>Only</b> these four signals leave the app, and nothing else:</p>
+      <table><tr><th>Signal</th><th>What it says</th></tr><tr><td>Tab opened</td><td>Which of the four tabs was opened: Calculation, Plan, Compare, App info.</td></tr><tr><td>Calculation completed</td><td>That a calculation was completed, at most once per launch. It carries only two pieces of information: the <b>type of asset</b> chosen (vehicle, machinery or property) and whether the term is <b>up to 120 months or longer</b>. <b>Not</b> the asset value, <b>not</b> the instalment, <b>not</b> the rate, <b>not</b> the down payment or buyout, <b>not</b> the exact term.</td></tr><tr><td>Plan exported</td><td>That the instalment plan was exported, and whether as PDF or CSV. Never the contents of the file.</td></tr><tr><td>Simulation used</td><td>That the term or rate slider was moved in the Compare tab, at most once per visit. <b>Not</b> the values.</td></tr></table>
+      <p>Each signal carries one single extra piece of information: <b>which of the two apps</b> sent it. No location is collected, no identifiers or profiles are created, no text you type is sent, and <b>none of the amounts you enter</b>. There is no screen recording. These statistics are not tracking and do not use the IDFA: tracking concerns only the advertising in Leasing Calculator Light, and is described below.</p>
+      <p>PostHog's privacy policy: <a href="https://posthog.com/privacy" target="_blank" rel="noopener">posthog.com/privacy</a>.</p>
     </section>
     <section class="card">
       <h2>Push notifications</h2>
@@ -151,7 +169,7 @@ html[data-lang="es"] [lang-block="es"] { display: block; }
     </section>
     <section class="card">
       <h2>What we don't do</h2>
-      <ul><li>No account and no user profile</li><li>No analytics or usage measurement on our side</li><li>No location access: the apps never request it</li><li>No advertising and no tracking in the paid version</li><li>No selling or sharing of your data for commercial purposes</li></ul>
+      <ul><li>No account and no user profile</li><li>No collection of the amounts you enter: asset value, down payment, buyout, instalment, rate and exact term never leave the device</li><li>No screen recording, in either app</li><li>No location access: the apps never request it</li><li>No advertising and no tracking in the paid version</li><li>No selling or sharing of your data for commercial purposes</li></ul>
     </section>
     <section class="card">
       <h2>Your rights and contact</h2>
@@ -163,22 +181,31 @@ html[data-lang="es"] [lang-block="es"] { display: block; }
     </section>
   </div>
   <div lang-block="fr">
-    <p class="date">En vigueur depuis le 28 juillet 2026</p>
+    <p class="date">En vigueur depuis le 18 septembre 2026</p>
     <section class="card">
       <h2>En bref</h2>
-      <p>Leasing Calculators et Leasing Calculator Light sont des applications de Fabrizio Bacchin (Suisse) et cette politique couvre les deux. Les applications <b>ne collectent aucune donnée personnelle</b> : pas de compte, pas d'outil d'analyse, aucune vente de données. Les données de leasing que vous saisissez <b>restent sur votre appareil</b> (pour les notifications push, si vous les activez, seules des données techniques anonymes sont enregistrées — voir plus bas). <b>Leasing Calculators ne contient aucune publicité.</b> <b>Leasing Calculator Light</b>, la version gratuite, affiche des annonces Google AdMob et <b>vous demande deux fois votre autorisation</b> — le formulaire de consentement de Google et l'autorisation de suivi d'Apple — avant de demander la moindre annonce.</p>
+      <p>Leasing Calculators et Leasing Calculator Light sont des applications de Fabrizio Bacchin (Suisse) et cette politique couvre les deux. Les applications <b>ne collectent aucune donnée personnelle</b> : pas de compte, pas de profil, aucune vente de données. Elles ne collectent que des <b>statistiques d'usage anonymes</b> — quels onglets sont ouverts et quelles fonctions sont utilisées, jamais les montants que vous saisissez — décrites en détail plus bas. Les données de leasing que vous saisissez <b>restent sur votre appareil</b> (pour les notifications push, si vous les activez, seules des données techniques anonymes sont enregistrées — voir plus bas). <b>Leasing Calculators ne contient aucune publicité.</b> <b>Leasing Calculator Light</b>, la version gratuite, affiche des annonces Google AdMob et <b>vous demande deux fois votre autorisation</b> — le formulaire de consentement de Google et l'autorisation de suivi d'Apple — avant de demander la moindre annonce.</p>
     </section>
     <section class="card">
       <h2>Les deux applications</h2>
-      <table><tr><th>Application</th><th>Publicité</th></tr><tr><td>Leasing Calculators (payante)</td><td>Aucune. L'application ne contient aucun code publicitaire.</td></tr><tr><td>Leasing Calculator Light (gratuite)</td><td>Bannières et annonces plein écran de Google AdMob — voir les sections dédiées.</td></tr></table>
+      <table><tr><th>Application</th><th>Publicité</th><th>Statistiques d'usage</th></tr><tr><td>Leasing Calculators (payante)</td><td>Aucune. L'application ne contient aucun code publicitaire.</td><td>Oui, anonymes</td></tr><tr><td>Leasing Calculator Light (gratuite)</td><td>Bannières et annonces plein écran de Google AdMob — voir les sections dédiées.</td><td>Oui, anonymes</td></tr></table>
     </section>
     <section class="card">
       <h2>Données enregistrées sur votre appareil</h2>
-      <p>Les applications conservent localement, dans leur propre conteneur, uniquement les <b>paramètres du leasing</b> que vous saisissez — valeur du bien, premier loyer majoré, valeur de rachat, durée, taux, paiement d'avance ou à terme échu, et date de la première mensualité — afin de les retrouver au redémarrage et de les partager entre les onglets Calcul, Mensualités et Comparaison. Leasing Calculator Light y enregistre également vos <b>choix de consentement</b> publicitaire.</p><p>Tous les calculs — mensualité, plan, comparaisons — se font <b>entièrement sur l'appareil</b> : aucune donnée n'est envoyée à un serveur, et il n'existe aucune synchronisation dans le cloud.</p>
+      <p>Les applications conservent localement, dans leur propre conteneur, uniquement les <b>paramètres du leasing</b> que vous saisissez — valeur du bien, premier loyer majoré, valeur de rachat, durée, taux, paiement d'avance ou à terme échu, et date de la première mensualité — afin de les retrouver au redémarrage et de les partager entre les onglets Calcul, Mensualités et Comparaison. Leasing Calculator Light y enregistre également vos <b>choix de consentement</b> publicitaire.</p><p>Tous les calculs — mensualité, plan, comparaisons — se font <b>entièrement sur l'appareil</b> : les chiffres que vous saisissez ne sont envoyés à aucun serveur, et il n'existe aucune synchronisation dans le cloud.</p>
     </section>
     <section class="card">
       <h2>Exportation du plan de mensualités</h2>
       <p>Depuis l'onglet Mensualités, vous pouvez exporter le plan au format <b>CSV</b> ou <b>PDF</b>. Le fichier est généré sur l'appareil et transmis à la <b>feuille de partage d'iOS</b> : c'est vous qui décidez de l'enregistrer, de l'imprimer ou de l'envoyer, et à qui. Les applications ne téléversent ni ne transmettent ces fichiers nulle part.</p>
+    </section>
+
+    <section class="card">
+      <h2>Statistiques d'usage</h2>
+      <p>Les deux applications mesurent <b>la façon dont elles sont utilisées</b>, pour comprendre quelles fonctions servent vraiment et lesquelles non. Le service est <b>PostHog</b>, sur ses serveurs <b>européens</b> (<code>eu.i.posthog.com</code>). La collecte est anonyme : pas de compte, pas de profil, et aucune donnée ne permet de remonter jusqu'à vous.</p>
+      <p><b>Seuls</b> ces quatre signaux quittent l'application, et rien d'autre :</p>
+      <table><tr><th>Signal</th><th>Ce qu'il indique</th></tr><tr><td>Ouverture d'un onglet</td><td>Lequel des quatre onglets a été ouvert : Calcul, Plan, Comparer, App info.</td></tr><tr><td>Calcul effectué</td><td>Qu'un calcul a été mené à bien, au plus une fois par lancement. Il ne transmet que deux informations : le <b>type de bien</b> choisi (véhicule, machine ou bien immobilier) et si la durée est <b>de 120 mois au plus ou supérieure</b>. <b>Ni</b> la valeur du bien, <b>ni</b> la mensualité, <b>ni</b> le taux, <b>ni</b> le premier loyer ou le rachat, <b>ni</b> la durée exacte.</td></tr><tr><td>Plan exporté</td><td>Que le plan de mensualités a été exporté, et s'il l'a été en PDF ou en CSV. Jamais le contenu du fichier.</td></tr><tr><td>Simulation utilisée</td><td>Que le curseur de la durée ou celui du taux a été déplacé dans l'onglet Comparer, au plus une fois par visite. <b>Pas</b> les valeurs.</td></tr></table>
+      <p>Chaque signal ne porte qu'une seule information supplémentaire : <b>laquelle des deux applications</b> l'a envoyé. Aucune localisation n'est collectée, aucun identifiant ni profil n'est créé, aucun texte saisi par vous n'est envoyé, et <b>aucun des montants que vous saisissez</b>. Il n'y a pas d'enregistrement de l'écran. Ces statistiques ne sont pas du suivi et n'utilisent pas l'IDFA : le suivi ne concerne que la publicité de Leasing Calculator Light, décrite plus bas.</p>
+      <p>Politique de confidentialité de PostHog : <a href="https://posthog.com/privacy" target="_blank" rel="noopener">posthog.com/privacy</a>.</p>
     </section>
     <section class="card">
       <h2>Notifications push</h2>
@@ -194,7 +221,7 @@ html[data-lang="es"] [lang-block="es"] { display: block; }
     </section>
     <section class="card">
       <h2>Ce que nous ne faisons pas</h2>
-      <ul><li>Aucun compte ni profil d'utilisateur</li><li>Aucune statistique ni mesure d'utilisation de notre part</li><li>Aucun accès à la localisation : les applications ne la demandent jamais</li><li>Aucune publicité ni suivi dans la version payante</li><li>Aucune vente ni partage de vos données à des fins commerciales</li></ul>
+      <ul><li>Aucun compte ni profil d'utilisateur</li><li>Aucune collecte des montants que vous saisissez : valeur du bien, premier loyer majoré, rachat, mensualité, taux et durée exacte ne quittent jamais l'appareil</li><li>Aucun enregistrement de l'écran, dans aucune des deux applications</li><li>Aucun accès à la localisation : les applications ne la demandent jamais</li><li>Aucune publicité ni suivi dans la version payante</li><li>Aucune vente ni partage de vos données à des fins commerciales</li></ul>
     </section>
     <section class="card">
       <h2>Vos droits et contact</h2>
@@ -206,22 +233,31 @@ html[data-lang="es"] [lang-block="es"] { display: block; }
     </section>
   </div>
   <div lang-block="de">
-    <p class="date">Gültig ab 28. Juli 2026</p>
+    <p class="date">Gültig ab 18. September 2026</p>
     <section class="card">
       <h2>Kurz gefasst</h2>
-      <p>Leasing Calculators und Leasing Calculator Light sind Apps von Fabrizio Bacchin (Schweiz); diese Erklärung gilt für beide. Die Apps <b>erheben keine personenbezogenen Daten</b>: kein Konto, keine Analysewerkzeuge, kein Datenverkauf. Die von Ihnen eingegebenen Leasingdaten <b>bleiben auf Ihrem Gerät</b> (für Push-Mitteilungen werden, falls Sie sie aktivieren, nur anonyme technische Daten erfasst — siehe unten). <b>Leasing Calculators enthält keinerlei Werbung.</b> <b>Leasing Calculator Light</b>, die kostenlose Version, zeigt Google-AdMob-Anzeigen und <b>fragt Sie zweimal um Erlaubnis</b> — Googles Einwilligungsformular und Apples Tracking-Berechtigung — bevor auch nur eine einzige Anzeige angefordert wird.</p>
+      <p>Leasing Calculators und Leasing Calculator Light sind Apps von Fabrizio Bacchin (Schweiz); diese Erklärung gilt für beide. Die Apps <b>erheben keine personenbezogenen Daten</b>: kein Konto, kein Profil, kein Datenverkauf. Erfasst werden nur <b>anonyme Nutzungsstatistiken</b> — welche Tabs geöffnet und welche Funktionen genutzt werden, nie die Beträge, die Sie eingeben — weiter unten vollständig beschrieben. Die von Ihnen eingegebenen Leasingdaten <b>bleiben auf Ihrem Gerät</b> (für Push-Mitteilungen werden, falls Sie sie aktivieren, nur anonyme technische Daten erfasst — siehe unten). <b>Leasing Calculators enthält keinerlei Werbung.</b> <b>Leasing Calculator Light</b>, die kostenlose Version, zeigt Google-AdMob-Anzeigen und <b>fragt Sie zweimal um Erlaubnis</b> — Googles Einwilligungsformular und Apples Tracking-Berechtigung — bevor auch nur eine einzige Anzeige angefordert wird.</p>
     </section>
     <section class="card">
       <h2>Die beiden Apps</h2>
-      <table><tr><th>App</th><th>Werbung</th></tr><tr><td>Leasing Calculators (kostenpflichtig)</td><td>Keine. Die App enthält keinen Werbecode.</td></tr><tr><td>Leasing Calculator Light (kostenlos)</td><td>Banner und Vollbildanzeigen von Google AdMob — siehe die entsprechenden Abschnitte.</td></tr></table>
+      <table><tr><th>App</th><th>Werbung</th><th>Nutzungsstatistiken</th></tr><tr><td>Leasing Calculators (kostenpflichtig)</td><td>Keine. Die App enthält keinen Werbecode.</td><td>Ja, anonym</td></tr><tr><td>Leasing Calculator Light (kostenlos)</td><td>Banner und Vollbildanzeigen von Google AdMob — siehe die entsprechenden Abschnitte.</td><td>Ja, anonym</td></tr></table>
     </section>
     <section class="card">
       <h2>Auf Ihrem Gerät gespeicherte Daten</h2>
-      <p>Die Apps speichern lokal, im eigenen Sandbox-Container, ausschliesslich die von Ihnen eingegebenen <b>Leasingparameter</b> — Objektwert, Sonderzahlung, Restwert, Laufzeit, Zinssatz, Zahlung vorschüssig oder nachschüssig sowie das Datum der ersten Rate — damit sie beim Neustart wieder verfügbar sind und zwischen den Tabs Berechnung, Raten und Vergleich geteilt werden können. Leasing Calculator Light speichert dort auch Ihre <b>Einwilligungsentscheidungen</b> zur Werbung.</p><p>Sämtliche Berechnungen — Rate, Ratenplan, Vergleiche — erfolgen <b>vollständig auf dem Gerät</b>: Es werden keine Daten an einen Server gesendet, und es gibt keine Cloud-Synchronisierung.</p>
+      <p>Die Apps speichern lokal, im eigenen Sandbox-Container, ausschliesslich die von Ihnen eingegebenen <b>Leasingparameter</b> — Objektwert, Sonderzahlung, Restwert, Laufzeit, Zinssatz, Zahlung vorschüssig oder nachschüssig sowie das Datum der ersten Rate — damit sie beim Neustart wieder verfügbar sind und zwischen den Tabs Berechnung, Raten und Vergleich geteilt werden können. Leasing Calculator Light speichert dort auch Ihre <b>Einwilligungsentscheidungen</b> zur Werbung.</p><p>Sämtliche Berechnungen — Rate, Ratenplan, Vergleiche — erfolgen <b>vollständig auf dem Gerät</b>: Die von Ihnen eingegebenen Zahlen werden an keinen Server gesendet, und es gibt keine Cloud-Synchronisierung.</p>
     </section>
     <section class="card">
       <h2>Export des Ratenplans</h2>
       <p>Im Tab Raten können Sie den Plan als <b>CSV</b> oder <b>PDF</b> exportieren. Die Datei wird auf dem Gerät erzeugt und an das <b>Teilen-Menü von iOS</b> übergeben: Sie entscheiden, ob Sie sie sichern, drucken oder senden — und an wen. Die Apps laden diese Dateien nirgendwohin hoch und übertragen sie nicht.</p>
+    </section>
+
+    <section class="card">
+      <h2>Nutzungsstatistiken</h2>
+      <p>Beide Apps messen, <b>wie sie genutzt werden</b>, um zu verstehen, welche Funktionen wirklich gebraucht werden und welche nicht. Der Dienst ist <b>PostHog</b>, auf seinen <b>europäischen</b> Servern (<code>eu.i.posthog.com</code>). Die Erfassung ist anonym: Es gibt kein Konto, kein Profil, und keine Daten lassen Rückschlüsse auf Ihre Person zu.</p>
+      <p><b>Nur</b> diese vier Signale verlassen die App, sonst nichts:</p>
+      <table><tr><th>Signal</th><th>Was es aussagt</th></tr><tr><td>Tab geöffnet</td><td>Welcher der vier Tabs geöffnet wurde: Rechnen, Plan, Vergleich, App info.</td></tr><tr><td>Berechnung abgeschlossen</td><td>Dass eine Berechnung abgeschlossen wurde, höchstens einmal pro Start. Es enthält nur zwei Angaben: die gewählte <b>Objektart</b> (Fahrzeug, Maschine oder Immobilie) und ob die Laufzeit <b>höchstens 120 Monate beträgt oder darüber liegt</b>. <b>Nicht</b> den Objektwert, <b>nicht</b> die Rate, <b>nicht</b> den Zinssatz, <b>nicht</b> Sonderzahlung oder Restwert, <b>nicht</b> die genaue Laufzeit.</td></tr><tr><td>Plan exportiert</td><td>Dass der Ratenplan exportiert wurde, und ob als PDF oder CSV. Nie den Inhalt der Datei.</td></tr><tr><td>Simulation genutzt</td><td>Dass im Tab Vergleich der Regler für Laufzeit oder Zinssatz bewegt wurde, höchstens einmal pro Besuch. <b>Nicht</b> die Werte.</td></tr></table>
+      <p>Jedem Signal ist nur eine einzige weitere Angabe beigefügt: <b>welche der beiden Apps</b> es gesendet hat. Es wird kein Standort erfasst, es werden keine Kennungen oder Profile angelegt, kein von Ihnen eingegebener Text gesendet und <b>keiner der Beträge, die Sie eingeben</b>. Es gibt keine Bildschirmaufzeichnung. Diese Statistiken sind kein Tracking und verwenden die IDFA nicht: Tracking betrifft nur die Werbung in Leasing Calculator Light und ist weiter unten beschrieben.</p>
+      <p>Datenschutzerklärung von PostHog: <a href="https://posthog.com/privacy" target="_blank" rel="noopener">posthog.com/privacy</a>.</p>
     </section>
     <section class="card">
       <h2>Push-Mitteilungen</h2>
@@ -237,7 +273,7 @@ html[data-lang="es"] [lang-block="es"] { display: block; }
     </section>
     <section class="card">
       <h2>Was wir nicht tun</h2>
-      <ul><li>Kein Konto und kein Nutzerprofil</li><li>Keine Statistiken oder Nutzungsmessung unsererseits</li><li>Kein Zugriff auf den Standort: Die Apps fragen ihn nie ab</li><li>Keine Werbung und kein Tracking in der kostenpflichtigen Version</li><li>Kein Verkauf und keine Weitergabe Ihrer Daten zu kommerziellen Zwecken</li></ul>
+      <ul><li>Kein Konto und kein Nutzerprofil</li><li>Keine Erfassung der Beträge, die Sie eingeben: Objektwert, Sonderzahlung, Restwert, Rate, Zinssatz und genaue Laufzeit verlassen das Gerät nie</li><li>Keine Bildschirmaufzeichnung, in keiner der beiden Apps</li><li>Kein Zugriff auf den Standort: Die Apps fragen ihn nie ab</li><li>Keine Werbung und kein Tracking in der kostenpflichtigen Version</li><li>Kein Verkauf und keine Weitergabe Ihrer Daten zu kommerziellen Zwecken</li></ul>
     </section>
     <section class="card">
       <h2>Ihre Rechte und Kontakt</h2>
@@ -249,22 +285,31 @@ html[data-lang="es"] [lang-block="es"] { display: block; }
     </section>
   </div>
   <div lang-block="es">
-    <p class="date">En vigor desde el 28 de julio de 2026</p>
+    <p class="date">En vigor desde el 18 de septiembre de 2026</p>
     <section class="card">
       <h2>En resumen</h2>
-      <p>Leasing Calculators y Leasing Calculator Light son aplicaciones de Fabrizio Bacchin (Suiza) y esta política se aplica a ambas. Las aplicaciones <b>no recogen datos personales</b>: sin cuenta, sin herramientas de análisis, sin venta de datos. Los datos del leasing que introduces <b>permanecen en tu dispositivo</b> (para las notificaciones push, si las activas, solo se registran datos técnicos anónimos — véase más abajo). <b>Leasing Calculators no contiene publicidad alguna.</b> <b>Leasing Calculator Light</b>, la versión gratuita, muestra anuncios de Google AdMob y <b>te pide permiso dos veces</b> — el formulario de consentimiento de Google y la autorización de seguimiento de Apple — antes de solicitar un solo anuncio.</p>
+      <p>Leasing Calculators y Leasing Calculator Light son aplicaciones de Fabrizio Bacchin (Suiza) y esta política se aplica a ambas. Las aplicaciones <b>no recogen datos personales</b>: sin cuenta, sin perfil, sin venta de datos. Solo recogen <b>estadísticas de uso anónimas</b> — qué pestañas se abren y qué funciones se usan, nunca los importes que introduces — descritas en detalle más abajo. Los datos del leasing que introduces <b>permanecen en tu dispositivo</b> (para las notificaciones push, si las activas, solo se registran datos técnicos anónimos — véase más abajo). <b>Leasing Calculators no contiene publicidad alguna.</b> <b>Leasing Calculator Light</b>, la versión gratuita, muestra anuncios de Google AdMob y <b>te pide permiso dos veces</b> — el formulario de consentimiento de Google y la autorización de seguimiento de Apple — antes de solicitar un solo anuncio.</p>
     </section>
     <section class="card">
       <h2>Las dos aplicaciones</h2>
-      <table><tr><th>Aplicación</th><th>Publicidad</th></tr><tr><td>Leasing Calculators (de pago)</td><td>Ninguna. La aplicación no contiene código publicitario.</td></tr><tr><td>Leasing Calculator Light (gratuita)</td><td>Banners y anuncios a pantalla completa de Google AdMob — véanse las secciones correspondientes.</td></tr></table>
+      <table><tr><th>Aplicación</th><th>Publicidad</th><th>Estadísticas de uso</th></tr><tr><td>Leasing Calculators (de pago)</td><td>Ninguna. La aplicación no contiene código publicitario.</td><td>Sí, anónimas</td></tr><tr><td>Leasing Calculator Light (gratuita)</td><td>Banners y anuncios a pantalla completa de Google AdMob — véanse las secciones correspondientes.</td><td>Sí, anónimas</td></tr></table>
     </section>
     <section class="card">
       <h2>Datos guardados en tu dispositivo</h2>
-      <p>Las aplicaciones conservan localmente, en su propio contenedor aislado, únicamente los <b>parámetros del leasing</b> que introduces — valor del bien, entrada inicial, valor residual, duración, tipo de interés, pago anticipado o vencido y fecha de la primera cuota — para recuperarlos al reiniciar y compartirlos entre las pestañas Cálculo, Cuotas y Comparación. Leasing Calculator Light guarda ahí también tus <b>decisiones de consentimiento</b> publicitario.</p><p>Todos los cálculos — cuota, plan de cuotas, comparaciones — se realizan <b>íntegramente en el dispositivo</b>: no se envía ningún dato a ningún servidor y no existe sincronización en la nube.</p>
+      <p>Las aplicaciones conservan localmente, en su propio contenedor aislado, únicamente los <b>parámetros del leasing</b> que introduces — valor del bien, entrada inicial, valor residual, duración, tipo de interés, pago anticipado o vencido y fecha de la primera cuota — para recuperarlos al reiniciar y compartirlos entre las pestañas Cálculo, Cuotas y Comparación. Leasing Calculator Light guarda ahí también tus <b>decisiones de consentimiento</b> publicitario.</p><p>Todos los cálculos — cuota, plan de cuotas, comparaciones — se realizan <b>íntegramente en el dispositivo</b>: los números que introduces no se envían a ningún servidor y no existe sincronización en la nube.</p>
     </section>
     <section class="card">
       <h2>Exportación del plan de cuotas</h2>
       <p>Desde la pestaña Cuotas puedes exportar el plan en formato <b>CSV</b> o <b>PDF</b>. El archivo se genera en el dispositivo y se entrega al <b>panel de compartir de iOS</b>: tú decides si guardarlo, imprimirlo o enviarlo, y a quién. Las aplicaciones nunca suben ni transmiten estos archivos a ningún sitio.</p>
+    </section>
+
+    <section class="card">
+      <h2>Estadísticas de uso</h2>
+      <p>Ambas aplicaciones miden <b>cómo se usan</b>, para entender qué funciones se necesitan de verdad y cuáles no. El servicio es <b>PostHog</b>, en sus servidores <b>europeos</b> (<code>eu.i.posthog.com</code>). La recogida es anónima: no hay cuenta, no hay perfil y ningún dato permite identificarte.</p>
+      <p><b>Solo</b> estas cuatro señales salen de la aplicación, y nada más:</p>
+      <table><tr><th>Señal</th><th>Qué indica</th></tr><tr><td>Apertura de una pestaña</td><td>Cuál de las cuatro pestañas se ha abierto: Cálculo, Plan, Comparar, App info.</td></tr><tr><td>Cálculo completado</td><td>Que se ha completado un cálculo, como máximo una vez por inicio. Lleva solo dos datos: el <b>tipo de bien</b> elegido (vehículo, maquinaria o inmueble) y si la duración es <b>de hasta 120 meses o superior</b>. <b>No</b> el valor del bien, <b>no</b> la cuota, <b>no</b> el tipo de interés, <b>no</b> la entrada ni el residual, <b>no</b> la duración exacta.</td></tr><tr><td>Plan exportado</td><td>Que se ha exportado el plan de cuotas, y si en PDF o en CSV. Nunca el contenido del archivo.</td></tr><tr><td>Simulación usada</td><td>Que en la pestaña Comparar se ha movido el control de la duración o el del tipo de interés, como máximo una vez por visita. <b>No</b> los valores.</td></tr></table>
+      <p>Cada señal lleva un solo dato adicional: <b>cuál de las dos aplicaciones</b> la ha enviado. No se recoge la ubicación, no se crean identificadores ni perfiles, no se envía ningún texto que escribas y <b>ninguno de los importes que introduces</b>. No hay grabación de pantalla. Estas estadísticas no son seguimiento y no usan el IDFA: el seguimiento solo afecta a la publicidad de Leasing Calculator Light y se describe más abajo.</p>
+      <p>Política de privacidad de PostHog: <a href="https://posthog.com/privacy" target="_blank" rel="noopener">posthog.com/privacy</a>.</p>
     </section>
     <section class="card">
       <h2>Notificaciones push</h2>
@@ -280,7 +325,7 @@ html[data-lang="es"] [lang-block="es"] { display: block; }
     </section>
     <section class="card">
       <h2>Lo que no hacemos</h2>
-      <ul><li>Ninguna cuenta ni perfil de usuario</li><li>Ninguna estadística ni medición de uso por nuestra parte</li><li>Ningún acceso a la ubicación: las aplicaciones nunca la solicitan</li><li>Ninguna publicidad ni seguimiento en la versión de pago</li><li>Ninguna venta ni cesión de tus datos con fines comerciales</li></ul>
+      <ul><li>Ninguna cuenta ni perfil de usuario</li><li>Ninguna recogida de los importes que introduces: valor del bien, entrada, residual, cuota, tipo de interés y duración exacta nunca salen del dispositivo</li><li>Ninguna grabación de pantalla, en ninguna de las dos aplicaciones</li><li>Ningún acceso a la ubicación: las aplicaciones nunca la solicitan</li><li>Ninguna publicidad ni seguimiento en la versión de pago</li><li>Ninguna venta ni cesión de tus datos con fines comerciales</li></ul>
     </section>
     <section class="card">
       <h2>Tus derechos y contacto</h2>
