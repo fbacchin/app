@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-lang="it">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,8 +41,10 @@
   th { color: var(--muted); font-weight: 600; }
   tr:last-child td { border-bottom: none; }
   .foot { color: var(--muted); font-size: 14px; margin-top: 28px; text-align: center; }
+  p, li { text-align: justify; -webkit-hyphens: auto; hyphens: auto; }
+  td, th { text-align: left; }
   [lang-block] { display: none; }
-  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"] { display: block; }
+  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"], html[data-lang="fr"] [lang-block="fr"], html[data-lang="de"] [lang-block="de"], html[data-lang="es"] [lang-block="es"] { display: block; }
 </style>
 </head>
 <body>
@@ -53,10 +55,16 @@
   </header>
   <p class="sub" lang-block="it">Supporto e guida all'uso · Libor X e LiborX Light</p>
   <p class="sub" lang-block="en">Support and user guide · Libor X and LiborX Light</p>
+  <p class="sub" lang-block="fr">Assistance et guide d'utilisation · Libor X et LiborX Light</p>
+  <p class="sub" lang-block="de">Support und Anleitung · Libor X und LiborX Light</p>
+  <p class="sub" lang-block="es">Soporte y guía de uso · Libor X y LiborX Light</p>
 
   <div class="langbar">
     <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
     <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
   </div>
 
   <!-- ============================ ITALIANO ============================ -->
@@ -77,7 +85,7 @@
     </section>
 
     <section class="card">
-      <h2><span class="ic">▦</span>La schermata Markets</h2>
+      <h2><span class="ic">▦</span>La schermata Mercati</h2>
       <p>In alto i quattro tassi <b>CME Term SOFR</b>, uno per scheda: valore, variazione rispetto al fixing precedente, mini-grafico degli ultimi tre mesi e <b>data del fixing</b>.</p>
       <p>Sotto, i tassi <b>overnight</b> delle quattro valute in righe compatte. Sono molto stabili da un giorno all'altro, per questo non hanno un grafico in elenco: <b>tocca una riga</b> per aprire quello completo.</p>
       <ul>
@@ -93,19 +101,19 @@
     </section>
 
     <section class="card">
-      <h2><span class="ic">🌍</span>La schermata Global</h2>
+      <h2><span class="ic">🌍</span>La schermata Globale</h2>
       <p>È il confronto tra i mercati (su iPad si trova in fondo alla schermata principale):</p>
       <ul>
-        <li><b>USD term curve</b> — la curva Term SOFR da 1 a 12 mesi, confrontata con com'era 3 mesi e 1 anno fa, con una lettura in parole semplici: se la curva sale il mercato si aspetta tassi più alti, se è invertita sconta tagli della Fed.</li>
-        <li><b>Rate ranking</b> — quale valuta paga di più oggi, in un colpo d'occhio.</li>
-        <li><b>One year, four currencies</b> — i quattro tassi overnight sovrapposti sugli ultimi 12 mesi.</li>
+        <li><b>Curva a termine USD</b> — la curva Term SOFR da 1 a 12 mesi, confrontata con com'era 3 mesi e 1 anno fa, con una lettura in parole semplici: se la curva sale il mercato si aspetta tassi più alti, se è invertita sconta tagli della Fed.</li>
+        <li><b>Classifica dei tassi</b> — quale valuta paga di più oggi, in un colpo d'occhio.</li>
+        <li><b>Un anno, quattro valute</b> — i quattro tassi overnight sovrapposti sugli ultimi 12 mesi.</li>
       </ul>
     </section>
 
     <section class="card">
       <h2><span class="ic">▣</span>La pubblicità — solo LiborX Light</h2>
       <p>LiborX Light è gratuita grazie agli annunci di <b>Google AdMob</b>: un <b>banner</b> nelle schermate principali e, ogni tanto, un <b>annuncio a schermo intero</b>. Libor X non contiene alcuna pubblicità.</p>
-      <p>Al primo avvio LiborX Light ti chiede le <b>preferenze sul consenso</b> (annunci personalizzati o generici); l'app <b>non richiede mai il tracciamento</b> di Apple. Puoi cambiare idea in ogni momento dal pulsante <b>Opzioni privacy</b> nella scheda Info. I dettagli sono nell'<a href="privacy.html">informativa sulla privacy</a>.</p>
+      <p>Al primo avvio LiborX Light ti chiede le <b>preferenze sul consenso</b> (annunci personalizzati o generici) e, subito dopo, iOS ti chiede se <b>autorizzare il tracciamento</b> (App Tracking Transparency). Puoi rifiutare entrambe: l'app funziona allo stesso modo, cambiano solo gli annunci. Il consenso si modifica dal pulsante <b>Opzioni privacy</b> nella scheda Info; il tracciamento da <b>Impostazioni → Privacy e sicurezza → Tracciamento</b>. I dettagli sono nell'<a href="privacy.html">informativa sulla privacy</a>.</p>
       <p>Se preferisci un'esperienza <b>senza pubblicità</b>, cerca <b>Libor X</b> sull'App Store.</p>
     </section>
 
@@ -189,7 +197,7 @@
     <section class="card">
       <h2><span class="ic">▣</span>Advertising — LiborX Light only</h2>
       <p>LiborX Light is free thanks to <b>Google AdMob</b> ads: a <b>banner</b> on the main screens and, now and then, a <b>full-screen ad</b>. Libor X contains no advertising at all.</p>
-      <p>At first launch LiborX Light asks for your <b>consent preferences</b> (personalized or generic ads); the app <b>never requests Apple's tracking permission</b>. You can change your mind at any time from the <b>Privacy options</b> button in the Info tab. Details are in the <a href="privacy.html">privacy policy</a>.</p>
+      <p>At first launch LiborX Light asks for your <b>consent preferences</b> (personalized or generic ads) and, right after, iOS asks whether to <b>allow tracking</b> (App Tracking Transparency). You can decline both: the app works the same, only the ads change. Consent can be changed from the <b>Privacy options</b> button in the Info tab; tracking from <b>Settings → Privacy &amp; Security → Tracking</b>. Details are in the <a href="privacy.html">privacy policy</a>.</p>
       <p>If you prefer an <b>ad-free</b> experience, look for <b>Libor X</b> on the App Store.</p>
     </section>
 
@@ -227,23 +235,283 @@
     </section>
   </div>
 
+  <!-- ============================ FRANÇAIS ============================ -->
+  <div lang-block="fr">
+    <section class="card">
+      <h2><span class="ic">◎</span>Ce que font les applications</h2>
+      <p>Le LIBOR n'existe plus : les derniers panels ont cessé en 2023 et chaque grande devise est passée à un nouveau taux de référence. <b>Libor X réunit ses successeurs sur un seul écran</b>, pour iPhone et iPad :</p>
+      <table>
+        <tr><th>Devise</th><th>Taux</th></tr>
+        <tr><td>🇺🇸 USD</td><td><b>SOFR</b> au jour le jour + la courbe <b>CME Term SOFR</b> à 1, 3, 6 et 12 mois</td></tr>
+        <tr><td>🇬🇧 GBP</td><td><b>SONIA</b></td></tr>
+        <tr><td>🇨🇭 CHF</td><td><b>SARON</b></td></tr>
+        <tr><td>🇯🇵 JPY</td><td><b>TONAR</b></td></tr>
+      </table>
+      <p>Les données se mettent à jour d'elles-mêmes au lancement et l'application fonctionne aussi <b>hors ligne</b>, en affichant les dernières valeurs téléchargées.</p>
+      <p>Elle existe en deux versions, identiques dans leurs fonctions : <b>Libor X</b> (payante, sans aucune publicité) et <b>LiborX Light</b> (gratuite, financée par les annonces). Ce guide vaut pour les deux.</p>
+      <p>Vous cherchez l'Euribor et l'€STR ? Ils sont dans l'application <b>Euribor X</b>, consacrée au marché de l'euro.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>L'écran Marchés</h2>
+      <p>En haut, les quatre taux <b>CME Term SOFR</b>, un par fiche : valeur, variation par rapport au fixing précédent, mini-graphique des trois derniers mois et <b>date du fixing</b>.</p>
+      <p>En dessous, les taux <b>au jour le jour</b> des quatre devises, en lignes compactes. Ils bougent très peu d'un jour à l'autre, c'est pourquoi ils n'ont pas de graphique dans la liste : <b>touchez une ligne</b> pour ouvrir le graphique complet.</p>
+      <ul>
+        <li>Chaque taux affiche <b>sa propre date</b> : il est normal que les Term SOFR aient un jour d'avance sur les taux au jour le jour, car les administrateurs ne publient pas tous en même temps.</li>
+        <li>Le <b>SARON</b> peut être <b>négatif</b> : ce n'est pas une erreur, la Suisse vit depuis longtemps avec des taux inférieurs à zéro.</li>
+      </ul>
+      <p>Pour actualiser : <b>tirez vers le bas</b> ou touchez le bouton <span class="kbd">⟳</span> en haut.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📈</span>Le graphique historique</h2>
+      <p><b>Touchez une fiche ou une ligne</b> pour ouvrir le graphique du taux. Vous pouvez choisir la période — <b>1M</b>, <b>6M</b>, <b>1Y</b>, <b>2Y</b> ou <b>Max</b> — et <b>faire glisser le doigt sur le graphique</b> pour lire la valeur exacte de chaque jour. En dessous figurent le minimum, le maximum, la moyenne et la variation de la période en <b>points de base</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🌍</span>L'écran Global</h2>
+      <p>C'est la comparaison entre les marchés (sur iPad, elle se trouve en bas de l'écran principal) :</p>
+      <ul>
+        <li><b>Courbe des taux USD</b> — la courbe Term SOFR de 1 à 12 mois, comparée à ce qu'elle était il y a 3 mois et 1 an, avec une lecture en termes simples : si la courbe monte, le marché s'attend à des taux plus élevés ; si elle est inversée, il anticipe des baisses de la Fed.</li>
+        <li><b>Classement des taux</b> — quelle devise rapporte le plus aujourd'hui, en un coup d'œil.</li>
+        <li><b>Un an, quatre devises</b> — les quatre taux au jour le jour superposés sur les 12 derniers mois.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>La publicité — LiborX Light uniquement</h2>
+      <p>LiborX Light est gratuite grâce aux annonces <b>Google AdMob</b> : une <b>bannière</b> sur les écrans principaux et, de temps en temps, une <b>annonce plein écran</b>. Libor X ne contient aucune publicité.</p>
+      <p>Au premier lancement, LiborX Light vous demande vos <b>préférences de consentement</b> (annonces personnalisées ou génériques) puis, juste après, iOS vous demande si vous <b>autorisez le suivi</b> (App Tracking Transparency). Vous pouvez refuser les deux : l'application fonctionne de la même façon, seules les annonces changent. Le consentement se modifie avec le bouton <b>Options de confidentialité</b> dans l'onglet Infos ; le suivi dans <b>Réglages → Confidentialité et sécurité → Suivi</b>. Les détails figurent dans la <a href="privacy.html">politique de confidentialité</a>.</p>
+      <p>Si vous préférez une expérience <b>sans publicité</b>, cherchez <b>Libor X</b> sur l'App Store.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Notifications</h2>
+      <p>L'application peut vous prévenir par une notification quand il y a du nouveau sur les taux. L'autorisation est demandée au premier lancement ; vous pouvez la modifier à tout moment dans <b>Réglages → Notifications</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🗣</span>Langues</h2>
+      <p>Les applications sont disponibles en <b>anglais, italien, français, espagnol et allemand</b> et suivent automatiquement la langue de l'appareil. Pour la changer : <b>Réglages → Apps → nom de l'app → Langue</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Problèmes fréquents</h2>
+      <ul>
+        <li><b>Les taux ne se mettent pas à jour</b> — vérifiez la connexion et réessayez avec <span class="kbd">⟳</span>. Sans réseau, l'application affiche les dernières données téléchargées.</li>
+        <li><b>La valeur du jour manque</b> — les fixings ne sont publiés que les <b>jours ouvrés</b>, jamais le week-end ni les jours fériés ; la valeur d'un jour arrive en général le lendemain.</li>
+        <li><b>Les taux ont des dates différentes</b> — c'est normal : chaque administrateur publie à son propre rythme. Chaque taux indique sa date.</li>
+        <li><b>Le SARON est négatif</b> — c'est correct, ce n'est pas une erreur de signe.</li>
+        <li><b>La variation affiche « = 0,000 »</b> — le taux n'a pas bougé de façon notable depuis le fixing précédent.</li>
+        <li><b>Le graphique est vide</b> — il faut au moins une mise à jour réussie : réessayez avec le réseau activé.</li>
+        <li><b>L'espace de la bannière est vide</b> (Light uniquement) — cela peut arriver quand aucune annonce n'est disponible ou que le réseau manque : ce n'est pas une erreur.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✱</span>Avertissement</h2>
+      <p>Les données sont fournies à titre purement informatif et <b>ne constituent pas un conseil financier</b>. Les valeurs peuvent différer des publications officielles : avant toute décision, reportez-vous toujours aux données de l'administrateur du taux.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✆</span>Contact</h2>
+      <p>Pour une assistance, un signalement ou une suggestion, écrivez à <a href="mailto:bacchin@tiscali.it?subject=Libor%20X%20%E2%80%94%20Assistance">bacchin@tiscali.it</a>. Je réponds en général en quelques jours ouvrés.</p>
+    </section>
+  </div>
+
+  <!-- ============================ DEUTSCH ============================ -->
+  <div lang-block="de">
+    <section class="card">
+      <h2><span class="ic">◎</span>Was die Apps tun</h2>
+      <p>Den LIBOR gibt es nicht mehr: Die letzten Panels endeten 2023, und jede große Währung ist auf einen neuen Referenzzinssatz umgestiegen. <b>Libor X bündelt seine Nachfolger auf einem Bildschirm</b>, für iPhone und iPad:</p>
+      <table>
+        <tr><th>Währung</th><th>Zinssatz</th></tr>
+        <tr><td>🇺🇸 USD</td><td><b>SOFR</b> (Tagesgeld) + die <b>CME-Term-SOFR</b>-Kurve für 1, 3, 6 und 12 Monate</td></tr>
+        <tr><td>🇬🇧 GBP</td><td><b>SONIA</b></td></tr>
+        <tr><td>🇨🇭 CHF</td><td><b>SARON</b></td></tr>
+        <tr><td>🇯🇵 JPY</td><td><b>TONAR</b></td></tr>
+      </table>
+      <p>Die Daten aktualisieren sich beim Start von selbst, und die App funktioniert auch <b>offline</b> mit den zuletzt geladenen Werten.</p>
+      <p>Es gibt sie in zwei Versionen mit identischen Funktionen: <b>Libor X</b> (kostenpflichtig, ganz ohne Werbung) und <b>LiborX Light</b> (kostenlos, durch Werbung finanziert). Diese Anleitung gilt für beide.</p>
+      <p>Sie suchen den Euribor und den €STR? Die finden Sie in der App <b>Euribor X</b>, die dem Euro-Markt gewidmet ist.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>Der Bildschirm Märkte</h2>
+      <p>Oben die vier <b>CME-Term-SOFR</b>-Sätze, je einer pro Karte: Wert, Veränderung gegenüber dem vorigen Fixing, Mini-Diagramm der letzten drei Monate und <b>Datum des Fixings</b>.</p>
+      <p>Darunter die <b>Tagesgeldsätze</b> der vier Währungen in kompakten Zeilen. Sie ändern sich von Tag zu Tag kaum, deshalb haben sie in der Liste kein Diagramm: <b>Tippen Sie auf eine Zeile</b>, um das vollständige zu öffnen.</p>
+      <ul>
+        <li>Jeder Zinssatz zeigt <b>sein eigenes Datum</b>: Dass die Term-SOFR-Sätze den Tagesgeldsätzen einen Tag voraus sind, ist normal — die Administratoren veröffentlichen nicht alle gleichzeitig.</li>
+        <li>Der <b>SARON</b> kann <b>negativ</b> sein: Das ist kein Fehler, die Schweiz lebt seit Langem mit Zinsen unter null.</li>
+      </ul>
+      <p>Zum Aktualisieren: <b>nach unten ziehen</b> oder oben auf die Taste <span class="kbd">⟳</span> tippen.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📈</span>Das historische Diagramm</h2>
+      <p><b>Tippen Sie auf eine Karte oder eine Zeile</b>, um das Diagramm des Zinssatzes zu öffnen. Sie können den Zeitraum wählen — <b>1M</b>, <b>6M</b>, <b>1Y</b>, <b>2Y</b> oder <b>Max</b> — und <b>mit dem Finger über das Diagramm fahren</b>, um den genauen Wert jedes Tages abzulesen. Darunter stehen Minimum, Maximum, Durchschnitt und die Veränderung des Zeitraums in <b>Basispunkten</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🌍</span>Der Bildschirm Global</h2>
+      <p>Hier werden die Märkte verglichen (auf dem iPad steht er unten auf dem Hauptbildschirm):</p>
+      <ul>
+        <li><b>USD-Terminkurve</b> — die Term-SOFR-Kurve von 1 bis 12 Monaten, verglichen mit ihrem Stand vor 3 Monaten und vor 1 Jahr, mit einer Deutung in einfachen Worten: Steigt die Kurve, erwartet der Markt höhere Zinsen; ist sie invers, preist er Zinssenkungen der Fed ein.</li>
+        <li><b>Zinsrangliste</b> — welche Währung heute am meisten bringt, auf einen Blick.</li>
+        <li><b>Ein Jahr, vier Währungen</b> — die vier Tagesgeldsätze der letzten 12 Monate übereinandergelegt.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>Werbung — nur LiborX Light</h2>
+      <p>LiborX Light ist dank Anzeigen von <b>Google AdMob</b> kostenlos: ein <b>Banner</b> auf den Hauptbildschirmen und ab und zu eine <b>Vollbildanzeige</b>. Libor X enthält keinerlei Werbung.</p>
+      <p>Beim ersten Start fragt LiborX Light nach Ihren <b>Einwilligungseinstellungen</b> (personalisierte oder allgemeine Anzeigen), und direkt danach fragt iOS, ob Sie <b>Tracking erlauben</b> (App Tracking Transparency). Sie können beides ablehnen: Die App funktioniert genauso, nur die Anzeigen ändern sich. Die Einwilligung ändern Sie über die Schaltfläche <b>Datenschutzoptionen</b> im Tab Info, das Tracking unter <b>Einstellungen → Datenschutz &amp; Sicherheit → Tracking</b>. Einzelheiten finden Sie in der <a href="privacy.html">Datenschutzerklärung</a>.</p>
+      <p>Wenn Sie es <b>ohne Werbung</b> möchten, suchen Sie im App Store nach <b>Libor X</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Mitteilungen</h2>
+      <p>Die App kann Sie per Mitteilung informieren, wenn es Neuigkeiten zu den Zinssätzen gibt. Die Erlaubnis wird beim ersten Start erfragt; Sie können sie jederzeit unter <b>Einstellungen → Mitteilungen</b> ändern.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🗣</span>Sprachen</h2>
+      <p>Die Apps sind auf <b>Englisch, Italienisch, Französisch, Spanisch und Deutsch</b> verfügbar und folgen automatisch der Sprache des Geräts. Zum Ändern: <b>Einstellungen → Apps → Name der App → Sprache</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Häufige Probleme</h2>
+      <ul>
+        <li><b>Die Zinssätze werden nicht aktualisiert</b> — prüfen Sie die Verbindung und versuchen Sie es erneut mit <span class="kbd">⟳</span>. Ohne Netz zeigt die App die zuletzt geladenen Daten.</li>
+        <li><b>Der heutige Wert fehlt</b> — Fixings werden nur an <b>Geschäftstagen</b> veröffentlicht, nie am Wochenende oder an Feiertagen; der Wert eines Tages kommt meist am Folgetag.</li>
+        <li><b>Die Zinssätze haben unterschiedliche Daten</b> — das ist normal: Jeder Administrator veröffentlicht nach eigenem Zeitplan. Jeder Zinssatz nennt sein Datum.</li>
+        <li><b>Der SARON ist negativ</b> — das ist korrekt, kein Vorzeichenfehler.</li>
+        <li><b>Die Veränderung zeigt „= 0,000“</b> — der Satz hat sich gegenüber dem vorigen Fixing nicht nennenswert bewegt.</li>
+        <li><b>Das Diagramm ist leer</b> — es braucht mindestens eine erfolgreiche Aktualisierung: Versuchen Sie es mit aktivem Netz erneut.</li>
+        <li><b>Der Bannerplatz ist leer</b> (nur Light) — das kann vorkommen, wenn keine Anzeige verfügbar ist oder das Netz fehlt: Das ist kein Fehler.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✱</span>Hinweis</h2>
+      <p>Die Daten dienen ausschließlich der Information und <b>stellen keine Finanzberatung dar</b>. Die Werte können von den offiziellen Veröffentlichungen abweichen: Ziehen Sie vor Entscheidungen immer die Daten des Administrators des Zinssatzes heran.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✆</span>Kontakt</h2>
+      <p>Für Hilfe, Fehlermeldungen oder Vorschläge schreiben Sie an <a href="mailto:bacchin@tiscali.it?subject=Libor%20X%20%E2%80%94%20Support">bacchin@tiscali.it</a>. Ich antworte in der Regel innerhalb weniger Werktage.</p>
+    </section>
+  </div>
+
+  <!-- ============================ ESPAÑOL ============================ -->
+  <div lang-block="es">
+    <section class="card">
+      <h2><span class="ic">◎</span>Qué hacen las apps</h2>
+      <p>El LIBOR ya no existe: los últimos paneles terminaron en 2023 y cada divisa principal pasó a un nuevo tipo de referencia. <b>Libor X reúne a sus sucesores en una sola pantalla</b>, para iPhone y iPad:</p>
+      <table>
+        <tr><th>Divisa</th><th>Tipo</th></tr>
+        <tr><td>🇺🇸 USD</td><td><b>SOFR</b> a un día + la curva <b>CME Term SOFR</b> a 1, 3, 6 y 12 meses</td></tr>
+        <tr><td>🇬🇧 GBP</td><td><b>SONIA</b></td></tr>
+        <tr><td>🇨🇭 CHF</td><td><b>SARON</b></td></tr>
+        <tr><td>🇯🇵 JPY</td><td><b>TONAR</b></td></tr>
+      </table>
+      <p>Los datos se actualizan solos al abrir la app, que también funciona <b>sin conexión</b> mostrando los últimos valores descargados.</p>
+      <p>Existe en dos versiones con las mismas funciones: <b>Libor X</b> (de pago, sin ninguna publicidad) y <b>LiborX Light</b> (gratuita, financiada con anuncios). Esta guía sirve para ambas.</p>
+      <p>¿Buscas el Euríbor y el €STR? Están en la app <b>Euribor X</b>, dedicada al mercado del euro.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▦</span>La pantalla Mercados</h2>
+      <p>Arriba, los cuatro tipos <b>CME Term SOFR</b>, uno por tarjeta: valor, variación respecto a la fijación anterior, minigráfico de los últimos tres meses y <b>fecha de la fijación</b>.</p>
+      <p>Debajo, los tipos <b>a un día</b> de las cuatro divisas en filas compactas. Apenas cambian de un día para otro, por eso no llevan gráfico en la lista: <b>toca una fila</b> para abrir el gráfico completo.</p>
+      <ul>
+        <li>Cada tipo muestra <b>su propia fecha</b>: es normal que los Term SOFR vayan un día por delante de los tipos a un día, porque los administradores no publican todos a la vez.</li>
+        <li>El <b>SARON</b> puede ser <b>negativo</b>: no es un error, Suiza convive desde hace tiempo con tipos por debajo de cero.</li>
+      </ul>
+      <p>Para actualizar: <b>desliza hacia abajo</b> o toca el botón <span class="kbd">⟳</span> de arriba.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">📈</span>El gráfico histórico</h2>
+      <p><b>Toca una tarjeta o una fila</b> para abrir el gráfico del tipo. Puedes elegir el intervalo — <b>1M</b>, <b>6M</b>, <b>1Y</b>, <b>2Y</b> o <b>Max</b> — y <b>deslizar el dedo por el gráfico</b> para leer el valor exacto de cada día. Debajo aparecen el mínimo, el máximo, la media y la variación del periodo en <b>puntos básicos</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🌍</span>La pantalla Global</h2>
+      <p>Es la comparación entre mercados (en iPad está al final de la pantalla principal):</p>
+      <ul>
+        <li><b>Curva a plazo USD</b> — la curva Term SOFR de 1 a 12 meses, comparada con cómo estaba hace 3 meses y hace 1 año, con una lectura en palabras sencillas: si la curva sube, el mercado espera tipos más altos; si está invertida, descuenta recortes de la Fed.</li>
+        <li><b>Ranking de tipos</b> — qué divisa paga más hoy, de un vistazo.</li>
+        <li><b>Un año, cuatro divisas</b> — los cuatro tipos a un día superpuestos en los últimos 12 meses.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">▣</span>La publicidad — solo LiborX Light</h2>
+      <p>LiborX Light es gratuita gracias a los anuncios de <b>Google AdMob</b>: un <b>banner</b> en las pantallas principales y, de vez en cuando, un <b>anuncio a pantalla completa</b>. Libor X no contiene ninguna publicidad.</p>
+      <p>En el primer inicio, LiborX Light te pide tus <b>preferencias de consentimiento</b> (anuncios personalizados o genéricos) y, justo después, iOS te pregunta si <b>permites el seguimiento</b> (App Tracking Transparency). Puedes rechazar ambos: la app funciona igual, solo cambian los anuncios. El consentimiento se cambia con el botón <b>Opciones de privacidad</b> en la pestaña Info; el seguimiento, en <b>Ajustes → Privacidad y seguridad → Seguimiento</b>. Los detalles están en la <a href="privacy.html">política de privacidad</a>.</p>
+      <p>Si prefieres una experiencia <b>sin publicidad</b>, busca <b>Libor X</b> en el App Store.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✉</span>Notificaciones</h2>
+      <p>La app puede avisarte con una notificación cuando haya novedades sobre los tipos. El permiso se pide en el primer inicio; puedes cambiarlo en cualquier momento en <b>Ajustes → Notificaciones</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">🗣</span>Idiomas</h2>
+      <p>Las apps están disponibles en <b>inglés, italiano, francés, español y alemán</b> y siguen automáticamente el idioma del dispositivo. Para cambiarlo: <b>Ajustes → Apps → nombre de la app → Idioma</b>.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">?</span>Problemas frecuentes</h2>
+      <ul>
+        <li><b>Los tipos no se actualizan</b> — comprueba la conexión y vuelve a intentarlo con <span class="kbd">⟳</span>. Sin red, la app muestra los últimos datos descargados.</li>
+        <li><b>Falta el dato de hoy</b> — las fijaciones solo se publican en <b>días hábiles</b>, nunca en fin de semana ni festivos; el dato de un día suele llegar al día siguiente.</li>
+        <li><b>Los tipos tienen fechas distintas</b> — es normal: cada administrador publica a su ritmo. Cada tipo indica su fecha.</li>
+        <li><b>El SARON es negativo</b> — es correcto, no es un error de signo.</li>
+        <li><b>La variación marca «= 0,000»</b> — el tipo no se ha movido de forma apreciable respecto a la fijación anterior.</li>
+        <li><b>El gráfico está vacío</b> — hace falta al menos una actualización correcta: vuelve a intentarlo con la red activada.</li>
+        <li><b>El espacio del banner está vacío</b> (solo Light) — puede ocurrir cuando no hay anuncios disponibles o falla la red: no es un error.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✱</span>Aviso</h2>
+      <p>Los datos tienen una finalidad puramente informativa y <b>no constituyen asesoramiento financiero</b>. Los valores pueden diferir de las publicaciones oficiales: antes de tomar decisiones, consulta siempre los datos del administrador del tipo.</p>
+    </section>
+
+    <section class="card">
+      <h2><span class="ic">✆</span>Contacto</h2>
+      <p>Para asistencia, avisos de errores o sugerencias escribe a <a href="mailto:bacchin@tiscali.it?subject=Libor%20X%20%E2%80%94%20Soporte">bacchin@tiscali.it</a>. Suelo responder en pocos días hábiles.</p>
+    </section>
+  </div>
+
   <p class="foot">
     <span lang-block="it">Libor X e LiborX Light · <a href="privacy.html">Privacy</a></span>
     <span lang-block="en">Libor X and LiborX Light · <a href="privacy.html">Privacy</a></span>
+    <span lang-block="fr">Libor X et LiborX Light · <a href="privacy.html">Confidentialité</a></span>
+    <span lang-block="de">Libor X und LiborX Light · <a href="privacy.html">Datenschutz</a></span>
+    <span lang-block="es">Libor X y LiborX Light · <a href="privacy.html">Privacidad</a></span>
   </p>
 </div>
 
 <script>
+  var LANGS = ["it", "en", "fr", "de", "es"];
   function setLang(l) {
+    if (LANGS.indexOf(l) < 0) l = "en";
     document.documentElement.setAttribute("data-lang", l);
     document.documentElement.lang = l;
-    document.getElementById("btn-it").setAttribute("aria-pressed", l === "it");
-    document.getElementById("btn-en").setAttribute("aria-pressed", l === "en");
+    LANGS.forEach(function (code) {
+      var btn = document.getElementById("btn-" + code);
+      if (btn) btn.setAttribute("aria-pressed", code === l);
+    });
     try { localStorage.setItem("liborx-lang", l); } catch (e) {}
   }
   var saved = null;
   try { saved = localStorage.getItem("liborx-lang"); } catch (e) {}
-  setLang(saved || ((navigator.language || "en").toLowerCase().indexOf("it") === 0 ? "it" : "en"));
+  var device = (navigator.language || "en").toLowerCase().slice(0, 2);
+  setLang(saved || (LANGS.indexOf(device) >= 0 ? device : "en"));
 </script>
 <noscript><style>[lang-block]{display:block !important}</style></noscript>
 </body>
