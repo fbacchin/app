@@ -49,6 +49,29 @@
   .ic { display:inline-block; width:1.6em; }
   .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--bg);
          border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; font-size: .9em; }
+
+  /* Testo giustificato: paragrafi ed elenchi dentro le schede. La sillabazione è
+     indispensabile: su una colonna da telefono, senza, il giustificato apre buchi
+     larghi fra le parole, soprattutto in tedesco. Segue la lingua scelta, perché lo
+     script aggiorna <html lang>. Il prefisso -webkit- serve a Safari su iPhone. */
+  section.card p, section.card li { text-align: justify; -webkit-hyphens: auto; hyphens: auto; }
+
+  /* Schermi stretti: la pagina non deve mai scorrere di lato. */
+  .langbar { flex-wrap: wrap; }
+  @media (max-width: 560px) {
+    .wrap { padding: 28px 16px 48px; }
+    section.card { padding: 18px; }
+    /* Le tabelle con più di due colonne (classe messa dallo script) diventano
+       una scheda per riga: ogni cella porta sopra il titolo della sua colonna. */
+    table.impila, table.impila tbody, table.impila tr, table.impila td { display: block; width: auto; }
+    table.impila tr:first-child { display: none; }
+    table.impila tr { padding: 12px 0; border-bottom: 1px solid var(--border); }
+    table.impila tr:last-child { border-bottom: none; }
+    table.impila td { border: none; padding: 3px 0; }
+    table.impila td::before { content: attr(data-label); display: block; font-size: 13px; font-weight: 600; color: var(--muted); }
+    table.impila td:first-child { font-weight: 600; }
+    table.impila td:first-child::before { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -626,6 +649,18 @@
   var saved = null;
   try { saved = localStorage.getItem("mortgage-lang"); } catch (e) {}
   setLang(saved || linguaDelBrowser());
+
+  // Tabelle con più di due colonne: su schermi stretti si impilano (vedi CSS).
+  // Ogni cella riceve come etichetta il titolo della sua colonna, in qualunque lingua.
+  Array.prototype.forEach.call(document.querySelectorAll("table"), function (t) {
+    var titoli = Array.prototype.map.call(t.rows[0].cells, function (c) { return c.textContent.trim(); });
+    if (titoli.length <= 2) { return; }
+    t.classList.add("impila");
+    Array.prototype.slice.call(t.rows, 1).forEach(function (r) {
+      Array.prototype.forEach.call(r.cells, function (c, i) { c.setAttribute("data-label", titoli[i] || ""); });
+    });
+  });
+
 </script>
 <noscript><style>[lang-block]{display:block !important}</style></noscript>
 </body>
