@@ -41,7 +41,7 @@
   .foot { color: var(--muted); font-size: 14px; margin-top: 28px; text-align: center; }
   .date { color: var(--muted); font-size: 14px; }
   [lang-block] { display: none; }
-  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"] { display: block; }
+  html[data-lang="it"] [lang-block="it"], html[data-lang="en"] [lang-block="en"], html[data-lang="fr"] [lang-block="fr"], html[data-lang="de"] [lang-block="de"], html[data-lang="es"] [lang-block="es"] { display: block; }
 </style>
 </head>
 <body>
@@ -52,19 +52,25 @@
   </header>
   <p class="sub" lang-block="it">Informativa sulla privacy · Libor X e LiborX Light</p>
   <p class="sub" lang-block="en">Privacy policy · Libor X and LiborX Light</p>
+  <p class="sub" lang-block="fr">Politique de confidentialité · Libor X et LiborX Light</p>
+  <p class="sub" lang-block="de">Datenschutzerklärung · Libor X und LiborX Light</p>
+  <p class="sub" lang-block="es">Política de privacidad · Libor X y LiborX Light</p>
 
   <div class="langbar">
     <button id="btn-it" aria-pressed="true" onclick="setLang('it')">Italiano</button>
     <button id="btn-en" aria-pressed="false" onclick="setLang('en')">English</button>
+    <button id="btn-fr" aria-pressed="false" onclick="setLang('fr')">Français</button>
+    <button id="btn-de" aria-pressed="false" onclick="setLang('de')">Deutsch</button>
+    <button id="btn-es" aria-pressed="false" onclick="setLang('es')">Español</button>
   </div>
 
   <!-- ============================ ITALIANO ============================ -->
   <div lang-block="it">
-    <p class="date">In vigore dal 20 luglio 2026</p>
+    <p class="date">In vigore dal 18 settembre 2026</p>
 
     <section class="card">
       <h2>In breve</h2>
-      <p>Libor X e LiborX Light sono app di Fabrizio Bacchin e questa informativa vale per entrambe. Le app <b>non raccolgono dati personali</b>: nessun account, nessuno strumento di analisi proprio, nessuna vendita di dati (per le notifiche push, se le attivi, vengono registrati solo dati tecnici anonimi — vedi sotto). <b>Libor X non contiene alcuna pubblicità.</b> <b>LiborX Light</b>, la versione gratuita, mostra annunci di Google AdMob e, in Europa, <b>ti chiede il consenso</b> prima di richiedere anche un solo annuncio.</p>
+      <p>Libor X e LiborX Light sono app di Fabrizio Bacchin e questa informativa vale per entrambe. Le app <b>non raccolgono dati personali</b>: nessun account, nessuna vendita di dati, solo <b>statistiche d'uso anonime</b> che non permettono di identificarti (per le notifiche push, se le attivi, vengono registrati solo dati tecnici anonimi — vedi sotto). <b>Libor X non contiene alcuna pubblicità.</b> <b>LiborX Light</b>, la versione gratuita, mostra annunci di Google AdMob e, in Europa, <b>ti chiede il consenso</b> prima di richiedere anche un solo annuncio.</p>
     </section>
 
     <section class="card">
@@ -93,7 +99,20 @@
 
     <section class="card">
       <h2>Dati salvati sul tuo dispositivo</h2>
-      <p>Le app conservano localmente, nel proprio contenitore sandbox, solo la <b>cache dei tassi</b> scaricati (per il funzionamento offline) e le tue <b>preferenze</b>; LiborX Light vi salva anche le <b>scelte di consenso</b>. Nulla di tutto questo viene trasmesso dalle app a terzi.</p>
+      <p>Le app conservano localmente, nel proprio contenitore sandbox, solo la <b>cache dei tassi</b> scaricati (per il funzionamento offline), le tue <b>preferenze</b> e un <b>contatore delle sessioni</b>, usato solo per decidere quando proporti di valutare l'app; LiborX Light vi salva anche le <b>scelte di consenso</b>. Nulla di tutto questo viene trasmesso dalle app a terzi.</p>
+    </section>
+
+    <section class="card">
+      <h2>Statistiche d'uso</h2>
+      <p>Per capire come vengono usate le app raccogliamo <b>statistiche anonime</b> tramite <b>PostHog</b>, su server nell'<b>Unione Europea</b>. Vengono registrati soltanto eventi dal nome fisso, decisi in anticipo:</p>
+      <ul>
+        <li>quale <b>schermata</b> viene aperta (mercati, globale, info, grafico di dettaglio);</li>
+        <li>quale <b>tasso</b> viene aperto nel dettaglio (ad esempio SOFR o Term SOFR a 3 mesi);</li>
+        <li>il cambio di <b>intervallo</b> sul grafico di un tasso;</li>
+        <li>l'<b>attivazione delle notifiche</b>, contata una sola volta;</li>
+        <li>il <b>mancato aggiornamento dei dati</b>, ridotto a una causa generica (rete o dati vuoti).</li>
+      </ul>
+      <p>Ogni evento indica anche <b>quale delle due app</b> lo ha inviato. PostHog associa gli eventi a un <b>identificatore casuale dell'installazione</b>, non collegato a te né ad altri servizi, e riceve informazioni tecniche generiche (modello del dispositivo, versione di iOS e dell'app). <b>Non viene registrata alcuna posizione</b>: è disattivata anche la localizzazione approssimativa che PostHog ricaverebbe di norma dall'indirizzo IP. Nessun valore dei tassi viene inviato. Non c'è tracciamento tra app o siti diversi e queste statistiche non alimentano alcuna pubblicità. Vedi l'<a href="https://posthog.com/privacy" target="_blank" rel="noopener">informativa privacy di PostHog</a>.</p>
     </section>
 
     <section class="card">
@@ -127,11 +146,11 @@
 
   <!-- ============================ ENGLISH ============================ -->
   <div lang-block="en">
-    <p class="date">Effective July 20, 2026</p>
+    <p class="date">Effective September 18, 2026</p>
 
     <section class="card">
       <h2>In short</h2>
-      <p>Libor X and LiborX Light are apps by Fabrizio Bacchin, and this policy applies to both. The apps <b>do not collect personal data</b>: no accounts, no analytics of their own, no selling of data (if you enable push notifications, only anonymous technical data is registered — see below). <b>Libor X contains no advertising at all.</b> <b>LiborX Light</b>, the free version, shows Google AdMob ads and, in Europe, <b>asks for your consent</b> before requesting even a single ad.</p>
+      <p>Libor X and LiborX Light are apps by Fabrizio Bacchin, and this policy applies to both. The apps <b>do not collect personal data</b>: no accounts, no selling of data, only <b>anonymous usage statistics</b> that cannot identify you (if you enable push notifications, only anonymous technical data is registered — see below). <b>Libor X contains no advertising at all.</b> <b>LiborX Light</b>, the free version, shows Google AdMob ads and, in Europe, <b>asks for your consent</b> before requesting even a single ad.</p>
     </section>
 
     <section class="card">
@@ -160,7 +179,20 @@
 
     <section class="card">
       <h2>Data stored on your device</h2>
-      <p>The apps keep locally, inside their own sandbox container, only the <b>cache of downloaded rates</b> (for offline use) and your <b>preferences</b>; LiborX Light also stores your <b>consent choices</b> there. None of this is transmitted by the apps to third parties.</p>
+      <p>The apps keep locally, inside their own sandbox container, only the <b>cache of downloaded rates</b> (for offline use), your <b>preferences</b> and a <b>session counter</b>, used only to decide when to ask you to rate the app; LiborX Light also stores your <b>consent choices</b> there. None of this is transmitted by the apps to third parties.</p>
+    </section>
+
+    <section class="card">
+      <h2>Usage statistics</h2>
+      <p>To understand how the apps are used we collect <b>anonymous statistics</b> through <b>PostHog</b>, on servers in the <b>European Union</b>. Only events with fixed, predefined names are recorded:</p>
+      <ul>
+        <li>which <b>screen</b> is opened (markets, global, info, detail chart);</li>
+        <li>which <b>rate</b> is opened in detail (for example SOFR or 3-month Term SOFR);</li>
+        <li>a change of <b>range</b> on a rate chart;</li>
+        <li><b>enabling notifications</b>, counted only once;</li>
+        <li>a <b>failed data update</b>, reduced to a generic cause (network or empty data).</li>
+      </ul>
+      <p>Each event also states <b>which of the two apps</b> sent it. PostHog links events to a <b>random installation identifier</b>, not tied to you or to any other service, and receives generic technical information (device model, iOS and app version). <b>No location is recorded</b>: we have also turned off the approximate location PostHog would normally derive from the IP address. No rate values are sent. There is no tracking across other apps or websites, and these statistics feed no advertising. See the <a href="https://posthog.com/privacy" target="_blank" rel="noopener">PostHog privacy policy</a>.</p>
     </section>
 
     <section class="card">
@@ -192,23 +224,271 @@
     </section>
   </div>
 
+  <!-- ============================ FRANÇAIS ============================ -->
+  <div lang-block="fr">
+    <p class="date">En vigueur depuis le 18 septembre 2026</p>
+
+    <section class="card">
+      <h2>En bref</h2>
+      <p>Libor X et LiborX Light sont des applications de Fabrizio Bacchin, et cette politique s'applique aux deux. Les applications <b>ne collectent aucune donnée personnelle</b> : aucun compte, aucune vente de données, seulement des <b>statistiques d'utilisation anonymes</b> qui ne permettent pas de vous identifier (si vous activez les notifications, seules des données techniques anonymes sont enregistrées — voir ci-dessous). <b>Libor X ne contient aucune publicité.</b> <b>LiborX Light</b>, la version gratuite, affiche des annonces Google AdMob et, en Europe, <b>vous demande votre consentement</b> avant de solliciter la moindre annonce.</p>
+    </section>
+
+    <section class="card">
+      <h2>Les deux applications</h2>
+      <table>
+        <tr><th>Application</th><th>Publicité</th></tr>
+        <tr><td>Libor X (payante)</td><td>Aucune. L'application ne contient aucun code publicitaire.</td></tr>
+        <tr><td>LiborX Light (gratuite)</td><td>Bannières et annonces plein écran Google AdMob — voir les sections dédiées.</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Téléchargement des taux</h2>
+      <p>Les taux sont téléchargés depuis des pages publiques hébergées sur <b>GitHub Pages</b>. Comme pour tout site web, GitHub peut enregistrer des données techniques de connexion (par exemple l'adresse IP) selon sa propre <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">déclaration de confidentialité</a>. Les applications n'envoient aucune autre donnée pendant le téléchargement.</p>
+    </section>
+
+    <section class="card">
+      <h2>Notifications</h2>
+      <p>Si vous choisissez d'activer les notifications, l'application enregistre auprès du service <b>Back4App</b> (plateforme Parse) deux informations techniques :</p>
+      <ul>
+        <li>le <b>jeton APNs</b> de l'appareil, généré par Apple, nécessaire pour acheminer les notifications ;</li>
+        <li>un <b>identifiant d'installation anonyme</b>, utilisé pour gérer les envois.</li>
+      </ul>
+      <p>Ces données ne sont pas liées à votre identité et servent uniquement au fonctionnement des notifications. Si vous refusez ou désactivez les notifications dans Réglages, le jeton devient inutilisable ; vous pouvez en demander la suppression en écrivant au contact ci-dessous.</p>
+    </section>
+
+    <section class="card">
+      <h2>Données enregistrées sur votre appareil</h2>
+      <p>Les applications conservent localement, dans leur propre conteneur sandbox, uniquement le <b>cache des taux</b> téléchargés (pour le fonctionnement hors ligne), vos <b>préférences</b> et un <b>compteur de sessions</b>, utilisé seulement pour décider quand vous proposer de noter l'application ; LiborX Light y enregistre aussi vos <b>choix de consentement</b>. Rien de tout cela n'est transmis à des tiers par les applications.</p>
+    </section>
+
+    <section class="card">
+      <h2>Statistiques d'utilisation</h2>
+      <p>Pour comprendre comment les applications sont utilisées, nous collectons des <b>statistiques anonymes</b> via <b>PostHog</b>, sur des serveurs situés dans l'<b>Union européenne</b>. Seuls des événements aux noms fixes, définis à l'avance, sont enregistrés :</p>
+      <ul>
+        <li>quel <b>écran</b> est ouvert (marchés, global, infos, graphique détaillé) ;</li>
+        <li>quel <b>taux</b> est ouvert en détail (par exemple SOFR ou Term SOFR à 3 mois) ;</li>
+        <li>le changement de <b>période</b> sur le graphique d'un taux ;</li>
+        <li>l'<b>activation des notifications</b>, comptée une seule fois ;</li>
+        <li>l'<b>échec de mise à jour des données</b>, réduit à une cause générique (réseau ou données vides).</li>
+      </ul>
+      <p>Chaque événement indique aussi <b>laquelle des deux applications</b> l'a envoyé. PostHog associe les événements à un <b>identifiant d'installation aléatoire</b>, qui n'est lié ni à vous ni à un autre service, et reçoit des informations techniques génériques (modèle de l'appareil, version d'iOS et de l'application). <b>Aucune position n'est enregistrée</b> : nous avons aussi désactivé la localisation approximative que PostHog déduirait normalement de l'adresse IP. Aucune valeur de taux n'est envoyée. Il n'y a aucun suivi entre applications ou sites, et ces statistiques n'alimentent aucune publicité. Voir la <a href="https://posthog.com/privacy" target="_blank" rel="noopener">politique de confidentialité de PostHog</a>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Publicité — LiborX Light uniquement</h2>
+      <p>LiborX Light est gratuite grâce aux annonces — une bannière sur les écrans principaux et, de temps en temps, des annonces plein écran — diffusées par <b>Google AdMob</b>. Pour sélectionner et mesurer les annonces, Google peut traiter :</p>
+      <ul>
+        <li>les <b>identifiants techniques</b> de l'appareil — <b>pas</b> l'IDFA, l'identifiant publicitaire, qui n'est jamais collecté ;</li>
+        <li>l'<b>adresse IP</b> (qui indique une position approximative) et des informations techniques sur l'appareil ;</li>
+        <li>des données d'<b>interaction avec les annonces</b> (affichages, touchers).</li>
+      </ul>
+      <p>La façon dont Google traite ces données est décrite dans les <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">règles de confidentialité de Google</a> et sur la page <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">« Comment Google utilise les informations »</a>. L'application utilise aussi <b>SKAdNetwork</b> d'Apple, le système qui mesure l'efficacité des campagnes de façon agrégée et anonyme. Libor X ne contient rien de tout cela.</p>
+    </section>
+
+    <section class="card">
+      <h2>Votre consentement — LiborX Light uniquement</h2>
+      <p>Au premier lancement, si vous vous trouvez dans l'Espace économique européen ou au Royaume-Uni, l'application affiche le <b>formulaire de consentement</b> de Google : vous pouvez choisir entre des <b>annonces personnalisées</b> et des <b>annonces génériques</b>, non basées sur vos centres d'intérêt. Vous pouvez <b>modifier ou retirer votre choix à tout moment</b> avec le bouton <b>Options de confidentialité</b> dans l'onglet Infos de l'application.</p>
+      <p>L'application <b>ne demande jamais l'autorisation de suivi</b> d'Apple (App Tracking Transparency) et <b>ne collecte pas l'identifiant publicitaire (IDFA)</b> : sans cette autorisation, iOS ne le rend pas disponible, il n'est donc ni utilisé ni transmis.</p>
+      <p>L'application fonctionne de la même façon quel que soit votre choix : seules les annonces changent, jamais les fonctions.</p>
+    </section>
+
+    <section class="card">
+      <h2>Vos droits et contact</h2>
+      <p>Vous pouvez retirer votre consentement à tout moment (voir ci-dessus) et introduire une réclamation auprès de votre autorité de protection des données. Pour toute question sur cette politique, écrivez à <a href="mailto:bacchin@tiscali.it?subject=Libor%20X%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Pour exercer vos droits sur les données traitées par Google, utilisez les canaux indiqués dans les règles de confidentialité de Google.</p>
+    </section>
+
+    <section class="card">
+      <h2>Modifications</h2>
+      <p>Toute modification de cette politique sera publiée sur cette page, avec la mise à jour de la date d'entrée en vigueur.</p>
+    </section>
+  </div>
+
+  <!-- ============================ DEUTSCH ============================ -->
+  <div lang-block="de">
+    <p class="date">Gültig ab 18. September 2026</p>
+
+    <section class="card">
+      <h2>Kurz gesagt</h2>
+      <p>Libor X und LiborX Light sind Apps von Fabrizio Bacchin, und diese Erklärung gilt für beide. Die Apps <b>erheben keine personenbezogenen Daten</b>: keine Konten, kein Verkauf von Daten, nur <b>anonyme Nutzungsstatistiken</b>, die Sie nicht identifizieren (wenn Sie Mitteilungen aktivieren, werden nur anonyme technische Daten registriert — siehe unten). <b>Libor X enthält keinerlei Werbung.</b> <b>LiborX Light</b>, die kostenlose Version, zeigt Anzeigen von Google AdMob und <b>bittet Sie in Europa um Ihre Einwilligung</b>, bevor auch nur eine einzige Anzeige angefordert wird.</p>
+    </section>
+
+    <section class="card">
+      <h2>Die beiden Apps</h2>
+      <table>
+        <tr><th>App</th><th>Werbung</th></tr>
+        <tr><td>Libor X (kostenpflichtig)</td><td>Keine. Die App enthält keinen Werbecode.</td></tr>
+        <tr><td>LiborX Light (kostenlos)</td><td>Banner und Vollbildanzeigen von Google AdMob — siehe die entsprechenden Abschnitte.</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Download der Zinsdaten</h2>
+      <p>Die Zinssätze werden von öffentlichen Seiten auf <b>GitHub Pages</b> geladen. Wie bei jeder Website kann GitHub technische Verbindungsdaten (etwa die IP-Adresse) gemäß seiner eigenen <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Datenschutzerklärung</a> protokollieren. Die Apps senden beim Download keine weiteren Daten.</p>
+    </section>
+
+    <section class="card">
+      <h2>Mitteilungen</h2>
+      <p>Wenn Sie Mitteilungen aktivieren, registriert die App beim Dienst <b>Back4App</b> (Parse-Plattform) zwei technische Angaben:</p>
+      <ul>
+        <li>das <b>APNs-Token</b> des Geräts, von Apple erzeugt und für die Zustellung der Mitteilungen erforderlich;</li>
+        <li>eine <b>anonyme Installationskennung</b>, die zur Verwaltung der Zustellungen dient.</li>
+      </ul>
+      <p>Diese Daten sind nicht mit Ihrer Identität verknüpft und dienen ausschließlich dem Betrieb der Mitteilungen. Wenn Sie Mitteilungen ablehnen oder in den Einstellungen deaktivieren, wird das Token unbrauchbar; seine Löschung können Sie über den unten genannten Kontakt verlangen.</p>
+    </section>
+
+    <section class="card">
+      <h2>Auf Ihrem Gerät gespeicherte Daten</h2>
+      <p>Die Apps speichern lokal, in ihrem eigenen Sandbox-Container, nur den <b>Cache der geladenen Zinssätze</b> (für die Offline-Nutzung), Ihre <b>Einstellungen</b> und einen <b>Sitzungszähler</b>, der nur dazu dient zu entscheiden, wann Sie um eine Bewertung der App gebeten werden; LiborX Light speichert dort außerdem Ihre <b>Einwilligungsentscheidungen</b>. Nichts davon wird von den Apps an Dritte übermittelt.</p>
+    </section>
+
+    <section class="card">
+      <h2>Nutzungsstatistiken</h2>
+      <p>Um zu verstehen, wie die Apps genutzt werden, erfassen wir <b>anonyme Statistiken</b> über <b>PostHog</b>, auf Servern in der <b>Europäischen Union</b>. Aufgezeichnet werden ausschließlich Ereignisse mit festen, vorab bestimmten Namen:</p>
+      <ul>
+        <li>welcher <b>Bildschirm</b> geöffnet wird (Märkte, Global, Info, Detaildiagramm);</li>
+        <li>welcher <b>Zinssatz</b> im Detail geöffnet wird (zum Beispiel SOFR oder Term SOFR für 3 Monate);</li>
+        <li>ein Wechsel des <b>Zeitraums</b> im Diagramm eines Zinssatzes;</li>
+        <li>die <b>Aktivierung von Mitteilungen</b>, nur einmal gezählt;</li>
+        <li>eine <b>fehlgeschlagene Datenaktualisierung</b>, reduziert auf eine allgemeine Ursache (Netzwerk oder leere Daten).</li>
+      </ul>
+      <p>Jedes Ereignis gibt außerdem an, <b>welche der beiden Apps</b> es gesendet hat. PostHog ordnet die Ereignisse einer <b>zufälligen Installationskennung</b> zu, die weder mit Ihnen noch mit einem anderen Dienst verknüpft ist, und erhält allgemeine technische Angaben (Gerätemodell, iOS- und App-Version). <b>Es wird kein Standort erfasst</b>: Auch den ungefähren Standort, den PostHog normalerweise aus der IP-Adresse ableiten würde, haben wir deaktiviert. Es werden keine Zinswerte übermittelt. Es findet kein app- oder seitenübergreifendes Tracking statt, und diese Statistiken fließen in keine Werbung ein. Siehe die <a href="https://posthog.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von PostHog</a>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Werbung — nur LiborX Light</h2>
+      <p>LiborX Light ist dank Anzeigen kostenlos — ein Banner auf den Hauptbildschirmen und gelegentliche Vollbildanzeigen —, die von <b>Google AdMob</b> ausgeliefert werden. Um Anzeigen auszuwählen und zu messen, kann Google Folgendes verarbeiten:</p>
+      <ul>
+        <li>die <b>technischen Kennungen</b> des Geräts — <b>nicht</b> die Werbe-ID (IDFA), die niemals erhoben wird;</li>
+        <li>die <b>IP-Adresse</b> (die einen ungefähren Standort angibt) und technische Geräteinformationen;</li>
+        <li>Daten zur <b>Interaktion mit Anzeigen</b> (Einblendungen, Tipps).</li>
+      </ul>
+      <p>Wie Google diese Daten verarbeitet, ist in der <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a> und auf der Seite <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">„Wie Google Daten verwendet“</a> beschrieben. Die App verwendet außerdem Apples <b>SKAdNetwork</b>, das System, das die Wirksamkeit von Kampagnen aggregiert und anonym misst. Libor X enthält nichts davon.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ihre Einwilligung — nur LiborX Light</h2>
+      <p>Beim ersten Start zeigt die App, wenn Sie sich im Europäischen Wirtschaftsraum oder im Vereinigten Königreich befinden, das <b>Einwilligungsformular</b> von Google: Sie können zwischen <b>personalisierten Anzeigen</b> und <b>allgemeinen Anzeigen</b> wählen, die nicht auf Ihren Interessen beruhen. Sie können Ihre Wahl <b>jederzeit ändern oder widerrufen</b> — über die Schaltfläche <b>Datenschutzoptionen</b> im Tab Info der App.</p>
+      <p>Die App <b>fragt niemals nach Apples Tracking-Erlaubnis</b> (App Tracking Transparency) und <b>erhebt die Werbe-ID (IDFA) nicht</b>: Ohne diese Erlaubnis stellt iOS sie nicht bereit, sie wird also weder verwendet noch übermittelt.</p>
+      <p>Die App funktioniert unabhängig von Ihrer Wahl gleich: Es ändern sich nur die Anzeigen, nie die Funktionen.</p>
+    </section>
+
+    <section class="card">
+      <h2>Ihre Rechte und Kontakt</h2>
+      <p>Sie können Ihre Einwilligung jederzeit widerrufen (siehe oben) und sich bei Ihrer Datenschutzbehörde beschweren. Bei Fragen zu dieser Erklärung schreiben Sie an <a href="mailto:bacchin@tiscali.it?subject=Libor%20X%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Ihre Rechte bezüglich der von Google verarbeiteten Daten üben Sie über die in der Datenschutzerklärung von Google genannten Kanäle aus.</p>
+    </section>
+
+    <section class="card">
+      <h2>Änderungen</h2>
+      <p>Änderungen dieser Erklärung werden auf dieser Seite veröffentlicht und das Datum des Inkrafttretens entsprechend aktualisiert.</p>
+    </section>
+  </div>
+
+  <!-- ============================ ESPAÑOL ============================ -->
+  <div lang-block="es">
+    <p class="date">En vigor desde el 18 de septiembre de 2026</p>
+
+    <section class="card">
+      <h2>En resumen</h2>
+      <p>Libor X y LiborX Light son apps de Fabrizio Bacchin y esta política se aplica a ambas. Las apps <b>no recopilan datos personales</b>: sin cuentas, sin venta de datos, solo <b>estadísticas de uso anónimas</b> que no permiten identificarte (si activas las notificaciones, solo se registran datos técnicos anónimos — ver más abajo). <b>Libor X no contiene ninguna publicidad.</b> <b>LiborX Light</b>, la versión gratuita, muestra anuncios de Google AdMob y, en Europa, <b>te pide el consentimiento</b> antes de solicitar un solo anuncio.</p>
+    </section>
+
+    <section class="card">
+      <h2>Las dos apps</h2>
+      <table>
+        <tr><th>App</th><th>Publicidad</th></tr>
+        <tr><td>Libor X (de pago)</td><td>Ninguna. La app no contiene código publicitario.</td></tr>
+        <tr><td>LiborX Light (gratuita)</td><td>Banners y anuncios a pantalla completa de Google AdMob — ver las secciones dedicadas.</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Descarga de los tipos</h2>
+      <p>Los tipos se descargan de páginas públicas alojadas en <b>GitHub Pages</b>. Como con cualquier sitio web, GitHub puede registrar datos técnicos de conexión (por ejemplo, la dirección IP) según su propia <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">declaración de privacidad</a>. Las apps no envían ningún otro dato durante la descarga.</p>
+    </section>
+
+    <section class="card">
+      <h2>Notificaciones</h2>
+      <p>Si decides activar las notificaciones, la app registra en el servicio <b>Back4App</b> (plataforma Parse) dos datos técnicos:</p>
+      <ul>
+        <li>el <b>token APNs</b> del dispositivo, generado por Apple, necesario para entregar las notificaciones;</li>
+        <li>un <b>identificador de instalación anónimo</b>, usado para gestionar los envíos.</li>
+      </ul>
+      <p>Estos datos no están vinculados a tu identidad y se usan exclusivamente para el funcionamiento de las notificaciones. Si rechazas o desactivas las notificaciones en Ajustes, el token deja de ser utilizable; puedes solicitar su eliminación escribiendo al contacto indicado abajo.</p>
+    </section>
+
+    <section class="card">
+      <h2>Datos guardados en tu dispositivo</h2>
+      <p>Las apps conservan localmente, en su propio contenedor sandbox, solo la <b>caché de los tipos</b> descargados (para el funcionamiento sin conexión), tus <b>preferencias</b> y un <b>contador de sesiones</b>, usado solo para decidir cuándo pedirte que valores la app; LiborX Light guarda además tus <b>decisiones de consentimiento</b>. Nada de esto se transmite a terceros desde las apps.</p>
+    </section>
+
+    <section class="card">
+      <h2>Estadísticas de uso</h2>
+      <p>Para entender cómo se usan las apps recopilamos <b>estadísticas anónimas</b> mediante <b>PostHog</b>, en servidores de la <b>Unión Europea</b>. Solo se registran eventos con nombres fijos, definidos de antemano:</p>
+      <ul>
+        <li>qué <b>pantalla</b> se abre (mercados, global, info, gráfico de detalle);</li>
+        <li>qué <b>tipo</b> se abre en detalle (por ejemplo SOFR o Term SOFR a 3 meses);</li>
+        <li>el cambio de <b>intervalo</b> en el gráfico de un tipo;</li>
+        <li>la <b>activación de las notificaciones</b>, contada una sola vez;</li>
+        <li>una <b>actualización de datos fallida</b>, reducida a una causa genérica (red o datos vacíos).</li>
+      </ul>
+      <p>Cada evento indica también <b>cuál de las dos apps</b> lo envió. PostHog asocia los eventos a un <b>identificador de instalación aleatorio</b>, que no está vinculado a ti ni a ningún otro servicio, y recibe información técnica genérica (modelo del dispositivo, versión de iOS y de la app). <b>No se registra ninguna ubicación</b>: hemos desactivado también la ubicación aproximada que PostHog deduciría normalmente de la dirección IP. No se envía ningún valor de los tipos. No hay seguimiento entre apps o sitios, y estas estadísticas no alimentan ninguna publicidad. Consulta la <a href="https://posthog.com/privacy" target="_blank" rel="noopener">política de privacidad de PostHog</a>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Publicidad — solo LiborX Light</h2>
+      <p>LiborX Light es gratuita gracias a los anuncios — un banner en las pantallas principales y, de vez en cuando, anuncios a pantalla completa — servidos por <b>Google AdMob</b>. Para seleccionar y medir los anuncios, Google puede tratar:</p>
+      <ul>
+        <li>los <b>identificadores técnicos</b> del dispositivo — <b>no</b> el IDFA, el identificador publicitario, que nunca se recopila;</li>
+        <li>la <b>dirección IP</b> (que indica una ubicación aproximada) e información técnica del dispositivo;</li>
+        <li>datos de <b>interacción con los anuncios</b> (impresiones, toques).</li>
+      </ul>
+      <p>Cómo trata Google estos datos se describe en la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidad de Google</a> y en la página <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">«Cómo utiliza Google la información»</a>. La app usa además <b>SKAdNetwork</b> de Apple, el sistema que mide la eficacia de las campañas de forma agregada y anónima. Libor X no contiene nada de esto.</p>
+    </section>
+
+    <section class="card">
+      <h2>Tu consentimiento — solo LiborX Light</h2>
+      <p>En el primer inicio, si te encuentras en el Espacio Económico Europeo o en el Reino Unido, la app muestra el <b>formulario de consentimiento</b> de Google: puedes elegir entre <b>anuncios personalizados</b> y <b>anuncios genéricos</b>, no basados en tus intereses. Puedes <b>cambiar o retirar tu elección en cualquier momento</b> con el botón <b>Opciones de privacidad</b> en la pestaña Info de la app.</p>
+      <p>La app <b>nunca solicita el permiso de seguimiento</b> de Apple (App Tracking Transparency) y <b>no recopila el identificador publicitario (IDFA)</b>: sin ese permiso iOS no lo pone a disposición, por lo que no se usa ni se transmite.</p>
+      <p>La app funciona igual sea cual sea tu elección: solo cambian los anuncios, nunca las funciones.</p>
+    </section>
+
+    <section class="card">
+      <h2>Tus derechos y contacto</h2>
+      <p>Puedes retirar tu consentimiento en cualquier momento (ver arriba) y presentar una reclamación ante tu autoridad de protección de datos. Para cualquier pregunta sobre esta política escribe a <a href="mailto:bacchin@tiscali.it?subject=Libor%20X%20%E2%80%94%20Privacy">bacchin@tiscali.it</a>. Para ejercer tus derechos sobre los datos tratados por Google, utiliza los canales indicados en la política de privacidad de Google.</p>
+    </section>
+
+    <section class="card">
+      <h2>Cambios</h2>
+      <p>Cualquier cambio en esta política se publicará en esta página, actualizando la fecha de entrada en vigor.</p>
+    </section>
+  </div>
+
   <p class="foot">
     <span lang-block="it">Libor X e LiborX Light · <a href="support.html">Supporto</a></span>
     <span lang-block="en">Libor X and LiborX Light · <a href="support.html">Support</a></span>
+    <span lang-block="fr">Libor X et LiborX Light · <a href="support.html">Assistance</a></span>
+    <span lang-block="de">Libor X und LiborX Light · <a href="support.html">Support</a></span>
+    <span lang-block="es">Libor X y LiborX Light · <a href="support.html">Soporte</a></span>
   </p>
 </div>
 
 <script>
+  var LANGS = ["it", "en", "fr", "de", "es"];
   function setLang(l) {
+    if (LANGS.indexOf(l) < 0) l = "en";
     document.documentElement.setAttribute("data-lang", l);
     document.documentElement.lang = l;
-    document.getElementById("btn-it").setAttribute("aria-pressed", l === "it");
-    document.getElementById("btn-en").setAttribute("aria-pressed", l === "en");
+    LANGS.forEach(function (code) {
+      var btn = document.getElementById("btn-" + code);
+      if (btn) btn.setAttribute("aria-pressed", code === l);
+    });
     try { localStorage.setItem("liborx-lang", l); } catch (e) {}
   }
   var saved = null;
   try { saved = localStorage.getItem("liborx-lang"); } catch (e) {}
-  setLang(saved || ((navigator.language || "en").toLowerCase().indexOf("it") === 0 ? "it" : "en"));
+  var device = (navigator.language || "en").toLowerCase().slice(0, 2);
+  setLang(saved || (LANGS.indexOf(device) >= 0 ? device : "en"));
 </script>
 <noscript><style>[lang-block]{display:block !important}</style></noscript>
 </body>
