@@ -61,6 +61,9 @@ function documento(situazioni) {
     Object.entries(s.testi).map(([l, t]) =>
       `<dx223:value xsi:type="dx223:MultilingualStringValue" lang="${l}-CH">${t}</dx223:value>`).join("") +
     `</dx223:values></dx223:comment><dx223:commentType>description</dx223:commentType></dx223:generalPublicComment>` +
+    (s.nota ? `<dx223:generalPublicComment xsi:type="dx223:Comment"><dx223:comment><dx223:values>` +
+      `<dx223:value xsi:type="dx223:MultilingualStringValue" lang="de-CH">${s.nota}</dx223:value>` +
+      `</dx223:values></dx223:comment><dx223:commentType>internalNote</dx223:commentType></dx223:generalPublicComment>` : "") +
     (s.punti || []).map((p) =>
       `<dx223:groupOfLocations><dx223:specificLocation>${p}</dx223:specificLocation></dx223:groupOfLocations>`).join("") +
     `</dx223:situationRecord></dx223:situation>`).join("") +
@@ -302,6 +305,77 @@ const TUNNEL_ALTROVE = {
   ok("senza qualificatore lo stesso periodo e' continuo: vale a mezzogiorno",
      m.inVigore(Object.assign({}, notturno, { qualificatori: [] }),
                 alle(8, 10)) === true);
+
+  // --- i giorni della settimana dalla nota interna (ADEV-698, 19.09.2026) ---
+  //
+  // Il 18 e il 19.09.2026, venerdi' e sabato sera, l'app dava il tunnel
+  // chiuso ed era aperto. Il record vero porta la nota interna «Mo-FR,
+  // jeweils in den Nächten von 20:00 bis 05:00 Uhr», e il calendario
+  // ufficiale dice «4 notti, da lunedì sera a venerdì mattina».
+  // Settembre 2026: il 14 e il 21 sono lunedi', il 18 venerdi'. Ora estiva:
+  // le 18:00Z sono le 20:00 in Svizzera.
+  const NOTA_VERA = "Mo-FR, jeweils in den Nächten von 20:00 bis 05:00 Uhr";
+  const conNota = (nota) => Object.assign({}, notturno, { notaInterna: nota });
+  const feriale = conNota(NOTA_VERA);
+  ok("Mo-Fr: lunedi' alle 20:00 chiuso", m.inVigore(feriale, alle(14, 18)) === true);
+  ok("  lunedi' a mezzanotte e mezza (ancora lunedi' in UTC) chiuso",
+     m.inVigore(feriale, alle(14, 22, 30)) === true);
+  ok("  giovedi' alle 23:00 chiuso", m.inVigore(feriale, alle(17, 21)) === true);
+  ok("  venerdi' alle 04:00, fine della notte di giovedi', chiuso",
+     m.inVigore(feriale, alle(18, 2)) === true);
+  ok("  venerdi' alle 21:56 APERTO (il caso del 18.09)",
+     m.inVigore(feriale, alle(18, 19, 56)) === false);
+  ok("  sabato alle 00:30, ancora la notte di venerdi', APERTO",
+     m.inVigore(feriale, alle(18, 22, 30)) === false);
+  ok("  sabato alle 20:05 APERTO (il caso del 19.09)",
+     m.inVigore(feriale, alle(19, 18, 5)) === false);
+  ok("  domenica alle 23:00 APERTO", m.inVigore(feriale, alle(20, 21)) === false);
+  ok("  lunedi' 21 alle 20:00 di nuovo chiuso", m.inVigore(feriale, alle(21, 18)) === true);
+  ok("  lunedi' 21 alle 19:30 non ancora", m.inVigore(feriale, alle(21, 17, 30)) === false);
+  ok("  martedi' 22 alle 03:00 chiuso", m.inVigore(feriale, alle(22, 1)) === true);
+  ok("  a mezzogiorno di mercoledi' no: la nota non allarga la fascia",
+     m.inVigore(feriale, alle(16, 10)) === false);
+
+  const daDomenica = conNota("So - Fr, jeweils nachts");
+  ok("So - Fr: domenica sera chiuso", m.inVigore(daDomenica, alle(20, 21)) === true);
+  ok("  venerdi' sera aperto", m.inVigore(daDomenica, alle(18, 21)) === false);
+  const coppie = conNota("So/Mo Do/Fr");
+  ok("So/Mo Do/Fr: la notte di domenica chiusa", m.inVigore(coppie, alle(20, 21)) === true);
+  ok("  quella di giovedi' chiusa", m.inVigore(coppie, alle(17, 21)) === true);
+  ok("  quella di lunedi' aperta", m.inVigore(coppie, alle(21, 21)) === false);
+
+  // Tutto quello che non sappiamo leggere non restringe niente: sabato sera
+  // resta chiuso, come prima di ADEV-698. Nel dubbio, chiuso.
+  ok("nota assente: come prima, chiuso anche il sabato",
+     m.inVigore(notturno, alle(19, 21)) === true);
+  ok("  «Mo Do» non e' una forma che leggiamo: chiuso",
+     m.inVigore(conNota("Mo Do"), alle(19, 21)) === true);
+  ok("  «Mo-» nemmeno: chiuso", m.inVigore(conNota("Mo-"), alle(19, 21)) === true);
+  ok("  una coppia che non e' una notte («Do/Sa»): chiuso",
+     m.inVigore(conNota("Do/Sa"), alle(19, 21)) === true);
+  ok("  una nota che non comincia coi giorni: chiuso",
+     m.inVigore(conNota("Umleitung via Pass, Mo-Fr"), alle(19, 21)) === true);
+  ok("  «Montag» non e' «Mo»: chiuso",
+     m.inVigore(conNota("Montag bis Freitag"), alle(19, 21)) === true);
+  ok("la nota non tocca un periodo continuo: senza qualificatore vale a mezzogiorno",
+     m.inVigore(Object.assign({}, feriale, { qualificatori: [] }), alle(19, 10)) === true);
+
+  {
+    const s = situazione(Object.assign({}, CHIUSURA_SENZA_DEL, {
+      id: "situation.900020.1", nota: NOTA_VERA,
+      periodo: ["2026-09-07T18:00:00Z", "2026-09-25T03:00:00Z"],
+      qualificatore: "duringTheNight",
+    }));
+    ok("il parser tiene la nota interna a parte", s.notaInterna === NOTA_VERA);
+    ok("  e la nota non finisce nel testo pubblico",
+       !Object.values(s.texts).some((t) => t.includes("jeweils")));
+    ok("  e dal documento vero il sabato sera e' aperto",
+       m.inVigore(s, alle(19, 18, 5)) === false);
+    ok("  e il lunedi' sera chiuso", m.inVigore(s, alle(21, 18, 5)) === true);
+  }
+  ok("il catalogo dei programmati il sabato sera non la mette nella vista",
+     Object.keys(m.conProgrammate({}, [Object.assign({}, feriale, { programmata: true })],
+                                  alle(19, 18, 5))).length === 0);
 
   // --- il catalogo dei programmati entra nella vista solo quando vale ------
   const programmata = Object.assign({}, notturno, { programmata: true });

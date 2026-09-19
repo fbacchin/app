@@ -488,6 +488,74 @@ _CONTINUO = _ET.fromstring("""
 ok("senza qualificatore lo stesso periodo e' continuo: vale anche a mezzogiorno",
    c.in_vigore(_CONTINUO, _alle(8, 10)) is True)
 
+# --- i giorni della settimana dalla nota interna (ADEV-698, 19.09.2026) -----
+# Il 18 e il 19.09.2026, venerdi' e sabato sera, l'app dava il tunnel chiuso
+# ed era aperto. Il record vero porta «Mo-FR, jeweils in den Nächten von 20:00
+# bis 05:00 Uhr»; il calendario ufficiale dice «4 notti, da lunedì sera a
+# venerdì mattina». Il 14 e il 21 settembre 2026 sono lunedi'. Stessi casi
+# delle prove del proxy: le due regole devono dire la stessa cosa.
+_NOTA_VERA = "Mo-FR, jeweils in den Nächten von 20:00 bis 05:00 Uhr"
+_v = lambda nota, g, h, mi=0: c.in_vigore(_NOTTURNO, _alle(g, h, mi), nota)
+ok("Mo-Fr: lunedi' alle 20:00 chiuso", _v(_NOTA_VERA, 14, 18) is True)
+ok("  lunedi' a mezzanotte e mezza chiuso", _v(_NOTA_VERA, 14, 22, 30) is True)
+ok("  giovedi' alle 23:00 chiuso", _v(_NOTA_VERA, 17, 21) is True)
+ok("  venerdi' alle 04:00 chiuso", _v(_NOTA_VERA, 18, 2) is True)
+ok("  venerdi' alle 21:56 APERTO (il caso del 18.09)", _v(_NOTA_VERA, 18, 19, 56) is False)
+ok("  sabato alle 00:30 APERTO", _v(_NOTA_VERA, 18, 22, 30) is False)
+ok("  sabato alle 20:05 APERTO (il caso del 19.09)", _v(_NOTA_VERA, 19, 18, 5) is False)
+ok("  domenica alle 23:00 APERTO", _v(_NOTA_VERA, 20, 21) is False)
+ok("  lunedi' 21 alle 20:00 di nuovo chiuso", _v(_NOTA_VERA, 21, 18) is True)
+ok("  martedi' 22 alle 03:00 chiuso", _v(_NOTA_VERA, 22, 1) is True)
+ok("So - Fr: domenica sera chiuso", _v("So - Fr, nachts", 20, 21) is True)
+ok("  venerdi' sera aperto", _v("So - Fr, nachts", 18, 21) is False)
+ok("So/Mo Do/Fr: la notte di domenica chiusa", _v("So/Mo Do/Fr", 20, 21) is True)
+ok("  quella di lunedi' aperta", _v("So/Mo Do/Fr", 21, 21) is False)
+ok("nota assente: come prima, chiuso anche il sabato", _v(None, 19, 21) is True)
+ok("  «Mo Do» non la leggiamo: chiuso", _v("Mo Do", 19, 21) is True)
+ok("  «Mo-» nemmeno: chiuso", _v("Mo-", 19, 21) is True)
+ok("  «Do/Sa» non e' una notte: chiuso", _v("Do/Sa", 19, 21) is True)
+ok("  «Montag bis Freitag» non e' una sigla: chiuso", _v("Montag bis Freitag", 19, 21) is True)
+
+# Dal documento: la nota sta in un record, il testo in un altro della stessa
+# situazione, come nel feed vero. Si ferma l'orologio di `extract`.
+_DOC_NOTA = f"""<?xml version="1.0" encoding="UTF-8"?>
+<d2LogicalModel xmlns="http://datex2.eu/schema/2/2_0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<situation id="situation.645705"><situationRecord xsi:type="RoadOrCarriagewayOrLaneManagement" id="situation.645705.1.1.1">
+  <situationRecordVersionTime>2026-08-17T12:41:48Z</situationRecordVersionTime>
+  <validity><validityStatus>active</validityStatus><validityTimeSpecification>
+    <overallStartTime>2026-08-17T12:38:00Z</overallStartTime>
+    <validPeriod><startOfPeriod>2026-09-07T18:00:00Z</startOfPeriod>
+      <endOfPeriod>2026-09-25T03:00:00Z</endOfPeriod></validPeriod>
+  </validityTimeSpecification>
+  <validityExtension><elementEnumerationExtension><element>validityStatus</element>
+    <value>duringTheNight</value></elementEnumerationExtension></validityExtension></validity>
+  <generalPublicComment><comment><values><value lang="it-CH">Approvato: A2 Chiasso &lt;-&gt; S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso cantiere</value></values></comment>
+    <commentType>description</commentType></generalPublicComment>
+  <groupOfLocations><specificLocation>11187</specificLocation></groupOfLocations>
+  <alertCDirectionCoded>both</alertCDirectionCoded>
+</situationRecord>
+<situationRecord xsi:type="RoadOrCarriagewayOrLaneManagement" id="situation.645705.1.1.2">
+  <situationRecordVersionTime>2026-08-17T12:41:48Z</situationRecordVersionTime>
+  <generalPublicComment><comment><values><value lang="de-CH">{_NOTA_VERA}</value></values></comment>
+    <commentType>internalNote</commentType></generalPublicComment>
+</situationRecord></situation></d2LogicalModel>"""
+
+class _Orologio(datetime):
+    fermo = None
+    @classmethod
+    def now(cls, tz=None):
+        return cls.fermo
+_vero = c.datetime
+c.datetime = _Orologio
+try:
+    _Orologio.fermo = _alle(19, 18, 5)
+    ok("dal documento, sabato alle 20:05: tunnel APERTO", c.extract(_DOC_NOTA)[4]["chiuso"] is False)
+    _Orologio.fermo = _alle(21, 18, 5)
+    ok("  lunedi' alle 20:05: tunnel chiuso", c.extract(_DOC_NOTA)[4]["chiuso"] is True)
+finally:
+    c.datetime = _vero
+
 n = sum(1 for _, e in prove if e)
 print("=== collector: corridoio, chiusura, push ===")
 for nome, esito in prove:

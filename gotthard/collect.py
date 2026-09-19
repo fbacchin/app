@@ -19,6 +19,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 ENDPOINT = "https://api.opentransportdata.swiss/TDP/Soap_Datex2/TrafficSituations/Pull"
 SOAP_ACTION = "http://opentransportdata.swiss/TDP/Soap_Datex2/Pull/v1/pullTrafficMessages"
@@ -131,15 +132,76 @@ QUALIFICATORI_OPACHI = {"severalTimes"}
 # oraria, e' l'opposto — vale da adesso e fino a nuovo avviso, ed e' come era
 # scritta la chiusura del 03.08.2026.
 #
-# NON leggiamo i giorni della settimana, di proposito: la chiusura del
-# Gottardo porta «Mo-FR, jeweils in den Nächten von 20:00 bis 05:00 Uhr» in
-# una nota interna, ma su 1657 record solo CINQUE dicono qualcosa sui giorni,
-# in cinque forme diverse fra loro («So - Fr», «So/Mo Do/Fr», «Mo Do», «Mo Di
-# Do», «Mo-»). Leggere quella prosa e' lo stesso errore del 03.08 in vestito
-# nuovo. Senza il giorno la finestra e' piu' larga del vero e il sabato notte
-# possiamo annunciare una chiusura che non c'e': e' il difetto meno grave dei
-# due — chi legge "chiuso" e trova aperto perde un minuto, chi legge "libera"
-# e trova il tunnel sbarrato ha fatto il viaggio per niente.
+# I GIORNI DELLA SETTIMANA, dalla nota interna (ADEV-698, 19.09.2026).
+# Stessa regola del proxy (`main.js`, `giorniDallaNota`): le due devono dire
+# la stessa cosa, o l'app e le notifiche si contraddicono.
+#
+# Fino a oggi non li leggevamo, di proposito: su 1657 record `duringTheNight`
+# solo CINQUE dicono qualcosa sui giorni, in cinque forme diverse. Il prezzo
+# si e' visto il 18 e 19.09.2026: la chiusura porta «Mo-FR, jeweils in den
+# Nächten von 20:00 bis 05:00 Uhr» e l'app dava il tunnel chiuso anche
+# venerdi', sabato e domenica notte, con il tunnel aperto.
+#
+# La fonte non ha un campo per i giorni e il cookbook non parla di
+# ricorrenze: QUESTA REGOLA LA DECIDIAMO NOI.
+#   - si legge solo l'inizio della nota, in due forme: un intervallo
+#     («Mo-Fr», «So - Fr») o coppie di notti («So/Mo Do/Fr»);
+#   - per una finestra che scavalca la mezzanotte una notte vale se il giorno
+#     della SERA e quello della MATTINA stanno tutti e due nell'intervallo:
+#     «Mo-Fr» sono le quattro notti da lunedi' sera a venerdi' mattina, come
+#     nel calendario ufficiale;
+#   - i giorni si contano all'ora svizzera;
+#   - qualunque altra forma, o nessuna nota, non restringe niente: nel dubbio,
+#     chiuso, come prima.
+GIORNI_NOTA = {"so": 6, "mo": 0, "di": 1, "mi": 2, "do": 3, "fr": 4, "sa": 5}  # weekday(): lunedi' = 0
+_SIGLA = r"(mo|di|mi|do|fr|sa|so)"
+NOTA_INTERVALLO = re.compile(r"^\s*" + _SIGLA + r"\s*-\s*" + _SIGLA + r"(?![a-z])", re.I)
+NOTA_COPPIE = re.compile(r"^\s*(" + _SIGLA + r"\s*/\s*" + _SIGLA
+                         + r"(?:\s+" + _SIGLA + r"\s*/\s*" + _SIGLA + r")*)(?![a-z/])", re.I)
+ZURIGO = ZoneInfo("Europe/Zurich")
+
+
+def giorni_dalla_nota(nota):
+    """I giorni della nota interna: ("intervallo", {giorni}) per «Mo-Fr»,
+    ("notti", {sere}) per «So/Mo Do/Fr», None se non la sappiamo leggere."""
+    if not nota:
+        return None
+    m = NOTA_INTERVALLO.match(nota)
+    if m:
+        da, a = GIORNI_NOTA[m.group(1).lower()], GIORNI_NOTA[m.group(2).lower()]
+        giorni, g = set(), da
+        while True:
+            giorni.add(g)
+            if g == a:
+                break
+            g = (g + 1) % 7
+        return ("intervallo", giorni)
+    m = NOTA_COPPIE.match(nota)
+    if m:
+        sere = set()
+        for coppia in re.split(r"\s+(?=[a-z])", m.group(1).lower()):
+            sera, mattina = (GIORNI_NOTA[x.strip()] for x in coppia.split("/"))
+            if mattina != (sera + 1) % 7:
+                return None          # «Do/Sa» non e' una notte
+            sere.add(sera)
+        return ("notti", sere)
+    return None
+
+
+def giorno_ammesso(regola, now, scavalca_mezzanotte):
+    """Il giorno di `now` e' fra quelli della nota? Senza regola, si'."""
+    if not regola:
+        return True
+    tipo, giorni = regola
+    locale = now.astimezone(ZURIGO)
+    if not scavalca_mezzanotte:
+        return locale.weekday() in giorni if tipo == "intervallo" else True
+    # Dopo mezzogiorno siamo nella sera della notte, prima nella mattina.
+    sera = locale.weekday() if locale.hour >= 12 else (locale.weekday() - 1) % 7
+    if tipo == "intervallo":
+        return sera in giorni and (sera + 1) % 7 in giorni
+    return sera in giorni
+
 
 # La direzione come la dichiara la fonte, non come la si indovina dal testo.
 # Verificato il 03.08.2026 su 50 concordanze e zero contraddizioni.
@@ -386,7 +448,7 @@ def direzione_codificata(record):
     return None
 
 
-def dentro_finestra_ricorrente(da, a, now):
+def dentro_finestra_ricorrente(da, a, now, regola=None):
     """`now` cade nella finestra che si RIPETE dentro il periodo?
 
     Due condizioni: dentro l'inviluppo (le date) e dentro la fascia oraria
@@ -403,10 +465,12 @@ def dentro_finestra_ricorrente(da, a, now):
     minuti = lambda t: t.hour * 60 + t.minute
     inizio, fine, ora = minuti(da), minuti(a), minuti(now)
     if inizio == fine:
-        return True                       # finestra piena
+        return giorno_ammesso(regola, now, False)    # finestra piena
     if inizio < fine:
-        return inizio <= ora < fine       # dentro la giornata
-    return ora >= inizio or ora < fine    # a cavallo della mezzanotte
+        dentro = inizio <= ora < fine     # dentro la giornata
+    else:
+        dentro = ora >= inizio or ora < fine    # a cavallo della mezzanotte
+    return dentro and giorno_ammesso(regola, now, inizio > fine)
 
 
 def qualificatori_di(record):
@@ -422,7 +486,7 @@ def qualificatori_di(record):
     return fuori
 
 
-def in_vigore(record, now):
+def in_vigore(record, now, nota=None):
     """Il messaggio vale ADESSO, o parla di qualcosa di programmato?
 
     Domande, tutte su dati dichiarati dalla fonte:
@@ -450,13 +514,14 @@ def in_vigore(record, now):
     periodi = [p for p in record.iter() if local(p.tag) == "validPeriod"]
     if not periodi:
         return not ricorrente
+    regola = giorni_dalla_nota(nota) if ricorrente else None
     for p in periodi:
         da = next((parse_time((c.text or "").strip()) for c in p
                    if local(c.tag) == "startOfPeriod"), None)
         a = next((parse_time((c.text or "").strip()) for c in p
                   if local(c.tag) == "endOfPeriod"), None)
         if ricorrente:
-            if dentro_finestra_ricorrente(da, a, now):
+            if dentro_finestra_ricorrente(da, a, now, regola):
                 return True
         elif (da is None or da <= now) and (a is None or a >= now):
             return True
@@ -500,6 +565,23 @@ def extract(xml_data):
     revoked_ids = {}
     tunnel = {"chiuso": False, "revocato": False, "direzione": None, "testo": None}
 
+    # La nota interna puo' stare in un record diverso da quello col testo:
+    # si raccoglie per SITUAZIONE (R3) e si da' a tutti i suoi record.
+    nota_di = {}
+    for sit in (e for e in root.iter() if local(e.tag) == "situation"):
+        note = []
+        for gpc in (c for c in sit.iter() if local(c.tag) == "generalPublicComment"):
+            ctype = next((ct.text for ct in gpc.iter() if local(ct.tag) == "commentType"), "")
+            if (ctype or "").strip() != "internalNote":
+                continue
+            for value in (v for v in gpc.iter() if local(v.tag) == "value"):
+                pezzo = (value.text or "").strip()
+                if pezzo and pezzo not in note:
+                    note.append(pezzo)
+        if note:
+            for rec in (r for r in sit.iter() if local(r.tag) == "situationRecord"):
+                nota_di[rec] = " — ".join(note)
+
     for record in (e for e in root.iter() if local(e.tag) == "situationRecord"):
         typename = localtype(record.get(xsi_type, ""))
 
@@ -534,7 +616,7 @@ def extract(xml_data):
         if chiusura_del_tunnel(texts, punti):
             if revoked:
                 tunnel["revocato"] = True
-            elif in_vigore(record, now):
+            elif in_vigore(record, now, nota_di.get(record)):
                 tunnel["chiuso"] = True
                 tunnel["direzione"] = direzione_codificata(record)
                 tunnel["testo"] = text

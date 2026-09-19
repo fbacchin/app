@@ -545,18 +545,98 @@ const QUALIFICATORI_OPACHI = new Set(["severalTimes"]);
 // restrizione oraria, e' l'opposto — dice che vale da adesso e fino a nuovo
 // avviso, ed e' come era scritta la chiusura del 03.08.2026.
 
-// NON leggiamo i giorni della settimana, di proposito. La chiusura del
-// Gottardo porta «Mo-FR, jeweils in den Nächten von 20:00 bis 05:00 Uhr»
-// in una nota interna, e quel "Mo-FR" restringerebbe la finestra ai giorni
-// feriali. Ma su 1657 record `duringTheNight` soltanto CINQUE dicono
-// qualcosa sui giorni, e lo dicono in cinque forme diverse fra loro:
-// «So - Fr», «So/Mo Do/Fr», «Mo Do», «Mo Di Do», «Mo-». Leggere quella
-// prosa con un'espressione regolare e' lo stesso errore del 03.08.2026 in
-// vestito nuovo. Senza il giorno la finestra e' piu' larga del vero e il
-// sabato notte possiamo annunciare una chiusura che non c'e': e' un difetto,
-// ma e' il difetto meno grave dei due. Chi legge "chiuso" e trova aperto
-// perde un minuto; chi legge "libera" e trova il tunnel sbarrato ha fatto
-// il viaggio per niente — ed e' quello che e' successo il 7 settembre.
+// I GIORNI DELLA SETTIMANA, dalla nota interna (ADEV-698, 19.09.2026).
+//
+// Fino a oggi non li leggevamo, di proposito: su 1657 record `duringTheNight`
+// soltanto CINQUE dicono qualcosa sui giorni, e in cinque forme diverse
+// («So - Fr», «So/Mo Do/Fr», «Mo Do», «Mo Di Do», «Mo-»). Il prezzo si e'
+// visto il 18 e 19.09.2026: la chiusura del Gottardo porta «Mo-FR, jeweils
+// in den Nächten von 20:00 bis 05:00 Uhr», e l'app dava il tunnel chiuso
+// anche venerdi', sabato e domenica notte, con il tunnel aperto. Il TCS, che
+// legge lo stesso avviso, il sabato lo dava aperto.
+//
+// La fonte non ha un campo per i giorni (vedi sopra: niente
+// `recurringDayWeekMonthPeriod` in tutta la cattura), e il cookbook non
+// parla di ricorrenze. QUESTA REGOLA LA DECIDIAMO NOI, e sta tutta qui:
+//
+//   - si legge SOLO l'inizio della nota, e solo due forme:
+//       un intervallo «Mo-Fr» / «So - Fr»  -> i giorni da..a, compresi;
+//       coppie di notti «So/Mo Do/Fr»      -> le notti scritte, e basta;
+//   - per una finestra che scavalca la mezzanotte, una notte vale se il
+//     giorno della SERA e quello della MATTINA stanno tutti e due nei giorni
+//     dell'intervallo. «Mo-Fr» sono quindi le quattro notti da lunedi' sera a
+//     venerdi' mattina — esattamente il calendario ufficiale pubblicato
+//     dal TCS («4 notti, da lunedì sera a venerdì mattina»);
+//   - i giorni si contano all'ora svizzera, perche' e' li' che la nota li
+//     conta: le 00:30 di sabato sono ancora la notte di venerdi';
+//   - qualunque altra forma («Mo Do», «Mo-», una nota assente) NON restringe
+//     niente, e resta il comportamento di prima: nel dubbio, chiuso. Chi
+//     legge "chiuso" e trova aperto perde un minuto; chi legge "libera" e
+//     trova il tunnel sbarrato ha fatto il viaggio per niente.
+const GIORNI_NOTA = { so: 0, mo: 1, di: 2, mi: 3, do: 4, fr: 5, sa: 6 };
+const SIGLA = "(mo|di|mi|do|fr|sa|so)";
+const NOTA_INTERVALLO = new RegExp("^\\s*" + SIGLA + "\\s*-\\s*" + SIGLA + "(?![a-z])", "i");
+const NOTA_COPPIE = new RegExp("^\\s*(" + SIGLA + "\\s*/\\s*" + SIGLA
+  + "(?:\\s+" + SIGLA + "\\s*/\\s*" + SIGLA + ")*)(?![a-z/])", "i");
+
+/**
+ * I giorni che la nota interna dichiara, o null se non ne dichiara in una
+ * forma che sappiamo leggere.
+ *   { intervallo: [giorni] }  per «Mo-Fr»
+ *   { notti: [sere] }         per «So/Mo Do/Fr» (il giorno della sera)
+ * Domenica = 0, come getDay().
+ */
+function giorniDallaNota(nota) {
+  if (!nota) return null;
+  const i = nota.match(NOTA_INTERVALLO);
+  if (i) {
+    const da = GIORNI_NOTA[i[1].toLowerCase()], a = GIORNI_NOTA[i[2].toLowerCase()];
+    const giorni = [];
+    for (let g = da; ; g = (g + 1) % 7) { giorni.push(g); if (g === a) break; }
+    return { intervallo: giorni };
+  }
+  const c = nota.match(NOTA_COPPIE);
+  if (c) {
+    const sere = [];
+    for (const coppia of c[1].toLowerCase().split(/\s+(?=[a-z])/)) {
+      const [sera, mattina] = coppia.split("/").map((x) => GIORNI_NOTA[x.trim()]);
+      // «Do/Fr» e' una notte solo se la mattina e' il giorno dopo la sera.
+      if (mattina !== (sera + 1) % 7) return null;
+      sere.push(sera);
+    }
+    return { notti: sere };
+  }
+  return null;
+}
+
+/** Giorno della settimana (domenica = 0) e ora, all'ora svizzera. */
+const FORMATO_SVIZZERO = new Intl.DateTimeFormat("en-US",
+  { timeZone: "Europe/Zurich", weekday: "short", hour: "2-digit", hourCycle: "h23" });
+const SETTIMANA = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+function oraSvizzera(t) {
+  const parti = Object.fromEntries(FORMATO_SVIZZERO.formatToParts(new Date(t))
+    .map((x) => [x.type, x.value]));
+  return { giorno: SETTIMANA[parti.weekday], ora: Number(parti.hour) };
+}
+
+/**
+ * Il giorno di adesso e' fra quelli della nota? Da chiamare solo quando
+ * adesso e' gia' dentro la fascia oraria. Senza regola, si'.
+ */
+function giornoAmmesso(regola, adesso, scavalcaMezzanotte) {
+  if (!regola) return true;
+  const { giorno, ora } = oraSvizzera(adesso);
+  if (!scavalcaMezzanotte) {
+    // Una fascia diurna con le coppie di notti non ha senso: non restringe.
+    return regola.intervallo ? regola.intervallo.includes(giorno) : true;
+  }
+  // Dopo mezzogiorno siamo nella sera della notte, prima nella mattina.
+  const sera = ora >= 12 ? giorno : (giorno + 6) % 7;
+  const mattina = (sera + 1) % 7;
+  return regola.intervallo
+    ? regola.intervallo.includes(sera) && regola.intervallo.includes(mattina)
+    : regola.notti.includes(sera);
+}
 
 /** Adesso cade dentro il periodo, preso come intervallo continuo. */
 function dentroPeriodo(p, adesso) {
@@ -574,7 +654,7 @@ function dentroPeriodo(p, adesso) {
  * di due ore rispetto a questi numeri, ma la sposta allo stesso modo su
  * entrambi gli estremi, e il confronto e' fra grandezze omogenee.
  */
-function dentroFinestraRicorrente(p, adesso) {
+function dentroFinestraRicorrente(p, adesso, regola) {
   const da = p.da ? Date.parse(p.da) : NaN;
   const a = p.a ? Date.parse(p.a) : NaN;
   // Senza tutti e due gli estremi non c'e' nessuna finestra da ricavare.
@@ -582,10 +662,11 @@ function dentroFinestraRicorrente(p, adesso) {
   if (adesso < da || adesso > a) return false;
   const minuti = (t) => { const d = new Date(t); return d.getUTCHours() * 60 + d.getUTCMinutes(); };
   const inizio = minuti(da), fine = minuti(a), ora = minuti(adesso);
-  if (inizio === fine) return true;                       // finestra piena
-  return inizio < fine
+  if (inizio === fine) return giornoAmmesso(regola, adesso, false);   // finestra piena
+  const dentro = inizio < fine
     ? (ora >= inizio && ora < fine)                       // dentro la giornata
     : (ora >= inizio || ora < fine);                      // a cavallo della mezzanotte
+  return dentro && giornoAmmesso(regola, adesso, inizio > fine);
 }
 
 /**
@@ -611,8 +692,9 @@ function inVigore(s, adesso) {
   const ricorrente = qualificatori.some((q) => QUALIFICATORI_RICORRENTI.has(q));
   const periodi = s.periodi || [];
   if (!periodi.length) return !ricorrente;
+  const regola = ricorrente ? giorniDallaNota(s.notaInterna) : null;
   return periodi.some((p) => ricorrente
-    ? dentroFinestraRicorrente(p, adesso)
+    ? dentroFinestraRicorrente(p, adesso, regola)
     : dentroPeriodo(p, adesso));
 }
 
@@ -731,12 +813,21 @@ function estraiSituazioni(xml) {
 
     // Il testo si prende da qualunque record lo porti, in tutte le lingue.
     const texts = {};
+    // La nota interna non va a schermo, ma porta i giorni della settimana di
+    // una chiusura che si ripete (ADEV-698): si tiene a parte.
+    const note = [];
     const commentRe = /<(?:[\w.-]+:)?generalPublicComment\b[^>]*>([\s\S]*?)<\/(?:[\w.-]+:)?generalPublicComment>/g;
     let c;
     while ((c = commentRe.exec(blocco)) !== null) {
       const body = c[1];
       const ctype = body.match(/<(?:[\w.-]+:)?commentType\b[^>]*>([\s\S]*?)<\//);
-      if (ctype && ctype[1].trim() === "internalNote") continue;
+      if (ctype && ctype[1].trim() === "internalNote") {
+        for (const n of body.matchAll(/<(?:[\w.-]+:)?value\b[^>]*>([\s\S]*?)<\/(?:[\w.-]+:)?value>/g)) {
+          const pezzo = decodeEntities(n[1]).trim();
+          if (pezzo && !note.includes(pezzo)) note.push(pezzo);
+        }
+        continue;
+      }
       const valueRe = /<(?:[\w.-]+:)?value\b([^>]*)>([\s\S]*?)<\/(?:[\w.-]+:)?value>/g;
       let v;
       while ((v = valueRe.exec(body)) !== null) {
@@ -843,6 +934,7 @@ function estraiSituazioni(xml) {
       punti,
       texts,
     };
+    if (note.length) nuovo.notaInterna = note.join(" — ").slice(0, 300);
 
     // Stessa situazione due volte nello stesso documento: vince la piu'
     // recente. L'ordine nel documento non e' garantito.
