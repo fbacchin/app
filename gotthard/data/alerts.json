@@ -1,5 +1,20 @@
 [
  {
+  "firstSeen": "2026-09-19T05:47:05Z",
+  "id": "situation.654015.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "south",
+  "versionTime": "2026-09-19T05:45:50Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Anschluss Faido und Anschluss Giornico Sachlage: Verkehrsbehinderung Ursache: Unfall",
+   "fr": "Libéré: A2 St-Gothard -> Chiasso entre Jonction autoroutière Faido et Jonction autoroutière Giornico Situation: trafic perturbé Raison: accident",
+   "it": "Approvato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Faido E Svincolo autostradale Giornico Situazione: problemi di traffico Causa: incidente"
+  },
+  "lastSeen": "2026-09-19T05:47:05Z"
+ },
+ {
   "firstSeen": "2026-09-19T04:25:49Z",
   "id": "situation.654011.1.1.1",
   "type": "AbnormalTraffic",
