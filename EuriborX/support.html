@@ -22,12 +22,15 @@
   .logo { width: 64px; height: 64px; border-radius: 14px; border: 1px solid var(--border); }
   h1 { font-size: 28px; margin: 0; letter-spacing: -0.02em; }
   .sub { color: var(--muted); margin: 0 0 20px 78px; }
-  .langbar { display: flex; gap: 8px; margin: 18px 0 26px; }
+  .langbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 26px; }
   .langbar button {
     font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
     border: 1px solid var(--border); background: var(--card); color: var(--fg);
   }
   .langbar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  @media (max-width: 520px) {
+    .langbar button { padding: 6px 13px; font-size: 15px; }
+  }
   section.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 26px; margin: 14px 0; }
   h2 { font-size: 19px; margin: 2px 0 10px; }
   h2 .ic { color: var(--accent); margin-right: 6px; }
