@@ -144,7 +144,7 @@ QUALIFICATORI_OPACHI = {"severalTimes"}
 #
 # La fonte non ha un campo per i giorni e il cookbook non parla di
 # ricorrenze: QUESTA REGOLA LA DECIDIAMO NOI.
-#   - si legge solo l'inizio della nota, in due forme: un intervallo
+#   - si legge l'inizio di una RIGA della nota, in due forme: un intervallo
 #     («Mo-Fr», «So - Fr») o coppie di notti («So/Mo Do/Fr»);
 #   - per una finestra che scavalca la mezzanotte una notte vale se il giorno
 #     della SERA e quello della MATTINA stanno tutti e due nell'intervallo:
@@ -163,9 +163,22 @@ ZURIGO = ZoneInfo("Europe/Zurich")
 
 def giorni_dalla_nota(nota):
     """I giorni della nota interna: ("intervallo", {giorni}) per «Mo-Fr»,
-    ("notti", {sere}) per «So/Mo Do/Fr», None se non la sappiamo leggere."""
+    ("notti", {sere}) per «So/Mo Do/Fr», None se non la sappiamo leggere.
+
+    La nota e' fatta di RIGHE e i giorni non stanno sulla prima: quella vera,
+    letta il 20.09.2026, e' «ID116422\nMo-FR, jeweils in den Nächten von
+    20:00 bis 05:00 Uhr.». Vale la prima riga che dice qualcosa.
+    """
     if not nota:
         return None
+    for riga in re.split(r"\r?\n| — ", str(nota)):
+        regola = _giorni_di_una_riga(riga)
+        if regola:
+            return regola
+    return None
+
+
+def _giorni_di_una_riga(nota):
     m = NOTA_INTERVALLO.match(nota)
     if m:
         da, a = GIORNI_NOTA[m.group(1).lower()], GIORNI_NOTA[m.group(2).lower()]

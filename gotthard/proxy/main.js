@@ -559,7 +559,7 @@ const QUALIFICATORI_OPACHI = new Set(["severalTimes"]);
 // `recurringDayWeekMonthPeriod` in tutta la cattura), e il cookbook non
 // parla di ricorrenze. QUESTA REGOLA LA DECIDIAMO NOI, e sta tutta qui:
 //
-//   - si legge SOLO l'inizio della nota, e solo due forme:
+//   - si legge l'inizio di UNA RIGA della nota, e solo due forme:
 //       un intervallo «Mo-Fr» / «So - Fr»  -> i giorni da..a, compresi;
 //       coppie di notti «So/Mo Do/Fr»      -> le notti scritte, e basta;
 //   - per una finestra che scavalca la mezzanotte, una notte vale se il
@@ -585,9 +585,22 @@ const NOTA_COPPIE = new RegExp("^\\s*(" + SIGLA + "\\s*/\\s*" + SIGLA
  *   { intervallo: [giorni] }  per «Mo-Fr»
  *   { notti: [sere] }         per «So/Mo Do/Fr» (il giorno della sera)
  * Domenica = 0, come getDay().
+ *
+ * La nota e' fatta di RIGHE, e i giorni non sono sulla prima: quella vera,
+ * letta dal magazzino il 20.09.2026, e' «ID116422\nMo-FR, jeweils in den
+ * Nächten von 20:00 bis 05:00 Uhr.» — col numero della perturbazione davanti.
+ * Si prova riga per riga, e vale la prima che dice qualcosa.
  */
 function giorniDallaNota(nota) {
   if (!nota) return null;
+  for (const riga of String(nota).split(/\r?\n| — /)) {
+    const r = unaRiga(riga);
+    if (r) return r;
+  }
+  return null;
+}
+
+function unaRiga(nota) {
   const i = nota.match(NOTA_INTERVALLO);
   if (i) {
     const da = GIORNI_NOTA[i[1].toLowerCase()], a = GIORNI_NOTA[i[2].toLowerCase()];

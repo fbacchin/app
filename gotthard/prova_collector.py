@@ -494,7 +494,9 @@ ok("senza qualificatore lo stesso periodo e' continuo: vale anche a mezzogiorno"
 # bis 05:00 Uhr»; il calendario ufficiale dice «4 notti, da lunedì sera a
 # venerdì mattina». Il 14 e il 21 settembre 2026 sono lunedi'. Stessi casi
 # delle prove del proxy: le due regole devono dire la stessa cosa.
-_NOTA_VERA = "Mo-FR, jeweils in den Nächten von 20:00 bis 05:00 Uhr"
+# La nota VERA come sta nel magazzino (letta il 20.09.2026): il numero della
+# perturbazione sulla prima riga, i giorni sulla seconda.
+_NOTA_VERA = "ID116422\nMo-FR, jeweils in den Nächten von 20:00 bis 05:00 Uhr."
 _v = lambda nota, g, h, mi=0: c.in_vigore(_NOTTURNO, _alle(g, h, mi), nota)
 ok("Mo-Fr: lunedi' alle 20:00 chiuso", _v(_NOTA_VERA, 14, 18) is True)
 ok("  lunedi' a mezzanotte e mezza chiuso", _v(_NOTA_VERA, 14, 22, 30) is True)
@@ -515,6 +517,8 @@ ok("  «Mo Do» non la leggiamo: chiuso", _v("Mo Do", 19, 21) is True)
 ok("  «Mo-» nemmeno: chiuso", _v("Mo-", 19, 21) is True)
 ok("  «Do/Sa» non e' una notte: chiuso", _v("Do/Sa", 19, 21) is True)
 ok("  «Montag bis Freitag» non e' una sigla: chiuso", _v("Montag bis Freitag", 19, 21) is True)
+ok("  una riga che non comincia coi giorni: chiuso", _v("Umleitung, Mo-Fr", 19, 21) is True)
+ok("  i giorni valgono da qualunque riga", _v("ID116422\nBaustelle\nSo/Mo Do/Fr", 21, 21) is False)
 
 # Dal documento: la nota sta in un record, il testo in un altro della stessa
 # situazione, come nel feed vero. Si ferma l'orologio di `extract`.

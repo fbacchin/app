@@ -314,7 +314,9 @@ const TUNNEL_ALTROVE = {
   // ufficiale dice «4 notti, da lunedì sera a venerdì mattina».
   // Settembre 2026: il 14 e il 21 sono lunedi', il 18 venerdi'. Ora estiva:
   // le 18:00Z sono le 20:00 in Svizzera.
-  const NOTA_VERA = "Mo-FR, jeweils in den Nächten von 20:00 bis 05:00 Uhr";
+  // La nota VERA, come sta nel magazzino (letta il 20.09.2026): il numero
+  // della perturbazione sulla prima riga, i giorni sulla seconda.
+  const NOTA_VERA = "ID116422\nMo-FR, jeweils in den Nächten von 20:00 bis 05:00 Uhr.";
   const conNota = (nota) => Object.assign({}, notturno, { notaInterna: nota });
   const feriale = conNota(NOTA_VERA);
   ok("Mo-Fr: lunedi' alle 20:00 chiuso", m.inVigore(feriale, alle(14, 18)) === true);
@@ -353,8 +355,12 @@ const TUNNEL_ALTROVE = {
   ok("  «Mo-» nemmeno: chiuso", m.inVigore(conNota("Mo-"), alle(19, 21)) === true);
   ok("  una coppia che non e' una notte («Do/Sa»): chiuso",
      m.inVigore(conNota("Do/Sa"), alle(19, 21)) === true);
-  ok("  una nota che non comincia coi giorni: chiuso",
+  ok("  una riga che non comincia coi giorni: chiuso",
      m.inVigore(conNota("Umleitung via Pass, Mo-Fr"), alle(19, 21)) === true);
+  ok("  i giorni valgono da qualunque riga: «ID116422» davanti non disturba",
+     m.inVigore(conNota("ID116422\nMo-FR, nachts"), alle(19, 21)) === false);
+  ok("  e nemmeno due righe di premessa",
+     m.inVigore(conNota("ID116422\nBaustelle\nSo/Mo Do/Fr"), alle(21, 21)) === false);
   ok("  «Montag» non e' «Mo»: chiuso",
      m.inVigore(conNota("Montag bis Freitag"), alle(19, 21)) === true);
   ok("la nota non tocca un periodo continuo: senza qualificatore vale a mezzogiorno",
