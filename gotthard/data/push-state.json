@@ -1,7 +1,9 @@
 {
  "south": {
-  "soglieAvvisate": [],
-  "lastSent": "2026-09-19T14:05:33Z"
+  "soglieAvvisate": [
+   2
+  ],
+  "lastSent": "2026-09-20T08:54:46Z"
  },
  "north": {
   "soglieAvvisate": [
