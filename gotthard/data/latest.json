@@ -1,5 +1,5 @@
 {
- "time": "2026-09-20T12:58:29Z",
+ "time": "2026-09-20T13:03:33Z",
  "south": {
   "km": 2.0,
   "wait": 20
@@ -46,19 +46,6 @@
     "de": "Freigegeben: H2 Airolo -> Flüelen zwischen Ortschaft Hospental und Anschluss Göschenen Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
     "fr": "Libéré: H2 Airolo -> Flüelen entre Localité Hospental et Jonction autoroutière Göschenen Situation: trafic en accordéon Raison: surcharge de trafic",
     "it": "Approvato: H2 Airolo -> Flüelen tra Luogo Hospental E Svincolo autostradale Göschenen Situazione: traffico fortemente rallentato Causa: traffico congestionato"
-   }
-  },
-  {
-   "id": "situation.654146.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "south",
-   "versionTime": "2026-09-20T09:39:47Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Göschenen Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Göschenen Situation: entrée fermée",
-    "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Göschenen Situazione: raccordo autostradale chiuso in entrata"
    }
   },
   {
