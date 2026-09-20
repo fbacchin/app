@@ -4,16 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Privacy Policy — Your Health Companion AI</title>
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
 <style>
   :root {
-    --paper: #f2f7f9;
-    --card: #ffffff;
-    --ink: #10243a;
-    --ink-soft: #5a6b7d;
-    --line: #dde6ec;
-    --accent: #156bd9;
-    --accent-2: #26c79e;
-    --accent-soft: #e3f2ee;
+    --paper: #fbf7fa; --card: #ffffff; --ink: #24122e; --ink-soft: #6c5a76;
+    --line: #ecdfee; --accent: #7a2fd6; --accent-soft: #f6e9f5;
+    --grad: linear-gradient(135deg, #ff8a1f 0%, #f0306e 50%, #6a2bd9 100%);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #160d1c; --card: #21152a; --ink: #f3eaf7; --ink-soft: #b7a6c2;
+      --line: #35243f; --accent: #c59bff; --accent-soft: #2b1a35;
+    }
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -21,30 +24,34 @@
     font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
   }
-  main { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; }
-  .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
-  .app-icon { flex: none; border-radius: 12px; }
-  h1 { font-size: 1.9em; line-height: 1.2; }
-  .sub { color: var(--ink-soft); margin: 0 0 14px 64px; }
-  .updated { color: var(--ink-soft); margin: 4px 0 6px; font-size: .9em; }
-  .langbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 28px; }
+  main { max-width: 720px; margin: 0 auto; padding: 44px 0 64px; }
+  .logo { display: flex; align-items: center; gap: 16px; margin-bottom: 4px; }
+  .app-icon { flex: none; width: 72px; height: 72px; border-radius: 22.5%;
+    box-shadow: 0 6px 18px rgba(106, 43, 217, .25); }
+  h1 { font-size: 1.7em; line-height: 1.2; text-wrap: balance; }
+  .sub { color: var(--ink-soft); font-size: 1.05em; text-align: left; hyphens: manual; -webkit-hyphens: manual; margin-bottom: 0; }
+  .updated { color: var(--ink-soft); margin: 4px 0 6px; font-size: .9em; text-align: left; hyphens: manual; -webkit-hyphens: manual; }
+  .langbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 28px; }
   .langbar button {
     font: inherit; padding: 6px 16px; border-radius: 99px; cursor: pointer;
     border: 1px solid var(--line); background: var(--card); color: var(--ink);
   }
-  .langbar button[aria-pressed="true"] {
-    background: linear-gradient(135deg, var(--accent-2), var(--accent));
-    border-color: var(--accent); color: #fff;
-  }
+  .langbar button[aria-pressed="true"] { background: var(--grad); border-color: transparent; color: #fff; }
+  .langbar button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   h2 { color: var(--accent); font-size: 1.25em; margin: 36px 0 10px; }
-  p, li { color: var(--ink); margin-bottom: 10px; }
+  p, li { color: var(--ink); margin-bottom: 10px;
+    text-align: justify; hyphens: auto; -webkit-hyphens: auto; text-wrap: pretty; }
   ul { padding-left: 22px; }
-  .card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-    padding: 18px 20px; margin: 14px 0;
-  }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 14px 0; }
   .tldr { background: var(--accent-soft); border-color: transparent; }
   a { color: var(--accent); }
+  .cta { display: inline-block; background: var(--grad); color: #fff; padding: 10px 22px;
+    border-radius: 99px; text-decoration: none; margin: 6px 0 4px; font-weight: 600; }
+  .mail { color: var(--ink-soft); font-size: .95em; text-align: left; }
+  details { border-bottom: 1px solid var(--line); padding: 12px 0; }
+  details:last-child { border-bottom: none; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin-top: 8px; color: var(--ink-soft); }
   footer { color: var(--ink-soft); font-size: .85em; margin-top: 48px; border-top: 1px solid var(--line); padding-top: 16px; text-align: center; }
   [lang-block] { display: none; }
   html[data-lang="en"] [lang-block="en"], html[data-lang="it"] [lang-block="it"] { display: block; }
@@ -53,124 +60,142 @@
 <body>
 <main>
   <div class="logo">
-    <img class="app-icon" src="icon.png" width="52" height="52" alt="Your Health Companion AI">
-    <h1>Your Health Companion AI</h1>
+    <img class="app-icon" src="icon.png" width="72" height="72" alt="">
+    <div>
+      <h1>Your Health Companion AI</h1>
+      <p class="sub" lang-block="en">Privacy Policy</p>
+      <p class="sub" lang-block="it">Informativa sulla privacy</p>
+    </div>
   </div>
-  <p class="sub" lang-block="en">Privacy Policy</p>
-  <p class="sub" lang-block="it">Informativa sulla privacy</p>
 
   <div class="langbar">
     <button id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
     <button id="btn-it" aria-pressed="false" onclick="setLang('it')">Italiano</button>
   </div>
 
-  <div lang-block="en">
-    <p class="updated">Your Health Companion AI — last updated 25 July 2026</p>
+  <div lang-block="en" lang="en">
+    <p class="updated">Your Health Companion AI — last updated 20 September 2026</p>
 
     <div class="card tldr">
-      <p><strong>In short:</strong> your data stays on your iPhone. No ads, no tracking, no selling of data. Health data never leaves your device.</p>
+      <p><strong>In short:</strong> your data stays on your iPhone and Apple Watch. No ads, no tracking, no selling of data. Health data never leaves your devices. The only information sent to a server is a technical token, and only if you turn notifications on.</p>
     </div>
 
     <h2>1. Who we are</h2>
-    <p>Your Health Companion AI ("the App") is developed by Fabrizio Bacchin. For any privacy question, contact <a href="mailto:bacchin@mac.com">bacchin@mac.com</a>.</p>
+    <p>Your Health Companion AI (“the App”) is developed by Fabrizio Bacchin, who is the data controller. For any privacy question, contact <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
 
-    <h2>2. Data stored on your device</h2>
-    <p>Everything you create in the App — your profile (name, age, sex, height, weight, goals), tracked activities and GPS routes, gym workouts, food diary and coaching insights — is stored locally on your iPhone in the App's private database. It is not transmitted to us or to any third party.</p>
+    <h2>2. Data stored on your devices</h2>
+    <p>Everything you create in the App — your profile (name, age, sex, height, weight, goals), tracked activities, laps and GPS routes, training plans, gym workouts and routines, food diary, custom portions and coaching insights — is stored locally on your iPhone in the App's private database. It is not transmitted to us or to any third party.</p>
+    <p>The Apple Watch app records your runs on the Watch and exchanges them directly with your iPhone through Apple's own connection between the two devices. Files you choose to import, such as a workout export from another app, are read on the device and are not uploaded anywhere.</p>
 
     <h2>3. Apple Health (HealthKit)</h2>
-    <p>With your explicit permission, the App reads data from Apple Health (steps, heart rate, active energy, activity rings, body weight) and writes data to it (workouts, active energy, body weight).</p>
+    <p>With your explicit permission, the App reads data from Apple Health (steps, heart rate, resting heart rate, active energy, exercise minutes, activity rings, body weight, workouts and their laps) and writes data to it (workouts, routes, distance, active energy, body weight).</p>
     <ul>
       <li>Health data is used solely to display your metrics and generate on-device insights.</li>
-      <li>Health data <strong>never leaves your device</strong> and is never shared with, sold to, or disclosed to third parties.</li>
+      <li>Health data <strong>never leaves your devices</strong> and is never shared with, sold to, or disclosed to third parties.</li>
       <li>Health data is never used for advertising, marketing or data-mining purposes.</li>
       <li>You can revoke access at any time in Settings → Privacy &amp; Security → Health.</li>
     </ul>
 
     <h2>4. Location</h2>
-    <p>GPS is used only while you record an outdoor activity, to draw your route and compute distance and pace. Routes are stored locally (and, if you allow it, in Apple Health as workout routes). Your location is never sent to our servers or to third parties.</p>
+    <p>GPS is used only while you record an outdoor activity, to draw your route and compute distance and pace. During a recording you started, tracking continues with the screen off or the App in the background, and stops when you end the activity. Routes are stored locally (and, if you allow it, in Apple Health as workout routes). Your location is never sent to our servers or to third parties.</p>
 
     <h2>5. Camera</h2>
     <p>The camera is used exclusively to scan food barcodes. No photos are captured, stored or transmitted.</p>
 
-    <h2>6. Food database (Open Food Facts)</h2>
+    <h2>6. Voice alerts and Live Activities</h2>
+    <p>Spoken alerts and the voice coach are generated on the device by the system speech synthesiser: the App does not use the microphone and records no audio. The activity shown on the Lock Screen and in the Dynamic Island is displayed by iOS from data that stays on your iPhone.</p>
+
+    <h2>7. Notifications</h2>
+    <p>Reminders for workouts, meals and the eating window are scheduled locally on your device. If you allow notifications, the App also registers your device with our push notification provider, Back4App (United States), so that service messages can be delivered. The registration contains a random installation identifier, the push token issued by Apple, your time zone, your language and region setting, and the App version. It contains no name, e-mail address, health data, location or diary content, and it is used only to deliver notifications. You can turn notifications off at any time in Settings → Notifications, and ask us to delete the registration by writing to <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
+
+    <h2>8. Food database (Open Food Facts)</h2>
     <p>When you search for a food or scan a barcode, the App sends the search text or barcode number to <a href="https://openfoodfacts.org">Open Food Facts</a>, a public non-profit food database, to retrieve nutrition information. These requests contain no personal identifiers and are not linked to your identity or health data.</p>
 
-    <h2>7. Future features: accounts and sync</h2>
+    <h2>9. Future features: accounts and sync</h2>
     <p>Future versions may offer an optional account and cloud synchronisation (hosted in the European Union). If introduced, these features will be strictly opt-in and this policy will be updated beforehand.</p>
 
-    <h2>8. Data retention and deletion</h2>
+    <h2>10. Data retention and deletion</h2>
     <ul>
-      <li>Erase all App data at any time from Profile → "Delete all data".</li>
-      <li>Uninstalling the App removes its local database.</li>
+      <li>Erase all App data at any time from Profile → “Delete all data”.</li>
+      <li>Uninstalling the App removes its local database, on the iPhone and on the Apple Watch.</li>
       <li>Data written to Apple Health remains under your control in the Health app.</li>
+      <li>The push registration described in section 7 is deleted on request.</li>
     </ul>
 
-    <h2>9. Children</h2>
+    <h2>11. Children</h2>
     <p>The App is not directed at children under 13 and does not knowingly collect personal information from them.</p>
 
-    <h2>10. Not medical advice</h2>
-    <p>The App provides general wellness information and is not a medical device. It does not provide medical advice, diagnosis or treatment. Always consult a qualified professional for medical or nutritional guidance.</p>
+    <h2>12. Not medical advice</h2>
+    <p>The App provides general wellness information and is not a medical device. Training plans, carbohydrate guidance, macro schemes and the fasting window are informative: the App does not provide medical advice, diagnosis or treatment. Always consult a qualified professional for medical or nutritional guidance.</p>
 
-    <h2>11. Your rights (GDPR)</h2>
-    <p>Because your data is stored only on your device, you exercise your rights of access, rectification and erasure directly within the App. For any request, contact <a href="mailto:bacchin@mac.com">bacchin@mac.com</a>.</p>
+    <h2>13. Your rights (GDPR)</h2>
+    <p>Because your data is stored on your devices, you exercise your rights of access, rectification and erasure directly within the App. For the push registration, or for any other request, contact <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>. You also have the right to lodge a complaint with your data protection authority.</p>
 
-    <h2>12. Changes to this policy</h2>
+    <h2>14. Changes to this policy</h2>
     <p>We may update this policy as the App evolves. Material changes will be reflected on this page with a new date.</p>
-  </div>
+</div>
 
-  <div lang-block="it">
-    <p class="updated">Your Health Companion AI — ultimo aggiornamento 25 luglio 2026</p>
+  <div lang-block="it" lang="it">
+    <p class="updated">Your Health Companion AI — ultimo aggiornamento 20 settembre 2026</p>
 
     <div class="card tldr">
-      <p><strong>In breve:</strong> i tuoi dati restano sul tuo iPhone. Niente pubblicità, niente tracciamento, nessuna vendita di dati. I dati di salute non lasciano mai il tuo dispositivo.</p>
+      <p><strong>In breve:</strong> i tuoi dati restano sul tuo iPhone e sul tuo Apple Watch. Niente pubblicità, niente tracciamento, nessuna vendita di dati. I dati di salute non lasciano mai i tuoi dispositivi. L'unica informazione inviata a un server è un token tecnico, e solo se attivi le notifiche.</p>
     </div>
 
     <h2>1. Chi siamo</h2>
-    <p>Your Health Companion AI ("l'App") è sviluppata da Fabrizio Bacchin. Per qualsiasi domanda sulla privacy scrivi a <a href="mailto:bacchin@mac.com">bacchin@mac.com</a>.</p>
+    <p>Your Health Companion AI (“l'App”) è sviluppata da Fabrizio Bacchin, che è il titolare del trattamento. Per qualsiasi domanda sulla privacy scrivi a <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
 
-    <h2>2. Dati memorizzati sul tuo dispositivo</h2>
-    <p>Tutto ciò che crei nell'App — profilo (nome, età, sesso, altezza, peso, obiettivi), attività tracciate e percorsi GPS, allenamenti in palestra, diario alimentare e insight del coach — è salvato localmente sul tuo iPhone, nel database privato dell'App. Non viene trasmesso né a noi né a terzi.</p>
+    <h2>2. Dati memorizzati sui tuoi dispositivi</h2>
+    <p>Tutto ciò che crei nell'App — profilo (nome, età, sesso, altezza, peso, obiettivi), attività tracciate, frazioni e percorsi GPS, piani di allenamento, allenamenti e schede di palestra, diario alimentare, porzioni personalizzate e insight del coach — è salvato localmente sul tuo iPhone, nel database privato dell'App. Non viene trasmesso né a noi né a terzi.</p>
+    <p>L'app per Apple Watch registra le corse sull'orologio e le scambia direttamente con il tuo iPhone attraverso il collegamento di Apple tra i due dispositivi. I file che scegli di importare, per esempio l'esportazione degli allenamenti da un'altra app, vengono letti sul dispositivo e non sono caricati altrove.</p>
 
     <h2>3. Apple Salute (HealthKit)</h2>
-    <p>Con il tuo permesso esplicito, l'App legge dati da Apple Salute (passi, frequenza cardiaca, energia attiva, anelli attività, peso corporeo) e vi scrive dati (allenamenti, energia attiva, peso).</p>
+    <p>Con il tuo permesso esplicito, l'App legge dati da Apple Salute (passi, frequenza cardiaca, frequenza a riposo, energia attiva, minuti di esercizio, anelli attività, peso corporeo, allenamenti e relative frazioni) e vi scrive dati (allenamenti, percorsi, distanza, energia attiva, peso).</p>
     <ul>
       <li>I dati di salute sono usati solo per mostrarti le tue metriche e generare insight sul dispositivo.</li>
-      <li>I dati di salute <strong>non lasciano mai il tuo dispositivo</strong> e non vengono mai condivisi, venduti o comunicati a terzi.</li>
+      <li>I dati di salute <strong>non lasciano mai i tuoi dispositivi</strong> e non vengono mai condivisi, venduti o comunicati a terzi.</li>
       <li>I dati di salute non sono mai usati per pubblicità, marketing o data mining.</li>
       <li>Puoi revocare l'accesso in ogni momento da Impostazioni → Privacy e sicurezza → Salute.</li>
     </ul>
 
     <h2>4. Posizione</h2>
-    <p>Il GPS viene usato solo mentre registri un'attività all'aperto, per disegnare il percorso e calcolare distanza e ritmo. I percorsi sono salvati localmente (e, se lo consenti, in Apple Salute come percorsi allenamento). La tua posizione non viene mai inviata a server nostri o di terzi.</p>
+    <p>Il GPS viene usato solo mentre registri un'attività all'aperto, per disegnare il percorso e calcolare distanza e ritmo. Durante una registrazione che hai avviato tu, il tracciamento prosegue a schermo spento o con l'App in secondo piano, e si ferma quando termini l'attività. I percorsi sono salvati localmente (e, se lo consenti, in Apple Salute come percorsi allenamento). La tua posizione non viene mai inviata a server nostri o di terzi.</p>
 
     <h2>5. Fotocamera</h2>
     <p>La fotocamera serve esclusivamente a leggere i codici a barre degli alimenti. Nessuna foto viene scattata, salvata o trasmessa.</p>
 
-    <h2>6. Database alimenti (Open Food Facts)</h2>
-    <p>Quando cerchi un alimento o scansioni un barcode, l'App invia il testo di ricerca o il numero del codice a <a href="https://it.openfoodfacts.org">Open Food Facts</a>, database alimentare pubblico e senza scopo di lucro, per recuperare i valori nutrizionali. Queste richieste non contengono identificativi personali e non sono collegate alla tua identità o ai tuoi dati di salute.</p>
+    <h2>6. Avvisi vocali e attività in tempo reale</h2>
+    <p>Gli avvisi parlati e il coach vocale sono generati sul dispositivo dalla sintesi vocale di sistema: l'App non usa il microfono e non registra audio. L'attività mostrata sulla schermata di blocco e nella Dynamic Island è visualizzata da iOS a partire da dati che restano sul tuo iPhone.</p>
 
-    <h2>7. Funzionalità future: account e sincronizzazione</h2>
-    <p>Le versioni future potranno offrire un account facoltativo e la sincronizzazione cloud (con hosting nell'Unione Europea). Se introdotte, saranno rigorosamente opt-in e questa informativa sarà aggiornata prima del rilascio.</p>
+    <h2>7. Notifiche</h2>
+    <p>I promemoria di allenamenti, pasti e finestra alimentare sono programmati localmente sul dispositivo. Se consenti le notifiche, l'App registra inoltre il tuo dispositivo presso il nostro fornitore di notifiche push, Back4App (Stati Uniti), per poter recapitare i messaggi di servizio. La registrazione contiene un identificativo casuale dell'installazione, il token push rilasciato da Apple, il fuso orario, la lingua e la regione impostate e la versione dell'App. Non contiene nome, indirizzo e-mail, dati di salute, posizione né contenuti del diario, ed è usata soltanto per recapitare le notifiche. Puoi disattivare le notifiche in ogni momento da Impostazioni → Notifiche e chiederci la cancellazione della registrazione scrivendo a <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>.</p>
 
-    <h2>8. Conservazione e cancellazione dei dati</h2>
+    <h2>8. Database alimenti (Open Food Facts)</h2>
+    <p>Quando cerchi un alimento o scansioni un codice a barre, l'App invia il testo di ricerca o il numero del codice a <a href="https://it.openfoodfacts.org">Open Food Facts</a>, database alimentare pubblico e senza scopo di lucro, per recuperare i valori nutrizionali. Queste richieste non contengono identificativi personali e non sono collegate alla tua identità o ai tuoi dati di salute.</p>
+
+    <h2>9. Funzionalità future: account e sincronizzazione</h2>
+    <p>Le versioni future potranno offrire un account facoltativo e la sincronizzazione cloud (con hosting nell'Unione Europea). Se introdotte, saranno rigorosamente facoltative e questa informativa sarà aggiornata prima del rilascio.</p>
+
+    <h2>10. Conservazione e cancellazione dei dati</h2>
     <ul>
-      <li>Puoi cancellare tutti i dati dell'App in ogni momento da Profilo → "Cancella tutti i dati".</li>
-      <li>Disinstallando l'App il suo database locale viene rimosso.</li>
+      <li>Puoi cancellare tutti i dati dell'App in ogni momento da Profilo → “Cancella tutti i dati”.</li>
+      <li>Disinstallando l'App il suo database locale viene rimosso, sull'iPhone e sull'Apple Watch.</li>
       <li>I dati scritti in Apple Salute restano sotto il tuo controllo nell'app Salute.</li>
+      <li>La registrazione push descritta al punto 7 viene cancellata su richiesta.</li>
     </ul>
 
-    <h2>9. Minori</h2>
+    <h2>11. Minori</h2>
     <p>L'App non è rivolta a minori di 13 anni e non raccoglie consapevolmente loro informazioni personali.</p>
 
-    <h2>10. Non è un dispositivo medico</h2>
-    <p>L'App fornisce informazioni generali sul benessere e non è un dispositivo medico. Non fornisce consulenza medica, diagnosi o terapie. Consulta sempre un professionista qualificato per indicazioni mediche o nutrizionali.</p>
+    <h2>12. Non è un dispositivo medico</h2>
+    <p>L'App fornisce informazioni generali sul benessere e non è un dispositivo medico. Piani di allenamento, indicazioni sui carboidrati, schemi di macro e finestra alimentare sono informativi: l'App non fornisce consulenza medica, diagnosi o terapie. Consulta sempre un professionista qualificato per indicazioni mediche o nutrizionali.</p>
 
-    <h2>11. I tuoi diritti (GDPR)</h2>
-    <p>Poiché i dati risiedono solo sul tuo dispositivo, i diritti di accesso, rettifica e cancellazione si esercitano direttamente nell'App. Per qualsiasi richiesta scrivi a <a href="mailto:bacchin@mac.com">bacchin@mac.com</a>.</p>
+    <h2>13. I tuoi diritti (GDPR)</h2>
+    <p>Poiché i dati risiedono sui tuoi dispositivi, i diritti di accesso, rettifica e cancellazione si esercitano direttamente nell'App. Per la registrazione push, o per qualsiasi altra richiesta, scrivi a <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a>. Hai inoltre il diritto di proporre reclamo al Garante per la protezione dei dati personali.</p>
 
-    <h2>12. Modifiche a questa informativa</h2>
+    <h2>14. Modifiche a questa informativa</h2>
     <p>Potremo aggiornare questa informativa con l'evolversi dell'App. Le modifiche sostanziali saranno pubblicate su questa pagina con una nuova data.</p>
-  </div>
+</div>
 
   <footer>
     <span lang-block="en">© 2026 Fabrizio Bacchin · <a href="support-healthcompanion.html">Support</a></span>
