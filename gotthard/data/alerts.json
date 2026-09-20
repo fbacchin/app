@@ -12,7 +12,7 @@
    "fr": "Libéré: H2 Göschenen <-> Flüelen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
    "it": "Approvato: H2 Göschenen <-> Flüelen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
   },
-  "lastSeen": "2026-09-20T19:14:48Z"
+  "lastSeen": "2026-09-20T19:19:53Z"
  },
  {
   "firstSeen": "2026-09-20T08:03:45Z",
@@ -333,21 +333,5 @@
   },
   "lastSeen": "2026-09-18T19:46:21Z",
   "revokedAt": "2026-09-18T19:47:17Z"
- },
- {
-  "firstSeen": "2026-09-18T19:00:39Z",
-  "id": "situation.653977.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": "south",
-  "versionTime": "2026-09-18T19:01:25Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Gotthard -> Chiasso Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Pannenfahrzeug",
-   "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: véhicule en panne",
-   "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: veicolo in avaria"
-  },
-  "lastSeen": "2026-09-18T19:15:53Z",
-  "revokedAt": "2026-09-18T19:20:57Z"
  }
 ]
