@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 3.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30"
   },
-  "lastSeen": "2026-09-20T17:07:55Z"
+  "lastSeen": "2026-09-20T17:12:59Z"
  },
  {
   "firstSeen": "2026-09-20T08:14:12Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-09-20T17:07:55Z"
+  "lastSeen": "2026-09-20T17:12:59Z"
  },
  {
   "firstSeen": "2026-09-20T09:35:21Z",
@@ -42,7 +42,7 @@
    "fr": "Libéré: H2 Göschenen <-> Flüelen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
    "it": "Approvato: H2 Göschenen <-> Flüelen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
   },
-  "lastSeen": "2026-09-20T17:07:55Z"
+  "lastSeen": "2026-09-20T17:12:59Z"
  },
  {
   "firstSeen": "2026-09-20T14:55:33Z",
@@ -411,21 +411,5 @@
   },
   "lastSeen": "2026-09-18T17:34:16Z",
   "revokedAt": "2026-09-18T17:39:20Z"
- },
- {
-  "firstSeen": "2026-09-18T17:08:53Z",
-  "id": "situation.653968.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-09-18T17:04:04Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Tunnel Piottino-Tunnel und Anschluss Quinto Sachlage: Stau in der Ausfahrt Ursache: Sportveranstaltung",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Tunnel Tunnel du Piottino et Jonction autoroutière Quinto Situation: bouchon dans la sortie Raison: manifestation sportive",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Galleria Galleria Piottino E Svincolo autostradale Quinto Situazione: colonna in uscita Causa: manifestazione sportiva"
-  },
-  "lastSeen": "2026-09-18T17:08:53Z",
-  "revokedAt": "2026-09-18T17:13:58Z"
  }
 ]
