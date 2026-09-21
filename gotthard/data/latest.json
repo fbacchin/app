@@ -1,5 +1,5 @@
 {
- "time": "2026-09-21T19:47:55Z",
+ "time": "2026-09-21T19:52:59Z",
  "south": {
   "km": null,
   "wait": null
@@ -59,19 +59,6 @@
     "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Anschluss Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 7.6 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.8 Dauer: nachts voraussichtlich 29.09.2026 20:00 bis 01.10.2026 05:00",
     "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: trafic perturbé travaux, longueur [km] 7.6 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.8 Durée: durant la nuit probable 29.09.2026 20:00 jusqu'à 01.10.2026 05:00",
     "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 7.6 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.8 Durata: durante la notte probabile 29.09.2026 20:00 fino 01.10.2026 05:00"
-   }
-  },
-  {
-   "id": "situation.654288.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-09-21T06:53:13Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Tunnel Teiftal-Tunnel und Anschluss Amsteg Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 3.5 Verkehrsführung: Verkehr wird über die Gegenfahrbahn geleitet Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.0 Dauer:  voraussichtlich 26.10.2026 05:00 bis 28.10.2026 05:00",
-    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Tunnel Tunnel Teiftal et Jonction autoroutière Amsteg Situation: trafic perturbé travaux, longueur [km] 3.5 Gestion du trafic: trafic bidirectionnel Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.0 Durée:  probable 26.10.2026 05:00 jusqu'à 28.10.2026 05:00",
-    "it": "Approvato: A2 S. Gottardo -> Luzern tra Galleria Galleria Teiftal E Svincolo autostradale Amsteg Situazione: problemi di traffico cantiere, lunghezza [km] 3.5 Limitazione del traffico: circolazione bidirezionale Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0 Durata:  probabile 26.10.2026 05:00 fino 28.10.2026 05:00"
    }
   }
  ]
