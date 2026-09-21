@@ -12,7 +12,6 @@
   "lastSent": "2026-09-21T08:47:33Z"
  },
  "tunnel": {
-  "phase": "closed",
-  "direzione": "south"
+  "phase": "open"
  }
 }
