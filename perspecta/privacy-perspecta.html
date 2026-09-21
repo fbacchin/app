@@ -175,6 +175,21 @@
   }
 
   p { margin-bottom: 12px; }
+  /* Testo giustificato, con la sillabazione della lingua attiva (html lang,
+     cambiato da setLang): senza, sulle colonne strette del telefono la
+     giustificazione apre buchi tra le parole. Titoli, contatti e footer
+     restano come sono. */
+  section p, section li, details .risposta {
+    text-align: justify;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  /* Mai sillabare link e indirizzi: «bacchin@tiscal-i.it» copiato a mano e'
+     un indirizzo sbagliato. */
+  section a, details .risposta a {
+    -webkit-hyphens: none;
+    hyphens: none;
+  }
   p:last-child { margin-bottom: 0; }
 
   strong { color: var(--oro-chiaro); font-weight: 600; }
@@ -240,7 +255,7 @@
   <div lang-block="it">
     <section>
       <h2>Titolare del trattamento</h2>
-      <p>Fabrizio Bacchin — email: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a></p>
+      <p>Fabrizio Bacchin<br>Email: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a></p>
     </section>
 
     <section>
@@ -316,7 +331,7 @@
   <div lang-block="en">
     <section>
       <h2>Data controller</h2>
-      <p>Fabrizio Bacchin — email: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a></p>
+      <p>Fabrizio Bacchin<br>Email: <a href="mailto:bacchin@tiscali.it">bacchin@tiscali.it</a></p>
     </section>
 
     <section>
