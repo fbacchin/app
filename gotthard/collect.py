@@ -541,6 +541,33 @@ def in_vigore(record, now, nota=None):
     return False
 
 
+# SOLO AVVISI VERI (ADEV-698, deciso dall'utente il 21.09.2026). Stessa
+# regola del proxy (`main.js`, `annunciataInAnticipo`): una chiusura
+# annunciata in anticipo dice che il tunnel CHIUDERA', non che e' chiuso.
+# Quando chiudono davvero la centrale pubblica un avviso ad hoc (il 21.09 alle
+# 20:01:40, `situation.654466`, nato 40 secondi dopo il suo inizio), ed e'
+# quello che fa partire la notifica. Regola NOSTRA, la fonte non ha un campo:
+# ricorrente, oppure creata piu' di un'ora prima di cominciare.
+ANTICIPO_PROGRAMMATA = timedelta(hours=1)
+
+
+def annunciata_in_anticipo(record):
+    if qualificatori_di(record) & QUALIFICATORI_RICORRENTI:
+        return True
+    creata = next((parse_time((e.text or "").strip()) for e in record.iter()
+                   if local(e.tag) == "situationRecordCreationTime"), None)
+    if creata is None:
+        return False
+    inizi = [t for t in (parse_time((c.text or "").strip())
+                         for c in record.iter() if local(c.tag) == "startOfPeriod") if t]
+    if not inizi:
+        inizi = [t for t in (parse_time((e.text or "").strip())
+                             for e in record.iter() if local(e.tag) == "overallStartTime") if t]
+    if not inizi:
+        return False
+    return creata <= min(inizi) - ANTICIPO_PROGRAMMATA
+
+
 def chiusura_del_tunnel(texts, punti):
     """Il messaggio parla di una chiusura DELLA GALLERIA DEL GOTTARDO?
 
@@ -576,7 +603,7 @@ def extract(xml_data):
     events = []
     revocations = set()
     revoked_ids = {}
-    tunnel = {"chiuso": False, "revocato": False, "direzione": None, "testo": None}
+    tunnel = {"chiuso": False, "revocato": False, "direzione": None, "testo": None, "testi": {}}
 
     # La nota interna puo' stare in un record diverso da quello col testo:
     # si raccoglie per SITUAZIONE (R3) e si da' a tutti i suoi record.
@@ -629,10 +656,12 @@ def extract(xml_data):
         if chiusura_del_tunnel(texts, punti):
             if revoked:
                 tunnel["revocato"] = True
-            elif in_vigore(record, now, nota_di.get(record)):
+            elif (in_vigore(record, now, nota_di.get(record))
+                  and not annunciata_in_anticipo(record)):
                 tunnel["chiuso"] = True
                 tunnel["direzione"] = direzione_codificata(record)
                 tunnel["testo"] = text
+                tunnel["testi"] = dict(texts)
 
         version_time = parse_time(
             next(
@@ -911,20 +940,108 @@ def update_notifications(state, now):
 
 
 # I testi delle due notifiche, nello stile delle altre (inglese, con emoji).
+# Le notifiche del tunnel nella lingua di chi le riceve, con la CAUSA che la
+# fonte dichiara (ADEV-698, 21.09.2026). Prima erano in inglese per tutti e
+# senza causa: due chiusure diverse la stessa sera — alle 19:37 «oggetto sulla
+# strada», alle 20:01 i lavori notturni — arrivavano con lo stesso identico
+# testo e sembravano un doppione.
 TUNNEL_CHIUSO = {
-    None: "🚧 Gotthard tunnel closed",
-    "south": "🚧 Gotthard tunnel closed southbound",
-    "north": "🚧 Gotthard tunnel closed northbound",
+    "it": {None: "🚧 Galleria del Gottardo chiusa",
+           "south": "🚧 Galleria del Gottardo chiusa verso sud",
+           "north": "🚧 Galleria del Gottardo chiusa verso nord"},
+    "de": {None: "🚧 Gotthardtunnel gesperrt",
+           "south": "🚧 Gotthardtunnel Richtung Süden gesperrt",
+           "north": "🚧 Gotthardtunnel Richtung Norden gesperrt"},
+    "fr": {None: "🚧 Tunnel du Gothard fermé",
+           "south": "🚧 Tunnel du Gothard fermé direction sud",
+           "north": "🚧 Tunnel du Gothard fermé direction nord"},
+    "en": {None: "🚧 Gotthard tunnel closed",
+           "south": "🚧 Gotthard tunnel closed southbound",
+           "north": "🚧 Gotthard tunnel closed northbound"},
 }
-# La riapertura dice la direzione come la chiusura (ADEV-678). Prima era un
-# testo solo: chi aveva ricevuto «closed southbound» si vedeva arrivare un
-# «reopened» generico, e con due notifiche ravvicinate non poteva capire se
-# fossero due direzioni o un doppione.
+# La riapertura dice la direzione come la chiusura (ADEV-678).
 TUNNEL_RIAPERTO = {
-    None: "✅ Gotthard tunnel reopened",
-    "south": "✅ Gotthard tunnel reopened southbound",
-    "north": "✅ Gotthard tunnel reopened northbound",
+    "it": {None: "✅ Galleria del Gottardo riaperta",
+           "south": "✅ Galleria del Gottardo riaperta verso sud",
+           "north": "✅ Galleria del Gottardo riaperta verso nord"},
+    "de": {None: "✅ Gotthardtunnel wieder offen",
+           "south": "✅ Gotthardtunnel Richtung Süden wieder offen",
+           "north": "✅ Gotthardtunnel Richtung Norden wieder offen"},
+    "fr": {None: "✅ Tunnel du Gothard rouvert",
+           "south": "✅ Tunnel du Gothard rouvert direction sud",
+           "north": "✅ Tunnel du Gothard rouvert direction nord"},
+    "en": {None: "✅ Gotthard tunnel reopened",
+           "south": "✅ Gotthard tunnel reopened southbound",
+           "north": "✅ Gotthard tunnel reopened northbound"},
 }
+LINGUE_PUSH = ("it", "de", "fr", "en")
+
+# La causa sta nel testo della fonte, dopo un'etichetta per lingua, e finisce
+# dove comincia il campo seguente («Raccomandazione:», «Durata:»...).
+ETICHETTA_CAUSA = {"it": "Causa:", "de": "Ursache:", "fr": "Raison:"}
+# L'inglese la fonte non lo scrive: le cause piu' frequenti si traducono,
+# le altre si omettono piuttosto che inventarle.
+CAUSE_IN_INGLESE = {
+    "oggetto sulla strada": "object on the road",
+    "oggetti sulla strada": "objects on the road",
+    "veicolo in avaria": "broken-down vehicle",
+    "veicolo in fiamme": "vehicle on fire",
+    "incendio": "fire",
+    "incidente": "accident",
+    "lavori di costruzione": "construction work",
+    "lavori di manutenzione": "maintenance work",
+    "manutenzione": "maintenance",
+    "cantiere": "roadworks",
+    "problemi tecnici": "technical problems",
+    "guasto tecnico": "technical fault",
+    "esercitazione": "exercise",
+    "controllo di polizia": "police check",
+}
+
+
+def causa_di(testi, lingua):
+    """La causa dichiarata dalla fonte nella lingua data, o None."""
+    if lingua == "en":
+        it = causa_di(testi, "it")
+        return CAUSE_IN_INGLESE.get((it or "").lower())
+    etichetta = ETICHETTA_CAUSA.get(lingua)
+    testo = (testi or {}).get(lingua) or ""
+    if not etichetta or etichetta not in testo:
+        return None
+    dopo = testo.split(etichetta, 1)[1]
+    # Fino all'etichetta successiva: una parola con la maiuscola seguita da «:».
+    m = re.match(r"\s*(.+?)(?=\s+[A-ZÀ-Ý][\w'’-]*:\s|\s*$)", dopo)
+    causa = (m.group(1) if m else dopo).strip().rstrip(".")
+    return causa or None
+
+
+def testo_chiusura(testi, direzione, lingua):
+    base = TUNNEL_CHIUSO[lingua].get(direzione, TUNNEL_CHIUSO[lingua][None])
+    causa = causa_di(testi, lingua)
+    return f"{base}: {causa}" if causa else base
+
+
+def per_lingua(where, lingua):
+    """Il filtro dei destinatari ristretto a una lingua.
+
+    `localeIdentifier` e' quello che l'app registra («it-CH», «de_CH»...).
+    L'inglese va a tutti gli altri, e a chi non l'ha mai registrato.
+    """
+    if lingua == "en":
+        cond = {"$or": [{"localeIdentifier": {"$exists": False}},
+                        {"localeIdentifier": {"$regex": "^(?!it|de|fr)"}}]}
+    else:
+        cond = {"localeIdentifier": {"$regex": f"^{lingua}"}}
+    nuovo = dict(where)
+    nuovo["$and"] = list(where.get("$and", [])) + [cond]
+    return nuovo
+
+
+def send_push_per_lingua(testi_per_lingua, where):
+    """Una push per lingua. Vale come inviata se ne parte almeno una: le
+    altre lingue senza destinatari non sono un errore."""
+    esiti = [send_push(testi_per_lingua[l], per_lingua(where, l)) for l in LINGUE_PUSH]
+    return any(esiti)
 
 
 def update_tunnel_notifications(tunnel, now):
@@ -964,8 +1081,9 @@ def update_tunnel_notifications(tunnel, now):
     if tunnel["chiuso"]:
         open_since = None
         if phase != "closed":
-            testo = TUNNEL_CHIUSO.get(tunnel["direzione"], TUNNEL_CHIUSO[None])
-            if send_push(testo, a_chi):
+            testi = {l: testo_chiusura(tunnel.get("testi"), tunnel["direzione"], l)
+                     for l in LINGUE_PUSH}
+            if send_push_per_lingua(testi, a_chi):
                 phase = "closed"
                 direzione_chiusa = tunnel["direzione"]
         elif tunnel["direzione"] != direzione_chiusa:
@@ -979,14 +1097,15 @@ def update_tunnel_notifications(tunnel, now):
         # marcia — perche' lasciare qualcuno a credere il tunnel ancora
         # chiuso e' peggio di un avviso di riapertura in piu'.
         riapertura = destinatari(chiusure=True)
-        testo_riapertura = TUNNEL_RIAPERTO.get(direzione_chiusa, TUNNEL_RIAPERTO[None])
+        testi_riapertura = {l: TUNNEL_RIAPERTO[l].get(direzione_chiusa, TUNNEL_RIAPERTO[l][None])
+                            for l in LINGUE_PUSH}
         if tunnel["revocato"]:
-            if send_push(testo_riapertura, riapertura):
+            if send_push_per_lingua(testi_riapertura, riapertura):
                 phase = "open"
                 open_since = None
         else:
             open_since = open_since or now
-            if now - open_since >= CLEAR_CONFIRM and send_push(testo_riapertura, riapertura):
+            if now - open_since >= CLEAR_CONFIRM and send_push_per_lingua(testi_riapertura, riapertura):
                 phase = "open"
                 open_since = None
     else:

@@ -30,8 +30,20 @@ def ok(nome, esito):
 # --- le push finiscono qui invece che ai telefoni ------------------------
 inviate = []
 c.send_push = lambda testo, dove=None: (inviate.append((testo, dove)), True)[1]
-def testi():
-    return [x[0] for x in inviate]
+def _lingua(dove):
+    """La lingua a cui era diretta una push, dal filtro sui destinatari."""
+    for cond in (dove or {}).get("$and", []):
+        loc = cond.get("localeIdentifier")
+        if loc:
+            return loc["$regex"][1:]
+        if any("localeIdentifier" in x for x in cond.get("$or", [])):
+            return "en"
+    return None                          # push senza lingua (le code)
+
+def testi(lingua="en"):
+    """Le push inviate. Quelle del tunnel partono una per lingua (ADEV-698):
+    le prove di prima guardano quella inglese, le code non hanno lingua."""
+    return [x[0] for x in inviate if _lingua(x[1]) in (lingua, None)]
 
 # --- un documento come li manda la fonte ---------------------------------
 def documento(situazioni):
@@ -556,9 +568,80 @@ try:
     _Orologio.fermo = _alle(19, 18, 5)
     ok("dal documento, sabato alle 20:05: tunnel APERTO", c.extract(_DOC_NOTA)[4]["chiuso"] is False)
     _Orologio.fermo = _alle(21, 18, 5)
-    ok("  lunedi' alle 20:05: tunnel chiuso", c.extract(_DOC_NOTA)[4]["chiuso"] is True)
+    # Dal 21.09.2026 conta solo l'avviso vero: quello programmato, anche nella
+    # sua notte, non chiude il tunnel (SOLO AVVISI VERI).
+    ok("  lunedi' alle 20:05, solo l'avviso programmato: tunnel NON chiuso",
+       c.extract(_DOC_NOTA)[4]["chiuso"] is False)
 finally:
     c.datetime = _vero
+
+# --- solo avvisi veri, e la causa nella notifica (ADEV-698, 21.09.2026) ------
+_AVVISO_VERO = """<?xml version="1.0" encoding="UTF-8"?>
+<d2LogicalModel xmlns="http://datex2.eu/schema/2/2_0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<situation id="situation.654466"><situationRecord xsi:type="RoadOrCarriagewayOrLaneManagement" id="situation.654466.1.1.1">
+  <situationRecordCreationTime>2026-09-21T18:01:40Z</situationRecordCreationTime>
+  <situationRecordVersionTime>2026-09-21T18:05:14Z</situationRecordVersionTime>
+  <validity><validityStatus>active</validityStatus><validityTimeSpecification>
+    <overallStartTime>2026-09-21T18:01:00Z</overallStartTime>
+  </validityTimeSpecification></validity>
+  <generalPublicComment><comment><values>
+    <value lang="it-CH">Approvato: A2 Chiasso &lt;-&gt; S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: lavori di costruzione Raccomandazione: deviazione in corso</value>
+    <value lang="de-CH">Freigegeben: A2 Chiasso &lt;-&gt; Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Bauarbeiten Empfehlung: eine Umleitung ist eingerichtet</value>
+    <value lang="fr-CH">Libéré: A2 Chiasso &lt;-&gt; St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: travaux de construction Recommandation: déviation en place</value>
+  </values></comment><commentType>description</commentType></generalPublicComment>
+  <groupOfLocations><specificLocation>11187</specificLocation></groupOfLocations>
+  <alertCDirectionCoded>both</alertCDirectionCoded>
+</situationRecord></situation></d2LogicalModel>"""
+c.datetime = _Orologio
+try:
+    _Orologio.fermo = _alle(21, 18, 5)
+    _t = c.extract(_AVVISO_VERO)[4]
+    ok("l'avviso vero del 21.09 chiude il tunnel", _t["chiuso"] is True)
+    ok("  e porta i testi nelle tre lingue", set(_t["testi"]) == {"it", "de", "fr"})
+finally:
+    c.datetime = _vero
+ok("il programmato e' un annuncio anticipato (ricorrente)",
+   c.annunciata_in_anticipo(_NOTTURNO) is True)
+_UNA_NOTTE = _ET.fromstring("""<situationRecord xmlns="http://datex2.eu/schema/2/2_0">
+  <situationRecordCreationTime>2026-09-19T09:00:00Z</situationRecordCreationTime>
+  <validity><validityTimeSpecification><validPeriod>
+    <startOfPeriod>2026-09-21T18:00:00Z</startOfPeriod><endOfPeriod>2026-09-22T03:00:00Z</endOfPeriod>
+  </validPeriod></validityTimeSpecification></validity></situationRecord>""")
+ok("  anche una notte sola annunciata due giorni prima", c.annunciata_in_anticipo(_UNA_NOTTE) is True)
+_POCO_PRIMA = _ET.fromstring("""<situationRecord xmlns="http://datex2.eu/schema/2/2_0">
+  <situationRecordCreationTime>2026-09-21T17:30:00Z</situationRecordCreationTime>
+  <validity><validityTimeSpecification><validPeriod>
+    <startOfPeriod>2026-09-21T18:00:00Z</startOfPeriod>
+  </validPeriod></validityTimeSpecification></validity></situationRecord>""")
+ok("  mezz'ora prima invece e' un avviso vero", c.annunciata_in_anticipo(_POCO_PRIMA) is False)
+
+_testi_veri = {
+    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: lavori di costruzione Raccomandazione: deviazione in corso",
+    "de": "Freigegeben: A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Bauarbeiten Empfehlung: eine Umleitung ist eingerichtet",
+    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: travaux de construction Recommandation: déviation en place",
+}
+ok("causa in italiano", c.causa_di(_testi_veri, "it") == "lavori di costruzione")
+ok("causa in tedesco", c.causa_di(_testi_veri, "de") == "Bauarbeiten")
+ok("causa in francese", c.causa_di(_testi_veri, "fr") == "travaux de construction")
+ok("causa in inglese, dalla tabella", c.causa_di(_testi_veri, "en") == "construction work")
+_oggetto = {"it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: oggetto sulla strada"}
+ok("causa in fondo al testo (19:37 del 21.09)", c.causa_di(_oggetto, "it") == "oggetto sulla strada")
+ok("  e in inglese", c.causa_di(_oggetto, "en") == "object on the road")
+ok("causa sconosciuta in inglese: niente, non inventata",
+   c.causa_di({"it": "x Causa: frana di sassi"}, "en") is None)
+ok("senza causa il testo resta quello base",
+   c.testo_chiusura({}, None, "it") == "🚧 Galleria del Gottardo chiusa")
+
+inviate_c = con_stato_pulito(lambda: giro(dict(chiuso(), testi=_testi_veri)))
+ok("la chiusura parte in quattro lingue, una push ciascuna", len(inviate) == 4 and len(inviate_c) == 1)
+_per = {_lingua(d): t for t, d in inviate}
+ok("  italiano con la causa", _per.get("it") == "🚧 Galleria del Gottardo chiusa: lavori di costruzione")
+ok("  tedesco con la causa", _per.get("de") == "🚧 Gotthardtunnel gesperrt: Bauarbeiten")
+ok("  francese con la causa", _per.get("fr") == "🚧 Tunnel du Gothard fermé: travaux de construction")
+ok("  inglese con la causa tradotta", _per.get("en") == "🚧 Gotthard tunnel closed: construction work")
+ok("  ognuna ristretta alla sua lingua, dentro il filtro delle chiusure",
+   all(any("pushChiusure" in str(x) for x in d["$and"]) for _, d in inviate))
 
 n = sum(1 for _, e in prove if e)
 print("=== collector: corridoio, chiusura, push ===")

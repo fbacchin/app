@@ -33,7 +33,7 @@ global.Parse.Object.destroyAll = async () => {};
 const sorgente = fs.readFileSync(path.join(__dirname, "..", "main.js"), "utf8");
 const richiedi = (p) => require(p.startsWith(".") ? path.join(__dirname, "..", p) : p);
 const m = new Function("require", sorgente +
-  "\n;return { estraiSituazioni, chiusuraDelTunnel, conEtichettaChiusura, senzaPrefissoDiStato, inVigore, conProgrammate, PUNTO_TUNNEL };")(richiedi);
+  "\n;return { estraiSituazioni, chiusuraDelTunnel, conEtichettaChiusura, senzaPrefissoDiStato, inVigore, conProgrammate, PUNTO_TUNNEL, annunciataInAnticipo, chiusoAdesso };")(richiedi);
 
 const prove = [];
 const ok = (nome, esito) => prove.push([nome, !!esito]);
@@ -382,6 +382,45 @@ const TUNNEL_ALTROVE = {
   ok("il catalogo dei programmati il sabato sera non la mette nella vista",
      Object.keys(m.conProgrammate({}, [Object.assign({}, feriale, { programmata: true })],
                                   alle(19, 18, 5))).length === 0);
+
+  // --- solo avvisi veri (ADEV-698, deciso il 21.09.2026) --------------------
+  //
+  // L'avviso programmato non basta piu': conta quello che la centrale
+  // pubblica quando chiude davvero. I due casi veri del 21.09.2026.
+  const chiuso = (rec, t) => m.chiusoAdesso(rec, (rec.texts.it || "").toLowerCase(), t);
+  const programmatoVero = Object.assign({}, notturno,
+    { creationTime: "2026-08-17T12:39:03Z", notaInterna: NOTA_VERA });
+  const avvisoVero = {
+    id: "situation.654466.1", type: "RoadOrCarriagewayOrLaneManagement",
+    inizioValidita: "2026-09-21T18:01:00Z", periodi: [], qualificatori: [],
+    versionTime: "2026-09-21T18:05:14Z", creationTime: "2026-09-21T18:01:40Z",
+    revocata: false, direzioneFonte: "both", punti: [m.PUNTO_TUNNEL],
+    notaInterna: "Umleitung via H2 Gotthardpass.",
+    texts: { it: "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: lavori di costruzione Raccomandazione: deviazione in corso" },
+  };
+  ok("il programmato e' in vigore nella sua finestra...",
+     m.inVigore(programmatoVero, alle(21, 18, 5)) === true);
+  ok("  ...ma non chiude il tunnel: e' un annuncio anticipato",
+     chiuso(programmatoVero, alle(21, 18, 5)) === false);
+  ok("  perche' e' ricorrente", m.annunciataInAnticipo(programmatoVero) === true);
+  ok("l'avviso vero del 21.09 chiude il tunnel", chiuso(avvisoVero, alle(21, 18, 5)) === true);
+  ok("  e non e' un annuncio anticipato: nato 40 s dopo il suo inizio",
+     m.annunciataInAnticipo(avvisoVero) === false);
+  ok("un avviso nato mezz'ora prima di cominciare conta ancora",
+     chiuso(Object.assign({}, avvisoVero, {
+       creationTime: "2026-09-21T17:30:00Z", inizioValidita: "2026-09-21T17:30:00Z",
+       periodi: [{ da: "2026-09-21T18:00:00Z", a: null }] }), alle(21, 18, 5)) === true);
+  ok("una chiusura singola annunciata due giorni prima no",
+     chiuso(Object.assign({}, avvisoVero, {
+       creationTime: "2026-09-19T09:00:00Z", inizioValidita: "2026-09-19T09:00:00Z",
+       periodi: [{ da: "2026-09-21T18:00:00Z", a: "2026-09-22T03:00:00Z" }] }),
+       alle(21, 18, 5)) === false);
+  ok("senza data di creazione (magazzino vecchio) vale come prima",
+     chiuso(Object.assign({}, avvisoVero, { creationTime: null }), alle(21, 18, 5)) === true);
+  ok("l'avviso per incidente del 21.09 alle 19:37 chiude il tunnel",
+     chiuso(Object.assign({}, avvisoVero, {
+       id: "situation.654462.1", creationTime: "2026-09-21T17:36:58Z",
+       inizioValidita: "2026-09-21T17:36:00Z" }), alle(21, 17, 40)) === true);
 
   // --- il catalogo dei programmati entra nella vista solo quando vale ------
   const programmata = Object.assign({}, notturno, { programmata: true });

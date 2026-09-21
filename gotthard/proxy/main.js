@@ -711,6 +711,54 @@ function inVigore(s, adesso) {
     : dentroPeriodo(p, adesso));
 }
 
+// SOLO AVVISI VERI (ADEV-698, deciso dall'utente il 21.09.2026).
+//
+// Una chiusura ANNUNCIATA IN ANTICIPO non dice che il tunnel e' chiuso: dice
+// che lo sara'. Quando chiudono davvero, la centrale pubblica un avviso ad
+// hoc — il 21.09.2026 alle 20:01:40 `situation.654466`, «tunnel chiuso,
+// causa lavori di costruzione, deviazione in corso», in vigore dalle 20:01,
+// senza ricorrenza — ed e' quello che vale. L'avviso programmato
+// (`situation.645705`, pubblicato il 17.08 per tutte le notti fino al 25.09)
+// resta fuori, e con lui la lettura completa quotidiana che serviva solo a
+// recuperarlo (ADEV-653).
+//
+// Il prezzo, misurato sullo storico del collector: su 9 notti di cantiere
+// (7-10, 14-17 e 21 settembre) l'avviso ad hoc ci e' arrivato in 3. Se nelle
+// altre la fonte lo pubblica e noi lo perdiamo, e' un difetto nostro da
+// cercare (LA FONTE NON SBAGLIA), non un motivo per tornare al calendario.
+//
+// "Annunciata in anticipo" e' una regola NOSTRA, perche' la fonte non ha un
+// campo che lo dica. Due prove, entrambe su dati dichiarati:
+//   - e' RICORRENTE (`duringTheNight` / `duringTheDayTime`): una finestra che
+//     si ripete e' un calendario per definizione;
+//   - e' stata CREATA piu' di un'ora prima di cominciare (inizio = il primo
+//     `startOfPeriod`, altrimenti `overallStartTime`). Un avviso vero nasce
+//     quando la chiusura comincia, o poco prima: quello di stasera e' nato 40
+//     secondi DOPO il suo inizio.
+const SOLO_AVVISI_VERI = true;
+const ANTICIPO_PROGRAMMATA_MS = 60 * 60 * 1000;
+
+function annunciataInAnticipo(s) {
+  if ((s.qualificatori || []).some((q) => QUALIFICATORI_RICORRENTI.has(q))) return true;
+  const creata = s.creationTime ? Date.parse(s.creationTime) : NaN;
+  if (isNaN(creata)) return false;
+  const inizi = (s.periodi || []).map((p) => (p.da ? Date.parse(p.da) : NaN))
+    .filter((t) => !isNaN(t));
+  const inizio = inizi.length ? Math.min(...inizi)
+    : (s.inizioValidita ? Date.parse(s.inizioValidita) : NaN);
+  if (isNaN(inizio)) return false;
+  return creata <= inizio - ANTICIPO_PROGRAMMATA_MS;
+}
+
+/**
+ * Il tunnel e' chiuso ADESSO secondo questo messaggio: parla del Gottardo,
+ * e' in vigore, e — con SOLO_AVVISI_VERI — non e' un annuncio anticipato.
+ */
+function chiusoAdesso(s, lower, adesso) {
+  return chiusuraDelTunnel(s, lower) && inVigore(s, adesso)
+    && !(SOLO_AVVISI_VERI && annunciataInAnticipo(s));
+}
+
 /**
  * Il messaggio parla di una chiusura DELLA GALLERIA DEL GOTTARDO?
  *
@@ -1629,7 +1677,7 @@ function costruisciPayload(magazzino, revoche, modo, recordTotali, adesso) {
     // dover rileggere la frase.
     // "Chiusura" vuol dire chiusa ADESSO. Un cantiere notturno programmato
     // per la settimana prossima resta un avviso normale, senza etichetta.
-    const chiusura = chiusuraDelTunnel(s, lower) && inVigore(s, adesso);
+    const chiusura = chiusoAdesso(s, lower, adesso);
     events.push({ id: s.id, type: s.type, direction, strada: stradaDi(it),
                   directionStated: !!s.direzioneFonte,
                   versionTime: s.versionTime, km, wait,
@@ -1787,7 +1835,7 @@ async function aggiornaTabelle(payload, magazzino, situazioni) {
     riga.set("attesaStimata", attesaRiga.stimata);
     // Il feed pubblica in tre lingue: la tabella le riporta tutte e tre, e
     // se e' una chiusura del tunnel ognuna porta la sua etichetta in testa.
-    const chiusuraRiga = chiusuraDelTunnel(s, it.toLowerCase()) && inVigore(s, adesso);
+    const chiusuraRiga = chiusoAdesso(s, it.toLowerCase(), adesso);
     const testi = chiusuraRiga
       ? conEtichettaChiusura(s.texts, direzioneDi(s, it.toLowerCase()))
       : s.texts;
@@ -1823,7 +1871,7 @@ async function aggiornaTabelle(payload, magazzino, situazioni) {
       // colonna vuota si leggono diverse nel cruscotto.
       riga.set("km", null);
       riga.set("attesa", null);
-      const chiusuraRev = chiusuraDelTunnel(s, it.toLowerCase()) && inVigore(s, adesso);
+      const chiusuraRev = chiusoAdesso(s, it.toLowerCase(), adesso);
       const testiRev = chiusuraRev
         ? conEtichettaChiusura(s.texts, direzioneDi(s, it.toLowerCase()))
         : s.texts;
@@ -2027,9 +2075,13 @@ async function giroCompleto(rigaNota, opzioni) {
   // c'e' un telefono che aspetta: la lettura completa sono 22 MB (misurati
   // il 07.09.2026) e Back4App ucciderebbe la funzione lasciando l'app con un
   // 408. Il catalogo lo rinfresca il lavoro pianificato, che ha tempo.
-  const programmate = (opzioni && opzioni.veloce)
-    ? ((dati.riga && dati.riga.get("programmate")) || [])
-    : await programmateAggiornate(dati.riga, adesso);
+  //
+  // Con SOLO_AVVISI_VERI il catalogo non serve: niente lettura completa,
+  // niente programmate nella vista (vedi `annunciataInAnticipo`).
+  const programmate = SOLO_AVVISI_VERI ? []
+    : (opzioni && opzioni.veloce)
+      ? ((dati.riga && dati.riga.get("programmate")) || [])
+      : await programmateAggiornate(dati.riga, adesso);
   const vista = conProgrammate(dati.magazzino, programmate, adesso);
 
   const payload = costruisciPayload(
