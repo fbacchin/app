@@ -312,21 +312,5 @@
   },
   "lastSeen": "2026-09-20T18:34:12Z",
   "revokedAt": "2026-09-20T18:39:16Z"
- },
- {
-  "firstSeen": "2026-09-20T14:55:33Z",
-  "id": "situation.654190.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-09-20T14:55:22Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Erstfeld und Autobahndreieck Verzweigung Altdorf Sachlage: Stau Ursache: Verkehrsüberlastung",
-   "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Erstfeld et Echangeur Echangeur d'Altdorf Situation: bouchon Raison: surcharge de trafic",
-   "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Erstfeld E Raccordo autostradale Diramazione Altdorf Situazione: colonna Causa: traffico congestionato"
-  },
-  "lastSeen": "2026-09-20T17:02:50Z",
-  "revokedAt": "2026-09-20T17:07:55Z"
  }
 ]
