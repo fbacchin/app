@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: travaux de maintenance Durée:  probable 22.09.2026 20:00 jusqu'à 23.09.2026 05:00",
    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: lavori di manutenzione Durata:  probabile 22.09.2026 20:00 fino 23.09.2026 05:00"
   },
-  "lastSeen": "2026-09-22T21:30:37Z"
+  "lastSeen": "2026-09-22T21:35:41Z"
  },
  {
   "firstSeen": "2026-09-22T09:48:49Z",
@@ -279,21 +279,5 @@
   },
   "lastSeen": "2026-09-21T09:43:36Z",
   "revokedAt": "2026-09-21T09:48:40Z"
- },
- {
-  "firstSeen": "2026-09-20T09:35:21Z",
-  "id": "situation.654144.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-09-20T09:34:43Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Göschenen <-> Flüelen zwischen Ortschaft Erstfeld und Anschluss Göschenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
-   "fr": "Libéré: H2 Göschenen <-> Flüelen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
-   "it": "Approvato: H2 Göschenen <-> Flüelen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
-  },
-  "lastSeen": "2026-09-20T21:32:10Z",
-  "revokedAt": "2026-09-21T03:48:15Z"
  }
 ]
