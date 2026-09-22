@@ -1,5 +1,5 @@
 {
- "time": "2026-09-22T05:04:03Z",
+ "time": "2026-09-22T05:09:08Z",
  "south": {
   "km": null,
   "wait": null
@@ -9,6 +9,19 @@
   "wait": null
  },
  "events": [
+  {
+   "id": "situation.654518.1.1.1",
+   "type": "RoadOrCarriagewayOrLaneManagement",
+   "direction": "south",
+   "versionTime": "2026-09-22T05:07:44Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Gotthard -> Chiasso Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Gegenstände auf der Fahrbahn",
+    "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: objets sur la chaussée",
+    "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: oggetto sulla strada"
+   }
+  },
   {
    "id": "situation.654493.1.1.1",
    "type": "AbnormalTraffic",
