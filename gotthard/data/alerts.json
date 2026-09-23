@@ -232,21 +232,5 @@
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Wassen Situazione: problemi di traffico cantiere, lunghezza [km] 4.0 Limitazione del traffico: circolazione bidirezionale Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0 Durata:  probabile 19.10.2026 05:00 fino 21.10.2026 05:00"
   },
   "lastSeen": "2026-09-21T18:47:06Z"
- },
- {
-  "firstSeen": "2026-09-21T17:51:21Z",
-  "id": "situation.654464.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-09-21T17:51:11Z",
-  "km": 1.0,
-  "wait": 10,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
-  },
-  "lastSeen": "2026-09-21T17:56:25Z",
-  "revokedAt": "2026-09-21T18:01:29Z"
  }
 ]
