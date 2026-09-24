@@ -1,8 +1,8 @@
 {
- "time": "2026-09-24T08:41:21Z",
+ "time": "2026-09-24T08:46:25Z",
  "south": {
-  "km": null,
-  "wait": null
+  "km": 1.0,
+  "wait": 10
  },
  "north": {
   "km": 1.0,
@@ -10,10 +10,23 @@
  },
  "events": [
   {
+   "id": "situation.655195.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "south",
+   "versionTime": "2026-09-24T08:44:00Z",
+   "km": 1.0,
+   "wait": 10,
+   "texts": {
+    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
+    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
+    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
+   }
+  },
+  {
    "id": "situation.655194.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-09-24T08:40:50Z",
+   "versionTime": "2026-09-24T08:43:12Z",
    "km": 1.0,
    "wait": 10,
    "texts": {
@@ -26,7 +39,7 @@
    "id": "situation.655193.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
    "direction": "north",
-   "versionTime": "2026-09-24T08:40:06Z",
+   "versionTime": "2026-09-24T08:43:27Z",
    "km": null,
    "wait": null,
    "texts": {
