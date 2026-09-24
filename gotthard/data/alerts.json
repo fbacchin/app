@@ -12,7 +12,7 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3 Durée:  probable 22.05.2026 07:00 jusqu'à 27.11.2026 17:00",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3 Durata:  probabile 22.05.2026 07:00 fino 27.11.2026 17:00"
   },
-  "lastSeen": "2026-09-24T05:28:29Z"
+  "lastSeen": "2026-09-24T05:33:33Z"
  },
  {
   "firstSeen": "2026-09-24T04:47:58Z",
@@ -155,21 +155,5 @@
   },
   "lastSeen": "2026-09-22T15:49:40Z",
   "revokedAt": "2026-09-22T15:54:44Z"
- },
- {
-  "firstSeen": "2026-09-22T05:09:08Z",
-  "id": "situation.654518.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": "south",
-  "versionTime": "2026-09-22T05:07:44Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Gotthard -> Chiasso Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Gegenstände auf der Fahrbahn",
-   "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: objets sur la chaussée",
-   "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: oggetto sulla strada"
-  },
-  "lastSeen": "2026-09-22T05:29:28Z",
-  "revokedAt": "2026-09-22T05:34:33Z"
  }
 ]
