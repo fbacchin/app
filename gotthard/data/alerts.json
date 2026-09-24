@@ -1,20 +1,5 @@
 [
  {
-  "firstSeen": "2026-09-24T04:47:58Z",
-  "id": "situation.655077.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-09-24T04:45:40Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau für LKW Ursache: Verkehrsüberlastung",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon pour poids lourd Raison: surcharge de trafic",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna per autocarro Causa: traffico congestionato"
-  },
-  "lastSeen": "2026-09-24T05:18:21Z"
- },
- {
   "firstSeen": "2026-09-24T05:08:13Z",
   "id": "situation.626453.1.1.1",
   "type": "AbnormalTraffic",
@@ -27,7 +12,23 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.3 Durée:  probable 22.05.2026 07:00 jusqu'à 27.11.2026 17:00",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.3 Durata:  probabile 22.05.2026 07:00 fino 27.11.2026 17:00"
   },
-  "lastSeen": "2026-09-24T05:18:21Z"
+  "lastSeen": "2026-09-24T05:23:25Z"
+ },
+ {
+  "firstSeen": "2026-09-24T04:47:58Z",
+  "id": "situation.655077.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "north",
+  "versionTime": "2026-09-24T04:45:40Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau für LKW Ursache: Verkehrsüberlastung",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon pour poids lourd Raison: surcharge de trafic",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna per autocarro Causa: traffico congestionato"
+  },
+  "lastSeen": "2026-09-24T05:18:21Z",
+  "revokedAt": "2026-09-24T05:23:25Z"
  },
  {
   "firstSeen": "2026-09-23T08:56:45Z",
