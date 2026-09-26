@@ -63,6 +63,17 @@ jobs:
         run: |
           git config user.name "gottardo-bot"
           git config user.email "actions@users.noreply.github.com"
+          # I campioni partono a :x0:00 e :x5:00 UTC, allineati all'orologio
+          # (ADEV-715, 26.09.2026). Prima si dormiva 300 s DOPO ogni campione:
+          # il tempo del campione si sommava e il giro scivolava in un punto
+          # qualunque dei 5 minuti. Il job `aggiorna` del proxy gira a :x0:08 e
+          # :x5:08 (pianificazione nel cruscotto Back4App): leggendo 8 secondi
+          # prima, quello che vede il collector lo vede anche il proxy, e
+          # quando arriva la notifica l'app ha gia' il dato. Se un campione dura
+          # piu' di 5 minuti si salta al multiplo successivo, senza accumulare.
+          # 34 giri: <= 5 min d'attesa iniziale + 33 x 5 min = 170 min < 178.
+          allinea() { sleep $(( 300 - $(date +%s) % 300 )); }
+          allinea
           for i in $(seq 1 34); do
             git fetch origin main && git reset --hard origin/main
             if python3 gotthard/collect.py; then
@@ -82,7 +93,7 @@ jobs:
                 [ -n "$salvato" ] || echo "push fallito dopo 3 tentativi, campione perso: riprovo al prossimo giro"
               fi
             fi
-            if [ "$i" -lt 34 ]; then sleep 300; fi
+            if [ "$i" -lt 34 ]; then allinea; fi
           done
 
   next:
