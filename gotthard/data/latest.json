@@ -1,5 +1,5 @@
 {
- "time": "2026-09-27T14:55:03Z",
+ "time": "2026-09-27T15:00:05Z",
  "south": {
   "km": null,
   "wait": null
@@ -26,13 +26,13 @@
    "id": "situation.655755.1.1.1",
    "type": "AbnormalTraffic",
    "direction": null,
-   "versionTime": "2026-09-27T14:12:44Z",
+   "versionTime": "2026-09-27T14:59:21Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: H2 Airolo -> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Göschenen Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: H2 Airolo -> Göschenen entre Col Col du St-Gothard et Localité Göschenen Situation: trafic en accordéon Raison: surcharge de trafic",
-    "it": "Approvato: H2 Airolo -> Göschenen tra Passo Passo del S. Gottardo E Luogo Göschenen Situazione: traffico fortemente rallentato Causa: traffico congestionato"
+    "de": "Freigegeben: H2 Airolo -> Göschenen zwischen Ortschaft Motto Bartola und Ortschaft Göschenen Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+    "fr": "Libéré: H2 Airolo -> Göschenen entre Localité Motto Bartola et Localité Göschenen Situation: trafic en accordéon Raison: surcharge de trafic",
+    "it": "Approvato: H2 Airolo -> Göschenen tra Luogo Motto Bartola E Luogo Göschenen Situazione: traffico fortemente rallentato Causa: traffico congestionato"
    }
   },
   {
