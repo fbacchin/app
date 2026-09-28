@@ -644,6 +644,25 @@ ok("  inglese con la causa tradotta", _per.get("en") == "🚧 Gotthard tunnel cl
 ok("  ognuna ristretta alla sua lingua, dentro il filtro delle chiusure",
    all(any("pushChiusure" in str(x) for x in d["$and"]) for _, d in inviate))
 
+# --- lavori notturni senza causa (ADEV-698, 28.09.2026) ---------------------
+ok("notturna in corso: finisce alle 05:00 svizzere", c.fine_notturna(_NOTTURNO, _alle(21, 18, 5)) == "05:00")
+ok("  fuori dal periodo: niente", c.fine_notturna(_NOTTURNO, _alle(26, 18, 5)) is None)
+ok("  una chiusura non notturna: niente", c.fine_notturna(_POCO_PRIMA, _alle(21, 18, 5)) is None)
+ok("programmata senza causa: «lavori notturni fino alle 05:00»",
+   c.testo_chiusura({"it": "x Situazione: tunnel chiuso cantiere"}, None, "it", "05:00")
+   == "🚧 Galleria del Gottardo chiusa: lavori notturni fino alle 05:00")
+ok("  in tedesco", c.testo_chiusura({}, None, "de", "05:00") == "🚧 Gotthardtunnel gesperrt: Nachtarbeiten bis 05:00 Uhr")
+ok("  in francese", c.testo_chiusura({}, None, "fr", "05:00") == "🚧 Tunnel du Gothard fermé: travaux de nuit jusqu'à 05:00")
+ok("  in inglese", c.testo_chiusura({}, None, "en", "05:00") == "🚧 Gotthard tunnel closed: night works until 05:00")
+ok("  la causa dichiarata vince", c.testo_chiusura(_testi_veri, None, "it", "05:00")
+   == "🚧 Galleria del Gottardo chiusa: lavori di costruzione")
+c.datetime = _Orologio
+try:
+    _Orologio.fermo = _alle(21, 18, 5)
+    ok("dal documento programmato: fino alle 05:00", c.extract(_DOC_NOTA)[4]["fino"] == "05:00")
+finally:
+    c.datetime = _vero
+
 n = sum(1 for _, e in prove if e)
 print("=== collector: corridoio, chiusura, push ===")
 for nome, esito in prove:

@@ -499,6 +499,22 @@ def qualificatori_di(record):
     return fuori
 
 
+def fine_notturna(record, now):
+    """Per una chiusura `duringTheNight` in corso, l'ora in cui finisce la
+    notte («05:00»), all'ora svizzera, presa dall'`endOfPeriod` del periodo
+    che contiene adesso. None se non e' notturna o l'ora non c'e'."""
+    if "duringTheNight" not in qualificatori_di(record):
+        return None
+    for p in (x for x in record.iter() if local(x.tag) == "validPeriod"):
+        da = next((parse_time((c.text or "").strip()) for c in p
+                   if local(c.tag) == "startOfPeriod"), None)
+        a = next((parse_time((c.text or "").strip()) for c in p
+                  if local(c.tag) == "endOfPeriod"), None)
+        if da and a and da <= now <= a:
+            return a.astimezone(ZURIGO).strftime("%H:%M")
+    return None
+
+
 def in_vigore(record, now, nota=None):
     """Il messaggio vale ADESSO, o parla di qualcosa di programmato?
 
@@ -606,7 +622,8 @@ def extract(xml_data):
     events = []
     revocations = set()
     revoked_ids = {}
-    tunnel = {"chiuso": False, "revocato": False, "direzione": None, "testo": None, "testi": {}}
+    tunnel = {"chiuso": False, "revocato": False, "direzione": None, "testo": None,
+              "testi": {}, "fino": None}
 
     # La nota interna puo' stare in un record diverso da quello col testo:
     # si raccoglie per SITUAZIONE (R3) e si da' a tutti i suoi record.
@@ -665,6 +682,7 @@ def extract(xml_data):
                 tunnel["direzione"] = direzione_codificata(record)
                 tunnel["testo"] = text
                 tunnel["testi"] = dict(texts)
+                tunnel["fino"] = fine_notturna(record, now)
 
         version_time = parse_time(
             next(
@@ -1018,9 +1036,21 @@ def causa_di(testi, lingua):
     return causa or None
 
 
-def testo_chiusura(testi, direzione, lingua):
+# Gli avvisi programmati dei lavori notturni non hanno «Causa:» nel testo
+# (ADEV-698, 28.09.2026): al suo posto si dice fino a quando dura la notte.
+LAVORI_NOTTURNI = {
+    "it": "lavori notturni fino alle {}",
+    "de": "Nachtarbeiten bis {} Uhr",
+    "fr": "travaux de nuit jusqu'à {}",
+    "en": "night works until {}",
+}
+
+
+def testo_chiusura(testi, direzione, lingua, fino=None):
     base = TUNNEL_CHIUSO[lingua].get(direzione, TUNNEL_CHIUSO[lingua][None])
     causa = causa_di(testi, lingua)
+    if not causa and fino:
+        causa = LAVORI_NOTTURNI[lingua].format(fino)
     return f"{base}: {causa}" if causa else base
 
 
@@ -1084,7 +1114,8 @@ def update_tunnel_notifications(tunnel, now):
     if tunnel["chiuso"]:
         open_since = None
         if phase != "closed":
-            testi = {l: testo_chiusura(tunnel.get("testi"), tunnel["direzione"], l)
+            testi = {l: testo_chiusura(tunnel.get("testi"), tunnel["direzione"], l,
+                                       tunnel.get("fino"))
                      for l in LINGUE_PUSH}
             if send_push_per_lingua(testi, a_chi):
                 phase = "closed"
