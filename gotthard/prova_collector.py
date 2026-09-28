@@ -570,8 +570,9 @@ try:
     _Orologio.fermo = _alle(21, 18, 5)
     # Dal 21.09.2026 conta solo l'avviso vero: quello programmato, anche nella
     # sua notte, non chiude il tunnel (SOLO AVVISI VERI).
-    ok("  lunedi' alle 20:05, solo l'avviso programmato: tunnel NON chiuso",
-       c.extract(_DOC_NOTA)[4]["chiuso"] is False)
+    # Dal 28.09.2026 SOLO_AVVISI_VERI e' spento: il programmato chiude.
+    ok("  lunedi' alle 20:05, solo l'avviso programmato: tunnel chiuso",
+       c.extract(_DOC_NOTA)[4]["chiuso"] is True)
 finally:
     c.datetime = _vero
 

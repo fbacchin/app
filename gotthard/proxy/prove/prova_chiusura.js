@@ -400,8 +400,11 @@ const TUNNEL_ALTROVE = {
   };
   ok("il programmato e' in vigore nella sua finestra...",
      m.inVigore(programmatoVero, alle(21, 18, 5)) === true);
-  ok("  ...ma non chiude il tunnel: e' un annuncio anticipato",
-     chiuso(programmatoVero, alle(21, 18, 5)) === false);
+  // Dal 28.09.2026 SOLO_AVVISI_VERI e' spento: il programmato chiude di nuovo.
+  ok("  ...e con SOLO_AVVISI_VERI spento chiude il tunnel",
+     chiuso(programmatoVero, alle(21, 18, 5)) === true);
+  ok("  ma non la domenica sera: i giorni della nota valgono ancora",
+     chiuso(programmatoVero, alle(20, 18, 5)) === false);
   ok("  perche' e' ricorrente", m.annunciataInAnticipo(programmatoVero) === true);
   ok("l'avviso vero del 21.09 chiude il tunnel", chiuso(avvisoVero, alle(21, 18, 5)) === true);
   ok("  e non e' un annuncio anticipato: nato 40 s dopo il suo inizio",
@@ -410,11 +413,11 @@ const TUNNEL_ALTROVE = {
      chiuso(Object.assign({}, avvisoVero, {
        creationTime: "2026-09-21T17:30:00Z", inizioValidita: "2026-09-21T17:30:00Z",
        periodi: [{ da: "2026-09-21T18:00:00Z", a: null }] }), alle(21, 18, 5)) === true);
-  ok("una chiusura singola annunciata due giorni prima no",
+  ok("una chiusura singola annunciata due giorni prima: con la regola spenta vale",
      chiuso(Object.assign({}, avvisoVero, {
        creationTime: "2026-09-19T09:00:00Z", inizioValidita: "2026-09-19T09:00:00Z",
        periodi: [{ da: "2026-09-21T18:00:00Z", a: "2026-09-22T03:00:00Z" }] }),
-       alle(21, 18, 5)) === false);
+       alle(21, 18, 5)) === true);
   ok("senza data di creazione (magazzino vecchio) vale come prima",
      chiuso(Object.assign({}, avvisoVero, { creationTime: null }), alle(21, 18, 5)) === true);
   ok("l'avviso per incidente del 21.09 alle 19:37 chiude il tunnel",

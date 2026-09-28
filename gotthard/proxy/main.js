@@ -735,7 +735,13 @@ function inVigore(s, adesso) {
 //     `startOfPeriod`, altrimenti `overallStartTime`). Un avviso vero nasce
 //     quando la chiusura comincia, o poco prima: quello di stasera e' nato 40
 //     secondi DOPO il suo inizio.
-const SOLO_AVVISI_VERI = true;
+// SPENTO il 28.09.2026 (ADEV-698). Quella sera la chiusura notturna e' stata
+// annunciata SOLO come programmata (ID117339, «tunnel chiuso, lavori durante
+// la notte, 28.09-30.09, 20:00-05:00») e nessun avviso ad hoc e' arrivato: il
+// tunnel era chiuso e l'app diceva aperto. Su 10 notti di cantiere l'avviso
+// vero e' mancato in 7. Il calendario (con i giorni della nota) torna a
+// valere; la regola resta qui, spenta, per quando la fonte lo permettera'.
+const SOLO_AVVISI_VERI = false;
 const ANTICIPO_PROGRAMMATA_MS = 60 * 60 * 1000;
 
 function annunciataInAnticipo(s) {

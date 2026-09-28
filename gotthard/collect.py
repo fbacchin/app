@@ -549,6 +549,9 @@ def in_vigore(record, now, nota=None):
 # quello che fa partire la notifica. Regola NOSTRA, la fonte non ha un campo:
 # ricorrente, oppure creata piu' di un'ora prima di cominciare.
 ANTICIPO_PROGRAMMATA = timedelta(hours=1)
+# SPENTO il 28.09.2026: quella sera il tunnel era chiuso con il solo avviso
+# programmato (ID117339) e nessun avviso ad hoc. Vedi SOLO_AVVISI_VERI in main.js.
+SOLO_AVVISI_VERI = False
 
 
 def annunciata_in_anticipo(record):
@@ -657,7 +660,7 @@ def extract(xml_data):
             if revoked:
                 tunnel["revocato"] = True
             elif (in_vigore(record, now, nota_di.get(record))
-                  and not annunciata_in_anticipo(record)):
+                  and not (SOLO_AVVISI_VERI and annunciata_in_anticipo(record))):
                 tunnel["chiuso"] = True
                 tunnel["direzione"] = direzione_codificata(record)
                 tunnel["testo"] = text
