@@ -1,9 +1,9 @@
 {
- "time": "2026-09-30T23:48:32Z",
+ "time": "2026-09-30T23:59:44Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
-   "updated": "2026-09-30T23:48:32Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "south": {
      "wait": null
@@ -14,7 +14,7 @@
    }
   },
   "hr-me.karasovici": {
-   "updated": "2026-09-30T23:48:32Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": null
@@ -25,7 +25,7 @@
    }
   },
   "hr-me.vitaljina": {
-   "updated": "2026-09-30T23:48:32Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": null
@@ -36,7 +36,7 @@
    }
   },
   "hr-ba.nova-sela": {
-   "updated": "2026-09-30T23:48:32Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": null
@@ -47,7 +47,7 @@
    }
   },
   "hr-ba.stara-gradiska": {
-   "updated": "2026-09-30T23:48:32Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": null
@@ -70,7 +70,7 @@
    "held": true
   },
   "hr-rs.tovarnik": {
-   "updated": "2026-09-30T23:48:32Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": 30
@@ -81,7 +81,7 @@
    }
   },
   "hu-rs.roszke": {
-   "updated": "2026-09-30T23:48:32Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": null
@@ -92,7 +92,7 @@
    }
   },
   "hu-rs.tompa": {
-   "updated": "2026-09-30T23:48:32Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": null
@@ -103,7 +103,7 @@
    }
   },
   "hu-ua.zahony": {
-   "updated": "2026-09-30T23:27:12Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -111,11 +111,10 @@
     "entry": {
      "wait": 15
     }
-   },
-   "held": true
+   }
   },
   "hu-ua.beregsurany": {
-   "updated": "2026-09-30T23:27:12Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -123,11 +122,10 @@
     "entry": {
      "wait": 15
     }
-   },
-   "held": true
+   }
   },
   "pl-ua.medyka": {
-   "updated": "2026-09-30T23:48:32Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": 0
@@ -138,7 +136,7 @@
    }
   },
   "pl-ua.korczowa": {
-   "updated": "2026-09-30T23:48:32Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": 0
@@ -149,7 +147,7 @@
    }
   },
   "pl-ua.dorohusk": {
-   "updated": "2026-09-30T23:48:32Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": null
@@ -160,7 +158,7 @@
    }
   },
   "pl-ua.hrebenne": {
-   "updated": "2026-09-30T23:48:32Z",
+   "updated": "2026-09-30T23:59:44Z",
    "directions": {
     "exit": {
      "wait": 0
@@ -174,7 +172,7 @@
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-09-30T23:45:03Z"
+   "sampled": "2026-09-30T23:55:03Z"
   },
   "hak": {
    "ok": true,
@@ -184,8 +182,11 @@
    "waits": 1
   },
   "police_hu": {
-   "ok": false,
-   "error": "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo: The read operation timed out"
+   "ok": true,
+   "url": "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo",
+   "found": 3,
+   "of": 4,
+   "waits": 4
   },
   "granica_pl": {
    "ok": true,
