@@ -10,7 +10,8 @@
    2,
    4
   ],
-  "lastSent": "2026-10-01T11:20:05Z"
+  "lastSent": "2026-10-01T11:20:05Z",
+  "clearSince": "2026-10-01T16:20:05Z"
  },
  "tunnel": {
   "phase": "open"
