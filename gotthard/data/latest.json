@@ -1,12 +1,14 @@
 {
- "time": "2026-10-01T09:10:03Z",
+ "time": "2026-10-01T09:15:02Z",
  "south": {
   "km": 1.0,
-  "wait": 10
+  "wait": 10,
+  "held": true
  },
  "north": {
   "km": 1.0,
-  "wait": 10
+  "wait": 10,
+  "held": true
  },
  "events": [
   {
