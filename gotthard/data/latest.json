@@ -1,21 +1,19 @@
 {
- "time": "2026-10-01T11:50:04Z",
+ "time": "2026-10-01T11:55:03Z",
  "south": {
   "km": 2.0,
-  "wait": 20,
-  "held": true
+  "wait": 20
  },
  "north": {
   "km": 4.0,
-  "wait": 40,
-  "held": true
+  "wait": 40
  },
  "events": [
   {
    "id": "situation.656712.1.1.1",
    "type": "AbnormalTraffic",
    "direction": "north",
-   "versionTime": "2026-10-01T11:14:15Z",
+   "versionTime": "2026-10-01T11:41:19Z",
    "km": 4.0,
    "wait": 40,
    "texts": {
@@ -41,7 +39,7 @@
    "id": "situation.656715.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
    "direction": "north",
-   "versionTime": "2026-10-01T08:55:51Z",
+   "versionTime": "2026-10-01T11:41:26Z",
    "km": null,
    "wait": null,
    "texts": {
