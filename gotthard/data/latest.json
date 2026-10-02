@@ -1,5 +1,5 @@
 {
- "time": "2026-10-02T17:20:08Z",
+ "time": "2026-10-02T17:25:03Z",
  "south": {
   "km": 4.0,
   "wait": 40
@@ -59,19 +59,6 @@
     "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Giornico und Anschluss Faido Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 6.4 Dauer: tagsüber voraussichtlich 05.10.2026 07:00 bis 07.10.2026 17:00",
     "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Giornico et Jonction autoroutière Faido Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 6.4 Durée: durant la journée probable 05.10.2026 07:00 jusqu''à 07.10.2026 17:00",
     "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Giornico E Svincolo autostradale Faido Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 6.4 Durata: durante il giorno probabile 05.10.2026 07:00 fino 07.10.2026 17:00"
-   }
-  },
-  {
-   "id": "situation.657018.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "north",
-   "versionTime": "2026-10-02T09:01:45Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
    }
   },
   {
