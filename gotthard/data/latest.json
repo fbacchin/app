@@ -1,5 +1,5 @@
 {
- "time": "2026-10-02T14:55:07Z",
+ "time": "2026-10-02T15:00:14Z",
  "south": {
   "km": 3.0,
   "wait": 30
@@ -37,15 +37,15 @@
   },
   {
    "id": "situation.657097.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-10-02T14:15:30Z",
+   "type": "AbnormalTraffic",
+   "direction": "south",
+   "versionTime": "2026-10-02T14:57:58Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: A2 Chiasso <-> Gotthard zwischen Autobahndreieck Verzweigung Mendrisio und Parkplatz Dosierstelle Coldrerio Sachlage: Strecke gesperrt Ursache: Unfall Verkehrsführung: Fahrstreifen gesperrt Dauer: bis auf weiteres",
-    "fr": "Libéré: A2 Chiasso <-> St-Gothard entre Echangeur Echangeur de Mendrisio et Parking Aire de dosage Coldrerio Situation: fermé Raison: accident Gestion du trafic: voie fermée Durée: jusqu'à nouvel avis",
-    "it": "Approvato: A2 Chiasso <-> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Parcheggio Area di dosaggio Coldrerio Situazione: chiusa Causa: incidente Limitazione del traffico: corsia chiusa Durata: fino a nuovo avviso"
+    "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Autobahndreieck Verzweigung Mendrisio und Parkplatz Dosierstelle Coldrerio Sachlage: Verkehrsbehinderung Ursache: Unfall Verkehrsführung: rechter Fahrstreifen gesperrt",
+    "fr": "Libéré: A2 St-Gothard -> Chiasso entre Echangeur Echangeur de Mendrisio et Parking Aire de dosage Coldrerio Situation: trafic perturbé Raison: accident Gestion du trafic: voie de droite fermée",
+    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Raccordo autostradale Diramazione Mendrisio E Parcheggio Area di dosaggio Coldrerio Situazione: problemi di traffico Causa: incidente Limitazione del traffico: corsia di destra chiusa"
    }
   },
   {
