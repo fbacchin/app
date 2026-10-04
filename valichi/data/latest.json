@@ -1,9 +1,9 @@
 {
- "time": "2026-10-04T02:01:59Z",
+ "time": "2026-10-04T02:12:56Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "south": {
      "wait": null
@@ -14,7 +14,7 @@
    }
   },
   "hr-me.karasovici": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
      "wait": null
@@ -25,7 +25,7 @@
    }
   },
   "hr-me.vitaljina": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
      "wait": null
@@ -36,7 +36,7 @@
    }
   },
   "hr-ba.nova-sela": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
      "wait": null
@@ -47,7 +47,7 @@
    }
   },
   "hr-ba.stara-gradiska": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
      "wait": null
@@ -58,7 +58,7 @@
    }
   },
   "hr-rs.bajakovo": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
      "wait": null
@@ -69,7 +69,7 @@
    }
   },
   "hr-rs.tovarnik": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
      "wait": null
@@ -80,7 +80,7 @@
    }
   },
   "hu-rs.roszke": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
      "wait": null
@@ -91,7 +91,7 @@
    }
   },
   "hu-rs.tompa": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
      "wait": null
@@ -102,29 +102,29 @@
    }
   },
   "hu-ua.zahony": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
-     "wait": null
+     "wait": 15
     },
     "entry": {
-     "wait": null
+     "wait": 15
     }
    }
   },
   "hu-ua.beregsurany": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
-     "wait": null
+     "wait": 15
     },
     "entry": {
-     "wait": null
+     "wait": 15
     }
    }
   },
   "pl-ua.medyka": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
      "wait": null
@@ -135,7 +135,7 @@
    }
   },
   "pl-ua.korczowa": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
      "wait": 60
@@ -146,7 +146,7 @@
    }
   },
   "pl-ua.dorohusk": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
      "wait": null
@@ -157,7 +157,7 @@
    }
   },
   "pl-ua.hrebenne": {
-   "updated": "2026-10-04T02:01:59Z",
+   "updated": "2026-10-04T02:12:56Z",
    "directions": {
     "exit": {
      "wait": 60
@@ -171,7 +171,7 @@
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-10-04T02:00:04Z"
+   "sampled": "2026-10-04T02:10:04Z"
   },
   "hak": {
    "ok": false,
@@ -183,8 +183,11 @@
    "excerpt": "izvjesce o stanju na cestama prohodnost cesta događaji na cestama stanje na autocestama ceste zatvorene zbog radova privremena prometna regulacija ostali događaji vremenski uvjeti vremenski uvjeti zimski uvjeti bura granicni prijelazi pomorski promet zeljeznicki promet ogranicenja za teretna vozila prometna prognoza granicni prijelazi granicni prijelazi savjeti vozacima voznja po mokrim i skliskim"
   },
   "police_hu": {
-   "ok": false,
-   "error": "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo: <urlopen error timed out>"
+   "ok": true,
+   "url": "https://www.police.hu/hu/hirek-es-informaciok/hatarinfo",
+   "found": 3,
+   "of": 4,
+   "waits": 4
   },
   "granica_pl": {
    "ok": true,
