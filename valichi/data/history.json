@@ -1,20 +1,5 @@
 [
  {
-  "time": "2026-10-02T07:58:48Z",
-  "w": {
-   "ch.gottardo.south": 10,
-   "hr-ba.nova-sela.entry": 30,
-   "hr-ba.stara-gradiska.entry": 30,
-   "hu-ua.zahony.exit": 15,
-   "hu-ua.zahony.entry": 15,
-   "hu-ua.beregsurany.exit": 15,
-   "hu-ua.beregsurany.entry": 15,
-   "pl-ua.medyka.exit": 0,
-   "pl-ua.korczowa.exit": 0,
-   "pl-ua.hrebenne.exit": 0
-  }
- },
- {
   "time": "2026-10-02T08:08:58Z",
   "w": {
    "ch.gottardo.south": 10,
@@ -5010,6 +4995,21 @@
  },
  {
   "time": "2026-10-04T07:58:08Z",
+  "w": {
+   "hr-ba.nova-sela.entry": 30,
+   "hr-ba.stara-gradiska.entry": 30,
+   "hr-rs.bajakovo.entry": 60,
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 0,
+   "pl-ua.korczowa.exit": 60,
+   "pl-ua.hrebenne.exit": 0
+  }
+ },
+ {
+  "time": "2026-10-04T08:08:16Z",
   "w": {
    "hr-ba.nova-sela.entry": 30,
    "hr-ba.stara-gradiska.entry": 30,
