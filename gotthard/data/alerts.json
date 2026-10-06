@@ -1,5 +1,20 @@
 [
  {
+  "firstSeen": "2026-10-06T10:05:04Z",
+  "id": "situation.657702.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "south",
+  "versionTime": "2026-10-06T10:03:07Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Luzern -> Gotthard Anschluss Wassen Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
+   "fr": "Libéré: A2 Lucerne -> St-Gothard Jonction autoroutière Wassen Situation: danger Raison: objets sur la chaussée",
+   "it": "Approvato: A2 Luzern -> S. Gottardo Svincolo autostradale Wassen Situazione: pericolo Causa: oggetto sulla strada"
+  },
+  "lastSeen": "2026-10-06T10:05:04Z"
+ },
+ {
   "firstSeen": "2026-10-05T09:55:02Z",
   "id": "situation.657472.1.1.1",
   "type": "AbnormalTraffic",
