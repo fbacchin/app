@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Sinner o Zverev? Simulatore del numero 1 ATP 2026</title>
+<meta name="description" content="Zverev è davanti a Sinner nella Race to Turin. Scegli i risultati dei tornei che restano, da Pechino alle ATP Finals, e vedi chi chiude il 2026 da numero 1.">
+<meta property="og:title" content="Sinner o Zverev? Chi chiude il 2026 da numero 1">
+<meta property="og:description" content="Zverev è davanti di 700 punti nella Race. Scegli i risultati da Pechino a Torino e guarda come cambia la classifica, settimana per settimana.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bacchin.app/tennis/numero-1">
+<meta property="og:image" content="https://bacchin.app/tennis/numero-1.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="it_IT">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#171A1F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23171A1F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='%23F2A93B'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/stile.css?v=2026-10-06a">
+<link rel="canonical" href="https://bacchin.app/tennis/numero-1">
+<style>
+  :root { --sinner: #F2A93B; --zverev: #7FA7D9; }
+  .duello { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: stretch; margin-top: 28px; }
+  .giocatore { background: var(--pannello); border: 1px solid var(--linea); border-radius: 14px; padding: 18px 18px 16px; }
+  .giocatore--s { border-top: 3px solid var(--sinner); }
+  .giocatore--z { border-top: 3px solid var(--zverev); }
+  .giocatore__nome { font-size: 20px; font-weight: 700; }
+  .giocatore__punti { font-family: var(--dato); font-size: clamp(28px, 7vw, 40px); line-height: 1.1; margin-top: 8px; }
+  .giocatore--s .giocatore__punti { color: var(--sinner); }
+  .giocatore--z .giocatore__punti { color: var(--zverev); }
+  .giocatore__sotto { font-family: var(--dato); font-size: 12px; color: var(--nebbia); margin-top: 6px; }
+  .scarto { display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 88px; text-align: center; }
+  .scarto__valore { font-family: var(--dato); font-size: 20px; margin-top: 4px; }
+  .verdetto { margin-top: 16px; padding: 14px 18px; border-radius: 12px; background: var(--rilievo); border-left: 3px solid var(--nebbia); font-size: 17px; }
+  .verdetto--s { border-left-color: var(--sinner); }
+  .verdetto--z { border-left-color: var(--zverev); }
+  .verdetto small { display: block; color: var(--nebbia); font-size: 14px; margin-top: 4px; }
+  .comandi { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 6px; }
+  .comandi button { font: inherit; font-size: 14px; color: var(--gesso); background: var(--pannello); border: 1px solid var(--linea); border-radius: 10px; padding: 8px 12px; cursor: pointer; }
+  .comandi button:hover { border-color: var(--ambra); }
+  .comandi button.primario { border-color: var(--ambra); color: var(--ambra); }
+  .tornei { display: grid; gap: 12px; margin-top: 14px; }
+  .torneo { background: var(--pannello); border: 1px solid var(--linea); border-radius: 14px; padding: 16px 18px; }
+  .torneo__testa { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+  .torneo__nome { font-weight: 700; font-size: 18px; }
+  .torneo__quando { font-family: var(--dato); font-size: 12px; color: var(--nebbia); }
+  .torneo__nota { font-size: 14px; color: var(--nebbia); margin-top: 4px; }
+  .torneo__scelte { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .scelta label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .scelta--s label { color: var(--sinner); }
+  .scelta--z label { color: var(--zverev); }
+  .scelta select { width: 100%; font: inherit; font-size: 15px; color: var(--gesso); background: var(--rilievo); border: 1px solid var(--linea); border-radius: 9px; padding: 8px 10px; }
+  .scelta select:disabled { opacity: .55; }
+  .scelta .guadagno { font-family: var(--dato); font-size: 12px; color: var(--nebbia); margin-top: 4px; min-height: 1.4em; }
+  .avviso { color: var(--rosso); font-size: 14px; margin-top: 8px; }
+  .tabella { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 15px; }
+  .tabella th, .tabella td { padding: 10px 8px; border-bottom: 1px solid var(--linea); text-align: left; }
+  .tabella thead th { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--nebbia); font-weight: 600; }
+  .tabella .num { font-family: var(--dato); text-align: right; white-space: nowrap; }
+  .tabella .n1 { font-weight: 700; }
+  .tabella .n1-s { color: var(--sinner); }
+  .tabella .n1-z { color: var(--zverev); }
+  .scorri { overflow-x: auto; }
+  .fonte { font-family: var(--dato); font-size: 12px; line-height: 1.6; color: var(--nebbia); margin-top: 10px; }
+  .lingua { margin-top: 10px; }
+  .copiato { color: var(--verde); font-size: 14px; margin-left: 6px; }
+  @media (max-width: 560px) {
+    .duello { grid-template-columns: 1fr 1fr; }
+    .scarto { grid-column: 1 / -1; order: 3; flex-direction: row; gap: 10px; min-width: 0; }
+    .torneo__scelte { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="foglio">
+
+  <header class="testata">
+    <a class="etichetta" href="/">Fabrizio Bacchin</a>
+    <a class="etichetta" href="/#t-web" data-t="tutti">Tutti gli strumenti</a>
+  </header>
+
+  <div class="app-hero">
+    <p class="etichetta" data-t="occhiello">Simulatore · classifica ATP 2026</p>
+    <h1 data-t="titolo">Sinner o Zverev: chi chiude il 2026 da numero 1?</h1>
+    <p class="tesi" data-t="tesi">Oggi Sinner è primo in classifica, ma nella Race, che conta solo i punti del 2026 e a fine anno diventa la classifica, è Zverev a stare davanti. Scegli i risultati dei tornei che restano e guarda chi arriva primo a Torino.</p>
+    <p class="lingua etichetta"><a id="altra-lingua" href="?lang=en" hreflang="en">English</a></p>
+  </div>
+
+  <div class="racconto">
+    <h2 data-t="h-fine">Classifica di fine anno</h2>
+    <div class="duello" aria-live="polite">
+      <div class="giocatore giocatore--s">
+        <div class="giocatore__nome">Jannik Sinner</div>
+        <div class="giocatore__punti" id="punti-s">7.950</div>
+        <div class="giocatore__sotto" id="sotto-s"></div>
+      </div>
+      <div class="scarto">
+        <span class="etichetta" data-t="distacco">Distacco</span>
+        <span class="scarto__valore" id="scarto">700</span>
+      </div>
+      <div class="giocatore giocatore--z">
+        <div class="giocatore__nome">Alexander Zverev</div>
+        <div class="giocatore__punti" id="punti-z">8.650</div>
+        <div class="giocatore__sotto" id="sotto-z"></div>
+      </div>
+    </div>
+    <div class="verdetto" id="verdetto"></div>
+
+    <h2 data-t="h-tornei">I tornei che restano</h2>
+    <p data-t="istruzioni">Per ogni torneo scegli fin dove arriva ciascuno. Sotto ogni torneo trovi quanto aveva fatto nel 2025: quei punti escono dalla classifica ATP la settimana del torneo.</p>
+    <div class="comandi">
+      <button type="button" data-preset="2025" data-t="p-2025">Come nel 2025</button>
+      <button type="button" data-preset="sinner" data-t="p-sinner">Sinner vince tutto</button>
+      <button type="button" data-preset="zverev" data-t="p-zverev">Zverev vince tutto</button>
+      <button type="button" data-preset="zero" data-t="p-zero">Azzera</button>
+      <button type="button" class="primario" id="condividi" data-t="condividi">Condividi lo scenario</button><span class="copiato" id="copiato" hidden></span>
+    </div>
+    <div class="tornei" id="tornei"></div>
+
+    <h2 data-t="h-settimane">La classifica ATP, settimana per settimana</h2>
+    <p data-t="settimane-intro">La classifica ATP conta gli ultimi 12 mesi: a ogni torneo entrano i punti nuovi ed escono quelli dello stesso torneo del 2025. Dopo le Finals restano solo i punti del 2026, e la classifica coincide con la Race.</p>
+    <div class="scorri">
+      <table class="tabella">
+        <thead><tr><th data-t="quando">Quando</th><th class="num">Sinner</th><th class="num">Zverev</th><th data-t="n1">N. 1</th></tr></thead>
+        <tbody id="settimane"></tbody>
+      </table>
+    </div>
+
+    <p class="fonte" id="fonte"></p>
+  </div>
+
+  <footer class="piede">
+    <span class="etichetta">© 2026 Fabrizio Bacchin</span>
+    <nav class="piede__link etichetta">
+      <a href="mailto:info@bacchin.app">info@bacchin.app</a>
+      <a href="/privacy" data-t="privacy">Privacy e assistenza</a>
+    </nav>
+  </footer>
+
+</div>
+<script>
+(function () {
+  'use strict';
+
+  // ── Dati al 29 settembre 2026 ──────────────────────────────────────────
+  // Classifica live e Race: live-tennis.eu; confermate da Wikipedia (ATP al 14.09).
+  // Classifica − punti 2025 ancora da scadere = Race, per entrambi:
+  //   Sinner 11.000 − (50 + 500 + 1000 + 1500) = 7.950
+  //   Zverev  9.630 − (50 + 330 +  400 +  200) = 8.650
+  var BASE = {
+    s: { classifica: 11000, race: 7950 },
+    z: { classifica: 9630, race: 8650 }
+  };
+
+  var CAT = {
+    M1000: { W: 1000, F: 650, SF: 400, QF: 200, R16: 100, R32: 50, R64: 30 },
+    A500:  { W: 500, F: 330, SF: 200, QF: 100, R16: 50 },
+    // A250 resta per un eventuale ATP 250 a cui uno dei due risulti iscritto (Almaty, Bruxelles, Stoccolma)
+    A250:  { W: 250, F: 165, SF: 100, QF: 50, R16: 25 },
+    // Finals: 200 per vittoria nel girone, +400 semifinale vinta, +500 finale vinta
+    FIN:   { RR0: 0, RR1: 200, RR2: 400, SF2: 400, SF3: 600, F2: 800, F3: 1000, W2: 1300, W3: 1500 }
+  };
+
+  // cade: i punti 2025 che escono dalla classifica ATP con questo torneo
+  var TORNEI = [
+    { id: 'pek', cat: 'A500', nome: { it: 'Pechino', en: 'Beijing' }, quando: { it: '30 set – 6 ott', en: '30 Sep – 6 Oct' },
+      s: { cade: 0, fuori: true, nota: { it: 'Si è ritirato dal torneo', en: 'Withdrew from the event' } },
+      z: { cade: 0, nota: { it: 'Nel 2025 non ha giocato', en: 'Did not play in 2025' } } },
+    { id: 'sha', cat: 'M1000', nome: { it: 'Shanghai', en: 'Shanghai' }, quando: { it: '7 – 18 ottobre', en: '7 – 18 October' },
+      s: { cade: 50, nota: { it: '2025: terzo turno, 50 punti', en: '2025: third round, 50 points' } },
+      z: { cade: 50, nota: { it: '2025: terzo turno, 50 punti', en: '2025: third round, 50 points' } } },
+    { id: 'a500', cat: 'A500', nome: { it: 'Vienna o Basilea', en: 'Vienna or Basel' }, quando: { it: '26 ott – 1 nov', en: '26 Oct – 1 Nov' },
+      s: { cade: 500, nota: { it: '2025: vince Vienna, 500 punti', en: '2025: won Vienna, 500 points' } },
+      z: { cade: 330, nota: { it: '2025: finale a Vienna, 330 punti', en: '2025: Vienna final, 330 points' } } },
+    { id: 'par', cat: 'M1000', nome: { it: 'Parigi', en: 'Paris' }, quando: { it: '2 – 8 novembre', en: '2 – 8 November' },
+      s: { cade: 1000, nota: { it: '2025: vince, 1.000 punti', en: '2025: won, 1,000 points' } },
+      z: { cade: 400, nota: { it: '2025: semifinale, 400 punti', en: '2025: semi-final, 400 points' } } },
+    { id: 'fin', cat: 'FIN', nome: { it: 'ATP Finals, Torino', en: 'ATP Finals, Turin' }, quando: { it: '15 – 22 novembre', en: '15 – 22 November' },
+      s: { cade: 1500, nota: { it: '2025: vince imbattuto, 1.500 punti', en: '2025: unbeaten champion, 1,500 points' } },
+      z: { cade: 200, nota: { it: '2025: girone, una vittoria, 200 punti', en: '2025: group stage, one win, 200 points' } } }
+  ];
+
+  // righe della tabella settimanale: tornei già conclusi a quel punto
+  var TAPPE = [
+    { dopo: [], it: 'Oggi, 29 settembre', en: 'Today, 29 September' },
+    { dopo: ['pek'], it: 'Dopo Pechino', en: 'After Beijing' },
+    { dopo: ['pek', 'sha'], it: 'Dopo Shanghai', en: 'After Shanghai' },
+    { dopo: ['pek', 'sha', 'a500'], it: 'Dopo Vienna e Basilea', en: 'After Vienna and Basel' },
+    { dopo: ['pek', 'sha', 'a500', 'par'], it: 'Dopo Parigi', en: 'After Paris' },
+    { dopo: ['pek', 'sha', 'a500', 'par', 'fin'], it: 'Fine anno, dopo le Finals', en: 'Year end, after the Finals' }
+  ];
+
+  var ETICHETTE = {
+    it: { '': '— scegli —', X: 'Non gioca / esce al primo turno', W: 'Vince', F: 'Finale', SF: 'Semifinale', QF: 'Quarti', R16: 'Ottavi', R32: 'Terzo turno', R64: 'Secondo turno',
+          RR0: 'Girone, nessuna vittoria', RR1: 'Girone, 1 vittoria', RR2: 'Girone, 2 vittorie, eliminato', SF2: 'Semifinale (2 vittorie nel girone)', SF3: 'Semifinale (3 vittorie nel girone)',
+          F2: 'Finale (2 vittorie nel girone)', F3: 'Finale (3 vittorie nel girone)', W2: 'Vince (2 vittorie nel girone)', W3: 'Vince imbattuto' },
+    en: { '': '— choose —', X: 'Does not play / loses first match', W: 'Wins', F: 'Final', SF: 'Semi-final', QF: 'Quarter-final', R16: 'Last 16', R32: 'Third round', R64: 'Second round',
+          RR0: 'Group stage, no wins', RR1: 'Group stage, 1 win', RR2: 'Group stage, 2 wins, out', SF2: 'Semi-final (2 group wins)', SF3: 'Semi-final (3 group wins)',
+          F2: 'Final (2 group wins)', F3: 'Final (3 group wins)', W2: 'Wins (2 group wins)', W3: 'Unbeaten champion' }
+  };
+
+  var T = {
+    it: {
+      tutti: 'Tutti gli strumenti', occhiello: 'Simulatore · classifica ATP 2026',
+      titolo: 'Sinner o Zverev: chi chiude il 2026 da numero 1?',
+      tesi: 'Oggi Sinner è primo in classifica, ma nella Race, che conta solo i punti del 2026 e a fine anno diventa la classifica, è Zverev a stare davanti. Scegli i risultati dei tornei che restano e guarda chi arriva primo a Torino.',
+      'h-fine': 'Classifica di fine anno', distacco: 'Distacco', 'h-tornei': 'I tornei che restano',
+      istruzioni: 'Per ogni torneo scegli fin dove arriva ciascuno. Sotto ogni torneo trovi quanto aveva fatto nel 2025: quei punti escono dalla classifica ATP la settimana del torneo.',
+      'p-2025': 'Come nel 2025', 'p-sinner': 'Sinner vince tutto', 'p-zverev': 'Zverev vince tutto', 'p-zero': 'Azzera', condividi: 'Condividi lo scenario',
+      'h-settimane': 'La classifica ATP, settimana per settimana',
+      'settimane-intro': 'La classifica ATP conta gli ultimi 12 mesi: a ogni torneo entrano i punti nuovi ed escono quelli dello stesso torneo del 2025. Dopo le Finals restano solo i punti del 2026, e la classifica coincide con la Race.',
+      quando: 'Quando', n1: 'N. 1', privacy: 'Privacy e assistenza',
+      race: 'Race oggi', guadagna: 'punti in più', copiato: 'Link copiato',
+      vS: 'Sinner chiude il 2026 da numero 1, con {d} punti di vantaggio.',
+      vZ: 'Zverev chiude il 2026 da numero 1, con {d} punti di vantaggio. Sarebbe il suo primo anno da numero 1.',
+      vP: 'Parità esatta a {p} punti.',
+      serve: 'Oggi Sinner deve fare {d} punti più di Zverev nei tornei che restano per chiudere davanti.',
+      nessuno: 'Nessun risultato scelto: sono i punti della Race di oggi.',
+      doppio: 'Due vincitori nello stesso torneo: uno dei due risultati non è possibile.',
+      fonte: 'Punti al 29 settembre 2026: classifica ATP live e Race to Turin da live-tennis.eu, confrontate con la classifica ufficiale del 14 settembre. Punti per turno secondo il regolamento ATP 2026. Semplificazione: il calcolo somma tutti i risultati e non applica il limite dei 19 tornei che contano, che potrebbe togliere qualche punto a chi ne gioca di più. Non è un prodotto ufficiale ATP.'
+    },
+    en: {
+      tutti: 'All tools', occhiello: 'Simulator · ATP rankings 2026',
+      titolo: 'Sinner or Zverev: who finishes 2026 as world No. 1?',
+      tesi: 'Sinner is No. 1 in the rankings today, but Zverev leads the Race, which counts only 2026 points and becomes the ranking at the end of the season. Pick the results of the remaining events and see who reaches Turin on top.',
+      'h-fine': 'Year-end ranking', distacco: 'Gap', 'h-tornei': 'Remaining events',
+      istruzioni: 'For each event, choose how far each player goes. Under every event you can see his 2025 result: those points drop out of the ATP ranking in the week of the event.',
+      'p-2025': 'Same as 2025', 'p-sinner': 'Sinner wins everything', 'p-zverev': 'Zverev wins everything', 'p-zero': 'Reset', condividi: 'Share this scenario',
+      'h-settimane': 'The ATP ranking, week by week',
+      'settimane-intro': 'The ATP ranking covers the last 12 months: at every event the new points come in and the points from the same event in 2025 drop out. After the Finals only 2026 points are left, and the ranking equals the Race.',
+      quando: 'When', n1: 'No. 1', privacy: 'Privacy and support',
+      race: 'Race today', guadagna: 'points added', copiato: 'Link copied',
+      vS: 'Sinner finishes 2026 as No. 1, {d} points ahead.',
+      vZ: 'Zverev finishes 2026 as No. 1, {d} points ahead. It would be his first year-end No. 1.',
+      vP: 'Dead heat at {p} points.',
+      serve: 'Today Sinner needs {d} more points than Zverev from the remaining events to finish ahead.',
+      nessuno: 'No results picked yet: these are today’s Race points.',
+      doppio: 'Two winners of the same event: one of the two results is not possible.',
+      fonte: 'Points as of 29 September 2026: live ATP ranking and Race to Turin from live-tennis.eu, checked against the official ranking of 14 September. Points per round per the 2026 ATP rules. Simplification: all results are added up; the best-19 rule is not applied, which could cost the player with more events a few points. Not an official ATP product.'
+    }
+  };
+
+  var lingua = /(^|[?&])lang=en\b/.test(location.search) ? 'en' : 'it';
+  var stato = { s: {}, z: {} };
+
+  // separatore delle migliaia anche a quattro cifre (toLocaleString in it-CH non lo mette)
+  function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, lingua === 'en' ? ',' : '.'); }
+  function t(k) { return T[lingua][k]; }
+  function punti(tr, v) { return v && v !== 'X' ? (CAT[tr.cat][v] || 0) : 0; }
+
+  function opzioni(tr) {
+    var chiavi = Object.keys(CAT[tr.cat]);
+    if (tr.cat !== 'FIN') chiavi = ['X'].concat(chiavi);
+    return [''].concat(chiavi).map(function (k) {
+      var p = k && k !== 'X' ? ' · ' + fmt(CAT[tr.cat][k]) : (k === 'X' ? ' · 0' : '');
+      return '<option value="' + k + '">' + ETICHETTE[lingua][k] + p + '</option>';
+    }).join('');
+  }
+
+  function disegnaTornei() {
+    var box = document.getElementById('tornei');
+    box.innerHTML = TORNEI.map(function (tr) {
+      return '<div class="torneo" id="t-' + tr.id + '">' +
+        '<div class="torneo__testa"><span class="torneo__nome">' + tr.nome[lingua] + '</span><span class="torneo__quando">' + tr.quando[lingua] + '</span></div>' +
+        '<div class="torneo__scelte">' + ['s', 'z'].map(function (g) {
+          var info = tr[g], nomeG = g === 's' ? 'Sinner' : 'Zverev';
+          return '<div class="scelta scelta--' + g + '"><label for="sel-' + tr.id + '-' + g + '">' + nomeG + '</label>' +
+            '<select id="sel-' + tr.id + '-' + g + '" data-t-id="' + tr.id + '" data-g="' + g + '"' +
+              (info.fuori ? ' disabled><option value="">' + ETICHETTE[lingua].X.split(' / ')[0] + ' · 0</option>' : '>' + opzioni(tr)) + '</select>' +
+            '<div class="torneo__nota">' + info.nota[lingua] + '</div>' +
+            '<div class="guadagno" id="g-' + tr.id + '-' + g + '"></div></div>';
+        }).join('') + '</div><div class="avviso" id="av-' + tr.id + '" hidden>' + t('doppio') + '</div></div>';
+    }).join('');
+    box.addEventListener('change', function (e) {
+      var sel = e.target;
+      if (!sel.dataset.tId) return;
+      if (sel.value) stato[sel.dataset.g][sel.dataset.tId] = sel.value; else delete stato[sel.dataset.g][sel.dataset.tId];
+      aggiorna();
+    });
+  }
+
+  function totale(g, ids) {
+    return TORNEI.reduce(function (acc, tr) {
+      if (ids && ids.indexOf(tr.id) < 0) return acc;
+      return acc + punti(tr, stato[g][tr.id]);
+    }, 0);
+  }
+
+  function classificaDopo(g, ids) {
+    return TORNEI.reduce(function (acc, tr) {
+      if (ids.indexOf(tr.id) < 0) return acc;
+      return acc + punti(tr, stato[g][tr.id]) - tr[g].cade;
+    }, BASE[g].classifica);
+  }
+
+  function aggiorna() {
+    var gs = totale('s'), gz = totale('z');
+    var ps = BASE.s.race + gs, pz = BASE.z.race + gz, d = ps - pz;
+    document.getElementById('punti-s').textContent = fmt(ps);
+    document.getElementById('punti-z').textContent = fmt(pz);
+    document.getElementById('sotto-s').textContent = t('race') + ' ' + fmt(BASE.s.race) + ' · +' + fmt(gs) + ' ' + t('guadagna');
+    document.getElementById('sotto-z').textContent = t('race') + ' ' + fmt(BASE.z.race) + ' · +' + fmt(gz) + ' ' + t('guadagna');
+    var sc = document.getElementById('scarto');
+    sc.textContent = d === 0 ? '0' : (d > 0 ? 'Sinner +' : 'Zverev +') + fmt(Math.abs(d));
+    sc.style.color = d > 0 ? 'var(--sinner)' : (d < 0 ? 'var(--zverev)' : 'var(--gesso)');
+
+    var v = document.getElementById('verdetto');
+    var scelti = Object.keys(stato.s).length + Object.keys(stato.z).length;
+    var testo = d > 0 ? t('vS') : (d < 0 ? t('vZ') : t('vP'));
+    testo = testo.replace('{d}', fmt(Math.abs(d))).replace('{p}', fmt(ps));
+    var sotto = scelti ? '' : t('nessuno') + ' ' + t('serve').replace('{d}', fmt(BASE.z.race - BASE.s.race + 1));
+    v.className = 'verdetto ' + (d > 0 ? 'verdetto--s' : (d < 0 ? 'verdetto--z' : ''));
+    v.innerHTML = testo + (sotto ? '<small>' + sotto + '</small>' : '');
+
+    TORNEI.forEach(function (tr) {
+      ['s', 'z'].forEach(function (g) {
+        var val = stato[g][tr.id], el = document.getElementById('g-' + tr.id + '-' + g);
+        el.textContent = val ? '+' + fmt(punti(tr, val)) : '';
+        var sel = document.getElementById('sel-' + tr.id + '-' + g);
+        if (sel.value !== (val || '')) sel.value = val || '';
+      });
+      var vinceS = /^W/.test(stato.s[tr.id] || ''), vinceZ = /^W/.test(stato.z[tr.id] || '');
+      // Vienna e Basilea si giocano nella stessa settimana: due vincitori sono possibili
+      document.getElementById('av-' + tr.id).hidden = !(vinceS && vinceZ && tr.id !== 'a500');
+    });
+
+    document.getElementById('settimane').innerHTML = TAPPE.map(function (tp, i) {
+      var s = classificaDopo('s', tp.dopo), z = classificaDopo('z', tp.dopo);
+      var chi = s > z ? '<span class="n1 n1-s">Sinner</span>' : (z > s ? '<span class="n1 n1-z">Zverev</span>' : '=');
+      var riga = '<tr><td>' + tp[lingua] + '</td><td class="num">' + fmt(s) + '</td><td class="num">' + fmt(z) + '</td><td>' + chi + '</td></tr>';
+      return i === TAPPE.length - 1 ? riga.replace('<tr>', '<tr style="font-weight:700">') : riga;
+    }).join('');
+
+    var h = codifica();
+    history.replaceState(null, '', location.pathname + location.search + (h ? '#' + h : ''));
+  }
+
+  // scenario nel link: #s=sha:W,par:F;z=pek:W
+  function codifica() {
+    return ['s', 'z'].map(function (g) {
+      var k = Object.keys(stato[g]);
+      return k.length ? g + '=' + k.map(function (id) { return id + ':' + stato[g][id]; }).join(',') : '';
+    }).filter(Boolean).join(';');
+  }
+  function decodifica(h) {
+    h.replace(/^#/, '').split(';').forEach(function (parte) {
+      var m = parte.match(/^([sz])=(.+)$/);
+      if (!m) return;
+      m[2].split(',').forEach(function (c) {
+        var kv = c.split(':'), tr = TORNEI.filter(function (x) { return x.id === kv[0]; })[0];
+        if (tr && !tr[m[1]].fuori && (kv[1] === 'X' || CAT[tr.cat][kv[1]] !== undefined)) stato[m[1]][kv[0]] = kv[1];
+      });
+    });
+  }
+
+  var PRESET = {
+    '2025': { s: { sha: 'R32', a500: 'W', par: 'W', fin: 'W3' }, z: { pek: 'X', sha: 'R32', a500: 'F', par: 'SF', fin: 'RR1' } },
+    sinner: { s: { sha: 'W', a500: 'W', par: 'W', fin: 'W3' }, z: { pek: 'W', sha: 'F', a500: 'F', par: 'F', fin: 'F2' } },
+    zverev: { s: { sha: 'F', a500: 'F', par: 'F', fin: 'F2' }, z: { pek: 'W', sha: 'W', a500: 'W', par: 'W', fin: 'W3' } },
+    zero: { s: {}, z: {} }
+  };
+
+  document.querySelectorAll('[data-preset]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var p = PRESET[b.dataset.preset];
+      stato = { s: Object.assign({}, p.s), z: Object.assign({}, p.z) };
+      aggiorna();
+    });
+  });
+
+  document.getElementById('condividi').addEventListener('click', function () {
+    var url = location.href, msg = document.getElementById('copiato');
+    if (navigator.share) { navigator.share({ title: document.title, url: url }).catch(function () {}); return; }
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () {
+      msg.textContent = t('copiato'); msg.hidden = false; setTimeout(function () { msg.hidden = true; }, 2500);
+    });
+  });
+
+  // lingua
+  if (lingua === 'en') {
+    document.documentElement.lang = 'en';
+    document.title = 'Sinner or Zverev? ATP year-end No. 1 simulator 2026';
+    document.querySelectorAll('[data-t]').forEach(function (el) { el.textContent = t(el.dataset.t); });
+    var al = document.getElementById('altra-lingua');
+    al.textContent = 'Italiano'; al.href = location.pathname; al.hreflang = 'it';
+  }
+  document.getElementById('fonte').textContent = t('fonte');
+
+  disegnaTornei();
+  if (location.hash) decodifica(location.hash);
+  aggiorna();
+})();
+</script>
+</body>
+</html>

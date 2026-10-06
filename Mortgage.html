@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mortgage Calculator — la rata del mutuo e cosa c’è dietro</title>
+<meta name="description" content="Calcola la rata del mutuo e mostra cosa c’è dietro quel numero: piano di ammortamento rata per rata, export CSV e PDF, e il confronto tra otto durate. Tutto sul dispositivo, anche offline.">
+<meta property="og:title" content="Mortgage Calculator — la rata del mutuo e cosa c’è dietro">
+<meta property="og:description" content="Rata, piano di ammortamento e scenari a confronto. Tutti i calcoli sul dispositivo, anche senza rete.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://bacchin.app/og.png">
+<meta property="og:locale" content="it_IT">
+<meta name="theme-color" content="#171A1F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23171A1F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='%23F2A93B'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="stile.css?v=2026-10-06a">
+<link rel="canonical" href="https://bacchin.app/Mortgage">
+</head>
+<body>
+<div class="foglio">
+
+  <header class="testata">
+    <a class="etichetta" href="./">Fabrizio Bacchin</a>
+    <a class="etichetta" href="./#t-app">Tutte le app</a>
+  </header>
+
+  <div class="app-hero">
+    <h1>Mortgage Calculator</h1>
+    <p class="tesi">Calcola la rata del mutuo e <strong>mostra che cosa c’è dietro quel numero</strong>: quanto paghi di capitale, quanto di interessi, come cambia rata dopo rata e che cosa succederebbe con un tasso o una durata diversi. Tutto sul dispositivo, anche senza rete.</p>
+    <p class="scarica">
+      <a class="scarica__link" href="https://apps.apple.com/app/id982773255">Scarica su App Store</a>
+      <span class="scarica__nota">Gratis, per iPhone</span>
+    </p>
+  </div>
+
+  <div class="racconto">
+    <h2>La scheda Calcolo</h2>
+    <p>Quattro dati e basta: importo, data di inizio, tasso annuo e durata, gli ultimi due con un cursore. <strong>La rata si ricalcola all’istante</strong> a ogni modifica, insieme al totale rimborsato e al totale interessi. La barra in fondo mostra a colpo d’occhio la proporzione fra capitale e interessi sull’intera durata.</p>
+    <p>Il calcolo usa il <strong>metodo francese a rata costante</strong>, quello della quasi totalità dei mutui: la rata resta uguale per tutta la durata, e a cambiare è la sua composizione interna.</p>
+
+    <h2>Il piano, rata per rata</h2>
+    <p>La scheda <strong>Piano ammort.</strong> è il dettaglio completo: numero e scadenza di ogni rata, quota capitale e quota interessi con la barra che ne mostra il rapporto, capitale residuo dopo il pagamento. Scorrendo verso il basso la barra vira progressivamente verso il verde — è l’effetto tipico dell’ammortamento francese, dove all’inizio si pagano soprattutto interessi e verso la fine soprattutto capitale.</p>
+    <p>Il piano si esporta in due formati: <strong>CSV</strong> per rielaborarlo in Numbers, Excel o Fogli Google — date in formato ISO e numeri col punto decimale, così l’importazione funziona in qualsiasi lingua — e <strong>PDF</strong> impaginato, pronto da stampare o inviare.</p>
+
+    <h2>La scheda Scenari</h2>
+    <p>Serve a rispondere alla domanda «e se…». Due cursori cambiano tasso e durata, e la nuova rata compare subito. Il grafico mette a confronto <strong>otto durate, da 5 a 40 anni</strong>: per ognuna una colonna divisa fra capitale — che non cambia mai, è la somma che hai chiesto in prestito — e interessi, che crescono all’allungarsi della durata. È il modo più diretto per vedere il compromesso di fondo di ogni mutuo: <strong>allungare la durata abbassa la rata, ma alza il totale degli interessi</strong>.</p>
+
+    <h2>Il tasso da inserire</h2>
+    <p>È il <strong>tasso annuo nominale</strong>, non il TAEG che comprende anche i costi accessori. E se la banca ti dà una rata diversa, di solito è perché la sua include assicurazioni, spese di incasso o imposte: l’app calcola la rata pura di capitale e interessi. L’ultima rata può differire di pochi centesimi — è corretto, viene aggiustata per azzerare esattamente il capitale residuo.</p>
+    <p>Per un mutuo a tasso variabile puoi simulare qualsiasi tasso, ma il piano lo tiene fisso per tutta la durata: per capire l’effetto di un rialzo, la scheda Scenari è lo strumento giusto. E per sapere da dove parte il tasso oggi, <a href="EuriborX.html">Euribor X</a> tiene i fixing aggiornati.</p>
+
+    <h2>Gratuita, e la pubblicità si toglie</h2>
+    <p>Mortgage Calculators è <strong>gratuita e completa</strong>, sostenuta dagli annunci di Google AdMob. Puoi rifiutare sia il consenso di Google sia il tracciamento di Apple: gli annunci restano ma non sono personalizzati, e l’app funziona esattamente allo stesso modo. E <strong>la pubblicità si può togliere</strong> con un acquisto in app: abbonamento annuale, oppure un acquisto una tantum che vale per sempre.</p>
+    <p>La vecchia versione a pagamento ora si chiama <strong>Mortgage Calculator Legacy</strong>: continua a funzionare ma non riceve più aggiornamenti. Chi l’aveva acquistata passa a Mortgage Calculators <strong>senza pubblicità e senza pagare di nuovo</strong> — come, lo spiega la <a href="/app/Mortgage/support">pagina di assistenza</a>.</p>
+
+    <h2>Un’avvertenza</h2>
+    <p>È uno strumento di calcolo e simulazione, <strong>non una consulenza finanziaria</strong>. I risultati hanno valore indicativo: per un impegno reale fai sempre riferimento ai documenti del tuo istituto di credito.</p>
+
+    <dl class="scheda-tecnica">
+      <div><dt>Piattaforma</dt><dd>iPhone · Mortgage Calculators</dd></div>
+      <div><dt>Prezzo</dt><dd>Gratuita con pubblicità · rimovibile con abbonamento annuale o acquisto una tantum</dd></div>
+      <div><dt>Metodo</dt><dd>Ammortamento francese a rata costante · calcoli sul dispositivo, anche offline</dd></div>
+      <div><dt>Esportazione</dt><dd>Piano completo in CSV e PDF</dd></div>
+      <div><dt>App Store</dt><dd><a href="https://apps.apple.com/app/id982773255">Apri la scheda dell’app</a></dd></div>
+      <div><dt>Assistenza</dt><dd><a href="/app/Mortgage/support">Guida all’uso e domande frequenti</a></dd></div>
+      <div><dt>Privacy</dt><dd><a href="/app/Mortgage/privacy">Informativa</a></dd></div>
+    </dl>
+
+    <nav class="vicini" aria-label="Altre app">
+      <a href="LiborX.html">← Libor X</a>
+      <a href="Leasing.html">Leasing Calculator →</a>
+    </nav>
+  </div>
+
+  <footer class="piede">
+    <span class="etichetta">© 2026 Fabrizio Bacchin</span>
+    <nav class="piede__link etichetta">
+      <a href="mailto:info@bacchin.app">info@bacchin.app</a>
+      <a href="/privacy">Privacy e assistenza</a>
+    </nav>
+  </footer>
+
+</div>
+</body>
+</html>

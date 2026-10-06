@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Gottardo Live — code e traffico al tunnel del San Gottardo</title>
+<meta name="description" content="Traffico in tempo reale al tunnel del Gottardo: code, attese, avvisi ufficiali VMZ-CH e webcam. Con notifiche quando la coda si forma.">
+<meta property="og:title" content="Gottardo Live — code e traffico al tunnel del San Gottardo">
+<meta property="og:description" content="Traffico in tempo reale al tunnel del Gottardo: code, attese, avvisi ufficiali VMZ-CH e webcam. Con notifiche quando la coda si forma.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://bacchin.app/og.png">
+<meta property="og:locale" content="it_IT">
+<meta name="theme-color" content="#171A1F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23171A1F'/%3E%3Ccircle cx='32' cy='32' r='11' fill='%23F2A93B'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="stile.css?v=2026-10-06a">
+<noscript><style>.dato-grande[data-vivo] { display: none; }</style></noscript>
+<link rel="canonical" href="https://bacchin.app/gotthard">
+</head>
+<body>
+<div class="foglio">
+
+  <header class="testata">
+    <a class="etichetta" href="./">Fabrizio Bacchin</a>
+    <a class="etichetta" href="./#t-app">Tutte le app</a>
+  </header>
+
+  <div class="app-hero">
+    <h1>Gottardo Live</h1>
+    <p class="tesi">Il tunnel del San Gottardo in tempo reale: <strong>code, attese, avvisi ufficiali e webcam</strong>, con una notifica quando la coda si forma — così decidi prima di partire, non quando sei in colonna.</p>
+    <p class="scarica">
+      <a class="scarica__link" href="https://apps.apple.com/app/id6790088814">Scarica su App Store</a>
+      <span class="scarica__nota">Gratis, per iPhone</span>
+    </p>
+    <div class="dato-grande" data-vivo aria-live="polite">
+      <div class="dato-grande__griglia">
+        <div class="cifra"><div class="cifra__nome">Verso sud · Göschenen</div><div class="cifra__valore" id="g-nord">—</div></div>
+        <div class="cifra"><div class="cifra__nome">Verso nord · Airolo</div><div class="cifra__valore" id="g-sud">—</div></div>
+      </div>
+      <div class="dato-grande__quando" id="g-quando">carico lo stato del tunnel…</div>
+    </div>
+  </div>
+
+  <div class="racconto">
+    <h2>Da dove arrivano i numeri</h2>
+    <p>Quando le autorità pubblicano un’attesa ufficiale, l’app mostra quella. Quando pubblicano solo la lunghezza della coda, la converte con la regola tipica del contingentamento al Gottardo — circa <strong>dieci minuti per chilometro</strong>. E quando non c’è nessun bollettino, mostra il ritardo di percorrenza in diretta da Apple Maps. «Libero, 0 minuti» non è un errore: vuol dire che ora non c’è coda.</p>
+    <h2>Il grafico delle 24 ore</h2>
+    <p>Le code al Gottardo si formano nei weekend, nei festivi e nelle giornate d’esodo. Il grafico delle ultime 24 ore mostra com’è andata la giornata — utile per capire se stai guardando un picco o una coda che si sta sciogliendo.</p>
+    <h2>Avvisi e webcam</h2>
+    <p>Gli avvisi ufficiali arrivano dalla centrale svizzera del traffico (VMZ-CH) nelle tre lingue nazionali; l’app sceglie quella più vicina alle tue impostazioni, e la sua interfaccia parla italiano, inglese, tedesco e francese. Le webcam sono quelle di USTRA: se una è fuori servizio, il cartello arriva dall’autorità stradale e di solito rientra in pochi giorni.</p>
+    <h2>Un’avvertenza seria</h2>
+    <p>Le informazioni sulle code arrivano dalle autorità e possono occasionalmente differire dalla situazione reale. E soprattutto: <strong>mai usare l’app mentre guidi</strong>.</p>
+    <dl class="scheda-tecnica">
+      <div><dt>Piattaforma</dt><dd>iPhone</dd></div>
+      <div><dt>Lingue</dt><dd>Italiano, inglese, tedesco e francese</dd></div>
+      <div><dt>Fonti</dt><dd>USTRA / VMZ-CH via opentransportdata.swiss · Apple Maps · Apple Weather / Open-Meteo</dd></div>
+      <div><dt>Il collector</dt><dd><a href="https://fbacchin.github.io/app/gotthard/">Come raccoglie i dati, su GitHub Actions</a></dd></div>
+      <div><dt>App Store</dt><dd><a href="https://apps.apple.com/app/id6790088814">Apri la scheda dell’app</a></dd></div>
+      <div><dt>Assistenza</dt><dd><a href="/app/gotthard/support-gotthard">Domande frequenti</a></dd></div>
+      <div><dt>Privacy</dt><dd><a href="/app/gotthard/privacy-gotthard">Informativa</a></dd></div>
+    </dl>
+
+    <nav class="vicini" aria-label="Altre app">
+      <a href="Leasing.html">← Leasing Calculator</a>
+      <a href="Burraco.html">Burraco Score →</a>
+    </nav>
+  </div>
+
+  <footer class="piede">
+    <span class="etichetta">© 2026 Fabrizio Bacchin</span>
+    <nav class="piede__link etichetta">
+      <a href="mailto:info@bacchin.app">info@bacchin.app</a>
+      <a href="/privacy">Privacy e assistenza</a>
+    </nav>
+  </footer>
+
+</div>
+<script>
+(function () {
+  fetch('https://fbacchin.github.io/app/gotthard/data/latest.json', { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (d) {
+      function scrivi(id, v) {
+        var m = v && typeof v.wait === 'number' ? v.wait : 0;
+        var c = m >= 60 ? 'rosso' : (m >= 20 ? 'ambra' : 'verde');
+        document.getElementById(id).innerHTML = '<span class="' + c + '">' + m + '\u2032</span>' + (m === 0 ? ' <small>libero</small>' : ' di coda');
+      }
+      scrivi('g-nord', d.north);
+      scrivi('g-sud', d.south);
+      var q = new Date(d.time);
+      document.getElementById('g-quando').textContent =
+        'Rilevato alle ' + q.toLocaleTimeString('it-CH', { hour: '2-digit', minute: '2-digit' }) + ' — lo stesso campione che legge l\u2019app, ricampionato ogni 5 minuti.';
+    })
+    .catch(function () {
+      document.getElementById('g-quando').textContent = 'Collector non raggiungibile — l\u2019app legge il feed VMZ-CH in diretta.';
+    });
+})();
+</script>
+</body>
+</html>
