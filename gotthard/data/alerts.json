@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 3.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 30",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 3.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 30"
   },
-  "lastSeen": "2026-10-06T12:30:05Z"
+  "lastSeen": "2026-10-06T12:35:06Z"
  },
  {
   "firstSeen": "2026-10-06T10:15:04Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-10-06T12:30:05Z"
+  "lastSeen": "2026-10-06T12:35:06Z"
  },
  {
   "firstSeen": "2026-10-06T11:20:05Z",
@@ -42,7 +42,22 @@
    "fr": "Libéré: H2 Göschenen <-> Flüelen Jonction autoroutière Göschenen Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: circulation alternée à une voie Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.0 Durée: durant la journée probable 12.10.2026 07:00 jusqu''à 04.12.2026 17:00",
    "it": "Approvato: H2 Göschenen <-> Flüelen Svincolo autostradale Göschenen Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0 Durata: durante il giorno probabile 12.10.2026 07:00 fino 04.12.2026 17:00"
   },
-  "lastSeen": "2026-10-06T12:30:05Z"
+  "lastSeen": "2026-10-06T12:35:06Z"
+ },
+ {
+  "firstSeen": "2026-10-06T12:35:06Z",
+  "id": "situation.657728.1.1.1",
+  "type": "RoadOrCarriagewayOrLaneManagement",
+  "direction": "south",
+  "versionTime": "2026-10-06T12:34:25Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Gotthard -> Chiasso Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Pannenfahrzeug",
+   "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: véhicule en panne",
+   "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: veicolo in avaria"
+  },
+  "lastSeen": "2026-10-06T12:35:06Z"
  },
  {
   "firstSeen": "2026-10-06T10:05:04Z",
@@ -219,21 +234,5 @@
   },
   "lastSeen": "2026-10-04T12:40:04Z",
   "revokedAt": "2026-10-04T12:45:03Z"
- },
- {
-  "firstSeen": "2026-10-04T09:25:04Z",
-  "id": "situation.657343.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-10-04T09:23:10Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Flüelen -> Göschenen zwischen Ortschaft Erstfeld und Anschluss Göschenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen Dauer:  voraussichtlich 04.10.2026 11:23",
-   "fr": "Libéré: H2 Flüelen -> Göschenen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus Durée:  probable 04.10.2026 11:23",
-   "it": "Approvato: H2 Flüelen -> Göschenen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi Durata:  probabile 04.10.2026 11:23"
-  },
-  "lastSeen": "2026-10-04T12:35:02Z",
-  "revokedAt": "2026-10-04T12:40:04Z"
  }
 ]
