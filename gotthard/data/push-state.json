@@ -1,16 +1,14 @@
 {
  "south": {
-  "soglieAvvisate": [
-   2
-  ],
-  "lastSent": "2026-10-06T13:00:07Z",
-  "clearSince": "2026-10-06T13:20:07Z"
+  "soglieAvvisate": [],
+  "lastSent": "2026-10-06T13:45:04Z"
  },
  "north": {
   "soglieAvvisate": [
-   2
+   2,
+   4
   ],
-  "lastSent": "2026-10-06T10:50:06Z"
+  "lastSent": "2026-10-06T13:45:04Z"
  },
  "tunnel": {
   "phase": "open"
