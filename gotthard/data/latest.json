@@ -1,5 +1,5 @@
 {
- "time": "2026-10-07T05:50:04Z",
+ "time": "2026-10-07T05:55:03Z",
  "south": {
   "km": null,
   "wait": null
@@ -20,19 +20,6 @@
     "de": "Freigegeben: H2 Bellinzona <-> Flüelen zwischen Anschluss Göschenen und Ortschaft Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5 Dauer: tagsüber voraussichtlich 11.05.2026 07:00 bis 18.12.2026 17:00",
     "fr": "Libéré: H2 Bellinzone <-> Flüelen entre Jonction autoroutière Göschenen et Localité Airolo Situation: trafic perturbé travaux, longueur [km] 0.1 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la journée probable 11.05.2026 07:00 jusqu''à 18.12.2026 17:00",
     "it": "Approvato: H2 Bellinzona <-> Flüelen tra Svincolo autostradale Göschenen E Luogo Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 11.05.2026 07:00 fino 18.12.2026 17:00"
-   }
-  },
-  {
-   "id": "situation.657896.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "south",
-   "versionTime": "2026-10-07T05:18:02Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Parkplatz Dosierstelle Coldrerio und Zollstation Chiasso-Brogeda Sachlage: Stau für LKW Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: A2 St-Gothard -> Chiasso entre Parking Aire de dosage Coldrerio et Poste de douane Chiasso-Brogeda Situation: bouchon pour poids lourd Raison: surcharge de trafic",
-    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Coldrerio E Dogana Chiasso Brogeda Situazione: colonna per autocarro Causa: traffico congestionato"
    }
   },
   {
