@@ -1,5 +1,5 @@
 {
- "time": "2026-10-07T17:30:06Z",
+ "time": "2026-10-07T17:35:03Z",
  "south": {
   "km": null,
   "wait": null
@@ -46,19 +46,6 @@
     "de": "Freigegeben: H2 Bellinzona <-> Flüelen zwischen Anschluss Göschenen und Ortschaft Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5 Dauer: tagsüber voraussichtlich 11.05.2026 07:00 bis 18.12.2026 17:00",
     "fr": "Libéré: H2 Bellinzone <-> Flüelen entre Jonction autoroutière Göschenen et Localité Airolo Situation: trafic perturbé travaux, longueur [km] 0.1 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la journée probable 11.05.2026 07:00 jusqu''à 18.12.2026 17:00",
     "it": "Approvato: H2 Bellinzona <-> Flüelen tra Svincolo autostradale Göschenen E Luogo Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 11.05.2026 07:00 fino 18.12.2026 17:00"
-   }
-  },
-  {
-   "id": "situation.657880.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-10-07T04:35:29Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso <-> Luzern zwischen Anschluss Göschenen und Anschluss Airolo Sachlage: Tunnel gesperrt Ursache: Ausnahmetransport Dauer:  voraussichtlich 07.10.2026 23:00 bis 08.10.2026 01:00",
-    "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Göschenen et Jonction autoroutière Airolo Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable 07.10.2026 23:00 jusqu''à 08.10.2026 01:00",
-    "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Göschenen E Svincolo autostradale Airolo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile 07.10.2026 23:00 fino 08.10.2026 01:00"
    }
   }
  ]
