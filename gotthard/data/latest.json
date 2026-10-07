@@ -1,5 +1,5 @@
 {
- "time": "2026-10-07T00:10:04Z",
+ "time": "2026-10-07T00:15:05Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,19 +8,5 @@
   "km": null,
   "wait": null
  },
- "events": [
-  {
-   "id": "situation.657714.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-10-06T11:17:16Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Göschenen <-> Flüelen Anschluss Göschenen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.0 Dauer: tagsüber voraussichtlich 12.10.2026 07:00 bis 04.12.2026 17:00",
-    "fr": "Libéré: H2 Göschenen <-> Flüelen Jonction autoroutière Göschenen Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: circulation alternée à une voie Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.0 Durée: durant la journée probable 12.10.2026 07:00 jusqu''à 04.12.2026 17:00",
-    "it": "Approvato: H2 Göschenen <-> Flüelen Svincolo autostradale Göschenen Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0 Durata: durante il giorno probabile 12.10.2026 07:00 fino 04.12.2026 17:00"
-   }
-  }
- ]
+ "events": []
 }
