@@ -1,0 +1,22 @@
+# Avviso una tantum (webcam ferme alla fonte, 07.10.2026). Temporaneo: da cancellare dopo l'invio.
+name: Gotthard avviso una tantum
+on:
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: conta | invia
+        required: true
+        default: conta
+permissions:
+  contents: read
+jobs:
+  avviso:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          B4A_APP_ID: ${{ secrets.B4A_APP_ID }}
+          B4A_MASTER_KEY: ${{ secrets.B4A_MASTER_KEY }}
+          MODO: ${{ inputs.modo }}
+        run: python3 gotthard/avviso.py "$MODO"
