@@ -12,7 +12,8 @@
    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable 07.10.2026 23:00 jusqu''à 08.10.2026 01:00",
    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile 07.10.2026 23:00 fino 08.10.2026 01:00"
   },
-  "lastSeen": "2026-10-07T22:00:06Z"
+  "lastSeen": "2026-10-07T22:00:06Z",
+  "revokedAt": "2026-10-07T22:05:03Z"
  },
  {
   "firstSeen": "2026-10-07T17:50:06Z",
@@ -90,7 +91,8 @@
    "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Göschenen et Jonction autoroutière Airolo Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable 07.10.2026 23:00 jusqu''à 08.10.2026 01:00",
    "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Göschenen E Svincolo autostradale Airolo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile 07.10.2026 23:00 fino 08.10.2026 01:00"
   },
-  "lastSeen": "2026-10-07T16:35:03Z"
+  "lastSeen": "2026-10-07T16:35:03Z",
+  "revokedAt": "2026-10-07T22:05:03Z"
  },
  {
   "firstSeen": "2026-10-07T15:30:06Z",
