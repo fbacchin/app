@@ -1,5 +1,5 @@
 {
- "time": "2026-10-07T18:20:05Z",
+ "time": "2026-10-07T18:25:05Z",
  "south": {
   "km": null,
   "wait": null
@@ -20,19 +20,6 @@
     "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Zollstation Chiasso-Brogeda und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung zu erwarten Ursache: Ausnahmetransport Dauer:  voraussichtlich 07.10.2026 19:42 bis 07.10.2026 22:00",
     "fr": "Libéré: A2 Chiasso -> St-Gothard entre Poste de douane Chiasso-Brogeda et Tunnel Tunnel du St-Gothard Situation: ralentissements prévus Raison: convoi exceptionnel Durée:  probable 07.10.2026 19:42 jusqu''à 07.10.2026 22:00",
     "it": "Approvato: A2 Chiasso -> S. Gottardo tra Dogana Chiasso Brogeda E Galleria Galleria San Gottardo Situazione: si prevedono problemi di traffico Causa: trasporto eccezionale Durata:  probabile 07.10.2026 19:42 fino 07.10.2026 22:00"
-   }
-  },
-  {
-   "id": "situation.620496.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-10-07T05:25:12Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Bellinzona <-> Flüelen zwischen Anschluss Göschenen und Ortschaft Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5 Dauer: tagsüber voraussichtlich 11.05.2026 07:00 bis 18.12.2026 17:00",
-    "fr": "Libéré: H2 Bellinzone <-> Flüelen entre Jonction autoroutière Göschenen et Localité Airolo Situation: trafic perturbé travaux, longueur [km] 0.1 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la journée probable 11.05.2026 07:00 jusqu''à 18.12.2026 17:00",
-    "it": "Approvato: H2 Bellinzona <-> Flüelen tra Svincolo autostradale Göschenen E Luogo Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 11.05.2026 07:00 fino 18.12.2026 17:00"
    }
   }
  ]
