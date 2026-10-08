@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
   },
-  "lastSeen": "2026-10-08T17:40:06Z"
+  "lastSeen": "2026-10-08T17:45:04Z"
  },
  {
   "firstSeen": "2026-10-08T09:15:05Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-10-08T17:40:06Z"
+  "lastSeen": "2026-10-08T17:45:04Z"
  },
  {
   "firstSeen": "2026-10-08T09:45:03Z",
@@ -42,7 +42,7 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé Durée:  probable 08.10.2026 18:00 jusqu''à 09.10.2026 08:00",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa Durata:  probabile 08.10.2026 18:00 fino 09.10.2026 08:00"
   },
-  "lastSeen": "2026-10-08T17:40:06Z"
+  "lastSeen": "2026-10-08T17:45:04Z"
  },
  {
   "firstSeen": "2026-10-08T14:30:05Z",
@@ -57,7 +57,7 @@
    "fr": "Libéré: Ulrichen <-> Airolo Col Col du Nufenen Situation: fermé Raison: fermeture hivernale Durée:  probable 08.10.2026 18:00 jusqu''à 09.10.2026 08:00",
    "it": "Approvato: Ulrichen <-> Airolo Passo Passo della Novena Situazione: chiusa Causa: chiusura invernale Durata:  probabile 08.10.2026 18:00 fino 09.10.2026 08:00"
   },
-  "lastSeen": "2026-10-08T17:40:06Z"
+  "lastSeen": "2026-10-08T17:45:04Z"
  },
  {
   "firstSeen": "2026-10-08T15:15:06Z",
@@ -72,7 +72,7 @@
    "fr": "Libéré: Ulrichen <-> Airolo Col Col du Nufenen Situation: fermé Raison: chutes de neige Durée:  probable 08.10.2026 18:00",
    "it": "Approvato: Ulrichen <-> Airolo Passo Passo della Novena Situazione: chiusa Causa: nevicata Durata:  probabile 08.10.2026 18:00"
   },
-  "lastSeen": "2026-10-08T17:40:06Z"
+  "lastSeen": "2026-10-08T17:45:04Z"
  },
  {
   "firstSeen": "2026-10-08T09:00:11Z",
@@ -342,21 +342,5 @@
    "it": "Approvato: H2 Göschenen <-> Flüelen Svincolo autostradale Göschenen Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0 Durata: durante il giorno probabile 12.10.2026 07:00 fino 04.12.2026 17:00"
   },
   "lastSeen": "2026-10-06T23:15:02Z"
- },
- {
-  "firstSeen": "2026-10-06T10:10:09Z",
-  "id": "situation.657703.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-10-06T17:10:36Z",
-  "km": 1.0,
-  "wait": 10,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
-  },
-  "lastSeen": "2026-10-06T17:40:08Z",
-  "revokedAt": "2026-10-06T17:45:05Z"
  }
 ]
