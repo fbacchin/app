@@ -1,5 +1,5 @@
 {
- "time": "2026-10-08T15:10:05Z",
+ "time": "2026-10-08T15:15:06Z",
  "south": {
   "km": 5.0,
   "wait": 50
@@ -33,6 +33,19 @@
     "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Anschluss Göschenen Sachlage: Stau Länge [km] 5.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 50",
     "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 5.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 50",
     "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 5.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 50"
+   }
+  },
+  {
+   "id": "situation.658350.1.1.1",
+   "type": "RoadOrCarriagewayOrLaneManagement",
+   "direction": null,
+   "versionTime": "2026-10-08T15:14:03Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: Ulrichen <-> Airolo Pass Nufenen-Pass Sachlage: Strecke gesperrt Ursache: Schneefall Dauer:  voraussichtlich 08.10.2026 18:00",
+    "fr": "Libéré: Ulrichen <-> Airolo Col Col du Nufenen Situation: fermé Raison: chutes de neige Durée:  probable 08.10.2026 18:00",
+    "it": "Approvato: Ulrichen <-> Airolo Passo Passo della Novena Situazione: chiusa Causa: nevicata Durata:  probabile 08.10.2026 18:00"
    }
   },
   {
