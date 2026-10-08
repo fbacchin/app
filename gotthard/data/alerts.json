@@ -12,7 +12,7 @@
    "fr": "Libéré: Ulrichen <-> Airolo Col Col du Nufenen Situation: fermé Raison: fermeture hivernale Durée:  probable 08.10.2026 18:00 jusqu''à 09.10.2026 08:00",
    "it": "Approvato: Ulrichen <-> Airolo Passo Passo della Novena Situazione: chiusa Causa: chiusura invernale Durata:  probabile 08.10.2026 18:00 fino 09.10.2026 08:00"
   },
-  "lastSeen": "2026-10-08T23:10:04Z"
+  "lastSeen": "2026-10-08T23:15:03Z"
  },
  {
   "firstSeen": "2026-10-08T15:15:06Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: Ulrichen <-> Airolo Col Col du Nufenen Situation: fermé Raison: chutes de neige Durée:  probable 08.10.2026 18:00",
    "it": "Approvato: Ulrichen <-> Airolo Passo Passo della Novena Situazione: chiusa Causa: nevicata Durata:  probabile 08.10.2026 18:00"
   },
-  "lastSeen": "2026-10-08T23:10:04Z"
+  "lastSeen": "2026-10-08T23:15:03Z"
  },
  {
   "firstSeen": "2026-10-08T18:30:08Z",
@@ -42,7 +42,7 @@
    "fr": "Libéré: Ulrichen <-> Airolo entre Localité Ulrichen et Localité All'Acqua Situation: fermé Raison: Congères",
    "it": "Approvato: Ulrichen <-> Airolo tra Luogo Ulrichen E Luogo All'Acqua Situazione: chiusa Causa: Accumuli di neve ventata"
   },
-  "lastSeen": "2026-10-08T23:10:04Z"
+  "lastSeen": "2026-10-08T23:15:03Z"
  },
  {
   "firstSeen": "2026-10-08T09:45:03Z",
@@ -344,20 +344,5 @@
   },
   "lastSeen": "2026-10-07T05:50:04Z",
   "revokedAt": "2026-10-07T05:55:03Z"
- },
- {
-  "firstSeen": "2026-10-06T11:20:05Z",
-  "id": "situation.657714.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-10-06T11:17:16Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Göschenen <-> Flüelen Anschluss Göschenen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.0 Dauer: tagsüber voraussichtlich 12.10.2026 07:00 bis 04.12.2026 17:00",
-   "fr": "Libéré: H2 Göschenen <-> Flüelen Jonction autoroutière Göschenen Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: circulation alternée à une voie Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.0 Durée: durant la journée probable 12.10.2026 07:00 jusqu''à 04.12.2026 17:00",
-   "it": "Approvato: H2 Göschenen <-> Flüelen Svincolo autostradale Göschenen Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.0 Durata: durante il giorno probabile 12.10.2026 07:00 fino 04.12.2026 17:00"
-  },
-  "lastSeen": "2026-10-06T23:15:02Z"
  }
 ]
