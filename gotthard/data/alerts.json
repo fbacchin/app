@@ -12,7 +12,22 @@
    "fr": "Libéré: Ulrichen <-> Airolo entre Localité Ulrichen et Localité All'Acqua Situation: fermé Raison: Congères",
    "it": "Approvato: Ulrichen <-> Airolo tra Luogo Ulrichen E Luogo All'Acqua Situazione: chiusa Causa: Accumuli di neve ventata"
   },
-  "lastSeen": "2026-10-09T05:05:06Z"
+  "lastSeen": "2026-10-09T05:10:04Z"
+ },
+ {
+  "firstSeen": "2026-10-08T09:45:03Z",
+  "id": "situation.658222.1.1.1",
+  "type": "RoadOrCarriagewayOrLaneManagement",
+  "direction": null,
+  "versionTime": "2026-10-09T05:08:27Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Anschluss Airolo-Nufenen und Ortschaft Hospental Sachlage: Strecke gesperrt Dauer:  voraussichtlich 08.10.2026 18:00 bis 09.10.2026 08:00",
+   "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé Durée:  probable 08.10.2026 18:00 jusqu''à 09.10.2026 08:00",
+   "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa Durata:  probabile 08.10.2026 18:00 fino 09.10.2026 08:00"
+  },
+  "lastSeen": "2026-10-09T05:10:04Z"
  },
  {
   "firstSeen": "2026-10-08T15:15:06Z",
@@ -43,21 +58,6 @@
    "it": "Approvato: Ulrichen <-> Airolo Passo Passo della Novena Situazione: chiusa Causa: chiusura invernale Durata:  probabile 08.10.2026 18:00 fino 09.10.2026 08:00"
   },
   "lastSeen": "2026-10-09T02:25:05Z"
- },
- {
-  "firstSeen": "2026-10-08T09:45:03Z",
-  "id": "situation.658222.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": null,
-  "versionTime": "2026-10-08T09:44:40Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Anschluss Airolo-Nufenen und Ortschaft Hospental Sachlage: Strecke gesperrt Dauer:  voraussichtlich 08.10.2026 18:00 bis 09.10.2026 08:00",
-   "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé Durée:  probable 08.10.2026 18:00 jusqu''à 09.10.2026 08:00",
-   "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa Durata:  probabile 08.10.2026 18:00 fino 09.10.2026 08:00"
-  },
-  "lastSeen": "2026-10-08T21:40:05Z"
  },
  {
   "firstSeen": "2026-10-08T09:10:06Z",
