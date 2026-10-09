@@ -12,7 +12,22 @@
    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: en raison de problèmes techniques",
    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: per problemi tecnici"
   },
-  "lastSeen": "2026-10-09T06:30:05Z"
+  "lastSeen": "2026-10-09T06:35:03Z"
+ },
+ {
+  "firstSeen": "2026-10-09T06:35:03Z",
+  "id": "situation.658443.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "south",
+  "versionTime": "2026-10-09T06:30:45Z",
+  "km": 2.0,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 2.0 Ursache: Verkehrsüberlastung",
+   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic",
+   "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato"
+  },
+  "lastSeen": "2026-10-09T06:35:03Z"
  },
  {
   "firstSeen": "2026-10-08T18:30:08Z",
