@@ -12,7 +12,7 @@
    "fr": "Libéré: Ulrichen <-> Airolo entre Localité Ulrichen et Localité All'Acqua Situation: fermé Raison: Congères",
    "it": "Approvato: Ulrichen <-> Airolo tra Luogo Ulrichen E Luogo All'Acqua Situazione: chiusa Causa: Accumuli di neve ventata"
   },
-  "lastSeen": "2026-10-09T05:50:04Z"
+  "lastSeen": "2026-10-09T05:55:03Z"
  },
  {
   "firstSeen": "2026-10-08T09:45:03Z",
@@ -27,7 +27,8 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé Durée:  probable 08.10.2026 18:00 jusqu''à 09.10.2026 08:00",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa Durata:  probabile 08.10.2026 18:00 fino 09.10.2026 08:00"
   },
-  "lastSeen": "2026-10-09T05:50:04Z"
+  "lastSeen": "2026-10-09T05:50:04Z",
+  "revokedAt": "2026-10-09T05:55:03Z"
  },
  {
   "firstSeen": "2026-10-08T15:15:06Z",
