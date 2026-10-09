@@ -1,5 +1,5 @@
 {
- "time": "2026-10-09T05:55:03Z",
+ "time": "2026-10-09T06:00:05Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,19 +8,5 @@
   "km": null,
   "wait": null
  },
- "events": [
-  {
-   "id": "situation.658401.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-10-08T18:25:27Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: Ulrichen <-> Airolo zwischen Ortschaft Ulrichen und Ortschaft All'Acqua Sachlage: Strecke gesperrt Ursache: Schneeverwehungen",
-    "fr": "Libéré: Ulrichen <-> Airolo entre Localité Ulrichen et Localité All'Acqua Situation: fermé Raison: Congères",
-    "it": "Approvato: Ulrichen <-> Airolo tra Luogo Ulrichen E Luogo All'Acqua Situazione: chiusa Causa: Accumuli di neve ventata"
-   }
-  }
- ]
+ "events": []
 }
