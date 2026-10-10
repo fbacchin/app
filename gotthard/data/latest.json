@@ -1,5 +1,5 @@
 {
- "time": "2026-10-10T12:20:03Z",
+ "time": "2026-10-10T12:25:05Z",
  "south": {
   "km": 3.0,
   "wait": 30
@@ -33,32 +33,6 @@
     "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
     "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
     "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
-   }
-  },
-  {
-   "id": "situation.658721.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-10-10T11:36:32Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Stalvedro Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen gesperrt",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Stalvedro Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de droite fermée",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Stalvedro Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa"
-   }
-  },
-  {
-   "id": "situation.658682.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-10-10T08:13:27Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Flüelen -> Göschenen zwischen Ortschaft Amsteg und Anschluss Göschenen Sachlage: Verkehrsbehinderung zu erwarten Ursache: Verkehrsüberlastung",
-    "fr": "Libéré: H2 Flüelen -> Göschenen entre Localité Amsteg et Jonction autoroutière Göschenen Situation: ralentissements prévus Raison: surcharge de trafic",
-    "it": "Approvato: H2 Flüelen -> Göschenen tra Luogo Amsteg E Svincolo autostradale Göschenen Situazione: si prevedono problemi di traffico Causa: traffico congestionato"
    }
   },
   {
