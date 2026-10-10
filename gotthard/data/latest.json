@@ -1,5 +1,5 @@
 {
- "time": "2026-10-10T06:10:04Z",
+ "time": "2026-10-10T06:15:04Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,19 +8,5 @@
   "km": null,
   "wait": null
  },
- "events": [
-  {
-   "id": "situation.658663.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-10-10T04:26:30Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Amsteg und Anschluss Erstfeld Sachlage: Verkehrsbehinderung Ursache: Unfall Verkehrsführung: rechter Fahrstreifen gesperrt",
-    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Amsteg et Jonction autoroutière Erstfeld Situation: trafic perturbé Raison: accident Gestion du trafic: voie de droite fermée",
-    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Amsteg E Svincolo autostradale Erstfeld Situazione: problemi di traffico Causa: incidente Limitazione del traffico: corsia di destra chiusa"
-   }
-  }
- ]
+ "events": []
 }
