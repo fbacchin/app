@@ -887,6 +887,60 @@ def km_efficaci(entry):
     return 0
 
 
+# Le notifiche di coda e di fine coda nella lingua di chi le riceve (ADEV-723).
+# Fino all'11.10.2026 partivano in inglese per tutti: la notifica per cui la
+# gente scarica l'app era l'unica a non parlare la sua lingua, mentre quelle
+# del tunnel erano gia' tradotte. Stesso stile di quelle: emoji in testa,
+# direzione per esteso. I due punti in francese vogliono lo spazio prima.
+DIREZIONE_PUSH = {
+    "it": {"south": "Verso sud", "north": "Verso nord"},
+    "de": {"south": "Richtung Süden", "north": "Richtung Norden"},
+    "fr": {"south": "Direction sud", "north": "Direction nord"},
+    "en": {"south": "Southbound", "north": "Northbound"},
+}
+CODA_CON_KM = {
+    "it": "🚦 {dir}: coda di {km} km · attesa ~{wait} min",
+    "de": "🚦 {dir}: {km} km Stau · ~{wait} Min. Wartezeit",
+    "fr": "🚦 {dir} : {km} km de bouchon · ~{wait} min d'attente",
+    "en": "🚦 {dir}: {km} km queue · ~{wait} min wait",
+}
+# Quando la fonte da' l'attesa ma non i chilometri.
+CODA_SENZA_KM = {
+    "it": "🚦 {dir}: coda · attesa ~{wait} min",
+    "de": "🚦 {dir}: Stau · ~{wait} Min. Wartezeit",
+    "fr": "🚦 {dir} : bouchon · ~{wait} min d'attente",
+    "en": "🚦 {dir}: queue · ~{wait} min wait",
+}
+CODA_FINITA = {
+    "it": "✅ {dir}: coda finita",
+    "de": "✅ {dir}: Stau aufgelöst",
+    "fr": "✅ {dir} : bouchon résorbé",
+    "en": "✅ {dir}: queue cleared",
+}
+
+
+def testi_coda(direction, km, wait):
+    """Il testo della notifica di coda, uno per lingua.
+
+    I chilometri con la virgola dove si usa la virgola: «2,5 km» in italiano,
+    tedesco e francese, «2.5 km» in inglese.
+    """
+    testi = {}
+    for lingua in LINGUE_PUSH:
+        direzione = DIREZIONE_PUSH[lingua][direction]
+        if not km:  # zero o assente: la fonte ha dato solo l'attesa
+            testi[lingua] = CODA_SENZA_KM[lingua].format(dir=direzione, wait=wait)
+            continue
+        numero = f"{km:g}" if lingua == "en" else f"{km:g}".replace(".", ",")
+        testi[lingua] = CODA_CON_KM[lingua].format(dir=direzione, km=numero, wait=wait)
+    return testi
+
+
+def testi_fine_coda(direction):
+    """Il testo della notifica di fine coda, uno per lingua."""
+    return {lingua: CODA_FINITA[lingua].format(dir=DIREZIONE_PUSH[lingua][direction]) for lingua in LINGUE_PUSH}
+
+
 def update_notifications(state, now):
     """Una notifica per episodio e per utente, alla soglia che ha scelto lui.
 
@@ -904,7 +958,6 @@ def update_notifications(state, now):
     except (FileNotFoundError, json.JSONDecodeError):
         push_state = {}
 
-    labels = {"south": "Southbound", "north": "Northbound"}
     for direction in ("south", "north"):
         km = km_efficaci(state[direction])
         wait = effective_wait(state[direction])
@@ -928,23 +981,21 @@ def update_notifications(state, now):
         else:
             clear_since = None
 
-        km_part = f"{km:g} km queue · " if km else "queue · "
-
         # 1. le soglie appena superate, dalla piu' alta: se una coda salta da 0
         #    a 8 km in un giro, chi ha scelto 8 riceve il messaggio giusto.
         for soglia in sorted(SOGLIE_KM, reverse=True):
             if km < soglia or soglia in avvisate:
                 continue
-            messaggio = f"🚦 {labels[direction]}: {km_part}~{wait} min wait"
-            if send_push(messaggio, destinatari(soglie=[soglia], direzione=direction)):
+            if send_push_per_lingua(testi_coda(direction, km, wait),
+                                    destinatari(soglie=[soglia], direzione=direction)):
                 avvisate.append(soglia)
                 last_sent = now
 
         # 2. la fine, solo a chi era stato avvisato dell'inizio. Annunciare la
         #    fine di una coda a chi non sapeva che ci fosse e' rumore puro.
         if avvisate and clear_since is not None and now - clear_since >= CLEAR_CONFIRM:
-            messaggio = f"✅ {labels[direction]}: queue cleared"
-            if send_push(messaggio, destinatari(soglie=sorted(avvisate), direzione=direction)):
+            if send_push_per_lingua(testi_fine_coda(direction),
+                                    destinatari(soglie=sorted(avvisate), direzione=direction)):
                 avvisate = []
                 clear_since = None
                 last_sent = now
@@ -960,7 +1011,6 @@ def update_notifications(state, now):
     state_file.write_text(json.dumps(push_state, indent=1))
 
 
-# I testi delle due notifiche, nello stile delle altre (inglese, con emoji).
 # Le notifiche del tunnel nella lingua di chi le riceve, con la CAUSA che la
 # fonte dichiara (ADEV-698, 21.09.2026). Prima erano in inglese per tutti e
 # senza causa: due chiusure diverse la stessa sera — alle 19:37 «oggetto sulla

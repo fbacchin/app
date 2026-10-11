@@ -338,14 +338,39 @@ def con_code(fn):
         fn()
     return list(inviate)
 
-fatte = con_code(lambda: giro_code(coda(km=3)))
+# Dall'11.10.2026 (ADEV-723) ogni notifica di coda parte in quattro lingue:
+# quattro invii con lo stesso filtro, ristretti ognuno alla sua lingua. Le prove
+# sulla macchina a stati contano le NOTIFICHE, quindi guardano una lingua sola.
+def una_per_notifica(fatte):
+    return [x for x in fatte if _lingua(x[1]) == "en"]
+
+tutte = con_code(lambda: giro_code(coda(km=3)))
+per_lingua = {_lingua(dove): testo for testo, dove in tutte}
+ok("la coda parte in quattro lingue, una push ciascuna",
+   len(tutte) == 4 and sorted(per_lingua) == ["de", "en", "fr", "it"])
+ok("  italiano", per_lingua.get("it") == "🚦 Verso sud: coda di 3 km · attesa ~30 min")
+ok("  tedesco", per_lingua.get("de") == "🚦 Richtung Süden: 3 km Stau · ~30 Min. Wartezeit")
+ok("  francese", per_lingua.get("fr") == "🚦 Direction sud : 3 km de bouchon · ~30 min d'attente")
+ok("  inglese, com'era", per_lingua.get("en") == "🚦 Southbound: 3 km queue · ~30 min wait")
+ok("  tutte con lo stesso filtro di soglia e direzione, piu' la lingua",
+   all(dove["$and"][:-1] == tutte[0][1]["$and"][:-1] for _, dove in tutte))
+ok("  i chilometri con la virgola dove si usa la virgola",
+   c.testi_coda("north", 2.5, 25)["it"] == "🚦 Verso nord: coda di 2,5 km · attesa ~25 min"
+   and c.testi_coda("north", 2.5, 25)["en"] == "🚦 Northbound: 2.5 km queue · ~25 min wait")
+ok("  senza chilometri resta la sola attesa",
+   c.testi_coda("south", None, 20)["de"] == "🚦 Richtung Süden: Stau · ~20 Min. Wartezeit")
+ok("la fine coda in quattro lingue",
+   c.testi_fine_coda("north") == {"it": "✅ Verso nord: coda finita", "de": "✅ Richtung Norden: Stau aufgelöst",
+                                  "fr": "✅ Direction nord : bouchon résorbé", "en": "✅ Northbound: queue cleared"})
+
+fatte = una_per_notifica(tutte)
 ok("una coda di 3 km avvisa solo chi ha scelto 2", len(fatte) == 1
    and fatte[0][1]["$and"][0]["$or"][0] == {"pushCodaKm": {"$in": [2]}})
 
 fatte = con_code(lambda: giro_code(coda(km=0.5)))
 ok("mezzo chilometro non avvisa nessuno", fatte == [])
 
-fatte = con_code(lambda: giro_code(coda(km=8)))
+fatte = una_per_notifica(con_code(lambda: giro_code(coda(km=8))))
 soglie = [x[1]["$and"][0]["$or"][0]["pushCodaKm"]["$in"][0] for x in fatte]
 ok("una coda di 8 km avvisa le quattro soglie sotto, una volta ciascuna",
    sorted(soglie) == [2, 4, 6, 8])
@@ -356,7 +381,7 @@ def cresce():
     giro_code(coda(km=3))
     giro_code(coda(km=5), quando=ADESSO + timedelta(minutes=5))
     giro_code(coda(km=7), quando=ADESSO + timedelta(minutes=10))
-fatte = con_code(cresce)
+fatte = una_per_notifica(con_code(cresce))
 soglie = [x[1]["$and"][0]["$or"][0]["pushCodaKm"]["$in"][0] for x in fatte]
 ok("una coda che cresce non riavvisa chi ha gia' ricevuto",
    sorted(soglie) == [2, 4, 6] and len(soglie) == len(set(soglie)))
@@ -395,7 +420,7 @@ fatte = con_code(lambda: rialza_la_testa(45))
 ok("  e la fine arriva al minuto 45, venti dopo la discesa VERA",
    len([x for x in fatte if "cleared" in x[0]]) == 1)
 
-fatte = con_code(lambda: giro_code(coda(minuti=30)))
+fatte = una_per_notifica(con_code(lambda: giro_code(coda(minuti=30))))
 soglie = [x[1]["$and"][0]["$or"][0]["pushCodaKm"]["$in"][0] for x in fatte]
 ok("senza km si stimano dai minuti: 30 min = 3 km, avvisa solo il 2",
    soglie == [2])
@@ -414,7 +439,7 @@ ok("una coda gia' in corso al rilascio NON rimanda tutto da capo",
    con_stato_vecchio("queued", 7) == [])
 ok("  e se era 'heavy' vale lo stesso", con_stato_vecchio("heavy", 7) == [])
 ok("uno stato vecchio 'clear' non blocca invece una coda nuova",
-   len(con_stato_vecchio("clear", 3)) == 1)
+   len(una_per_notifica(con_stato_vecchio("clear", 3))) == 1)
 
 # --- l'attesa implausibile (04.09.2026) ---
 ok("10 km con 10 minuti e' implausibile", c.attesa_implausibile(10, 10) is True)
