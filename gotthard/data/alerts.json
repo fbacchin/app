@@ -174,21 +174,5 @@
   },
   "lastSeen": "2026-10-11T20:15:03Z",
   "revokedAt": "2026-10-11T20:20:04Z"
- },
- {
-  "firstSeen": "2026-10-11T19:00:05Z",
-  "id": "situation.658841.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": null,
-  "versionTime": "2026-10-11T19:00:43Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Pass Gotthard-Pass und Ortschaft Motto Bartola Sachlage: Strecke gesperrt Ursache: Pannenfahrzeug",
-   "fr": "Libéré: H2 Airolo <-> Göschenen entre Col Col du St-Gothard et Localité Motto Bartola Situation: fermé Raison: véhicule en panne",
-   "it": "Approvato: H2 Airolo <-> Göschenen tra Passo Passo del S. Gottardo E Luogo Motto Bartola Situazione: chiusa Causa: veicolo in avaria"
-  },
-  "lastSeen": "2026-10-11T19:50:03Z",
-  "revokedAt": "2026-10-11T19:55:03Z"
  }
 ]
