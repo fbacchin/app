@@ -1,5 +1,5 @@
 {
- "time": "2026-10-14T23:15:03Z",
+ "time": "2026-10-14T23:20:07Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,19 +8,5 @@
   "km": null,
   "wait": null
  },
- "events": [
-  {
-   "id": "situation.659368.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-10-14T22:53:06Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso <-> Luzern zwischen Anschluss Göschenen und Anschluss Airolo Sachlage: Tunnel gesperrt Ursache: Ausnahmetransport Dauer:  voraussichtlich 14.10.2026 23:00 bis 15.10.2026 01:15",
-    "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Göschenen et Jonction autoroutière Airolo Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable 14.10.2026 23:00 jusqu''à 15.10.2026 01:15",
-    "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Göschenen E Svincolo autostradale Airolo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile 14.10.2026 23:00 fino 15.10.2026 01:15"
-   }
-  }
- ]
+ "events": []
 }
