@@ -7,7 +7,8 @@
   "soglieAvvisate": [
    2
   ],
-  "lastSent": "2026-10-14T11:25:03Z"
+  "lastSent": "2026-10-14T11:25:03Z",
+  "clearSince": "2026-10-14T16:35:06Z"
  },
  "tunnel": {
   "phase": "open"
