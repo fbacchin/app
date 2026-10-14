@@ -12,7 +12,22 @@
    "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Göschenen et Jonction autoroutière Airolo Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable 14.10.2026 23:00 jusqu''à 15.10.2026 01:00",
    "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Göschenen E Svincolo autostradale Airolo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile 14.10.2026 23:00 fino 15.10.2026 01:00"
   },
-  "lastSeen": "2026-10-14T06:00:06Z"
+  "lastSeen": "2026-10-14T06:05:04Z"
+ },
+ {
+  "firstSeen": "2026-10-14T06:05:04Z",
+  "id": "situation.659374.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "south",
+  "versionTime": "2026-10-14T06:02:30Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Parkplatz Dosierstelle Coldrerio und Parkplatz Chiasso-Warenzoll Sachlage: Stau für LKW Ursache: Verkehrsüberlastung",
+   "fr": "Libéré: A2 St-Gothard -> Chiasso entre Parking Aire de dosage Coldrerio et Parking Chiasso-Douane commercial Situation: bouchon pour poids lourd Raison: surcharge de trafic",
+   "it": "Approvato: A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Coldrerio E Parcheggio Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato"
+  },
+  "lastSeen": "2026-10-14T06:05:04Z"
  },
  {
   "firstSeen": "2026-10-13T14:00:07Z",
