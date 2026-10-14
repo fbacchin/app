@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Göschenen et Jonction autoroutière Airolo Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable 14.10.2026 23:00 jusqu''à 15.10.2026 01:00",
    "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Göschenen E Svincolo autostradale Airolo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile 14.10.2026 23:00 fino 15.10.2026 01:00"
   },
-  "lastSeen": "2026-10-14T06:40:08Z"
+  "lastSeen": "2026-10-14T06:45:05Z"
  },
  {
   "firstSeen": "2026-10-14T06:05:04Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 St-Gothard -> Chiasso entre Parking Aire de dosage Coldrerio et Parking Chiasso-Douane commercial Situation: bouchon pour poids lourd Raison: surcharge de trafic",
    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Coldrerio E Parcheggio Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato"
   },
-  "lastSeen": "2026-10-14T06:40:08Z"
+  "lastSeen": "2026-10-14T06:45:05Z"
  },
  {
   "firstSeen": "2026-10-13T14:00:07Z",
@@ -156,21 +156,5 @@
   },
   "lastSeen": "2026-10-12T07:10:07Z",
   "revokedAt": "2026-10-12T07:15:06Z"
- },
- {
-  "firstSeen": "2026-10-12T06:25:04Z",
-  "id": "situation.658930.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": null,
-  "versionTime": "2026-10-12T06:25:35Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Pannenfahrzeug",
-   "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: véhicule en panne",
-   "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: veicolo in avaria"
-  },
-  "lastSeen": "2026-10-12T06:45:04Z",
-  "revokedAt": "2026-10-12T06:50:05Z"
  }
 ]
