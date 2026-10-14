@@ -8,6 +8,7 @@
   "lastSent": "2026-10-14T17:00:19Z"
  },
  "tunnel": {
-  "phase": "closed"
+  "phase": "closed",
+  "openSince": "2026-10-14T23:15:03Z"
  }
 }
