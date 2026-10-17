@@ -1,5 +1,5 @@
 {
- "time": "2026-10-17T18:25:02Z",
+ "time": "2026-10-17T18:30:05Z",
  "south": {
   "km": null,
   "wait": null
@@ -46,19 +46,6 @@
     "de": "Freigegeben: Ulrichen <-> Airolo Pass Nufenen-Pass Sachlage: Strecke gesperrt Ursache: Schneefall Dauer: bis auf weiteres voraussichtlich 17.10.2026 18:00",
     "fr": "Libéré: Ulrichen <-> Airolo Col Col du Nufenen Situation: fermé Raison: chutes de neige Durée: jusqu'à nouvel avis probable 17.10.2026 18:00",
     "it": "Approvato: Ulrichen <-> Airolo Passo Passo della Novena Situazione: chiusa Causa: nevicata Durata: fino a nuovo avviso probabile 17.10.2026 18:00"
-   }
-  },
-  {
-   "id": "situation.660068.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "north",
-   "versionTime": "2026-10-17T08:08:09Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
    }
   }
  ]
