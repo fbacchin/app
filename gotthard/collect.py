@@ -284,6 +284,12 @@ CLEAR_CONFIRM = timedelta(minutes=20)
 # coda ferma a 8 km, quindi 20 minuti non bastavano. Con le revoche a fare
 # da interruttore, una fine annunciata azzera comunque subito.
 HOLD_WINDOW = timedelta(minutes=60)
+# «La coda sta per finire» (18.10.2026, richiesta dell'utente): l'avviso parte
+# quando l'attesa ufficiale scende a 20 minuti o meno dopo esserci stata sopra.
+# Venti minuti e' il limite a cui, col passo aperto, salire al passo non
+# conviene piu': si aspetta la galleria. Vale per ogni coda che li ha superati,
+# anche di poco, non solo per quelle lunghe.
+ATTESA_IN_FINALE_MIN = 20
 
 HISTORY_FILE = Path(__file__).parent / "data" / "history.json"
 WINDOW = timedelta(hours=48)
@@ -919,6 +925,15 @@ CODA_FINITA = {
 }
 
 
+# La coda sta per finire: stesso stile, la clessidra al posto del semaforo.
+CODA_IN_FINALE = {
+    "it": "⏳ {dir}: la coda sta per finire · attesa ~{wait} min",
+    "de": "⏳ {dir}: Stau bald vorbei · noch ~{wait} Min. Wartezeit",
+    "fr": "⏳ {dir} : le bouchon touche à sa fin · ~{wait} min d'attente",
+    "en": "⏳ {dir}: queue almost over · ~{wait} min wait",
+}
+
+
 def testi_coda(direction, km, wait):
     """Il testo della notifica di coda, uno per lingua.
 
@@ -939,6 +954,12 @@ def testi_coda(direction, km, wait):
 def testi_fine_coda(direction):
     """Il testo della notifica di fine coda, uno per lingua."""
     return {lingua: CODA_FINITA[lingua].format(dir=DIREZIONE_PUSH[lingua][direction]) for lingua in LINGUE_PUSH}
+
+
+def testi_coda_in_finale(direction, wait):
+    """Il testo della notifica «la coda sta per finire», uno per lingua."""
+    return {lingua: CODA_IN_FINALE[lingua].format(dir=DIREZIONE_PUSH[lingua][direction], wait=wait)
+            for lingua in LINGUE_PUSH}
 
 
 def update_notifications(state, now):
@@ -973,6 +994,10 @@ def update_notifications(state, now):
             avvisate = [s for s in SOGLIE_KM if km >= s]
         clear_since = parse_time(entry.get("clearSince") or "")
         last_sent = parse_time(entry.get("lastSent") or "")
+        # «Sta per finire»: se in questo episodio l'attesa e' stata sopra la
+        # soglia, e se l'avviso e' gia' partito. Una volta sola per episodio.
+        sopra_finale = bool(entry.get("sopraFinale"))
+        finale_avvisato = bool(entry.get("finaleAvvisato"))
 
         # Da quando la coda e' sotto soglia, a prescindere dagli invii: se
         # risale, la fine non era reale e il conteggio riparte da zero.
@@ -991,6 +1016,19 @@ def update_notifications(state, now):
                 avvisate.append(soglia)
                 last_sent = now
 
+        # 1b. la coda sta per finire: l'attesa scende a ATTESA_IN_FINALE_MIN
+        #     dopo esserci stata sopra. Solo a chi era stato avvisato della
+        #     coda, come la fine. Una coda che sparisce di colpo non lo manda:
+        #     arriva direttamente «coda finita».
+        if avvisate and wait > ATTESA_IN_FINALE_MIN:
+            sopra_finale = True
+        if (avvisate and sopra_finale and not finale_avvisato
+                and 0 < wait <= ATTESA_IN_FINALE_MIN and km >= FINE_CODA_KM):
+            if send_push_per_lingua(testi_coda_in_finale(direction, wait),
+                                    destinatari(soglie=sorted(avvisate), direzione=direction)):
+                finale_avvisato = True
+                last_sent = now
+
         # 2. la fine, solo a chi era stato avvisato dell'inizio. Annunciare la
         #    fine di una coda a chi non sapeva che ci fosse e' rumore puro.
         if avvisate and clear_since is not None and now - clear_since >= CLEAR_CONFIRM:
@@ -999,6 +1037,8 @@ def update_notifications(state, now):
                 avvisate = []
                 clear_since = None
                 last_sent = now
+        if not avvisate:  # episodio finito (o mai iniziato): si riparte da zero
+            sopra_finale = finale_avvisato = False
 
         new_entry = {
             "soglieAvvisate": sorted(avvisate),
@@ -1006,6 +1046,10 @@ def update_notifications(state, now):
         }
         if clear_since is not None:
             new_entry["clearSince"] = clear_since.isoformat().replace("+00:00", "Z")
+        if sopra_finale:
+            new_entry["sopraFinale"] = True
+        if finale_avvisato:
+            new_entry["finaleAvvisato"] = True
         push_state[direction] = new_entry
 
     state_file.write_text(json.dumps(push_state, indent=1))

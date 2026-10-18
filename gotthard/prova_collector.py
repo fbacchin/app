@@ -425,6 +425,42 @@ soglie = [x[1]["$and"][0]["$or"][0]["pushCodaKm"]["$in"][0] for x in fatte]
 ok("senza km si stimano dai minuti: 30 min = 3 km, avvisa solo il 2",
    soglie == [2])
 
+# --- «la coda sta per finire» (18.10.2026) ---
+ok("in finale, in quattro lingue",
+   c.testi_coda_in_finale("south", 20) == {"it": "⏳ Verso sud: la coda sta per finire · attesa ~20 min",
+                                            "de": "⏳ Richtung Süden: Stau bald vorbei · noch ~20 Min. Wartezeit",
+                                            "fr": "⏳ Direction sud : le bouchon touche à sa fin · ~20 min d'attente",
+                                            "en": "⏳ Southbound: queue almost over · ~20 min wait"})
+
+def finale(*minuti):
+    for i, m in enumerate(minuti):
+        giro_code(coda(minuti=m), quando=ADESSO + timedelta(minutes=5 * i))
+def in_finale(fatte):
+    return [x for x in una_per_notifica(fatte) if "almost over" in x[0]]
+
+fatte = con_code(lambda: finale(40, 30, 20))
+ok("da 40 a 20 minuti: «sta per finire»", len(in_finale(fatte)) == 1
+   and in_finale(fatte)[0][0] == "⏳ Southbound: queue almost over · ~20 min wait")
+ok("  a chi era stato avvisato della coda, come la fine",
+   in_finale(fatte)[0][1]["$and"][0]["$or"][0]["pushCodaKm"]["$in"] == [2, 4])
+fatte = con_code(lambda: finale(25, 15))
+ok("anche una coda che ha superato i 20 di poco", len(in_finale(fatte)) == 1)
+fatte = con_code(lambda: finale(40, 20, 15, 10, 25, 18))
+ok("una volta sola per episodio, anche se l'attesa risale e riscende", len(in_finale(fatte)) == 1)
+fatte = con_code(lambda: finale(20, 15))
+ok("una coda mai sopra i 20 minuti non la manda", in_finale(fatte) == [])
+fatte = con_code(lambda: finale(40, 0, 0))
+ok("una coda che sparisce di colpo non la manda", in_finale(fatte) == [])
+def due_episodi():
+    finale(40, 20)
+    giro_code(coda(km=0), quando=ADESSO + timedelta(minutes=15))
+    giro_code(coda(km=0), quando=ADESSO + timedelta(minutes=40))
+    for i, m in enumerate((40, 20)):
+        giro_code(coda(minuti=m), quando=ADESSO + timedelta(minutes=60 + 5 * i))
+fatte = con_code(due_episodi)
+ok("dopo «coda finita» un episodio nuovo la rimanda", len(in_finale(fatte)) == 2
+   and any("cleared" in x[0] for x in una_per_notifica(fatte)))
+
 # --- il passaggio dallo schema vecchio di push-state.json ---
 def con_stato_vecchio(fase, km_ora):
     with tempfile.TemporaryDirectory() as dd:
