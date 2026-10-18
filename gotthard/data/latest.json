@@ -1,5 +1,5 @@
 {
- "time": "2026-10-18T13:40:05Z",
+ "time": "2026-10-18T13:45:03Z",
  "south": {
   "km": null,
   "wait": null
@@ -26,13 +26,13 @@
    "id": "situation.660193.1.1.1",
    "type": "AbnormalTraffic",
    "direction": null,
-   "versionTime": "2026-10-18T13:12:43Z",
+   "versionTime": "2026-10-18T13:43:54Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: H2 Bellinzona <-> Airolo zwischen Ortschaft Osogna und Ortschaft Biasca Sachlage: Verkehrsbehinderung Ursache: Unfall",
-    "fr": "Libéré: H2 Bellinzone <-> Airolo entre Localité Osogna et Localité Biasca Situation: trafic perturbé Raison: accident",
-    "it": "Approvato: H2 Bellinzona <-> Airolo tra Luogo Osogna E Luogo Biasca Situazione: problemi di traffico Causa: incidente"
+    "de": "Freigegeben: H2 Bellinzona <-> Airolo zwischen Ortschaft Osogna und Ortschaft Biasca Sachlage: Verkehrsbehinderung Ursache: Unfall Verkehrsführung: wechselseitige Verkehrsführung",
+    "fr": "Libéré: H2 Bellinzone <-> Airolo entre Localité Osogna et Localité Biasca Situation: trafic perturbé Raison: accident Gestion du trafic: circulation alternée à une voie",
+    "it": "Approvato: H2 Bellinzona <-> Airolo tra Luogo Osogna E Luogo Biasca Situazione: problemi di traffico Causa: incidente Limitazione del traffico: circolazione a corsie alternate"
    }
   },
   {
