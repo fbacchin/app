@@ -1,5 +1,5 @@
 {
- "time": "2026-10-18T13:10:05Z",
+ "time": "2026-10-18T13:15:04Z",
  "south": {
   "km": null,
   "wait": null
@@ -20,6 +20,19 @@
     "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 4.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 40",
     "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 4.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 40",
     "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 4.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 40"
+   }
+  },
+  {
+   "id": "situation.660193.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": null,
+   "versionTime": "2026-10-18T13:12:43Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: H2 Bellinzona <-> Airolo zwischen Ortschaft Osogna und Ortschaft Biasca Sachlage: Verkehrsbehinderung Ursache: Unfall",
+    "fr": "Libéré: H2 Bellinzone <-> Airolo entre Localité Osogna et Localité Biasca Situation: trafic perturbé Raison: accident",
+    "it": "Approvato: H2 Bellinzona <-> Airolo tra Luogo Osogna E Luogo Biasca Situazione: problemi di traffico Causa: incidente"
    }
   },
   {
