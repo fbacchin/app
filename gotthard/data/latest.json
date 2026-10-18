@@ -1,5 +1,5 @@
 {
- "time": "2026-10-18T00:00:03Z",
+ "time": "2026-10-18T00:05:03Z",
  "south": {
   "km": null,
   "wait": null
@@ -20,19 +20,6 @@
     "de": "Freigegeben: Ulrichen <-> Airolo Pass Nufenen-Pass Sachlage: Strecke gesperrt Dauer: bis auf weiteres voraussichtlich 17.10.2026 18:00",
     "fr": "Libéré: Ulrichen <-> Airolo Col Col du Nufenen Situation: fermé Durée: jusqu'à nouvel avis probable 17.10.2026 18:00",
     "it": "Approvato: Ulrichen <-> Airolo Passo Passo della Novena Situazione: chiusa Durata: fino a nuovo avviso probabile 17.10.2026 18:00"
-   }
-  },
-  {
-   "id": "situation.660094.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-10-17T11:02:12Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: Ulrichen <-> Airolo Pass Nufenen-Pass Sachlage: Strecke gesperrt Ursache: Schneefall Dauer: bis auf weiteres voraussichtlich 17.10.2026 18:00",
-    "fr": "Libéré: Ulrichen <-> Airolo Col Col du Nufenen Situation: fermé Raison: chutes de neige Durée: jusqu'à nouvel avis probable 17.10.2026 18:00",
-    "it": "Approvato: Ulrichen <-> Airolo Passo Passo della Novena Situazione: chiusa Causa: nevicata Durata: fino a nuovo avviso probabile 17.10.2026 18:00"
    }
   }
  ]
