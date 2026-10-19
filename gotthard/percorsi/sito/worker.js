@@ -153,7 +153,8 @@ const TRATTE_PAGINA = `<!doctype html>
   main > * { min-width: 0; }
   section { background: var(--scheda); border: 1px solid var(--bordo); border-radius: 8px; padding: 12px 10px 4px; overflow-x: auto; }
   h2 { font-size: 17px; margin: 0 0 8px; } h2 span { font-weight: 400; color: var(--tenue); font-size: 14px; }
-  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  /* Larghezze fisse e uguali in tutte le tabelle (19.10, richiesta dell'utente): ogni fonte sta sempre nello stesso posto. */
+  table { table-layout: fixed; border-collapse: collapse; font-variant-numeric: tabular-nums; }
   th, td { text-align: left; padding: 8px 4px; border-top: 1px solid var(--bordo); vertical-align: top; }
   thead th { border-top: 0; font-size: 13px; color: var(--tenue); font-weight: 600; }
   tbody th { font-weight: 600; }
@@ -192,6 +193,17 @@ const TRATTE_PAGINA = `<!doctype html>
   }
   const differenza = (d) => d == null ? cella(null) : crea("td", (d > 0 ? "+" : "") + d + " min");
   let colonne = [];
+  // Etichette 28 % della scheda, ogni fonte 18 %: la tabella è larga solo quanto le sue colonne, così una tabella
+  // con 3 fonti non allarga le colonne per riempire lo spazio e resta allineata a quelle con 4.
+  const ETICHETTA = 28, FONTE = 18;
+  function tabella() {
+    const t = crea("table"), cg = crea("colgroup"), totale = ETICHETTA + FONTE * colonne.length;
+    t.style.width = totale + "%"; t.style.minWidth = (ETICHETTA + FONTE * colonne.length) * 5.6 + "px";
+    const col = (w) => { const c = crea("col"); c.style.width = (100 * w / totale) + "%"; return c; };
+    cg.append(col(ETICHETTA), ...colonne.map(() => col(FONTE)));
+    t.append(cg);
+    return t;
+  }
   function riga(titolo, fn, classe) {
     const tr = crea("tr", null, classe); tr.append(crea("th", titolo));
     for (const [f] of colonne) tr.append(fn(f));
@@ -204,11 +216,14 @@ const TRATTE_PAGINA = `<!doctype html>
     el("quanto").textContent = m.quando.slice(8, 10) + "." + m.quando.slice(5, 7) + " · " + m.quanto;
     el("prima").disabled = i >= momenti.length - 1;
     el("dopo").disabled = el("adesso").disabled = i === 0;
+    // Le stesse colonne in tutte le schede dello stesso tipo: le fonti con almeno un dato in una di esse.
+    // I contatori ASTRA misurano solo le tratte separate, e stanno per ultimi: le altre fonti restano allineate.
+    const colonneTratte = fonti.filter(([f]) => m.tratte.some((t) => t.fonti[f] && (t.fonti[f].galleria || t.fonti[f].passo)));
+    const colonneSeparate = fonti.filter(([f]) => m.separate.some((g) => g.righe.some((r) => r.fonti[f] && r.fonti[f].cella)));
     el("tratte").replaceChildren(...m.tratte.map((t) => {
       const s = crea("section"), h = crea("h2", t.nome + " "); h.append(crea("span", t.senso)); s.append(h);
-      // Solo le fonti con almeno un dato in questa tratta (i contatori ASTRA misurano solo le tratte separate).
-      colonne = fonti.filter(([f]) => t.fonti[f] && (t.fonti[f].galleria || t.fonti[f].passo));
-      const tab = crea("table"), testa = crea("tr"); testa.append(crea("th"));
+      colonne = colonneTratte;
+      const tab = tabella(), testa = crea("tr"); testa.append(crea("th"));
       for (const [f, nome] of colonne) {
         const th = crea("th", nome), ora = t.fonti[f] && t.fonti[f].ora;
         if (ora && ora !== m.quando) th.append(crea("small", "alle " + ora.slice(11)));
@@ -227,10 +242,9 @@ const TRATTE_PAGINA = `<!doctype html>
       tab.append(thead, tbody); s.append(tab);
       return s;
     }), ...m.separate.map((g) => {
-      // Solo le fonti che misurano queste tratte (Google no).
-      const colonne = fonti.filter(([f]) => g.righe.some((r) => r.fonti[f] && r.fonti[f].cella));
+      colonne = colonneSeparate;
       const s = crea("section"), h = crea("h2", "Tratte separate "); h.append(crea("span", g.senso)); s.append(h);
-      const tab = crea("table"), testa = crea("tr"); testa.append(crea("th"));
+      const tab = tabella(), testa = crea("tr"); testa.append(crea("th"));
       for (const [, nome] of colonne) testa.append(crea("th", nome));
       const thead = crea("thead"); thead.append(testa);
       const tbody = crea("tbody");
