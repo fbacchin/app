@@ -1,0 +1,104 @@
+name: Percorsi Gottardo
+
+# ADEV-773: tempi di percorrenza galleria/passo. Codice in gotthard/percorsi (fino al 19.10.2026 nel repository
+# fbacchin/gottardo-percorsi). Giri lunghi come il collector: GitHub ritarda o salta i cron frequenti.
+# Un run misura agli scatti dei quarti d'ora per ~2 ore e 45 minuti; il job `next` accoda il successivo
+# solo se la raccolta è finita bene (freno contro i run falliti a raffica); il cron è la rete di sicurezza.
+# Il repository è PUBBLICO e anche i log lo sono: giro.py non stampa mai URL né risposte.
+# Non scrive niente in questo repository (contents: read): tutti i dati vanno nel privato fbacchin/gottardo-percorsi-privati.
+# Segreti con il prefisso PERCORSI_ per non toccare quelli degli altri flussi.
+# Fermare tutto: gh workflow disable gotthard-percorsi.yml -R fbacchin/app
+on:
+  schedule:
+    - cron: "7 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gotthard-percorsi
+  cancel-in-progress: false
+
+defaults:
+  run:
+    working-directory: gotthard/percorsi
+
+jobs:
+  misura:
+    runs-on: ubuntu-latest
+    timeout-minutes: 178
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: gotthard/percorsi
+      - uses: actions/checkout@v5
+        with:
+          repository: fbacchin/gottardo-percorsi-privati
+          token: ${{ secrets.PERCORSI_PRIVATI_TOKEN }}
+          path: gotthard/percorsi/privati
+      # Il Python di sistema di Ubuntu non accetta pip install (PEP 668): se ne usa uno dedicato.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --quiet "cryptography==50.0.2"
+      - name: Misura ogni 15 minuti per ~2 ore e 45
+        env:
+          APPLE_MAPS_KEY_ID: ${{ secrets.PERCORSI_APPLE_MAPS_KEY_ID }}
+          APPLE_TEAM_ID: ${{ secrets.PERCORSI_APPLE_TEAM_ID }}
+          APPLE_MAPS_PRIVATE_KEY: ${{ secrets.PERCORSI_APPLE_MAPS_PRIVATE_KEY }}
+          TOMTOM_KEY: ${{ secrets.PERCORSI_TOMTOM_KEY }}
+          GOOGLE_ROUTES_KEY: ${{ secrets.PERCORSI_GOOGLE_ROUTES_KEY }}
+          OTD_CONTATORI_KEY: ${{ secrets.PERCORSI_OTD_CONTATORI_KEY }}
+        run: |
+          git -C privati config user.name "gottardo-bot"
+          git -C privati config user.email "actions@users.noreply.github.com"
+          # salva: commit e push del privato, con 3 tentativi dopo rebase (solo questo flusso scrive lì)
+          salva() {
+            git -C privati add -A dati mappe storia README.md uso.json 2>/dev/null || true
+            git -C privati diff --cached --quiet && return 0
+            git -C privati commit -q -m "percorsi $(date -u +%FT%TZ)"
+            git -C privati push -q origin main && return 0
+            for t in 1 2 3; do
+              sleep $((t * 5))
+              git -C privati fetch -q origin main && git -C privati rebase -q origin/main && git -C privati push -q origin main && return 0
+              git -C privati rebase --abort 2>/dev/null || true
+            done
+            echo "push fallito, riprovo al prossimo giro"
+          }
+          allinea() { sleep $(( 900 - $(date +%s) % 900 )); }
+          # 11 giri: <= 15 min d'attesa iniziale + 10 x 15 min = 165 min < 178
+          allinea
+          falliti=0
+          for i in $(seq 1 11); do
+            # Un commit non pubblicato al giro prima (push fallito) non si butta: si riallinea con rebase.
+            # Il reset duro solo quando non c'è niente di nostro da salvare.
+            git -C privati fetch -q origin main
+            if [ -z "$(git -C privati rev-list origin/main..HEAD)" ]; then
+              git -C privati reset -q --hard origin/main
+            else
+              git -C privati rebase -q origin/main || { git -C privati rebase --abort || true; echo "::warning::rebase non riuscito, riprovo al prossimo giro"; }
+            fi
+            if ! python3 giro.py; then
+              falliti=$((falliti + 1))
+              echo "::error::giro $i fallito"
+            fi
+            salva
+            if [ "$i" -lt 11 ]; then allinea; fi
+          done
+          # Freno: con 3 o più giri falliti il run risulta fallito, così si vede e la catena non va avanti da sola.
+          if [ "$falliti" -ge 3 ]; then echo "::error::$falliti giri falliti su 11"; exit 1; fi
+
+
+  next:
+    needs: misura
+    if: ${{ needs.misura.result == 'success' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        working-directory: .
+        run: gh workflow run gotthard-percorsi.yml --ref main -R "$GITHUB_REPOSITORY"

@@ -12,6 +12,8 @@ notifiche push automatiche quando si forma una coda.
   decide le notifiche
 - `.github/workflows/gotthard-collect.yml` (alla radice del repo) — il
   workflow che lo esegue in loop
+- `percorsi/` — osservazione dei tempi di percorrenza galleria/passo (ADEV-773), con il suo flusso
+  `.github/workflows/gotthard-percorsi.yml`; scrive solo nel repository privato `fbacchin/gottardo-percorsi-privati`
 - `privacy-gotthard.html` / `support-gotthard.html` — pagine pubbliche per
   l'App Store (via GitHub Pages)
 

@@ -1,0 +1,13 @@
+name = "gottardo-percorsi"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+# Solo il dominio protetto da Cloudflare Access: l'indirizzo *.workers.dev e le anteprime restano spenti.
+workers_dev = false
+preview_urls = false
+
+routes = [
+  { pattern = "percorsi.bacchin.app", custom_domain = true }
+]
+
+# Segreto (non qui): GITHUB_TOKEN, token GitHub in sola lettura sul repository privato.
