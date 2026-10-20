@@ -9,5 +9,6 @@
  },
  "tunnel": {
   "phase": "open"
- }
+ },
+ "preavvisi": {}
 }
