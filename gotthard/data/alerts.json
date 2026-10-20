@@ -12,7 +12,7 @@
    "fr": "Libéré: Ulrichen <-> Airolo entre Localité Ulrichen et Col Col du Nufenen Situation: fermé conditions de conduite difficiles Raison: verglas Durée: jusqu'à nouvel avis probable 20.10.2026 18:00",
    "it": "Approvato: Ulrichen <-> Airolo tra Luogo Ulrichen E Passo Passo della Novena Situazione: chiusa condizioni di guida difficili Causa: ghiaccio Durata: fino a nuovo avviso probabile 20.10.2026 18:00"
   },
-  "lastSeen": "2026-10-20T14:20:11Z"
+  "lastSeen": "2026-10-20T14:25:04Z"
  },
  {
   "firstSeen": "2026-10-20T13:00:05Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
   },
-  "lastSeen": "2026-10-20T14:20:11Z"
+  "lastSeen": "2026-10-20T14:25:04Z"
  },
  {
   "firstSeen": "2026-10-19T18:15:07Z",
@@ -124,21 +124,5 @@
   },
   "lastSeen": "2026-10-18T17:20:06Z",
   "revokedAt": "2026-10-18T17:25:03Z"
- },
- {
-  "firstSeen": "2026-10-18T13:15:04Z",
-  "id": "situation.660193.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-10-18T13:43:54Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Bellinzona <-> Airolo zwischen Ortschaft Osogna und Ortschaft Biasca Sachlage: Verkehrsbehinderung Ursache: Unfall Verkehrsführung: wechselseitige Verkehrsführung",
-   "fr": "Libéré: H2 Bellinzone <-> Airolo entre Localité Osogna et Localité Biasca Situation: trafic perturbé Raison: accident Gestion du trafic: circulation alternée à une voie",
-   "it": "Approvato: H2 Bellinzona <-> Airolo tra Luogo Osogna E Luogo Biasca Situazione: problemi di traffico Causa: incidente Limitazione del traffico: circolazione a corsie alternate"
-  },
-  "lastSeen": "2026-10-18T14:25:04Z",
-  "revokedAt": "2026-10-18T14:30:06Z"
  }
 ]
