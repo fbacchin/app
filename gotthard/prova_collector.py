@@ -338,30 +338,33 @@ def con_code(fn):
         fn()
     return list(inviate)
 
-# Dall'11.10.2026 (ADEV-723) ogni notifica di coda parte in quattro lingue:
-# quattro invii con lo stesso filtro, ristretti ognuno alla sua lingua. Le prove
+# Dall'11.10.2026 (ADEV-723) ogni notifica di coda parte in quattro lingue,
+# dal 20.10.2026 in cinque con l'olandese: un invio per lingua con lo stesso filtro, ristretti ognuno alla sua lingua. Le prove
 # sulla macchina a stati contano le NOTIFICHE, quindi guardano una lingua sola.
 def una_per_notifica(fatte):
     return [x for x in fatte if _lingua(x[1]) == "en"]
 
 tutte = con_code(lambda: giro_code(coda(km=3)))
 per_lingua = {_lingua(dove): testo for testo, dove in tutte}
-ok("la coda parte in quattro lingue, una push ciascuna",
-   len(tutte) == 4 and sorted(per_lingua) == ["de", "en", "fr", "it"])
+ok("la coda parte in cinque lingue, una push ciascuna",
+   len(tutte) == 5 and sorted(per_lingua) == ["de", "en", "fr", "it", "nl"])
 ok("  italiano", per_lingua.get("it") == "🚦 Verso sud: coda di 3 km · attesa ~30 min")
 ok("  tedesco", per_lingua.get("de") == "🚦 Richtung Süden: 3 km Stau · ~30 Min. Wartezeit")
 ok("  francese", per_lingua.get("fr") == "🚦 Direction sud : 3 km de bouchon · ~30 min d'attente")
 ok("  inglese, com'era", per_lingua.get("en") == "🚦 Southbound: 3 km queue · ~30 min wait")
+ok("  olandese", per_lingua.get("nl") == "🚦 Richting zuiden: 3 km file · ~30 min wachten")
 ok("  tutte con lo stesso filtro di soglia e direzione, piu' la lingua",
    all(dove["$and"][:-1] == tutte[0][1]["$and"][:-1] for _, dove in tutte))
 ok("  i chilometri con la virgola dove si usa la virgola",
    c.testi_coda("north", 2.5, 25)["it"] == "🚦 Verso nord: coda di 2,5 km · attesa ~25 min"
-   and c.testi_coda("north", 2.5, 25)["en"] == "🚦 Northbound: 2.5 km queue · ~25 min wait")
+   and c.testi_coda("north", 2.5, 25)["en"] == "🚦 Northbound: 2.5 km queue · ~25 min wait"
+   and c.testi_coda("north", 2.5, 25)["nl"] == "🚦 Richting noorden: 2,5 km file · ~25 min wachten")
 ok("  senza chilometri resta la sola attesa",
    c.testi_coda("south", None, 20)["de"] == "🚦 Richtung Süden: Stau · ~20 Min. Wartezeit")
-ok("la fine coda in quattro lingue",
+ok("la fine coda in cinque lingue",
    c.testi_fine_coda("north") == {"it": "✅ Verso nord: coda finita", "de": "✅ Richtung Norden: Stau aufgelöst",
-                                  "fr": "✅ Direction nord : bouchon résorbé", "en": "✅ Northbound: queue cleared"})
+                                  "fr": "✅ Direction nord : bouchon résorbé", "en": "✅ Northbound: queue cleared",
+                                  "nl": "✅ Richting noorden: file opgelost"})
 
 fatte = una_per_notifica(tutte)
 ok("una coda di 3 km avvisa solo chi ha scelto 2", len(fatte) == 1
@@ -390,7 +393,7 @@ def cresce_e_finisce():
     giro_code(coda(km=5))
     giro_code(coda(km=0), quando=ADESSO + timedelta(minutes=10))
     giro_code(coda(km=0), quando=ADESSO + timedelta(minutes=40))
-fatte = con_code(cresce_e_finisce)
+fatte = una_per_notifica(con_code(cresce_e_finisce))
 ok("la fine arriva dopo la conferma", fatte[-1][0].endswith("queue cleared"))
 finali = fatte[-1][1]["$and"][0]["$or"][0]["pushCodaKm"]["$in"]
 ok("  e va SOLO a chi era stato avvisato dell'inizio", finali == [2, 4])
@@ -426,11 +429,12 @@ ok("senza km si stimano dai minuti: 30 min = 3 km, avvisa solo il 2",
    soglie == [2])
 
 # --- «la coda sta per finire» (18.10.2026) ---
-ok("in finale, in quattro lingue",
+ok("in finale, in cinque lingue",
    c.testi_coda_in_finale("south", 20) == {"it": "⏳ Verso sud: la coda sta per finire · attesa ~20 min",
                                             "de": "⏳ Richtung Süden: Stau bald vorbei · noch ~20 Min. Wartezeit",
                                             "fr": "⏳ Direction sud : le bouchon touche à sa fin · ~20 min d'attente",
-                                            "en": "⏳ Southbound: queue almost over · ~20 min wait"})
+                                            "en": "⏳ Southbound: queue almost over · ~20 min wait",
+                                            "nl": "⏳ Richting zuiden: file bijna voorbij · nog ~20 min wachten"})
 
 def finale(*minuti):
     for i, m in enumerate(minuti):
@@ -690,18 +694,22 @@ ok("causa in inglese, dalla tabella", c.causa_di(_testi_veri, "en") == "construc
 _oggetto = {"it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: oggetto sulla strada"}
 ok("causa in fondo al testo (19:37 del 21.09)", c.causa_di(_oggetto, "it") == "oggetto sulla strada")
 ok("  e in inglese", c.causa_di(_oggetto, "en") == "object on the road")
+ok("  e in olandese", c.causa_di(_oggetto, "nl") == "voorwerp op de weg")
 ok("causa sconosciuta in inglese: niente, non inventata",
    c.causa_di({"it": "x Causa: frana di sassi"}, "en") is None)
 ok("senza causa il testo resta quello base",
    c.testo_chiusura({}, None, "it") == "🚧 Galleria del Gottardo chiusa")
 
 inviate_c = con_stato_pulito(lambda: giro(dict(chiuso(), testi=_testi_veri)))
-ok("la chiusura parte in quattro lingue, una push ciascuna", len(inviate) == 4 and len(inviate_c) == 1)
+ok("la chiusura parte in cinque lingue, una push ciascuna", len(inviate) == 5 and len(inviate_c) == 1)
 _per = {_lingua(d): t for t, d in inviate}
 ok("  italiano con la causa", _per.get("it") == "🚧 Galleria del Gottardo chiusa: lavori di costruzione")
 ok("  tedesco con la causa", _per.get("de") == "🚧 Gotthardtunnel gesperrt: Bauarbeiten")
 ok("  francese con la causa", _per.get("fr") == "🚧 Tunnel du Gothard fermé: travaux de construction")
 ok("  inglese con la causa tradotta", _per.get("en") == "🚧 Gotthard tunnel closed: construction work")
+ok("  olandese con la causa tradotta", _per.get("nl") == "🚧 Gotthardtunnel dicht: bouwwerkzaamheden")
+ok("  l'inglese non va a chi ha l'olandese",
+   any("nl" in str(x) for x in [d for t, d in inviate if _lingua(d) == "en"][0]["$and"][-1]["$or"][1]["localeIdentifier"].values()))
 ok("  ognuna ristretta alla sua lingua, dentro il filtro delle chiusure",
    all(any("pushChiusure" in str(x) for x in d["$and"]) for _, d in inviate))
 

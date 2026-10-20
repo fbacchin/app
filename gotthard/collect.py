@@ -903,12 +903,14 @@ DIREZIONE_PUSH = {
     "de": {"south": "Richtung Süden", "north": "Richtung Norden"},
     "fr": {"south": "Direction sud", "north": "Direction nord"},
     "en": {"south": "Southbound", "north": "Northbound"},
+    "nl": {"south": "Richting zuiden", "north": "Richting noorden"},
 }
 CODA_CON_KM = {
     "it": "🚦 {dir}: coda di {km} km · attesa ~{wait} min",
     "de": "🚦 {dir}: {km} km Stau · ~{wait} Min. Wartezeit",
     "fr": "🚦 {dir} : {km} km de bouchon · ~{wait} min d'attente",
     "en": "🚦 {dir}: {km} km queue · ~{wait} min wait",
+    "nl": "🚦 {dir}: {km} km file · ~{wait} min wachten",
 }
 # Quando la fonte da' l'attesa ma non i chilometri.
 CODA_SENZA_KM = {
@@ -916,12 +918,14 @@ CODA_SENZA_KM = {
     "de": "🚦 {dir}: Stau · ~{wait} Min. Wartezeit",
     "fr": "🚦 {dir} : bouchon · ~{wait} min d'attente",
     "en": "🚦 {dir}: queue · ~{wait} min wait",
+    "nl": "🚦 {dir}: file · ~{wait} min wachten",
 }
 CODA_FINITA = {
     "it": "✅ {dir}: coda finita",
     "de": "✅ {dir}: Stau aufgelöst",
     "fr": "✅ {dir} : bouchon résorbé",
     "en": "✅ {dir}: queue cleared",
+    "nl": "✅ {dir}: file opgelost",
 }
 
 
@@ -931,6 +935,7 @@ CODA_IN_FINALE = {
     "de": "⏳ {dir}: Stau bald vorbei · noch ~{wait} Min. Wartezeit",
     "fr": "⏳ {dir} : le bouchon touche à sa fin · ~{wait} min d'attente",
     "en": "⏳ {dir}: queue almost over · ~{wait} min wait",
+    "nl": "⏳ {dir}: file bijna voorbij · nog ~{wait} min wachten",
 }
 
 
@@ -1073,6 +1078,9 @@ TUNNEL_CHIUSO = {
     "en": {None: "🚧 Gotthard tunnel closed",
            "south": "🚧 Gotthard tunnel closed southbound",
            "north": "🚧 Gotthard tunnel closed northbound"},
+    "nl": {None: "🚧 Gotthardtunnel dicht",
+           "south": "🚧 Gotthardtunnel dicht richting zuiden",
+           "north": "🚧 Gotthardtunnel dicht richting noorden"},
 }
 # La riapertura dice la direzione come la chiusura (ADEV-678).
 TUNNEL_RIAPERTO = {
@@ -1088,8 +1096,11 @@ TUNNEL_RIAPERTO = {
     "en": {None: "✅ Gotthard tunnel reopened",
            "south": "✅ Gotthard tunnel reopened southbound",
            "north": "✅ Gotthard tunnel reopened northbound"},
+    "nl": {None: "✅ Gotthardtunnel weer open",
+           "south": "✅ Gotthardtunnel richting zuiden weer open",
+           "north": "✅ Gotthardtunnel richting noorden weer open"},
 }
-LINGUE_PUSH = ("it", "de", "fr", "en")
+LINGUE_PUSH = ("it", "de", "fr", "en", "nl")
 
 # La causa sta nel testo della fonte, dopo un'etichetta per lingua, e finisce
 # dove comincia il campo seguente («Raccomandazione:», «Durata:»...).
@@ -1112,13 +1123,31 @@ CAUSE_IN_INGLESE = {
     "esercitazione": "exercise",
     "controllo di polizia": "police check",
 }
+# Neanche l'olandese (20.10.2026): stesso criterio dell'inglese.
+CAUSE_IN_OLANDESE = {
+    "oggetto sulla strada": "voorwerp op de weg",
+    "oggetti sulla strada": "voorwerpen op de weg",
+    "veicolo in avaria": "voertuig met pech",
+    "veicolo in fiamme": "brandend voertuig",
+    "incendio": "brand",
+    "incidente": "ongeval",
+    "lavori di costruzione": "bouwwerkzaamheden",
+    "lavori di manutenzione": "onderhoudswerkzaamheden",
+    "manutenzione": "onderhoud",
+    "cantiere": "wegwerkzaamheden",
+    "problemi tecnici": "technische problemen",
+    "guasto tecnico": "technische storing",
+    "esercitazione": "oefening",
+    "controllo di polizia": "politiecontrole",
+}
+CAUSE_TRADOTTE = {"en": CAUSE_IN_INGLESE, "nl": CAUSE_IN_OLANDESE}
 
 
 def causa_di(testi, lingua):
     """La causa dichiarata dalla fonte nella lingua data, o None."""
-    if lingua == "en":
+    if lingua in CAUSE_TRADOTTE:
         it = causa_di(testi, "it")
-        return CAUSE_IN_INGLESE.get((it or "").lower())
+        return CAUSE_TRADOTTE[lingua].get((it or "").lower())
     etichetta = ETICHETTA_CAUSA.get(lingua)
     testo = (testi or {}).get(lingua) or ""
     if not etichetta or etichetta not in testo:
@@ -1137,6 +1166,7 @@ LAVORI_NOTTURNI = {
     "de": "Nachtarbeiten bis {} Uhr",
     "fr": "travaux de nuit jusqu'à {}",
     "en": "night works until {}",
+    "nl": "nachtwerkzaamheden tot {}",
 }
 
 
@@ -1156,7 +1186,7 @@ def per_lingua(where, lingua):
     """
     if lingua == "en":
         cond = {"$or": [{"localeIdentifier": {"$exists": False}},
-                        {"localeIdentifier": {"$regex": "^(?!it|de|fr)"}}]}
+                        {"localeIdentifier": {"$regex": "^(?!it|de|fr|nl)"}}]}
     else:
         cond = {"localeIdentifier": {"$regex": f"^{lingua}"}}
     nuovo = dict(where)
