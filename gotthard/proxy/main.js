@@ -711,6 +711,63 @@ function inVigore(s, adesso) {
     : dentroPeriodo(p, adesso));
 }
 
+// AVVISO 5 ORE PRIMA (ADEV-774, deciso dall'utente il 20.10.2026).
+//
+// L'app scrive sulla scheda «Tunnel chiuso dalle 23:00» nelle 5 ore prima di
+// una chiusura programmata; il collector manda la notifica. L'inizio viene dai
+// campi strutturati, come in `inVigore`: mai dal testo. Stessa funzione, in
+// Python, nel collector (`prossimo_inizio`): le prove di tutte e due usano gli
+// stessi casi.
+const PREAVVISO_CHIUSURA_MS = 5 * 3600 * 1000;
+
+/**
+ * La prossima chiusura di questo messaggio che comincia DOPO adesso, come
+ * { inizio, fine } in millisecondi (fine puo' essere null). null se non c'e'.
+ */
+function prossimoInizio(s, adesso) {
+  const qualificatori = s.qualificatori || [];
+  if (qualificatori.some((q) => QUALIFICATORI_OPACHI.has(q))) return null;
+  const ricorrente = qualificatori.some((q) => QUALIFICATORI_RICORRENTI.has(q));
+  const regola = ricorrente ? giorniDallaNota(s.notaInterna) : null;
+  const periodi = s.periodi || [];
+  const candidati = [];
+  const GIORNO = 24 * 3600 * 1000;
+  for (const p of periodi) {
+    const da = p.da ? Date.parse(p.da) : NaN;
+    const a = p.a ? Date.parse(p.a) : NaN;
+    if (ricorrente) {
+      if (isNaN(da) || isNaN(a)) continue;
+      const minuti = (t) => { const d = new Date(t); return d.getUTCHours() * 60 + d.getUTCMinutes(); };
+      const inizioM = minuti(da), fineM = minuti(a);
+      const durata = ((((fineM - inizioM) % 1440) + 1440) % 1440 || 1440) * 60000;
+      const base = Math.max(adesso, da);
+      const mezzanotte = base - (base % GIORNO);
+      for (let k = 0; k < 9; k++) {
+        const t = mezzanotte + k * GIORNO + inizioM * 60000;
+        if (t > a) break;
+        if (t > adesso && t >= da && giornoAmmesso(regola, t, inizioM > fineM)) {
+          candidati.push({ inizio: t, fine: Math.min(t + durata, a) });
+          break;
+        }
+      }
+    } else if (!isNaN(da) && da > adesso) {
+      candidati.push({ inizio: da, fine: isNaN(a) ? null : a });
+    }
+  }
+  if (!periodi.length && !ricorrente && s.inizioValidita && Date.parse(s.inizioValidita) > adesso) {
+    candidati.push({ inizio: Date.parse(s.inizioValidita), fine: null });
+  }
+  if (!candidati.length) return null;
+  return candidati.reduce((x, y) => (y.inizio < x.inizio ? y : x));
+}
+
+/** Una chiusura del Gottardo che comincia entro le prossime 5 ore. */
+function chiusuraInArrivo(s, adesso) {
+  if (!chiusuraDelTunnel(s, (s.texts && s.texts.it || "").toLowerCase())) return false;
+  const p = prossimoInizio(s, adesso);
+  return !!p && p.inizio - adesso <= PREAVVISO_CHIUSURA_MS;
+}
+
 // SOLO AVVISI VERI (ADEV-698, deciso dall'utente il 21.09.2026).
 //
 // Una chiusura ANNUNCIATA IN ANTICIPO non dice che il tunnel e' chiuso: dice
@@ -1662,7 +1719,12 @@ function costruisciPayload(magazzino, revoche, modo, recordTotali, adesso) {
     // chiusura programmata E' vecchia per definizione: quella del Gottardo
     // porta il `versionTime` del 17.08 e vale stanotte. Per lei decide
     // `inVigore`, gia' verificato in conProgrammate.
-    if (!s.programmata && eta > FINESTRA_EVENTI_MS) continue;
+    // Neanche una chiusura annunciata da piu' di 12 ore che comincia fra poco
+    // (il suo preavviso, ADEV-774) o che e' in corso: il trasporto eccezionale
+    // del 14.10.2026, annunciato alle 06:35 per le 23:00, alle 23:00 aveva
+    // 16 ore e sarebbe sparito dalla lista proprio mentre il tunnel chiudeva.
+    if (!s.programmata && eta > FINESTRA_EVENTI_MS
+        && !chiusuraInArrivo(s, adesso) && !chiusoAdesso(s, lower, adesso)) continue;
 
     const km = queueKm(it);
     const attesa = attesaDi(s.type, it, km);
@@ -1684,7 +1746,11 @@ function costruisciPayload(magazzino, revoche, modo, recordTotali, adesso) {
     // "Chiusura" vuol dire chiusa ADESSO. Un cantiere notturno programmato
     // per la settimana prossima resta un avviso normale, senza etichetta.
     const chiusura = chiusoAdesso(s, lower, adesso);
+    // `chiudeAlle`: quando comincia la prossima chiusura annunciata (ADEV-774).
+    // Solo per chiusure non ancora in corso; l'app la mostra nelle 5 ore prima.
+    const prossima = !chiusura && chiusuraDelTunnel(s, lower) ? prossimoInizio(s, adesso) : null;
     events.push({ id: s.id, type: s.type, direction, strada: stradaDi(it),
+                  chiudeAlle: prossima ? iso(prossima.inizio) : null,
                   directionStated: !!s.direzioneFonte,
                   versionTime: s.versionTime, km, wait,
                   waitStimato: attesa.stimata, chiusura,
@@ -2064,7 +2130,8 @@ function conProgrammate(magazzino, programmate, adesso) {
   const vista = Object.assign({}, magazzino);
   for (const s of programmate || []) {
     if (vista[s.id]) continue;
-    if (!inVigore(s, adesso)) continue;
+    // Anche nelle 5 ore prima di cominciare: e' il preavviso dell'ADEV-774.
+    if (!inVigore(s, adesso) && !chiusuraInArrivo(s, adesso)) continue;
     vista[s.id] = s;
   }
   return vista;

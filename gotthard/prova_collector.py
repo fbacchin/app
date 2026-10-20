@@ -732,6 +732,63 @@ try:
 finally:
     c.datetime = _vero
 
+# --- avviso 5 ore prima di una chiusura (ADEV-774, 20.10.2026) ---------------
+ok("notturna: prima della finestra, la prossima chiusura e' stasera 18:00Z-03:00Z",
+   c.prossimo_inizio(_NOTTURNO, _alle(7, 12)) == (_alle(7, 18), _alle(8, 3)))
+ok("  dentro la finestra, la prossima e' la notte dopo",
+   c.prossimo_inizio(_NOTTURNO, _alle(8, 1)) == (_alle(8, 18), _alle(9, 3)))
+ok("  finito l'inviluppo non ce n'e' piu'", c.prossimo_inizio(_NOTTURNO, _alle(25, 12)) is None)
+ok("  severalTimes: non si inventa un orario", c.prossimo_inizio(_OPACO, _alle(7, 12)) is None)
+
+# Il caso dell'issue: trasporto eccezionale del 14.10.2026, 23:00-01:15 svizzere.
+_ECCEZIONALE = _ET.fromstring("""
+<situationRecord xmlns="http://datex2.eu/schema/2/2_0"><validity>
+  <validityTimeSpecification>
+    <overallStartTime>2026-10-14T04:35:00Z</overallStartTime>
+    <validPeriod><startOfPeriod>2026-10-14T21:00:00Z</startOfPeriod>
+      <endOfPeriod>2026-10-14T23:15:00Z</endOfPeriod></validPeriod>
+  </validityTimeSpecification></validity></situationRecord>""")
+def _ott(ora, minuto=0):
+    return datetime(2026, 10, 14, ora, minuto, tzinfo=timezone.utc)
+ok("chiusura singola: inizio e fine dal periodo, non dal testo",
+   c.prossimo_inizio(_ECCEZIONALE, _ott(10)) == (_ott(21), _ott(23, 15)))
+ok("  cominciata, non e' piu' «prossima»", c.prossimo_inizio(_ECCEZIONALE, _ott(21, 30)) is None)
+
+_TESTI_ECC = {"it": "Approvato: A2 Galleria San Gottardo Situazione: tunnel chiuso Causa: trasporto eccezionale",
+              "de": "Freigegeben: A2 Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Ausnahmetransport"}
+_PROSSIMA = {"inizio": _ott(21), "fine": _ott(23, 15), "direzione": None, "ricorrente": False, "testi": _TESTI_ECC}
+ok("testo in italiano, ore svizzere e causa",
+   c.testo_preavviso(_PROSSIMA, "it") == "⏰ Galleria del Gottardo chiusa dalle 23:00 alle 01:15: trasporto eccezionale")
+ok("  in tedesco", c.testo_preavviso(_PROSSIMA, "de") == "⏰ Gotthardtunnel gesperrt von 23:00 bis 01:15 Uhr: Ausnahmetransport")
+ok("  in olandese, senza causa conosciuta",
+   c.testo_preavviso(dict(_PROSSIMA, testi={}), "nl") == "⏰ Gotthardtunnel dicht van 23:00 tot 01:15")
+ok("  con la direzione",
+   c.testo_preavviso(dict(_PROSSIMA, direzione="south", testi={}), "en") == "⏰ Gotthard tunnel closed southbound from 23:00 to 01:15")
+ok("  una chiusura di giorni porta la data della fine",
+   c.testo_preavviso(dict(_PROSSIMA, fine=_ott(21) + timedelta(days=2), testi={}), "it")
+   == "⏰ Galleria del Gottardo chiusa dalle 23:00 alle 16.10. 23:00")
+
+def preavvisi(*giri):
+    with tempfile.TemporaryDirectory() as d:
+        c.HISTORY_FILE = Path(d) / "history.json"
+        inviate.clear()
+        for prossime, quando in giri:
+            c.update_preavvisi_chiusura(prossime, quando)
+        return list(inviate)
+
+ok("piu' di 5 ore prima: niente", preavvisi(([_PROSSIMA], _ott(15, 59))) == [])
+fatte = preavvisi(([_PROSSIMA], _ott(16)), ([_PROSSIMA], _ott(16, 5)), ([_PROSSIMA, dict(_PROSSIMA)], _ott(18)))
+ok("5 ore prima: una push per lingua, e una volta sola anche se due record la ripetono",
+   len(fatte) == 5 and sorted(_lingua(d) for _, d in fatte) == ["de", "en", "fr", "it", "nl"])
+ok("  va a chi ha le chiusure attive, non alle ricorrenti",
+   all("pushChiusure" in str(d) and "pushChiusureRicorrenti" not in str(d) for _, d in fatte))
+ok("annunciata 1 ora prima: parte subito", len(preavvisi(([_PROSSIMA], _ott(20))) ) == 5)
+ok("  gia' cominciata: niente", preavvisi(([_PROSSIMA], _ott(21, 1))) == [])
+_RICORRENTE = dict(_PROSSIMA, ricorrente=True)
+fatte = preavvisi(([_RICORRENTE], _ott(17)))
+ok("ricorrente: solo a chi l'ha chiesta (campo assente = no)",
+   len(fatte) == 5 and all({"pushChiusureRicorrenti": True} in d["$and"] for _, d in fatte))
+
 n = sum(1 for _, e in prove if e)
 print("=== collector: corridoio, chiusura, push ===")
 for nome, esito in prove:

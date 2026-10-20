@@ -563,6 +563,61 @@ def in_vigore(record, now, nota=None):
     return False
 
 
+# AVVISO 5 ORE PRIMA (ADEV-774, deciso dall'utente il 20.10.2026). Chi e' in
+# viaggio deve sapere che dopo una certa ora il tunnel non passa. L'inizio si
+# prende dai campi strutturati (`startOfPeriod`, `overallStartTime`), come
+# chiede il cookbook, mai dal testo. Se la chiusura e' annunciata con meno di 5
+# ore di anticipo l'avviso parte subito. Le ricorrenti (cantieri notturni)
+# arrivano solo a chi le ha chieste in Impostazioni (`pushChiusureRicorrenti`).
+PREAVVISO_CHIUSURA = timedelta(hours=5)
+
+
+def prossimo_inizio(record, now, nota=None):
+    """La prossima chiusura di questo record che comincia DOPO adesso, come
+    (inizio, fine) in UTC; `fine` puo' essere None. None se non ce n'e'.
+
+    Stesse regole di `in_vigore`: qualificatore opaco = non lo sappiamo;
+    ricorrente = la fascia oraria degli estremi, ripetuta nei giorni ammessi
+    dentro l'inviluppo; altrimenti l'inizio del periodo.
+    """
+    qualificatori = qualificatori_di(record)
+    if qualificatori & QUALIFICATORI_OPACHI:
+        return None
+    ricorrente = bool(qualificatori & QUALIFICATORI_RICORRENTI)
+    regola = giorni_dalla_nota(nota) if ricorrente else None
+    utc = lambda t: t.astimezone(timezone.utc) if t else None
+    periodi = []
+    for p in (x for x in record.iter() if local(x.tag) == "validPeriod"):
+        da = next((parse_time((c.text or "").strip()) for c in p if local(c.tag) == "startOfPeriod"), None)
+        a = next((parse_time((c.text or "").strip()) for c in p if local(c.tag) == "endOfPeriod"), None)
+        periodi.append((utc(da), utc(a)))
+    candidati = []
+    for da, a in periodi:
+        if ricorrente:
+            if da is None or a is None:
+                continue
+            inizio_m, fine_m = da.hour * 60 + da.minute, a.hour * 60 + a.minute
+            durata = timedelta(minutes=(fine_m - inizio_m) % 1440 or 1440)
+            giorno = max(now, da).date()
+            for k in range(9):          # una settimana e un po': basta per qualunque regola di giorni
+                t = datetime.combine(giorno + timedelta(days=k), da.timetz())
+                if t > a:
+                    break
+                if t > now and t >= da and giorno_ammesso(regola, t, inizio_m > fine_m):
+                    candidati.append((t, min(t + durata, a)))
+                    break
+        elif da is not None and da > now:
+            candidati.append((da, a))
+    if not periodi and not ricorrente:
+        inizi = [t for t in (utc(parse_time((e.text or "").strip())) for e in record.iter()
+                             if local(e.tag) == "overallStartTime") if t and t > now]
+        fini = [t for t in (utc(parse_time((e.text or "").strip())) for e in record.iter()
+                            if local(e.tag) == "overallEndTime") if t]
+        if inizi:
+            candidati.append((min(inizi), min(fini) if fini else None))
+    return min(candidati, key=lambda c: c[0]) if candidati else None
+
+
 # SOLO AVVISI VERI (ADEV-698, deciso dall'utente il 21.09.2026). Stessa
 # regola del proxy (`main.js`, `annunciataInAnticipo`): una chiusura
 # annunciata in anticipo dice che il tunnel CHIUDERA', non che e' chiuso.
@@ -629,7 +684,7 @@ def extract(xml_data):
     revocations = set()
     revoked_ids = {}
     tunnel = {"chiuso": False, "revocato": False, "direzione": None, "testo": None,
-              "testi": {}, "fino": None}
+              "testi": {}, "fino": None, "prossime": []}
 
     # La nota interna puo' stare in un record diverso da quello col testo:
     # si raccoglie per SITUAZIONE (R3) e si da' a tutti i suoi record.
@@ -680,6 +735,14 @@ def extract(xml_data):
         # La chiusura del tunnel: si registra qui, prima che la revoca faccia
         # uscire di scena il messaggio, perche' la revoca E' la riapertura.
         if chiusura_del_tunnel(texts, punti):
+            prossimo = None if revoked else prossimo_inizio(record, now, nota_di.get(record))
+            if prossimo:
+                tunnel["prossime"].append({
+                    "inizio": prossimo[0], "fine": prossimo[1],
+                    "direzione": direzione_codificata(record),
+                    "ricorrente": bool(qualificatori_di(record) & QUALIFICATORI_RICORRENTI),
+                    "testi": dict(texts),
+                })
             if revoked:
                 tunnel["revocato"] = True
             elif (in_vigore(record, now, nota_di.get(record))
@@ -773,7 +836,7 @@ def delay_minutes(entry):
     return 0
 
 
-def destinatari(soglie=None, direzione=None, chiusure=False):
+def destinatari(soglie=None, direzione=None, chiusure=False, ricorrenti=False):
     """Il filtro sulle installazioni: chi deve ricevere questa notifica.
 
     ⚠️ Una preferenza ASSENTE non significa "escluso": significa "non l'ha mai
@@ -799,6 +862,11 @@ def destinatari(soglie=None, direzione=None, chiusure=False):
         condizioni.append({"$or": [{"pushDirezione": "both"},
                                    {"pushDirezione": {"$exists": False}},
                                    {"pushDirezione": direzione}]})
+    if ricorrenti:
+        # Al contrario delle altre preferenze, qui l'assenza vale NO: chi non
+        # ha la 1.6.1 non ha mai visto la scelta, e un avviso ogni sera per un
+        # cantiere di settimane non glielo si manda senza che l'abbia chiesto.
+        condizioni.append({"pushChiusureRicorrenti": True})
     where = {"channels": "global", "deviceType": "ios"}
     if condizioni:
         where["$and"] = condizioni
@@ -1201,6 +1269,59 @@ def send_push_per_lingua(testi_per_lingua, where):
     return any(esiti)
 
 
+QUANDO_PREAVVISO = {
+    "it": ("dalle {da} alle {a}", "dalle {da}"),
+    "de": ("von {da} bis {a} Uhr", "ab {da} Uhr"),
+    "fr": ("de {da} à {a}", "dès {da}"),
+    "en": ("from {da} to {a}", "from {da}"),
+    "nl": ("van {da} tot {a}", "vanaf {da}"),
+}
+
+
+def testo_preavviso(p, lingua):
+    """«⏰ Galleria del Gottardo chiusa verso sud dalle 23:00 alle 01:15: trasporto
+    eccezionale» — l'ora e' svizzera; la fine porta la data se la chiusura
+    dura quasi un giorno o piu', perche' «alle 06:00» sarebbe ambiguo."""
+    base = TUNNEL_CHIUSO[lingua].get(p["direzione"], TUNNEL_CHIUSO[lingua][None]).replace("🚧", "⏰")
+    da = p["inizio"].astimezone(ZURIGO).strftime("%H:%M")
+    if p["fine"]:
+        lunga = p["fine"] - p["inizio"] >= timedelta(hours=20)
+        a = p["fine"].astimezone(ZURIGO).strftime("%d.%m. %H:%M" if lunga else "%H:%M")
+        quando = QUANDO_PREAVVISO[lingua][0].format(da=da, a=a)
+    else:
+        quando = QUANDO_PREAVVISO[lingua][1].format(da=da)
+    testo = f"{base} {quando}"
+    causa = causa_di(p.get("testi"), lingua)
+    return f"{testo}: {causa}" if causa else testo
+
+
+def update_preavvisi_chiusura(prossime, now):
+    """Una push per chiusura programmata, 5 ore prima che cominci (o subito,
+    se e' annunciata piu' tardi). Una volta sola per inizio e direzione: la
+    stessa chiusura puo' arrivare da piu' record (il programmato e quello ad
+    hoc), e chi la riceve due volte smette di leggerle."""
+    state_file = HISTORY_FILE.parent / "push-state.json"
+    try:
+        push_state = json.loads(state_file.read_text())
+    except (FileNotFoundError, json.JSONDecodeError):
+        push_state = {}
+    inviati = push_state.get("preavvisi", {})
+    for p in sorted(prossime, key=lambda x: x["inizio"]):
+        if not (now < p["inizio"] <= now + PREAVVISO_CHIUSURA):
+            continue
+        chiave = p["inizio"].isoformat().replace("+00:00", "Z") + "|" + (p["direzione"] or "both")
+        if chiave in inviati:
+            continue
+        a_chi = destinatari(chiusure=True, direzione=p["direzione"], ricorrenti=p["ricorrente"])
+        if send_push_per_lingua({l: testo_preavviso(p, l) for l in LINGUE_PUSH}, a_chi):
+            inviati[chiave] = now.isoformat().replace("+00:00", "Z")
+    # Si dimenticano le chiusure gia' cominciate da due giorni.
+    limite = now - timedelta(days=2)
+    push_state["preavvisi"] = {k: v for k, v in inviati.items()
+                               if (parse_time(k.split("|")[0]) or now) >= limite}
+    state_file.write_text(json.dumps(push_state, indent=1))
+
+
 def update_tunnel_notifications(tunnel, now):
     """Una push quando il tunnel chiude, una quando riapre.
 
@@ -1503,6 +1624,7 @@ def main():
     # Dopo le code, e da una rilettura fresca del file: la chiusura del tunnel
     # ha uno stato suo e non deve calpestare quello delle due direzioni.
     update_tunnel_notifications(tunnel, now)
+    update_preavvisi_chiusura(tunnel["prossime"], now)
 
     sample = {
         "time": now.isoformat().replace("+00:00", "Z"),

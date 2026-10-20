@@ -33,7 +33,7 @@ global.Parse.Object.destroyAll = async () => {};
 const sorgente = fs.readFileSync(path.join(__dirname, "..", "main.js"), "utf8");
 const richiedi = (p) => require(p.startsWith(".") ? path.join(__dirname, "..", p) : p);
 const m = new Function("require", sorgente +
-  "\n;return { estraiSituazioni, chiusuraDelTunnel, conEtichettaChiusura, senzaPrefissoDiStato, inVigore, conProgrammate, PUNTO_TUNNEL, annunciataInAnticipo, chiusoAdesso };")(richiedi);
+  "\n;return { estraiSituazioni, chiusuraDelTunnel, conEtichettaChiusura, senzaPrefissoDiStato, inVigore, conProgrammate, PUNTO_TUNNEL, annunciataInAnticipo, chiusoAdesso, prossimoInizio, chiusuraInArrivo, costruisciPayload };")(richiedi);
 
 const prove = [];
 const ok = (nome, esito) => prove.push([nome, !!esito]);
@@ -434,6 +434,37 @@ const TUNNEL_ALTROVE = {
   ok("  e se la stessa situazione e' gia' nel magazzino vince l'incrementale",
      m.conProgrammate({ "situation.645705.1": { id: "situation.645705.1", fresca: true } },
                       [programmata], alle(7, 21))["situation.645705.1"].fresca === true);
+
+  // --- la prossima chiusura, per il preavviso di 5 ore (ADEV-774) ------------
+  const pr = (s, t) => { const p = m.prossimoInizio(s, t); return p && [p.inizio, p.fine]; };
+  ok("notturna: prima della finestra la prossima e' stasera 18:00Z-03:00Z",
+     JSON.stringify(pr(notturno, alle(7, 12))) === JSON.stringify([alle(7, 18), alle(8, 3)]));
+  ok("  dentro la finestra e' la notte dopo",
+     JSON.stringify(pr(notturno, alle(8, 1))) === JSON.stringify([alle(8, 18), alle(9, 3)]));
+  ok("  finito l'inviluppo non ce n'e' piu'", m.prossimoInizio(notturno, alle(25, 12)) === null);
+  ok("  in arrivo alle 13:00Z (5 ore prima), non alle 12:59",
+     m.chiusuraInArrivo(notturno, alle(7, 13)) && !m.chiusuraInArrivo(notturno, alle(7, 12, 59)));
+  const ottobre = (h, min) => Date.UTC(2026, 9, 14, h, min || 0);
+  const eccezionale = Object.assign({}, notturno, {
+    id: "situation.eccezionale.1", qualificatori: [], inizioValidita: "2026-10-14T04:35:00Z",
+    versionTime: "2026-10-14T04:35:00Z",
+    periodi: [{ da: "2026-10-14T21:00:00Z", a: "2026-10-14T23:15:00Z" }] });
+  ok("chiusura singola del 14.10: inizio e fine dal periodo",
+     JSON.stringify(pr(eccezionale, ottobre(10))) === JSON.stringify([ottobre(21), ottobre(23, 15)]));
+  const schermo = m.costruisciPayload({ [eccezionale.id]: eccezionale }, [], "prova", 1, ottobre(17));
+  const ev = schermo.events.find((e) => e.id === eccezionale.id);
+  ok("lo schermo porta `chiudeAlle` e non la dichiara chiusa",
+     ev && ev.chiudeAlle === "2026-10-14T21:00:00Z" && ev.chiusura === false);
+  ok("  annunciata da 13 ore: resta nella lista perche' comincia fra 4",
+     !!m.costruisciPayload({ [eccezionale.id]: eccezionale }, [], "prova", 1, ottobre(17, 40))
+       .events.find((e) => e.id === eccezionale.id));
+  ok("  in corso: `chiusura` e niente `chiudeAlle`",
+     (() => { const e = m.costruisciPayload({ [eccezionale.id]: eccezionale }, [], "prova", 1, ottobre(22))
+       .events.find((x) => x.id === eccezionale.id); return e && e.chiusura === true && e.chiudeAlle === null; })());
+  const prog = Object.assign({}, notturno, { programmata: true });
+  ok("il catalogo dei programmati entra nella vista 5 ore prima",
+     Object.keys(m.conProgrammate({}, [prog], alle(7, 13))).length === 1
+     && Object.keys(m.conProgrammate({}, [prog], alle(7, 12))).length === 0);
 
   let n = 0;
   console.log("=== chiusura del tunnel ===");

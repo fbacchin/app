@@ -72,8 +72,9 @@ cd gotthard/proxy
 for f in prove/*.js; do node "$f" | tail -1; done
 ```
 
-Attese: `108/108`, `51/51`, `45/45`, `37/37`, `33/33`. Il collector ha le sue,
-accanto a lui: `python3 ../prova_collector.py` → `50/50`.
+Attese (20.10.2026, in ordine di nome): `108/108` chiusura, `51/51` correzioni, `37/37` direzione,
+`33/33` tabelle, `108/108` trasporto. Il collector ha le sue, accanto a lui:
+`python3 ../prova_collector.py` → `157/157`.
 
 ## Cosa sorvegliano le prove
 
