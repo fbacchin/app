@@ -4,7 +4,7 @@
   "id": "situation.660752.1.1.1",
   "type": "AbnormalTraffic",
   "direction": "south",
-  "versionTime": "2026-10-21T05:36:48Z",
+  "versionTime": "2026-10-21T06:02:55Z",
   "km": null,
   "wait": null,
   "texts": {
@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 St-Gothard -> Chiasso entre Parking Aire de dosage Coldrerio et Parking Chiasso-Douane commercial Situation: bouchon pour poids lourd Raison: surcharge de trafic",
    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Coldrerio E Parcheggio Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato"
   },
-  "lastSeen": "2026-10-21T05:50:04Z"
+  "lastSeen": "2026-10-21T06:05:02Z"
  },
  {
   "firstSeen": "2026-10-20T12:00:08Z",
