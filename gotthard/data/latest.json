@@ -1,5 +1,5 @@
 {
- "time": "2026-10-21T12:15:03Z",
+ "time": "2026-10-21T12:20:04Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,5 +8,19 @@
   "km": null,
   "wait": null
  },
- "events": []
+ "events": [
+  {
+   "id": "situation.660869.1.1.1",
+   "type": "RoadOrCarriagewayOrLaneManagement",
+   "direction": null,
+   "versionTime": "2026-10-21T12:17:58Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Anschluss Airolo-Nufenen und Ortschaft Hospental Sachlage: Strecke gesperrt Dauer:  voraussichtlich 21.10.2026 18:00 bis 22.10.2026 08:00",
+    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé Durée:  probable 21.10.2026 18:00 jusqu''à 22.10.2026 08:00",
+    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa Durata:  probabile 21.10.2026 18:00 fino 22.10.2026 08:00"
+   }
+  }
+ ]
 }
