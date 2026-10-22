@@ -12,7 +12,7 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa"
   },
-  "lastSeen": "2026-10-22T14:10:07Z"
+  "lastSeen": "2026-10-22T14:15:03Z"
  },
  {
   "firstSeen": "2026-10-22T13:50:05Z",
@@ -27,7 +27,22 @@
    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Parking Gurtnellen et Jonction autoroutière Amsteg Situation: trafic perturbé Raison: véhicule en panne poids lourd en panne Gestion du trafic: voie de droite fermée",
    "it": "Approvato: A2 S. Gottardo -> Luzern tra Parcheggio Gurtnellen E Svincolo autostradale Amsteg Situazione: problemi di traffico Causa: veicolo in avaria mezzo pesante in avaria Limitazione del traffico: corsia di destra chiusa"
   },
-  "lastSeen": "2026-10-22T14:10:07Z"
+  "lastSeen": "2026-10-22T14:15:03Z"
+ },
+ {
+  "firstSeen": "2026-10-22T14:15:03Z",
+  "id": "situation.661273.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "north",
+  "versionTime": "2026-10-22T14:13:14Z",
+  "km": 1.0,
+  "wait": 10,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
+  },
+  "lastSeen": "2026-10-22T14:15:03Z"
  },
  {
   "firstSeen": "2026-10-22T10:40:05Z",
