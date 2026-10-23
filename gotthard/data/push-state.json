@@ -1,13 +1,7 @@
 {
  "south": {
-  "soglieAvvisate": [
-   2,
-   4
-  ],
-  "lastSent": "2026-10-23T19:35:03Z",
-  "clearSince": "2026-10-23T20:15:03Z",
-  "sopraFinale": true,
-  "finaleAvvisato": true
+  "soglieAvvisate": [],
+  "lastSent": "2026-10-23T20:35:03Z"
  },
  "north": {
   "soglieAvvisate": [],
