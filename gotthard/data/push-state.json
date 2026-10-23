@@ -19,8 +19,7 @@
   "finaleAvvisato": true
  },
  "tunnel": {
-  "phase": "closed",
-  "direzione": "south"
+  "phase": "open"
  },
  "preavvisi": {}
 }
