@@ -3,7 +3,8 @@
   "soglieAvvisate": [
    2
   ],
-  "lastSent": "2026-10-23T10:15:02Z"
+  "lastSent": "2026-10-23T10:15:02Z",
+  "sopraFinale": true
  },
  "north": {
   "soglieAvvisate": [
@@ -14,8 +15,7 @@
   "sopraFinale": true
  },
  "tunnel": {
-  "phase": "closed",
-  "direzione": "north"
+  "phase": "closed"
  },
  "preavvisi": {}
 }
