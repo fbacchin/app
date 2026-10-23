@@ -14,7 +14,8 @@
   "sopraFinale": true
  },
  "tunnel": {
-  "phase": "open"
+  "phase": "closed",
+  "direzione": "north"
  },
  "preavvisi": {}
 }
