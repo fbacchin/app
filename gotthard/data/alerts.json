@@ -4,7 +4,7 @@
   "id": "situation.660878.1.1.1",
   "type": "RoadOrCarriagewayOrLaneManagement",
   "direction": null,
-  "versionTime": "2026-10-23T20:06:58Z",
+  "versionTime": "2026-10-23T22:52:32Z",
   "km": null,
   "wait": null,
   "texts": {
@@ -12,7 +12,7 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa"
   },
-  "lastSeen": "2026-10-23T22:50:04Z"
+  "lastSeen": "2026-10-23T22:55:05Z"
  },
  {
   "firstSeen": "2026-10-23T09:40:04Z",
