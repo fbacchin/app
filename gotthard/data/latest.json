@@ -1,5 +1,5 @@
 {
- "time": "2026-10-24T11:45:04Z",
+ "time": "2026-10-24T11:50:06Z",
  "south": {
   "km": 5.0,
   "wait": 50
@@ -72,19 +72,6 @@
     "de": "Freigegeben: H2 Flüelen -> Göschenen zwischen Ortschaft Erstfeld und Anschluss Göschenen Sachlage: Verkehrsbehinderung Ursache: Verkehrsüberlastung Zusatz 1: es ist mit grossem Zeitverlust zu rechnen",
     "fr": "Libéré: H2 Flüelen -> Göschenen entre Localité Erstfeld et Jonction autoroutière Göschenen Situation: trafic perturbé Raison: surcharge de trafic Complément 1: retards importants prévus",
     "it": "Approvato: H2 Flüelen -> Göschenen tra Luogo Erstfeld E Svincolo autostradale Göschenen Situazione: problemi di traffico Causa: traffico congestionato Aggiunta 1: si prevedono lunghi ritardi"
-   }
-  },
-  {
-   "id": "situation.660878.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-10-23T22:52:32Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Anschluss Airolo-Nufenen und Ortschaft Hospental Sachlage: Strecke gesperrt",
-    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé",
-    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa"
    }
   }
  ]
