@@ -1,9 +1,10 @@
 {
  "south": {
   "soglieAvvisate": [
-   2
+   2,
+   4
   ],
-  "lastSent": "2026-10-24T07:45:03Z",
+  "lastSent": "2026-10-24T09:05:03Z",
   "sopraFinale": true
  },
  "north": {
