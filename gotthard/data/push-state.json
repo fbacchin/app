@@ -8,8 +8,9 @@
    2,
    4
   ],
-  "lastSent": "2026-10-24T11:40:04Z",
-  "sopraFinale": true
+  "lastSent": "2026-10-24T15:25:02Z",
+  "sopraFinale": true,
+  "finaleAvvisato": true
  },
  "tunnel": {
   "phase": "open"
