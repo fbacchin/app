@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: bouchon longueur [km] 6 Raison: surcharge de trafic Complément 1: retards Nbre. [h] 1",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: colonna lunghezza [km] 6 Causa: traffico congestionato Aggiunta 1: ritardi No. [h] 1"
   },
-  "lastSeen": "2026-10-25T17:55:03Z"
+  "lastSeen": "2026-10-25T18:00:07Z"
  },
  {
   "firstSeen": "2026-10-25T10:25:03Z",
@@ -27,7 +27,22 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
    "it": "Approvato: A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata"
   },
-  "lastSeen": "2026-10-25T17:55:03Z"
+  "lastSeen": "2026-10-25T18:00:07Z"
+ },
+ {
+  "firstSeen": "2026-10-21T12:40:06Z",
+  "id": "situation.660878.1.1.1",
+  "type": "RoadOrCarriagewayOrLaneManagement",
+  "direction": null,
+  "versionTime": "2026-10-25T17:59:26Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Anschluss Airolo-Nufenen und Ortschaft Hospental Sachlage: Strecke gesperrt",
+   "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé",
+   "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa"
+  },
+  "lastSeen": "2026-10-25T18:00:07Z"
  },
  {
   "firstSeen": "2026-10-25T14:40:02Z",
@@ -140,21 +155,6 @@
   },
   "lastSeen": "2026-10-24T13:35:03Z",
   "revokedAt": "2026-10-24T13:40:05Z"
- },
- {
-  "firstSeen": "2026-10-21T12:40:06Z",
-  "id": "situation.660878.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": null,
-  "versionTime": "2026-10-23T22:52:32Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Anschluss Airolo-Nufenen und Ortschaft Hospental Sachlage: Strecke gesperrt",
-   "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé",
-   "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa"
-  },
-  "lastSeen": "2026-10-24T10:50:05Z"
  },
  {
   "firstSeen": "2026-10-23T09:40:04Z",
