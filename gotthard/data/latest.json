@@ -1,5 +1,5 @@
 {
- "time": "2026-10-25T15:10:04Z",
+ "time": "2026-10-25T15:15:03Z",
  "south": {
   "km": null,
   "wait": null
@@ -20,19 +20,6 @@
     "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Faido und Anschluss Airolo Sachlage: Stau Länge [km] 10 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [h] 1.667",
     "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Jonction autoroutière Airolo Situation: bouchon longueur [km] 10 Raison: surcharge de trafic Complément 1: retards Nbre. [h] 1.667",
     "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Airolo Situazione: colonna lunghezza [km] 10 Causa: traffico congestionato Aggiunta 1: ritardi No. [h] 1.667"
-   }
-  },
-  {
-   "id": "situation.661799.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": "north",
-   "versionTime": "2026-10-25T14:37:21Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Faido und Tunnel Piumogna-Tunnel Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen blockiert",
-    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Tunnel Tunnel de Piumogna Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de droite bloquée",
-    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Galleria Galleria Piumogna Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra bloccata"
    }
   },
   {
