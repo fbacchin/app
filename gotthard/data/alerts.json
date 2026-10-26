@@ -4,7 +4,7 @@
   "id": "situation.661937.1.1.1",
   "type": "RoadOrCarriagewayOrLaneManagement",
   "direction": "south",
-  "versionTime": "2026-10-26T06:59:35Z",
+  "versionTime": "2026-10-26T07:03:49Z",
   "km": null,
   "wait": null,
   "texts": {
@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: accident",
    "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: incidente"
   },
-  "lastSeen": "2026-10-26T07:00:05Z"
+  "lastSeen": "2026-10-26T07:05:03Z"
  },
  {
   "firstSeen": "2026-10-21T12:40:06Z",
