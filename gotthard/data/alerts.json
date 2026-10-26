@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Lucerne -> Chiasso entre Parking Aire de dosage Göschenen et Tunnel Tunnel du St-Gothard Situation: trafic perturbé Raison: accident Gestion du trafic: voie de droite fermée",
    "it": "Approvato: A2 Luzern -> Chiasso tra Parcheggio Area di dosaggio Göschenen E Galleria Galleria San Gottardo Situazione: problemi di traffico Causa: incidente Limitazione del traffico: corsia di destra chiusa"
   },
-  "lastSeen": "2026-10-26T10:10:05Z"
+  "lastSeen": "2026-10-26T10:15:03Z"
  },
  {
   "firstSeen": "2026-10-26T09:55:03Z",
@@ -27,7 +27,8 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Parking Gurtnellen Situation: trafic en accordéon Raison: travaux de construction Gestion du trafic: rétrécissement des voies sur une voie de circulation",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Parcheggio Gurtnellen Situazione: traffico fortemente rallentato Causa: lavori di costruzione Limitazione del traffico: corsie strette ridotta su una corsia"
   },
-  "lastSeen": "2026-10-26T10:10:05Z"
+  "lastSeen": "2026-10-26T10:10:05Z",
+  "revokedAt": "2026-10-26T10:15:03Z"
  },
  {
   "firstSeen": "2026-10-26T07:15:04Z",
