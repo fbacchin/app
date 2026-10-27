@@ -12,7 +12,7 @@
    "fr": "Libéré: Ulrichen <-> Airolo Col Col du Nufenen Situation: fermé Durée: durant la nuit probable 27.10.2026 18:00",
    "it": "Approvato: Ulrichen <-> Airolo Passo Passo della Novena Situazione: chiusa Durata: durante la notte probabile 27.10.2026 18:00"
   },
-  "lastSeen": "2026-10-27T08:45:03Z"
+  "lastSeen": "2026-10-27T08:50:04Z"
  },
  {
   "firstSeen": "2026-10-26T13:25:04Z",
@@ -156,21 +156,5 @@
   },
   "lastSeen": "2026-10-25T15:10:04Z",
   "revokedAt": "2026-10-25T15:15:02Z"
- },
- {
-  "firstSeen": "2026-10-25T08:10:05Z",
-  "id": "situation.661765.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-10-25T08:05:02Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Tunnel Biaschina-Tunnel und Anschluss Faido Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen gesperrt",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Tunnel Tunnel de la Biaschina et Jonction autoroutière Faido Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de droite fermée",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Galleria Galleria Biaschina E Svincolo autostradale Faido Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa"
-  },
-  "lastSeen": "2026-10-25T08:45:05Z",
-  "revokedAt": "2026-10-25T08:50:03Z"
  }
 ]
