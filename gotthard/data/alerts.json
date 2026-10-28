@@ -12,7 +12,7 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: trafic perturbé Recommandation: équipement d'hiver recommandé",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: problemi di traffico Raccomandazione: attrezzatura invernale consigliata"
   },
-  "lastSeen": "2026-10-28T07:45:08Z"
+  "lastSeen": "2026-10-28T07:50:06Z"
  },
  {
   "firstSeen": "2026-10-28T07:25:02Z",
@@ -27,7 +27,22 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé Durée:  probable 28.10.2026 18:00 jusqu''à 29.10.2026 08:00 Recommandation: équipement d'hiver recommandé",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa Durata:  probabile 28.10.2026 18:00 fino 29.10.2026 08:00 Raccomandazione: attrezzatura invernale consigliata"
   },
-  "lastSeen": "2026-10-28T07:45:08Z"
+  "lastSeen": "2026-10-28T07:50:06Z"
+ },
+ {
+  "firstSeen": "2026-10-28T07:50:06Z",
+  "id": "situation.662626.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "north",
+  "versionTime": "2026-10-28T07:49:09Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Zollstation Chiasso-Brogeda und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung zu erwarten Ursache: Ausnahmetransport",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Poste de douane Chiasso-Brogeda et Tunnel Tunnel du St-Gothard Situation: ralentissements prévus Raison: convoi exceptionnel",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Dogana Chiasso Brogeda E Galleria Galleria San Gottardo Situazione: si prevedono problemi di traffico Causa: trasporto eccezionale"
+  },
+  "lastSeen": "2026-10-28T07:50:06Z"
  },
  {
   "firstSeen": "2026-10-28T06:25:03Z",
