@@ -1,5 +1,5 @@
 {
- "time": "2026-10-28T15:05:03Z",
+ "time": "2026-10-28T15:10:08Z",
  "south": {
   "km": null,
   "wait": null
@@ -9,6 +9,19 @@
   "wait": null
  },
  "events": [
+  {
+   "id": "situation.662715.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "north",
+   "versionTime": "2026-10-28T15:05:40Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Gotthard -> Luzern zwischen Anschluss Göschenen und Tunnel Teiftal-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5 Dauer: tagsüber voraussichtlich 02.11.2026 07:00 bis 04.11.2026 17:00",
+    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Göschenen et Tunnel Tunnel Teiftal Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la journée probable 02.11.2026 07:00 jusqu''à 04.11.2026 17:00",
+    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Göschenen E Galleria Galleria Teiftal Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 02.11.2026 07:00 fino 04.11.2026 17:00"
+   }
+  },
   {
    "id": "situation.662621.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
