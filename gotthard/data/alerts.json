@@ -12,7 +12,7 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: trafic perturbé Recommandation: équipement d'hiver recommandé",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: problemi di traffico Raccomandazione: attrezzatura invernale consigliata"
   },
-  "lastSeen": "2026-10-28T12:55:06Z"
+  "lastSeen": "2026-10-28T13:00:07Z"
  },
  {
   "firstSeen": "2026-10-28T07:25:02Z",
@@ -27,7 +27,22 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé Durée:  probable 28.10.2026 18:00 jusqu''à 29.10.2026 08:00 Recommandation: équipement d'hiver recommandé",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa Durata:  probabile 28.10.2026 18:00 fino 29.10.2026 08:00 Raccomandazione: attrezzatura invernale consigliata"
   },
-  "lastSeen": "2026-10-28T12:55:06Z"
+  "lastSeen": "2026-10-28T13:00:07Z"
+ },
+ {
+  "firstSeen": "2026-10-28T12:55:06Z",
+  "id": "situation.662668.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "south",
+  "versionTime": "2026-10-28T12:59:55Z",
+  "km": 2.0,
+  "wait": 20,
+  "texts": {
+   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 2.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
+   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
+   "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20"
+  },
+  "lastSeen": "2026-10-28T13:00:07Z"
  },
  {
   "firstSeen": "2026-10-28T12:40:04Z",
@@ -42,22 +57,8 @@
    "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: véhicule en panne",
    "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: veicolo in avaria"
   },
-  "lastSeen": "2026-10-28T12:55:06Z"
- },
- {
-  "firstSeen": "2026-10-28T12:55:06Z",
-  "id": "situation.662668.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "south",
-  "versionTime": "2026-10-28T12:51:26Z",
-  "km": 2.0,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 2.0 Ursache: Pannenfahrzeug",
-   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 2.0 Raison: véhicule en panne",
-   "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 2.0 Causa: veicolo in avaria"
-  },
-  "lastSeen": "2026-10-28T12:55:06Z"
+  "lastSeen": "2026-10-28T12:55:06Z",
+  "revokedAt": "2026-10-28T13:00:07Z"
  },
  {
   "firstSeen": "2026-10-28T07:50:06Z",
