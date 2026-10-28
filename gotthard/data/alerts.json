@@ -12,7 +12,7 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: trafic perturbé Recommandation: équipement d'hiver recommandé",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: problemi di traffico Raccomandazione: attrezzatura invernale consigliata"
   },
-  "lastSeen": "2026-10-28T15:30:07Z"
+  "lastSeen": "2026-10-28T15:35:04Z"
  },
  {
   "firstSeen": "2026-10-28T07:25:02Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé Durée:  probable 28.10.2026 18:00 jusqu''à 29.10.2026 08:00 Recommandation: équipement d'hiver recommandé",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa Durata:  probabile 28.10.2026 18:00 fino 29.10.2026 08:00 Raccomandazione: attrezzatura invernale consigliata"
   },
-  "lastSeen": "2026-10-28T15:30:07Z"
+  "lastSeen": "2026-10-28T15:35:04Z"
  },
  {
   "firstSeen": "2026-10-28T15:10:08Z",
@@ -42,7 +42,7 @@
    "fr": "Libéré: A2 St-Gothard -> Lucerne entre Jonction autoroutière Göschenen et Tunnel Tunnel Teiftal Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la journée probable 02.11.2026 07:00 jusqu''à 04.11.2026 17:00",
    "it": "Approvato: A2 S. Gottardo -> Luzern tra Svincolo autostradale Göschenen E Galleria Galleria Teiftal Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 02.11.2026 07:00 fino 04.11.2026 17:00"
   },
-  "lastSeen": "2026-10-28T15:30:07Z"
+  "lastSeen": "2026-10-28T15:35:04Z"
  },
  {
   "firstSeen": "2026-10-28T12:55:06Z",
@@ -153,21 +153,5 @@
    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Coldrerio E Parcheggio Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato"
   },
   "lastSeen": "2026-10-27T15:30:09Z"
- },
- {
-  "firstSeen": "2026-10-26T13:25:04Z",
-  "id": "situation.662033.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-10-26T14:51:40Z",
-  "km": 1.0,
-  "wait": 10,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
-  },
-  "lastSeen": "2026-10-26T15:30:11Z",
-  "revokedAt": "2026-10-26T15:35:04Z"
  }
 ]
