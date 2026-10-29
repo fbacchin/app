@@ -4,7 +4,7 @@ Codice di una prova di osservazione dei tempi di percorrenza sull'asse del San G
 
 Qui c'è solo il codice; il flusso di GitHub Actions che lo esegue ogni 15 minuti è `.github/workflows/gotthard-percorsi.yml` alla radice del repository. I dati raccolti non sono pubblici: vanno nel repository privato `fbacchin/gottardo-percorsi-privati`, clonato in `privati/` durante il flusso.
 
-Fonti: Apple Maps, TomTom, Google (galleria e passo, più le tratte separate dell'A2) e i contatori ASTRA di opentransportdata (solo le tratte separate). Fino al 19.10.2026 il codice stava nel repository `fbacchin/gottardo-percorsi`.
+Fonti: Apple Maps, TomTom, Google (galleria e passo, più le tratte separate dell'A2; TomTom dal 29.10.2026 ogni 30 minuti, solo galleria, passo e Faido→Airolo, per stare sotto le 20.000 richieste al mese) e i contatori ASTRA di opentransportdata (solo le tratte separate). Fino al 19.10.2026 il codice stava nel repository `fbacchin/gottardo-percorsi`.
 
 - `giro.py` — un giro di misure
 - `fonti.py` — chiamate alle fonti

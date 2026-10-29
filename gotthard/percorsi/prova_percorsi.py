@@ -62,7 +62,7 @@ def prova_quote():
         assert consenti(uso, "google", 8, ott); registra(uso, "google", 8, ott)
     assert not consenti(uso, "google", 8, ott)                             # 4.800: tetto raggiunto
     assert consenti(uso, "google", 8, datetime(2026, 11, 1, 0, 0, tzinfo=ZURIGO))   # mese nuovo
-    registra(uso, "tomtom", 2000, ott)
+    registra(uso, "tomtom", 645, ott)
     assert not consenti(uso, "tomtom", 8, ott) and consenti(uso, "tomtom", 8, ott + timedelta(days=1))   # tetto giornaliero
     assert consenti(uso, "apple", 5, ott)                                  # nessun tetto
 
@@ -130,7 +130,7 @@ def prova_tomtom_otto_misure():
     from fonti import tomtom
     from config import chiamate
     rs = tomtom("k", lambda *a, **k: (500, None))
-    assert [r["misura"] for r in rs] == [m[0] for m in chiamate("tomtom")] and len(rs) == 20 and all(r["esito"] == "errore 500" for r in rs)
+    assert [r["misura"] for r in rs] == [m[0] for m in chiamate("tomtom")] and len(rs) == 13 and all(r["esito"] == "errore 500" for r in rs)
 
 def prova_google_campioni():
     from fonti import da_google
@@ -291,14 +291,16 @@ def prova_giro_segreti_mai_in_uscita():
 def prova_giro_cosa_e_dove():
     from config import ZURIGO
     risposte = lambda metodo, url, intestazioni=None, corpo=None: (503, None)
-    pub, priv, _ = _giro_finto(datetime(2026, 10, 16, 17, 16, 30, tzinfo=ZURIGO), risposte, {"TOMTOM_KEY": "k", "GOOGLE_ROUTES_KEY": "g"})
+    pub, priv, _ = _giro_finto(datetime(2026, 10, 16, 17, 31, 30, tzinfo=ZURIGO), risposte, {"TOMTOM_KEY": "k", "GOOGLE_ROUTES_KEY": "g"})
     assert os.path.exists(f"{priv}/dati/tomtom-2026-10.csv") and os.path.exists(f"{priv}/dati/tomtom-2026-10-dettaglio.csv")
-    assert "2026-10-16 17:15" in open(f"{priv}/dati/tomtom-2026-10.csv", encoding="utf-8").read()   # ora del quarto d'ora
+    assert "2026-10-16 17:30" in open(f"{priv}/dati/tomtom-2026-10.csv", encoding="utf-8").read()   # ora del quarto d'ora
     assert not glob.glob(f"{priv}/dati/apple-*")                               # senza chiave la fonte non gira
-    assert not glob.glob(f"{priv}/dati/google-*")                              # :15, non è il giro dell'ora
+    assert not glob.glob(f"{priv}/dati/google-*")                              # :30, non è il giro dell'ora
     assert not os.path.exists(pub) or not _tutti_i_file(pub)                   # nel pubblico non si scrive niente
-    assert os.path.exists(f"{priv}/mappe/2026-10-16-1715-tomtom.svg") and not glob.glob(f"{priv}/mappe/*-apple.svg")
+    assert os.path.exists(f"{priv}/mappe/2026-10-16-1730-tomtom.svg") and not glob.glob(f"{priv}/mappe/*-apple.svg")
     assert os.path.exists(f"{priv}/README.md") and os.path.exists(f"{priv}/storia/15.md")
+    _, priv, _ = _giro_finto(datetime(2026, 10, 16, 17, 46, tzinfo=ZURIGO), risposte, {"TOMTOM_KEY": "k"})
+    assert not glob.glob(f"{priv}/dati/tomtom-*")                              # TomTom ogni 30 minuti (29.10): alle :45 no
     pub, priv, _ = _giro_finto(datetime(2026, 10, 16, 18, 0, tzinfo=ZURIGO), risposte, {"GOOGLE_ROUTES_KEY": "g", "OPENWEBNINJA_KEY": "o", "APIFY_TOKEN": "a"})
     assert os.path.exists(f"{priv}/dati/google-2026-10.csv")
     assert not glob.glob(f"{priv}/dati/waze-*")                                # Waze non si raccoglie più (richiesta dell'utente, 15.10)

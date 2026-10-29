@@ -58,6 +58,10 @@ NON_MISURATE = {"google": {m[0] for m in MISURE if "Erstfeld-Biasca" in m[0] or 
 # Contatori ASTRA (opentransportdata «Road traffic – traffic counters», 19.10, richiesta dell'utente): solo le tratte
 # separate dell'A2. Velocità delle auto in un punto, ultimo minuto: il tempo di una tratta è la lunghezza di riferimento
 # divisa tra le sue stazioni, ognuna percorsa alla velocità che misura. Nessun «senza traffico»: la fonte non lo dà.
+# TomTom: crediti gratuiti finiti il 25.10; da allora al massimo 20.000 richieste al mese, passo prima della galleria
+# (decisione dell'utente, 29.10). Il passo ogni 15 minuti da solo farebbe ~20.800: passo e galleria ogni 30 minuti
+# (13 richieste a giro, 624 al giorno), niente tratte separate tranne Faido→Airolo, che serve alla CUPRA.
+NON_MISURATE["tomtom"] = {m[0] for m in MISURE if m[3] == "diretto" and m[0] != TRATTO_CUPRA}
 NON_MISURATE["astra"] = {m[0] for m in MISURE if m[3] != "diretto"}
 STAZIONI_ASTRA = {   # tratta (nomi da nord a sud) → stazioni sull'A2 lungo la tratta; posizioni dall'elenco ASTRA del 15.10
     "Erstfeld-Amsteg": ["CH:0195"],                  # 46.79, 8.67
@@ -86,7 +90,7 @@ def chiamate(fonte):
 # Fonti i cui dati possono stare nel repository pubblico. Vuoto: Apple vieta di pubblicare i suoi dati,
 # le condizioni di TomTom non sono verificate (Doc/ADEV-773/preliminari.md).
 PUBBLICHE = set()
-ORARIE = {"google"}                                   # le altre girano ogni 15 minuti
+PERIODI = {"google": 60, "tomtom": 30}                # minuti tra un giro e l'altro; le altre fonti ogni 15
 
 # Soglie dell'app (HistoryChartView.livello): < 1 verde, < 10 giallo, < 40 arancione, oltre rosso.
 # Nelle mappe il verde arriva a 2 minuti: 1-2 minuti di scarto sono arrotondamento, non coda (richiesta dell'utente, 15.10).
@@ -94,7 +98,7 @@ SOGLIE = ((3, "🟢"), (10, "🟡"), (40, "🟠"))
 COLORI = {"🟢": "#2fb350", "🟡": "#ffcc00", "🟠": "#ff6f00", "🔴": "#c62828", "⚪": "#d5d8dc"}
 
 # Tetti sotto le quote gratuite: (periodo, limite).
-TETTI = {"tomtom": ("giorno", 2000), "google": ("mese", 4800)}
+TETTI = {"tomtom": ("giorno", 645), "google": ("mese", 4800)}   # TomTom: 645 × 31 giorni < 20.000 (29.10)
 
 
 # Distanza di riferimento per misura (metri), fissata dal primo giro riuscito e controllata a mano.

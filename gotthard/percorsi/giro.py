@@ -6,7 +6,7 @@ from datetime import datetime, timedelta, timezone
 import fonti
 from archivio import (INTESTAZIONE, INTESTAZIONE_DETTAGLIO, INTESTAZIONE_STAZIONI, aggiungi_in_cima, con_cupra, consenti, controlla_distanza, file_mese,
                       registra, riga_sintetica, righe_dettaglio, risultato, ultime_24h, ultimi_totali)
-from config import ORARIE, PUBBLICHE, ZURIGO, chiamate, misure
+from config import PERIODI, PUBBLICHE, ZURIGO, chiamate, misure
 from pagina import PASSI_STORIA, mappa_fonte, nome_mappa, pagine
 
 CHIAVI = {"apple": "APPLE_MAPS_PRIVATE_KEY", "tomtom": "TOMTOM_KEY", "google": "GOOGLE_ROUTES_KEY",   # Waze tolto il 15.10
@@ -30,7 +30,6 @@ def giro(adesso, env, pubblico, privato, chiama=fonti.http, chiama_soap=fonti.ht
     quarto = locale.replace(minute=locale.minute // 15 * 15, second=0, microsecond=0)
     ora, ora_utc = f"{quarto:%Y-%m-%d %H:%M}", f"{adesso.astimezone(timezone.utc):%Y-%m-%dT%H:%MZ}"
     un_ora_fa = f"{quarto - timedelta(hours=1):%Y-%m-%d %H:%M}"
-    dell_ora = quarto.minute == 0
     os.makedirs(privato, exist_ok=True)
     p_uso = os.path.join(privato, "uso.json")
     uso = json.load(open(p_uso)) if os.path.exists(p_uso) else {}
@@ -44,7 +43,7 @@ def giro(adesso, env, pubblico, privato, chiama=fonti.http, chiama_soap=fonti.ht
         json.dump(uso, open(p_uso, "w"), indent=1, sort_keys=True)
 
     def percorsi(fonte, richieste, funzione):
-        if not attiva(fonte) or (fonte in ORARIE and not dell_ora):
+        if not attiva(fonte) or quarto.minute % PERIODI.get(fonte, 15):
             return
         try:
             if consenti(uso, fonte, richieste, quarto):

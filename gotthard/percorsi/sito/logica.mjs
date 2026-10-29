@@ -46,7 +46,7 @@ export const SEPARATE = [
   ["verso sud", [["Erstfeld → Amsteg", "NS Erstfeld-Amsteg"], ["Amsteg → Göschenen", "NS Amsteg-Göschenen"], ["Airolo → Faido", "NS Airolo-Faido"], ["Faido → Biasca", "NS Faido-Biasca"]]],
   ["verso nord", [["Biasca → Faido", "SN Biasca-Faido"], ["Faido → Airolo", "SN Faido-Airolo"], ["Göschenen → Amsteg", "SN Göschenen-Amsteg"], ["Amsteg → Erstfeld", "SN Amsteg-Erstfeld"]]],
 ];
-const ORARIE = new Set(["google"]);   // come config.ORARIE: misurano solo al minuto :00
+const PERIODI = { google: 60, tomtom: 30 };   // come config.PERIODI: minuti tra un giro e l'altro, le altre fonti 15
 const COLONNE = ["ora", "ora_utc", "misura", "con_traffico_s", "senza_traffico_s", "distanza_m", "esito"];
 
 // CSV di dettaglio → righe; si leggono solo le prime `quante` (le più recenti stanno in cima): 22 misure a giro, 16 giri.
@@ -75,13 +75,13 @@ function cella(r) {
 }
 
 // { fonte: righe } → ultimi `n` quarti d'ora, dal più recente, con galleria, passo e differenza per tratta e fonte.
-// Le fonti orarie mostrano l'ultima misura dell'ora (con la sua ora), le altre solo la misura di quel quarto d'ora.
+// Le fonti più lente (Google ogni ora, TomTom ogni 30 minuti) mostrano l'ultima misura (con la sua ora), le altre solo quella del quarto d'ora.
 export function tabelle(perFonte, n = 12) {
   const ore = [...new Set(Object.values(perFonte).flat().map((r) => r.ora))].sort().reverse().slice(0, n);
   return ore.map((quando, i) => {
     const misura = {};
     for (const [fonte, righe] of Object.entries(perFonte)) {
-      const valide = righe.filter((r) => r.ora === quando || (ORARIE.has(fonte) && r.ora < quando && minuti(quando) - minuti(r.ora) < 60));
+      const valide = righe.filter((r) => r.ora === quando || (r.ora < quando && minuti(quando) - minuti(r.ora) < (PERIODI[fonte] ?? 15)));
       const ultima = valide.map((r) => r.ora).sort().pop();
       misura[fonte] = { ora: ultima || null, righe: valide.filter((r) => r.ora === ultima) };
     }

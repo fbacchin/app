@@ -42,6 +42,12 @@ assert.deepEqual(eb.fonti.google.passo, { esito: "percorso diverso", km: 106 });
 assert.equal(eb.fonti.google.differenza, null);
 assert.equal(t[1].tratte[0].fonti.apple.passo, null);                      // nessuna riga: cella vuota
 assert.equal(t[3].tratte[0].fonti.apple.ora, null);                        // Apple non c'era alle 21:00
+// TomTom ogni 30 minuti (29.10): alle :15 vale la misura delle :00, alle :30 senza giro la cella è vuota.
+const tt = tabelle({ apple, tomtom: leggiDettaglio(intestazione + "2026-10-15 22:00,2026-10-15T20:00Z,NS Erstfeld-Biasca passo,4500,4300,90900,ok\n") });
+const tq = (q) => tt.find((x) => x.quando === q).tratte[0].fonti.tomtom;
+assert.equal(tq("2026-10-15 22:15").ora, "2026-10-15 22:00");
+assert.equal(tq("2026-10-15 22:15").passo.totale, 75);
+assert.equal(tq("2026-10-15 22:30").ora, null);
 const sep = tabelle({ apple: leggiDettaglio(intestazione + "2026-10-16 20:00,2026-10-16T18:00Z,SN Faido-Airolo,900,780,18964,ok\n") });
 assert.equal(sep[0].separate[1].righe[1].nome, "Faido → Airolo");
 assert.deepEqual(sep[0].separate[1].righe[1].fonti.apple.cella, { esito: "ok", totale: 15, ritardo: 2, km: 19 });
