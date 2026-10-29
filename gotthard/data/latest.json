@@ -1,5 +1,5 @@
 {
- "time": "2026-10-29T11:05:02Z",
+ "time": "2026-10-29T11:10:06Z",
  "south": {
   "km": null,
   "wait": null
@@ -9,6 +9,19 @@
   "wait": null
  },
  "events": [
+  {
+   "id": "situation.662933.1.1.1",
+   "type": "RoadOrCarriagewayOrLaneManagement",
+   "direction": null,
+   "versionTime": "2026-10-29T11:08:59Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: Tremola, Airolo in beide Richtungen  Sachlage: Strecke gesperrt Ursache: Wintersperre",
+    "fr": "Libéré: Tremola, Airolo dans les deux sens  Situation: fermé Raison: fermeture hivernale",
+    "it": "Approvato: Tremola, Airolo in tutte le direzioni  Situazione: chiusa Causa: chiusura invernale"
+   }
+  },
   {
    "id": "situation.662915.1.1.1",
    "type": "AbnormalTraffic",
