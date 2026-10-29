@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Göschenen et Jonction autoroutière Airolo Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable 29.10.2026 23:00 jusqu''à 30.10.2026 01:00",
    "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Göschenen E Svincolo autostradale Airolo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile 29.10.2026 23:00 fino 30.10.2026 01:00"
   },
-  "lastSeen": "2026-10-29T22:05:02Z"
+  "lastSeen": "2026-10-29T22:10:03Z"
  },
  {
   "firstSeen": "2026-10-29T11:10:06Z",
@@ -27,7 +27,7 @@
    "fr": "Libéré: Tremola, Airolo dans les deux sens  Situation: fermé Raison: fermeture hivernale",
    "it": "Approvato: Tremola, Airolo in tutte le direzioni  Situazione: chiusa Causa: chiusura invernale"
   },
-  "lastSeen": "2026-10-29T22:05:02Z"
+  "lastSeen": "2026-10-29T22:10:03Z"
  },
  {
   "firstSeen": "2026-10-29T15:00:08Z",
@@ -42,14 +42,14 @@
    "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Jonction autoroutière Quinto Situation: trafic perturbé travaux, longueur [km] 0.7 Gestion du trafic: rétrécissement des voies sur deux voies de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 7.15 Durée:  probable 01.11.2026 20:00 jusqu''à 11.11.2026 05:00",
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del traffico: corsie strette ridotta su due corsie Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 7.15 Durata:  probabile 01.11.2026 20:00 fino 11.11.2026 05:00"
   },
-  "lastSeen": "2026-10-29T22:05:02Z"
+  "lastSeen": "2026-10-29T22:10:03Z"
  },
  {
   "firstSeen": "2026-10-29T22:00:04Z",
   "id": "situation.663095.1.1.1",
   "type": "RoadOrCarriagewayOrLaneManagement",
   "direction": null,
-  "versionTime": "2026-10-29T22:03:49Z",
+  "versionTime": "2026-10-29T22:05:13Z",
   "km": null,
   "wait": null,
   "texts": {
@@ -57,7 +57,7 @@
    "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable jusqu''à 30.10.2026 01:00",
    "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile fino 30.10.2026 01:00"
   },
-  "lastSeen": "2026-10-29T22:05:02Z"
+  "lastSeen": "2026-10-29T22:10:03Z"
  },
  {
   "firstSeen": "2026-10-29T09:20:07Z",
