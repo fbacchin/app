@@ -1,5 +1,5 @@
 {
- "time": "2026-10-29T17:01:45Z",
+ "time": "2026-10-29T17:11:55Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
@@ -15,7 +15,7 @@
    "held": true
   },
   "hr-me.karasovici": {
-   "updated": "2026-10-29T17:01:45Z",
+   "updated": "2026-10-29T17:11:55Z",
    "directions": {
     "exit": {
      "wait": null
@@ -26,7 +26,7 @@
    }
   },
   "hr-me.vitaljina": {
-   "updated": "2026-10-29T17:01:45Z",
+   "updated": "2026-10-29T17:11:55Z",
    "directions": {
     "exit": {
      "wait": null
@@ -37,7 +37,7 @@
    }
   },
   "hr-ba.nova-sela": {
-   "updated": "2026-10-29T17:01:45Z",
+   "updated": "2026-10-29T17:11:55Z",
    "directions": {
     "exit": {
      "wait": null
@@ -48,7 +48,7 @@
    }
   },
   "hr-ba.stara-gradiska": {
-   "updated": "2026-10-29T17:01:45Z",
+   "updated": "2026-10-29T17:11:55Z",
    "directions": {
     "exit": {
      "wait": null
@@ -71,7 +71,7 @@
    "held": true
   },
   "hr-rs.tovarnik": {
-   "updated": "2026-10-29T17:01:45Z",
+   "updated": "2026-10-29T17:11:55Z",
    "directions": {
     "exit": {
      "wait": null
@@ -82,7 +82,7 @@
    }
   },
   "hu-rs.roszke": {
-   "updated": "2026-10-29T17:01:45Z",
+   "updated": "2026-10-29T17:11:55Z",
    "directions": {
     "exit": {
      "wait": null
@@ -93,7 +93,7 @@
    }
   },
   "hu-rs.tompa": {
-   "updated": "2026-10-29T17:01:45Z",
+   "updated": "2026-10-29T17:11:55Z",
    "directions": {
     "exit": {
      "wait": null
@@ -104,7 +104,7 @@
    }
   },
   "hu-ua.zahony": {
-   "updated": "2026-10-29T17:01:45Z",
+   "updated": "2026-10-29T17:11:55Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -115,7 +115,7 @@
    }
   },
   "hu-ua.beregsurany": {
-   "updated": "2026-10-29T17:01:45Z",
+   "updated": "2026-10-29T17:11:55Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -134,10 +134,11 @@
     "entry": {
      "wait": null
     }
-   }
+   },
+   "held": true
   },
   "pl-ua.korczowa": {
-   "updated": "2026-10-29T16:51:35Z",
+   "updated": "2026-10-29T17:11:55Z",
    "directions": {
     "exit": {
      "wait": 60
@@ -145,8 +146,7 @@
     "entry": {
      "wait": null
     }
-   },
-   "held": true
+   }
   },
   "pl-ua.dorohusk": {
    "updated": "2026-10-29T17:01:45Z",
@@ -157,10 +157,11 @@
     "entry": {
      "wait": null
     }
-   }
+   },
+   "held": true
   },
   "pl-ua.hrebenne": {
-   "updated": "2026-10-29T17:01:45Z",
+   "updated": "2026-10-29T17:11:55Z",
    "directions": {
     "exit": {
      "wait": 0
@@ -174,7 +175,7 @@
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-10-29T17:00:05Z"
+   "sampled": "2026-10-29T17:10:03Z"
   },
   "hak": {
    "ok": true,
@@ -195,7 +196,7 @@
    "url": "https://granica.gov.pl/Services/czasyService/soap_granica.php",
    "found": 4,
    "of": 4,
-   "waits": 3,
+   "waits": 2,
    "ora_pl": "2026-10-29 18"
   },
   "bihamk": {
