@@ -67,6 +67,8 @@ def richieste_apple():
     return ([(o, sorted(set(ds))) for o, ds in sorted(tunnel.items())] + [(o, [VALICO]) for o in sorted(salite)]
             + [(VALICO, sorted(set(discese)))])
 
+_CAMPI_ETA = {"expectedTravelTimeSeconds", "staticTravelTimeSeconds", "distanceMeters"}
+
 def _vicino(a, b):
     return abs(a[0] - b[0]) < 0.01 and abs(a[1] - b[1]) < 0.01
 
@@ -81,8 +83,10 @@ def apple(token, chiama=http):
                 continue
             # Abbinamento per coordinate, non per posizione: una destinazione irraggiungibile può mancare.
             e = next((e for e in r.get("etas", []) if _vicino((e["destination"]["latitude"], e["destination"]["longitude"]), PUNTI[d])), None)
+            # Apple può restituire la destinazione senza tempi né distanza quando la considera irraggiungibile
+            # (dal 23.10.2026 il valico, col passo aperto): vale come percorso non trovato, non come errore.
             tratte[(o, d)] = (risultato("", e["expectedTravelTimeSeconds"], e["staticTravelTimeSeconds"], e["distanceMeters"])
-                              if e else risultato("", esito="percorso non trovato"))
+                              if e and _CAMPI_ETA <= e.keys() else risultato("", esito="percorso non trovato"))
     return [componi(nome, o, d, p, tratte) for nome, o, d, p in chiamate("apple")]
 
 def _luogo(tappe):

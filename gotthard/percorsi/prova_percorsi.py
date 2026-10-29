@@ -101,6 +101,23 @@ def prova_apple_errore():
     rs = apple("t", lambda *a, **k: (503, None))
     assert all(r["esito"] == "errore 503" and r["con_traffico_s"] is None for r in rs)
 
+def prova_apple_senza_tempi():
+    """29.10.2026: per il valico Apple risponde 200 con le destinazioni senza tempi. Prima era un KeyError
+    che faceva perdere anche galleria e tratte dell'A2; ora solo le misure del passo restano vuote."""
+    from fonti import apple
+    from config import PUNTI, VALICO
+    def chiama(metodo, url, intestazioni=None, corpo=None):
+        dest = url.split("destinations=")[1].split("&")[0].split("|")
+        punti = [tuple(map(float, x.split(","))) for x in dest]
+        vuota = lambda p: {"destination": {"latitude": p[0], "longitude": p[1]}, "transportType": "Automobile"}
+        piena = lambda p: {**vuota(p), "expectedTravelTimeSeconds": 600, "staticTravelTimeSeconds": 500, "distanceMeters": 20000}
+        valico = "origin=%s,%s" % PUNTI[VALICO] in url
+        return 200, {"etas": [vuota(p) if valico or p == PUNTI[VALICO] else piena(p) for p in punti]}
+    rs = {r["misura"]: r for r in apple("t", chiama)}
+    assert rs["NS Erstfeld-Biasca tunnel"]["esito"] == "ok"
+    assert rs["NS Erstfeld-Biasca passo"]["esito"] == "percorso non trovato"
+    assert not any("errore" in r["esito"] for r in rs.values())
+
 def prova_tomtom_campioni():
     from fonti import da_tomtom
     t = _campione("privati/campioni/tomtom-tunnel.json"); p = _campione("privati/campioni/tomtom-passo.json")
