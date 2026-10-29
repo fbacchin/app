@@ -1,5 +1,5 @@
 {
- "time": "2026-10-29T22:10:03Z",
+ "time": "2026-10-29T22:15:02Z",
  "south": {
   "km": null,
   "wait": null
@@ -13,7 +13,7 @@
    "id": "situation.663095.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
    "direction": null,
-   "versionTime": "2026-10-29T22:05:13Z",
+   "versionTime": "2026-10-29T22:13:57Z",
    "km": null,
    "wait": null,
    "texts": {
@@ -59,19 +59,6 @@
     "de": "Freigegeben: Tremola, Airolo in beide Richtungen  Sachlage: Strecke gesperrt Ursache: Wintersperre",
     "fr": "Libéré: Tremola, Airolo dans les deux sens  Situation: fermé Raison: fermeture hivernale",
     "it": "Approvato: Tremola, Airolo in tutte le direzioni  Situazione: chiusa Causa: chiusura invernale"
-   }
-  },
-  {
-   "id": "situation.662915.1.1.1",
-   "type": "AbnormalTraffic",
-   "direction": null,
-   "versionTime": "2026-10-29T09:16:34Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Chiasso <-> Gotthard zwischen Anschluss Faido und Anschluss Quinto Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.6 Verkehrsführung: veränderte Verkehrsführung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5 Dauer: nachts voraussichtlich 09.11.2026 20:00 bis 11.11.2026 05:00",
-    "fr": "Libéré: A2 Chiasso <-> St-Gothard entre Jonction autoroutière Faido et Jonction autoroutière Quinto Situation: trafic perturbé travaux, longueur [km] 1.6 Gestion du trafic: nouveau plan de circulation sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la nuit probable 09.11.2026 20:00 jusqu''à 11.11.2026 05:00",
-    "it": "Approvato: A2 Chiasso <-> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 1.6 Limitazione del traffico: nuova viabilità ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante la notte probabile 09.11.2026 20:00 fino 11.11.2026 05:00"
    }
   }
  ]
