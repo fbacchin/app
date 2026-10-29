@@ -13,5 +13,7 @@
  "tunnel": {
   "phase": "open"
  },
- "preavvisi": {}
+ "preavvisi": {
+  "2026-10-29T22:00:00Z|both": "2026-10-29T17:00:05Z"
+ }
 }
