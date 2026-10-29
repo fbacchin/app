@@ -1,5 +1,5 @@
 {
- "time": "2026-10-29T09:00:07Z",
+ "time": "2026-10-29T09:05:03Z",
  "south": {
   "km": null,
   "wait": null
@@ -9,6 +9,19 @@
   "wait": null
  },
  "events": [
+  {
+   "id": "situation.662913.1.1.1",
+   "type": "RoadOrCarriagewayOrLaneManagement",
+   "direction": null,
+   "versionTime": "2026-10-29T09:04:05Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Ortschaft Motto Bartola und Pass Gotthard-Pass Sachlage: Tunnel gesperrt Ursache: Fahrzeugbrand",
+    "fr": "Libéré: H2 Airolo <-> Göschenen entre Localité Motto Bartola et Col Col du St-Gothard Situation: tunnel fermé Raison: véhicule en feu",
+    "it": "Approvato: H2 Airolo <-> Göschenen tra Luogo Motto Bartola E Passo Passo del S. Gottardo Situazione: tunnel chiuso Causa: veicolo in fiamme"
+   }
+  },
   {
    "id": "situation.662910.1.1.1",
    "type": "AbnormalTraffic",
