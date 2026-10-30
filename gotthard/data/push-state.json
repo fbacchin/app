@@ -4,14 +4,8 @@
   "lastSent": "2026-10-28T14:25:04Z"
  },
  "north": {
-  "soglieAvvisate": [
-   2,
-   4
-  ],
-  "lastSent": "2026-10-30T16:40:04Z",
-  "clearSince": "2026-10-30T18:50:04Z",
-  "sopraFinale": true,
-  "finaleAvvisato": true
+  "soglieAvvisate": [],
+  "lastSent": "2026-10-30T19:10:04Z"
  },
  "tunnel": {
   "phase": "open"
