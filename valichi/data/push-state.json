@@ -14,6 +14,9 @@
  "hr-ba.stara-gradiska.entry": {
   "phase": "clear"
  },
+ "hr-ba.stara-gradiska.exit": {
+  "phase": "clear"
+ },
  "hr-me.karasovici.entry": {
   "phase": "clear"
  },
