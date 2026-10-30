@@ -1,5 +1,5 @@
 {
- "time": "2026-10-30T12:55:03Z",
+ "time": "2026-10-30T13:00:04Z",
  "south": {
   "km": null,
   "wait": null
@@ -24,15 +24,15 @@
   },
   {
    "id": "situation.663187.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
+   "type": "AbnormalTraffic",
    "direction": null,
-   "versionTime": "2026-10-30T12:22:58Z",
+   "versionTime": "2026-10-30T12:58:06Z",
    "km": null,
    "wait": null,
    "texts": {
-    "de": "Freigegeben: H2 Bellinzona -> Airolo zwischen Ortschaft Arbedo und Anschluss Bellinzona-Nord Sachlage: Strecke gesperrt Ursache: Unfall",
-    "fr": "Libéré: H2 Bellinzone -> Airolo entre Localité Arbedo et Jonction autoroutière Bellinzone-Nord Situation: fermé Raison: accident",
-    "it": "Approvato: H2 Bellinzona -> Airolo tra Luogo Arbedo E Svincolo autostradale Bellinzona Nord Situazione: chiusa Causa: incidente"
+    "de": "Freigegeben: H2 Bellinzona -> Airolo zwischen Ortschaft Arbedo und Anschluss Bellinzona-Nord Sachlage: Verkehrsbehinderung Ursache: Unfall Verkehrsführung: Fahrstreifen gesperrt Empfohlene Umleitung: lokale Umleitung",
+    "fr": "Libéré: H2 Bellinzone -> Airolo entre Localité Arbedo et Jonction autoroutière Bellinzone-Nord Situation: trafic perturbé Raison: accident Gestion du trafic: voie fermée Déviation recommandée: Déviation locale",
+    "it": "Approvato: H2 Bellinzona -> Airolo tra Luogo Arbedo E Svincolo autostradale Bellinzona Nord Situazione: problemi di traffico Causa: incidente Limitazione del traffico: corsia chiusa Deviazione raccomandata: Deviazione locale"
    }
   },
   {
