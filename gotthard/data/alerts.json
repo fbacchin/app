@@ -12,7 +12,7 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé Durée:  probable 31.10.2026 18:00 jusqu''à 01.11.2026 08:00",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa Durata:  probabile 31.10.2026 18:00 fino 01.11.2026 08:00"
   },
-  "lastSeen": "2026-10-31T17:25:03Z"
+  "lastSeen": "2026-10-31T17:30:03Z"
  },
  {
   "firstSeen": "2026-10-31T10:10:04Z",
@@ -246,21 +246,5 @@
   },
   "lastSeen": "2026-10-29T19:10:05Z",
   "revokedAt": "2026-10-30T08:55:02Z"
- },
- {
-  "firstSeen": "2026-10-29T17:25:05Z",
-  "id": "situation.663077.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": "south",
-  "versionTime": "2026-10-29T17:24:26Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Gotthard -> Chiasso Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Technische Probleme",
-   "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: en raison de problèmes techniques",
-   "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: per problemi tecnici"
-  },
-  "lastSeen": "2026-10-29T17:25:05Z",
-  "revokedAt": "2026-10-29T17:30:05Z"
  }
 ]
