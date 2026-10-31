@@ -7,8 +7,9 @@
   "soglieAvvisate": [
    2
   ],
-  "lastSent": "2026-10-31T11:00:04Z",
-  "sopraFinale": true
+  "lastSent": "2026-10-31T14:40:03Z",
+  "sopraFinale": true,
+  "finaleAvvisato": true
  },
  "tunnel": {
   "phase": "open"
