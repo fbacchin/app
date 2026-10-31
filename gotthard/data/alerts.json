@@ -230,21 +230,5 @@
    "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Quinto Situazione: problemi di traffico cantiere, lunghezza [km] 1.6 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante la notte probabile 01.11.2026 20:00 fino 02.11.2026 05:00"
   },
   "lastSeen": "2026-10-29T20:45:05Z"
- },
- {
-  "firstSeen": "2026-10-28T07:25:02Z",
-  "id": "situation.662621.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": null,
-  "versionTime": "2026-10-29T07:11:53Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Anschluss Airolo-Nufenen und Ortschaft Hospental Sachlage: Strecke gesperrt Dauer:  voraussichtlich 29.10.2026 18:00 bis 30.10.2026 08:00",
-   "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé Durée:  probable 29.10.2026 18:00 jusqu''à 30.10.2026 08:00",
-   "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa Durata:  probabile 29.10.2026 18:00 fino 30.10.2026 08:00"
-  },
-  "lastSeen": "2026-10-29T19:10:05Z",
-  "revokedAt": "2026-10-30T08:55:02Z"
  }
 ]
