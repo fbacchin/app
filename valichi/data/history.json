@@ -1,24 +1,5 @@
 [
  {
-  "time": "2026-10-29T06:01:36Z",
-  "w": {
-   "hr-ba.nova-sela.entry": 30,
-   "hr-ba.stara-gradiska.entry": 30,
-   "hu-ua.zahony.exit": 15,
-   "hu-ua.zahony.entry": 15,
-   "hu-ua.beregsurany.exit": 15,
-   "hu-ua.beregsurany.entry": 15,
-   "pl-ua.medyka.exit": 1200,
-   "pl-ua.korczowa.exit": 0,
-   "pl-ua.dorohusk.exit": 960,
-   "pl-ua.hrebenne.exit": 0
-  },
-  "held": [
-   "pl-ua.korczowa",
-   "pl-ua.medyka"
-  ]
- },
- {
   "time": "2026-10-29T06:11:43Z",
   "w": {
    "hr-ba.nova-sela.entry": 30,
@@ -5474,6 +5455,21 @@
  },
  {
   "time": "2026-10-31T05:58:41Z",
+  "w": {
+   "hr-ba.nova-sela.entry": 30,
+   "hr-ba.stara-gradiska.entry": 30,
+   "hu-ua.zahony.exit": 15,
+   "hu-ua.zahony.entry": 15,
+   "hu-ua.beregsurany.exit": 15,
+   "hu-ua.beregsurany.entry": 15,
+   "pl-ua.medyka.exit": 0,
+   "pl-ua.korczowa.exit": 60,
+   "pl-ua.dorohusk.exit": 1260,
+   "pl-ua.hrebenne.exit": 0
+  }
+ },
+ {
+  "time": "2026-10-31T06:08:51Z",
   "w": {
    "hr-ba.nova-sela.entry": 30,
    "hr-ba.stara-gradiska.entry": 30,
