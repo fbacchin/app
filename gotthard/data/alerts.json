@@ -12,7 +12,8 @@
    "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: véhicule en panne",
    "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: veicolo in avaria"
   },
-  "lastSeen": "2026-11-02T22:30:04Z"
+  "lastSeen": "2026-11-02T22:30:04Z",
+  "revokedAt": "2026-11-02T22:40:03Z"
  },
  {
   "firstSeen": "2026-11-02T10:15:02Z",

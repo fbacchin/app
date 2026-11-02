@@ -8,9 +8,7 @@
   "lastSent": "2026-11-01T19:25:02Z"
  },
  "tunnel": {
-  "phase": "closed",
-  "openSince": "2026-11-02T22:35:03Z",
-  "direzione": "south"
+  "phase": "open"
  },
  "preavvisi": {}
 }
