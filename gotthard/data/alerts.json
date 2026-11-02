@@ -1,20 +1,5 @@
 [
  {
-  "firstSeen": "2026-11-02T10:15:02Z",
-  "id": "situation.663646.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-11-02T10:13:24Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Anschluss Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 4.3 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.85 Dauer: tagsüber voraussichtlich 10.11.2026 07:30 bis 12.11.2026 17:00",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: trafic perturbé travaux, longueur [km] 4.3 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.85 Durée: durant la journée probable 10.11.2026 07:30 jusqu''à 12.11.2026 17:00",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 4.3 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.85 Durata: durante il giorno probabile 10.11.2026 07:30 fino 12.11.2026 17:00"
-  },
-  "lastSeen": "2026-11-02T22:10:07Z"
- },
- {
   "firstSeen": "2026-11-02T21:55:03Z",
   "id": "situation.663825.1.1.1",
   "type": "RoadOrCarriagewayOrLaneManagement",
@@ -26,6 +11,21 @@
    "de": "Freigegeben: A2 Gotthard -> Chiasso Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Pannenfahrzeug",
    "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: véhicule en panne",
    "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: veicolo in avaria"
+  },
+  "lastSeen": "2026-11-02T22:15:02Z"
+ },
+ {
+  "firstSeen": "2026-11-02T10:15:02Z",
+  "id": "situation.663646.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "north",
+  "versionTime": "2026-11-02T10:13:24Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Anschluss Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 4.3 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.85 Dauer: tagsüber voraussichtlich 10.11.2026 07:30 bis 12.11.2026 17:00",
+   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Jonction autoroutière Airolo Situation: trafic perturbé travaux, longueur [km] 4.3 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.85 Durée: durant la journée probable 10.11.2026 07:30 jusqu''à 12.11.2026 17:00",
+   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 4.3 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.85 Durata: durante il giorno probabile 10.11.2026 07:30 fino 12.11.2026 17:00"
   },
   "lastSeen": "2026-11-02T22:10:07Z"
  },
