@@ -9,6 +9,7 @@
  },
  "tunnel": {
   "phase": "closed",
+  "openSince": "2026-11-02T22:25:02Z",
   "direzione": "south"
  },
  "preavvisi": {}
