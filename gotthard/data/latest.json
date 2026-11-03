@@ -1,5 +1,5 @@
 {
- "time": "2026-11-03T20:50:10Z",
+ "time": "2026-11-03T20:55:08Z",
  "south": {
   "km": null,
   "wait": null
@@ -20,19 +20,6 @@
     "de": "Freigegeben: Ulrichen <-> Airolo zwischen Ortschaft All'Acqua und Ortschaft Ulrichen Sachlage: Strecke gesperrt Ursache: Schneefall",
     "fr": "Libéré: Ulrichen <-> Airolo entre Localité All'Acqua et Localité Ulrichen Situation: fermé Raison: chutes de neige",
     "it": "Approvato: Ulrichen <-> Airolo tra Luogo All'Acqua E Luogo Ulrichen Situazione: chiusa Causa: nevicata"
-   }
-  },
-  {
-   "id": "situation.663298.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-11-03T07:53:16Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo <-> Göschenen zwischen Anschluss Airolo-Nufenen und Ortschaft Hospental Sachlage: Strecke gesperrt Dauer:  voraussichtlich 03.11.2026 18:00 bis 04.11.2026 08:00",
-    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé Durée:  probable 03.11.2026 18:00 jusqu''à 04.11.2026 08:00",
-    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa Durata:  probabile 03.11.2026 18:00 fino 04.11.2026 08:00"
    }
   }
  ]
