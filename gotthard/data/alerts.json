@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Göschenen et Jonction autoroutière Airolo Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable 04.11.2026 23:00 jusqu''à 05.11.2026 01:00",
    "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Göschenen E Svincolo autostradale Airolo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile 04.11.2026 23:00 fino 05.11.2026 01:00"
   },
-  "lastSeen": "2026-11-04T07:00:05Z"
+  "lastSeen": "2026-11-04T07:05:03Z"
  },
  {
   "firstSeen": "2026-11-03T11:05:03Z",
@@ -42,7 +42,8 @@
    "fr": "Libéré: H2 Airolo <-> Göschenen entre Jonction autoroutière Airolo-Nufenen et Localité Hospental Situation: fermé Durée:  probable 03.11.2026 18:00 jusqu''à 04.11.2026 08:00",
    "it": "Approvato: H2 Airolo <-> Göschenen tra Svincolo autostradale Airolo-Nufenen E Luogo Hospental Situazione: chiusa Durata:  probabile 03.11.2026 18:00 fino 04.11.2026 08:00"
   },
-  "lastSeen": "2026-11-03T19:50:18Z"
+  "lastSeen": "2026-11-03T19:50:18Z",
+  "revokedAt": "2026-11-04T07:05:03Z"
  },
  {
   "firstSeen": "2026-11-03T13:40:07Z",
