@@ -1,5 +1,5 @@
 {
- "time": "2026-11-04T06:40:03Z",
+ "time": "2026-11-04T06:45:04Z",
  "south": {
   "km": null,
   "wait": null
@@ -20,19 +20,6 @@
     "de": "Freigegeben: A2 Chiasso <-> Luzern zwischen Anschluss Göschenen und Anschluss Airolo Sachlage: Tunnel gesperrt Ursache: Ausnahmetransport Dauer:  voraussichtlich 04.11.2026 23:00 bis 05.11.2026 01:00",
     "fr": "Libéré: A2 Chiasso <-> Lucerne entre Jonction autoroutière Göschenen et Jonction autoroutière Airolo Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable 04.11.2026 23:00 jusqu''à 05.11.2026 01:00",
     "it": "Approvato: A2 Chiasso <-> Luzern tra Svincolo autostradale Göschenen E Svincolo autostradale Airolo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile 04.11.2026 23:00 fino 05.11.2026 01:00"
-   }
-  },
-  {
-   "id": "situation.663962.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-11-03T17:42:37Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: Ulrichen <-> Airolo zwischen Ortschaft All'Acqua und Ortschaft Ulrichen Sachlage: Strecke gesperrt Ursache: Schneefall",
-    "fr": "Libéré: Ulrichen <-> Airolo entre Localité All'Acqua et Localité Ulrichen Situation: fermé Raison: chutes de neige",
-    "it": "Approvato: Ulrichen <-> Airolo tra Luogo All'Acqua E Luogo Ulrichen Situazione: chiusa Causa: nevicata"
    }
   }
  ]
