@@ -12,7 +12,22 @@
    "fr": "Libéré: Ulrichen <-> Airolo entre Localité Ulrichen et Col Col du Nufenen Situation: fermé Raison: chutes de neige Durée: jusqu'à nouvel avis probable 05.11.2026 07:01",
    "it": "Approvato: Ulrichen <-> Airolo tra Luogo Ulrichen E Passo Passo della Novena Situazione: chiusa Causa: nevicata Durata: fino a nuovo avviso probabile 05.11.2026 07:01"
   },
-  "lastSeen": "2026-11-05T06:45:05Z"
+  "lastSeen": "2026-11-05T06:50:04Z"
+ },
+ {
+  "firstSeen": "2026-11-03T11:05:03Z",
+  "id": "situation.663962.1.1.1",
+  "type": "RoadOrCarriagewayOrLaneManagement",
+  "direction": null,
+  "versionTime": "2026-11-05T06:48:57Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: Ulrichen <-> Airolo zwischen Ortschaft All'Acqua und Ortschaft Ulrichen Sachlage: Strecke gesperrt Ursache: Schneefall",
+   "fr": "Libéré: Ulrichen <-> Airolo entre Localité All'Acqua et Localité Ulrichen Situation: fermé Raison: chutes de neige",
+   "it": "Approvato: Ulrichen <-> Airolo tra Luogo All'Acqua E Luogo Ulrichen Situazione: chiusa Causa: nevicata"
+  },
+  "lastSeen": "2026-11-05T06:50:04Z"
  },
  {
   "firstSeen": "2026-11-04T18:35:04Z",
@@ -122,21 +137,6 @@
   },
   "lastSeen": "2026-11-04T08:10:04Z",
   "revokedAt": "2026-11-04T08:15:05Z"
- },
- {
-  "firstSeen": "2026-11-03T11:05:03Z",
-  "id": "situation.663962.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": null,
-  "versionTime": "2026-11-03T17:42:37Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: Ulrichen <-> Airolo zwischen Ortschaft All'Acqua und Ortschaft Ulrichen Sachlage: Strecke gesperrt Ursache: Schneefall",
-   "fr": "Libéré: Ulrichen <-> Airolo entre Localité All'Acqua et Localité Ulrichen Situation: fermé Raison: chutes de neige",
-   "it": "Approvato: Ulrichen <-> Airolo tra Luogo All'Acqua E Luogo Ulrichen Situazione: chiusa Causa: nevicata"
-  },
-  "lastSeen": "2026-11-04T05:40:04Z"
  },
  {
   "firstSeen": "2026-10-30T16:55:06Z",
