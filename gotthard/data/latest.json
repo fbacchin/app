@@ -1,5 +1,5 @@
 {
- "time": "2026-11-05T11:25:05Z",
+ "time": "2026-11-05T11:30:04Z",
  "south": {
   "km": null,
   "wait": null
@@ -9,6 +9,19 @@
   "wait": null
  },
  "events": [
+  {
+   "id": "situation.664962.1.1.1",
+   "type": "AbnormalTraffic",
+   "direction": "south",
+   "versionTime": "2026-11-05T11:27:21Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Anschluss Erstfeld, bei Kilometer 145.5 Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
+    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Jonction autoroutière Erstfeld, au kilomètre 145.5 Situation: danger Raison: objets sur la chaussée",
+    "it": "Approvato: A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Svincolo autostradale Erstfeld, al chilometro 145.5 Situazione: pericolo Causa: oggetto sulla strada"
+   }
+  },
   {
    "id": "situation.663962.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
