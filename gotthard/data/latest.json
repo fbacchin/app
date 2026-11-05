@@ -1,5 +1,5 @@
 {
- "time": "2026-11-05T12:50:04Z",
+ "time": "2026-11-05T12:55:02Z",
  "south": {
   "km": null,
   "wait": null
@@ -9,6 +9,19 @@
   "wait": null
  },
  "events": [
+  {
+   "id": "situation.664906.1.1.1",
+   "type": "RoadOrCarriagewayOrLaneManagement",
+   "direction": null,
+   "versionTime": "2026-11-05T12:50:08Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: H2 Airolo <-> Göschenen Pass Gotthard-Pass Sachlage: Strecke gesperrt Ursache: Wintersperre",
+    "fr": "Libéré: H2 Airolo <-> Göschenen Col Col du St-Gothard Situation: fermé Raison: fermeture hivernale",
+    "it": "Approvato: H2 Airolo <-> Göschenen Passo Passo del S. Gottardo Situazione: chiusa Causa: chiusura invernale"
+   }
+  },
   {
    "id": "situation.663962.1.1.1",
    "type": "RoadOrCarriagewayOrLaneManagement",
@@ -20,19 +33,6 @@
     "de": "Freigegeben: Ulrichen <-> Airolo zwischen Ortschaft All'Acqua und Ortschaft Ulrichen Sachlage: Strecke gesperrt Ursache: Schneefall Dauer:  voraussichtlich 05.11.2026 18:00",
     "fr": "Libéré: Ulrichen <-> Airolo entre Localité All'Acqua et Localité Ulrichen Situation: fermé Raison: chutes de neige Durée:  probable 05.11.2026 18:00",
     "it": "Approvato: Ulrichen <-> Airolo tra Luogo All'Acqua E Luogo Ulrichen Situazione: chiusa Causa: nevicata Durata:  probabile 05.11.2026 18:00"
-   }
-  },
-  {
-   "id": "situation.664906.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-11-05T07:02:29Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo <-> Göschenen Pass Gotthard-Pass Sachlage: Strecke gesperrt Ursache: Wintersperre",
-    "fr": "Libéré: H2 Airolo <-> Göschenen Col Col du St-Gothard Situation: fermé Raison: fermeture hivernale",
-    "it": "Approvato: H2 Airolo <-> Göschenen Passo Passo del S. Gottardo Situazione: chiusa Causa: chiusura invernale"
    }
   }
  ]
