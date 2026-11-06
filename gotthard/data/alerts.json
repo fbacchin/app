@@ -125,20 +125,5 @@
   },
   "lastSeen": "2026-11-04T23:35:03Z",
   "revokedAt": "2026-11-04T23:40:03Z"
- },
- {
-  "firstSeen": "2026-11-04T10:20:04Z",
-  "id": "situation.664517.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": null,
-  "versionTime": "2026-11-04T10:18:24Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso <-> Luzern zwischen Parkplatz Wassen, Dieden und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.0 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5 Dauer: tagsüber voraussichtlich 10.11.2026 07:00 bis 12.11.2026 17:00",
-   "fr": "Libéré: A2 Chiasso <-> Lucerne entre Parking Wassen, Dieden et Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 1.0 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5 Durée: durant la journée probable 10.11.2026 07:00 jusqu''à 12.11.2026 17:00",
-   "it": "Approvato: A2 Chiasso <-> Luzern tra Parcheggio Wassen, Dieden E Galleria Galleria San Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 10.11.2026 07:00 fino 12.11.2026 17:00"
-  },
-  "lastSeen": "2026-11-04T22:15:04Z"
  }
 ]
