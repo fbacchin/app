@@ -1,5 +1,5 @@
 {
- "time": "2026-11-06T01:45:03Z",
+ "time": "2026-11-06T01:50:05Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,19 +8,5 @@
   "km": null,
   "wait": null
  },
- "events": [
-  {
-   "id": "situation.664906.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": null,
-   "versionTime": "2026-11-05T12:50:08Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: H2 Airolo <-> Göschenen Pass Gotthard-Pass Sachlage: Strecke gesperrt Ursache: Wintersperre",
-    "fr": "Libéré: H2 Airolo <-> Göschenen Col Col du St-Gothard Situation: fermé Raison: fermeture hivernale",
-    "it": "Approvato: H2 Airolo <-> Göschenen Passo Passo del S. Gottardo Situazione: chiusa Causa: chiusura invernale"
-   }
-  }
- ]
+ "events": []
 }
