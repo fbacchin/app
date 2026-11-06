@@ -1,5 +1,5 @@
 {
- "time": "2026-11-06T11:35:03Z",
+ "time": "2026-11-06T11:40:04Z",
  "south": {
   "km": 1.0,
   "wait": null
@@ -20,19 +20,6 @@
     "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 1.0",
     "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 1.0",
     "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 1.0"
-   }
-  },
-  {
-   "id": "situation.665251.1.1.1",
-   "type": "RoadOrCarriagewayOrLaneManagement",
-   "direction": "south",
-   "versionTime": "2026-11-06T11:23:34Z",
-   "km": null,
-   "wait": null,
-   "texts": {
-    "de": "Freigegeben: A2 Gotthard -> Chiasso Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Pannenfahrzeug",
-    "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: véhicule en panne",
-    "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: veicolo in avaria"
    }
   }
  ]
