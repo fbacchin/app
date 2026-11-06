@@ -155,21 +155,5 @@
    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Coldrerio E Parcheggio Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato"
   },
   "lastSeen": "2026-11-04T09:20:04Z"
- },
- {
-  "firstSeen": "2026-11-04T08:10:04Z",
-  "id": "situation.664473.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "south",
-  "versionTime": "2026-11-04T08:09:37Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Autobahndreieck Verzweigung Altdorf und Anschluss Erstfeld Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
-   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Echangeur Echangeur d'Altdorf et Jonction autoroutière Erstfeld Situation: danger Raison: objets sur la chaussée",
-   "it": "Approvato: A2 Luzern -> S. Gottardo tra Raccordo autostradale Diramazione Altdorf E Svincolo autostradale Erstfeld Situazione: pericolo Causa: oggetto sulla strada"
-  },
-  "lastSeen": "2026-11-04T08:10:04Z",
-  "revokedAt": "2026-11-04T08:15:05Z"
  }
 ]
