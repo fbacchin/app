@@ -804,6 +804,58 @@ ok("latest.json: la prossima chiusura e' la prima che comincia dopo adesso",
 ok("  nessuna chiusura annunciata: prossima e' null",
    c.blocco_tunnel(dict(_t, prossime=[]), _ott(16))["prossima"] is None)
 
+# --- soglia personale «parti ora» (ADEV-801) -------------------------------
+def attese(*minuti, dir="south"):
+    """Un giro ogni 5 minuti con queste attese; le push «parti ora», in inglese."""
+    with tempfile.TemporaryDirectory() as dd:
+        c.HISTORY_FILE = Path(dd) / "history.json"
+        inviate.clear()
+        for i, m in enumerate(minuti):
+            st = {"south": coda(), "north": coda()}
+            st[dir] = coda(minuti=m)
+            c.update_avvisi_attesa(st, ADESSO + timedelta(minutes=5 * i))
+        return [(t, d) for t, d in inviate if _lingua(d) == "en"]
+
+def soglia_di(dove):
+    return next(x["pushAttesaMin"] for x in dove["$and"] if "pushAttesaMin" in x)
+
+d = c.destinatari(attesa=30, direzione="south")
+ok("soglia personale: va solo a chi l'ha scelta, l'assenza vale no",
+   {"pushAttesaMin": 30} in condizioni(d)
+   and not any("pushAttesaMin" in json.dumps(x) and "$exists" in json.dumps(x) for x in condizioni(d)))
+fatte = attese(40, 40, 30, 30, 30)
+ok("da 40 a 30: una push a chi ha scelto 30, dopo 10 minuti sotto soglia",
+   [soglia_di(x[1]) for x in fatte] == [30] and fatte[0][0] == "🟢 Southbound: wait below 30 min · now ~30 min")
+ok("  e non prima: con 5 minuti sotto soglia niente", attese(40, 30, 30) == [])
+ok("  in cinque lingue",
+   c.testi_attesa_sotto_soglia("north", 40, 30)["it"] == "🟢 Verso nord: attesa sotto 40 min · ora ~30 min"
+   and sorted(c.testi_attesa_sotto_soglia("north", 40, 30)) == ["de", "en", "fr", "it", "nl"])
+ok("un'attesa mai sopra la soglia non avvisa", attese(30, 20, 10, 10, 10) == [])
+ok("un valore basso isolato non avvisa", attese(50, 30, 50, 50) == [])
+fatte = attese(50, 30, 40, 30, 30, 30, 40, 30, 30, 30)
+ok("un'attesa che oscilla: al massimo una push per soglia",
+   sorted(soglia_di(x[1]) for x in fatte) == [30, 40])
+fatte = attese(50, 0, 0, 0)
+ok("l'attesa che sparisce: avvisa senza scrivere «~0 min»",
+   fatte and all(x[0].endswith("no queue reported") for x in fatte))
+fatte = attese(50, 30, 30, 30, 0, 0, 0, 0, 0, 0, 50, 30, 30, 30)
+ok("dopo 20 minuti a zero la coda e' finita: la coda nuova riavvisa",
+   [soglia_di(x[1]) for x in fatte].count(30) == 2)
+fatte = attese(50, 30, 30, 30, 0, 0, 50, 30, 30, 30)
+ok("  ma 10 minuti a zero non bastano: niente doppione", [soglia_di(x[1]) for x in fatte].count(30) == 1)
+fatte = attese(70, 50, 50, 50, dir="north")
+ok("la direzione arriva nel filtro", fatte and all(
+   {"$or": [{"pushDirezione": "both"}, {"pushDirezione": {"$exists": False}}, {"pushDirezione": "north"}]}
+   in x[1]["$and"] for x in fatte) and [soglia_di(x[1]) for x in fatte] == [60])
+with tempfile.TemporaryDirectory() as dd:
+    c.HISTORY_FILE = Path(dd) / "history.json"
+    st = {"south": coda(km=3, minuti=40), "north": coda()}
+    c.update_notifications(st, ADESSO)
+    c.update_avvisi_attesa(st, ADESSO)
+    salvato = json.loads((Path(dd) / "push-state.json").read_text())
+ok("lo stato della soglia non calpesta quello delle code in km",
+   salvato["south"].get("soglieAvvisate") and salvato["attesa"]["south"].get("armate") == [30])
+
 n = sum(1 for _, e in prove if e)
 print("=== collector: corridoio, chiusura, push ===")
 for nome, esito in prove:

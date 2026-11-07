@@ -24,7 +24,7 @@ notifiche push automatiche quando si forma una coda.
 | `history.json` | Finestra mobile di 48h di campioni (attesa in minuti per direzione) | Il grafico 6/12/24h dell'app — **unica fonte**, i campioni locali sono stati aboliti (01.08.2026) |
 | `latest.json` | Ultimo stato completo + eventi in tutte le lingue del feed + blocco `tunnel` (chiuso adesso, direzione, fino, testi, prossima chiusura annunciata) | Fallback dell'app quando la chiamata diretta fallisce, **seme** della tenuta anti-lampeggio all'avvio a freddo, e fonte del widget (ADEV-800): gli `events` tengono solo 12 ore e non portano le chiusure programmate |
 | `alerts.json` | Archivio degli avvisi ufficiali per `id`, con `firstSeen`/`lastSeen`/`revokedAt` — finestra 48h dall'ultimo avvistamento | Lista avvisi dell'app (ripiego quando il feed tace) e storico che la fonte non conserva |
-| `push-state.json` | Fase corrente per direzione (clear/queued/heavy) e timestamp ultimo invio | Il collector stesso, per non ri-notificare |
+| `push-state.json` | Stato degli avvisi per direzione (soglie in km avvisate, fine coda), del tunnel, dei preavvisi di chiusura e, sotto `attesa`, della soglia personale «parti ora» (ADEV-801: soglie armate, avvisate, da quando sotto soglia) | Il collector stesso, per non ri-notificare |
 
 Gli URL letti dall'app sono cablati in `APIConfig.swift`
 (`raw.githubusercontent.com/fbacchin/app/main/gotthard/data/…`).
