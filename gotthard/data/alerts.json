@@ -61,21 +61,5 @@
    "it": "Approvato: H2 Airolo <-> Göschenen Passo Passo del S. Gottardo Situazione: chiusa Causa: chiusura invernale"
   },
   "lastSeen": "2026-11-06T00:50:02Z"
- },
- {
-  "firstSeen": "2026-11-03T11:05:03Z",
-  "id": "situation.663962.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": null,
-  "versionTime": "2026-11-05T10:00:54Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: Ulrichen <-> Airolo zwischen Ortschaft All'Acqua und Ortschaft Ulrichen Sachlage: Strecke gesperrt Ursache: Schneefall Dauer:  voraussichtlich 05.11.2026 18:00",
-   "fr": "Libéré: Ulrichen <-> Airolo entre Localité All'Acqua et Localité Ulrichen Situation: fermé Raison: chutes de neige Durée:  probable 05.11.2026 18:00",
-   "it": "Approvato: Ulrichen <-> Airolo tra Luogo All'Acqua E Luogo Ulrichen Situazione: chiusa Causa: nevicata Durata:  probabile 05.11.2026 18:00"
-  },
-  "lastSeen": "2026-11-05T18:00:04Z",
-  "revokedAt": "2026-11-05T18:05:03Z"
  }
 ]
