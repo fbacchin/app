@@ -789,6 +789,21 @@ fatte = preavvisi(([_RICORRENTE], _ott(17)))
 ok("ricorrente: solo a chi l'ha chiesta (campo assente = no)",
    len(fatte) == 5 and all({"pushChiusureRicorrenti": True} in d["$and"] for _, d in fatte))
 
+# --- il blocco tunnel di latest.json (widget, ADEV-800) -------------------
+b = c.blocco_tunnel(leggi(CHIUSURA_ORA)[4], ADESSO)
+ok("latest.json: la chiusura in vigore risulta chiusa, con i testi della fonte",
+   b["chiuso"] is True and b["testi"].get("it"))
+ok("  ed e' serializzabile", json.loads(json.dumps(b)) == b)
+b = c.blocco_tunnel(leggi(CANTIERE_PROGRAMMATO)[4], ADESSO)
+ok("latest.json: il cantiere programmato non risulta chiuso", b["chiuso"] is False and b["testi"] == {})
+_t = {"chiuso": False, "revocato": False, "direzione": None, "testo": None, "testi": {}, "fino": None,
+      "prossime": [dict(_PROSSIMA, inizio=_ott(23)), _PROSSIMA, dict(_PROSSIMA, inizio=_ott(10))]}
+b = c.blocco_tunnel(_t, _ott(16))
+ok("latest.json: la prossima chiusura e' la prima che comincia dopo adesso",
+   b["prossima"]["inizio"] == "2026-10-14T21:00:00Z" and json.loads(json.dumps(b)) == b)
+ok("  nessuna chiusura annunciata: prossima e' null",
+   c.blocco_tunnel(dict(_t, prossime=[]), _ott(16))["prossima"] is None)
+
 n = sum(1 for _, e in prove if e)
 print("=== collector: corridoio, chiusura, push ===")
 for nome, esito in prove:

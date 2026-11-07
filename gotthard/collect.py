@@ -1595,6 +1595,33 @@ def hold_events(fresh, alerts, now):
     return out[:20]
 
 
+def blocco_tunnel(tunnel, now):
+    """Lo stato del tunnel per latest.json (widget, ADEV-800).
+
+    Gli `events` non bastano: ci entrano solo i messaggi aggiornati da meno di
+    12 ore, e le chiusure programmate sono pubblicate giorni prima — nelle
+    notti di chiusura del 15-17.09.2026 `events` era vuoto. Qui va quello che
+    extract() ha gia' deciso dalla fonte, senza logica nuova: chiusa adesso,
+    in che senso, fino a che ora, e la prossima chiusura annunciata.
+    """
+    iso = lambda t: t.isoformat().replace("+00:00", "Z") if t else None
+    future = sorted((p for p in tunnel["prossime"] if p["inizio"] > now),
+                    key=lambda p: p["inizio"])
+    prossima = future[0] if future else None
+    return {
+        "chiuso": tunnel["chiuso"],
+        "direzione": tunnel["direzione"] if tunnel["chiuso"] else None,
+        "fino": tunnel["fino"] if tunnel["chiuso"] else None,
+        "testi": tunnel["testi"] if tunnel["chiuso"] else {},
+        "prossima": {
+            "inizio": iso(prossima["inizio"]),
+            "fine": iso(prossima.get("fine")),
+            "direzione": prossima["direzione"],
+            "testi": prossima.get("testi") or {},
+        } if prossima else None,
+    }
+
+
 def main():
     api_key = os.environ.get("OTD_API_KEY", "").strip()
     if not api_key:
@@ -1652,6 +1679,7 @@ def main():
         "south": state["south"],
         "north": state["north"],
         "events": latest_events,
+        "tunnel": blocco_tunnel(tunnel, now),
     }
 
     (HISTORY_FILE.parent / "latest.json").write_text(
