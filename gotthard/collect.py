@@ -290,6 +290,10 @@ HOLD_WINDOW = timedelta(minutes=60)
 # conviene piu': si aspetta la galleria. Vale per ogni coda che li ha superati,
 # anche di poco, non solo per quelle lunghe.
 ATTESA_IN_FINALE_MIN = 20
+# Dal 07.11.2026 (ADEV-801, decisione dell'utente) la soglia la sceglie chi
+# riceve: 10, 20 o 30 minuti, nel campo `pushAttesaMin` dell'installazione.
+# Chi non l'ha scelta resta a 20, cioe' come prima.
+SOGLIE_FINALE = [10, 20, 30]
 
 HISTORY_FILE = Path(__file__).parent / "data" / "history.json"
 WINDOW = timedelta(hours=48)
@@ -863,9 +867,10 @@ def destinatari(soglie=None, direzione=None, chiusure=False, ricorrenti=False, a
                                    {"pushDirezione": {"$exists": False}},
                                    {"pushDirezione": direzione}]})
     if attesa is not None:
-        # Soglia personale «parti ora» (ADEV-801): l'assenza vale NO, come per
-        # le ricorrenti. E' una scelta esplicita, e chi non ha la 1.7 non l'ha.
-        condizioni.append({"pushAttesaMin": attesa})
+        varianti = [{"pushAttesaMin": attesa}]
+        if attesa == ATTESA_IN_FINALE_MIN:  # chi non ha scelto: come prima
+            varianti.append({"pushAttesaMin": {"$exists": False}})
+        condizioni.append({"$or": varianti})
     if ricorrenti:
         # Al contrario delle altre preferenze, qui l'assenza vale NO: chi non
         # ha la 1.6.1 non ha mai visto la scelta, e un avviso ogni sera per un
@@ -1001,31 +1006,6 @@ CODA_FINITA = {
 }
 
 
-# «Parti ora» (ADEV-801): l'attesa e' scesa sotto la soglia personale.
-ATTESA_SOTTO_SOGLIA = {
-    "it": "🟢 {dir}: attesa sotto {soglia} min · ora ~{wait} min",
-    "de": "🟢 {dir}: Wartezeit unter {soglia} Min. · jetzt ~{wait} Min.",
-    "fr": "🟢 {dir} : attente sous {soglia} min · maintenant ~{wait} min",
-    "en": "🟢 {dir}: wait below {soglia} min · now ~{wait} min",
-    "nl": "🟢 {dir}: wachttijd onder {soglia} min · nu ~{wait} min",
-}
-# Quando l'attesa e' scesa a zero: «~0 min» non e' un'informazione.
-ATTESA_SPARITA = {
-    "it": "🟢 {dir}: attesa sotto {soglia} min · nessuna coda segnalata",
-    "de": "🟢 {dir}: Wartezeit unter {soglia} Min. · kein Stau gemeldet",
-    "fr": "🟢 {dir} : attente sous {soglia} min · aucun bouchon signalé",
-    "en": "🟢 {dir}: wait below {soglia} min · no queue reported",
-    "nl": "🟢 {dir}: wachttijd onder {soglia} min · geen file gemeld",
-}
-
-
-def testi_attesa_sotto_soglia(direction, soglia, wait):
-    """Il testo della notifica «parti ora», uno per lingua."""
-    modello = ATTESA_SOTTO_SOGLIA if wait else ATTESA_SPARITA
-    return {lingua: modello[lingua].format(dir=DIREZIONE_PUSH[lingua][direction], soglia=soglia, wait=wait)
-            for lingua in LINGUE_PUSH}
-
-
 # La coda sta per finire: stesso stile, la clessidra al posto del semaforo.
 CODA_IN_FINALE = {
     "it": "⏳ {dir}: la coda sta per finire · attesa ~{wait} min",
@@ -1096,10 +1076,14 @@ def update_notifications(state, now):
             avvisate = [s for s in SOGLIE_KM if km >= s]
         clear_since = parse_time(entry.get("clearSince") or "")
         last_sent = parse_time(entry.get("lastSent") or "")
-        # «Sta per finire»: se in questo episodio l'attesa e' stata sopra la
-        # soglia, e se l'avviso e' gia' partito. Una volta sola per episodio.
-        sopra_finale = bool(entry.get("sopraFinale"))
-        finale_avvisato = bool(entry.get("finaleAvvisato"))
+        # «Sta per finire»: per ogni soglia, se in questo episodio l'attesa e'
+        # stata sopra, e se l'avviso e' gia' partito. Una volta sola per
+        # episodio e per soglia. Fino al 07.11.2026 erano due booleani della
+        # sola soglia a 20: un episodio in corso al rilascio li porta ancora.
+        def _soglie(v):
+            return {ATTESA_IN_FINALE_MIN} if v is True else {x for x in (v or []) if x in SOGLIE_FINALE}
+        sopra_finale = _soglie(entry.get("sopraFinale"))
+        finale_avvisato = _soglie(entry.get("finaleAvvisato"))
 
         # Da quando la coda e' sotto soglia, a prescindere dagli invii: se
         # risale, la fine non era reale e il conteggio riparte da zero.
@@ -1118,18 +1102,20 @@ def update_notifications(state, now):
                 avvisate.append(soglia)
                 last_sent = now
 
-        # 1b. la coda sta per finire: l'attesa scende a ATTESA_IN_FINALE_MIN
-        #     dopo esserci stata sopra. Solo a chi era stato avvisato della
-        #     coda, come la fine. Una coda che sparisce di colpo non lo manda:
-        #     arriva direttamente «coda finita».
-        if avvisate and wait > ATTESA_IN_FINALE_MIN:
-            sopra_finale = True
-        if (avvisate and sopra_finale and not finale_avvisato
-                and 0 < wait <= ATTESA_IN_FINALE_MIN and km >= FINE_CODA_KM):
-            if send_push_per_lingua(testi_coda_in_finale(direction, wait),
-                                    destinatari(soglie=sorted(avvisate), direzione=direction)):
-                finale_avvisato = True
-                last_sent = now
+        # 1b. la coda sta per finire: l'attesa scende alla soglia scelta (10,
+        #     20 o 30 minuti) dopo esserci stata sopra. Solo a chi era stato
+        #     avvisato della coda, come la fine. Una coda che sparisce di colpo
+        #     non lo manda: arriva direttamente «coda finita».
+        for soglia in SOGLIE_FINALE:
+            if avvisate and wait > soglia:
+                sopra_finale.add(soglia)
+            if (avvisate and soglia in sopra_finale and soglia not in finale_avvisato
+                    and 0 < wait <= soglia and km >= FINE_CODA_KM):
+                if send_push_per_lingua(testi_coda_in_finale(direction, wait),
+                                        destinatari(soglie=sorted(avvisate), direzione=direction,
+                                                    attesa=soglia)):
+                    finale_avvisato.add(soglia)
+                    last_sent = now
 
         # 2. la fine, solo a chi era stato avvisato dell'inizio. Annunciare la
         #    fine di una coda a chi non sapeva che ci fosse e' rumore puro.
@@ -1140,7 +1126,7 @@ def update_notifications(state, now):
                 clear_since = None
                 last_sent = now
         if not avvisate:  # episodio finito (o mai iniziato): si riparte da zero
-            sopra_finale = finale_avvisato = False
+            sopra_finale, finale_avvisato = set(), set()
 
         new_entry = {
             "soglieAvvisate": sorted(avvisate),
@@ -1149,79 +1135,11 @@ def update_notifications(state, now):
         if clear_since is not None:
             new_entry["clearSince"] = clear_since.isoformat().replace("+00:00", "Z")
         if sopra_finale:
-            new_entry["sopraFinale"] = True
+            new_entry["sopraFinale"] = sorted(sopra_finale)
         if finale_avvisato:
-            new_entry["finaleAvvisato"] = True
+            new_entry["finaleAvvisato"] = sorted(finale_avvisato)
         push_state[direction] = new_entry
 
-    state_file.write_text(json.dumps(push_state, indent=1))
-
-
-# --- soglia personale «parti ora» (ADEV-801, regola approvata il 07.11.2026) ---
-# Elenco chiuso come i km. Di dieci in dieci perche' la fonte da' l'attesa a
-# passi di 10 minuti; niente 20, che e' gia' «sta per finire».
-SOGLIE_ATTESA = [30, 40, 60]
-# L'attesa deve restare pari o sotto la soglia per questo tempo: un valore basso
-# isolato e' spesso il lampeggio del feed, non la coda che cala.
-CONFERMA_ATTESA = timedelta(minutes=10)
-
-
-def update_avvisi_attesa(state, now):
-    """Una push per soglia, per direzione e per coda, quando l'attesa scende.
-
-    Provata sullo storico 11.07-06.11.2026 (32.000 misure): senza regola fino a
-    4 push per la stessa coda, con la regola mai piu' di una e nessuna coda
-    persa. Per ogni soglia: si ARMA quando l'attesa la supera, PARTE quando resta
-    pari o sotto per CONFERMA_ATTESA, poi non riparte fino alla fine della coda
-    (attesa a zero per CLEAR_CONFIRM). Lo stato e' separato da quello delle code
-    in km: una coda di 300 metri all'area di dosaggio puo' valere 30 minuti.
-    """
-    state_file = HISTORY_FILE.parent / "push-state.json"
-    try:
-        push_state = json.loads(state_file.read_text())
-    except (FileNotFoundError, json.JSONDecodeError):
-        push_state = {}
-    tutto = push_state.get("attesa", {})
-    iso = lambda t: t.isoformat().replace("+00:00", "Z")
-
-    for direction in ("south", "north"):
-        wait = effective_wait(state[direction])
-        e = tutto.get(direction, {})
-        armate = {s for s in e.get("armate", []) if s in SOGLIE_ATTESA}
-        avvisate = {s for s in e.get("avvisate", []) if s in SOGLIE_ATTESA}
-        sotto = {int(k): parse_time(v) for k, v in e.get("sotto", {}).items()
-                 if int(k) in SOGLIE_ATTESA and parse_time(v)}
-        zero_dal = parse_time(e.get("zeroDal") or "")
-
-        for soglia in SOGLIE_ATTESA:
-            if wait > soglia:
-                armate.add(soglia)
-                sotto.pop(soglia, None)
-            elif soglia in armate and soglia not in avvisate:
-                sotto[soglia] = sotto.get(soglia) or now
-                if now - sotto[soglia] >= CONFERMA_ATTESA and send_push_per_lingua(
-                        testi_attesa_sotto_soglia(direction, soglia, wait),
-                        destinatari(attesa=soglia, direzione=direction)):
-                    avvisate.add(soglia)
-                    sotto.pop(soglia, None)
-
-        # Fine della coda: attesa a zero per CLEAR_CONFIRM, poi si riparte.
-        zero_dal = (zero_dal or now) if wait == 0 else None
-        if zero_dal and now - zero_dal >= CLEAR_CONFIRM:
-            armate, avvisate, sotto, zero_dal = set(), set(), {}, None
-
-        nuovo = {}
-        if armate:
-            nuovo["armate"] = sorted(armate)
-        if avvisate:
-            nuovo["avvisate"] = sorted(avvisate)
-        if sotto:
-            nuovo["sotto"] = {str(k): iso(v) for k, v in sorted(sotto.items())}
-        if zero_dal and (armate or avvisate):
-            nuovo["zeroDal"] = iso(zero_dal)
-        tutto[direction] = nuovo
-
-    push_state["attesa"] = tutto
     state_file.write_text(json.dumps(push_state, indent=1))
 
 
@@ -1745,7 +1663,6 @@ def main():
     hold_through_gaps(state, revocations, history, now)
 
     update_notifications(state, now)
-    update_avvisi_attesa(state, now)
     # Dopo le code, e da una rilettura fresca del file: la chiusura del tunnel
     # ha uno stato suo e non deve calpestare quello delle due direzioni.
     update_tunnel_notifications(tunnel, now)

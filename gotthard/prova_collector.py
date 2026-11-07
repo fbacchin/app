@@ -439,8 +439,15 @@ ok("in finale, in cinque lingue",
 def finale(*minuti):
     for i, m in enumerate(minuti):
         giro_code(coda(minuti=m), quando=ADESSO + timedelta(minutes=5 * i))
-def in_finale(fatte):
-    return [x for x in una_per_notifica(fatte) if "almost over" in x[0]]
+def soglia_finale(dove):
+    """La soglia «sta per finire» a cui era diretta una push (ADEV-801)."""
+    for cond in dove["$and"]:
+        for o in cond.get("$or", []):
+            if isinstance(o.get("pushAttesaMin"), int):
+                return o["pushAttesaMin"]
+def in_finale(fatte, soglia=20):
+    """Le «sta per finire» per chi ha la soglia predefinita, salvo altra scelta."""
+    return [x for x in una_per_notifica(fatte) if "almost over" in x[0] and soglia_finale(x[1]) == soglia]
 
 fatte = con_code(lambda: finale(40, 30, 20))
 ok("da 40 a 20 minuti: «sta per finire»", len(in_finale(fatte)) == 1
@@ -464,6 +471,30 @@ def due_episodi():
 fatte = con_code(due_episodi)
 ok("dopo «coda finita» un episodio nuovo la rimanda", len(in_finale(fatte)) == 2
    and any("cleared" in x[0] for x in una_per_notifica(fatte)))
+
+# --- «sta per finire» con soglia a scelta: 10, 20 o 30 minuti (ADEV-801) ---
+d = c.destinatari(soglie=[2], direzione="south", attesa=20)
+ok("soglia 20: rientra anche chi non ha scelto, cioe' chi ha l'app vecchia",
+   {"pushAttesaMin": {"$exists": False}} in condizioni(d)[-1]["$or"])
+d = c.destinatari(soglie=[2], direzione="south", attesa=30)
+ok("soglia 30: solo chi l'ha scelta", condizioni(d)[-1] == {"$or": [{"pushAttesaMin": 30}]})
+fatte = con_code(lambda: finale(40, 30, 20, 10))
+ok("da 40 a 10: una push per soglia, a 30, a 20 e a 10",
+   [soglia_finale(x[1]) for x in una_per_notifica(fatte) if "almost over" in x[0]] == [30, 20, 10])
+fatte = con_code(lambda: finale(40, 30, 40, 30, 20, 30, 20))
+ok("  e mai due volte la stessa soglia nella stessa coda",
+   sorted(soglia_finale(x[1]) for x in una_per_notifica(fatte) if "almost over" in x[0]) == [20, 30])
+fatte = con_code(lambda: finale(25, 15))
+ok("una coda mai sopra i 30 non avvisa chi ha scelto 30", in_finale(fatte, 30) == [])
+with tempfile.TemporaryDirectory() as dd:
+    c.HISTORY_FILE = Path(dd) / "history.json"
+    (Path(dd) / "push-state.json").write_text(json.dumps(
+        {"south": {"soglieAvvisate": [2, 4], "sopraFinale": True, "finaleAvvisato": True}}))
+    inviate.clear()
+    c.update_notifications({"south": coda(minuti=20), "north": coda()}, ADESSO)
+    ok("episodio in corso al rilascio: lo stato vecchio vale come soglia 20, niente doppione",
+       [x for x in inviate if "almost over" in x[0]] == []
+       and json.loads((Path(dd) / "push-state.json").read_text())["south"]["finaleAvvisato"] == [20])
 
 # --- il passaggio dallo schema vecchio di push-state.json ---
 def con_stato_vecchio(fase, km_ora):
@@ -803,58 +834,6 @@ ok("latest.json: la prossima chiusura e' la prima che comincia dopo adesso",
    b["prossima"]["inizio"] == "2026-10-14T21:00:00Z" and json.loads(json.dumps(b)) == b)
 ok("  nessuna chiusura annunciata: prossima e' null",
    c.blocco_tunnel(dict(_t, prossime=[]), _ott(16))["prossima"] is None)
-
-# --- soglia personale «parti ora» (ADEV-801) -------------------------------
-def attese(*minuti, dir="south"):
-    """Un giro ogni 5 minuti con queste attese; le push «parti ora», in inglese."""
-    with tempfile.TemporaryDirectory() as dd:
-        c.HISTORY_FILE = Path(dd) / "history.json"
-        inviate.clear()
-        for i, m in enumerate(minuti):
-            st = {"south": coda(), "north": coda()}
-            st[dir] = coda(minuti=m)
-            c.update_avvisi_attesa(st, ADESSO + timedelta(minutes=5 * i))
-        return [(t, d) for t, d in inviate if _lingua(d) == "en"]
-
-def soglia_di(dove):
-    return next(x["pushAttesaMin"] for x in dove["$and"] if "pushAttesaMin" in x)
-
-d = c.destinatari(attesa=30, direzione="south")
-ok("soglia personale: va solo a chi l'ha scelta, l'assenza vale no",
-   {"pushAttesaMin": 30} in condizioni(d)
-   and not any("pushAttesaMin" in json.dumps(x) and "$exists" in json.dumps(x) for x in condizioni(d)))
-fatte = attese(40, 40, 30, 30, 30)
-ok("da 40 a 30: una push a chi ha scelto 30, dopo 10 minuti sotto soglia",
-   [soglia_di(x[1]) for x in fatte] == [30] and fatte[0][0] == "🟢 Southbound: wait below 30 min · now ~30 min")
-ok("  e non prima: con 5 minuti sotto soglia niente", attese(40, 30, 30) == [])
-ok("  in cinque lingue",
-   c.testi_attesa_sotto_soglia("north", 40, 30)["it"] == "🟢 Verso nord: attesa sotto 40 min · ora ~30 min"
-   and sorted(c.testi_attesa_sotto_soglia("north", 40, 30)) == ["de", "en", "fr", "it", "nl"])
-ok("un'attesa mai sopra la soglia non avvisa", attese(30, 20, 10, 10, 10) == [])
-ok("un valore basso isolato non avvisa", attese(50, 30, 50, 50) == [])
-fatte = attese(50, 30, 40, 30, 30, 30, 40, 30, 30, 30)
-ok("un'attesa che oscilla: al massimo una push per soglia",
-   sorted(soglia_di(x[1]) for x in fatte) == [30, 40])
-fatte = attese(50, 0, 0, 0)
-ok("l'attesa che sparisce: avvisa senza scrivere «~0 min»",
-   fatte and all(x[0].endswith("no queue reported") for x in fatte))
-fatte = attese(50, 30, 30, 30, 0, 0, 0, 0, 0, 0, 50, 30, 30, 30)
-ok("dopo 20 minuti a zero la coda e' finita: la coda nuova riavvisa",
-   [soglia_di(x[1]) for x in fatte].count(30) == 2)
-fatte = attese(50, 30, 30, 30, 0, 0, 50, 30, 30, 30)
-ok("  ma 10 minuti a zero non bastano: niente doppione", [soglia_di(x[1]) for x in fatte].count(30) == 1)
-fatte = attese(70, 50, 50, 50, dir="north")
-ok("la direzione arriva nel filtro", fatte and all(
-   {"$or": [{"pushDirezione": "both"}, {"pushDirezione": {"$exists": False}}, {"pushDirezione": "north"}]}
-   in x[1]["$and"] for x in fatte) and [soglia_di(x[1]) for x in fatte] == [60])
-with tempfile.TemporaryDirectory() as dd:
-    c.HISTORY_FILE = Path(dd) / "history.json"
-    st = {"south": coda(km=3, minuti=40), "north": coda()}
-    c.update_notifications(st, ADESSO)
-    c.update_avvisi_attesa(st, ADESSO)
-    salvato = json.loads((Path(dd) / "push-state.json").read_text())
-ok("lo stato della soglia non calpesta quello delle code in km",
-   salvato["south"].get("soglieAvvisate") and salvato["attesa"]["south"].get("armate") == [30])
 
 n = sum(1 for _, e in prove if e)
 print("=== collector: corridoio, chiusura, push ===")
