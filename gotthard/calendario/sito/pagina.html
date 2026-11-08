@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendario Gottardo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800;900&family=Overpass+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ADEV-802: pagina privata per controllare e pubblicare i giorni critici.
+   Tipografia Overpass, nata dai cartelli stradali; verde dei cartelli
+   autostradali svizzeri per la testata; «molto critico» con le strisce delle
+   barriere di cantiere. Colori di direzione presi dal grafico dell'app. */
+:root {
+  --granito: #e9edeb;
+  --carta: #f7f9f8;
+  --inchiostro: #15201c;
+  --tenue: #5d6b65;
+  --linea: #cfd7d3;
+  --cartello: #1d6b47;
+  --cartello-testo: #ffffff;
+  --critico: #f0a93b;
+  --critico-testo: #2b1d05;
+  --molto: #c4352e;
+  --molto-testo: #ffffff;
+  --sud: #138fb0;
+  --nord: #b03c94;
+  --fuoco: #1d6b47;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --granito: #121816; --carta: #1a2220; --inchiostro: #e6ece9; --tenue: #93a39c;
+    --linea: #2c3834; --cartello: #1f7a50; --critico: #e9a23a; --critico-testo: #1f1503;
+    --molto: #d6463e; --sud: #3cb6d6; --nord: #d567b8; --fuoco: #6fd3a0; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --granito: #121816; --carta: #1a2220; --inchiostro: #e6ece9; --tenue: #93a39c;
+  --linea: #2c3834; --cartello: #1f7a50; --critico: #e9a23a; --critico-testo: #1f1503;
+  --molto: #d6463e; --sud: #3cb6d6; --nord: #d567b8; --fuoco: #6fd3a0; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--granito); color: var(--inchiostro);
+  font: 400 16px/1.5 "Overpass", system-ui, sans-serif;
+}
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--fuoco); outline-offset: 2px; }
+
+/* Testata: un cartello autostradale */
+.cartello {
+  background: var(--cartello); color: var(--cartello-testo);
+  padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px;
+  border-bottom: 4px solid color-mix(in srgb, var(--cartello) 70%, #000);
+}
+.cartello h1 { margin: 0; font-weight: 900; font-size: 26px; letter-spacing: .01em; line-height: 1; }
+.cartello h1 small { display: block; font: 600 12px/1.4 "Overpass Mono", monospace; letter-spacing: .08em; opacity: .8; text-transform: uppercase; }
+.direzioni { display: flex; gap: 6px; }
+.direzioni button {
+  border: 2px solid rgba(255,255,255,.55); background: transparent; color: #fff;
+  border-radius: 6px; padding: 6px 14px 4px; font-weight: 800; font-size: 17px; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+}
+.direzioni button[aria-pressed="true"] { background: #fff; color: var(--cartello); border-color: #fff; }
+.direzioni .freccia { font-size: 20px; line-height: 1; }
+.spazio { flex: 1; }
+.stato { font: 600 12px/1.3 "Overpass Mono", monospace; opacity: .85; text-align: right; }
+.pubblica {
+  background: #fff; color: var(--cartello); border: 0; border-radius: 6px;
+  padding: 9px 18px 7px; font-weight: 800; cursor: pointer;
+}
+.pubblica:disabled { opacity: .55; cursor: not-allowed; }
+
+main {
+  max-width: 1180px; margin: 0 auto; padding: 24px 16px 48px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 24px; align-items: start;
+}
+@media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+
+.mese { background: var(--carta); border: 1px solid var(--linea); border-radius: 10px; padding: 18px; }
+.mese header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.mese h2 { margin: 0; font-weight: 900; font-size: clamp(26px, 4vw, 38px); line-height: 1; text-wrap: balance; }
+.mese h2 .verso { font-weight: 600; font-size: .5em; color: var(--tenue); display: block; letter-spacing: .02em; }
+.nav { margin-left: auto; display: flex; gap: 6px; }
+.nav button {
+  width: 40px; height: 40px; border-radius: 8px; border: 1px solid var(--linea);
+  background: var(--granito); cursor: pointer; font-size: 18px; font-weight: 800;
+}
+.conti { font: 600 13px/1.4 "Overpass Mono", monospace; color: var(--tenue); margin: 0 0 12px; }
+
+.griglia { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.intest { font: 600 11px/1 "Overpass Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--tenue); padding: 4px 6px 6px; }
+.giorno {
+  position: relative; aspect-ratio: 1 / .92; min-width: 0;
+  border: 1px solid var(--linea); border-radius: 8px; background: var(--granito);
+  padding: 6px 8px; text-align: left; cursor: pointer; display: flex; flex-direction: column; overflow: hidden;
+}
+.giorno .num { font-weight: 900; font-size: clamp(18px, 2.6vw, 30px); line-height: 1; font-variant-numeric: tabular-nums; }
+.giorno .motivo { margin-top: auto; font-size: 11px; line-height: 1.2; font-weight: 600;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.giorno.vuoto { visibility: hidden; }
+.giorno.passato { opacity: .45; }
+.giorno.oggi { box-shadow: inset 0 0 0 3px var(--inchiostro); }
+.giorno.scelto { outline: 3px solid var(--fuoco); outline-offset: 2px; }
+.giorno.critico { background: var(--critico); border-color: transparent; color: var(--critico-testo); }
+/* La firma: il giorno molto critico come una barriera di cantiere */
+.giorno.molto {
+  border-color: transparent; color: var(--molto-testo);
+  background: repeating-linear-gradient(-45deg, var(--molto) 0 14px, color-mix(in srgb, var(--molto) 82%, #fff) 14px 28px);
+}
+.giorno.molto .num, .giorno.molto .motivo { text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+/* Angolo piegato: giorno cambiato a mano rispetto alla proposta */
+.giorno.cambiato::after {
+  content: ""; position: absolute; top: 0; right: 0; width: 0; height: 0;
+  border-style: solid; border-width: 0 16px 16px 0;
+  border-color: transparent var(--inchiostro) transparent transparent; opacity: .8;
+}
+@media (max-width: 560px) { .giorno .motivo { display: none; } .giorno { aspect-ratio: 1; padding: 5px; } }
+
+.legenda { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 16px; font-size: 13px; color: var(--tenue); }
+.legenda span { display: inline-flex; align-items: center; gap: 7px; }
+.campione { width: 18px; height: 18px; border-radius: 4px; border: 1px solid var(--linea); background: var(--granito); }
+.campione.critico { background: var(--critico); border-color: transparent; }
+.campione.molto { border-color: transparent; background: repeating-linear-gradient(-45deg, var(--molto) 0 4px, color-mix(in srgb, var(--molto) 82%, #fff) 4px 8px); }
+.campione.cambiato { position: relative; }
+.campione.cambiato::after { content: ""; position: absolute; top: 0; right: 0; border-style: solid; border-width: 0 8px 8px 0; border-color: transparent var(--inchiostro) transparent transparent; }
+
+/* Pannello del giorno */
+.pannello { background: var(--carta); border: 1px solid var(--linea); border-radius: 10px; padding: 18px; position: sticky; top: 16px; }
+@media (max-width: 900px) { .pannello { position: static; } }
+.pannello h3 { margin: 0; font-weight: 900; font-size: 24px; line-height: 1.1; }
+.pannello .sotto { margin: 2px 0 16px; color: var(--tenue); font-size: 14px; display: flex; align-items: center; gap: 8px; }
+.pallino { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.etichetta { font: 600 11px/1 "Overpass Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--tenue); margin: 18px 0 8px; }
+.livelli { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.livelli button {
+  border: 1px solid var(--linea); background: var(--granito); border-radius: 8px;
+  padding: 10px 6px 8px; font-weight: 800; font-size: 13px; cursor: pointer; line-height: 1.15;
+}
+.livelli button[aria-pressed="true"][data-livello="normale"] { background: var(--inchiostro); color: var(--carta); border-color: transparent; }
+.livelli button[aria-pressed="true"][data-livello="critico"] { background: var(--critico); color: var(--critico-testo); border-color: transparent; }
+.livelli button[aria-pressed="true"][data-livello="molto"] { background: var(--molto); color: var(--molto-testo); border-color: transparent; }
+.motivi { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.motivi li { border-left: 3px solid var(--linea); padding: 2px 0 2px 10px; font-size: 14px; line-height: 1.35; }
+.motivi a { color: var(--tenue); font-size: 12px; font-family: "Overpass Mono", monospace; }
+.proposta { font-size: 13px; color: var(--tenue); margin: 14px 0 0; }
+.ripristina { background: none; border: 0; padding: 0; color: var(--inchiostro); text-decoration: underline; cursor: pointer; font-size: 13px; }
+.vuoto-msg { color: var(--tenue); font-size: 14px; margin: 0; }
+.bozza { margin: 18px 0 0; padding: 10px 12px; border-radius: 8px; background: var(--granito); font-size: 12.5px; color: var(--tenue); line-height: 1.4; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .griglia.entra .giorno { animation: entra .28s ease-out both; animation-delay: calc(var(--i) * 8ms); }
+  @keyframes entra { from { opacity: 0; transform: translateY(4px); } }
+}
+</style>
+</head>
+<body>
+<div class="cartello">
+  <h1><small>Calendario giorni critici</small>Gottardo</h1>
+  <div class="direzioni" role="group" aria-label="Direzione">
+    <button type="button" data-dir="south" aria-pressed="true"><span class="freccia" aria-hidden="true">↓</span>Verso sud</button>
+    <button type="button" data-dir="north" aria-pressed="false"><span class="freccia" aria-hidden="true">↑</span>Verso nord</button>
+  </div>
+  <div class="spazio"></div>
+  <div class="stato" id="stato">Caricamento…</div>
+  <button class="pubblica" type="button" disabled>Pubblica</button>
+</div>
+
+<main>
+  <section class="mese" aria-labelledby="titolo-mese">
+    <header>
+      <h2 id="titolo-mese"></h2>
+      <div class="nav">
+        <button type="button" id="prima" aria-label="Mese precedente">‹</button>
+        <button type="button" id="dopo" aria-label="Mese successivo">›</button>
+      </div>
+    </header>
+    <p class="conti" id="conti"></p>
+    <div class="griglia" id="griglia" role="grid"></div>
+    <div class="legenda">
+      <span><i class="campione"></i>Nessun motivo</span>
+      <span><i class="campione critico"></i>Critico</span>
+      <span><i class="campione molto"></i>Molto critico</span>
+      <span><i class="campione cambiato"></i>Cambiato da te</span>
+    </div>
+  </section>
+
+  <aside class="pannello" aria-live="polite" id="pannello"></aside>
+</main>
+
+<script>
+// Pagina privata del calendario (ADEV-802). Dati da /api/stato; «Pubblica»
+// manda le correzioni a /api/pubblica, che scrive calendario.json su GitHub.
+const REGIONI = {
+  "DE-BW": "Baden-Württemberg", "DE-BY": "Baviera", "DE-NW": "Renania Sett.-Vestfalia", "DE-HE": "Assia",
+  "DE-RP": "Renania-Palatinato", "NL-N": "Paesi Bassi nord", "NL-M": "Paesi Bassi centro", "NL-Z": "Paesi Bassi sud",
+  "CH-ZH": "Zurigo", "CH-BE": "Berna", "CH-AG": "Argovia", "CH-LU": "Lucerna", "CH-SG": "San Gallo", "CH-BS": "Basilea Città",
+};
+const FESTE = { pasqua: "Pasqua", ascensione: "Ascensione", pentecoste: "Pentecoste", corpus_domini: "Corpus Domini",
+  festa_nazionale_ch: "Festa nazionale svizzera", ognissanti: "Ognissanti" };
+const testo = m => ({
+  inizio_ferie: () => `Inizio ${m.nome} · ${REGIONI[m.regione] ?? m.regione}`,
+  fine_ferie: () => `Fine ${m.nome} · ${REGIONI[m.regione] ?? m.regione}`,
+  festa: () => FESTE[m.festa] ?? m.festa,
+  alta_stagione: () => `Alta stagione: ferie in ${m.regioni} regioni`,
+  manuale: () => "Segnato a mano",
+}[m.tipo] ?? (() => m.tipo))();
+const breve = motivi => {
+  const f = motivi.find(m => m.tipo === "festa"); if (f) return testo(f);
+  const ferie = motivi.filter(m => m.tipo.endsWith("_ferie"));
+  if (ferie.length) return `${ferie[0].tipo === "inizio_ferie" ? "Inizio" : "Fine"} ferie · ${new Set(ferie.map(m => m.regione)).size} reg.`;
+  return motivi[0] ? testo(motivi[0]) : "";
+};
+
+const NOMI = { normale: "Nessun motivo", critico: "Critico", molto: "Molto critico" };
+const MESI = ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"];
+const GIORNI = ["lun","mar","mer","gio","ven","sab","dom"];
+const oggi = new Date(); oggi.setHours(0,0,0,0);
+const chiave = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+
+let dir = "south", mese = new Date(oggi.getFullYear(), oggi.getMonth(), 1), scelto = chiave(oggi);
+let proposta = { south: {}, north: {} };          // data -> giorno della proposta
+let salvate = { south: {}, north: {} };           // correzioni gia' pubblicate
+let correzioni = { south: {}, north: {} };        // correzioni in corso
+let pubblicato = null;
+
+const daProposta = k => proposta[dir][k]?.livello === "molto critico" ? "molto" : proposta[dir][k] ? "critico" : "normale";
+const livello = k => correzioni[dir][k] ?? daProposta(k);
+const motiviDi = k => proposta[dir][k]?.motivi ?? (livello(k) !== "normale" ? [{ tipo: "manuale" }] : []);
+
+async function carica() {
+  const r = await fetch("/api/stato", { cache: "no-store" });
+  const j = await r.json();
+  if (!r.ok) throw new Error(j.errore ?? r.status);
+  proposta = { south: {}, north: {} };
+  for (const g of j.proposta) proposta[g.direzione][g.data] = g;
+  salvate = { south: { ...j.correzioni.south }, north: { ...j.correzioni.north } };
+  correzioni = structuredClone(salvate);
+  pubblicato = j.pubblicato;
+}
+
+function disegna() {
+  document.querySelectorAll(".direzioni button").forEach(b => b.setAttribute("aria-pressed", b.dataset.dir === dir));
+  document.getElementById("titolo-mese").innerHTML =
+    `${MESI[mese.getMonth()]} ${mese.getFullYear()}<span class="verso">${dir === "south" ? "↓ Verso sud · Göschenen → Airolo" : "↑ Verso nord · Airolo → Göschenen"}</span>`;
+  const g = document.getElementById("griglia");
+  g.innerHTML = GIORNI.map(n => `<div class="intest" role="columnheader">${n}</div>`).join("");
+  const primo = (mese.getDay() + 6) % 7;
+  for (let i = 0; i < primo; i++) g.insertAdjacentHTML("beforeend", `<div class="giorno vuoto"></div>`);
+  let critici = 0, molti = 0;
+  const giorniMese = new Date(mese.getFullYear(), mese.getMonth() + 1, 0).getDate();
+  for (let n = 1; n <= giorniMese; n++) {
+    const d = new Date(mese.getFullYear(), mese.getMonth(), n), k = chiave(d), l = livello(k);
+    if (l === "critico") critici++; if (l === "molto") molti++;
+    const classi = ["giorno", l === "critico" ? "critico" : l === "molto" ? "molto" : "",
+      d < oggi ? "passato" : "", k === chiave(oggi) ? "oggi" : "", k === scelto ? "scelto" : "",
+      k in correzioni[dir] ? "cambiato" : ""].filter(Boolean).join(" ");
+    g.insertAdjacentHTML("beforeend",
+      `<button type="button" class="${classi}" data-k="${k}" style="--i:${n}" aria-label="${n} ${MESI[mese.getMonth()]}: ${NOMI[l]}">
+        <span class="num">${n}</span>${l !== "normale" ? `<span class="motivo">${breve(motiviDi(k))}</span>` : ""}
+      </button>`);
+  }
+  g.classList.remove("entra"); void g.offsetWidth; g.classList.add("entra");
+  document.getElementById("conti").textContent =
+    `${molti} molto critic${molti === 1 ? "o" : "i"} · ${critici} critic${critici === 1 ? "o" : "i"} in questo mese`;
+  g.querySelectorAll("button.giorno").forEach(b => b.onclick = () => { scelto = b.dataset.k; disegna(); });
+  pannello(); aggiornaStato();
+}
+
+function pannello() {
+  const d = new Date(scelto + "T00:00"), l = livello(scelto), proposto = daProposta(scelto), motivi = motiviDi(scelto);
+  const p = document.getElementById("pannello");
+  p.innerHTML = `
+    <h3>${GIORNI[(d.getDay()+6)%7]} ${d.getDate()} ${MESI[d.getMonth()].toLowerCase()}</h3>
+    <p class="sotto"><span class="pallino" style="background:var(--${dir === "south" ? "sud" : "nord"})"></span>${dir === "south" ? "Verso sud" : "Verso nord"}</p>
+    <div class="etichetta">Livello</div>
+    <div class="livelli" role="group" aria-label="Livello del giorno">
+      ${["normale","critico","molto"].map(x => `<button type="button" data-livello="${x}" aria-pressed="${x === l}">${NOMI[x]}</button>`).join("")}
+    </div>
+    <div class="etichetta">Motivi</div>
+    ${motivi.length ? `<ul class="motivi">${motivi.map(m => `<li>${testo(m)}${m.fonte ? `<br><a href="${m.fonte}" target="_blank" rel="noopener">fonte ufficiale</a>` : ""}</li>`).join("")}</ul>`
+                    : `<p class="vuoto-msg">Nessuna data ufficiale cade in questo giorno.</p>`}
+    <p class="proposta">Proposta automatica: <strong>${NOMI[proposto]}</strong>${
+      scelto in correzioni[dir] ? ` · <button type="button" class="ripristina" id="ripristina">Torna alla proposta</button>` : ""}</p>`;
+  p.querySelectorAll(".livelli button").forEach(b => b.onclick = () => {
+    if (b.dataset.livello === proposto) delete correzioni[dir][scelto]; else correzioni[dir][scelto] = b.dataset.livello;
+    disegna();
+  });
+  p.querySelector("#ripristina")?.addEventListener("click", () => { delete correzioni[dir][scelto]; disegna(); });
+}
+
+const daPubblicare = () => JSON.stringify(correzioni) !== JSON.stringify(salvate) || !pubblicato;
+function aggiornaStato(messaggio) {
+  const quando = pubblicato ? new Date(pubblicato).toLocaleString("it-CH", { dateStyle: "short", timeStyle: "short" }) : null;
+  document.getElementById("stato").textContent = messaggio ??
+    (daPubblicare() ? (quando ? "Modifiche da pubblicare" : "Mai pubblicato") : `Pubblicato ${quando}`);
+  document.querySelector(".pubblica").disabled = !daPubblicare();
+}
+
+document.querySelector(".pubblica").onclick = async () => {
+  const pulsante = document.querySelector(".pubblica");
+  pulsante.disabled = true; aggiornaStato("Pubblicazione in corso…");
+  try {
+    const r = await fetch("/api/pubblica", { method: "POST", headers: { "Content-Type": "application/json" },
+                                            body: JSON.stringify({ correzioni }) });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.errore ?? r.status);
+    salvate = structuredClone(correzioni); pubblicato = j.pubblicato;
+    aggiornaStato(`Pubblicato: ${j.giorni} giorni`);
+  } catch (e) {
+    aggiornaStato(`Pubblicazione non riuscita: ${e.message}. Riprova.`); pulsante.disabled = false;
+  }
+};
+document.querySelectorAll(".direzioni button").forEach(b => b.onclick = () => { dir = b.dataset.dir; disegna(); });
+document.getElementById("prima").onclick = () => { mese = new Date(mese.getFullYear(), mese.getMonth() - 1, 1); disegna(); };
+document.getElementById("dopo").onclick = () => { mese = new Date(mese.getFullYear(), mese.getMonth() + 1, 1); disegna(); };
+addEventListener("beforeunload", e => { if (JSON.stringify(correzioni) !== JSON.stringify(salvate)) e.preventDefault(); });
+carica().then(disegna).catch(e => { document.getElementById("stato").textContent = `Dati non caricati: ${e.message}. Ricarica la pagina.`; });
+</script>
+</body>
+</html>

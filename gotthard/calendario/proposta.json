@@ -1,0 +1,3140 @@
+[
+ {
+  "data": "2026-11-01",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Herbstferien 2026",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Herbstferien 2026",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "festa",
+    "festa": "ognissanti"
+   }
+  ]
+ },
+ {
+  "data": "2026-11-06",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Herbstferien 2026",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   }
+  ]
+ },
+ {
+  "data": "2026-11-07",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Herbstferien 2026",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   }
+  ]
+ },
+ {
+  "data": "2026-11-08",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Herbstferien 2026",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   }
+  ]
+ },
+ {
+  "data": "2026-12-18",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2026-12-19",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2026-12-22",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   }
+  ]
+ },
+ {
+  "data": "2026-12-23",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2026-12-23",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Winterferien 2026/27",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2026-12-24",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-24",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Winterferien 2026/27",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-25",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-25",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-26",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-26",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-27",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-27",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-28",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-28",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-29",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-29",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-30",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-30",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-31",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2026-12-31",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-01-01",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-01-01",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-01-02",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 13
+   }
+  ]
+ },
+ {
+  "data": "2027-01-02",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 13
+   }
+  ]
+ },
+ {
+  "data": "2027-01-03",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Kerstvakantie 2026/27",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 13
+   }
+  ]
+ },
+ {
+  "data": "2027-01-03",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 13
+   }
+  ]
+ },
+ {
+  "data": "2027-01-08",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Winterferien 2026/27",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   }
+  ]
+ },
+ {
+  "data": "2027-01-09",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Winterferien 2026/27",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   }
+  ]
+ },
+ {
+  "data": "2027-01-10",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Winterferien 2026/27",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   }
+  ]
+ },
+ {
+  "data": "2027-01-15",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   }
+  ]
+ },
+ {
+  "data": "2027-01-16",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   }
+  ]
+ },
+ {
+  "data": "2027-01-17",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Weihnachtsferien 2026/27",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   }
+  ]
+ },
+ {
+  "data": "2027-01-29",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sportferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Fasnachtsferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Winterferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien.html"
+   }
+  ]
+ },
+ {
+  "data": "2027-01-30",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sportferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Fasnachtsferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Winterferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien.html"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-05",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Winterferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien.html"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-05",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Frühjahrsferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Februar-Ferienwoche 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Fasnachts- und Sportferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-06",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Winterferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien.html"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-06",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Frühjahrsferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Februar-Ferienwoche 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Fasnachts- und Sportferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-07",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Winterferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien.html"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-12",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühjahrsferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Februar-Ferienwoche 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sportferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Fasnachtsferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-12",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sportferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-13",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühjahrsferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Februar-Ferienwoche 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sportferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Fasnachtsferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-13",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sportferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-14",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühjahrsferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Februar-Ferienwoche 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sportferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Fasnachtsferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-19",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Fasnachts- und Sportferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-19",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-20",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Fasnachts- und Sportferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-20",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-21",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Fasnachts- und Sportferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-26",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sportferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-27",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sportferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-02-28",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Voorjaarsvakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sportferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-03-19",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Frühjahrsferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-03-20",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Frühjahrsferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-03-25",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "festa",
+    "festa": "pasqua"
+   }
+  ]
+ },
+ {
+  "data": "2027-03-26",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   }
+  ]
+ },
+ {
+  "data": "2027-03-27",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "festa",
+    "festa": "pasqua"
+   }
+  ]
+ },
+ {
+  "data": "2027-03-29",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "festa",
+    "festa": "pasqua"
+   }
+  ]
+ },
+ {
+  "data": "2027-03-29",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   }
+  ]
+ },
+ {
+  "data": "2027-03-30",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-02",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühjahrsferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-03",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühjahrsferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-04",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühjahrsferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-09",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-09",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-10",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-10",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-11",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Osterferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-23",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-23",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-24",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-24",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-25",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-04-30",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-01",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-02",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Meivakantie 2027",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-05",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "festa",
+    "festa": "ascensione"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-07",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-08",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-09",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Frühlingsferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   },
+   {
+    "tipo": "festa",
+    "festa": "ascensione"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-15",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "festa",
+    "festa": "pentecoste"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-17",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "festa",
+    "festa": "pentecoste"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-17",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-18",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-21",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-22",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-23",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-26",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "festa",
+    "festa": "corpus_domini"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-28",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-29",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   }
+  ]
+ },
+ {
+  "data": "2027-05-30",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Pfingstferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "festa",
+    "festa": "corpus_domini"
+   }
+  ]
+ },
+ {
+  "data": "2027-06-25",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   }
+  ]
+ },
+ {
+  "data": "2027-06-26",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   }
+  ]
+ },
+ {
+  "data": "2027-07-02",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-07-03",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-07-09",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Zomervakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-07-10",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Zomervakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   }
+  ]
+ },
+ {
+  "data": "2027-07-16",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Zomervakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-07-17",
+  "direzione": "south",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-NW",
+    "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Zomervakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-07-19",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-07-19",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-07-20",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-07-20",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-07-21",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-07-21",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-07-22",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-07-22",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-07-23",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-07-23",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Zomervakantie 2027",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-07-24",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-07-24",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Zomervakantie 2027",
+    "regione": "NL-Z",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-07-25",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-07-25",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-07-26",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-07-26",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-07-27",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-07-27",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-07-28",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-07-28",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-07-29",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 13
+   }
+  ]
+ },
+ {
+  "data": "2027-07-29",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-BW",
+    "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 13
+   }
+  ]
+ },
+ {
+  "data": "2027-07-30",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 13
+   }
+  ]
+ },
+ {
+  "data": "2027-07-30",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 13
+   }
+  ]
+ },
+ {
+  "data": "2027-07-31",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 13
+   }
+  ]
+ },
+ {
+  "data": "2027-07-31",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "inizio_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-BY",
+    "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+   },
+   {
+    "tipo": "festa",
+    "festa": "festa_nazionale_ch"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 13
+   }
+  ]
+ },
+ {
+  "data": "2027-08-01",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "festa",
+    "festa": "festa_nazionale_ch"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 13
+   }
+  ]
+ },
+ {
+  "data": "2027-08-01",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 13
+   }
+  ]
+ },
+ {
+  "data": "2027-08-02",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-08-02",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-08-03",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-08-03",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-08-04",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-08-04",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-08-05",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-08-05",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-08-06",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-08-06",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 14
+   }
+  ]
+ },
+ {
+  "data": "2027-08-07",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-08-07",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-08-08",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-HE",
+    "fonte": "https://kultus.hessen.de/schulsystem/ferien/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "DE-RP",
+    "fonte": "https://bm.rlp.de/service/ferientermine"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-AG",
+    "fonte": "https://www.schule-aarau.ch/organisation/wie-wo-was/ferienplan"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-08-08",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 12
+   }
+  ]
+ },
+ {
+  "data": "2027-08-09",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-09",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-10",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-10",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-11",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-11",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-12",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-12",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-13",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-13",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-14",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-14",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-15",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-BE",
+    "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-LU",
+    "fonte": "https://volksschulbildung.lu.ch/-/media/Volksschulbildung/Dokumente/syst_schulen/ss_schulsystem/schulferien/feriendaten_volksschulen_kt_luzern.pdf"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-SG",
+    "fonte": "https://www.stadt.sg.ch/home/schule-bildung/Schulferien/_jcr_content/TeaserPar1/stsg_teaser_download/DownloadListPar/download.ocFile/sg.de.ics"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-BS",
+    "fonte": "https://data-bs.ch/stata/ed/schulferien/SchulferienBS.ics"
+   },
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-15",
+  "direzione": "south",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "alta_stagione",
+    "regioni": 11
+   }
+  ]
+ },
+ {
+  "data": "2027-08-20",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Zomervakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-08-21",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Zomervakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-08-22",
+  "direzione": "north",
+  "livello": "molto critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Zomervakantie 2027",
+    "regione": "NL-N",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   },
+   {
+    "tipo": "fine_ferie",
+    "nome": "Sommerferien 2027",
+    "regione": "CH-ZH",
+    "fonte": "https://data.stadt-zuerich.ch/dataset/ssd_schulferien/download/schulferien.csv"
+   }
+  ]
+ },
+ {
+  "data": "2027-08-27",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Zomervakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   }
+  ]
+ },
+ {
+  "data": "2027-08-28",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Zomervakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   }
+  ]
+ },
+ {
+  "data": "2027-08-29",
+  "direzione": "north",
+  "livello": "critico",
+  "motivi": [
+   {
+    "tipo": "fine_ferie",
+    "nome": "Zomervakantie 2027",
+    "regione": "NL-M",
+    "fonte": "https://www.rijksoverheid.nl/onderwerpen/schoolvakanties/overzicht-schoolvakanties-per-schooljaar/overzicht-schoolvakanties-2026-2027"
+   }
+  ]
+ }
+]
