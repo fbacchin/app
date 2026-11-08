@@ -20,6 +20,11 @@ from collections import defaultdict
 G = dt.timedelta(days=1)
 CRITICO, MOLTO = 1, 2
 ALTA_STAGIONE = 10
+# Regioni le cui ferie non passano dal Gottardo. La Baviera va in Italia dal
+# Brennero: nello storico l'inizio e la fine delle sue vacanze d'autunno
+# (30.10 e 6-8.11.2026) non hanno portato nessuna coda, mentre le ferie brevi
+# di Berna, Paesi Bassi nord e Baden-Wuerttemberg si' (decisione del 09.11).
+ESCLUSE = {"DE-BY"}
 
 
 def pasqua(anno):
@@ -96,6 +101,7 @@ def festivita(anno):
 
 
 def genera(ferie, da, a):
+    ferie = [f for f in ferie if f["regione"] not in ESCLUSE]
     giorni = defaultdict(lambda: {"livello": 0, "motivi": []})
 
     def segna(giorno, direzione, livello, voce):
@@ -172,6 +178,9 @@ def prova():
     assert r[("2026-08-16", "north")] == "critico" and r[("2026-08-30", "north")] == "critico"
     assert r[("2026-08-14", "north")] == "critico" and r[("2026-08-28", "north")] == "critico"
     assert ("2026-08-02", "south") not in r
+    baviera = [{"regione": "DE-BY", "nome": "Herbst", "inizio": "2026-11-02", "fine": "2026-11-06"}]
+    assert not [m for x in genera(baviera, dt.date(2026, 10, 1), dt.date(2026, 11, 30)) for m in x["motivi"]
+                if m["tipo"].endswith("_ferie")], "la Baviera non conta"
 
 
 if __name__ == "__main__":

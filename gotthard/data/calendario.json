@@ -1,5 +1,5 @@
 {
- "pubblicato": "2026-11-08T14:19:59Z",
+ "pubblicato": "2026-11-08T14:24:38Z",
  "giorni": [
   {
    "data": "2026-11-01",
@@ -207,12 +207,6 @@
     },
     {
      "tipo": "inizio_ferie",
-     "nome": "Weihnachtsferien 2026/27",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
-    {
-     "tipo": "inizio_ferie",
      "nome": "Winterferien 2026/27",
      "regione": "CH-BE",
      "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
@@ -230,21 +224,15 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
   {
    "data": "2026-12-24",
    "direzione": "south",
-   "livello": "molto critico",
+   "livello": "critico",
    "motivi": [
-    {
-     "tipo": "inizio_ferie",
-     "nome": "Weihnachtsferien 2026/27",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
     {
      "tipo": "inizio_ferie",
      "nome": "Winterferien 2026/27",
@@ -253,7 +241,7 @@
     },
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -264,7 +252,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -275,7 +263,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -286,7 +274,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -297,7 +285,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -308,7 +296,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -319,7 +307,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -330,7 +318,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -341,7 +329,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -352,7 +340,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -363,7 +351,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -374,7 +362,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -385,7 +373,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -396,7 +384,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -407,7 +395,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -466,7 +454,7 @@
     },
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -477,7 +465,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -536,7 +524,7 @@
     },
     {
      "tipo": "alta_stagione",
-     "regioni": 13
+     "regioni": 12
     }
    ]
   },
@@ -547,7 +535,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 13
+     "regioni": 12
     }
    ]
   },
@@ -606,7 +594,7 @@
     },
     {
      "tipo": "alta_stagione",
-     "regioni": 13
+     "regioni": 12
     }
    ]
   },
@@ -617,7 +605,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 13
+     "regioni": 12
     }
    ]
   },
@@ -631,12 +619,6 @@
      "nome": "Weihnachtsferien 2026/27",
      "regione": "DE-BW",
      "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
-    },
-    {
-     "tipo": "fine_ferie",
-     "nome": "Weihnachtsferien 2026/27",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
     },
     {
      "tipo": "fine_ferie",
@@ -672,12 +654,6 @@
     {
      "tipo": "fine_ferie",
      "nome": "Weihnachtsferien 2026/27",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
-    {
-     "tipo": "fine_ferie",
-     "nome": "Weihnachtsferien 2026/27",
      "regione": "DE-NW",
      "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
     },
@@ -705,12 +681,6 @@
      "nome": "Weihnachtsferien 2026/27",
      "regione": "DE-BW",
      "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
-    },
-    {
-     "tipo": "fine_ferie",
-     "nome": "Weihnachtsferien 2026/27",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
     },
     {
      "tipo": "fine_ferie",
@@ -841,12 +811,6 @@
    "motivi": [
     {
      "tipo": "inizio_ferie",
-     "nome": "Frühjahrsferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
-    {
-     "tipo": "inizio_ferie",
      "nome": "Februar-Ferienwoche 2027",
      "regione": "CH-BE",
      "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
@@ -879,12 +843,6 @@
    "motivi": [
     {
      "tipo": "inizio_ferie",
-     "nome": "Frühjahrsferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
-    {
-     "tipo": "inizio_ferie",
      "nome": "Februar-Ferienwoche 2027",
      "regione": "CH-BE",
      "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
@@ -915,12 +873,6 @@
    "direzione": "north",
    "livello": "molto critico",
    "motivi": [
-    {
-     "tipo": "fine_ferie",
-     "nome": "Frühjahrsferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
     {
      "tipo": "fine_ferie",
      "nome": "Februar-Ferienwoche 2027",
@@ -965,12 +917,6 @@
    "direzione": "north",
    "livello": "molto critico",
    "motivi": [
-    {
-     "tipo": "fine_ferie",
-     "nome": "Frühjahrsferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
     {
      "tipo": "fine_ferie",
      "nome": "Februar-Ferienwoche 2027",
@@ -1015,12 +961,6 @@
    "direzione": "north",
    "livello": "molto critico",
    "motivi": [
-    {
-     "tipo": "fine_ferie",
-     "nome": "Frühjahrsferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
     {
      "tipo": "fine_ferie",
      "nome": "Februar-Ferienwoche 2027",
@@ -1219,12 +1159,6 @@
     {
      "tipo": "inizio_ferie",
      "nome": "Osterferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
-    {
-     "tipo": "inizio_ferie",
-     "nome": "Osterferien 2027",
      "regione": "DE-NW",
      "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
     },
@@ -1253,12 +1187,6 @@
    "direzione": "south",
    "livello": "molto critico",
    "motivi": [
-    {
-     "tipo": "inizio_ferie",
-     "nome": "Osterferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
     {
      "tipo": "inizio_ferie",
      "nome": "Osterferien 2027",
@@ -1377,12 +1305,6 @@
     {
      "tipo": "fine_ferie",
      "nome": "Osterferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
-    {
-     "tipo": "fine_ferie",
-     "nome": "Osterferien 2027",
      "regione": "DE-NW",
      "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
     },
@@ -1420,12 +1342,6 @@
     {
      "tipo": "fine_ferie",
      "nome": "Osterferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
-    {
-     "tipo": "fine_ferie",
-     "nome": "Osterferien 2027",
      "regione": "DE-NW",
      "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
     },
@@ -1459,12 +1375,6 @@
      "nome": "Osterferien 2027",
      "regione": "DE-BW",
      "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
-    },
-    {
-     "tipo": "fine_ferie",
-     "nome": "Osterferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
     },
     {
      "tipo": "fine_ferie",
@@ -1883,12 +1793,6 @@
     {
      "tipo": "inizio_ferie",
      "nome": "Pfingstferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
-    {
-     "tipo": "inizio_ferie",
-     "nome": "Pfingstferien 2027",
      "regione": "DE-NW",
      "fonte": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
     }
@@ -1904,12 +1808,6 @@
      "nome": "Pfingstferien 2027",
      "regione": "DE-BW",
      "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
-    },
-    {
-     "tipo": "inizio_ferie",
-     "nome": "Pfingstferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
     },
     {
      "tipo": "inizio_ferie",
@@ -1972,57 +1870,39 @@
   {
    "data": "2027-05-28",
    "direzione": "north",
-   "livello": "molto critico",
+   "livello": "critico",
    "motivi": [
     {
      "tipo": "fine_ferie",
      "nome": "Pfingstferien 2027",
      "regione": "DE-BW",
      "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
-    },
-    {
-     "tipo": "fine_ferie",
-     "nome": "Pfingstferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
     }
    ]
   },
   {
    "data": "2027-05-29",
    "direzione": "north",
-   "livello": "molto critico",
+   "livello": "critico",
    "motivi": [
     {
      "tipo": "fine_ferie",
      "nome": "Pfingstferien 2027",
      "regione": "DE-BW",
      "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
-    },
-    {
-     "tipo": "fine_ferie",
-     "nome": "Pfingstferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
     }
    ]
   },
   {
    "data": "2027-05-30",
    "direzione": "north",
-   "livello": "molto critico",
+   "livello": "critico",
    "motivi": [
     {
      "tipo": "fine_ferie",
      "nome": "Pfingstferien 2027",
      "regione": "DE-BW",
      "fonte": "https://km.baden-wuerttemberg.de/de/service/ferien"
-    },
-    {
-     "tipo": "fine_ferie",
-     "nome": "Pfingstferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
     },
     {
      "tipo": "festa",
@@ -2501,12 +2381,6 @@
    "livello": "critico",
    "motivi": [
     {
-     "tipo": "inizio_ferie",
-     "nome": "Sommerferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
-    {
      "tipo": "alta_stagione",
      "regioni": 13
     }
@@ -2528,12 +2402,6 @@
    "direzione": "south",
    "livello": "critico",
    "motivi": [
-    {
-     "tipo": "inizio_ferie",
-     "nome": "Sommerferien 2027",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    },
     {
      "tipo": "festa",
      "festa": "festa_nazionale_ch"
@@ -2577,7 +2445,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -2588,7 +2456,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -2599,7 +2467,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -2610,7 +2478,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -2621,7 +2489,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -2632,7 +2500,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -2643,7 +2511,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -2654,7 +2522,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -2683,7 +2551,7 @@
     },
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -2694,7 +2562,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 14
+     "regioni": 13
     }
    ]
   },
@@ -2723,7 +2591,7 @@
     },
     {
      "tipo": "alta_stagione",
-     "regioni": 12
+     "regioni": 11
     }
    ]
   },
@@ -2734,7 +2602,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 12
+     "regioni": 11
     }
    ]
   },
@@ -2763,7 +2631,7 @@
     },
     {
      "tipo": "alta_stagione",
-     "regioni": 12
+     "regioni": 11
     }
    ]
   },
@@ -2774,7 +2642,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 12
+     "regioni": 11
     }
    ]
   },
@@ -2785,7 +2653,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -2796,7 +2664,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -2807,7 +2675,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -2818,7 +2686,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -2829,7 +2697,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -2840,7 +2708,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -2851,7 +2719,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -2862,7 +2730,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -2897,7 +2765,7 @@
     },
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -2908,7 +2776,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -2943,7 +2811,7 @@
     },
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -2954,7 +2822,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -2989,7 +2857,7 @@
     },
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
@@ -3000,7 +2868,7 @@
    "motivi": [
     {
      "tipo": "alta_stagione",
-     "regioni": 11
+     "regioni": 10
     }
    ]
   },
