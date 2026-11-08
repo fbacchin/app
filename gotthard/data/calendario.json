@@ -1,5 +1,5 @@
 {
- "pubblicato": "2026-11-08T14:07:47Z",
+ "pubblicato": "2026-11-08T14:19:59Z",
  "giorni": [
   {
    "data": "2026-11-01",
@@ -21,45 +21,6 @@
     {
      "tipo": "festa",
      "festa": "ognissanti"
-    }
-   ]
-  },
-  {
-   "data": "2026-11-06",
-   "direzione": "north",
-   "livello": "critico",
-   "motivi": [
-    {
-     "tipo": "fine_ferie",
-     "nome": "Herbstferien 2026",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    }
-   ]
-  },
-  {
-   "data": "2026-11-07",
-   "direzione": "north",
-   "livello": "critico",
-   "motivi": [
-    {
-     "tipo": "fine_ferie",
-     "nome": "Herbstferien 2026",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
-    }
-   ]
-  },
-  {
-   "data": "2026-11-08",
-   "direzione": "north",
-   "livello": "critico",
-   "motivi": [
-    {
-     "tipo": "fine_ferie",
-     "nome": "Herbstferien 2026",
-     "regione": "DE-BY",
-     "fonte": "https://www.km.bayern.de/ministerium/termine/ferientermine.html"
     }
    ]
   },
