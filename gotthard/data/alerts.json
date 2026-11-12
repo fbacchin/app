@@ -12,7 +12,7 @@
    "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Tunnel Tunnel Platti Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: bande d'arrêt d'urgence fermée Complément 1: limitation temporaire de largeur largeur de la voie [m] 7.0 Durée: durant la journée probable 19.11.2026 13:00 jusqu''à 19.11.2026 16:00",
    "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Galleria Galleria Platti Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsia d'emergenza chiusa Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 7.0 Durata: durante il giorno probabile 19.11.2026 13:00 fino 19.11.2026 16:00"
   },
-  "lastSeen": "2026-11-12T13:35:03Z"
+  "lastSeen": "2026-11-12T13:40:03Z"
  },
  {
   "firstSeen": "2026-11-12T06:45:02Z",
@@ -106,21 +106,5 @@
    "it": "Approvato: A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Coldrerio E Svincolo autostradale Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato"
   },
   "lastSeen": "2026-11-11T08:00:05Z"
- },
- {
-  "firstSeen": "2026-11-10T13:25:02Z",
-  "id": "situation.666155.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "south",
-  "versionTime": "2026-11-10T13:20:47Z",
-  "km": 1.0,
-  "wait": 10,
-  "texts": {
-   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Wassen und Anschluss Göschenen Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
-   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Wassen et Jonction autoroutière Göschenen Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
-   "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Wassen E Svincolo autostradale Göschenen Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10"
-  },
-  "lastSeen": "2026-11-10T13:35:04Z",
-  "revokedAt": "2026-11-10T13:40:04Z"
  }
 ]
