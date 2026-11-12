@@ -1,5 +1,20 @@
 [
  {
+  "firstSeen": "2026-11-12T05:55:02Z",
+  "id": "situation.666724.1.1.1",
+  "type": "AbnormalTraffic",
+  "direction": "south",
+  "versionTime": "2026-11-12T05:51:06Z",
+  "km": null,
+  "wait": null,
+  "texts": {
+   "de": "Freigegeben: A2 Luzern -> Gotthard zwischen Anschluss Erstfeld und Tunnel Platti-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Verkehrsführung: Pannenstreifen gesperrt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 7.0 Dauer: tagsüber voraussichtlich 19.11.2026 13:00 bis 19.11.2026 16:00",
+   "fr": "Libéré: A2 Lucerne -> St-Gothard entre Jonction autoroutière Erstfeld et Tunnel Tunnel Platti Situation: trafic perturbé travaux, longueur [km] 0.1 Gestion du trafic: bande d'arrêt d'urgence fermée Complément 1: limitation temporaire de largeur largeur de la voie [m] 7.0 Durée: durant la journée probable 19.11.2026 13:00 jusqu''à 19.11.2026 16:00",
+   "it": "Approvato: A2 Luzern -> S. Gottardo tra Svincolo autostradale Erstfeld E Galleria Galleria Platti Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Limitazione del traffico: corsia d'emergenza chiusa Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 7.0 Durata: durante il giorno probabile 19.11.2026 13:00 fino 19.11.2026 16:00"
+  },
+  "lastSeen": "2026-11-12T05:55:02Z"
+ },
+ {
   "firstSeen": "2026-11-11T13:25:02Z",
   "id": "situation.666470.1.1.1",
   "type": "AbnormalTraffic",
