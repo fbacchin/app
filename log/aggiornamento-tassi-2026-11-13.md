@@ -1,6 +1,6 @@
 # Aggiornamento tassi — 13/11/2026
 
-**Esecuzione:** 13/11/2026 17:30 UTC (GitHub Actions)
+**Esecuzione:** 13/11/2026 18:46 UTC (GitHub Actions)
 **Stato complessivo: SUCCESSO**
 
 | File | Nuove righe | Date aggiunte | Note |
