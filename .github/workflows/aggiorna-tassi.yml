@@ -1,0 +1,36 @@
+name: Aggiorna tassi
+
+on:
+  schedule:
+    - cron: "30 12 * * *"   # ogni giorno alle 12:30 UTC (13:30 o 14:30 in Svizzera)
+  workflow_dispatch:         # permette di lanciarlo a mano dal sito di GitHub
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aggiorna-tassi
+  cancel-in-progress: false
+
+jobs:
+  aggiorna:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scarica i tassi e aggiorna i CSV
+        run: python3 tools/aggiorna_tassi.py
+
+      - name: Commit e push se ci sono modifiche
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Euribor log
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica da pubblicare"
+          else
+            git commit -m "Aggiorna tassi $(date -u +%d.%m.%Y)"
+            git push
+          fi
