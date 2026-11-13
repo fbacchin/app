@@ -2,7 +2,10 @@ name: Aggiorna tassi
 
 on:
   schedule:
-    - cron: "30 12 * * *"   # ogni giorno alle 12:30 UTC (13:30 o 14:30 in Svizzera)
+    # GitHub usa solo l'ora UTC: lo stesso lavoro è programmato alle 11:00 e alle 12:00 UTC.
+    # Il primo passaggio lascia andare avanti solo quello che cade alle 13:00 in Svizzera.
+    - cron: "0 11 * * *"
+    - cron: "0 12 * * *"
   workflow_dispatch:         # permette di lanciarlo a mano dal sito di GitHub
 
 permissions:
@@ -17,13 +20,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Controlla se sono le 13 in Svizzera
+        id: ora
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ] && [ "$(TZ=Europe/Zurich date +%H)" != "13" ]; then
+            echo "Non sono le 13 in Svizzera: salto questa esecuzione"
+            echo "salta=1" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.ora.outputs.salta != '1'
 
       - name: Scarica i tassi e aggiorna i CSV
+        if: steps.ora.outputs.salta != '1'
         run: python3 tools/aggiorna_tassi.py
 
       - name: Commit e push se ci sono modifiche
-        if: always()
+        if: always() && steps.ora.outputs.salta != '1'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
