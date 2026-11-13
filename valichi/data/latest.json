@@ -1,9 +1,9 @@
 {
- "time": "2026-11-13T18:45:19Z",
+ "time": "2026-11-13T18:57:31Z",
  "catalogVersion": 1,
  "crossings": {
   "ch.gottardo": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "south": {
      "wait": null
@@ -14,7 +14,7 @@
    }
   },
   "hr-me.karasovici": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": null
@@ -25,7 +25,7 @@
    }
   },
   "hr-me.vitaljina": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": null
@@ -36,7 +36,7 @@
    }
   },
   "hr-ba.nova-sela": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": null
@@ -47,7 +47,7 @@
    }
   },
   "hr-ba.stara-gradiska": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": 30
@@ -58,7 +58,7 @@
    }
   },
   "hr-rs.bajakovo": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": 60
@@ -69,7 +69,7 @@
    }
   },
   "hr-rs.tovarnik": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": 30
@@ -80,7 +80,7 @@
    }
   },
   "hu-rs.roszke": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": null
@@ -91,7 +91,7 @@
    }
   },
   "hu-rs.tompa": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": null
@@ -102,7 +102,7 @@
    }
   },
   "hu-ua.zahony": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -113,7 +113,7 @@
    }
   },
   "hu-ua.beregsurany": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": 15
@@ -124,7 +124,7 @@
    }
   },
   "pl-ua.medyka": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": null
@@ -135,7 +135,7 @@
    }
   },
   "pl-ua.korczowa": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": null
@@ -146,7 +146,7 @@
    }
   },
   "pl-ua.dorohusk": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": null
@@ -157,7 +157,7 @@
    }
   },
   "pl-ua.hrebenne": {
-   "updated": "2026-11-13T18:45:19Z",
+   "updated": "2026-11-13T18:57:31Z",
    "directions": {
     "exit": {
      "wait": null
@@ -171,7 +171,7 @@
  "sources": {
   "gotthard": {
    "ok": true,
-   "sampled": "2026-11-13T18:45:05Z"
+   "sampled": "2026-11-13T18:55:02Z"
   },
   "hak": {
    "ok": true,
@@ -194,7 +194,7 @@
    "of": 4,
    "waits": 0,
    "ora_pl": "2026-11-13 19",
-   "error": "Medyka: The read operation timed out | Korczowa: The read operation timed out | Dorohusk: Remote end closed connection without response | Hrebenne: Remote end closed connection without response"
+   "error": "Medyka: The read operation timed out | Korczowa: Remote end closed connection without response | Dorohusk: Remote end closed connection without response | Hrebenne: Remote end closed connection without response"
   },
   "bihamk": {
    "ok": true,
