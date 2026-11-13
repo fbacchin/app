@@ -1,5 +1,5 @@
 {
- "time": "2026-11-13T06:20:04Z",
+ "time": "2026-11-13T06:25:03Z",
  "south": {
   "km": null,
   "wait": null
@@ -8,12 +8,30 @@
   "km": null,
   "wait": null
  },
- "events": [],
+ "events": [
+  {
+   "id": "situation.667154.1.1.1",
+   "type": "RoadOrCarriagewayOrLaneManagement",
+   "direction": "south",
+   "versionTime": "2026-11-13T06:21:34Z",
+   "km": null,
+   "wait": null,
+   "texts": {
+    "de": "Freigegeben: A2 Gotthard -> Chiasso Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Langsam fahrendes Fahrzeug defekter LKW",
+    "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: danger dû à un véhicule lent poids lourd en panne",
+    "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: pericolo dovuto a un veicolo lento mezzo pesante in avaria"
+   }
+  }
+ ],
  "tunnel": {
-  "chiuso": false,
-  "direzione": null,
+  "chiuso": true,
+  "direzione": "south",
   "fino": null,
-  "testi": {},
+  "testi": {
+   "de": "Freigegeben: A2 Gotthard -> Chiasso Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Langsam fahrendes Fahrzeug defekter LKW",
+   "fr": "Libéré: A2 St-Gothard -> Chiasso Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: danger dû à un véhicule lent poids lourd en panne",
+   "it": "Approvato: A2 S. Gottardo -> Chiasso Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: pericolo dovuto a un veicolo lento mezzo pesante in avaria"
+  },
   "prossima": null
  }
 }
