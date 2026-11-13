@@ -59,21 +59,5 @@
    "it": "Approvato: A2 S. Gottardo <-> Luzern tra Svincolo autostradale Amsteg E Galleria Galleria Platti Situazione: problemi di traffico cantiere, lunghezza [km] 0.7 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5 Durata: durante il giorno probabile 16.11.2026 07:00 fino 17.11.2026 17:00"
   },
   "lastSeen": "2026-11-12T01:20:04Z"
- },
- {
-  "firstSeen": "2026-11-11T22:25:03Z",
-  "id": "situation.666671.1.1.1",
-  "type": "RoadOrCarriagewayOrLaneManagement",
-  "direction": null,
-  "versionTime": "2026-11-11T23:12:40Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Tunnel gesperrt Ursache: Ausnahmetransport Dauer:  voraussichtlich 11.11.2026 23:00 bis 12.11.2026 01:00",
-   "fr": "Libéré: A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: tunnel fermé Raison: convoi exceptionnel Durée:  probable 11.11.2026 23:00 jusqu''à 12.11.2026 01:00",
-   "it": "Approvato: A2 Chiasso <-> S. Gottardo Galleria Galleria San Gottardo Situazione: tunnel chiuso Causa: trasporto eccezionale Durata:  probabile 11.11.2026 23:00 fino 12.11.2026 01:00"
-  },
-  "lastSeen": "2026-11-11T23:20:04Z",
-  "revokedAt": "2026-11-11T23:25:02Z"
  }
 ]
