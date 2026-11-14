@@ -4,8 +4,8 @@ on:
   schedule:
     # GitHub usa solo l'ora UTC: lo stesso lavoro è programmato alle 11:00 e alle 12:00 UTC.
     # Il primo passaggio lascia andare avanti solo quello che cade alle 13:00 in Svizzera.
-    - cron: "0 11 * * *"
-    - cron: "0 12 * * *"
+    - cron: "7 11 * * *"
+    - cron: "7 12 * * *"
   workflow_dispatch:         # permette di lanciarlo a mano dal sito di GitHub
 
 permissions:
