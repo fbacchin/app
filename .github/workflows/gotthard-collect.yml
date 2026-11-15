@@ -100,7 +100,7 @@ jobs:
             # Alle 13:00 svizzere (ora legale inclusa) lancia l'aggiornamento dei
             # tassi: il cron di GitHub ritarda di ore, la catena del collector no.
             # Il lavoro e' idempotente; un errore qui non ferma la raccolta.
-            if [ "$(TZ=Europe/Zurich date +%H%M)" = "1300" ]; then
+            if { [ "$(TZ=Europe/Zurich date +%H%M)" = "1300" ] || [ "$(TZ=Europe/Zurich date +%H%M)" = "1905" ]; }  # PROVA 15.11: togliere il secondo test; then
               gh workflow run aggiorna-tassi.yml --ref main -R "$GITHUB_REPOSITORY" || echo "lancio aggiorna-tassi fallito"
             fi
             if [ "$i" -lt 34 ]; then allinea; fi
