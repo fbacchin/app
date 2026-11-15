@@ -8,7 +8,7 @@ Esce con codice 1 se qualche file fallisce (così GitHub segnala l'errore).
 
 Solo libreria standard. Uso:  python3 tools/aggiorna_tassi.py [--dry-run]
 """
-import csv, io, re, sys, urllib.request
+import csv, io, re, ssl, sys, urllib.error, urllib.request
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
@@ -16,6 +16,11 @@ from pathlib import Path
 BASE = "https://www.global-rates.com/en/interest-rates/"
 COLUMNS = ["Date", "Week day", "ON", "1W", "1M", "2M", "3M", "6M", "12M"]
 HEADER = '"' + '","'.join(COLUMNS) + '"'
+# TEMPORANEO (deciso dal proprietario il 15/11/2026): se il certificato di global-rates.com
+# non è valido, riprova senza verifica. Per tornare alla modalità sicura: ALLOW_UNVERIFIED_CERT = False.
+ALLOW_UNVERIFIED_CERT = True
+MAX_JUMP = 0.5   # punti percentuali: scarto massimo rispetto all'ultimo valore pubblicato
+UNVERIFIED_USED = False
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 
@@ -49,9 +54,29 @@ def page_lines(html):
 
 
 def fetch(url):
+    global UNVERIFIED_USED
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "en"})
-    with urllib.request.urlopen(req, timeout=60) as r:
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return page_lines(r.read().decode("utf-8", "replace"))
+    except urllib.error.URLError as e:
+        if not (ALLOW_UNVERIFIED_CERT and isinstance(e.reason, ssl.SSLCertVerificationError)):
+            raise
+    UNVERIFIED_USED = True
+    ctx = ssl._create_unverified_context()
+    with urllib.request.urlopen(req, timeout=60, context=ctx) as r:
         return page_lines(r.read().decode("utf-8", "replace"))
+
+
+def last_row_values(line):
+    row = next(csv.reader(io.StringIO(line)))
+    return {c: v for c, v in zip(COLUMNS[2:], row[2:]) if v.strip()}
+
+
+def check_jump(last, vals, date):
+    for c, v in vals.items():
+        if c in last and abs(float(v) - float(last[c])) > MAX_JUMP:
+            raise RuntimeError(f"valore sospetto {c} del {date:%d.%m.%Y}: {v} contro {last[c]} dell'ultima riga pubblicata (scarto > {MAX_JUMP}), non pubblicato")
 
 
 def to_date(m):
@@ -162,11 +187,13 @@ def main():
             if not pub: raise RuntimeError("file di destinazione vuoto o illeggibile")
             missing = sorted(set(data) - existing)
             if missing:
+                last = last_row_values(pub[0][1])
+                for d in missing: check_jump(last, data[d], d)
                 lines = merge(pub, [(d, render(d, data[d], dec)) for d in missing])
                 if not dry:
                     path.write_text(HEADER + "\n" + "\n".join(lines) + "\n", encoding="utf-8")
                 rng = f"{missing[0]:%d.%m.%Y}" + (f" – {missing[-1]:%d.%m.%Y}" if len(missing) > 1 else "")
-                report.append((name, len(missing), rng, ""))
+                report.append((name, len(missing), rng, "⚠ letto senza verifica del certificato: da controllare" if UNVERIFIED_USED else ""))
             else:
                 report.append((name, 0, "—", f"già aggiornato (ultima data {pub[0][0]:%d.%m.%Y})"))
             print(f"{name}: {report[-1][1]} nuove righe {report[-1][2]}")
@@ -177,7 +204,10 @@ def main():
         status = "FALLITO" if len(failed) == len(SOURCES) else ("PARZIALE" if failed else "SUCCESSO")
         log = [f"# Aggiornamento tassi — {now:%d/%m/%Y}", "",
                f"**Esecuzione:** {now:%d/%m/%Y %H:%M} UTC (GitHub Actions)",
-               f"**Stato complessivo: {status}**", "",
+               f"**Stato complessivo: {status}**", ""]
+        if UNVERIFIED_USED:
+            log += ["> ⚠ Il certificato di global-rates.com non era valido: i dati sono stati letti SENZA verifica del certificato (modalità temporanea). Controllare i valori aggiunti.", ""]
+        log += [
                "| File | Nuove righe | Date aggiunte | Note |", "|---|---|---|---|"]
         log += [f"| {n} | {c} | {r} | {note} |" for n, c, r, note in report]
         Path("log").mkdir(exist_ok=True)
