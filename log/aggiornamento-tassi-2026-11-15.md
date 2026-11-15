@@ -1,6 +1,6 @@
 # Aggiornamento tassi — 15/11/2026
 
-**Esecuzione:** 15/11/2026 12:42 UTC (GitHub Actions)
+**Esecuzione:** 15/11/2026 12:44 UTC (GitHub Actions)
 **Stato complessivo: FALLITO**
 
 | File | Nuove righe | Date aggiunte | Note |
