@@ -1,5 +1,5 @@
 {
- "pubblicato": "2026-11-15T16:42:57Z",
+ "pubblicato": "2026-11-15T16:43:04Z",
  "giorni": [
   {
    "data": "2026-11-01",
@@ -639,16 +639,6 @@
      "fonte": "https://www.bern.ch/themen/bildung/schule/schulferien"
     }
    ]
-  },
-  {
-   "data": "2027-01-08",
-   "direzione": "south",
-   "motivi": [
-    {
-     "tipo": "manuale"
-    }
-   ],
-   "livello": "critico"
   },
   {
    "data": "2027-01-09",
