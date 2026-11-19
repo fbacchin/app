@@ -156,35 +156,5 @@
   },
   "lastSeen": "2026-11-18T07:45:03Z",
   "revokedAt": "2026-11-18T07:50:06Z"
- },
- {
-  "firstSeen": "2026-11-17T09:10:04Z",
-  "id": "situation.667965.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "south",
-  "versionTime": "2026-11-17T09:09:43Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Anschluss Quinto und Anschluss Faido Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.75 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen verengt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.85 Dauer: nachts voraussichtlich 09.12.2026 20:00 bis 12.12.2026 05:00",
-   "fr": "Libéré: A2 St-Gothard -> Chiasso entre Jonction autoroutière Quinto et Jonction autoroutière Faido Situation: trafic perturbé travaux, longueur [km] 0.75 Gestion du trafic: rétrécissement des voies sur une voie de circulation Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.85 Durée: durant la nuit probable 09.12.2026 20:00 jusqu''à 12.12.2026 05:00",
-   "it": "Approvato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Quinto E Svincolo autostradale Faido Situazione: problemi di traffico cantiere, lunghezza [km] 0.75 Limitazione del traffico: corsie strette ridotta su una corsia Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.85 Durata: durante la notte probabile 09.12.2026 20:00 fino 12.12.2026 05:00"
-  },
-  "lastSeen": "2026-11-17T21:05:04Z"
- },
- {
-  "firstSeen": "2026-11-17T09:10:04Z",
-  "id": "situation.667963.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "south",
-  "versionTime": "2026-11-17T09:08:59Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Gotthard -> Chiasso zwischen Anschluss Quinto und Anschluss Faido Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Verkehrsführung: Pannenstreifen gesperrt Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 7.2 Dauer: tagsüber voraussichtlich 24.11.2026 05:00 bis 25.11.2026 20:00",
-   "fr": "Libéré: A2 St-Gothard -> Chiasso entre Jonction autoroutière Quinto et Jonction autoroutière Faido Situation: trafic perturbé travaux, longueur [km] 0.5 Gestion du trafic: bande d'arrêt d'urgence fermée Complément 1: limitation temporaire de largeur largeur de la voie [m] 7.2 Durée: durant la journée probable 24.11.2026 05:00 jusqu''à 25.11.2026 20:00",
-   "it": "Approvato: A2 S. Gottardo -> Chiasso tra Svincolo autostradale Quinto E Svincolo autostradale Faido Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Limitazione del traffico: corsia d'emergenza chiusa Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 7.2 Durata: durante il giorno probabile 24.11.2026 05:00 fino 25.11.2026 20:00"
-  },
-  "lastSeen": "2026-11-17T21:05:04Z"
  }
 ]
