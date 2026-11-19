@@ -211,7 +211,13 @@ def main():
                "| File | Nuove righe | Date aggiunte | Note |", "|---|---|---|---|"]
         log += [f"| {n} | {c} | {r} | {note} |" for n, c, r, note in report]
         Path("log").mkdir(exist_ok=True)
-        Path(f"log/aggiornamento-tassi-{now:%Y-%m-%d}.md").write_text("\n".join(log) + "\n", encoding="utf-8")
+        # Più esecuzioni nello stesso giorno: si accoda al file, senza sovrascrivere.
+        path = Path(f"log/aggiornamento-tassi-{now:%Y-%m-%d}.md")
+        corpo = "\n".join(log) + "\n"
+        if path.exists():
+            corpo = "\n---\n\n" + corpo
+        with path.open("a", encoding="utf-8") as f:
+            f.write(corpo)
     return 1 if failed else 0
 
 
