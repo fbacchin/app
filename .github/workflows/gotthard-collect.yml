@@ -97,10 +97,10 @@ jobs:
                 [ -n "$salvato" ] || echo "push fallito dopo 3 tentativi, campione perso: riprovo al prossimo giro"
               fi
             fi
-            # Alle 13:00 svizzere (ora legale inclusa) lancia l'aggiornamento dei
+            # Alle 13:10 svizzere (ora legale inclusa) lancia l'aggiornamento dei
             # tassi: il cron di GitHub ritarda di ore, la catena del collector no.
             # Il lavoro e' idempotente; un errore qui non ferma la raccolta.
-            if [ "$(TZ=Europe/Zurich date +%H%M)" = "1300" ]; then
+            if [ "$(TZ=Europe/Zurich date +%H%M)" = "1310" ]; then
               gh workflow run aggiorna-tassi.yml --ref main -R "$GITHUB_REPOSITORY" || echo "lancio aggiorna-tassi fallito"
             fi
             if [ "$i" -lt 34 ]; then allinea; fi
