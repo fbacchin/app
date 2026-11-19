@@ -1,13 +1,11 @@
 name: Aggiorna tassi
 
-# Il lancio principale parte dal collector Gotthard (gotthard-collect.yml) alle
-# 13:00 svizzere, perché GitHub esegue i cron "best effort" e in questo repo li
-# ritarda anche di ore. Il cron qui sotto è solo un ripiego, se quel lancio salta.
-# Il lavoro è idempotente (aggiunge solo le date mancanti, altrimenti non fa nulla).
-# Orario UTC; il minuto ":07" evita l'ora tonda, la più carica.
+# Parte dal collector Gotthard (gotthard-collect.yml) alle 13:10 svizzere, quando
+# il dato €STR è già uscito. Niente cron: in questo repo GitHub lo ritarda di ore
+# o lo salta. Si può lanciare anche a mano (workflow_dispatch).
+# Il lavoro è idempotente (aggiunge solo le date mancanti, altrimenti non fa nulla)
+# e il log del giorno si accoda a ogni esecuzione.
 on:
-  schedule:
-    - cron: "7 13 * * *"
   workflow_dispatch:         # permette di lanciarlo a mano dal sito di GitHub
 
 permissions:
