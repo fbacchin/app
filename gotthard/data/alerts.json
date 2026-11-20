@@ -173,21 +173,5 @@
   },
   "lastSeen": "2026-11-19T00:05:02Z",
   "revokedAt": "2026-11-19T00:10:04Z"
- },
- {
-  "firstSeen": "2026-11-18T19:00:04Z",
-  "id": "situation.668518.1.1.1",
-  "type": "AbnormalTraffic",
-  "direction": "north",
-  "versionTime": "2026-11-18T18:58:34Z",
-  "km": null,
-  "wait": null,
-  "texts": {
-   "de": "Freigegeben: A2 Chiasso -> Gotthard zwischen Zollstation Chiasso-Brogeda und Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung zu erwarten Ursache: Ausnahmetransport Dauer:  voraussichtlich 18.11.2026 19:56 bis 18.11.2026 21:30",
-   "fr": "Libéré: A2 Chiasso -> St-Gothard entre Poste de douane Chiasso-Brogeda et Tunnel Tunnel du St-Gothard Situation: ralentissements prévus Raison: convoi exceptionnel Durée:  probable 18.11.2026 19:56 jusqu''à 18.11.2026 21:30",
-   "it": "Approvato: A2 Chiasso -> S. Gottardo tra Dogana Chiasso Brogeda E Galleria Galleria San Gottardo Situazione: si prevedono problemi di traffico Causa: trasporto eccezionale Durata:  probabile 18.11.2026 19:56 fino 18.11.2026 21:30"
-  },
-  "lastSeen": "2026-11-18T20:55:02Z",
-  "revokedAt": "2026-11-18T21:00:04Z"
  }
 ]
